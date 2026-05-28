@@ -1,14 +1,27 @@
 # jackssybin 静态博客迁移项目
 
-这个项目把原 `jackssybin.cn` 的 Solo/Bolo 博客迁移为 VuePress 静态站点。内容来自 `bolo_260527.sql`，样式参考 `ROOT/skins/bolo-9IPHP`，生成后的静态文件在 `docs/.vuepress/dist`。
+这个项目把原 `jackssybin.cn` 的 Solo/Bolo 博客迁移为 VuePress 2 静态站点。内容来自 `bolo_260527.sql`，样式参考 `ROOT/skins/bolo-9IPHP`，构建后的静态文件位于 `docs/.vuepress/dist`。
 
-## 环境要求
+## 一、项目能力
+
+- 使用 VuePress 2 + vuepress-theme-hope 构建静态博客。
+- 保留原文章链接，例如 `/articles/2019/07/31/1564568923421.html`。
+- 支持首页文章列表、文章页、标签页、归档页、友链页、RSS。
+- 支持文章标题和标签的前端搜索。
+- 原评论以只读归档方式展示。
+- 不再依赖 Tomcat、Solo 后台、JAR 包和动态数据库服务。
+- 支持通过 GitHub Actions 自动构建并部署到自己的服务器。
+
+## 二、本地环境要求
+
+本地开发和迁移需要：
 
 - Node.js 22+
 - pnpm 10.33.0+
 - MySQL 5.7+/8.0+
+- Git
 
-本项目默认使用本地 MySQL：
+本项目默认读取本地 MySQL：
 
 ```text
 host: localhost
@@ -18,7 +31,7 @@ password: root-1234
 database: bolo_migration
 ```
 
-如需临时覆盖数据库连接，可以使用环境变量：
+如需覆盖数据库连接，可以使用环境变量：
 
 ```powershell
 $env:BOLO_DB_HOST="localhost"
@@ -28,9 +41,9 @@ $env:BOLO_DB_PASSWORD="root-1234"
 $env:BOLO_DB_NAME="bolo_migration"
 ```
 
-## 初始化数据库
+## 三、初始化数据库
 
-如果本地还没有 `bolo_migration` 库，先导入 SQL 备份：
+如果本地还没有 `bolo_migration` 数据库，先导入 SQL 备份：
 
 ```powershell
 mysql -hlocalhost -P3306 -uroot -proot-1234 --default-character-set=utf8mb4 -e "DROP DATABASE IF EXISTS bolo_migration; CREATE DATABASE bolo_migration DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;"
@@ -43,7 +56,7 @@ mysql -hlocalhost -P3306 -uroot -proot-1234 --default-character-set=utf8mb4 bolo
 mysql -hlocalhost -P3306 -uroot -proot-1234 --default-character-set=utf8mb4 -D bolo_migration -e "SELECT COUNT(*) articles, SUM(articleStatus=0) published FROM b3_solo_article; SELECT COUNT(*) comments FROM b3_solo_comment;"
 ```
 
-当前迁移结果应为：
+当前迁移结果：
 
 ```text
 103 篇已发布文章
@@ -52,37 +65,21 @@ mysql -hlocalhost -P3306 -uroot -proot-1234 --default-character-set=utf8mb4 -D b
 3 个友情链接
 ```
 
-## 安装依赖
+## 四、本地使用
+
+安装依赖：
 
 ```powershell
 pnpm install
 ```
 
-安装时如果出现 `INVALID_ANNOTATION`、`chunk larger than 1024 kB` 或 `sass` bin 的 warning，一般不影响本项目构建。
-
-## 生成站点内容
-
-从 MySQL 读取 Solo/Bolo 数据并生成 VuePress 页面：
+从 Bolo/Solo 数据库重新生成 VuePress 内容：
 
 ```powershell
 pnpm migrate
 ```
 
-迁移脚本位置：
-
-```text
-scripts/migrate-from-bolo.mjs
-```
-
-脚本会重新生成 `docs` 下的内容页，保留 `docs/.vuepress` 配置目录。
-
-生成摘要文件：
-
-```text
-docs/.vuepress/public/migration-summary.json
-```
-
-## 本地预览
+本地预览：
 
 ```powershell
 pnpm dev --port 8080
@@ -92,6 +89,18 @@ pnpm dev --port 8080
 
 ```text
 http://localhost:8080/
+```
+
+构建静态站点：
+
+```powershell
+pnpm build
+```
+
+构建产物目录：
+
+```text
+docs/.vuepress/dist
 ```
 
 常用检查路径：
@@ -104,127 +113,432 @@ http://localhost:8080/
 /tags.html
 /archives.html
 /links.html
+/search.html?keyword=mysql
 /rss.xml
 ```
 
-## 构建静态文件
+## 五、日常写文章和版本管理
 
-```powershell
-pnpm build
-```
-
-构建产物目录：
-
-```text
-docs/.vuepress/dist
-```
-
-构建完成后，把这个目录部署到服务器的 Nginx 静态目录即可。
-
-## 部署到自己的服务器
+迁移完成后，日常写作可以直接修改项目里的 Markdown 文件。
 
 推荐流程：
+
+```bash
+git pull
+# 修改 docs 下的 Markdown 内容
+pnpm dev --port 8080
+pnpm build
+git status
+git add .
+git commit -m "update blog content"
+git push
+```
+
+如果已经配置好自动部署，`git push` 到 `main` 分支后，GitHub Actions 会自动构建并同步到服务器。
+
+## 六、自动部署整体流程
+
+本项目使用 GitHub Actions 部署到自己的服务器，不使用 GitHub Pages。
+
+整体流程如下：
 
 ```text
 本地修改 Markdown
 -> git commit
 -> git push 到 GitHub main 分支
--> GitHub Actions 自动 pnpm build
--> 通过 SSH 把 docs/.vuepress/dist/ 同步到服务器
--> Nginx 对外提供访问
+-> GitHub Actions 自动执行 pnpm install 和 pnpm build
+-> 通过 SSH/rsync 把 docs/.vuepress/dist/ 上传到服务器
+-> Nginx 从服务器目录对外提供访问
 ```
 
-本项目已经提供 GitHub Actions 工作流：
+工作流文件：
 
 ```text
 .github/workflows/deploy-to-server.yml
 ```
 
-你需要在 GitHub 仓库中配置这些 Secrets：
+该工作流会在两种情况下执行：
+
+- 推送到 `main` 分支时自动执行。
+- 在 GitHub Actions 页面手动点击 `Run workflow` 执行。
+
+## 七、新服务器从零搭建
+
+以下以 Ubuntu/Debian 服务器为例，假设网站目录为：
 
 ```text
-SERVER_HOST      服务器 IP 或域名
-SERVER_PORT      SSH 端口，通常是 22
-SERVER_USER      SSH 用户，例如 root 或 deploy
-SERVER_SSH_KEY   SSH 私钥内容
-SERVER_PATH      服务器网站目录，例如 /var/www/jackssybin
+/var/www/jackssybin
 ```
 
-在服务器上创建目录：
+域名为：
+
+```text
+jackssybin.cn
+www.jackssybin.cn
+```
+
+### 1. 登录服务器
+
+```bash
+ssh root@你的服务器IP
+```
+
+如果不是 root 用户，请使用你的实际 SSH 用户。
+
+### 2. 安装 Nginx
+
+```bash
+sudo apt update
+sudo apt install -y nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+
+检查 Nginx 状态：
+
+```bash
+sudo systemctl status nginx
+```
+
+### 3. 创建网站目录
 
 ```bash
 sudo mkdir -p /var/www/jackssybin
 sudo chown -R $USER:$USER /var/www/jackssybin
 ```
 
-如果 GitHub Actions 使用的 SSH 用户不是 root，要确保该用户有写入 `SERVER_PATH` 的权限。
+如果 GitHub Actions 使用的 SSH 用户不是当前用户，请把目录授权给实际部署用户，例如：
 
-Nginx 配置模板在：
+```bash
+sudo chown -R deploy:deploy /var/www/jackssybin
+```
+
+### 4. 准备部署用 SSH 密钥
+
+建议单独创建一个部署用户和一把部署密钥。
+
+在本地电脑生成 SSH key：
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-jackssybin" -f ~/.ssh/jackssybin_deploy
+```
+
+会生成两个文件：
+
+```text
+~/.ssh/jackssybin_deploy       私钥，放到 GitHub Secrets
+~/.ssh/jackssybin_deploy.pub   公钥，放到服务器 authorized_keys
+```
+
+把公钥添加到服务器：
+
+```bash
+ssh-copy-id -i ~/.ssh/jackssybin_deploy.pub root@你的服务器IP
+```
+
+如果服务器没有 `ssh-copy-id`，可以手动追加：
+
+```bash
+cat ~/.ssh/jackssybin_deploy.pub
+```
+
+复制输出内容后，在服务器执行：
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+echo "这里粘贴公钥内容" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+测试本地是否能免密登录：
+
+```bash
+ssh -i ~/.ssh/jackssybin_deploy root@你的服务器IP
+```
+
+### 5. 配置 Nginx
+
+项目已经提供 Nginx 模板：
 
 ```text
 deploy/nginx-jackssybin.conf
 ```
 
-可以复制到服务器：
+服务器上创建配置文件：
 
 ```bash
-sudo cp deploy/nginx-jackssybin.conf /etc/nginx/conf.d/jackssybin.conf
+sudo nano /etc/nginx/conf.d/jackssybin.conf
+```
+
+填入：
+
+```nginx
+server {
+    listen 80;
+    server_name jackssybin.cn www.jackssybin.cn;
+
+    root /var/www/jackssybin;
+    index index.html;
+
+    access_log /var/log/nginx/jackssybin.access.log;
+    error_log /var/log/nginx/jackssybin.error.log;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~* \.(?:css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$ {
+        expires 30d;
+        add_header Cache-Control "public";
+        try_files $uri =404;
+    }
+}
+```
+
+检查并重载 Nginx：
+
+```bash
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-模板默认网站目录是：
+### 6. 配置域名解析
+
+在域名服务商后台添加 DNS 解析：
 
 ```text
-/var/www/jackssybin
+A 记录
+主机记录: @
+记录值: 你的服务器公网 IP
+
+A 记录
+主机记录: www
+记录值: 你的服务器公网 IP
 ```
 
-如果你在 GitHub Secrets 里设置的 `SERVER_PATH` 不是这个路径，需要同步修改 Nginx 配置里的 `root`。
-
-## 其他平台部署
-
-如果部署到 Vercel、Render、Netlify 或 Cloudflare Pages，可以使用：
+解析生效后访问：
 
 ```text
-Build Command: pnpm build
-Publish Directory: docs/.vuepress/dist
-Node.js Version: 22
+http://jackssybin.cn
 ```
 
-如果部署环境没有提前生成内容，构建命令可改为：
+## 八、配置 GitHub Actions 自动部署
+
+进入 GitHub 仓库：
 
 ```text
-pnpm install --frozen-lockfile && pnpm migrate && pnpm build
+https://github.com/jackssybin/jackssybinIndex
 ```
 
-## 项目结构
+打开：
+
+```text
+Settings -> Secrets and variables -> Actions -> New repository secret
+```
+
+添加以下 Secrets：
+
+```text
+SERVER_HOST      服务器 IP 或域名，例如 1.2.3.4
+SERVER_PORT      SSH 端口，通常是 22
+SERVER_USER      SSH 用户，例如 root 或 deploy
+SERVER_SSH_KEY   SSH 私钥内容
+SERVER_PATH      服务器网站目录，例如 /var/www/jackssybin
+```
+
+`SERVER_SSH_KEY` 要填写私钥完整内容，也就是本地这个文件的内容：
+
+```bash
+cat ~/.ssh/jackssybin_deploy
+```
+
+私钥内容通常长这样：
+
+```text
+-----BEGIN OPENSSH PRIVATE KEY-----
+...
+-----END OPENSSH PRIVATE KEY-----
+```
+
+注意：不要填写 `.pub` 公钥，GitHub Secrets 里需要的是私钥。
+
+配置完成后，推送一次代码即可触发部署：
+
+```bash
+git add .
+git commit -m "update blog"
+git push
+```
+
+也可以手动触发：
+
+```text
+GitHub 仓库 -> Actions -> Deploy to Server -> Run workflow
+```
+
+## 九、首次部署检查
+
+部署完成后，在 GitHub Actions 页面确认任务是绿色成功状态。
+
+然后登录服务器检查文件：
+
+```bash
+ls -lah /var/www/jackssybin
+```
+
+应该能看到：
+
+```text
+index.html
+assets/
+articles/
+tags.html
+archives.html
+links.html
+rss.xml
+```
+
+检查 Nginx：
+
+```bash
+sudo nginx -t
+sudo systemctl status nginx
+```
+
+浏览器访问：
+
+```text
+http://jackssybin.cn
+http://jackssybin.cn/articles/2019/07/31/1564568923421.html
+http://jackssybin.cn/search.html?keyword=mysql
+```
+
+## 十、配置 HTTPS
+
+建议上线后使用 Certbot 配置免费 HTTPS 证书：
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d jackssybin.cn -d www.jackssybin.cn
+```
+
+按提示输入邮箱并确认，Certbot 会自动修改 Nginx 配置并启用 HTTPS。
+
+检查证书自动续期：
+
+```bash
+sudo certbot renew --dry-run
+```
+
+## 十一、常见问题
+
+### 1. GitHub Actions 连接服务器失败
+
+检查：
+
+- `SERVER_HOST` 是否正确。
+- `SERVER_PORT` 是否正确。
+- `SERVER_USER` 是否能 SSH 登录。
+- `SERVER_SSH_KEY` 是否填写的是私钥完整内容。
+- 服务器防火墙和云厂商安全组是否放行 SSH 端口。
+
+本地可以先测试：
+
+```bash
+ssh -i ~/.ssh/jackssybin_deploy root@你的服务器IP
+```
+
+### 2. GitHub Actions 提示没有权限写入目录
+
+说明 `SERVER_USER` 对 `SERVER_PATH` 没有写入权限。
+
+在服务器执行：
+
+```bash
+sudo chown -R SERVER_USER:SERVER_USER /var/www/jackssybin
+```
+
+把 `SERVER_USER` 替换成实际用户，例如：
+
+```bash
+sudo chown -R deploy:deploy /var/www/jackssybin
+```
+
+### 3. 首页能打开，文章链接 404
+
+检查 Nginx 是否包含：
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
+
+同时检查服务器目录中是否存在对应 HTML 文件：
+
+```bash
+ls /var/www/jackssybin/articles/2019/07/31/
+```
+
+### 4. 修改 Markdown 后网站没有变化
+
+检查：
+
+- 是否已经 `git push` 到 `main` 分支。
+- GitHub Actions 是否执行成功。
+- 浏览器是否缓存了旧页面。
+- 服务器 `/var/www/jackssybin` 的文件时间是否更新。
+
+### 5. 搜索没有结果
+
+搜索索引来自迁移脚本生成的：
+
+```text
+docs/.vuepress/search-index.ts
+```
+
+如果新增或批量调整文章后搜索不正确，重新执行：
+
+```bash
+pnpm migrate
+pnpm build
+```
+
+然后提交并推送。
+
+## 十二、项目结构
 
 ```text
 .
-├─ bolo_260527.sql              # 原博客数据库备份
-├─ ROOT/                         # 原 Tomcat/Solo 项目，仅作样式和资源参考
-├─ scripts/
-│  └─ migrate-from-bolo.mjs      # SQL -> VuePress 页面迁移脚本
-├─ docs/
-│  ├─ .vuepress/
-│  │  ├─ config.ts               # VuePress 配置
-│  │  ├─ theme.ts                # vuepress-theme-hope 配置
-│  │  ├─ client.ts               # 注册 SoloPage 组件
-│  │  ├─ components/SoloPage.vue # 渲染迁移后的页面 HTML
-│  │  ├─ styles/index.scss       # 覆盖 Hope 默认样式并复刻 Solo 布局
-│  │  └─ public/                 # 原皮肤 CSS、字体、图片、RSS 等静态资源
-│  ├─ index.md                   # 迁移生成：首页
-│  ├─ articles/                  # 迁移生成：旧文章路径
-│  ├─ tags/                      # 迁移生成：标签页
-│  └─ archives/                  # 迁移生成：归档页
-├─ package.json
-└─ pnpm-lock.yaml
+├── bolo_260527.sql              # 原博客数据库备份，本地使用，不提交
+├── ROOT/                         # 原 Tomcat/Solo 项目，本地参考，不提交
+├── scripts/
+│   └── migrate-from-bolo.mjs     # SQL/MySQL -> VuePress 页面迁移脚本
+├── deploy/
+│   └── nginx-jackssybin.conf     # Nginx 配置模板
+├── docs/
+│   ├── .vuepress/
+│   │   ├── config.ts             # VuePress 配置
+│   │   ├── theme.ts              # vuepress-theme-hope 配置
+│   │   ├── client.ts             # 注册自定义组件
+│   │   ├── components/           # 页面渲染和搜索组件
+│   │   ├── styles/index.scss     # 迁移后的 Solo 风格样式
+│   │   └── public/               # 静态资源
+│   ├── index.md                  # 首页
+│   ├── articles/                 # 旧文章路径
+│   ├── tags/                     # 标签页
+│   └── archives/                 # 归档页
+├── .github/workflows/
+│   └── deploy-to-server.yml      # 自动部署到服务器
+├── package.json
+└── pnpm-lock.yaml
 ```
 
-## 迁移说明
+## 十三、迁移说明
 
 - 仅迁移 `articleStatus = 0` 的已发布文章。
-- 原 `articlePermalink` 会尽量保持，例如 `/articles/2019/07/31/1564568923421.html`。
-- 旧评论以只读归档方式展示，不支持新评论提交。
+- 原 `articlePermalink` 会尽量保持，方便旧链接继续访问。
+- 旧评论只读展示，不支持新评论提交。
 - 不迁移 Solo 后台、登录、动态实时交互和 Tomcat/JAR 运行时。
-- 图片默认保留原远程地址；`ROOT/images` 中的公共资源已复制到 `docs/.vuepress/public/images`。
+- 图片默认保留原远程地址；`ROOT/images` 中的公共资源已复制到 VuePress public 目录。
