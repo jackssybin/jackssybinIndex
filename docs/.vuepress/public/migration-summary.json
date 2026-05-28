@@ -1,10 +1,12 @@
 {
   "articles": 103,
   "publishedArticles": 103,
+  "manualArticles": 1,
+  "totalArticles": 104,
   "comments": 12,
   "tags": 157,
-  "usedTags": 150,
+  "usedTags": 156,
   "pages": 2,
   "links": 3,
-  "generatedAt": "2026-05-28T08:41:30.751Z"
+  "generatedAt": "2026-05-28T12:03:50.746Z"
 }

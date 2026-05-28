@@ -140,21 +140,21 @@ git push
 
 当前项目有两类内容：
 
-- 旧文章：由 `bolo_260527.sql` 迁移生成，页面内容主要存放在 `docs/.vuepress/page-data.ts`，`docs/articles/.../*.md` 只是页面入口。
-- 新文章：可以直接写普通 Markdown 文件，适合后续长期维护。
+- 旧文章：由 `bolo_260527.sql` 迁移生成，页面内容主要存放在 `docs/.vuepress/page-data.ts`，`docs/articles/.../*.md` 只是生成后的页面入口。
+- 新文章：直接写到 `content/articles`，迁移脚本会把它们合并进首页、标签、归档、搜索和 RSS，并生成到 `docs/articles`。
 
 ### 1. 推荐的新文章存放位置
 
 建议继续使用原博客的文章路径规则：
 
 ```text
-docs/articles/年/月/日/文章标识.md
+content/articles/年/月/日/文章标识.md
 ```
 
 例如新增一篇 2026 年 05 月 28 日的文章：
 
 ```text
-docs/articles/2026/05/28/github-actions-nginx-deploy.md
+content/articles/2026/05/28/github-actions-nginx-deploy.md
 ```
 
 对应的线上访问地址可以设置为：
@@ -168,7 +168,7 @@ https://jackssybin.cn/articles/2026/05/28/github-actions-nginx-deploy.html
 新建文件：
 
 ```text
-docs/articles/2026/05/28/github-actions-nginx-deploy.md
+content/articles/2026/05/28/github-actions-nginx-deploy.md
 ```
 
 写入：
@@ -217,7 +217,7 @@ comment: false
 例如：
 
 ```text
-docs/articles/2026/05/28/github-actions-nginx-deploy.md
+content/articles/2026/05/28/github-actions-nginx-deploy.md
 ```
 
 会生成：
@@ -226,15 +226,14 @@ docs/articles/2026/05/28/github-actions-nginx-deploy.md
 /articles/2026/05/28/github-actions-nginx-deploy.html
 ```
 
-需要注意：当前首页、标签页、归档页和搜索索引是从旧 Bolo 数据迁移生成的静态内容。直接手写一个新的 Markdown 文件后：
+执行 `pnpm migrate` 后，它会同时出现在：
 
-- 新文章页面可以正常访问。
-- 新文章不会自动出现在旧风格首页文章列表里。
-- 新文章不会自动进入 `/tags.html`。
-- 新文章不会自动进入 `/archives.html`。
-- 新文章不会自动进入当前自定义搜索结果。
-
-如果只是偶尔新增文章，可以在首页或某个固定页面中手动加链接。如果希望新文章自动进入首页、标签、归档和搜索，需要后续扩展迁移脚本，让脚本同时读取手写 Markdown 文章并重新生成这些列表。
+- 首页文章列表，按文章日期排序。
+- `/archives.html` 和对应年月归档页。
+- `/tags.html` 和对应标签页。
+- `/search.html` 的标题搜索结果。
+- `/rss.xml`。
+- 右侧栏文章总数统计。
 
 ### 4. 新文章发布流程
 
@@ -243,13 +242,14 @@ docs/articles/2026/05/28/github-actions-nginx-deploy.md
 ```bash
 git pull
 
-# 新建或修改 docs/articles/年/月/日/xxx.md
+# 新建或修改 content/articles/年/月/日/xxx.md
 
+pnpm migrate
 pnpm dev --port 8080
 pnpm build
 
 git status
-git add docs/articles/2026/05/28/github-actions-nginx-deploy.md
+git add content/articles/2026/05/28/github-actions-nginx-deploy.md docs scripts README.md
 git commit -m "add github actions nginx deploy article"
 git push
 ```
@@ -659,6 +659,8 @@ pnpm build
 ├── ROOT/                         # 原 Tomcat/Solo 项目，本地参考，不提交
 ├── scripts/
 │   └── migrate-from-bolo.mjs     # SQL/MySQL -> VuePress 页面迁移脚本
+├── content/
+│   └── articles/                  # 后续手写 Markdown 文章源目录
 ├── deploy/
 │   └── nginx-jackssybin.conf     # Nginx 配置模板
 ├── docs/

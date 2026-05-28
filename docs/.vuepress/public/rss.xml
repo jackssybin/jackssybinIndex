@@ -5,6 +5,13 @@
   <link>https://jackssybin.cn/</link>
   <description>记录精彩的程序人生</description>
   <item>
+    <title>我把一个老 Solo/Bolo 博客迁成了 VuePress 静态站：完整迁移手册</title>
+    <link>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</link>
+    <guid>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</guid>
+    <pubDate>Wed, 27 May 2026 16:00:00 GMT</pubDate>
+    <description><![CDATA[我把一个老 Solo/Bolo 博客迁成了 VuePress 静态站：完整迁移手册 先说背景：我手上有一个运行多年的个人博客 jackssybin.cn，原来是 Solo/Bolo 系统，通过 Tomcat 部署，数据在 MySQL 里。后来我希望把它迁成一个更轻、更容易维护的静态站：文章继续保留，旧链接尽量不失效，样式尽量接近原站，但不再依赖 Tomcat、后台和数据库服务。 这篇文章记录的是一次完整迁移过程。不是泛泛而谈“把博客迁到]]></description>
+  </item>
+<item>
     <title>LocalDateTime操作</title>
     <link>https://jackssybin.cn/articles/2025/07/16/1752652246705.html</link>
     <guid>https://jackssybin.cn/articles/2025/07/16/1752652246705.html</guid>
@@ -73,14 +80,6 @@
     <link>https://jackssybin.cn/articles/2021/03/25/1616636082398.html</link>
     <guid>https://jackssybin.cn/articles/2021/03/25/1616636082398.html</guid>
     <pubDate>Thu, 25 Mar 2021 01:34:42 GMT</pubDate>
-    <description><![CDATA[
-]]></description>
-  </item>
-<item>
-    <title>Spring Integration 中文手册（完整版）</title>
-    <link>https://jackssybin.cn/articles/2021/03/16/1615897840354.html</link>
-    <guid>https://jackssybin.cn/articles/2021/03/16/1615897840354.html</guid>
-    <pubDate>Tue, 16 Mar 2021 12:30:40 GMT</pubDate>
     <description><![CDATA[
 ]]></description>
   </item>

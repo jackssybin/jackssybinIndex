@@ -6,6 +6,7 @@ import mysql from "mysql2/promise";
 const root = process.cwd();
 const docsDir = path.join(root, "docs");
 const publicDir = path.join(docsDir, ".vuepress", "public");
+const contentDir = path.join(root, "content");
 
 const dbConfig = {
   host: process.env.BOLO_DB_HOST || "127.0.0.1",
@@ -69,6 +70,43 @@ function markdownToHtml(source = "") {
   return md.render(String(source));
 }
 
+function stripMarkdown(source = "") {
+  return String(source)
+    .replace(/^---[\s\S]*?---\s*/u, "")
+    .replace(/```[\s\S]*?```/gu, "")
+    .replace(/!\[[^\]]*\]\([^)]*\)/gu, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/gu, "$1")
+    .replace(/[#>*_`~-]/gu, "")
+    .replace(/\s+/gu, " ")
+    .trim();
+}
+
+function parseFrontmatter(source = "") {
+  const match = String(source).match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/u);
+  if (!match) return { data: {}, body: String(source) };
+
+  const data = {};
+  for (const line of match[1].split(/\r?\n/u)) {
+    const pair = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/u);
+    if (!pair) continue;
+    const [, key, rawValue] = pair;
+    let value = rawValue.trim();
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    } else if (value.startsWith("[") && value.endsWith("]")) {
+      value = value.slice(1, -1).split(",").map((item) => item.trim().replace(/^['"]|['"]$/gu, "")).filter(Boolean);
+    }
+    data[key] = value;
+  }
+
+  return { data, body: String(source).slice(match[0].length) };
+}
+
+function normalizeTags(value) {
+  if (Array.isArray(value)) return value.map((tag) => String(tag).trim()).filter(Boolean);
+  return splitTags(value || "");
+}
+
 function splitTags(tags = "") {
   return String(tags).split(",").map((tag) => tag.trim()).filter(Boolean);
 }
@@ -86,6 +124,79 @@ function localPathForPermalink(permalink) {
   if (!clean) clean = "index";
   if (clean.endsWith(".html")) clean = clean.slice(0, -5);
   return path.join(docsDir, `${clean}.md`);
+}
+
+function permalinkForManualArticle(relativePath) {
+  const clean = relativePath.replace(/\\/gu, "/").replace(/\.md$/u, ".html");
+  return `/${clean}`;
+}
+
+function dateFromPermalink(permalink, fallbackMs) {
+  const match = permalink.match(/\/articles\/(\d{4})\/(\d{2})\/(\d{2})\//u);
+  if (!match) return fallbackMs;
+  const [, year, month, day] = match;
+  return new Date(`${year}-${month}-${day}T00:00:00+08:00`).getTime();
+}
+
+async function listMarkdownFiles(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true }).catch(() => []);
+  const files = [];
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...await listMarkdownFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      files.push(fullPath);
+    }
+  }
+  return files;
+}
+
+async function readManualArticles() {
+  const sourceDirs = [
+    path.join(contentDir, "articles"),
+    path.join(docsDir, "articles")
+  ];
+  const manualArticles = [];
+  const seenPermalinks = new Set();
+
+  for (const articlesDir of sourceDirs) {
+    const files = await listMarkdownFiles(articlesDir);
+    for (const file of files) {
+    const source = await fs.readFile(file, "utf8");
+    const { data, body } = parseFrontmatter(source);
+    if (/^<SoloPage\s+id="[^"]+"\s*\/>\s*$/u.test(body.trim())) continue;
+    const relativePath = path.join("articles", path.relative(articlesDir, file)).replace(/\\/gu, "/");
+    const permalink = data.permalink || permalinkForManualArticle(relativePath);
+    if (seenPermalinks.has(permalink)) continue;
+    seenPermalinks.add(permalink);
+    const title = data.title || path.basename(file, ".md");
+    const stats = await fs.stat(file);
+    const created = dateFromPermalink(permalink, stats.birthtimeMs || stats.mtimeMs);
+    const tags = normalizeTags(data.tags || data.tag || "");
+    const bodyWithoutTitle = body.replace(new RegExp(`^#\\s+${title.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*`, "u"), "");
+    const abstractText = stripMarkdown(bodyWithoutTitle).slice(0, 220);
+
+    manualArticles.push({
+      oId: `manual:${relativePath.replace(/\\/gu, "/")}`,
+      articleTitle: title,
+      articlePermalink: permalink,
+      articleCreated: created,
+      articleUpdated: stats.mtimeMs,
+      articleAbstract: "",
+      articleAbstractText: abstractText,
+      articleContent: bodyWithoutTitle,
+      articleTags: tags.join(","),
+      articleCommentCount: 0,
+      articleViewCount: 0,
+      articlePutTop: 0,
+      hasUpdated: false,
+      isManual: true
+    });
+    }
+  }
+
+  return manualArticles;
 }
 
 async function writePage(permalink, title, html) {
@@ -392,17 +503,26 @@ async function main() {
     commentsByArticle.get(comment.commentOnId).push(comment);
   }
 
-  const articles = articleRows.map((article) => ({
+  const migratedArticles = articleRows.map((article) => ({
     ...article,
     articleCommentCount: (commentsByArticle.get(article.oId) || []).length,
     hasUpdated: Number(article.articleUpdated) !== Number(article.articleCreated)
   }));
+  const manualArticles = await readManualArticles();
+  const articles = [...migratedArticles, ...manualArticles]
+    .sort((a, b) => Number(b.articlePutTop || 0) - Number(a.articlePutTop || 0) || Number(b.articleCreated) - Number(a.articleCreated));
 
   const tagCounts = new Map();
   for (const article of articles) {
     for (const tag of splitTags(article.articleTags)) tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
   }
-  const tags = tagRows.map((tag) => ({ ...tag, count: tagCounts.get(tag.tagTitle) || 0 }));
+  const knownTagTitles = new Set(tagRows.map((tag) => tag.tagTitle));
+  const tags = [
+    ...tagRows.map((tag) => ({ ...tag, count: tagCounts.get(tag.tagTitle) || 0 })),
+    ...[...tagCounts.keys()]
+      .filter((tagTitle) => !knownTagTitles.has(tagTitle))
+      .map((tagTitle) => ({ oId: `manual:${tagTitle}`, tagTitle, count: tagCounts.get(tagTitle) || 0 }))
+  ];
 
   const site = {
     blogTitle: options.blogTitle || "jackssybin 的个人博客",
@@ -484,7 +604,9 @@ async function main() {
   );
   await fs.writeFile(path.join(publicDir, "migration-summary.json"), JSON.stringify({
     articles: articleRows.length,
-    publishedArticles: articles.length,
+    publishedArticles: migratedArticles.length,
+    manualArticles: manualArticles.length,
+    totalArticles: articles.length,
     comments: commentRows.length,
     tags: tagRows.length,
     usedTags: tags.filter((tag) => tag.count > 0).length,
@@ -493,7 +615,7 @@ async function main() {
     generatedAt: new Date().toISOString()
   }, null, 2), "utf8");
 
-  console.log(`Generated ${articles.length} articles, ${commentRows.length} comments, ${tags.filter((tag) => tag.count > 0).length} used tags, ${linkRows.length} links.`);
+  console.log(`Generated ${articles.length} articles (${manualArticles.length} manual), ${commentRows.length} comments, ${tags.filter((tag) => tag.count > 0).length} used tags, ${linkRows.length} links.`);
 }
 
 main().catch((error) => {

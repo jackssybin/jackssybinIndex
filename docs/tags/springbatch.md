@@ -1,6 +1,6 @@
 ---
-title: "springbatch - jackssybin 的个人博客"
-permalink: "/tags/springbatch.html"
+title: "springBatch - jackssybin 的个人博客"
+permalink: "/tags/springBatch.html"
 pageClass: solo-page
 sidebar: false
 breadcrumb: false
@@ -10,4 +10,4 @@ lastUpdated: false
 comment: false
 ---
 
-<SoloPage id="p178" />
+<SoloPage id="p266" />

@@ -1,5 +1,17 @@
 export const searchIndex = [
   {
+    "title": "我把一个老 Solo/Bolo 博客迁成了 VuePress 静态站：完整迁移手册",
+    "url": "/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html",
+    "date": "2026-05-28",
+    "tags": [
+      "VuePress",
+      "Bolo",
+      "Solo",
+      "静态网站",
+      "博客迁移"
+    ]
+  },
+  {
     "title": "LocalDateTime操作",
     "url": "/articles/2025/07/16/1752652246705.html",
     "date": "2025-07-16",
