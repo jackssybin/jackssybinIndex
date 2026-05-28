@@ -136,7 +136,151 @@ git push
 
 如果已经配置好自动部署，`git push` 到 `main` 分支后，GitHub Actions 会自动构建并同步到服务器。
 
-## 六、自动部署整体流程
+## 六、后续如何新增文章
+
+当前项目有两类内容：
+
+- 旧文章：由 `bolo_260527.sql` 迁移生成，页面内容主要存放在 `docs/.vuepress/page-data.ts`，`docs/articles/.../*.md` 只是页面入口。
+- 新文章：可以直接写普通 Markdown 文件，适合后续长期维护。
+
+### 1. 推荐的新文章存放位置
+
+建议继续使用原博客的文章路径规则：
+
+```text
+docs/articles/年/月/日/文章标识.md
+```
+
+例如新增一篇 2026 年 05 月 28 日的文章：
+
+```text
+docs/articles/2026/05/28/github-actions-nginx-deploy.md
+```
+
+对应的线上访问地址可以设置为：
+
+```text
+https://jackssybin.cn/articles/2026/05/28/github-actions-nginx-deploy.html
+```
+
+### 2. 新文章 Markdown 模板
+
+新建文件：
+
+```text
+docs/articles/2026/05/28/github-actions-nginx-deploy.md
+```
+
+写入：
+
+```markdown
+---
+title: "使用 GitHub Actions 自动部署 VuePress 到 Nginx"
+permalink: "/articles/2026/05/28/github-actions-nginx-deploy.html"
+pageClass: solo-page
+sidebar: false
+breadcrumb: false
+pageInfo: false
+contributors: false
+lastUpdated: false
+comment: false
+---
+
+# 使用 GitHub Actions 自动部署 VuePress 到 Nginx
+
+这里写文章摘要或开头。
+
+## 一、背景
+
+这里写正文。
+
+## 二、操作步骤
+
+这里写正文。
+
+## 三、总结
+
+这里写正文。
+```
+
+其中：
+
+- `title` 是浏览器标题和页面标题。
+- `permalink` 是最终访问路径，建议保持 `/articles/年/月/日/xxx.html`。
+- `pageClass: solo-page` 会复用当前迁移站的 Solo 风格样式。
+- 正文部分就是普通 Markdown，可以写标题、代码块、表格、图片等。
+
+### 3. 新文章会在哪里展示
+
+新建 Markdown 后，只要执行 `pnpm build` 成功，该文章就会生成独立页面，并可以通过 `permalink` 访问。
+
+例如：
+
+```text
+docs/articles/2026/05/28/github-actions-nginx-deploy.md
+```
+
+会生成：
+
+```text
+/articles/2026/05/28/github-actions-nginx-deploy.html
+```
+
+需要注意：当前首页、标签页、归档页和搜索索引是从旧 Bolo 数据迁移生成的静态内容。直接手写一个新的 Markdown 文件后：
+
+- 新文章页面可以正常访问。
+- 新文章不会自动出现在旧风格首页文章列表里。
+- 新文章不会自动进入 `/tags.html`。
+- 新文章不会自动进入 `/archives.html`。
+- 新文章不会自动进入当前自定义搜索结果。
+
+如果只是偶尔新增文章，可以在首页或某个固定页面中手动加链接。如果希望新文章自动进入首页、标签、归档和搜索，需要后续扩展迁移脚本，让脚本同时读取手写 Markdown 文章并重新生成这些列表。
+
+### 4. 新文章发布流程
+
+本地新增文章后，按下面流程发布：
+
+```bash
+git pull
+
+# 新建或修改 docs/articles/年/月/日/xxx.md
+
+pnpm dev --port 8080
+pnpm build
+
+git status
+git add docs/articles/2026/05/28/github-actions-nginx-deploy.md
+git commit -m "add github actions nginx deploy article"
+git push
+```
+
+推送到 GitHub 后，如果服务器自动部署已经配置完成，GitHub Actions 会自动执行：
+
+```text
+pnpm install
+pnpm build
+rsync docs/.vuepress/dist/ 到服务器
+Nginx 对外提供新文章访问
+```
+
+### 5. 修改旧文章的建议
+
+旧文章是迁移脚本生成的，文章正文不直接写在 `docs/articles/.../*.md` 里，而是在：
+
+```text
+docs/.vuepress/page-data.ts
+```
+
+因此不建议直接手动改旧文章生成文件。更稳的方式是：
+
+1. 在原始数据库或迁移源中修改文章内容。
+2. 执行 `pnpm migrate` 重新生成站点内容。
+3. 执行 `pnpm build` 验证。
+4. 提交并推送。
+
+如果只是修正少量错别字，也可以直接改 `docs/.vuepress/page-data.ts`，但这个文件很大，且下次执行 `pnpm migrate` 会被重新生成覆盖。
+
+## 七、自动部署整体流程
 
 本项目使用 GitHub Actions 部署到自己的服务器，不使用 GitHub Pages。
 
@@ -162,7 +306,7 @@ git push
 - 推送到 `main` 分支时自动执行。
 - 在 GitHub Actions 页面手动点击 `Run workflow` 执行。
 
-## 七、新服务器从零搭建
+## 八、新服务器从零搭建
 
 以下以 Ubuntu/Debian 服务器为例，假设网站目录为：
 
@@ -323,7 +467,7 @@ A 记录
 http://jackssybin.cn
 ```
 
-## 八、配置 GitHub Actions 自动部署
+## 九、配置 GitHub Actions 自动部署
 
 进入 GitHub 仓库：
 
@@ -377,7 +521,7 @@ git push
 GitHub 仓库 -> Actions -> Deploy to Server -> Run workflow
 ```
 
-## 九、首次部署检查
+## 十、首次部署检查
 
 部署完成后，在 GitHub Actions 页面确认任务是绿色成功状态。
 
@@ -414,7 +558,7 @@ http://jackssybin.cn/articles/2019/07/31/1564568923421.html
 http://jackssybin.cn/search.html?keyword=mysql
 ```
 
-## 十、配置 HTTPS
+## 十一、配置 HTTPS
 
 建议上线后使用 Certbot 配置免费 HTTPS 证书：
 
@@ -431,7 +575,7 @@ sudo certbot --nginx -d jackssybin.cn -d www.jackssybin.cn
 sudo certbot renew --dry-run
 ```
 
-## 十一、常见问题
+## 十二、常见问题
 
 ### 1. GitHub Actions 连接服务器失败
 
@@ -507,7 +651,7 @@ pnpm build
 
 然后提交并推送。
 
-## 十二、项目结构
+## 十三、项目结构
 
 ```text
 .
@@ -535,7 +679,7 @@ pnpm build
 └── pnpm-lock.yaml
 ```
 
-## 十三、迁移说明
+## 十四、迁移说明
 
 - 仅迁移 `articleStatus = 0` 的已发布文章。
 - 原 `articlePermalink` 会尽量保持，方便旧链接继续访问。
