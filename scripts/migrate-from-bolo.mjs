@@ -241,6 +241,7 @@ function makeHeader({ blogTitle, blogSubtitle, pages }) {
                 <a rel="alternate" href="/rss.xml" rel="section"><i class="icon-rss"></i> RSS</a>
             </nav>
             <div class="fn-right">
+                <button class="theme-toggle" type="button" aria-label="切换黑夜模式" title="切换黑夜模式" data-theme-toggle>夜</button>
                 <form class="form" action="/search.html" method="get">
                     <input placeholder="搜索文章标题" id="search" type="text" name="keyword">
                     <button type="submit"><i class="icon-search"></i></button>

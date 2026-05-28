@@ -8,6 +8,15 @@ body,
   color-scheme: light !important;
 }
 
+html[data-solo-theme="dark"],
+html[data-solo-theme="dark"] body,
+html[data-solo-theme="dark"] #app,
+html[data-solo-theme="dark"] .theme-container {
+  color: #d7dde7 !important;
+  background: #11151b !important;
+  color-scheme: dark !important;
+}
+
 .vp-page,
 .theme-container,
 [vp-container],
@@ -35,6 +44,8 @@ body,
   min-height: 100vh;
   font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
   font-size: 14px;
+  background: #fff;
+  color: #333;
 }
 
 .solo-static a {
@@ -127,6 +138,31 @@ body,
   margin-top: 8px;
 }
 
+.solo-static .navbar .fn-right {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.solo-static .theme-toggle {
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  line-height: 28px;
+  text-align: center;
+  font-size: 13px;
+  padding: 0;
+}
+
+.solo-static .theme-toggle:hover {
+  border-color: #eb5750;
+  color: #eb5750;
+}
+
 .solo-static .form input,
 .solo-static .form textarea {
   border: 1px solid #ccc;
@@ -146,14 +182,14 @@ body,
   padding-right: 40px;
 }
 
-.solo-static .navbar button,
+.solo-static .navbar button:not(.theme-toggle),
 .solo-static .form button {
   background-color: #eb5750;
   border: 0;
   color: #fff;
 }
 
-.solo-static .navbar button {
+.solo-static .navbar button:not(.theme-toggle) {
   position: absolute;
   top: 0;
   right: 0;
@@ -358,6 +394,143 @@ body,
   display: block;
 }
 
+html[data-solo-theme="dark"] .solo-static {
+  background: #11151b;
+  color: #d7dde7;
+}
+
+html[data-solo-theme="dark"] .solo-static .banner {
+  background-color: #07090d;
+}
+
+html[data-solo-theme="dark"] .solo-static .banner h1 a {
+  color: #f3f6fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .banner small {
+  color: #9aa6b8;
+}
+
+html[data-solo-theme="dark"] .solo-static .navbar {
+  border-bottom-color: #262d38;
+  background: #151a22;
+}
+
+html[data-solo-theme="dark"] .solo-static .navbar nav a {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .navbar nav a:hover,
+html[data-solo-theme="dark"] .solo-static .post h2 > a {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .post,
+html[data-solo-theme="dark"] .solo-static .module {
+  border-color: #2a323f;
+  background: #171d26;
+}
+
+html[data-solo-theme="dark"] .solo-static .module {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+html[data-solo-theme="dark"] .solo-static .post .meta,
+html[data-solo-theme="dark"] .solo-static .post .meta a,
+html[data-solo-theme="dark"] .solo-static .post sup,
+html[data-solo-theme="dark"] .solo-static .post sup a,
+html[data-solo-theme="dark"] .solo-static .ft-gray {
+  color: #8d99aa;
+}
+
+html[data-solo-theme="dark"] .solo-static .vditor-reset,
+html[data-solo-theme="dark"] .solo-static .post__content,
+html[data-solo-theme="dark"] .solo-static .module main {
+  color: #d7dde7;
+}
+
+html[data-solo-theme="dark"] .solo-static .vditor-reset h1,
+html[data-solo-theme="dark"] .solo-static .vditor-reset h2,
+html[data-solo-theme="dark"] .solo-static .vditor-reset h3,
+html[data-solo-theme="dark"] .solo-static .vditor-reset h4,
+html[data-solo-theme="dark"] .solo-static .vditor-reset h5,
+html[data-solo-theme="dark"] .solo-static .vditor-reset h6 {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .vditor-reset a,
+html[data-solo-theme="dark"] .solo-static .footer a {
+  color: #ff7668;
+}
+
+html[data-solo-theme="dark"] .solo-static .form input,
+html[data-solo-theme="dark"] .solo-static .form textarea,
+html[data-solo-theme="dark"] .solo-static .theme-toggle {
+  border-color: #343d4b;
+  background-color: #10151d;
+  color: #d7dde7;
+  box-shadow: none;
+}
+
+html[data-solo-theme="dark"] .solo-static .theme-toggle:hover {
+  border-color: #ff7668;
+  color: #ff7668;
+}
+
+html[data-solo-theme="dark"] .solo-static aside .tag.vditor-tooltipped,
+html[data-solo-theme="dark"] .solo-static .pagination .page-number {
+  border-color: #343d4b;
+}
+
+html[data-solo-theme="dark"] .solo-static .tags > a.tag {
+  background-color: #4a5568;
+}
+
+html[data-solo-theme="dark"] .solo-static .tags > a.tag:hover {
+  background-color: #64748b;
+}
+
+html[data-solo-theme="dark"] .solo-static .list li {
+  border-bottom-color: #293241;
+}
+
+html[data-solo-theme="dark"] .solo-static .list a {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .post .meta a:hover,
+html[data-solo-theme="dark"] .solo-static .list a:hover {
+  color: #ff7668;
+}
+
+html[data-solo-theme="dark"] .solo-static pre,
+html[data-solo-theme="dark"] .solo-static code {
+  background: #0c1118;
+  color: #e5eaf3;
+  border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static blockquote {
+  border-left-color: #3b4658;
+  color: #bac4d3;
+  background: #141a23;
+}
+
+html[data-solo-theme="dark"] .solo-static table,
+html[data-solo-theme="dark"] .solo-static th,
+html[data-solo-theme="dark"] .solo-static td {
+  border-color: #343d4b;
+}
+
+html[data-solo-theme="dark"] .solo-static th {
+  background: #1c2430;
+}
+
+html[data-solo-theme="dark"] .solo-static .footer {
+  background: #07090d;
+  color: #c2cad8;
+}
+
 @media (max-width: 760px) {
   .solo-static .wrapper {
     min-width: 0;
@@ -404,8 +577,15 @@ body,
     padding: 0 8px;
   }
 
-  .solo-static .navbar .fn-right {
+  .solo-static .navbar form {
     display: none;
+  }
+
+  .solo-static .navbar .fn-right {
+    display: flex;
+    float: none;
+    justify-content: flex-end;
+    padding-bottom: 10px;
   }
 
   .solo-static .main-wrap {
