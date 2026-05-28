@@ -1,0 +1,436 @@
+html,
+html[data-theme="dark"],
+body,
+#app,
+.theme-container {
+  color: #333 !important;
+  background: #fff !important;
+  color-scheme: light !important;
+}
+
+.vp-page,
+.theme-container,
+[vp-container],
+[vp-content],
+#markdown-content {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vp-page-title,
+.vp-breadcrumb,
+.vp-page-meta,
+.vp-toc,
+.vp-sidebar,
+.vp-navbar,
+.vp-footer-wrapper,
+.vp-catalog-wrapper,
+.toggle-sidebar-wrapper,
+.vp-skip-link {
+  display: none !important;
+}
+
+.solo-static {
+  min-height: 100vh;
+  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+  font-size: 14px;
+}
+
+.solo-static a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.solo-static a:hover {
+  text-decoration: underline;
+}
+
+.solo-static .wrapper {
+  width: 90%;
+  margin: 0 auto;
+  min-width: 720px;
+  max-width: 1300px;
+}
+
+.solo-static .fn-clear::before,
+.solo-static .fn-clear::after {
+  display: table;
+  content: "";
+}
+
+.solo-static .fn-clear::after {
+  clear: both;
+}
+
+.solo-static .fn-left {
+  float: left;
+}
+
+.solo-static .fn-right {
+  float: right;
+}
+
+.solo-static .fn-inline {
+  display: inline;
+}
+
+.solo-static .banner {
+  background-color: #393939;
+  height: 75px;
+}
+
+.solo-static .banner h1 {
+  margin: 0;
+}
+
+.solo-static .banner h1 a {
+  color: #fff;
+  line-height: 75px;
+  text-decoration: none;
+}
+
+.solo-static .banner small {
+  color: #dfdfdf;
+  font-size: 15px;
+}
+
+.solo-static .banner .fn-right a {
+  line-height: 75px;
+  color: #dfdfdf;
+  text-decoration: none;
+  margin-left: 10px;
+  opacity: 0.6;
+}
+
+.solo-static .navbar {
+  border-bottom: 1px solid #eee;
+  height: 50px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.solo-static .navbar nav a {
+  color: #555;
+  text-decoration: none;
+  line-height: 50px;
+  padding: 0 10px;
+  display: inline-block;
+}
+
+.solo-static .navbar nav a:hover {
+  color: #333;
+}
+
+.solo-static .navbar form {
+  position: relative;
+  margin-top: 8px;
+}
+
+.solo-static .form input,
+.solo-static .form textarea {
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075) inset;
+  padding: 0 10px;
+  width: 100%;
+  line-height: 28px;
+  box-sizing: border-box;
+}
+
+.solo-static .form input {
+  height: 30px;
+}
+
+.solo-static .navbar .form input {
+  padding-right: 40px;
+}
+
+.solo-static .navbar button,
+.solo-static .form button {
+  background-color: #eb5750;
+  border: 0;
+  color: #fff;
+}
+
+.solo-static .navbar button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 30px;
+  width: 30px;
+}
+
+.solo-static .page-icon {
+  float: left;
+  height: 14px;
+  width: 14px;
+  margin: 18px 5px 0 0;
+}
+
+.solo-static .main-wrap {
+  display: flex;
+}
+
+.solo-static .main-wrap > main {
+  margin-right: 30px;
+  flex: 1;
+  min-width: 1px;
+}
+
+.solo-static aside {
+  width: 28%;
+  min-width: 236px;
+}
+
+.solo-static .post {
+  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.solo-static .post h2 {
+  margin: 0 0 10px;
+}
+
+.solo-static .post h2 > a {
+  color: #333;
+  font-size: 24px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.solo-static .post sup,
+.solo-static .post sup a {
+  color: #aaa;
+  font-weight: 300;
+}
+
+.solo-static .post .meta {
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.solo-static .post .meta a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.solo-static .post .meta a:hover,
+.solo-static .list a:hover {
+  color: #ff4d3a;
+}
+
+.solo-static .vditor-reset {
+  line-height: 1.75;
+}
+
+.solo-static .tags > a.tag {
+  color: #fff;
+  font-size: 12px;
+  display: inline-block;
+  background-color: #bbb;
+  margin-right: 10px;
+  padding: 0 5px;
+  line-height: 22px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.solo-static .tags > a.tag::before {
+  content: "#";
+}
+
+.solo-static .tags > a.tag:hover {
+  background: #999;
+}
+
+.solo-static .module {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.solo-static .module header h2 {
+  border-bottom: 1px solid #ff4d3a;
+  padding: 10px;
+  line-height: 18px;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.solo-static .module main {
+  padding: 20px;
+}
+
+.solo-static aside .tag.vditor-tooltipped {
+  display: inline-block;
+  padding: 2px 5px;
+  margin-bottom: 10px;
+  border: 1px solid #e1e1e1;
+  text-decoration: none;
+  margin-right: 10px;
+  line-height: 22px;
+}
+
+.solo-static aside .meta main {
+  text-align: right;
+  line-height: 20px;
+}
+
+.solo-static aside .meta img {
+  float: left;
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
+}
+
+.solo-static .list,
+.solo-static .module main.list {
+  padding: 0;
+}
+
+.solo-static .list li {
+  list-style: none;
+  border-bottom: 1px solid #eee;
+  line-height: 40px;
+  padding: 0 20px;
+}
+
+.solo-static .list a {
+  color: #666;
+  text-decoration: none;
+  display: block;
+}
+
+.solo-static .pagination .page-number {
+  display: inline-block;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-left: 0;
+  text-decoration: none;
+  float: left;
+  line-height: 30px;
+}
+
+.solo-static .pagination .page-number.current {
+  color: #fff;
+  background: #ff4d3a;
+  border-color: #ff4d3a;
+}
+
+.solo-static .footer {
+  padding: 30px 0;
+  text-align: center;
+  background: #111;
+  margin-top: 30px;
+  color: #fff;
+}
+
+.solo-static .footer a {
+  color: #ff4d3a;
+  text-decoration: none;
+}
+
+.solo-static .search-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.solo-static .search-form input {
+  flex: 1;
+}
+
+.solo-static .search-form button {
+  padding: 0 18px;
+}
+
+.solo-static .search-results li {
+  line-height: 1.6;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.solo-static .search-results strong,
+.solo-static .search-results span {
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .solo-static .wrapper {
+    min-width: 0;
+    width: 94%;
+  }
+
+  .solo-static .banner {
+    height: auto;
+    padding: 14px 0;
+  }
+
+  .solo-static .banner h1 {
+    display: block;
+  }
+
+  .solo-static .banner h1 a {
+    line-height: 1.35;
+  }
+
+  .solo-static .banner small {
+    display: block;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+
+  .solo-static .banner .fn-right {
+    display: none;
+  }
+
+  .solo-static .navbar {
+    height: auto;
+    margin-bottom: 18px;
+  }
+
+  .solo-static .navbar nav {
+    display: block;
+    float: none;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .solo-static .navbar nav a {
+    line-height: 42px;
+    padding: 0 8px;
+  }
+
+  .solo-static .navbar .fn-right {
+    display: none;
+  }
+
+  .solo-static .main-wrap {
+    display: block;
+  }
+
+  .solo-static .main-wrap > main {
+    margin-right: 0;
+  }
+
+  .solo-static aside {
+    margin-top: 18px;
+    min-width: 0;
+    width: auto;
+  }
+
+  .solo-static .post {
+    padding: 16px;
+  }
+
+  .solo-static .post h2 > a {
+    font-size: 20px;
+  }
+
+  .solo-static .post__content pre {
+    overflow-x: auto;
+  }
+}

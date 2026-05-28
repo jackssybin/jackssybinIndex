@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# VuePress build output
+docs/.vuepress/dist/
+docs/.vuepress/.cache/
+docs/.vuepress/.temp/
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Original migration inputs kept locally by default
+ROOT/
+*.sql
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
