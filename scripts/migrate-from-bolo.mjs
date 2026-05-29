@@ -283,15 +283,6 @@ function makeArticleCard(article) {
             <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="${article.hasUpdated ? "更新日期" : "创建日期"}">
                 <i class="icon-date"></i> <time>${formatDate(article.articleCreated)}</time>
             </span>
-            &nbsp; | &nbsp;
-            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="评论数">
-                <i class="icon-comments"></i>
-                <a href="${escapeAttr(article.articlePermalink)}#comments">${Number(article.articleCommentCount || 0)} 评论</a>
-            </span>
-            &nbsp; | &nbsp;
-            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="浏览数">
-                <i class="icon-views"></i> ${Number(article.articleViewCount || 0)} 浏览
-            </span>
         </div>
     </header>
     <div class="vditor-reset">${abstract}</div>
@@ -307,13 +298,6 @@ function makeSidebar({ tags, articles, comments, options, user, links }) {
     .filter((tag) => tag.count > 0)
     .sort((a, b) => b.count - a.count || a.tagTitle.localeCompare(b.tagTitle, "zh-CN"))
     .slice(0, Number(options.mostUsedTagDisplayCount || 20));
-  const mostCommentArticles = [...articles]
-    .sort((a, b) => Number(b.articleCommentCount) - Number(a.articleCommentCount))
-    .filter((article) => Number(article.articleCommentCount) > 0)
-    .slice(0, Number(options.mostCommentArticleDisplayCount || 5));
-  const mostViewArticles = [...articles]
-    .sort((a, b) => Number(b.articleViewCount) - Number(a.articleViewCount))
-    .slice(0, Number(options.mostViewArticleDisplayCount || 5));
 
   return `<aside>
     <section>
@@ -329,23 +313,9 @@ function makeSidebar({ tags, articles, comments, options, user, links }) {
                 <img src="${escapeAttr(user?.userAvatar || "/images/default-user-thumbnail.png")}" aria-label="${escapeAttr(user?.userName || "jackssybin")}">
                 <div class="fn-right">
                     <a href="/archives.html">${articles.length} <span class="ft-gray">文章</span></a><br>
-                    ${comments.length} <span class="ft-gray">评论</span><br>
-                    ${Number(options.statisticBlogViewCount || 0)} <span class="ft-gray">浏览</span><br>
                     ${links.length} <span class="ft-gray">友链</span>
                 </div>
             </main>
-        </div>
-        <div class="module">
-            <header><h2>评论最多的文章</h2></header>
-            <main class="list"><ul>
-                ${mostCommentArticles.map((article) => `<li><a rel="nofollow" aria-label="${Number(article.articleCommentCount)} 评论" class="vditor-tooltipped vditor-tooltipped__e" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleTitle)}</a></li>`).join("\n")}
-            </ul></main>
-        </div>
-        <div class="module">
-            <header><h2>访问最多的文章</h2></header>
-            <main class="list"><ul>
-                ${mostViewArticles.map((article) => `<li><a rel="nofollow" aria-label="${Number(article.articleViewCount)} 浏览" class="vditor-tooltipped vditor-tooltipped__e" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleTitle)}</a></li>`).join("\n")}
-            </ul></main>
         </div>
     </section>
 </aside>`;
@@ -365,7 +335,7 @@ ${makeFooter(site)}`;
 function makeComments(articleComments) {
   if (articleComments.length === 0) return "";
   return `<section id="comments" class="comments">
-    <h3>${articleComments.length} 条旧评论</h3>
+    <h3>旧评论归档</h3>
     ${articleComments.map((comment) => `<article class="comment" id="${escapeAttr(comment.oId)}">
         <img src="${escapeAttr(comment.commentThumbnailURL || "/images/default-user-thumbnail.png")}" alt="${escapeAttr(comment.commentName)}">
         <main>
@@ -396,15 +366,6 @@ function makeArticlePage(article, site, prev, next, commentsByArticle) {
                 <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="${article.hasUpdated ? "更新日期" : "创建日期"}">
                     <i class="icon-date"></i>
                     <time>${formatDate(article.articleCreated)}/${formatDate(article.articleUpdated)}</time>
-                </span>
-                &nbsp; | &nbsp;
-                <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="评论数">
-                    <i class="icon-comments"></i>
-                    <a href="${escapeAttr(article.articlePermalink)}#comments">${articleComments.length} 评论</a>
-                </span>
-                &nbsp; | &nbsp;
-                <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="浏览数">
-                    <i class="icon-views"></i> ${Number(article.articleViewCount || 0)} 浏览
                 </span>
             </div>
         </header>
