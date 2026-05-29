@@ -14,11 +14,20 @@ const results = computed(() => {
   if (!query) return [];
 
   return searchIndex
-    .filter((item) => {
+    .map((item) => {
       const title = item.title.toLowerCase();
       const tags = item.tags.join(",").toLowerCase();
-      return title.includes(query) || tags.includes(query);
+      const excerpt = (item.excerpt || "").toLowerCase();
+      const content = (item.content || "").toLowerCase();
+      let score = 0;
+      if (title.includes(query)) score += 100;
+      if (tags.includes(query)) score += 60;
+      if (excerpt.includes(query)) score += 30;
+      if (content.includes(query)) score += 10;
+      return { ...item, score };
     })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || b.date.localeCompare(a.date))
     .slice(0, 50);
 });
 </script>
@@ -74,6 +83,7 @@ const results = computed(() => {
             <a :href="item.url">
               <strong>{{ item.title }}</strong>
               <span class="ft-gray">{{ item.date }} · {{ item.tags.join(', ') }}</span>
+              <span v-if="item.excerpt" class="search-excerpt">{{ item.excerpt }}</span>
             </a>
           </li>
         </ul>

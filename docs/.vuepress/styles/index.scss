@@ -394,6 +394,12 @@ html[data-solo-theme="dark"] .theme-container {
   display: block;
 }
 
+.solo-static .search-excerpt {
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.55;
+}
+
 html[data-solo-theme="dark"] .solo-static {
   background: #11151b;
   color: #d7dde7;
@@ -496,6 +502,10 @@ html[data-solo-theme="dark"] .solo-static .list li {
 
 html[data-solo-theme="dark"] .solo-static .list a {
   color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .search-excerpt {
+  color: #9aa6b8;
 }
 
 html[data-solo-theme="dark"] .solo-static .post .meta a:hover,

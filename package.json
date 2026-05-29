@@ -7,6 +7,7 @@
     "node": ">=22 <25"
   },
   "scripts": {
+    "new-post": "node scripts/new-post.mjs",
     "migrate": "node scripts/migrate-from-bolo.mjs",
     "dev": "vuepress dev docs --host 0.0.0.0",
     "build": "vuepress build docs",

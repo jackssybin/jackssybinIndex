@@ -146,6 +146,24 @@ git push
 
 ### 1. 推荐的新文章存放位置
 
+推荐用脚本创建文章：
+
+```bash
+pnpm new-post "使用 GitHub Actions 自动部署 VuePress 到 Nginx"
+```
+
+脚本会自动生成当天目录、文件名、`title`、`permalink`、`description` 和 `tags` 模板。标题是中文时，文件名会使用 `post-时间戳.md`，也可以临时指定英文 slug：
+
+```bash
+POST_SLUG=github-actions-nginx-deploy pnpm new-post "使用 GitHub Actions 自动部署 VuePress 到 Nginx"
+```
+
+PowerShell 使用：
+
+```powershell
+$env:POST_SLUG="github-actions-nginx-deploy"; pnpm new-post "使用 GitHub Actions 自动部署 VuePress 到 Nginx"; Remove-Item Env:POST_SLUG
+```
+
 建议继续使用原博客的文章路径规则：
 
 ```text
@@ -178,6 +196,8 @@ content/articles/2026/05/28/github-actions-nginx-deploy.md
 ---
 title: "使用 GitHub Actions 自动部署 VuePress 到 Nginx"
 permalink: "/articles/2026/05/28/github-actions-nginx-deploy.html"
+description: "本文介绍如何使用 GitHub Actions 把 VuePress 静态博客自动部署到自己的 Nginx 服务器。"
+tags: ["VuePress", "GitHub Actions", "Nginx"]
 pageClass: solo-page
 sidebar: false
 breadcrumb: false
@@ -208,6 +228,8 @@ comment: false
 
 - `title` 是浏览器标题和页面标题。
 - `permalink` 是最终访问路径，建议保持 `/articles/年/月/日/xxx.html`。
+- `description` 会用于 SEO 摘要、搜索结果摘要和 RSS 描述；如果留空，迁移脚本会从正文自动截取。
+- `tags` 会用于标签页、搜索权重和 SEO keywords。
 - `pageClass: solo-page` 会复用当前迁移站的 Solo 风格样式。
 - 正文部分就是普通 Markdown，可以写标题、代码块、表格、图片等。
 
@@ -232,7 +254,7 @@ content/articles/2026/05/28/github-actions-nginx-deploy.md
 - 首页文章列表，按文章日期排序。
 - `/archives.html` 和对应年月归档页。
 - `/tags.html` 和对应标签页。
-- `/search.html` 的标题搜索结果。
+- `/search.html` 的搜索结果，支持匹配标题、标签、摘要和正文。
 - `/rss.xml`。
 - 右侧栏文章总数统计。
 
@@ -243,14 +265,15 @@ content/articles/2026/05/28/github-actions-nginx-deploy.md
 ```bash
 git pull
 
-# 新建或修改 content/articles/年/月/日/xxx.md
+pnpm new-post "文章标题"
+# 或修改 content/articles/年/月/日/xxx.md
 
 pnpm migrate
 pnpm dev --port 8080
 pnpm build
 
 git status
-git add content/articles/2026/05/28/github-actions-nginx-deploy.md docs scripts README.md
+git add content docs
 git commit -m "add github actions nginx deploy article"
 git push
 ```

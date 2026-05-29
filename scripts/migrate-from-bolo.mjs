@@ -58,12 +58,16 @@ function formatDateTime(ms) {
   }).format(new Date(Number(ms))).replaceAll("/", "-");
 }
 
-function frontmatter(title, permalink) {
-  return `---\ntitle: ${JSON.stringify(title)}\npermalink: ${JSON.stringify(permalink)}\npageClass: solo-page\nsidebar: false\nbreadcrumb: false\npageInfo: false\ncontributors: false\nlastUpdated: false\ncomment: false\n---\n\n`;
+function frontmatter(title, permalink, seo = {}) {
+  const description = seo.description ? `description: ${JSON.stringify(seo.description)}\n` : "";
+  const keywords = Array.isArray(seo.keywords) && seo.keywords.length > 0
+    ? `head:\n  - - meta\n    - name: keywords\n      content: ${JSON.stringify(seo.keywords.join(","))}\n  - - meta\n    - property: og:description\n      content: ${JSON.stringify(seo.description || "")}\n  - - meta\n    - property: og:url\n      content: ${JSON.stringify(`https://jackssybin.cn${permalink}`)}\n`
+    : "";
+  return `---\ntitle: ${JSON.stringify(title)}\npermalink: ${JSON.stringify(permalink)}\n${description}${keywords}pageClass: solo-page\nsidebar: false\nbreadcrumb: false\npageInfo: false\ncontributors: false\nlastUpdated: false\ncomment: false\n---\n\n`;
 }
 
-function pageDocument(title, permalink, pageId) {
-  return `${frontmatter(title, permalink)}<SoloPage id="${pageId}" />\n`;
+function pageDocument(title, permalink, pageId, seo = {}) {
+  return `${frontmatter(title, permalink, seo)}<SoloPage id="${pageId}" />\n`;
 }
 
 function markdownToHtml(source = "") {
@@ -79,6 +83,13 @@ function stripMarkdown(source = "") {
     .replace(/[#>*_`~-]/gu, "")
     .replace(/\s+/gu, " ")
     .trim();
+}
+
+function excerptText(value = "", length = 160) {
+  const text = stripMarkdown(value)
+    .replace(/\s+/gu, " ")
+    .trim();
+  return text.length > length ? `${text.slice(0, length)}...` : text;
 }
 
 function parseFrontmatter(source = "") {
@@ -174,8 +185,8 @@ async function readManualArticles() {
     const stats = await fs.stat(file);
     const created = dateFromPermalink(permalink, stats.birthtimeMs || stats.mtimeMs);
     const tags = normalizeTags(data.tags || data.tag || "");
-    const bodyWithoutTitle = body.replace(new RegExp(`^#\\s+${title.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*`, "u"), "");
-    const abstractText = stripMarkdown(bodyWithoutTitle).slice(0, 220);
+    const bodyWithoutTitle = body.replace(new RegExp(`^\\s*#\\s+${title.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*`, "u"), "");
+    const abstractText = excerptText(bodyWithoutTitle, 220);
 
     manualArticles.push({
       oId: `manual:${relativePath.replace(/\\/gu, "/")}`,
@@ -185,6 +196,8 @@ async function readManualArticles() {
       articleUpdated: stats.mtimeMs,
       articleAbstract: "",
       articleAbstractText: abstractText,
+      articleSeoDescription: data.description || excerptText(bodyWithoutTitle, 160),
+      articleSearchText: stripMarkdown(bodyWithoutTitle).slice(0, 4000),
       articleContent: bodyWithoutTitle,
       articleTags: tags.join(","),
       articleCommentCount: 0,
@@ -199,12 +212,12 @@ async function readManualArticles() {
   return manualArticles;
 }
 
-async function writePage(permalink, title, html) {
+async function writePage(permalink, title, html, seo = {}) {
   const pageId = `p${pageData.length}`;
   pageData.push({ id: pageId, html });
   const file = localPathForPermalink(permalink);
   await fs.mkdir(path.dirname(file), { recursive: true });
-  await fs.writeFile(file, pageDocument(title, permalink, pageId), "utf8");
+  await fs.writeFile(file, pageDocument(title, permalink, pageId, seo), "utf8");
 }
 
 async function resetGeneratedDocs() {
@@ -432,7 +445,7 @@ function makeRss(articles, options) {
     <link>https://jackssybin.cn${escapeHtml(article.articlePermalink)}</link>
     <guid>https://jackssybin.cn${escapeHtml(article.articlePermalink)}</guid>
     <pubDate>${new Date(Number(article.articleCreated)).toUTCString()}</pubDate>
-    <description><![CDATA[${article.articleAbstract || article.articleAbstractText || ""}]]></description>
+    <description><![CDATA[${article.articleSeoDescription || article.articleAbstract || article.articleAbstractText || ""}]]></description>
   </item>`).join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -468,6 +481,8 @@ async function main() {
   const migratedArticles = articleRows.map((article) => ({
     ...article,
     articleCommentCount: (commentsByArticle.get(article.oId) || []).length,
+    articleSeoDescription: excerptText(article.articleAbstractText || article.articleAbstract || article.articleContent, 160),
+    articleSearchText: stripMarkdown(`${article.articleAbstractText || ""} ${article.articleAbstract || ""} ${article.articleContent || ""}`).slice(0, 4000),
     hasUpdated: Number(article.articleUpdated) !== Number(article.articleCreated)
   }));
   const manualArticles = await readManualArticles();
@@ -512,7 +527,15 @@ async function main() {
     const article = articles[index];
     const prev = articles[index + 1];
     const next = articles[index - 1];
-    await writePage(article.articlePermalink, `${article.articleTitle} - ${site.blogTitle}`, makeArticlePage(article, site, prev, next, commentsByArticle));
+    await writePage(
+      article.articlePermalink,
+      `${article.articleTitle} - ${site.blogTitle}`,
+      makeArticlePage(article, site, prev, next, commentsByArticle),
+      {
+        description: article.articleSeoDescription,
+        keywords: splitTags(article.articleTags)
+      }
+    );
   }
 
   const tagWall = `<div class="tags">
@@ -560,7 +583,9 @@ async function main() {
       title: article.articleTitle,
       url: article.articlePermalink,
       date: formatDate(article.articleCreated),
-      tags: splitTags(article.articleTags)
+      tags: splitTags(article.articleTags),
+      excerpt: article.articleSeoDescription || article.articleAbstractText || "",
+      content: article.articleSearchText || ""
     })), null, 2)};\n`,
     "utf8"
   );
