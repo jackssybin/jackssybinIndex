@@ -20,7 +20,7 @@ function applySoloTheme(theme: "light" | "dark") {
 function getInitialSoloTheme(): "light" | "dark" {
   const saved = localStorage.getItem(THEME_KEY);
   if (saved === "dark" || saved === "light") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "dark";
 }
 
 export default defineClientConfig({
