@@ -558,6 +558,55 @@ html[data-solo-theme="dark"] .theme-container {
   color: #ff4d3a;
 }
 
+.solo-static .tutorial-sidebar main {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+}
+
+.solo-static .tutorial-sidebar-card {
+  border: 1px solid #ededed;
+  display: block;
+  padding: 11px 12px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.solo-static .tutorial-sidebar-card strong,
+.solo-static .tutorial-sidebar-card span {
+  display: block;
+}
+
+.solo-static .tutorial-sidebar-card strong {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.solo-static .tutorial-sidebar-card span {
+  color: #888;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.solo-static .tutorial-sidebar-card:hover {
+  border-color: #ff4d3a;
+  background: #fff7f6;
+  text-decoration: none;
+}
+
+.solo-static .tutorial-sidebar-more {
+  color: #ff4d3a;
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  padding-top: 2px;
+  text-align: right;
+  text-decoration: none;
+}
+
 .solo-static .topic-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -788,10 +837,25 @@ html[data-solo-theme="dark"] .solo-static .topic-roadmap a {
 }
 
 html[data-solo-theme="dark"] .solo-static .topic-list a,
+html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card span,
 html[data-solo-theme="dark"] .solo-static .topic-card p,
 html[data-solo-theme="dark"] .solo-static .core-intro p,
 html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel p {
   color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card {
+  border-color: #2a323f;
+  background: #141a23;
+}
+
+html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card:hover {
+  border-color: #ff7668;
+  background: #1c232d;
+}
+
+html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card strong {
+  color: #f1f5fb;
 }
 
 html[data-solo-theme="dark"] .solo-static .topic-card,
@@ -1016,6 +1080,158 @@ html[data-solo-theme="dark"] .solo-static .footer {
   margin: 18px 20px 8px;
 }
 
+.solo-static .mysql-hero {
+  background: #fff;
+  border: 1px solid #eee;
+  margin-bottom: 16px;
+  padding: 22px 24px;
+}
+
+.solo-static .mysql-hero h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.solo-static .mysql-hero p {
+  color: #666;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+
+.solo-static .mysql-hero div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.solo-static .mysql-hero a {
+  background: #ff4d3a;
+  color: #fff;
+  line-height: 32px;
+  padding: 0 12px;
+  text-decoration: none;
+}
+
+.solo-static .mysql-course {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
+
+.solo-static .mysql-tutorial-nav {
+  align-self: start;
+  background: #fff;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+  padding: 16px;
+  position: sticky;
+  top: 12px;
+}
+
+.solo-static .mysql-tutorial-nav h3 {
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+}
+
+.solo-static .tutorial-series-nav h3 + h3 {
+  display: none;
+}
+
+.solo-static .mysql-tutorial-nav h4 {
+  color: #999;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 14px 0 6px;
+}
+
+.solo-static .mysql-tutorial-nav a {
+  color: #555;
+  display: block;
+  line-height: 1.45;
+  padding: 6px 8px;
+  text-decoration: none;
+}
+
+.solo-static .mysql-tutorial-nav a:hover,
+.solo-static .mysql-tutorial-nav a.current {
+  background: #ff4d3a;
+  color: #fff;
+}
+
+.solo-static .mysql-course-main {
+  min-width: 0;
+}
+
+.solo-static .mysql-chapter-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.solo-static .tutorial-series-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.solo-static .mysql-chapter-grid a,
+.solo-static .tutorial-series-grid a {
+  background: #fff;
+  border: 1px solid #eee;
+  color: #333;
+  display: block;
+  min-height: 112px;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.solo-static .mysql-chapter-grid a:hover,
+.solo-static .tutorial-series-grid a:hover {
+  border-color: #ff4d3a;
+}
+
+.solo-static .mysql-chapter-grid strong,
+.solo-static .mysql-chapter-grid span,
+.solo-static .mysql-chapter-grid em,
+.solo-static .tutorial-series-grid strong,
+.solo-static .tutorial-series-grid span,
+.solo-static .tutorial-series-grid em {
+  display: block;
+}
+
+.solo-static .mysql-chapter-grid strong,
+.solo-static .tutorial-series-grid strong {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.solo-static .mysql-chapter-grid span,
+.solo-static .tutorial-series-grid span {
+  color: #ff4d3a;
+  margin: 6px 0;
+}
+
+.solo-static .mysql-chapter-grid em,
+.solo-static .tutorial-series-grid em {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #777;
+  display: -webkit-box;
+  font-style: normal;
+  line-height: 1.55;
+  overflow: hidden;
+}
+
+.solo-static .mysql-article {
+  margin-bottom: 0;
+}
+
 html[data-solo-theme="dark"] .solo-static .nav-hero,
 html[data-solo-theme="dark"] .solo-static .nav-card,
 html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
@@ -1040,6 +1256,32 @@ html[data-solo-theme="dark"] .solo-static .nav-section h3 {
 
 html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
   color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .mysql-hero,
+html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav,
+html[data-solo-theme="dark"] .solo-static .mysql-chapter-grid a,
+html[data-solo-theme="dark"] .solo-static .tutorial-series-grid a {
+  background: #171d26;
+  border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .mysql-hero p,
+html[data-solo-theme="dark"] .solo-static .mysql-chapter-grid em,
+html[data-solo-theme="dark"] .solo-static .tutorial-series-grid em,
+html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav a {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .mysql-hero h2,
+html[data-solo-theme="dark"] .solo-static .mysql-chapter-grid strong,
+html[data-solo-theme="dark"] .solo-static .tutorial-series-grid strong,
+html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav h3 {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav h3 {
+  border-bottom-color: #2a323f;
 }
 
 @media (max-width: 760px) {
@@ -1072,31 +1314,100 @@ html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
   }
 
   .solo-static .navbar {
+    border-top: 1px solid #ececec;
     height: auto;
     margin-bottom: 18px;
+    overflow: visible;
+    padding: 8px 0 10px;
+  }
+
+  .solo-static .navbar .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .solo-static .navbar nav {
-    display: block;
+    display: flex;
     float: none;
-    overflow-x: auto;
-    white-space: nowrap;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow: visible;
+    white-space: normal;
   }
 
   .solo-static .navbar nav a {
-    line-height: 42px;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    box-sizing: border-box;
+    color: #4c5563;
+    flex: 0 0 calc(33.333% - 6px);
+    font-size: 13px;
+    line-height: 34px;
+    min-width: 0;
+    overflow: hidden;
     padding: 0 8px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .solo-static .navbar nav a:hover {
+    border-color: #eb5750;
+    color: #eb5750;
+    text-decoration: none;
   }
 
   .solo-static .navbar form {
-    display: none;
+    display: block;
+    flex: 1;
+    margin-top: 0;
+    min-width: 0;
   }
 
   .solo-static .navbar .fn-right {
     display: flex;
     float: none;
-    justify-content: flex-end;
-    padding-bottom: 10px;
+    gap: 8px;
+    justify-content: stretch;
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  .solo-static .navbar .form input {
+    height: 34px;
+    line-height: 32px;
+  }
+
+  .solo-static .navbar button:not(.theme-toggle) {
+    height: 34px;
+    width: 36px;
+  }
+
+  .solo-static .theme-toggle {
+    flex: 0 0 36px;
+    height: 34px;
+    line-height: 32px;
+    margin-top: 0;
+    width: 36px;
+  }
+
+  .solo-static .page-icon {
+    float: none;
+    height: 13px;
+    margin: 0 4px 0 0;
+    vertical-align: -2px;
+    width: 13px;
+  }
+
+  html[data-solo-theme="dark"] .solo-static .navbar {
+    border-top-color: #262d38;
+  }
+
+  html[data-solo-theme="dark"] .solo-static .navbar nav a {
+    background: #171d26;
+    border-color: #2a323f;
+    color: #c2cad8;
   }
 
   .solo-static .main-wrap {
@@ -1163,5 +1474,31 @@ html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
   .solo-static .nav-search button {
     margin-top: 8px;
     width: 100%;
+  }
+
+  .solo-static .mysql-course {
+    display: block;
+  }
+
+  .solo-static .mysql-tutorial-nav {
+    max-height: none;
+    margin-bottom: 16px;
+    position: static;
+  }
+
+  .solo-static .mysql-chapter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .tutorial-series-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .mysql-hero {
+    padding: 16px;
+  }
+
+  .solo-static .mysql-hero h2 {
+    font-size: 22px;
   }
 }

@@ -15,6 +15,9 @@ bak/
 # Original migration inputs kept locally by default
 ROOT/
 jackssybin.github.io-master/
+mysql_project_all/
+netty_project_all/
+springboot4_project_all/
 *.sql
 
 # Logs

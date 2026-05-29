@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import { navIndex, searchIndex } from "../search-index.js";
+import { navIndex, searchIndex, tutorialIndex } from "../search-index.js";
 
 const keyword = ref("");
 
@@ -61,6 +61,29 @@ const navResults = computed(() => {
     .slice(0, 30);
 });
 
+const tutorialResults = computed(() => {
+  if (terms.value.length === 0) return [];
+
+  return tutorialIndex
+    .map((item) => {
+      const title = item.title.toLowerCase();
+      const group = (item.group || "").toLowerCase();
+      const excerpt = (item.excerpt || "").toLowerCase();
+      const content = (item.content || "").toLowerCase();
+      let score = 0;
+      for (const query of terms.value) {
+        if (title.includes(query)) score += 100;
+        if (group.includes(query)) score += 60;
+        if (excerpt.includes(query)) score += 30;
+        if (content.includes(query)) score += 10;
+      }
+      return { ...item, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "zh-CN"))
+    .slice(0, 30);
+});
+
 const hotTags = computed(() => {
   const counts = new Map<string, number>();
   for (const item of searchIndex) {
@@ -90,6 +113,7 @@ const hotTags = computed(() => {
             <a href="/my-github-repos"><img class="page-icon" src="/images/github-icon.png" alt="">我的开源</a>
             <a href="https://blog.csdn.net/jackssybin">我的 CSDN</a>
             <a href="/topics.html"><i class="icon-list"></i> 专题</a>
+            <a href="/tutorials.html"><i class="icon-list"></i> 教程中心</a>
             <a href="/nav.html"><i class="icon-link"></i> 网址导航</a>
             <a href="/tags.html"><i class="icon-tags"></i> 标签墙</a>
             <a href="/archives.html"><i class="icon-inbox"></i> 存档</a>
@@ -124,8 +148,8 @@ const hotTags = computed(() => {
             {{ tag }} <b>{{ count }}</b>
           </a>
         </div>
-        <p v-if="!keyword" class="ft-gray">可搜索文章标题、专题、标签、摘要、正文和网址导航。</p>
-        <p v-else class="ft-gray">关键词：{{ keyword }}，找到 {{ results.length }} 篇文章、{{ navResults.length }} 个导航资源。</p>
+        <p v-if="!keyword" class="ft-gray">可搜索文章标题、专题、标签、摘要、正文、教程中心和网址导航。</p>
+        <p v-else class="ft-gray">关键词：{{ keyword }}，找到 {{ results.length }} 篇文章、{{ tutorialResults.length }} 篇教程、{{ navResults.length }} 个导航资源。</p>
 
         <h3 v-if="results.length" class="search-section-title">文章</h3>
         <ul v-if="results.length" class="list search-results">
@@ -133,6 +157,17 @@ const hotTags = computed(() => {
             <a :href="item.url">
               <strong>{{ item.title }}</strong>
               <span class="ft-gray">{{ item.date }} · {{ item.topic }} · {{ item.tags.join(', ') }}</span>
+              <span v-if="item.excerpt" class="search-excerpt">{{ item.excerpt }}</span>
+            </a>
+          </li>
+        </ul>
+
+        <h3 v-if="tutorialResults.length" class="search-section-title">教程</h3>
+        <ul v-if="tutorialResults.length" class="list search-results">
+          <li v-for="item in tutorialResults" :key="item.url">
+            <a :href="item.url">
+              <strong>{{ item.title }}</strong>
+              <span class="ft-gray">{{ item.series }} · {{ item.group }}</span>
               <span v-if="item.excerpt" class="search-excerpt">{{ item.excerpt }}</span>
             </a>
           </li>

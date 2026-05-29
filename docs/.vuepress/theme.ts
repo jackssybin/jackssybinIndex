@@ -3,7 +3,7 @@ import { hopeTheme } from "vuepress-theme-hope";
 export default hopeTheme({
   hostname: "https://jackssybin.cn/",
   logo: "/images/logo.png",
-  favicon: "/images/favicon.png",
+  favicon: "/images/favicon.svg?v=20260529-4",
   navbar: false,
   sidebar: false,
   breadcrumb: false,

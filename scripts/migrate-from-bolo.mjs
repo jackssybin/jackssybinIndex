@@ -13,6 +13,60 @@ const navSourceDir = path.join(root, "content", "navigation");
 const navDataFile = path.join(navSourceDir, "webstack.yml");
 const navLogoSourceDir = path.join(navSourceDir, "logos");
 const navLogoPublicDir = path.join(publicDir, "nav-logos");
+const mysqlTutorialDir = path.join(root, "mysql_project_all", "111101");
+const springBoot4TutorialDir = path.join(root, "springboot4_project_all", "1223");
+const nettyTutorialDir = path.join(root, "netty_project_all", "1226");
+
+const tutorialSeriesDefinitions = [
+  {
+    id: "mysql",
+    slug: "mysql",
+    title: "MySQL教程",
+    shortTitle: "MySQL",
+    sourceDir: mysqlTutorialDir,
+    description: "MySQL从新手到专家完整教程，包含安装、SQL、索引、事务锁、日志备份、性能优化、主从高可用和故障排查。",
+    keywords: ["MySQL", "SQL", "索引优化", "事务", "binlog", "备份恢复", "性能优化"],
+    heroTitle: "MySQL从新手到专家完整教程",
+    heroDescription: "系统学习 MySQL 安装配置、SQL 基础、索引优化、事务锁、日志备份、性能调优、主从高可用、监控诊断和实战面试。",
+    quickLinks: [
+      ["快速开始指南.md", "快速开始"],
+      ["MySQL学习路线图.md", "学习路线图"],
+      ["学习进度检查清单.md", "进度检查"]
+    ]
+  },
+  {
+    id: "springboot4",
+    slug: "springboot4",
+    title: "Spring Boot 4教程",
+    shortTitle: "Spring Boot 4",
+    sourceDir: springBoot4TutorialDir,
+    description: "Spring Boot 4 系列教程，覆盖框架新特性、Web、数据访问、安全、可观测性、云原生、性能优化和迁移实践。",
+    keywords: ["Spring Boot 4", "Spring Framework 7", "Spring Security 7", "GraalVM", "虚拟线程", "云原生"],
+    heroTitle: "Spring Boot 4完整教程",
+    heroDescription: "系统整理 Spring Boot 4、Spring Framework 7、Spring Security 7、云原生、GraalVM、性能优化和从 Boot 3 迁移的完整学习路径。",
+    quickLinks: [
+      ["快速导航.md", "快速导航"],
+      ["README.md", "教程首页"],
+      ["附录/附录D-迁移检查清单.md", "迁移清单"]
+    ]
+  },
+  {
+    id: "netty",
+    slug: "netty",
+    title: "Netty教程",
+    shortTitle: "Netty",
+    sourceDir: nettyTutorialDir,
+    description: "Netty 系列教程，覆盖网络编程基础、核心组件、ByteBuf、编解码、粘包拆包、线程模型、性能优化和实战项目。",
+    keywords: ["Netty", "Java NIO", "网络编程", "ByteBuf", "编解码器", "粘包拆包", "EventLoop", "高性能"],
+    heroTitle: "Netty完整教程",
+    heroDescription: "系统学习 Netty 网络编程、核心组件、缓冲区、编解码、协议支持、EventLoop 线程模型、零拷贝、高性能优化和实战项目。",
+    quickLinks: [
+      ["第一部分-基础入门/第1章-Netty简介与环境搭建.md", "环境搭建"],
+      ["第一部分-基础入门/第3章-Netty核心组件.md", "核心组件"],
+      ["第二部分-核心特性/第10章-EventLoop与线程模型.md", "线程模型"]
+    ]
+  }
+];
 
 const dbConfig = {
   host: process.env.BOLO_DB_HOST || "127.0.0.1",
@@ -337,6 +391,15 @@ function logoPath(logo = "") {
   return `/nav-logos/${encodeURIComponent(logo)}`;
 }
 
+function slugifyAscii(value = "") {
+  const ascii = String(value)
+    .toLowerCase()
+    .replace(/['"]/gu, "")
+    .replace(/[^a-z0-9]+/gu, "-")
+    .replace(/^-+|-+$/gu, "");
+  return ascii || tagSlug(value);
+}
+
 function localPathForPermalink(permalink) {
   let clean = permalink.replace(/^\/+/, "");
   if (!clean) clean = "index";
@@ -383,6 +446,7 @@ async function readManualArticles() {
     for (const file of files) {
     const source = await fs.readFile(file, "utf8");
     const { data, body } = parseFrontmatter(source);
+    if (file.startsWith(docsDir) && data.pageClass === "solo-page") continue;
     if (/^<SoloPage\s+id="[^"]+"\s*\/>\s*$/u.test(body.trim())) continue;
     const relativePath = path.join("articles", path.relative(articlesDir, file)).replace(/\\/gu, "/");
     const permalink = data.permalink || permalinkForManualArticle(relativePath);
@@ -455,6 +519,7 @@ function makeHeader({ blogTitle, blogSubtitle, pages }) {
             <nav class="fn-left">
                 <a href="/"><i class="icon-home"></i> 首页</a>
                 ${navPages}
+                <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
                 <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
                 <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
                 <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
@@ -520,11 +585,18 @@ function makeArticleCard(article) {
 </article>`;
 }
 
-function makeSidebar({ tags, articles, comments, options, user, links }) {
+function makeSidebar({ tags, articles, comments, options, user, links, tutorialSeriesList = [] }) {
   const usedTags = tags
     .filter((tag) => tag.count > 0)
     .sort((a, b) => b.count - a.count || a.tagTitle.localeCompare(b.tagTitle, "zh-CN"))
     .slice(0, Number(options.mostUsedTagDisplayCount || 20));
+  const tutorialLinks = tutorialSeriesList
+    .filter((series) => series.tutorials?.length > 0)
+    .map((series) => `<a class="tutorial-sidebar-card" href="/${series.slug}.html">
+        <strong>${escapeHtml(series.shortTitle || series.title)}</strong>
+        <span>${series.tutorials.length} 篇教程</span>
+    </a>`)
+    .join("\n");
 
   return `<aside>
     <section>
@@ -540,6 +612,13 @@ function makeSidebar({ tags, articles, comments, options, user, links }) {
                 ${usedTags.map((tag) => `<a rel="tag" href="${tagHref(tag.tagTitle)}" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="${tag.count} 篇文章">${escapeHtml(tag.tagTitle)}</a>`).join("\n")}
             </main>
         </div>
+        ${tutorialLinks ? `<div class="module tutorial-sidebar">
+            <header><h2>教程中心</h2></header>
+            <main>
+                ${tutorialLinks}
+                <a class="tutorial-sidebar-more" href="/tutorials.html">查看全部教程 &raquo;</a>
+            </main>
+        </div>` : ""}
         <div class="module meta">
             <header><h2 class="ft__center"><a href="https://github.com/jackssybin" target="_blank" rel="noopener">GitHub</a></h2></header>
             <main class="fn__clear">
@@ -815,6 +894,266 @@ function makeNavCategoryPage(section, site) {
   return makeOtherPage(section.taxonomy, "icon-link", body, site);
 }
 
+async function walkMarkdownFiles(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true }).catch(() => []);
+  const files = [];
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...await walkMarkdownFiles(fullPath));
+    } else if (entry.isFile() && entry.name.toLowerCase().endsWith(".md")) {
+      files.push(fullPath);
+    }
+  }
+  return files;
+}
+
+function tutorialTitle(source, file) {
+  const heading = String(source).match(/^#\s+(.+)$/mu)?.[1]?.trim();
+  if (heading) return heading.replace(/[#*`]/gu, "").trim();
+  return path.basename(file, ".md").replace(/^\d+[-_]/u, "");
+}
+
+function tutorialPermalink(relativePath, series) {
+  const clean = relativePath.replace(/\\/gu, "/").replace(/\.md$/u, "");
+  if (clean.toLowerCase() === "readme") return `/${series.slug}.html`;
+  return `/${series.slug}/${clean.split("/").map((part) => slugifyAscii(part)).join("/")}.html`;
+}
+
+function tutorialGroup(relativePath) {
+  const parts = relativePath.replace(/\\/gu, "/").split("/");
+  if (parts.length === 1) return "入门导航";
+  return parts[0].replace(/^\d+[-_]/u, "");
+}
+
+function chineseSectionNumber(value = "") {
+  const map = new Map([
+    ["一", 1], ["二", 2], ["三", 3], ["四", 4], ["五", 5],
+    ["六", 6], ["七", 7], ["八", 8], ["九", 9], ["十", 10],
+    ["十一", 11], ["十二", 12]
+  ]);
+  const match = String(value).match(/第([一二三四五六七八九十]+)(?:[、和及])?([一二三四五六七八九十]+)?/u);
+  if (!match) return 999;
+  const first = map.get(match[1]) || 999;
+  const second = match[2] ? map.get(match[2]) || first : first;
+  return Math.min(first, second);
+}
+
+function tutorialOrderKey(item) {
+  const normalized = item.relativePath.replace(/\\/gu, "/");
+  const basename = path.posix.basename(normalized, ".md");
+  const parts = normalized.split("/");
+  const isRoot = parts.length === 1;
+  const lower = basename.toLowerCase();
+  const chapterMatch = basename.match(/第(\d+)(?:-(\d+))?章/u);
+  const numericPrefix = basename.match(/^(\d+)(?:[-_]|$)/u);
+
+  let chapter = 9999;
+  if (chapterMatch) chapter = Number(chapterMatch[1]);
+  else if (numericPrefix) chapter = Number(numericPrefix[1]);
+  else if (lower === "readme") chapter = -20;
+  else if (basename.includes("快速") || basename.includes("导航")) chapter = -10;
+  else if (basename.includes("路线") || basename.includes("进度") || basename.includes("总结") || basename.includes("报告")) chapter = -5;
+
+  return {
+    section: isRoot ? 0 : chineseSectionNumber(parts[0]),
+    chapter,
+    rootRank: isRoot ? 0 : 1,
+    path: normalized
+  };
+}
+
+function compareTutorials(a, b) {
+  const left = tutorialOrderKey(a);
+  const right = tutorialOrderKey(b);
+  return left.rootRank - right.rootRank
+    || left.section - right.section
+    || left.chapter - right.chapter
+    || left.path.localeCompare(right.path, "zh-CN", { numeric: true });
+}
+
+function rewriteTutorialLinks(source, currentRelativePath, tutorialMaps) {
+  return String(source).replace(/\]\((?!https?:\/\/|mailto:|#|\/)([^)\s]+\.md)(#[^)]+)?\)/giu, (match, href, hash = "") => {
+    const normalized = path.posix.normalize(path.posix.join(path.posix.dirname(currentRelativePath.replace(/\\/gu, "/")), decodeURIComponent(href))).replace(/^\.\//u, "");
+    const basename = path.posix.basename(normalized);
+    const target = tutorialMaps.byRelative.get(normalized) || tutorialMaps.byBasename.get(basename);
+    return target ? `](${target.permalink}${hash})` : match;
+  });
+}
+
+async function readTutorialSeries(series) {
+  const files = await walkMarkdownFiles(series.sourceDir);
+  const tutorials = [];
+  for (const file of files) {
+    const relativePath = path.relative(series.sourceDir, file).replace(/\\/gu, "/");
+    const source = await fs.readFile(file, "utf8");
+    tutorials.push({
+      file,
+      relativePath,
+      title: tutorialTitle(source, file),
+      source,
+      group: tutorialGroup(relativePath),
+      permalink: tutorialPermalink(relativePath, series),
+      seriesId: series.id,
+      seriesSlug: series.slug,
+      seriesTitle: series.title
+    });
+  }
+  tutorials.sort(compareTutorials);
+
+  const byRelative = new Map(tutorials.map((item) => [item.relativePath, item]));
+  const byBasename = new Map();
+  for (const item of tutorials) {
+    const basename = path.posix.basename(item.relativePath);
+    if (!byBasename.has(basename)) byBasename.set(basename, item);
+  }
+  const tutorialMaps = { byRelative, byBasename };
+  for (const item of tutorials) {
+    item.body = rewriteTutorialLinks(item.source, item.relativePath, tutorialMaps);
+    item.excerpt = excerptText(item.body, 180);
+    item.content = stripMarkdown(item.body).slice(0, 4000);
+  }
+  return { ...series, tutorials };
+}
+
+async function readTutorialSeriesList() {
+  const seriesList = [];
+  for (const series of tutorialSeriesDefinitions) {
+    const result = await readTutorialSeries(series);
+    if (result.tutorials.length > 0) seriesList.push(result);
+  }
+  return seriesList;
+}
+
+function makeTutorialNav(tutorials, currentPermalink = "", series = { title: "教程" }) {
+  const groups = new Map();
+  for (const item of tutorials) {
+    if (!groups.has(item.group)) groups.set(item.group, []);
+    groups.get(item.group).push(item);
+  }
+  return `<aside class="mysql-tutorial-nav tutorial-series-nav">
+    <h3>${escapeHtml(series.title)}目录</h3>
+    <h3>MySQL教程目录</h3>
+    ${[...groups.entries()].map(([group, items]) => `<section>
+      <h4>${escapeHtml(group)}</h4>
+      ${items.map((item) => `<a class="${item.permalink === currentPermalink ? "current" : ""}" href="${escapeAttr(item.permalink)}">${escapeHtml(item.title)}</a>`).join("\n")}
+    </section>`).join("\n")}
+  </aside>`;
+}
+
+function makeMysqlOverviewPage(tutorials, site) {
+  const hrefByName = (name) => tutorials.find((item) => item.relativePath.endsWith(name))?.permalink || "/mysql.html";
+  const chapterItems = tutorials
+    .filter((item) => item.permalink !== "/mysql.html")
+    .map((item) => `<a href="${escapeAttr(item.permalink)}">
+      <strong>${escapeHtml(item.title)}</strong>
+      <span>${escapeHtml(item.group)}</span>
+      <em>${escapeHtml(item.excerpt)}</em>
+    </a>`).join("\n");
+  const body = `<section class="mysql-hero">
+      <h2>MySQL从新手到专家完整教程</h2>
+      <p>系统学习 MySQL 安装配置、SQL 基础、索引优化、事务锁、日志备份、性能调优、主从高可用、监控诊断和实战面试。</p>
+      <div>
+        <a href="${escapeAttr(hrefByName("快速开始指南.md"))}">快速开始</a>
+        <a href="${escapeAttr(hrefByName("MySQL学习路线图.md"))}">学习路线图</a>
+        <a href="${escapeAttr(hrefByName("学习进度检查清单.md"))}">进度检查</a>
+      </div>
+    </section>
+    <section class="mysql-course">
+      ${makeTutorialNav(tutorials, "/mysql.html")}
+      <main class="mysql-course-main">
+        <div class="mysql-chapter-grid">${chapterItems}</div>
+      </main>
+    </section>`;
+  return makeOtherPage("MySQL教程", "icon-list", body, site);
+}
+
+function makeMysqlTutorialPage(tutorial, tutorials, site) {
+  const index = tutorials.findIndex((item) => item.permalink === tutorial.permalink);
+  const prev = tutorials[index - 1];
+  const next = tutorials[index + 1];
+  const body = `<section class="mysql-course">
+      ${makeTutorialNav(tutorials, tutorial.permalink)}
+      <main class="mysql-course-main">
+        <article class="post post--detail mysql-article">
+          <header>
+            <h2><a rel="bookmark" href="${escapeAttr(tutorial.permalink)}">${escapeHtml(tutorial.title)}</a></h2>
+            <div class="meta"><span>MySQL教程 / ${escapeHtml(tutorial.group)}</span></div>
+          </header>
+          <div class="vditor-reset post__content">${markdownToHtml(tutorial.body)}</div>
+          <footer class="rel fn-clear ft__center">
+            ${prev ? `<a href="${escapeAttr(prev.permalink)}" class="fn-left">上一篇：${escapeHtml(prev.title)}</a>` : ""}
+            ${next ? `<a href="${escapeAttr(next.permalink)}" class="fn-right">下一篇：${escapeHtml(next.title)}</a>` : ""}
+          </footer>
+        </article>
+      </main>
+    </section>`;
+  return makeOtherPage(tutorial.title, "icon-list", body, site);
+}
+
+function makeTutorialSeriesOverviewPage(tutorials, site, series) {
+  const hrefByName = (name) => tutorials.find((item) => item.relativePath.endsWith(name))?.permalink || `/${series.slug}.html`;
+  const chapterItems = tutorials
+    .filter((item) => item.permalink !== `/${series.slug}.html`)
+    .map((item) => `<a href="${escapeAttr(item.permalink)}">
+      <strong>${escapeHtml(item.title)}</strong>
+      <span>${escapeHtml(item.group)}</span>
+      <em>${escapeHtml(item.excerpt)}</em>
+    </a>`).join("\n");
+  const body = `<section class="mysql-hero tutorials-hero">
+      <h2>${escapeHtml(series.heroTitle || series.title)}</h2>
+      <p>${escapeHtml(series.heroDescription || series.description)}</p>
+      <div>
+        ${(series.quickLinks || []).map(([name, label]) => `<a href="${escapeAttr(hrefByName(name))}">${escapeHtml(label)}</a>`).join("\n")}
+      </div>
+    </section>
+    <section class="mysql-course tutorial-series">
+      ${makeTutorialNav(tutorials, `/${series.slug}.html`, series)}
+      <main class="mysql-course-main">
+        <div class="mysql-chapter-grid">${chapterItems}</div>
+      </main>
+    </section>`;
+  return makeOtherPage(series.title, "icon-list", body, site);
+}
+
+function makeTutorialPage(tutorial, tutorials, site, series) {
+  const index = tutorials.findIndex((item) => item.permalink === tutorial.permalink);
+  const prev = tutorials[index - 1];
+  const next = tutorials[index + 1];
+  const body = `<section class="mysql-course tutorial-series">
+      ${makeTutorialNav(tutorials, tutorial.permalink, series)}
+      <main class="mysql-course-main">
+        <article class="post post--detail mysql-article">
+          <header>
+            <h2><a rel="bookmark" href="${escapeAttr(tutorial.permalink)}">${escapeHtml(tutorial.title)}</a></h2>
+            <div class="meta"><span>${escapeHtml(series.title)} / ${escapeHtml(tutorial.group)}</span></div>
+          </header>
+          <div class="vditor-reset post__content">${markdownToHtml(tutorial.body)}</div>
+          <footer class="rel fn-clear ft__center">
+            ${prev ? `<a href="${escapeAttr(prev.permalink)}" class="fn-left">上一篇：${escapeHtml(prev.title)}</a>` : ""}
+            ${next ? `<a href="${escapeAttr(next.permalink)}" class="fn-right">下一篇：${escapeHtml(next.title)}</a>` : ""}
+          </footer>
+        </article>
+      </main>
+    </section>`;
+  return makeOtherPage(tutorial.title, "icon-list", body, site);
+}
+
+function makeTutorialsHomePage(seriesList, site) {
+  const body = `<section class="mysql-hero tutorials-hero">
+      <h2>教程中心</h2>
+      <p>这里集中发布成体系的技术教程。每个系列都有独立目录、章节页面、站内搜索索引和移动端阅读布局，后续新增教程也会统一进入这里。</p>
+    </section>
+    <div class="tutorial-series-grid">
+      ${seriesList.map((series) => `<a href="/${escapeAttr(series.slug)}.html">
+        <strong>${escapeHtml(series.title)}</strong>
+        <span>${series.tutorials.length} 篇教程</span>
+        <em>${escapeHtml(series.description)}</em>
+      </a>`).join("\n")}
+    </div>`;
+  return makeOtherPage("教程中心", "icon-list", body, site);
+}
+
 function makeAboutPage(site, topics) {
   const yearGroups = buildArchives(site.articles).reduce((acc, archive) => {
     acc.set(archive.year, (acc.get(archive.year) || 0) + archive.articles.length);
@@ -960,6 +1299,9 @@ async function main() {
   };
   const navSections = await readNavData();
   const navLinks = flattenNavLinks(navSections);
+  const tutorialSeriesList = await readTutorialSeriesList();
+  const allTutorials = tutorialSeriesList.flatMap((series) => series.tutorials);
+  site.tutorialSeriesList = tutorialSeriesList;
 
   await resetGeneratedDocs();
   await fs.rm(navLogoPublicDir, { recursive: true, force: true });
@@ -1059,6 +1401,25 @@ async function main() {
     }
   }
 
+  if (tutorialSeriesList.length > 0) {
+    await writePage("/tutorials.html", `教程中心 - ${site.blogTitle}`, makeTutorialsHomePage(tutorialSeriesList, site), {
+      description: "jackssybin 教程中心，集中发布 MySQL、Spring Boot 等成体系技术教程。",
+      keywords: ["教程", "MySQL", "Spring Boot", "Java", "后端"]
+    });
+    for (const series of tutorialSeriesList) {
+      await writePage(`/${series.slug}.html`, `${series.title} - ${site.blogTitle}`, makeTutorialSeriesOverviewPage(series.tutorials, site, series), {
+        description: series.description,
+        keywords: series.keywords
+      });
+      for (const tutorial of series.tutorials.filter((item) => item.permalink !== `/${series.slug}.html`)) {
+        await writePage(tutorial.permalink, `${tutorial.title} - ${series.title} - ${site.blogTitle}`, makeTutorialPage(tutorial, series.tutorials, site, series), {
+          description: tutorial.excerpt,
+          keywords: [...(series.keywords || []), tutorial.group, tutorial.title]
+        });
+      }
+    }
+  }
+
   await fs.writeFile(
     path.join(docsDir, "search.md"),
     `${frontmatter(`搜索 - ${site.blogTitle}`, "/search.html")}<SearchPage />\n`,
@@ -1066,9 +1427,19 @@ async function main() {
   );
 
   await fs.writeFile(path.join(publicDir, "rss.xml"), makeRss(articles, options), "utf8");
+  const pageDataDir = path.join(docsDir, ".vuepress", "page-data");
+  await fs.rm(pageDataDir, { recursive: true, force: true });
+  await fs.mkdir(pageDataDir, { recursive: true });
+  for (const page of pageData) {
+    await fs.writeFile(
+      path.join(pageDataDir, `${page.id}.ts`),
+      `export default ${JSON.stringify(page.html)};\n`,
+      "utf8"
+    );
+  }
   await fs.writeFile(
     path.join(docsDir, ".vuepress", "page-data.ts"),
-    `export const pages: Record<string, string> = ${JSON.stringify(Object.fromEntries(pageData.map((page) => [page.id, page.html])), null, 2)};\n`,
+    `export const pages: Record<string, () => Promise<{ default: string }>> = {\n${pageData.map((page) => `  ${JSON.stringify(page.id)}: () => import("./page-data/${page.id}.js")`).join(",\n")}\n};\n`,
     "utf8"
   );
   await fs.writeFile(
@@ -1092,6 +1463,15 @@ export const navIndex = ${JSON.stringify(navLinks.map((link) => ({
       taxonomy: link.taxonomy,
       term: link.term,
       description: link.description || ""
+    })), null, 2)};
+
+export const tutorialIndex = ${JSON.stringify(allTutorials.map((item) => ({
+      title: item.title,
+      url: item.permalink,
+      series: item.seriesTitle,
+      group: item.group,
+      excerpt: item.excerpt,
+      content: item.content
     })), null, 2)};\n`,
     "utf8"
   );
@@ -1106,12 +1486,14 @@ export const navIndex = ${JSON.stringify(navLinks.map((link) => ({
     topics: topics.length,
     navSections: navSections.length,
     navLinks: navLinks.length,
+    tutorialSeries: tutorialSeriesList.length,
+    tutorials: allTutorials.length,
     pages: pageRows.length,
     links: linkRows.length,
     generatedAt: new Date().toISOString()
   }, null, 2), "utf8");
 
-  console.log(`Generated ${articles.length} articles (${manualArticles.length} manual), ${commentRows.length} comments, ${tags.filter((tag) => tag.count > 0).length} used tags, ${linkRows.length} links, ${navLinks.length} nav links.`);
+  console.log(`Generated ${articles.length} articles (${manualArticles.length} manual), ${commentRows.length} comments, ${tags.filter((tag) => tag.count > 0).length} used tags, ${linkRows.length} links, ${navLinks.length} nav links, ${allTutorials.length} tutorials in ${tutorialSeriesList.length} series.`);
 }
 
 main().catch((error) => {

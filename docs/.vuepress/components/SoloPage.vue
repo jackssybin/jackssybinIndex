@@ -1,12 +1,22 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { onServerPrefetch, ref, watch } from "vue";
 import { pages } from "../page-data.js";
 
 const props = defineProps<{
   id: string;
 }>();
 
-const html = computed(() => pages[props.id] || "");
+const html = ref("");
+
+async function loadPage(id: string) {
+  html.value = pages[id] ? (await pages[id]()).default : "";
+}
+
+onServerPrefetch(() => loadPage(props.id));
+
+if (typeof window !== "undefined") {
+  watch(() => props.id, loadPage, { immediate: true });
+}
 </script>
 
 <template>
