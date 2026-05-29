@@ -237,6 +237,44 @@ html[data-solo-theme="dark"] .theme-container {
   text-decoration: none;
 }
 
+.solo-static .post--summary {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px;
+}
+
+.solo-static .post--summary h2 {
+  align-items: flex-start;
+  border-bottom: 1px solid #ededed;
+  display: flex;
+  gap: 12px;
+  line-height: 1.35;
+  padding-bottom: 10px;
+}
+
+.solo-static .post--summary h2 > a {
+  display: -webkit-box;
+  flex: 1;
+  font-size: 22px;
+  line-height: 1.35;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.solo-static .post--summary .core-badge {
+  flex: 0 0 auto;
+  margin: 5px 0 0;
+}
+
+.solo-static .post--summary sup {
+  flex: 0 0 auto;
+  line-height: 1.6;
+  margin-top: 2px;
+}
+
 .solo-static .post sup,
 .solo-static .post sup a {
   color: #aaa;
@@ -260,6 +298,215 @@ html[data-solo-theme="dark"] .theme-container {
 
 .solo-static .vditor-reset {
   line-height: 1.75;
+}
+
+.solo-static .post--summary .post__excerpt {
+  color: #5f6877;
+  display: -webkit-box;
+  font-size: 15px;
+  line-height: 1.75;
+  max-height: 5.25em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.solo-static .post--summary .post__excerpt p {
+  display: inline;
+  margin: 0;
+}
+
+.solo-static .post--summary .post__excerpt pre,
+.solo-static .post--summary .post__excerpt table,
+.solo-static .post--summary .post__excerpt img,
+.solo-static .post--summary .post__excerpt ul,
+.solo-static .post--summary .post__excerpt ol {
+  display: none;
+}
+
+.solo-static .post--summary .post__actions {
+  align-items: center;
+  border-top: 1px solid #ededed;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 2px;
+  padding-top: 12px;
+}
+
+.solo-static .post--summary .post__actions .topic-pill,
+.solo-static .post--summary .post__actions > a.tag {
+  margin-top: 0;
+}
+
+.solo-static .post--summary .post__actions .fn-right {
+  color: #555;
+  float: none;
+  margin-left: auto;
+  padding: 0 0 0 18px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.solo-static .post--summary .post__actions .fn-right:hover {
+  color: #ff7668;
+}
+
+.solo-static .vditor-reset img {
+  max-width: 100%;
+  height: auto;
+}
+
+.solo-static .vditor-reset table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.solo-static .vditor-reset th,
+.solo-static .vditor-reset td {
+  border: 1px solid #e5e5e5;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.solo-static .vditor-reset th {
+  background: #f7f7f7;
+}
+
+.solo-static .article-guide {
+  border-left: 3px solid #ff4d3a;
+  background: #fafafa;
+  margin: 12px 0 18px;
+  padding: 12px 14px;
+  line-height: 1.7;
+}
+
+.solo-static .article-guide div + div {
+  margin-top: 6px;
+}
+
+.solo-static .article-guide strong {
+  color: #333;
+  display: inline-block;
+  min-width: 44px;
+  margin-right: 8px;
+}
+
+.solo-static .article-guide a {
+  color: #ff4d3a;
+  text-decoration: none;
+}
+
+.solo-static .core-badge {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #ff4d3a;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  padding: 0 5px;
+  margin-right: 8px;
+}
+
+.solo-static .core-intro,
+.solo-static .related-posts,
+.solo-static .topic-roadmap-panel {
+  border: 1px solid #eee;
+  background: #fff;
+  margin: 14px 0 20px;
+  padding: 16px 18px;
+}
+
+.solo-static .core-intro h3,
+.solo-static .related-posts h3,
+.solo-static .topic-roadmap-panel h3 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.solo-static .core-intro p,
+.solo-static .topic-roadmap-panel p {
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+
+.solo-static .core-intro ul,
+.solo-static .related-posts ul,
+.solo-static .topic-roadmap-panel ol,
+.solo-static .topic-roadmap {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.solo-static .core-intro li,
+.solo-static .topic-roadmap-panel li,
+.solo-static .topic-roadmap li {
+  line-height: 1.7;
+  margin: 5px 0;
+}
+
+.solo-static .related-posts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #eee;
+  line-height: 38px;
+}
+
+.solo-static .related-posts li:first-child {
+  border-top: 0;
+}
+
+.solo-static .related-posts a,
+.solo-static .topic-roadmap-panel a,
+.solo-static .topic-roadmap a {
+  color: #333;
+  text-decoration: none;
+}
+
+.solo-static .related-posts a:hover,
+.solo-static .topic-roadmap-panel a:hover,
+.solo-static .topic-roadmap a:hover {
+  color: #ff4d3a;
+}
+
+.solo-static .related-posts span,
+.solo-static .topic-roadmap-panel span {
+  color: #fff;
+  background: #ff4d3a;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0 5px;
+  margin-right: 6px;
+}
+
+.solo-static .related-posts em {
+  color: #999;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.solo-static .topic-pill {
+  color: #fff;
+  font-size: 12px;
+  display: inline-block;
+  background-color: #ff4d3a;
+  margin-right: 10px;
+  padding: 0 7px;
+  line-height: 22px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.solo-static .topic-pill::before {
+  content: "专题 ";
 }
 
 .solo-static .tags > a.tag {
@@ -298,6 +545,59 @@ html[data-solo-theme="dark"] .theme-container {
 
 .solo-static .module main {
   padding: 20px;
+}
+
+.solo-static .topic-list a {
+  display: block;
+  line-height: 30px;
+  color: #666;
+  text-decoration: none;
+}
+
+.solo-static .topic-list a:hover {
+  color: #ff4d3a;
+}
+
+.solo-static .topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solo-static .topic-card {
+  border: 1px solid #eee;
+  padding: 16px;
+  background: #fff;
+}
+
+.solo-static .topic-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.solo-static .topic-card a {
+  color: #333;
+  text-decoration: none;
+}
+
+.solo-static .topic-card p {
+  color: #666;
+  margin: 0 0 10px;
+  line-height: 1.65;
+}
+
+.solo-static .topic-card .topic-roadmap {
+  margin-bottom: 10px;
+  color: #777;
+}
+
+.solo-static .topic-card span {
+  color: #999;
+}
+
+.solo-static .about-page h3,
+.solo-static .topic-detail p {
+  margin: 18px 20px 10px;
 }
 
 .solo-static aside .tag.vditor-tooltipped {
@@ -400,6 +700,10 @@ html[data-solo-theme="dark"] .theme-container {
   line-height: 1.55;
 }
 
+.solo-static .search-tags {
+  margin-bottom: 12px;
+}
+
 html[data-solo-theme="dark"] .solo-static {
   background: #11151b;
   color: #d7dde7;
@@ -437,6 +741,11 @@ html[data-solo-theme="dark"] .solo-static .module {
   background: #171d26;
 }
 
+html[data-solo-theme="dark"] .solo-static .post--summary h2,
+html[data-solo-theme="dark"] .solo-static .post--summary .post__actions {
+  border-color: #2a323f;
+}
+
 html[data-solo-theme="dark"] .solo-static .module {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
@@ -453,6 +762,48 @@ html[data-solo-theme="dark"] .solo-static .vditor-reset,
 html[data-solo-theme="dark"] .solo-static .post__content,
 html[data-solo-theme="dark"] .solo-static .module main {
   color: #d7dde7;
+}
+
+html[data-solo-theme="dark"] .solo-static .post--summary .post__excerpt {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .post--summary .post__actions .fn-right {
+  color: #d7dde7;
+}
+
+html[data-solo-theme="dark"] .solo-static .article-guide {
+  background: #141a23;
+}
+
+html[data-solo-theme="dark"] .solo-static .article-guide strong,
+html[data-solo-theme="dark"] .solo-static .topic-card a,
+html[data-solo-theme="dark"] .solo-static .core-intro h3,
+html[data-solo-theme="dark"] .solo-static .related-posts h3,
+html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel h3,
+html[data-solo-theme="dark"] .solo-static .related-posts a,
+html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel a,
+html[data-solo-theme="dark"] .solo-static .topic-roadmap a {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .topic-list a,
+html[data-solo-theme="dark"] .solo-static .topic-card p,
+html[data-solo-theme="dark"] .solo-static .core-intro p,
+html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel p {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .topic-card,
+html[data-solo-theme="dark"] .solo-static .core-intro,
+html[data-solo-theme="dark"] .solo-static .related-posts,
+html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel {
+  border-color: #2a323f;
+  background: #171d26;
+}
+
+html[data-solo-theme="dark"] .solo-static .related-posts li {
+  border-top-color: #293241;
 }
 
 html[data-solo-theme="dark"] .solo-static .vditor-reset h1,
@@ -541,6 +892,156 @@ html[data-solo-theme="dark"] .solo-static .footer {
   color: #c2cad8;
 }
 
+.solo-static .nav-hero {
+  background: #fff;
+  border: 1px solid #eee;
+  margin-bottom: 16px;
+  padding: 18px 20px;
+}
+
+.solo-static .nav-hero h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.solo-static .nav-hero p {
+  color: #666;
+  line-height: 1.7;
+  margin: 0 0 14px;
+}
+
+.solo-static .nav-search {
+  display: flex;
+  gap: 8px;
+}
+
+.solo-static .nav-search input {
+  flex: 1;
+}
+
+.solo-static .nav-taxonomies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.solo-static .nav-taxonomies a {
+  background: #fff;
+  border: 1px solid #eee;
+  color: #555;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+
+.solo-static .nav-taxonomies a:hover {
+  border-color: #c00;
+  color: #c00;
+}
+
+.solo-static .nav-section {
+  margin-bottom: 24px;
+}
+
+.solo-static .nav-section h3 {
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+}
+
+.solo-static .nav-section h3 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.solo-static .nav-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.solo-static .nav-card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  color: #333;
+  display: flex;
+  gap: 10px;
+  min-height: 72px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.solo-static .nav-card:hover {
+  border-color: #c00;
+}
+
+.solo-static .nav-card img {
+  border-radius: 6px;
+  flex: 0 0 auto;
+  height: 36px;
+  object-fit: contain;
+  width: 36px;
+}
+
+.solo-static .nav-card span {
+  min-width: 0;
+}
+
+.solo-static .nav-card strong {
+  display: block;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.solo-static .nav-card em {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #777;
+  display: -webkit-box;
+  font-style: normal;
+  line-height: 1.45;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.solo-static .search-section-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 18px 20px 8px;
+}
+
+html[data-solo-theme="dark"] .solo-static .nav-hero,
+html[data-solo-theme="dark"] .solo-static .nav-card,
+html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
+  background: #171d26;
+  border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .nav-hero p,
+html[data-solo-theme="dark"] .solo-static .nav-card em {
+  color: #9aa6b8;
+}
+
+html[data-solo-theme="dark"] .solo-static .nav-card strong,
+html[data-solo-theme="dark"] .solo-static .nav-section h3,
+html[data-solo-theme="dark"] .solo-static .nav-section h3 a {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .nav-section h3 {
+  border-bottom-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .nav-taxonomies a {
+  color: #c2cad8;
+}
+
 @media (max-width: 760px) {
   .solo-static .wrapper {
     min-width: 0;
@@ -620,7 +1121,47 @@ html[data-solo-theme="dark"] .solo-static .footer {
     font-size: 20px;
   }
 
+  .solo-static .post--summary {
+    padding: 16px;
+  }
+
+  .solo-static .post--summary h2 {
+    gap: 8px;
+  }
+
+  .solo-static .post--summary h2 > a {
+    font-size: 19px;
+  }
+
+  .solo-static .post--summary .post__excerpt {
+    -webkit-line-clamp: 2;
+    max-height: 3.5em;
+  }
+
+  .solo-static .post--summary .post__actions .fn-right {
+    margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+
   .solo-static .post__content pre {
     overflow-x: auto;
+  }
+
+  .solo-static .topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .nav-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .nav-search {
+    display: block;
+  }
+
+  .solo-static .nav-search button {
+    margin-top: 8px;
+    width: 100%;
   }
 }

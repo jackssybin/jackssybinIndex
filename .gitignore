@@ -14,6 +14,7 @@ bak/
 
 # Original migration inputs kept locally by default
 ROOT/
+jackssybin.github.io-master/
 *.sql
 
 # Logs
@@ -28,4 +29,3 @@ yarn-error.log*
 Thumbs.db
 .idea/
 .vscode/
-

@@ -11,6 +11,9 @@ importers:
       '@vuepress/bundler-vite':
         specifier: 2.0.0-rc.30
         version: 2.0.0-rc.30(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(esbuild@0.28.0)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)
+      iconv-lite:
+        specifier: ^0.7.2
+        version: 0.7.2
       markdown-it:
         specifier: ^14.1.0
         version: 14.2.0
@@ -26,6 +29,9 @@ importers:
       vuepress-theme-hope:
         specifier: 2.0.0-rc.107
         version: 2.0.0-rc.107(@vuepress/bundler-vite@2.0.0-rc.30(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(esbuild@0.28.0)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))(markdown-it@14.2.0)(sass-embedded@1.100.0)(sass@1.100.0)(vuepress@2.0.0-rc.30(@vue/compiler-sfc@3.5.35)(@vuepress/bundler-vite@2.0.0-rc.30(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(esbuild@0.28.0)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))(vue@3.5.35))
+      yaml:
+        specifier: ^2.9.0
+        version: 2.9.0
     devDependencies:
       sass-embedded:
         specifier: ^1.93.3
