@@ -870,6 +870,22 @@ sudo sed -i "s/No authentication provided\\./静态报表已加载。/g" /var/ww
 5 0 * * * goaccess /var/log/nginx/access.log --log-format=COMBINED -o /var/www/jackssybin/admin/report.html && sed -i "s/No authentication provided\\./静态报表已加载。/g" /var/www/jackssybin/admin/report.html
 ```
 
+如果页面一直停在加载状态或白屏，打开浏览器控制台看到 `unsafe-eval` / `Content Security Policy` 报错，需要给 GoAccess 报表页单独放开 CSP。不要给全站放开，只在 Nginx 的站点配置中增加：
+
+```nginx
+location = /admin/report.html {
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" always;
+    try_files $uri =404;
+}
+```
+
+然后检查并重载 Nginx：
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
 ### 内容增长节奏
 
 - 每周维护 `/weekly.html`：自动汇总实时热点、核心文章和教程入口。
