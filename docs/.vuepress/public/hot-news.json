@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-30T07:41:26.692Z",
+  "generatedAt": "2026-05-30T07:49:27.433Z",
   "source": "https://github.com/orz-ai/hot_news",
   "api": "https://orz.ai/api/v1/dailynews/",
   "groups": [
@@ -14,7 +14,7 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 1
         },
         {
@@ -24,7 +24,7 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 2
         },
         {
@@ -34,7 +34,7 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 3
         },
         {
@@ -44,17 +44,17 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 4
         },
         {
-          "title": "“我是外国人 但不是外人”",
-          "url": "https://www.baidu.com/s?word=%E2%80%9C%E6%88%91%E6%98%AF%E5%A4%96%E5%9B%BD%E4%BA%BA+%E4%BD%86%E4%B8%8D%E6%98%AF%E5%A4%96%E4%BA%BA%E2%80%9D&sa=fyb_news",
+          "title": "航天员回地球后最想洗头",
+          "url": "https://www.baidu.com/s?word=%E8%88%AA%E5%A4%A9%E5%91%98%E5%9B%9E%E5%9C%B0%E7%90%83%E5%90%8E%E6%9C%80%E6%83%B3%E6%B4%97%E5%A4%B4&sa=fyb_news",
           "content": "",
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 5
         },
         {
@@ -64,17 +64,17 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 6
         },
         {
-          "title": "武契奇坦言：会见前一晚我彻夜未眠",
-          "url": "https://www.baidu.com/s?word=%E6%AD%A6%E5%A5%91%E5%A5%87%E5%9D%A6%E8%A8%80%EF%BC%9A%E4%BC%9A%E8%A7%81%E5%89%8D%E4%B8%80%E6%99%9A%E6%88%91%E5%BD%BB%E5%A4%9C%E6%9C%AA%E7%9C%A0&sa=fyb_news",
+          "title": "儿子去世 妈妈绷不住在静音车厢痛哭",
+          "url": "https://www.baidu.com/s?word=%E5%84%BF%E5%AD%90%E5%8E%BB%E4%B8%96+%E5%A6%88%E5%A6%88%E7%BB%B7%E4%B8%8D%E4%BD%8F%E5%9C%A8%E9%9D%99%E9%9F%B3%E8%BD%A6%E5%8E%A2%E7%97%9B%E5%93%AD&sa=fyb_news",
           "content": "",
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 7
         },
         {
@@ -84,7 +84,7 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 8
         },
         {
@@ -94,27 +94,27 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 9
         },
         {
-          "title": "435万法拉利电车撞脸13万蔚来萤火虫",
-          "url": "https://www.baidu.com/s?word=435%E4%B8%87%E6%B3%95%E6%8B%89%E5%88%A9%E7%94%B5%E8%BD%A6%E6%92%9E%E8%84%B813%E4%B8%87%E8%94%9A%E6%9D%A5%E8%90%A4%E7%81%AB%E8%99%AB&sa=fyb_news",
+          "title": "“我是外国人 但不是外人”",
+          "url": "https://www.baidu.com/s?word=%E2%80%9C%E6%88%91%E6%98%AF%E5%A4%96%E5%9B%BD%E4%BA%BA+%E4%BD%86%E4%B8%8D%E6%98%AF%E5%A4%96%E4%BA%BA%E2%80%9D&sa=fyb_news",
           "content": "",
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 10
         },
         {
-          "title": "航天员回地球后最想洗头",
-          "url": "https://www.baidu.com/s?word=%E8%88%AA%E5%A4%A9%E5%91%98%E5%9B%9E%E5%9C%B0%E7%90%83%E5%90%8E%E6%9C%80%E6%83%B3%E6%B4%97%E5%A4%B4&sa=fyb_news",
+          "title": "班主任集体打开车灯送高三学子",
+          "url": "https://www.baidu.com/s?word=%E7%8F%AD%E4%B8%BB%E4%BB%BB%E9%9B%86%E4%BD%93%E6%89%93%E5%BC%80%E8%BD%A6%E7%81%AF%E9%80%81%E9%AB%98%E4%B8%89%E5%AD%A6%E5%AD%90&sa=fyb_news",
           "content": "",
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 11
         },
         {
@@ -124,48 +124,8 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 12
-        },
-        {
-          "title": "集采百元一盒药 药店竟卖3960元",
-          "url": "https://www.baidu.com/s?word=%E9%9B%86%E9%87%87%E7%99%BE%E5%85%83%E4%B8%80%E7%9B%92%E8%8D%AF+%E8%8D%AF%E5%BA%97%E7%AB%9F%E5%8D%963960%E5%85%83&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 13
-        },
-        {
-          "title": "宾利车内藏3000万财物小偷盗走30万",
-          "url": "https://www.baidu.com/s?word=%E5%AE%BE%E5%88%A9%E8%BD%A6%E5%86%85%E8%97%8F3000%E4%B8%87%E8%B4%A2%E7%89%A9%E5%B0%8F%E5%81%B7%E7%9B%97%E8%B5%B030%E4%B8%87&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 14
-        },
-        {
-          "title": "车手张秀军意外离世 留下3个孩子",
-          "url": "https://www.baidu.com/s?word=%E8%BD%A6%E6%89%8B%E5%BC%A0%E7%A7%80%E5%86%9B%E6%84%8F%E5%A4%96%E7%A6%BB%E4%B8%96+%E7%95%99%E4%B8%8B3%E4%B8%AA%E5%AD%A9%E5%AD%90&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 15
-        },
-        {
-          "title": "情侣相约自杀1人身亡1人获刑",
-          "url": "https://www.baidu.com/s?word=%E6%83%85%E4%BE%A3%E7%9B%B8%E7%BA%A6%E8%87%AA%E6%9D%801%E4%BA%BA%E8%BA%AB%E4%BA%A11%E4%BA%BA%E8%8E%B7%E5%88%91&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 16
         },
         {
           "title": "女子被大狼狗扑咬血肉模糊 警方介入",
@@ -174,28 +134,8 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 17
-        },
-        {
-          "title": "班主任集体打开车灯送高三学子",
-          "url": "https://www.baidu.com/s?word=%E7%8F%AD%E4%B8%BB%E4%BB%BB%E9%9B%86%E4%BD%93%E6%89%93%E5%BC%80%E8%BD%A6%E7%81%AF%E9%80%81%E9%AB%98%E4%B8%89%E5%AD%A6%E5%AD%90&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 18
-        },
-        {
-          "title": "中国最美公路6月1日恢复通车",
-          "url": "https://www.baidu.com/s?word=%E4%B8%AD%E5%9B%BD%E6%9C%80%E7%BE%8E%E5%85%AC%E8%B7%AF6%E6%9C%881%E6%97%A5%E6%81%A2%E5%A4%8D%E9%80%9A%E8%BD%A6&sa=fyb_news",
-          "content": "",
-          "source": "baidu",
-          "platform": "baidu",
-          "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 19
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 13
         },
         {
           "title": "从中年“一身病”到74岁无“三高”",
@@ -204,7 +144,67 @@
           "source": "baidu",
           "platform": "baidu",
           "platformName": "百度热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 14
+        },
+        {
+          "title": "男子为狗捡玩具被江水卷走身亡",
+          "url": "https://www.baidu.com/s?word=%E7%94%B7%E5%AD%90%E4%B8%BA%E7%8B%97%E6%8D%A1%E7%8E%A9%E5%85%B7%E8%A2%AB%E6%B1%9F%E6%B0%B4%E5%8D%B7%E8%B5%B0%E8%BA%AB%E4%BA%A1&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 15
+        },
+        {
+          "title": "宾利车内藏3000万财物小偷盗走30万",
+          "url": "https://www.baidu.com/s?word=%E5%AE%BE%E5%88%A9%E8%BD%A6%E5%86%85%E8%97%8F3000%E4%B8%87%E8%B4%A2%E7%89%A9%E5%B0%8F%E5%81%B7%E7%9B%97%E8%B5%B030%E4%B8%87&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 16
+        },
+        {
+          "title": "获Offer后辞职 入职前岗位被取消",
+          "url": "https://www.baidu.com/s?word=%E8%8E%B7Offer%E5%90%8E%E8%BE%9E%E8%81%8C+%E5%85%A5%E8%81%8C%E5%89%8D%E5%B2%97%E4%BD%8D%E8%A2%AB%E5%8F%96%E6%B6%88&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 17
+        },
+        {
+          "title": "专家：一生最好只减肥一次",
+          "url": "https://www.baidu.com/s?word=%E4%B8%93%E5%AE%B6%EF%BC%9A%E4%B8%80%E7%94%9F%E6%9C%80%E5%A5%BD%E5%8F%AA%E5%87%8F%E8%82%A5%E4%B8%80%E6%AC%A1&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 18
+        },
+        {
+          "title": "435万法拉利电车撞脸13万蔚来萤火虫",
+          "url": "https://www.baidu.com/s?word=435%E4%B8%87%E6%B3%95%E6%8B%89%E5%88%A9%E7%94%B5%E8%BD%A6%E6%92%9E%E8%84%B813%E4%B8%87%E8%94%9A%E6%9D%A5%E8%90%A4%E7%81%AB%E8%99%AB&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 19
+        },
+        {
+          "title": "情侣相约自杀1人身亡1人获刑",
+          "url": "https://www.baidu.com/s?word=%E6%83%85%E4%BE%A3%E7%9B%B8%E7%BA%A6%E8%87%AA%E6%9D%801%E4%BA%BA%E8%BA%AB%E4%BA%A11%E4%BA%BA%E8%8E%B7%E5%88%91&sa=fyb_news",
+          "content": "",
+          "source": "baidu",
+          "platform": "baidu",
+          "platformName": "百度热搜",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 20
         }
       ]
@@ -214,23 +214,23 @@
       "platformName": "微博热搜",
       "items": [
         {
-          "title": "新加坡街头印度人多的吓人",
-          "url": "https://s.weibo.com/weibo?q=%23新加坡街头印度人多的吓人%23",
-          "content": "新加坡街头印度人多的吓人",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 1
-        },
-        {
           "title": "生命树被标注白玉兰奖",
           "url": "https://s.weibo.com/weibo?q=%23生命树被标注白玉兰奖%23",
           "content": "生命树被标注白玉兰奖",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 1
+        },
+        {
+          "title": "女子想买1斤荔枝一个操作收到100斤",
+          "url": "https://s.weibo.com/weibo?q=%23女子想买1斤荔枝一个操作收到100斤%23",
+          "content": "女子想买1斤荔枝一个操作收到100斤",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 2
         },
         {
@@ -240,38 +240,28 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 3
         },
         {
-          "title": "美团闪购618大牌免单",
-          "url": "https://s.weibo.com/weibo?q=%23美团闪购618大牌免单%23",
-          "content": "美团闪购618大牌免单",
+          "title": "启境GT7预售价格21.99万起",
+          "url": "https://s.weibo.com/weibo?q=%23启境GT7预售价格21.99万起%23",
+          "content": "启境GT7预售价格21.99万起",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 4
         },
         {
-          "title": "女子想买1斤荔枝一个操作收到100斤",
-          "url": "https://s.weibo.com/weibo?q=%23女子想买1斤荔枝一个操作收到100斤%23",
-          "content": "女子想买1斤荔枝一个操作收到100斤",
+          "title": "住东北就别熬夜了",
+          "url": "https://s.weibo.com/weibo?q=%23住东北就别熬夜了%23",
+          "content": "住东北就别熬夜了",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 5
-        },
-        {
-          "title": "鹿晗被张雨霏公主抱",
-          "url": "https://s.weibo.com/weibo?q=%23鹿晗被张雨霏公主抱%23",
-          "content": "鹿晗被张雨霏公主抱",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 6
         },
         {
           "title": "再见朋友综艺真要来了",
@@ -280,28 +270,28 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 6
+        },
+        {
+          "title": "鹿晗被张雨霏公主抱",
+          "url": "https://s.weibo.com/weibo?q=%23鹿晗被张雨霏公主抱%23",
+          "content": "鹿晗被张雨霏公主抱",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 7
         },
         {
-          "title": "上班斯道普华莱士喊我过六一了",
-          "url": "https://s.weibo.com/weibo?q=%23上班斯道普华莱士喊我过六一了%23",
-          "content": "上班斯道普华莱士喊我过六一了",
+          "title": "京东秒送618大牌请客",
+          "url": "https://s.weibo.com/weibo?q=%23京东秒送618大牌请客%23",
+          "content": "京东秒送618大牌请客",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 8
-        },
-        {
-          "title": "梁文峰对华为的态度",
-          "url": "https://s.weibo.com/weibo?q=%23梁文峰对华为的态度%23",
-          "content": "梁文峰对华为的态度",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 9
         },
         {
           "title": "六一表演小朋友失误却意外出彩",
@@ -310,7 +300,17 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 9
+        },
+        {
+          "title": "梁文峰对华为的态度",
+          "url": "https://s.weibo.com/weibo?q=%23梁文峰对华为的态度%23",
+          "content": "梁文峰对华为的态度",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 10
         },
         {
@@ -320,7 +320,7 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 11
         },
         {
@@ -330,8 +330,18 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 12
+        },
+        {
+          "title": "曝唐嫣罗晋经常一起参加女儿活动",
+          "url": "https://s.weibo.com/weibo?q=%23曝唐嫣罗晋经常一起参加女儿活动%23",
+          "content": "曝唐嫣罗晋经常一起参加女儿活动",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 13
         },
         {
           "title": "6月狗屎运最旺的星座",
@@ -340,17 +350,7 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 13
-        },
-        {
-          "title": "多名幼儿园小朋友被老师用热熔胶烫伤",
-          "url": "https://s.weibo.com/weibo?q=%23多名幼儿园小朋友被老师用热熔胶烫伤%23",
-          "content": "多名幼儿园小朋友被老师用热熔胶烫伤",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 14
         },
         {
@@ -360,48 +360,28 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 15
         },
         {
-          "title": "曝唐嫣罗晋经常一起参加女儿活动",
-          "url": "https://s.weibo.com/weibo?q=%23曝唐嫣罗晋经常一起参加女儿活动%23",
-          "content": "曝唐嫣罗晋经常一起参加女儿活动",
+          "title": "王源夏日歌会连唱5首",
+          "url": "https://s.weibo.com/weibo?q=%23王源夏日歌会连唱5首%23",
+          "content": "王源夏日歌会连唱5首",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 16
         },
         {
-          "title": "宾利车内藏3千万财物小偷盗走30万",
-          "url": "https://s.weibo.com/weibo?q=%23宾利车内藏3千万财物小偷盗走30万%23",
-          "content": "宾利车内藏3千万财物小偷盗走30万",
+          "title": "新加坡街头印度人多得吓人",
+          "url": "https://s.weibo.com/weibo?q=%23新加坡街头印度人多得吓人%23",
+          "content": "新加坡街头印度人多得吓人",
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 17
-        },
-        {
-          "title": "百元集采药品药店竟卖3960元",
-          "url": "https://s.weibo.com/weibo?q=%23百元集采药品药店竟卖3960元%23",
-          "content": "百元集采药品药店竟卖3960元",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 18
-        },
-        {
-          "title": "白鹿孟子义说今天穿长裤太开心了",
-          "url": "https://s.weibo.com/weibo?q=%23白鹿孟子义说今天穿长裤太开心了%23",
-          "content": "白鹿孟子义说今天穿长裤太开心了",
-          "source": "weibo",
-          "platform": "weibo",
-          "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
-          "rank": 19
         },
         {
           "title": "窦靖童紧张到喊妈妈救命",
@@ -410,7 +390,27 @@
           "source": "weibo",
           "platform": "weibo",
           "platformName": "微博热搜",
-          "publishTime": "2026-05-30 15:16:28",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 18
+        },
+        {
+          "title": "至今无人能破内马尔转会费",
+          "url": "https://s.weibo.com/weibo?q=%23至今无人能破内马尔转会费%23",
+          "content": "至今无人能破内马尔转会费",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
+          "rank": 19
+        },
+        {
+          "title": "宾利车内藏3千万财物小偷盗走30万",
+          "url": "https://s.weibo.com/weibo?q=%23宾利车内藏3千万财物小偷盗走30万%23",
+          "content": "宾利车内藏3千万财物小偷盗走30万",
+          "source": "weibo",
+          "platform": "weibo",
+          "platformName": "微博热搜",
+          "publishTime": "2026-05-30 15:46:28",
           "rank": 20
         }
       ]
@@ -426,18 +426,8 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 1
-        },
-        {
-          "title": "香港演员刘洵离世，享年87岁，曾参演《笑傲江湖》《九品芝麻官》《黄飞鸿》等影片，哪些角色令你印象深刻？",
-          "url": "https://www.zhihu.com/question/2043977412040286872",
-          "content": "看到这个消息，我心下一沉，又一位前辈离我们而去。 [图片] 刘洵老师曾在我执笔的《梁祝》中饰演家仆长贵，因全程跟组，我与他有过不少接触。在我的印象里，他戏里戏外判若两人：镜头前，无论多古灵精怪、诙谐跳脱的戏份，他都收放自如；镜头外，却是一位极有边界感、沉默寡言，却始终温文有礼的老行尊。戏里…",
-          "source": "zhihu",
-          "platform": "zhihu",
-          "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 2
         },
         {
           "title": "为什么全世界很多地方把土豆当口粮，中国人却更爱把它当菜？",
@@ -446,27 +436,37 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 2
+        },
+        {
+          "title": "香港演员刘洵离世，享年87岁，曾参演《笑傲江湖》《九品芝麻官》《黄飞鸿》等影片，哪些角色令你印象深刻？",
+          "url": "https://www.zhihu.com/question/2043977412040286872",
+          "content": "看到这个消息，我心下一沉，又一位前辈离我们而去。 [图片] 刘洵老师曾在我执笔的《梁祝》中饰演家仆长贵，因全程跟组，我与他有过不少接触。在我的印象里，他戏里戏外判若两人：镜头前，无论多古灵精怪、诙谐跳脱的戏份，他都收放自如；镜头外，却是一位极有边界感、沉默寡言，却始终温文有礼的老行尊。戏里…",
+          "source": "zhihu",
+          "platform": "zhihu",
+          "platformName": "知乎热榜",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 3
         },
         {
           "title": "如何看待深圳常住人口首破1800万，增量居全国城市首位？",
           "url": "https://www.zhihu.com/question/2042567073533097662",
-          "content": "真正牛逼的是东莞，常住人口增量22.96万，只比深圳的25.9万增量少3万左右。为什么深圳、东莞这两城市的常住人口增量最多呢？其实，很大原因是：人口很年轻、老年人口死亡少、人口自然增长高。比如，2025年死亡人口：东莞1.11万，广州5.56万，上海16.4万，北京13.7万；比如，2025年出生人口：东莞3.25万…",
+          "content": "在北京和深圳工作过多年的老瓢来答一下。深圳是个包容的城市，本地人口占比特别少，基本就是之前农民或者渔民。他们清醒的知道，自己能力低，深圳的繁荣是靠外来人的。老北京人认为自己是高级人，外来人拉低了北京人生活的高级感。深圳因为历史原因，分布多个城中村，原当地农民可以自行建楼出租，这…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 4
         },
         {
-          "title": "癌症到了晚期有多疼，大家可以进来给题主讲讲吗?",
-          "url": "https://www.zhihu.com/question/652090994",
-          "content": "鼻咽癌晚期（T2N3M1a）第一次感觉到疼痛是2022年6月，位置比较尴尬，恰好是内衣扣子的上下，所以，复查前隐隐约约的痛感，我以为是扣子勒得太紧。放松一节，依旧痛。换掉一件，仍然痛。它很安静地待在那里痛着，就像伞柄上的一个窟窿，似乎对我的生活影响不大。复查后，发现胸椎骨T11有阴影，当时是…",
+          "title": "如何看待59岁「高考钉子户」梁实将第30次参加高考？",
+          "url": "https://www.zhihu.com/question/2043761895782536236",
+          "content": "梁实参加高考，就像冯巩参加春晚一样，一年一次，台词是：想死大家了！ 梁实就这么一直考下去也没什么不好，每个人都要有点爱好。有人抽烟喝酒影响自己健康，有人跳老人舞马路暴走扰乱秩序。梁实就喜欢参加高考没什么不好，经常学习思考，至少不会得老年痴呆。 梁实只是去参加高考，也不会占用其他人…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 5
         },
         {
@@ -476,7 +476,7 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 6
         },
         {
@@ -486,7 +486,7 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 7
         },
         {
@@ -496,18 +496,8 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 8
-        },
-        {
-          "title": "如何评价窦靖童《歌手 2026》第二期演唱《电台情歌》？",
-          "url": "https://www.zhihu.com/question/2043750806583775975",
-          "content": "看了这么多评论，非常震惊！这首歌已经经典到烂大街了，她唱得还不如好些路人。另外表扬一下歌手节目，全开麦真唱很好，让大家知道了大部分歌手其实就是混子",
-          "source": "zhihu",
-          "platform": "zhihu",
-          "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 9
         },
         {
           "title": "贵州大学招聘管理岗，要求配偶为该校在职在编优秀博士，校方回应称不是「萝卜岗」，为何会有这种限制？",
@@ -516,18 +506,18 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 10
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 9
         },
         {
-          "title": "如何看待中国队缺席 2026 亚运会《英雄联盟》项目名单，王者荣耀、和平精英获直通资格？",
-          "url": "https://www.zhihu.com/question/2043644166786082651",
-          "content": "因为被关系户搞破防了呗 。上一届LOL总教练和主教练怎么向上级领导拍着胸脯保证的，领导也相信你了，把选人训练所有内容全交给你，给你请了最顶级康复疗养师。尤其是为了营造两岸一家亲的的氛围，特意把大陆跟台湾分在不同半区，主舞台还特意搭成一个圆形和大红色，意味着团团圆圆和喜庆。结果呢？差…",
+          "title": "癌症到了晚期有多疼，大家可以进来给题主讲讲吗?",
+          "url": "https://www.zhihu.com/question/652090994",
+          "content": "鼻咽癌晚期（T2N3M1a）第一次感觉到疼痛是2022年6月，位置比较尴尬，恰好是内衣扣子的上下，所以，复查前隐隐约约的痛感，我以为是扣子勒得太紧。放松一节，依旧痛。换掉一件，仍然痛。它很安静地待在那里痛着，就像伞柄上的一个窟窿，似乎对我的生活影响不大。复查后，发现胸椎骨T11有阴影，当时是…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 11
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 10
         },
         {
           "title": "作为国府二号人物，陈诚绝非好人，为何在吴石将军暴露后，他会冒险保住吴石的妻儿?",
@@ -536,7 +526,17 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 11
+        },
+        {
+          "title": "如何看待中国队缺席 2026 亚运会《英雄联盟》项目名单，王者荣耀、和平精英获直通资格？",
+          "url": "https://www.zhihu.com/question/2043644166786082651",
+          "content": "因为被关系户搞破防了呗 。上一届LOL总教练和主教练怎么向上级领导拍着胸脯保证的，领导也相信你了，把选人训练所有内容全交给你，给你请了最顶级康复疗养师。尤其是为了营造两岸一家亲的的氛围，特意把大陆跟台湾分在不同半区，主舞台还特意搭成一个圆形和大红色，意味着团团圆圆和喜庆。结果呢？差…",
+          "source": "zhihu",
+          "platform": "zhihu",
+          "platformName": "知乎热榜",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 12
         },
         {
@@ -546,7 +546,7 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 13
         },
         {
@@ -556,7 +556,7 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 14
         },
         {
@@ -566,18 +566,8 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 15
-        },
-        {
-          "title": "海底捞宣布小料台牛肉粒回归，全国门店恢复供应，此前牛肉粒需通过 iPad 下单，如何看待这一调整？",
-          "url": "https://www.zhihu.com/question/2042642736826816309",
-          "content": "有没有牛肉粒都不会再去海底捞了。以前吃海底捞感觉虽贵，但两个人300块钱以内能吃饱。最近又去了，看着一个锅底90多，半份豆皮15元，半份土豆片15元。。。两个人吃了300多没饱。。。我突然感觉自己脑子有问题我干嘛不自己买食材煮火锅吃？于是最近几次我自己买食材，牛肉卷、羊肉卷放开了吃。。。两…",
-          "source": "zhihu",
-          "platform": "zhihu",
-          "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 16
         },
         {
           "title": "如何看待董路称汪修昊因国少集训比赛已失去达姆U19队轮换位置？",
@@ -586,37 +576,47 @@
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 17
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 16
         },
         {
-          "title": "如何看待59岁「高考钉子户」梁实将第30次参加高考？",
-          "url": "https://www.zhihu.com/question/2043761895782536236",
-          "content": "梁实参加高考，就像冯巩参加春晚一样，一年一次，台词是：想死大家了！ 梁实就这么一直考下去也没什么不好，每个人都要有点爱好。有人抽烟喝酒影响自己健康，有人跳老人舞马路暴走扰乱秩序。梁实就喜欢参加高考没什么不好，经常学习思考，至少不会得老年痴呆。 梁实只是去参加高考，也不会占用其他人…",
+          "title": "如何评价窦靖童《歌手 2026》第二期演唱《电台情歌》？",
+          "url": "https://www.zhihu.com/question/2043750806583775975",
+          "content": "天分这东西很玄乎，窦靖童单论演唱能力也就比KTV唱将略强一点，但是你不得不承认，窦靖童用从爹妈那继承来的嗓子，通过编曲和唱法包装一下，唱完后你至少会觉得窦靖童起码是个搞艺术的，而不是被艺术搞的。这就有点像集美们找了家漂亮饭，吃完后发现欸我操这饭也没想象中这么好吃啊，但看在店里装修…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
-          "rank": 18
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 17
         },
         {
           "title": "为什么管泽元一个电竞解说能成为 2026 美加墨世界杯的解说呢？",
           "url": "https://www.zhihu.com/question/2043642859421525697",
-          "content": "管泽元这个人我觉着他有两点是很多传统体育解说做不到的。一个是情绪价值给的特别足，比如常规赛收官战AL vs BLG，我没记错的话好像是Viper两把虐菜局，讲道理一般虐菜局都是比较无聊的，但是大伙回看一下就知道，那把管泽元喊得比Viper粉丝还起劲，有些时候是装备巨大领先的秒杀，他都得高喊一句「V…",
+          "content": "别觉得传统体育的解说有多了不起就冲管泽元能把英雄联盟那172个英雄，加起来六百多个技能名背的一清二楚能在眼花缭乱的团战里面把十个选手同一时间做的事给你解说出来，出错的次数不多他在做解说这件事上的敬业程度和专业程度上，甩开至少90%的传统体育赛事解说更何况管泽元解说的时候激情无比，更是…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
+          "rank": 18
+        },
+        {
+          "title": "孩子觉得妈妈为了几块钱跟别人讨价还价很丢脸，你会怎么做？",
+          "url": "https://www.zhihu.com/question/2038200594087802380",
+          "content": "我的外婆，是个格外喜欢讨价还价的长辈。小时候的我，却总因为这件事觉得难为情。老家的小镇每五天就有一次赶集，这是我儿时最期盼的日子。四面八方的商贩齐聚大街两旁，各式新奇货品琳琅满目，热闹的烟火气总能让人满心欢喜。 [图片] 外婆每次赶集，总免不了和商家讨价还价，谈妥价格临走时，还常要随手往兜…",
+          "source": "zhihu",
+          "platform": "zhihu",
+          "platformName": "知乎热榜",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 19
         },
         {
-          "title": "幼童被幼儿园老师用热熔胶烫嘴虐待，公安部门立案调查，此类虐童事件为何屡禁不止？背后哪些问题值得反思？",
-          "url": "https://www.zhihu.com/question/2043824042503660038",
-          "content": "涉事女教师的面相有说法 [图片] 微博热搜的标题也有说法 [图片] [图片] [图片] 施虐的女幼师部分能省略则省略，一半字数都在强调旁边有男老师未制止，何意味？用一半标题字数转移视线干什么？是不是和涉事女幼师有利益往来？变态女幼师使用热熔胶虐待女童这™才是正确标题，一个两个，都不诗人",
+          "title": "近日有心理调研报告显示，高达 74.9% 受访高中生存在不同程度和频率的拒学意念，高中生为何不想上学？",
+          "url": "https://www.zhihu.com/question/2043628938363147594",
+          "content": "我猜因为这些学生隐隐感觉到没有用吧？一场仗如果想打赢。最重要的是有希望打赢，这些战士才会去拼尽一切。对于绝大部分学生来说，他们不是天才，他们在这个社会中感觉到自己不是最上流的那些人，就算拼了命的去读书，也对自己的阶级跃迁，提供不了太多的好处。社会上有太多的高学历人才，没有获得匹…",
           "source": "zhihu",
           "platform": "zhihu",
           "platformName": "知乎热榜",
-          "publishTime": "2026-05-30 15:16:29",
+          "publishTime": "2026-05-30 15:46:29",
           "rank": 20
         }
       ]
@@ -632,7 +632,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 1
         },
         {
@@ -642,7 +642,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 2
         },
         {
@@ -652,7 +652,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 3
         },
         {
@@ -662,7 +662,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 4
         },
         {
@@ -672,7 +672,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 5
         },
         {
@@ -682,7 +682,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 6
         },
         {
@@ -692,7 +692,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 7
         },
         {
@@ -702,7 +702,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 8
         },
         {
@@ -712,7 +712,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 9
         },
         {
@@ -722,7 +722,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 10
         },
         {
@@ -732,7 +732,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 11
         },
         {
@@ -742,7 +742,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 12
         },
         {
@@ -752,7 +752,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 13
         },
         {
@@ -762,7 +762,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 14
         },
         {
@@ -772,7 +772,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 15
         },
         {
@@ -782,7 +782,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 16
         },
         {
@@ -792,7 +792,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 17
         },
         {
@@ -802,7 +802,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 18
         },
         {
@@ -812,7 +812,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 19
         },
         {
@@ -822,7 +822,7 @@
           "source": "juejin",
           "platform": "juejin",
           "platformName": "掘金",
-          "publishTime": "2026-05-30 15:16:35",
+          "publishTime": "2026-05-30 15:46:36",
           "rank": 20
         }
       ]
@@ -838,7 +838,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 1
         },
         {
@@ -848,7 +848,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 2
         },
         {
@@ -858,7 +858,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 3
         },
         {
@@ -868,7 +868,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 4
         },
         {
@@ -878,7 +878,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 5
         },
         {
@@ -888,7 +888,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 6
         },
         {
@@ -898,7 +898,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 7
         },
         {
@@ -908,7 +908,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 8
         },
         {
@@ -918,7 +918,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 9
         },
         {
@@ -928,7 +928,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 10
         },
         {
@@ -938,7 +938,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 11
         },
         {
@@ -948,7 +948,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 12
         },
         {
@@ -958,7 +958,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 13
         },
         {
@@ -968,7 +968,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 14
         },
         {
@@ -978,7 +978,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 15
         },
         {
@@ -988,7 +988,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 16
         },
         {
@@ -998,7 +998,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 17
         },
         {
@@ -1008,7 +1008,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 18
         },
         {
@@ -1018,7 +1018,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 19
         },
         {
@@ -1028,7 +1028,7 @@
           "source": "github",
           "platform": "github",
           "platformName": "GitHub Trending",
-          "publishTime": "2026-05-30 15:16:38",
+          "publishTime": "2026-05-30 15:46:39",
           "rank": 20
         }
       ]
@@ -1040,201 +1040,201 @@
         {
           "title": "SQLite is all you need for durable workflows",
           "url": "https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/",
-          "content": "来源: obeli.sk | 得分: 474 points | 作者: tomasol | 评论: 13 hours ago",
+          "content": "来源: obeli.sk | 得分: 494 points | 作者: tomasol | 评论: 13 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 1
         },
         {
           "title": "Perry Compiles TypeScript directly to executables using SWC and LLVM",
           "url": "https://www.perryts.com/",
-          "content": "来源: perryts.com | 得分: 66 points | 作者: 0x1997 | 评论: 4 hours ago",
+          "content": "来源: perryts.com | 得分: 73 points | 作者: 0x1997 | 评论: 4 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 2
-        },
-        {
-          "title": "Snowboard Kids 2 is 100% Decompiled",
-          "url": "https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/",
-          "content": "来源: blog.chrislewis.au | 得分: 159 points | 作者: GaggiX | 评论: 8 hours ago",
-          "source": "hackernews",
-          "platform": "hackernews",
-          "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 3
         },
         {
           "title": "Algebraic Effects for the Rest of Us",
           "url": "https://overreacted.io/algebraic-effects-for-the-rest-of-us/",
-          "content": "来源: overreacted.io | 得分: 9 points | 作者: satvikpendem | 评论: 1 hour ago",
+          "content": "来源: overreacted.io | 得分: 15 points | 作者: satvikpendem | 评论: 2 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 4
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 3
         },
         {
-          "title": "Math-to-Manim",
-          "url": "https://github.com/HarleyCoops/Math-To-Manim",
-          "content": "来源: github.com/harleycoops | 得分: 43 points | 作者: georgewsinger | 评论: 4 hours ago",
+          "title": "Snowboard Kids 2 is 100% Decompiled",
+          "url": "https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/",
+          "content": "来源: blog.chrislewis.au | 得分: 169 points | 作者: GaggiX | 评论: 9 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 5
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 4
         },
         {
           "title": "Notes from the Mistral AI Now Summit",
           "url": "https://koenvangilst.nl/lab/mistral-ai-now-summit",
-          "content": "来源: koenvangilst.nl | 得分: 343 points | 作者: vnglst | 评论: 14 hours ago",
+          "content": "来源: koenvangilst.nl | 得分: 353 points | 作者: vnglst | 评论: 15 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 6
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 5
         },
         {
           "title": "MCP is dead?",
           "url": "https://www.quandri.io/engineering-blog/mcp-is-dead",
-          "content": "来源: quandri.io | 得分: 179 points | 作者: nadis | 评论: 8 hours ago",
+          "content": "来源: quandri.io | 得分: 192 points | 作者: nadis | 评论: 8 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 6
+        },
+        {
+          "title": "What It Takes to Preserve Floppy Disks",
+          "url": "https://spectrum.ieee.org/floppy-disk-data-preservation-archives",
+          "content": "来源: ieee.org | 得分: 32 points | 作者: pseudolus | 评论: 5 hours ago",
+          "source": "hackernews",
+          "platform": "hackernews",
+          "platformName": "Hacker News",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 7
         },
         {
           "title": "Naphtha shortages in Japan",
           "url": "https://www.nippon.com/en/japan-data/h02783/",
-          "content": "来源: nippon.com | 得分: 96 points | 作者: takakaze | 评论: 4 hours ago",
+          "content": "来源: nippon.com | 得分: 99 points | 作者: takakaze | 评论: 5 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 8
-        },
-        {
-          "title": "What It Takes to Preserve Floppy Disks",
-          "url": "https://spectrum.ieee.org/floppy-disk-data-preservation-archives",
-          "content": "来源: ieee.org | 得分: 28 points | 作者: pseudolus | 评论: 4 hours ago",
-          "source": "hackernews",
-          "platform": "hackernews",
-          "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 9
         },
         {
           "title": "Print with dozens of colors: Our new open-source ColorMix for PrusaSlicer",
           "url": "https://blog.prusa3d.com/our-new-open-source-colormix-model-in-prusaslicer-and-easyprint_136079/",
-          "content": "来源: prusa3d.com | 得分: 130 points | 作者: rented_mule | 评论: 10 hours ago",
+          "content": "来源: prusa3d.com | 得分: 135 points | 作者: rented_mule | 评论: 10 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 9
+        },
+        {
+          "title": "A new register allocator for ZJIT",
+          "url": "https://railsatscale.com/2026-05-27-a-new-register-allocator-for-zjit/",
+          "content": "来源: railsatscale.com | 得分: 23 points | 作者: tenderlove | 评论: 3 hours ago",
+          "source": "hackernews",
+          "platform": "hackernews",
+          "platformName": "Hacker News",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 10
         },
         {
           "title": "Shift will clean homes for free to train future robots",
           "url": "https://www.theverge.com/ai-artificial-intelligence/939765/ai-training-data-startup-shift-free-cleaning",
-          "content": "来源: theverge.com | 得分: 123 points | 作者: evilsimon | 评论: 11 hours ago",
+          "content": "来源: theverge.com | 得分: 126 points | 作者: evilsimon | 评论: 12 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 11
         },
         {
           "title": "The dead economy theory",
           "url": "https://www.owenmcgrann.com/p/the-dead-economy-theory",
-          "content": "来源: owenmcgrann.com | 得分: 918 points | 作者: WillDaSilva | 评论: 15 hours ago",
+          "content": "来源: owenmcgrann.com | 得分: 932 points | 作者: WillDaSilva | 评论: 16 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 12
         },
         {
           "title": "It's hard to justify buying a Framework 12",
           "url": "https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/",
-          "content": "来源: jeffgeerling.com | 得分: 274 points | 作者: watermelon0 | 评论: 16 hours ago",
+          "content": "来源: jeffgeerling.com | 得分: 278 points | 作者: watermelon0 | 评论: 16 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 13
         },
         {
           "title": "Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM",
           "url": "https://www.latimes.com/california/story/2026-05-27/uc-math-professors-demand-return-of-sat-for-stem-admissions",
-          "content": "来源: latimes.com | 得分: 559 points | 作者: brandonb | 评论: 1 day ago",
+          "content": "来源: latimes.com | 得分: 569 points | 作者: brandonb | 评论: 1 day ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 14
         },
         {
           "title": "The Last Technical Interview",
           "url": "https://steve-yegge.medium.com/the-last-technical-interview-bc13ddcf4564",
-          "content": "来源: steve-yegge.medium.com | 得分: 100 points | 作者: headalgorithm | 评论: 11 hours ago",
+          "content": "来源: steve-yegge.medium.com | 得分: 101 points | 作者: headalgorithm | 评论: 11 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 15
         },
         {
           "title": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
           "url": "https://github.com/jmaczan/tiny-vllm",
-          "content": "来源: github.com/jmaczan | 得分: 132 points | 作者: yu3zhou4 | 评论: 11 hours ago",
+          "content": "来源: github.com/jmaczan | 得分: 135 points | 作者: yu3zhou4 | 评论: 12 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 16
         },
         {
           "title": "Show HN: Open-source private home security camera system (end-to-end encryption)",
           "url": "https://github.com/secluso/core",
-          "content": "来源: github.com/secluso | 得分: 49 points | 作者: arrdalan | 评论: 8 hours ago",
+          "content": "来源: github.com/secluso | 得分: 54 points | 作者: arrdalan | 评论: 9 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 17
-        },
-        {
-          "title": "A new register allocator for ZJIT",
-          "url": "https://railsatscale.com/2026-05-27-a-new-register-allocator-for-zjit/",
-          "content": "来源: railsatscale.com | 得分: 18 points | 作者: tenderlove | 评论: 2 hours ago",
-          "source": "hackernews",
-          "platform": "hackernews",
-          "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 18
         },
         {
           "title": "Liquid AI reveals 8B-A1B MoE trained on 38T",
           "url": "https://www.liquid.ai/blog/lfm2-5-8b-a1b",
-          "content": "来源: liquid.ai | 得分: 176 points | 作者: simjnd | 评论: 14 hours ago",
+          "content": "来源: liquid.ai | 得分: 177 points | 作者: simjnd | 评论: 15 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 19
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 18
         },
         {
           "title": "Bijou64: A variable-length integer encoding",
           "url": "https://www.inkandswitch.com/tangents/bijou64/",
-          "content": "来源: inkandswitch.com | 得分: 220 points | 作者: justinweiss | 评论: 16 hours ago",
+          "content": "来源: inkandswitch.com | 得分: 221 points | 作者: justinweiss | 评论: 16 hours ago",
           "source": "hackernews",
           "platform": "hackernews",
           "platformName": "Hacker News",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 19
+        },
+        {
+          "title": "Ember.js 7.0",
+          "url": "https://blog.emberjs.com/ember-released-7-0/",
+          "content": "来源: emberjs.com | 得分: 62 points | 作者: satvikpendem | 评论: 7 hours ago",
+          "source": "hackernews",
+          "platform": "hackernews",
+          "platformName": "Hacker News",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 20
         }
       ]
@@ -1249,14 +1249,134 @@
       "platformName": "新浪财经",
       "items": [
         {
+          "title": "【“港车北上”政策延长至2031年】5月30日，广东省人民政府官网发布公告，宣布将“港车北上”政策生效期延长5年，至2031年6月1日。 据了解，2023年5月，《广东省关于香港机动车经港珠澳大桥珠海公路口岸入出内地的管理办法》对外公布，办法自2023年6月1日起施行，有效期3年。 2023年7月1日零时起，符合条件的香港机动车车主在港方预约通关获准后，可驾车经港珠澳大桥珠海公路口岸驶入广东。数据显示，自“澳车北上”“港车北上”政策落地实施以来，经口岸出入境港澳旅客数量年均增速达34%，2025年已达近1800万人次。边检部门预计，2026年经口岸出入境港澳旅客数量有望突破2000万人次。（大湾区之声）",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshar6974707.shtml",
+          "content": "【“港车北上”政策延长至2031年】5月30日，广东省人民政府官网发布公告，宣布将“港车北上”政策生效期延长5年，至2031年6月1日。 据了解，2023年5月，《广东省关于香港机动车经港珠澳大桥珠海公路口岸入出内地的管理办法》对外公布，办法自2023年6月1日起施行，有效期3年。 2023年7月1日零时起，符合条件的香港机动车车主在港方预约通关获准后，可驾车经港珠澳大桥珠海公路口岸驶入广东。数据显示，自“澳车北上”“港车北上”政策落地实施以来，经口岸出入境港澳旅客数量年均增速达34%，2025年已达近1800万人次。边检部门预计，2026年经口岸出入境港澳旅客数量有望突破2000万人次。（大湾区之声）",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 1
+        },
+        {
+          "title": "【6月5日起国内航线燃油附加费将下调】记者从多家航空公司了解到，自2026年6月5日起销售的国内航线客票燃油附加费将下调。调整标准为成人旅客：800公里以上航线每位旅客收取150元燃油附加费，800公里（含）以下航线每位旅客收取80元燃油附加费。相较于调整前降低了20元和10元。此次燃油附加费下调将在一定程度上降低旅客出行成本。（央视新闻）",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshar6974253.shtml",
+          "content": "【6月5日起国内航线燃油附加费将下调】记者从多家航空公司了解到，自2026年6月5日起销售的国内航线客票燃油附加费将下调。调整标准为成人旅客：800公里以上航线每位旅客收取150元燃油附加费，800公里（含）以下航线每位旅客收取80元燃油附加费。相较于调整前降低了20元和10元。此次燃油附加费下调将在一定程度上降低旅客出行成本。（央视新闻）",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 2
+        },
+        {
+          "title": "【超100家企业参与共建 中央企业科技成果产业化联合体成立】记者今天（30日）从国务院国资委获悉，中央企业科技成果产业化联合体在北京正式成立。本次成立的中央企业科技成果产业化联合体由超100家中央企业参与共建，并吸纳科研院所、高校、产业链上下游骨干企业、创新型民营企业等多元主体。以推动科技创新与产业创新深度融合为核心任务，为实体经济高质量发展注入强劲动能。据了解，中央企业科技成果产业化联合体将分阶段推进，到2030年底，将建成开放协同、全球辐射的世界一流成果产业化联合体，平台功能达国际领先水平，交易规模与服务能级领跑全球。（央视新闻）",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0196973.shtml",
+          "content": "【超100家企业参与共建 中央企业科技成果产业化联合体成立】记者今天（30日）从国务院国资委获悉，中央企业科技成果产业化联合体在北京正式成立。本次成立的中央企业科技成果产业化联合体由超100家中央企业参与共建，并吸纳科研院所、高校、产业链上下游骨干企业、创新型民营企业等多元主体。以推动科技创新与产业创新深度融合为核心任务，为实体经济高质量发展注入强劲动能。据了解，中央企业科技成果产业化联合体将分阶段推进，到2030年底，将建成开放协同、全球辐射的世界一流成果产业化联合体，平台功能达国际领先水平，交易规模与服务能级领跑全球。（央视新闻）",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 3
+        },
+        {
+          "title": "【内蒙古呼和浩特一药店高价销售集采药 当地约谈主要负责人】从呼和浩特市医疗保障局了解到，针对此前报道的内蒙古京远大药房有限公司高价销售集采药品马来酸阿伐曲泊帕片的问题，呼和浩特市医疗保障局高度重视，会同市场监管局组成专项工作组，第一时间赶赴现场开展联合检查，医保部门对涉事药店主要负责人进行约谈，市场监管部门行政立案。下一步，医保部门将联合市场监管部门深刻剖析问题，举一反三开展专项检查，全市范围彻查新集采药品价格落地执行情况、药品进销存管理等关键环节，对执行政策不到位的定点药店依法依规从严处理，确保全部整改到位，对相关责任人予以医保支付资格记分处理，进一步加强全市定点药店规范化经营，全力保障消费者的合法权益。医保部门将持续深化医保基金监管专项整治行动，聚焦医保基金滥用、欺诈骗保等各类违法违规问题，常态化开展靶向监管、精准施治，不断健全医保药品全流程监管机制，筑牢医保基金安全防线。（央视新闻）",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8729568.shtml",
+          "content": "【内蒙古呼和浩特一药店高价销售集采药 当地约谈主要负责人】从呼和浩特市医疗保障局了解到，针对此前报道的内蒙古京远大药房有限公司高价销售集采药品马来酸阿伐曲泊帕片的问题，呼和浩特市医疗保障局高度重视，会同市场监管局组成专项工作组，第一时间赶赴现场开展联合检查，医保部门对涉事药店主要负责人进行约谈，市场监管部门行政立案。下一步，医保部门将联合市场监管部门深刻剖析问题，举一反三开展专项检查，全市范围彻查新集采药品价格落地执行情况、药品进销存管理等关键环节，对执行政策不到位的定点药店依法依规从严处理，确保全部整改到位，对相关责任人予以医保支付资格记分处理，进一步加强全市定点药店规范化经营，全力保障消费者的合法权益。医保部门将持续深化医保基金监管专项整治行动，聚焦医保基金滥用、欺诈骗保等各类违法违规问题，常态化开展靶向监管、精准施治，不断健全医保药品全流程监管机制，筑牢医保基金安全防线。（央视新闻）",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 4
+        },
+        {
+          "title": "【宁德时代：巧克力换电累计落站1650座，2026年预计超3000座】5月30日，据宁德时代消息，截至2026年5月，巧克力换电站在全国范围内落1650座，覆盖127城。不到半年，新增落站超600站、覆盖82城。高速网络建设方面，计划2027年将形成“11纵9横”高速换电网络。根据规划，2026年底巧克力换电站将突破3000座，全国范围内覆盖近190城。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0193945.shtml",
+          "content": "【宁德时代：巧克力换电累计落站1650座，2026年预计超3000座】5月30日，据宁德时代消息，截至2026年5月，巧克力换电站在全国范围内落1650座，覆盖127城。不到半年，新增落站超600站、覆盖82城。高速网络建设方面，计划2027年将形成“11纵9横”高速换电网络。根据规划，2026年底巧克力换电站将突破3000座，全国范围内覆盖近190城。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 5
+        },
+        {
+          "title": "【美国“选区版图战”升级 路易斯安那州拆分民主党控制选区】当地时间29日，美国路易斯安那州参议院通过一份新的国会选区版图法案，拆分了一个目前由民主党控制、非洲裔选民占多数的选区。随后该州共和党籍州长杰夫·兰德里将法案签署生效。分析称，随着中期选举的临近，美国共和、民主两党围绕重划选区的争斗也将愈演愈烈。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7195448.shtml",
+          "content": "【美国“选区版图战”升级 路易斯安那州拆分民主党控制选区】当地时间29日，美国路易斯安那州参议院通过一份新的国会选区版图法案，拆分了一个目前由民主党控制、非洲裔选民占多数的选区。随后该州共和党籍州长杰夫·兰德里将法案签署生效。分析称，随着中期选举的临近，美国共和、民主两党围绕重划选区的争斗也将愈演愈烈。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 6
+        },
+        {
+          "title": "【财跃星辰AI小财神V1.4更新上线4大核心功能，全面提升投资体验】5月30日，AI小财神正式发布V1.4时代级重大版本更新。AI小财神V1.4大版本正式发布。本次更新重点上线探索Tab（专家广场+订阅/精选）、知识库、深度研究（DR）、Cashclaw全新形态、快问快答四大核心模块，同时配套上线统一会员体系与全新行情资讯，全面提升投资体验。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshar6969347.shtml",
+          "content": "【财跃星辰AI小财神V1.4更新上线4大核心功能，全面提升投资体验】5月30日，AI小财神正式发布V1.4时代级重大版本更新。AI小财神V1.4大版本正式发布。本次更新重点上线探索Tab（专家广场+订阅/精选）、知识库、深度研究（DR）、Cashclaw全新形态、快问快答四大核心模块，同时配套上线统一会员体系与全新行情资讯，全面提升投资体验。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 7
+        },
+        {
+          "title": "【王兴兴获全国创新争先奖状】5月30日，正值第十个全国科技工作者日。据“中国科协之声”消息，人力资源社会保障部、中国科协、科技部、国务院国资委近日联合开展第四届全国创新争先奖评选，决定表彰一批先进集体和先进个人，分别颁发全国创新争先奖牌、奖章或奖状。 宇树科技创始人王兴兴位列第四届全国创新争先奖状获奖者名单。 王兴兴出生于1990年，宇树科技创始人、CEO。被称为“杭州六小龙”之一的宇树科技成立于2016年8月，注册资本约3.64亿人民币，经营范围包括智能机器人的研发、智能机器人销售、工业机器人制造等。（长安街知事）",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8724935.shtml",
+          "content": "【王兴兴获全国创新争先奖状】5月30日，正值第十个全国科技工作者日。据“中国科协之声”消息，人力资源社会保障部、中国科协、科技部、国务院国资委近日联合开展第四届全国创新争先奖评选，决定表彰一批先进集体和先进个人，分别颁发全国创新争先奖牌、奖章或奖状。 宇树科技创始人王兴兴位列第四届全国创新争先奖状获奖者名单。 王兴兴出生于1990年，宇树科技创始人、CEO。被称为“杭州六小龙”之一的宇树科技成立于2016年8月，注册资本约3.64亿人民币，经营范围包括智能机器人的研发、智能机器人销售、工业机器人制造等。（长安街知事）",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 8
+        },
+        {
+          "title": "俄官方称，乌克兰无人机袭击了俄罗斯南部一处港口及一座油库。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8724194.shtml",
+          "content": "俄官方称，乌克兰无人机袭击了俄罗斯南部一处港口及一座油库。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 9
+        },
+        {
+          "title": "【邵东一水库隧洞施工事故致3死】邵东应急管理局发布：5月29日20时50分左右，资水犬木塘水库工程邵峰干渠Ⅱ标土地岭隧洞出口顶管施工段发生人员被困事故。接报后，消防、应急、水利、卫健等部门和施工单位迅速赶赴现场展开救援。至5月30日2时06分，3名被困人员全部搜救出洞，后经全力抢救无效死亡。目前，善后处置和事故调查工作正在有序进行中。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8724042.shtml",
+          "content": "【邵东一水库隧洞施工事故致3死】邵东应急管理局发布：5月29日20时50分左右，资水犬木塘水库工程邵峰干渠Ⅱ标土地岭隧洞出口顶管施工段发生人员被困事故。接报后，消防、应急、水利、卫健等部门和施工单位迅速赶赴现场展开救援。至5月30日2时06分，3名被困人员全部搜救出洞，后经全力抢救无效死亡。目前，善后处置和事故调查工作正在有序进行中。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 10
+        },
+        {
+          "title": "赞比亚称两例疑似埃博拉病例检测结果均为阴性，目前已加强筛查工作。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshar6965040.shtml",
+          "content": "赞比亚称两例疑似埃博拉病例检测结果均为阴性，目前已加强筛查工作。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 11
+        },
+        {
+          "title": "以色列空袭黎巴嫩南部纳巴蒂耶。",
+          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8722100.shtml",
+          "content": "以色列空袭黎巴嫩南部纳巴蒂耶。",
+          "source": "sina_finance",
+          "platform": "sina_finance",
+          "platformName": "新浪财经",
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 12
+        },
+        {
           "title": "【总投资10亿元，锦瑞汽车智能装备制造总部基地项目落地合肥】5月29日，锦瑞汽车智能装备制造总部基地项目签约仪式在合肥市肥西县举行。该项目总投资10亿元，占地面积约140亩，计划建设模具车间、智能装配车间、热管理系统部件生产车间、精密注塑车间以及实验中心。",
           "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7188159.shtml",
           "content": "【总投资10亿元，锦瑞汽车智能装备制造总部基地项目落地合肥】5月29日，锦瑞汽车智能装备制造总部基地项目签约仪式在合肥市肥西县举行。该项目总投资10亿元，占地面积约140亩，计划建设模具车间、智能装配车间、热管理系统部件生产车间、精密注塑车间以及实验中心。",
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 2
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 14
         },
         {
           "title": "【广汽资本完成对领伟创新投资】广汽资本5月30日宣布，已完成对领伟创新智能系统（浙江）有限公司（下称领伟创新）的投资。据介绍，领伟创新已进入广汽集团核心供应链，为广汽埃安、广汽昊铂核心车型配套非晶定子铁芯。",
@@ -1265,8 +1385,8 @@
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 3
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 15
         },
         {
           "title": "【印度财政部称零售通胀或加速攀升，受季风降水不足及燃料价格上涨影响】印度财政部周六发布报告称，受近期燃油涨价、季风降雨不及往年充沛影响，加上中东冲突持续导致能源供应受阻，印度零售通胀可能上升。报告称，霍尔木兹海峡中断的持续时间仍然是影响印度外部经济和物价前景的“最关键因素”。上游价格压力急剧上升，加上近期燃油价格上涨，意味着未来几个月，运输、能源和食品相关成本的上涨将逐步传导至零售通胀。报告指出，降雨量严重不足加上当前的地缘政治局势，可能导致食品价格上涨，进而削弱农村需求和整体经济增长。",
@@ -1275,8 +1395,8 @@
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 4
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 16
         },
         {
           "title": "【美国石油巨头称今夏油价大概率走高】在投资机构伯恩斯坦公司举办的会议上，美国石油巨头雪佛龙公司首席执行官迈克·沃思称，受伊朗局势影响，全球原油库存不断下降，未来两个月油价大概率走高。英国《金融时报》报道说，沃思的发言折射出普遍忧虑：即便冲突各方敲定停战协议，战事对能源价格的负面影响仍会持续数月。此外，据美国有线电视新闻网28日报道，受中东地缘冲突持续影响，美国战略石油储备正以近年来罕见速度下降，商业原油库存也处于低位。 (央视财经)",
@@ -1285,8 +1405,8 @@
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 6
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 18
         },
         {
           "title": "【武汉公积金发布最新通知 灵活就业贷款看齐单位职工】“武汉公积金”微信公众号5月29日发布最新通知，灵活就业人员住房公积金缴存使用政策迎来全面优化升级。此次调整大幅提升灵活就业人员的贷款权益。贷款额度计算公式中的倍数由10倍调整为20倍，缴存系数与单位职工公积金政策实现统一；允许使用公积金贷款购买家庭第二套住房，并参照单位职工政策申请商转公贷款。贷款基本条件从“按协议缴存（留存）满12个月”优化为“贷款申请日距有效协议签订后首次缴存的时间间隔不少于12个月”，进一步降低贷款门槛。",
@@ -1295,8 +1415,8 @@
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 7
+          "publishTime": "2026-05-30 15:46:41",
+          "rank": 19
         },
         {
           "title": "【生物制造迎来“超级风口” 合成生物学大科学装置重大突破】在深圳光明科学城，全球首个合成生物学重大科技基础设施已正式对全球开放使用。这座投资7.22亿元的合成生物学设施，彻底颠覆了生命科学传统的劳动密集型研究模式，把实验效率直接提升10倍！中国科学院深圳先进技术研究院院长、定量合成生物学全国重点实验室主任刘陈立在《对话》中表示，原来需要一年完成的研究，现在一个月就能出结果。更震撼的是，这里一个功能岛就能替代几十个博士后的研发工作量。初创企业再也不用投入巨资买设备、建实验室、招团队，只要“拎脑入驻”，带着想法和资金租用功能岛，就能开启生物技术创业，催生了生物科技产业的全新模态。 (央视财经)",
@@ -1305,117 +1425,7 @@
           "source": "sina_finance",
           "platform": "sina_finance",
           "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 8
-        },
-        {
-          "title": "【国际组织警告：中东战事若持续 今夏或现能源短缺】国际能源署、国际货币基金组织、世界银行和世界贸易组织29日警告，如果霍尔木兹海峡航运不能恢复正常，全球能源储备快速消耗，在夏季用能高峰期将面临能源短缺的风险。（新华社）",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0179043.shtml",
-          "content": "【国际组织警告：中东战事若持续 今夏或现能源短缺】国际能源署、国际货币基金组织、世界银行和世界贸易组织29日警告，如果霍尔木兹海峡航运不能恢复正常，全球能源储备快速消耗，在夏季用能高峰期将面临能源短缺的风险。（新华社）",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 9
-        },
-        {
-          "title": "【深圳楼市新政满月 一二手房成交同比增33%】深圳楼市新政满月。4月29日，深圳发布楼市优化新政，核心措施包括分区松绑限购、提高公积金贷款额度等。在业内人士看来，3月、4月楼市“小阳春”后，5月市场交易通常会惯性回落，但深圳楼市今年的情况有所不同。据深圳贝壳研究院监测，截至5月27日，今年5月深圳新房住宅成交量为3970套，较去年同期增长51%；二手房住宅成交量达到5006套，同比增长21%；一二手住宅合计成交8976套，同比增长33%。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshar6955068.shtml",
-          "content": "【深圳楼市新政满月 一二手房成交同比增33%】深圳楼市新政满月。4月29日，深圳发布楼市优化新政，核心措施包括分区松绑限购、提高公积金贷款额度等。在业内人士看来，3月、4月楼市“小阳春”后，5月市场交易通常会惯性回落，但深圳楼市今年的情况有所不同。据深圳贝壳研究院监测，截至5月27日，今年5月深圳新房住宅成交量为3970套，较去年同期增长51%；二手房住宅成交量达到5006套，同比增长21%；一二手住宅合计成交8976套，同比增长33%。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 10
-        },
-        {
-          "title": "【苏州：1—4月规模以上工业增加值同比增长9.8%】苏州市统计局发布数据，1—4月，苏州市规模以上工业增加值同比增长9.8%。规模以上工业总产值16126.5亿元，同比增长7.3%。34个工业行业大类中，有27个行业产值同比增长，行业增长面达79.4%，其中16个行业产值增速超8%。制造业高端化持续推进。规模以上高新技术产业产值9164.6亿元，同比增长11.7%，其中航空航天制造业、电子及通讯设备制造业、医药制造业、仪器仪表制造业产值分别增长23.1%、20.0%、12.1%和14.6%。新兴电子产品、新能源产品产量快速增长。智能手机、集成电路、光电子器件、锂离子电池产品产量同比分别增长8.5%、18.1%、18.2%和46.3%。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7178721.shtml",
-          "content": "【苏州：1—4月规模以上工业增加值同比增长9.8%】苏州市统计局发布数据，1—4月，苏州市规模以上工业增加值同比增长9.8%。规模以上工业总产值16126.5亿元，同比增长7.3%。34个工业行业大类中，有27个行业产值同比增长，行业增长面达79.4%，其中16个行业产值增速超8%。制造业高端化持续推进。规模以上高新技术产业产值9164.6亿元，同比增长11.7%，其中航空航天制造业、电子及通讯设备制造业、医药制造业、仪器仪表制造业产值分别增长23.1%、20.0%、12.1%和14.6%。新兴电子产品、新能源产品产量快速增长。智能手机、集成电路、光电子器件、锂离子电池产品产量同比分别增长8.5%、18.1%、18.2%和46.3%。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 11
-        },
-        {
-          "title": "印度：财政和货币政策应对措施需要灵活。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7177646.shtml",
-          "content": "印度：财政和货币政策应对措施需要灵活。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 12
-        },
-        {
-          "title": "【青海省黄南州人民政府原党组成员、副州长尼玛才仁被双开】据青海省纪委监委消息：经中共青海省委批准，青海省纪委监委对黄南州人民政府原党组成员、副州长尼玛才仁严重违纪违法问题进行了立案审查调查。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0170951.shtml",
-          "content": "【青海省黄南州人民政府原党组成员、副州长尼玛才仁被双开】据青海省纪委监委消息：经中共青海省委批准，青海省纪委监委对黄南州人民政府原党组成员、副州长尼玛才仁严重违纪违法问题进行了立案审查调查。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 13
-        },
-        {
-          "title": "【俄外交部称已召回驻亚美尼亚大使】当地时间5月30日，俄罗斯外交部发布消息称，因亚美尼亚领导层加速与欧盟靠拢，俄方已召回驻亚美尼亚大使返回莫斯科进行磋商。（央视新闻）",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7174461.shtml",
-          "content": "【俄外交部称已召回驻亚美尼亚大使】当地时间5月30日，俄罗斯外交部发布消息称，因亚美尼亚领导层加速与欧盟靠拢，俄方已召回驻亚美尼亚大使返回莫斯科进行磋商。（央视新闻）",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 14
-        },
-        {
-          "title": "【倍杰特小洞锑矿项目建设用地获省级批复】近日，倍杰特旗下大豪矿业西畴县小洞锑矿采选工程项目用地，顺利取得云南省自然资源厅农用地转用及建设用地批复，标志着该项目合法合规落地取得关键性突破，为全面开工建设奠定坚实基础。小洞锑矿保有锑金属量约3.49万吨，平均品位3.13%。项目建成投产后，预计年产出锑金属3000吨，将显著提升区域锑资源供给能力，补强国内战略性矿产资源储备。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0169598.shtml",
-          "content": "【倍杰特小洞锑矿项目建设用地获省级批复】近日，倍杰特旗下大豪矿业西畴县小洞锑矿采选工程项目用地，顺利取得云南省自然资源厅农用地转用及建设用地批复，标志着该项目合法合规落地取得关键性突破，为全面开工建设奠定坚实基础。小洞锑矿保有锑金属量约3.49万吨，平均品位3.13%。项目建成投产后，预计年产出锑金属3000吨，将显著提升区域锑资源供给能力，补强国内战略性矿产资源储备。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 15
-        },
-        {
-          "title": "【东方电气集团与中国稀土集团举行会谈】据东方电气集团消息，5月30日，中国稀土集团党委副书记、董事、总经理李志辉率队访问东方电气集团，东方电气集团党组书记、董事长罗乾宜接待李志辉一行，双方围绕服务国家战略、推动产业协同与科技创新进行深入交流。罗乾宜表示，中国稀土集团是国家战略资源保障的核心力量，双方在材料领域合作基础良好、前景广阔，希望在新材料开发、前沿技术联合攻关等方面加强战略协同，更好服务保障国家能源安全和战略资源安全。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0167454.shtml",
-          "content": "【东方电气集团与中国稀土集团举行会谈】据东方电气集团消息，5月30日，中国稀土集团党委副书记、董事、总经理李志辉率队访问东方电气集团，东方电气集团党组书记、董事长罗乾宜接待李志辉一行，双方围绕服务国家战略、推动产业协同与科技创新进行深入交流。罗乾宜表示，中国稀土集团是国家战略资源保障的核心力量，双方在材料领域合作基础良好、前景广阔，希望在新材料开发、前沿技术联合攻关等方面加强战略协同，更好服务保障国家能源安全和战略资源安全。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 17
-        },
-        {
-          "title": "印度：通胀前景需保持警惕。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshaq0167205.shtml",
-          "content": "印度：通胀前景需保持警惕。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 18
-        },
-        {
-          "title": "印度：近期经济前景谨慎乐观。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzshan7172353.shtml",
-          "content": "印度：近期经济前景谨慎乐观。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
-          "rank": 19
-        },
-        {
-          "title": "印度：生态活动放缓或将对需求构成阻力。",
-          "url": "https://finance.sina.com.cn/7x24/2026-05-30/doc-inhzsham8704835.shtml",
-          "content": "印度：生态活动放缓或将对需求构成阻力。",
-          "source": "sina_finance",
-          "platform": "sina_finance",
-          "platformName": "新浪财经",
-          "publishTime": "2026-05-30 15:16:40",
+          "publishTime": "2026-05-30 15:46:41",
           "rank": 20
         }
       ]

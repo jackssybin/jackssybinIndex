@@ -1022,25 +1022,63 @@ function makeHotNewsCards(groups = [], limitPerGroup = 8) {
 function makeHotNewsWidget(hotNews) {
   const groups = (hotNews?.groups || []).filter((group) => group.items?.length > 0).slice(0, 4);
   if (groups.length === 0) return "";
-  return `<section class="home-hot-news">
+  return `<section class="home-hot-news" data-hot-news-live="home">
     <div>
       <h3>实时热点</h3>
       <a href="/news.html">查看全部 &raquo;</a>
     </div>
     <p>每小时从 orz-ai/hot_news 聚合一次，更新时间：${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</p>
     <div class="hot-news-grid">${makeHotNewsCards(groups, 5)}</div>
+    ${makeHotNewsClientScript()}
   </section>`;
+}
+
+function makeHotNewsClientScript() {
+  return `<script>
+(function () {
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, function (char) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[char];
+    });
+  }
+  function formatTime(value) {
+    var date = new Date(value);
+    return Number.isNaN(date.getTime()) ? (value || "尚未生成") : date.toLocaleString("zh-CN", { hour12: false });
+  }
+  function card(group, limit) {
+    var items = (group.items || []).slice(0, limit).map(function (item) {
+      return '<li><a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener nofollow"><span>' + escapeHtml(item.rank || "") + '</span><strong>' + escapeHtml(item.title) + '</strong></a>' + (item.content ? '<p>' + escapeHtml(item.content).slice(0, 120) + '</p>' : '') + '</li>';
+    }).join("");
+    return '<section class="hot-news-source"><h3>' + escapeHtml(group.platformName || group.platform) + '</h3><ol>' + items + '</ol></section>';
+  }
+  fetch("/hot-news.json", { cache: "no-store" })
+    .then(function (response) { return response.ok ? response.json() : null; })
+    .then(function (data) {
+      if (!data || !Array.isArray(data.groups)) return;
+      document.querySelectorAll("[data-hot-news-live]").forEach(function (box) {
+        var isHome = box.getAttribute("data-hot-news-live") === "home";
+        var groups = data.groups.filter(function (group) { return group.items && group.items.length; }).slice(0, isHome ? 4 : 99);
+        var grid = box.querySelector(".hot-news-grid");
+        var time = box.querySelector("[data-hot-news-time]");
+        if (grid) grid.innerHTML = groups.map(function (group) { return card(group, isHome ? 5 : 20); }).join("");
+        if (time) time.textContent = formatTime(data.generatedAt);
+      });
+    })
+    .catch(function () {});
+})();
+</script>`;
 }
 
 function makeHotNewsPage(hotNews, site) {
   const groups = (hotNews?.groups || []).filter((group) => group.items?.length > 0);
-  const body = `<section class="hot-news-page">
+  const body = `<section class="hot-news-page" data-hot-news-live="page">
     <div class="hot-news-hero">
       <h2>实时新闻</h2>
       <p>内容来源于 <a href="${escapeAttr(hotNews.source || "https://github.com/orz-ai/hot_news")}" target="_blank" rel="noopener">orz-ai/hot_news</a>，本站按静态站方式每小时生成一次，用来快速浏览技术、财经、社区和综合热点。</p>
-      <span>最后生成：${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</span>
+      <span>最后生成：<b data-hot-news-time>${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</b></span>
     </div>
     ${groups.length > 0 ? `<div class="hot-news-grid hot-news-grid--page">${makeHotNewsCards(groups, 20)}</div>` : `<p class="ft-gray">暂时没有抓取到新闻数据。</p>`}
+    ${makeHotNewsClientScript()}
   </section>`;
   return makeOtherPage("实时新闻", "icon-list", body, site);
 }

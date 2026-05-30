@@ -29,8 +29,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Update content and build static site
-        run: pnpm update-content
+      - name: Fetch hourly hot news
+        run: pnpm fetch-hot-news
+
+      - name: Build static site
+        run: pnpm build
+
+      - name: Publish latest hot news JSON
+        run: cp content/hot-news.json docs/.vuepress/dist/hot-news.json
 
       - name: Deploy dist to server
         uses: easingthemes/ssh-deploy@v5.1.0
