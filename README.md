@@ -858,6 +858,18 @@ sudo goaccess /var/log/nginx/access.log --log-format=COMBINED -o /var/www/jackss
 sudo chown -R www-data:www-data /var/www/jackssybin/admin
 ```
 
+如果页面能打开但显示 `No authentication provided.`，这通常不是 Nginx Basic Auth 报错，而是 GoAccess HTML 内置的实时 WebSocket/JWT 提示。本站只使用每日静态报表，不需要开启实时 WebSocket，可以在生成后替换这句提示：
+
+```bash
+sudo sed -i "s/No authentication provided\\./静态报表已加载。/g" /var/www/jackssybin/admin/report.html
+```
+
+对应的 crontab 可以写成：
+
+```bash
+5 0 * * * goaccess /var/log/nginx/access.log --log-format=COMBINED -o /var/www/jackssybin/admin/report.html && sed -i "s/No authentication provided\\./静态报表已加载。/g" /var/www/jackssybin/admin/report.html
+```
+
 ### 内容增长节奏
 
 - 每周维护 `/weekly.html`：自动汇总实时热点、核心文章和教程入口。
