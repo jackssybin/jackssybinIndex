@@ -17,6 +17,7 @@ const mysqlTutorialDir = path.join(contentDir, "tutorials", "mysql");
 const springBoot4TutorialDir = path.join(contentDir, "tutorials", "springboot4");
 const nettyTutorialDir = path.join(contentDir, "tutorials", "netty");
 const hotNewsDataFile = path.join(contentDir, "hot-news.json");
+const siteAvatar = "/images/sidebar-avatar.jpg";
 
 const tutorialSeriesDefinitions = [
   {
@@ -665,7 +666,7 @@ function makeSidebar({ tags, articles, comments, options, user, links, tutorialS
         <div class="module meta">
             <header><h2 class="ft__center"><a href="https://github.com/jackssybin" target="_blank" rel="noopener">GitHub</a></h2></header>
             <main class="fn__clear">
-                <img src="${escapeAttr(user?.userAvatar || "/images/default-user-thumbnail.png")}" aria-label="${escapeAttr(user?.userName || "jackssybin")}">
+                <img src="${escapeAttr(siteAvatar)}" aria-label="${escapeAttr(user?.userName || "jackssybin")}">
                 <div class="fn-right">
                     <a href="/archives.html">${articles.length} <span class="ft-gray">文章</span></a><br>
                     ${links.length} <span class="ft-gray">友链</span>
