@@ -844,6 +844,20 @@ crontab -e
 
 建议用 Nginx basic auth 保护 `/admin/report.html`，避免公开访问数据。每周重点看：访问最多页面、404、搜索引擎爬虫、来源站点、移动端比例，并据此继续优化 3-5 篇文章。
 
+如果 `https://jackssybin.cn/admin/report.html` 返回 404，优先检查报表文件是否还在：
+
+```bash
+ls -lah /var/www/jackssybin/admin/report.html
+```
+
+本项目的 GitHub Actions 部署使用 `rsync --delete`，已在 `.github/workflows/deploy-to-server.yml` 中排除 `admin/` 目录，避免自动部署删除服务器上由 GoAccess 生成的报表。修改部署脚本后，需要重新生成一次报表：
+
+```bash
+sudo mkdir -p /var/www/jackssybin/admin
+sudo goaccess /var/log/nginx/access.log --log-format=COMBINED -o /var/www/jackssybin/admin/report.html
+sudo chown -R www-data:www-data /var/www/jackssybin/admin
+```
+
 ### 内容增长节奏
 
 - 每周维护 `/weekly.html`：自动汇总实时热点、核心文章和教程入口。

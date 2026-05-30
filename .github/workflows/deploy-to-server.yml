@@ -47,4 +47,4 @@ jobs:
           REMOTE_PORT: ${{ secrets.SERVER_PORT || 22 }}
           SOURCE: docs/.vuepress/dist/
           TARGET: ${{ secrets.SERVER_PATH }}
-          ARGS: -rlgoDzvc --delete
+          ARGS: -rlgoDzvc --delete --exclude=admin/**
