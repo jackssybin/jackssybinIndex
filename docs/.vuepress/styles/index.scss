@@ -738,15 +738,29 @@ html[data-solo-theme="dark"] .theme-container {
   padding-bottom: 12px;
 }
 
+.solo-static .search-results li a {
+  display: block;
+}
+
 .solo-static .search-results strong,
 .solo-static .search-results span {
   display: block;
 }
 
+.solo-static .search-results strong {
+  font-size: 18px;
+  line-height: 1.45;
+  margin-bottom: 2px;
+}
+
 .solo-static .search-excerpt {
   color: #666;
-  margin-top: 4px;
+  margin-top: 6px;
   line-height: 1.55;
+}
+
+.solo-static .search-result-meta {
+  font-size: 13px;
 }
 
 .solo-static .search-tags {
@@ -1579,6 +1593,10 @@ html[data-solo-theme="dark"] .solo-static .footer {
 
 .solo-static .search-result-badge--tutorial {
   background: #ff4d3a;
+}
+
+.solo-static .search-result-badge--topic {
+  background: #6f55a3;
 }
 
 .solo-static .search-result-badge--nav {

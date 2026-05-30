@@ -1772,7 +1772,7 @@ async function main() {
 
   if (navSections.length > 0) {
     await writePage("/nav.html", `网址导航 - ${site.blogTitle}`, makeNavPage(navSections, site), {
-      description: "jackssybin 网址导航，收集 AI 工具、开发资源、学习资料、实用工具和常用站点。"
+      description: "jackssybin 网址导航，收录 AI 工具、开发资源、学习资料、实用工具和常用站点。"
     });
     for (const section of navSections) {
       await writePage(`/nav/${slugifyNav(section.taxonomy)}.html`, `${section.taxonomy} - 网址导航 - ${site.blogTitle}`, makeNavCategoryPage(section, site), {
@@ -1784,8 +1784,8 @@ async function main() {
 
   if (tutorialSeriesList.length > 0) {
     await writePage("/tutorials.html", `教程中心 - ${site.blogTitle}`, makeTutorialsHomePage(tutorialSeriesList, site), {
-      description: "jackssybin 教程中心，集中发布 MySQL、Spring Boot 等成体系技术教程。",
-      keywords: ["教程", "MySQL", "Spring Boot", "Java", "后端"]
+      description: "jackssybin 教程中心，集中发布 MySQL、Spring Boot、Netty 等成体系技术教程。",
+      keywords: ["教程", "MySQL", "Spring Boot", "Netty", "Java", "后端"]
     });
     for (const series of tutorialSeriesList) {
       await writePage(`/${series.slug}.html`, `${series.title} - ${site.blogTitle}`, makeTutorialSeriesOverviewPage(series.tutorials, site, series), {
@@ -1803,7 +1803,10 @@ async function main() {
 
   await fs.writeFile(
     path.join(docsDir, "search.md"),
-    `${frontmatter(`搜索 - ${site.blogTitle}`, "/search.html")}<SearchPage />\n`,
+    `${frontmatter(`搜索 - ${site.blogTitle}`, "/search.html", {
+      description: "搜索 jackssybin 技术博客、教程中心、专题系列和网址导航内容。",
+      keywords: ["搜索", "技术博客", "教程", "Java", "MySQL", "Spring Boot", "Netty"]
+    })}<SearchPage />\n`,
     "utf8"
   );
 
@@ -1850,6 +1853,18 @@ export const navIndex = ${JSON.stringify(navLinks.map((link) => ({
       taxonomy: link.taxonomy,
       term: link.term,
       description: link.description || ""
+    })), null, 2)};
+
+export const topicIndex = ${JSON.stringify(topics.map((topic) => ({
+      title: topic.title,
+      url: `/topics/${topic.slug}.html`,
+      type: "topic",
+      priority: 75 + Math.min(topic.articles.length, 20),
+      slug: topic.slug,
+      count: topic.articles.length,
+      description: topic.description,
+      keywords: topic.keywords || [],
+      articles: topic.articles.slice(0, 6).map((article) => article.articleSeoTitle || article.articleTitle)
     })), null, 2)};
 
 export const tutorialIndex = ${JSON.stringify(allTutorials.map((item) => ({

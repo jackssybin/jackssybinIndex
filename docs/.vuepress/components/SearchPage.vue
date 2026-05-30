@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import { navIndex, searchIndex, tutorialIndex } from "../search-index.js";
+import { navIndex, searchIndex, topicIndex, tutorialIndex } from "../search-index.js";
 
-type FilterType = "all" | "tutorial" | "blog" | "nav";
+type FilterType = "all" | "tutorial" | "blog" | "topic" | "nav";
 
 const keyword = ref("");
 const activeType = ref<FilterType>("all");
+
+const filterValues: FilterType[] = ["all", "tutorial", "blog", "topic", "nav"];
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search);
   keyword.value = params.get("keyword")?.trim() || "";
   const type = params.get("type") as FilterType | null;
-  if (type && ["all", "tutorial", "blog", "nav"].includes(type)) activeType.value = type;
+  if (type && filterValues.includes(type)) activeType.value = type;
 });
 
 const terms = computed(() => keyword.value.trim().toLowerCase().split(/\s+/u).filter(Boolean));
 
-function scoreText(value: string, weight: number) {
+function scoreText(value = "", weight: number) {
   const text = value.toLowerCase();
   return terms.value.reduce((score, query) => score + (text.includes(query) ? weight : 0), 0);
 }
@@ -28,38 +30,72 @@ function highlight(value = "") {
   return value.replace(pattern, "<mark>$1</mark>");
 }
 
+function snippet(value = "", fallback = "") {
+  const text = String(value || fallback || "").replace(/\s+/gu, " ").trim();
+  if (!text) return "";
+  if (terms.value.length === 0) return text.slice(0, 180);
+  const lower = text.toLowerCase();
+  const firstHit = terms.value
+    .map((term) => lower.indexOf(term))
+    .filter((index) => index >= 0)
+    .sort((a, b) => a - b)[0];
+  if (firstHit === undefined) return text.slice(0, 180);
+  const start = Math.max(0, firstHit - 70);
+  const end = Math.min(text.length, firstHit + 150);
+  return `${start > 0 ? "..." : ""}${text.slice(start, end)}${end < text.length ? "..." : ""}`;
+}
+
 const mergedResults = computed(() => {
   if (terms.value.length === 0) return [];
 
-  const blogResults = searchIndex.map((item) => {
-    const score = (item.priority || 0)
-      + scoreText(item.title, 120)
-      + scoreText(item.tags?.join(",") || "", 80)
-      + scoreText(item.topic || "", 60)
-      + scoreText(item.excerpt || "", 35)
-      + scoreText(item.guide || "", 25)
-      + scoreText(item.content || "", 8);
-    return {
-      ...item,
-      type: "blog" as const,
-      badge: item.core ? "核心文章" : "博客文章",
-      meta: [item.date, item.topic, ...(item.tags || []).slice(0, 3)].filter(Boolean).join(" / "),
-      score
-    };
-  });
-
   const tutorialResults = tutorialIndex.map((item) => {
     const score = (item.priority || 0)
-      + scoreText(item.title, 130)
-      + scoreText(item.series || "", 80)
-      + scoreText(item.group || "", 55)
-      + scoreText(item.excerpt || "", 35)
-      + scoreText(item.content || "", 10);
+      + scoreText(item.title, 150)
+      + scoreText(item.series, 90)
+      + scoreText(item.group, 70)
+      + scoreText(item.excerpt, 40)
+      + scoreText(item.content, 12);
     return {
       ...item,
       type: "tutorial" as const,
       badge: "教程",
       meta: [item.series, item.group].filter(Boolean).join(" / "),
+      excerpt: snippet(item.content, item.excerpt),
+      score
+    };
+  });
+
+  const blogResults = searchIndex.map((item) => {
+    const score = (item.priority || 0)
+      + scoreText(item.title, 140)
+      + scoreText(item.tags?.join(","), 90)
+      + scoreText(item.topic, 80)
+      + scoreText(item.excerpt, 45)
+      + scoreText(item.guide, 35)
+      + scoreText(item.content, 10);
+    return {
+      ...item,
+      type: "blog" as const,
+      badge: item.core ? "核心文章" : "博客文章",
+      meta: [item.date, item.topic, ...(item.tags || []).slice(0, 3)].filter(Boolean).join(" / "),
+      excerpt: snippet(item.content, item.guide || item.excerpt),
+      score
+    };
+  });
+
+  const topicResults = topicIndex.map((item) => {
+    const articleText = (item.articles || []).join(" ");
+    const score = (item.priority || 0)
+      + scoreText(item.title, 135)
+      + scoreText(item.description, 70)
+      + scoreText(item.keywords?.join(","), 60)
+      + scoreText(articleText, 25);
+    return {
+      ...item,
+      type: "topic" as const,
+      badge: "专题",
+      meta: `${item.count} 篇文章`,
+      excerpt: snippet(articleText, item.description),
       score
     };
   });
@@ -67,20 +103,20 @@ const mergedResults = computed(() => {
   const navResults = navIndex.map((item) => {
     const score = (item.priority || 0)
       + scoreText(item.title, 110)
-      + scoreText(item.taxonomy || "", 70)
-      + scoreText(item.term || "", 45)
-      + scoreText(item.description || "", 25);
+      + scoreText(item.taxonomy, 70)
+      + scoreText(item.term, 45)
+      + scoreText(item.description, 25);
     return {
       ...item,
       type: "nav" as const,
       badge: "导航",
       meta: [item.taxonomy, item.term].filter(Boolean).join(" / "),
-      excerpt: item.description || "",
+      excerpt: snippet(item.description),
       score
     };
   });
 
-  return [...tutorialResults, ...blogResults, ...navResults]
+  return [...tutorialResults, ...blogResults, ...topicResults, ...navResults]
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "zh-CN"))
     .slice(0, 120);
@@ -95,6 +131,7 @@ const counts = computed(() => ({
   all: mergedResults.value.length,
   tutorial: mergedResults.value.filter((item) => item.type === "tutorial").length,
   blog: mergedResults.value.filter((item) => item.type === "blog").length,
+  topic: mergedResults.value.filter((item) => item.type === "topic").length,
   nav: mergedResults.value.filter((item) => item.type === "nav").length
 }));
 
@@ -112,6 +149,7 @@ const filters: Array<{ label: string; value: FilterType }> = [
   { label: "全部", value: "all" },
   { label: "教程", value: "tutorial" },
   { label: "博客", value: "blog" },
+  { label: "专题", value: "topic" },
   { label: "导航", value: "nav" }
 ];
 </script>
@@ -132,6 +170,7 @@ const filters: Array<{ label: string; value: FilterType }> = [
             <a href="/my-github-repos"><img class="page-icon" src="/images/github-icon.png" alt="">我的开源</a>
             <a href="https://blog.csdn.net/jackssybin">我的 CSDN</a>
             <a href="/tutorials.html"><i class="icon-list"></i> 教程中心</a>
+            <a href="/news.html"><i class="icon-list"></i> 实时新闻</a>
             <a href="/topics.html"><i class="icon-list"></i> 专题</a>
             <a href="/nav.html"><i class="icon-link"></i> 网址导航</a>
             <a href="/tags.html"><i class="icon-tags"></i> 标签墙</a>
@@ -177,7 +216,7 @@ const filters: Array<{ label: string; value: FilterType }> = [
             {{ tag }} <b>{{ count }}</b>
           </a>
         </div>
-        <p v-if="!keyword" class="ft-gray">可搜索文章标题、专题、标签、摘要、正文、教程中心和网址导航。</p>
+        <p v-if="!keyword" class="ft-gray">可搜索文章标题、专题、标签、摘要、正文、教程中心和网址导航。教程与核心文章会优先展示。</p>
         <p v-else class="ft-gray">关键词：{{ keyword }}，当前展示 {{ filteredResults.length }} 条结果。</p>
 
         <ul v-if="filteredResults.length" class="list search-results search-results--mixed">
@@ -185,7 +224,7 @@ const filters: Array<{ label: string; value: FilterType }> = [
             <a :href="item.url" :target="item.type === 'nav' ? '_blank' : undefined" :rel="item.type === 'nav' ? 'noopener' : undefined">
               <span class="search-result-badge" :class="`search-result-badge--${item.type}`">{{ item.badge }}</span>
               <strong v-html="highlight(item.title)"></strong>
-              <span class="ft-gray" v-html="highlight(item.meta)"></span>
+              <span class="ft-gray search-result-meta" v-html="highlight(item.meta)"></span>
               <span v-if="item.excerpt" class="search-excerpt" v-html="highlight(item.excerpt)"></span>
             </a>
           </li>

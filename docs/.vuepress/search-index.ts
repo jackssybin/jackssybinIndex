@@ -7899,6 +7899,222 @@ export const navIndex = [
   }
 ];
 
+export const topicIndex = [
+  {
+    "title": "Java 与 JVM",
+    "url": "/topics/java-jvm.html",
+    "type": "topic",
+    "priority": 95,
+    "slug": "java-jvm",
+    "count": 25,
+    "description": "Java 基础、集合、反射、并发、JVM、GC 与排障相关内容。",
+    "keywords": [
+      "java",
+      "jvm",
+      "gc",
+      "反射",
+      "内省",
+      "线程",
+      "锁",
+      "javap",
+      "dump",
+      "内存",
+      "对象"
+    ],
+    "articles": [
+      "JVM 基础总览",
+      "JVM 垃圾回收器",
+      "LocalDateTime操作",
+      "java内省机制与反射机制的区别",
+      "Java反射生成对象",
+      "Java 逐行读取文本文件的几种方式以及效率对比"
+    ]
+  },
+  {
+    "title": "Spring Boot 与后端框架",
+    "url": "/topics/spring-backend.html",
+    "type": "topic",
+    "priority": 85,
+    "slug": "spring-backend",
+    "count": 10,
+    "description": "Spring Boot、Spring Batch、MyBatis、Swagger、WebFlux、自动装配和扩展点实践。",
+    "keywords": [
+      "spring",
+      "springboot",
+      "spring boot",
+      "springbatch",
+      "mybatis",
+      "swagger",
+      "knife4j",
+      "webflux",
+      "bean",
+      "conditional"
+    ],
+    "articles": [
+      "Spring Boot 启动扩展点",
+      "Spring Integration 中文手册",
+      "使用@ConditionalOnExpression决定是否生效",
+      "springBatch监控相关",
+      "SpringBoo2t获取ApplicationContext的3种方式",
+      "springBoot2中webflux集成swagger2"
+    ]
+  },
+  {
+    "title": "MySQL 与数据架构",
+    "url": "/topics/mysql-data.html",
+    "type": "topic",
+    "priority": 90,
+    "slug": "mysql-data",
+    "count": 15,
+    "description": "MySQL 索引、事务、锁、分库分表、冷热分离、数据一致性与大表优化。",
+    "keywords": [
+      "mysql",
+      "数据库",
+      "索引",
+      "事务",
+      "锁",
+      "分库",
+      "分表",
+      "大表",
+      "limit",
+      "order by",
+      "缓存一致性"
+    ],
+    "articles": [
+      "MySQL RR 隔离级别锁测试",
+      "分库分表方案总览",
+      "表数据量大读写缓慢如何优化【分库分表】",
+      "表数据量大读写缓慢如何优化【查询分离】",
+      "表数据量大读写缓慢如何优化【冷热分离】",
+      "MySQL 5.7root用户密码修改"
+    ]
+  },
+  {
+    "title": "Linux 运维与部署",
+    "url": "/topics/linux-ops.html",
+    "type": "topic",
+    "priority": 93,
+    "slug": "linux-ops",
+    "count": 18,
+    "description": "Linux、CentOS、Ubuntu、Nginx、Redis、JDK、Maven、Git、服务器排障和部署记录。",
+    "keywords": [
+      "linux",
+      "centos",
+      "ubuntu",
+      "nginx",
+      "redis",
+      "ssh",
+      "yum",
+      "jdk",
+      "maven",
+      "git",
+      "服务器",
+      "病毒",
+      "cpu",
+      "内存"
+    ],
+    "articles": [
+      "Linux Dump 文件分析",
+      "Ubuntu 搭建Zookeeper服务",
+      "HAProxy常见的安装方式",
+      "Linux - 查看用户登录记录",
+      "Linux服务器kdevtmpfsi挖矿病毒解决方法",
+      "利用Grafana展示zabbix数据"
+    ]
+  },
+  {
+    "title": "Python 爬虫与自动化",
+    "url": "/topics/python-crawler.html",
+    "type": "topic",
+    "priority": 95,
+    "slug": "python-crawler",
+    "count": 23,
+    "description": "Python 环境、requests、urllib、Scrapy、Selenium、ChromeDriver 和爬虫实战。",
+    "keywords": [
+      "python",
+      "爬虫",
+      "scrapy",
+      "requests",
+      "urllib",
+      "selenium",
+      "chromedriver",
+      "headless",
+      "cookie"
+    ],
+    "articles": [
+      "Scrapy 框架入门",
+      "Python3下request处理cookie的两种方法",
+      "Python3绘图Turtle库详解",
+      "python3下chromedriver + headless + proxy+场景",
+      "centos7 安装chromedriver",
+      "阿里云ubutun python3.5.2卸载更新到3.6方法亲测有效"
+    ]
+  },
+  {
+    "title": "中间件与分布式",
+    "url": "/topics/middleware-distributed.html",
+    "type": "topic",
+    "priority": 82,
+    "slug": "middleware-distributed",
+    "count": 7,
+    "description": "Redis、Zookeeper、网关、HAProxy、SOFA、Prometheus、Grafana、分布式锁和服务治理。",
+    "keywords": [
+      "redis",
+      "zookeeper",
+      "zk",
+      "gateway",
+      "网关",
+      "haproxy",
+      "prometheus",
+      "grafana",
+      "zabbix",
+      "sofa",
+      "分布式",
+      "服务",
+      "锁"
+    ],
+    "articles": [
+      "Redis 缓存穿透、击穿、雪崩",
+      "各种法则定律-引论",
+      "api网关介绍",
+      "分布式锁(Redis,zk,db锁)",
+      "蚂蚁中间件SOFA",
+      "免费接口api分享（终于找到了）"
+    ]
+  },
+  {
+    "title": "工具、效率与博客建设",
+    "url": "/topics/tools-blog.html",
+    "type": "topic",
+    "priority": 81,
+    "slug": "tools-blog",
+    "count": 6,
+    "description": "开发工具、网络分析、Rust 学习、博客迁移、静态站建设和零散效率笔记。",
+    "keywords": [
+      "vuepress",
+      "bolo",
+      "solo",
+      "博客",
+      "迁移",
+      "rust",
+      "wireshark",
+      "drools",
+      "工具",
+      "github",
+      "api",
+      "区块链"
+    ],
+    "articles": [
+      "老博客静态化迁移实战",
+      "Drools语法",
+      "wireshark安装和基本语法",
+      "js京东全民养红包一步完成",
+      "Rust学习之二猜字谜",
+      "Rust 学习一之环境安装"
+    ]
+  }
+];
+
 export const tutorialIndex = [
   {
     "title": "MySQL从新手到专家完整学习路线图",
