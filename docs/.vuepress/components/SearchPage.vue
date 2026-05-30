@@ -2,97 +2,118 @@
 import { computed, onMounted, ref } from "vue";
 import { navIndex, searchIndex, tutorialIndex } from "../search-index.js";
 
+type FilterType = "all" | "tutorial" | "blog" | "nav";
+
 const keyword = ref("");
+const activeType = ref<FilterType>("all");
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search);
   keyword.value = params.get("keyword")?.trim() || "";
+  const type = params.get("type") as FilterType | null;
+  if (type && ["all", "tutorial", "blog", "nav"].includes(type)) activeType.value = type;
 });
 
 const terms = computed(() => keyword.value.trim().toLowerCase().split(/\s+/u).filter(Boolean));
 
-const results = computed(() => {
+function scoreText(value: string, weight: number) {
+  const text = value.toLowerCase();
+  return terms.value.reduce((score, query) => score + (text.includes(query) ? weight : 0), 0);
+}
+
+function highlight(value = "") {
+  if (terms.value.length === 0) return value;
+  const escaped = terms.value.map((term) => term.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"));
+  const pattern = new RegExp(`(${escaped.join("|")})`, "giu");
+  return value.replace(pattern, "<mark>$1</mark>");
+}
+
+const mergedResults = computed(() => {
   if (terms.value.length === 0) return [];
 
-  return searchIndex
-    .map((item) => {
-      const title = item.title.toLowerCase();
-      const tags = item.tags.join(",").toLowerCase();
-      const topic = (item.topic || "").toLowerCase();
-      const excerpt = (item.excerpt || "").toLowerCase();
-      const guide = (item.guide || "").toLowerCase();
-      const content = (item.content || "").toLowerCase();
-      let score = 0;
-      for (const query of terms.value) {
-        if (title.includes(query)) score += 100;
-        if (tags.includes(query)) score += 70;
-        if (topic.includes(query)) score += 50;
-        if (excerpt.includes(query)) score += 30;
-        if (guide.includes(query)) score += 20;
-        if (content.includes(query)) score += 10;
-      }
-      return { ...item, score };
-    })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || b.date.localeCompare(a.date))
-    .slice(0, 50);
-});
+  const blogResults = searchIndex.map((item) => {
+    const score = (item.priority || 0)
+      + scoreText(item.title, 120)
+      + scoreText(item.tags?.join(",") || "", 80)
+      + scoreText(item.topic || "", 60)
+      + scoreText(item.excerpt || "", 35)
+      + scoreText(item.guide || "", 25)
+      + scoreText(item.content || "", 8);
+    return {
+      ...item,
+      type: "blog" as const,
+      badge: item.core ? "核心文章" : "博客文章",
+      meta: [item.date, item.topic, ...(item.tags || []).slice(0, 3)].filter(Boolean).join(" / "),
+      score
+    };
+  });
 
-const navResults = computed(() => {
-  if (terms.value.length === 0) return [];
+  const tutorialResults = tutorialIndex.map((item) => {
+    const score = (item.priority || 0)
+      + scoreText(item.title, 130)
+      + scoreText(item.series || "", 80)
+      + scoreText(item.group || "", 55)
+      + scoreText(item.excerpt || "", 35)
+      + scoreText(item.content || "", 10);
+    return {
+      ...item,
+      type: "tutorial" as const,
+      badge: "教程",
+      meta: [item.series, item.group].filter(Boolean).join(" / "),
+      score
+    };
+  });
 
-  return navIndex
-    .map((item) => {
-      const title = item.title.toLowerCase();
-      const taxonomy = (item.taxonomy || "").toLowerCase();
-      const term = (item.term || "").toLowerCase();
-      const description = (item.description || "").toLowerCase();
-      let score = 0;
-      for (const query of terms.value) {
-        if (title.includes(query)) score += 100;
-        if (taxonomy.includes(query)) score += 60;
-        if (term.includes(query)) score += 40;
-        if (description.includes(query)) score += 20;
-      }
-      return { ...item, score };
-    })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "zh-CN"))
-    .slice(0, 30);
-});
+  const navResults = navIndex.map((item) => {
+    const score = (item.priority || 0)
+      + scoreText(item.title, 110)
+      + scoreText(item.taxonomy || "", 70)
+      + scoreText(item.term || "", 45)
+      + scoreText(item.description || "", 25);
+    return {
+      ...item,
+      type: "nav" as const,
+      badge: "导航",
+      meta: [item.taxonomy, item.term].filter(Boolean).join(" / "),
+      excerpt: item.description || "",
+      score
+    };
+  });
 
-const tutorialResults = computed(() => {
-  if (terms.value.length === 0) return [];
-
-  return tutorialIndex
-    .map((item) => {
-      const title = item.title.toLowerCase();
-      const group = (item.group || "").toLowerCase();
-      const excerpt = (item.excerpt || "").toLowerCase();
-      const content = (item.content || "").toLowerCase();
-      let score = 0;
-      for (const query of terms.value) {
-        if (title.includes(query)) score += 100;
-        if (group.includes(query)) score += 60;
-        if (excerpt.includes(query)) score += 30;
-        if (content.includes(query)) score += 10;
-      }
-      return { ...item, score };
-    })
+  return [...tutorialResults, ...blogResults, ...navResults]
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "zh-CN"))
-    .slice(0, 30);
+    .slice(0, 120);
 });
+
+const filteredResults = computed(() => {
+  if (activeType.value === "all") return mergedResults.value;
+  return mergedResults.value.filter((item) => item.type === activeType.value);
+});
+
+const counts = computed(() => ({
+  all: mergedResults.value.length,
+  tutorial: mergedResults.value.filter((item) => item.type === "tutorial").length,
+  blog: mergedResults.value.filter((item) => item.type === "blog").length,
+  nav: mergedResults.value.filter((item) => item.type === "nav").length
+}));
 
 const hotTags = computed(() => {
-  const counts = new Map<string, number>();
+  const countMap = new Map<string, number>();
   for (const item of searchIndex) {
-    for (const tag of item.tags || []) counts.set(tag, (counts.get(tag) || 0) + 1);
+    for (const tag of item.tags || []) countMap.set(tag, (countMap.get(tag) || 0) + 1);
   }
-  return [...counts.entries()]
+  return [...countMap.entries()]
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-CN"))
     .slice(0, 18);
 });
+
+const filters: Array<{ label: string; value: FilterType }> = [
+  { label: "全部", value: "all" },
+  { label: "教程", value: "tutorial" },
+  { label: "博客", value: "blog" },
+  { label: "导航", value: "nav" }
+];
 </script>
 
 <template>
@@ -100,9 +121,7 @@ const hotTags = computed(() => {
     <header>
       <div class="banner">
         <div class="fn-clear wrapper">
-          <h1 class="fn-inline">
-            <a href="/" rel="start">jackssybin 的个人博客</a>
-          </h1>
+          <h1 class="fn-inline"><a href="/" rel="start">jackssybin 的个人博客</a></h1>
           <small> &nbsp; 记录精彩的程序人生</small>
         </div>
       </div>
@@ -112,8 +131,8 @@ const hotTags = computed(() => {
             <a href="/"><i class="icon-home"></i> 首页</a>
             <a href="/my-github-repos"><img class="page-icon" src="/images/github-icon.png" alt="">我的开源</a>
             <a href="https://blog.csdn.net/jackssybin">我的 CSDN</a>
-            <a href="/topics.html"><i class="icon-list"></i> 专题</a>
             <a href="/tutorials.html"><i class="icon-list"></i> 教程中心</a>
+            <a href="/topics.html"><i class="icon-list"></i> 专题</a>
             <a href="/nav.html"><i class="icon-link"></i> 网址导航</a>
             <a href="/tags.html"><i class="icon-tags"></i> 标签墙</a>
             <a href="/archives.html"><i class="icon-inbox"></i> 存档</a>
@@ -124,7 +143,7 @@ const hotTags = computed(() => {
           <div class="fn-right">
             <button class="theme-toggle" type="button" aria-label="切换黑夜模式" title="切换黑夜模式" data-theme-toggle>夜</button>
             <form class="form" action="/search.html" method="get">
-              <input v-model="keyword" placeholder="搜索标题、标签、专题、正文或导航" id="search" type="text" name="keyword">
+              <input v-model="keyword" placeholder="搜索文章、教程或导航" id="search" type="text" name="keyword">
               <button type="submit"><i class="icon-search"></i></button>
             </form>
           </div>
@@ -134,14 +153,24 @@ const hotTags = computed(() => {
 
     <div class="wrapper">
       <main class="other search-page">
-        <div class="title">
-          <h2><i class="icon-search"></i>&nbsp;全站搜索</h2>
-        </div>
+        <div class="title"><h2><i class="icon-search"></i>&nbsp;全站搜索</h2></div>
 
         <form class="form search-form" action="/search.html" method="get">
-          <input v-model="keyword" placeholder="输入 Java、MySQL、Spring Boot、AI 工具、导航站点等关键词" type="text" name="keyword">
+          <input v-model="keyword" placeholder="输入 Java、MySQL、Spring Boot、Netty、AI 工具等关键词" type="text" name="keyword">
           <button type="submit">搜索</button>
         </form>
+
+        <div v-if="keyword" class="search-filter-tabs">
+          <button
+            v-for="filter in filters"
+            :key="filter.value"
+            type="button"
+            :class="{ active: activeType === filter.value }"
+            @click="activeType = filter.value"
+          >
+            {{ filter.label }} <span>{{ counts[filter.value] }}</span>
+          </button>
+        </div>
 
         <div v-if="!keyword" class="search-tags tags">
           <a v-for="[tag, count] in hotTags" :key="tag" class="tag" :href="`/search.html?keyword=${encodeURIComponent(tag)}`">
@@ -149,40 +178,20 @@ const hotTags = computed(() => {
           </a>
         </div>
         <p v-if="!keyword" class="ft-gray">可搜索文章标题、专题、标签、摘要、正文、教程中心和网址导航。</p>
-        <p v-else class="ft-gray">关键词：{{ keyword }}，找到 {{ results.length }} 篇文章、{{ tutorialResults.length }} 篇教程、{{ navResults.length }} 个导航资源。</p>
+        <p v-else class="ft-gray">关键词：{{ keyword }}，当前展示 {{ filteredResults.length }} 条结果。</p>
 
-        <h3 v-if="results.length" class="search-section-title">文章</h3>
-        <ul v-if="results.length" class="list search-results">
-          <li v-for="item in results" :key="item.url">
-            <a :href="item.url">
-              <strong>{{ item.title }}</strong>
-              <span class="ft-gray">{{ item.date }} · {{ item.topic }} · {{ item.tags.join(', ') }}</span>
-              <span v-if="item.excerpt" class="search-excerpt">{{ item.excerpt }}</span>
+        <ul v-if="filteredResults.length" class="list search-results search-results--mixed">
+          <li v-for="item in filteredResults" :key="`${item.type}-${item.url}`">
+            <a :href="item.url" :target="item.type === 'nav' ? '_blank' : undefined" :rel="item.type === 'nav' ? 'noopener' : undefined">
+              <span class="search-result-badge" :class="`search-result-badge--${item.type}`">{{ item.badge }}</span>
+              <strong v-html="highlight(item.title)"></strong>
+              <span class="ft-gray" v-html="highlight(item.meta)"></span>
+              <span v-if="item.excerpt" class="search-excerpt" v-html="highlight(item.excerpt)"></span>
             </a>
           </li>
         </ul>
 
-        <h3 v-if="tutorialResults.length" class="search-section-title">教程</h3>
-        <ul v-if="tutorialResults.length" class="list search-results">
-          <li v-for="item in tutorialResults" :key="item.url">
-            <a :href="item.url">
-              <strong>{{ item.title }}</strong>
-              <span class="ft-gray">{{ item.series }} · {{ item.group }}</span>
-              <span v-if="item.excerpt" class="search-excerpt">{{ item.excerpt }}</span>
-            </a>
-          </li>
-        </ul>
-
-        <h3 v-if="navResults.length" class="search-section-title">导航资源</h3>
-        <ul v-if="navResults.length" class="list search-results">
-          <li v-for="item in navResults" :key="item.url">
-            <a :href="item.url" target="_blank" rel="noopener">
-              <strong>{{ item.title }}</strong>
-              <span class="ft-gray">{{ item.taxonomy }} · {{ item.term }}</span>
-              <span v-if="item.description" class="search-excerpt">{{ item.description }}</span>
-            </a>
-          </li>
-        </ul>
+        <p v-else-if="keyword" class="ft-gray">没有找到匹配内容，可以换一个关键词再试。</p>
       </main>
     </div>
   </div>

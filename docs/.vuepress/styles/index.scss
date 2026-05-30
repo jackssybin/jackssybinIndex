@@ -861,9 +861,82 @@ html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card strong {
 html[data-solo-theme="dark"] .solo-static .topic-card,
 html[data-solo-theme="dark"] .solo-static .core-intro,
 html[data-solo-theme="dark"] .solo-static .related-posts,
-html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel {
+html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel,
+html[data-solo-theme="dark"] .solo-static .home-portal-hero,
+html[data-solo-theme="dark"] .solo-static .home-portal-grid section,
+html[data-solo-theme="dark"] .solo-static .home-hot-news,
+html[data-solo-theme="dark"] .solo-static .home-learning-path,
+html[data-solo-theme="dark"] .solo-static .home-recent-updates,
+html[data-solo-theme="dark"] .solo-static .hot-news-hero,
+html[data-solo-theme="dark"] .solo-static .hot-news-source,
+html[data-solo-theme="dark"] .solo-static .weekly-hero,
+html[data-solo-theme="dark"] .solo-static .weekly-grid > section,
+html[data-solo-theme="dark"] .solo-static .tutorial-route {
   border-color: #2a323f;
   background: #171d26;
+}
+
+html[data-solo-theme="dark"] .solo-static .home-portal-hero h2,
+html[data-solo-theme="dark"] .solo-static .home-portal h3,
+html[data-solo-theme="dark"] .solo-static .home-hot-news h3,
+html[data-solo-theme="dark"] .solo-static .home-portal-grid strong,
+html[data-solo-theme="dark"] .solo-static .home-recent-updates strong,
+html[data-solo-theme="dark"] .solo-static .home-learning-path a,
+html[data-solo-theme="dark"] .solo-static .hot-news-hero h2,
+html[data-solo-theme="dark"] .solo-static .hot-news-source h3,
+html[data-solo-theme="dark"] .solo-static .hot-news-source a,
+html[data-solo-theme="dark"] .solo-static .weekly-hero h2,
+html[data-solo-theme="dark"] .solo-static .weekly-grid h3,
+html[data-solo-theme="dark"] .solo-static .weekly-grid h4,
+html[data-solo-theme="dark"] .solo-static .weekly-grid a,
+html[data-solo-theme="dark"] .solo-static .tutorial-route h3,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-grid h4,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-focus h4 {
+  color: #f1f5fb;
+}
+
+html[data-solo-theme="dark"] .solo-static .home-portal-hero p,
+html[data-solo-theme="dark"] .solo-static .home-hot-news > p,
+html[data-solo-theme="dark"] .solo-static .hot-news-hero p,
+html[data-solo-theme="dark"] .solo-static .hot-news-hero span,
+html[data-solo-theme="dark"] .solo-static .hot-news-source p,
+html[data-solo-theme="dark"] .solo-static .weekly-hero p,
+html[data-solo-theme="dark"] .solo-static .weekly-hero span,
+html[data-solo-theme="dark"] .solo-static .weekly-core-list p,
+html[data-solo-theme="dark"] .solo-static .weekly-tutorial-card span,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-intro p,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-grid p,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-focus p,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-focus li {
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .home-portal-grid a,
+html[data-solo-theme="dark"] .solo-static .home-recent-updates a,
+html[data-solo-theme="dark"] .solo-static .home-learning-path li,
+html[data-solo-theme="dark"] .solo-static .hot-news-source li,
+html[data-solo-theme="dark"] .solo-static .weekly-grid article,
+html[data-solo-theme="dark"] .solo-static .weekly-tutorial-card,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-grid article,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-focus section {
+  border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .tutorial-route-grid article,
+html[data-solo-theme="dark"] .solo-static .tutorial-route-focus section,
+html[data-solo-theme="dark"] .solo-static .search-filter-tabs button {
+  background: #141a23;
+}
+
+html[data-solo-theme="dark"] .solo-static .search-filter-tabs button {
+  border-color: #343d4b;
+  color: #c2cad8;
+}
+
+html[data-solo-theme="dark"] .solo-static .search-filter-tabs button.active {
+  background: #ff4d3a;
+  border-color: #ff4d3a;
+  color: #fff;
 }
 
 html[data-solo-theme="dark"] .solo-static .related-posts li {
@@ -1078,6 +1151,403 @@ html[data-solo-theme="dark"] .solo-static .footer {
   font-size: 18px;
   font-weight: 400;
   margin: 18px 20px 8px;
+}
+
+.solo-static .home-portal {
+  margin-bottom: 20px;
+}
+
+.solo-static .home-portal-hero,
+.solo-static .home-portal-grid section,
+.solo-static .home-learning-path,
+.solo-static .home-recent-updates,
+.solo-static .tutorial-route {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+}
+
+.solo-static .home-portal-hero {
+  padding: 24px;
+}
+
+.solo-static .home-portal-hero span {
+  color: #ff4d3a;
+  display: block;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.solo-static .home-portal-hero h2 {
+  color: #333;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 0 0 10px;
+}
+
+.solo-static .home-portal-hero p,
+.solo-static .tutorial-route-intro p,
+.solo-static .tutorial-route-grid p,
+.solo-static .tutorial-route-focus p,
+.solo-static .tutorial-route-focus li {
+  color: #666;
+  line-height: 1.75;
+}
+
+.solo-static .home-portal-hero div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.solo-static .home-portal-hero a {
+  background: #ff4d3a;
+  color: #fff;
+  line-height: 34px;
+  padding: 0 14px;
+  text-decoration: none;
+}
+
+.solo-static .home-portal-hero a + a {
+  background: #4c5563;
+}
+
+.solo-static .home-portal-grid,
+.solo-static .home-recent-updates div,
+.solo-static .tutorial-route-grid,
+.solo-static .tutorial-route-focus {
+  display: grid;
+  gap: 12px;
+}
+
+.solo-static .home-portal-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+.solo-static .home-portal-grid section,
+.solo-static .home-learning-path,
+.solo-static .home-recent-updates,
+.solo-static .tutorial-route {
+  padding: 18px;
+}
+
+.solo-static .home-portal h3,
+.solo-static .tutorial-route h3 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+.solo-static .home-portal-grid a,
+.solo-static .home-recent-updates a,
+.solo-static .home-learning-path a {
+  border-top: 1px solid #eee;
+  color: #333;
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.solo-static .home-portal-grid a:first-of-type,
+.solo-static .home-recent-updates a:first-of-type {
+  border-top: 0;
+}
+
+.solo-static .home-portal-grid strong,
+.solo-static .home-recent-updates strong {
+  display: block;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.solo-static .home-portal-grid span,
+.solo-static .home-recent-updates span,
+.solo-static .home-learning-path span {
+  color: #9098a6;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.solo-static .home-learning-path,
+.solo-static .home-recent-updates {
+  margin-top: 14px;
+}
+
+.solo-static .home-hot-news,
+.solo-static .hot-news-hero,
+.solo-static .hot-news-source,
+.solo-static .weekly-hero,
+.solo-static .weekly-grid > section {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+}
+
+.solo-static .home-hot-news {
+  margin-top: 14px;
+  padding: 18px;
+}
+
+.solo-static .home-hot-news > div:first-child {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.solo-static .home-hot-news > div:first-child a {
+  color: #ff4d3a;
+  text-decoration: none;
+}
+
+.solo-static .home-hot-news > p,
+.solo-static .hot-news-hero p,
+.solo-static .hot-news-hero span,
+.solo-static .hot-news-source p,
+.solo-static .weekly-hero p,
+.solo-static .weekly-hero span,
+.solo-static .weekly-core-list p,
+.solo-static .weekly-tutorial-card span {
+  color: #707988;
+  line-height: 1.7;
+}
+
+.solo-static .hot-news-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.solo-static .home-hot-news .hot-news-grid {
+  margin-top: 12px;
+}
+
+.solo-static .hot-news-grid--page {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.solo-static .hot-news-hero,
+.solo-static .hot-news-source,
+.solo-static .weekly-hero,
+.solo-static .weekly-grid > section {
+  padding: 18px;
+}
+
+.solo-static .hot-news-hero,
+.solo-static .weekly-hero {
+  margin-bottom: 14px;
+}
+
+.solo-static .hot-news-hero h2,
+.solo-static .hot-news-source h3,
+.solo-static .weekly-hero h2,
+.solo-static .weekly-grid h3,
+.solo-static .weekly-grid h4 {
+  color: #333;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.solo-static .weekly-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(260px, .8fr);
+}
+
+.solo-static .weekly-grid article {
+  border-top: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.solo-static .weekly-grid article:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.solo-static .weekly-grid ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.solo-static .weekly-grid li {
+  line-height: 1.65;
+  margin: 6px 0;
+}
+
+.solo-static .weekly-grid a {
+  color: #333;
+  text-decoration: none;
+}
+
+.solo-static .weekly-core-list p {
+  font-size: 13px;
+  margin: 4px 0 10px;
+}
+
+.solo-static .weekly-tutorial-card {
+  border-top: 1px solid #eee;
+  display: block;
+  padding: 12px 0;
+}
+
+.solo-static .weekly-tutorial-card:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.solo-static .weekly-tutorial-card strong,
+.solo-static .weekly-tutorial-card span {
+  display: block;
+}
+
+.solo-static .hot-news-source ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.solo-static .hot-news-source li {
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.solo-static .hot-news-source li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.solo-static .hot-news-source a {
+  color: #333;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  text-decoration: none;
+}
+
+.solo-static .hot-news-source a span {
+  background: #ff4d3a;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.solo-static .hot-news-source a strong {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.solo-static .hot-news-source p {
+  font-size: 13px;
+  margin: 6px 0 0 32px;
+}
+
+.solo-static .home-learning-path ol {
+  display: grid;
+  gap: 8px 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.solo-static .home-learning-path li {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.solo-static .home-recent-updates div,
+.solo-static .tutorial-route-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.solo-static .tutorial-route {
+  margin-bottom: 18px;
+}
+
+.solo-static .tutorial-route-grid article,
+.solo-static .tutorial-route-focus section {
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 14px;
+}
+
+.solo-static .tutorial-route-grid span {
+  color: #ff4d3a;
+  font-size: 12px;
+}
+
+.solo-static .tutorial-route-grid h4,
+.solo-static .tutorial-route-focus h4 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 6px 0 8px;
+}
+
+.solo-static .tutorial-route-grid ol,
+.solo-static .tutorial-route-focus ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.solo-static .tutorial-route-focus {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 14px;
+}
+
+.solo-static .search-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 14px;
+}
+
+.solo-static .search-filter-tabs button {
+  background: #f5f6f8;
+  border: 1px solid #e0e3e8;
+  color: #4c5563;
+  cursor: pointer;
+  line-height: 32px;
+  padding: 0 12px;
+}
+
+.solo-static .search-filter-tabs button.active {
+  background: #ff4d3a;
+  border-color: #ff4d3a;
+  color: #fff;
+}
+
+.solo-static .search-result-badge {
+  background: #4c5563;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0 8px 6px 0;
+  padding: 0 6px;
+  vertical-align: 2px;
+}
+
+.solo-static .search-result-badge--tutorial {
+  background: #ff4d3a;
+}
+
+.solo-static .search-result-badge--nav {
+  background: #2f7d68;
+}
+
+.solo-static mark {
+  background: rgba(255, 77, 58, .18);
+  color: inherit;
+  padding: 0 2px;
 }
 
 .solo-static .mysql-hero {
@@ -1492,6 +1962,21 @@ html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav h3 {
 
   .solo-static .tutorial-series-grid {
     grid-template-columns: 1fr;
+  }
+
+  .solo-static .home-portal-grid,
+  .solo-static .hot-news-grid,
+  .solo-static .hot-news-grid--page,
+  .solo-static .weekly-grid,
+  .solo-static .home-learning-path ol,
+  .solo-static .home-recent-updates div,
+  .solo-static .tutorial-route-grid,
+  .solo-static .tutorial-route-focus {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .home-portal-hero h2 {
+    font-size: 22px;
   }
 
   .solo-static .mysql-hero {

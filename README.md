@@ -712,3 +712,140 @@ pnpm build
 - 旧评论只读展示，不支持新评论提交。
 - 不迁移 Solo 后台、登录、动态实时交互和 Tomcat/JAR 运行时。
 - 图片默认保留原远程地址；`ROOT/images` 中的公共资源已复制到 VuePress public 目录。
+## 内容更新机制（推荐流程）
+
+### 实时新闻模块
+
+站点新增 `/news.html` 实时新闻页面，数据来源为 [orz-ai/hot_news](https://github.com/orz-ai/hot_news) 的公开 API。默认抓取百度热搜、微博、知乎、掘金、GitHub Trending、Hacker News、少数派和新浪财经。
+
+本地手动更新：
+
+```powershell
+pnpm fetch-hot-news
+pnpm update-content
+```
+
+也可以通过环境变量调整来源：
+
+```powershell
+$env:HOT_NEWS_PLATFORMS="zhihu,juejin,github,hackernews"
+pnpm update-content
+```
+
+GitHub Actions 已配置 `0 * * * *` 定时任务，会每小时执行一次 `pnpm update-content`，重新生成新闻数据、站点页面并部署到服务器。服务器自建定时任务时，也可以每小时执行同一条命令。
+
+### 新增普通文章
+
+```powershell
+pnpm new-post "文章标题"
+```
+
+文章会创建到 `content/articles/年/月/日/`，重新生成后会自动进入：
+
+- 首页最新文章
+- 首页最近更新
+- 对应专题和标签页
+- 归档页
+- 搜索索引
+- RSS
+
+推荐发布命令：
+
+```powershell
+pnpm update-content
+git status
+git add content docs scripts package.json README.md
+git commit -m "update site content"
+git push
+```
+
+其中 `pnpm update-content` 会依次执行：
+
+```powershell
+pnpm migrate
+pnpm build
+```
+
+### 新增或修改教程
+
+教程源文件统一放在：
+
+```text
+content/tutorials/mysql
+content/tutorials/springboot4
+content/tutorials/netty
+```
+
+以后新增教程系列时，建议继续使用：
+
+```text
+content/tutorials/教程标识/
+```
+
+并在 `scripts/migrate-from-bolo.mjs` 的 `tutorialSeriesDefinitions` 中增加系列配置，包括标题、适合人群、前置要求、学习产出、实战项目和面试重点。执行 `pnpm update-content` 后，教程会同步进入教程中心、首页推荐、搜索索引和站点构建产物。
+
+### 内容入口说明
+
+首页现在不再只是文章列表，而是站点内容入口，包含：
+
+- 最新文章
+- 推荐教程
+- 热门专题
+- 学习路线
+- 最近更新
+
+搜索页支持按“全部 / 教程 / 博客 / 导航”筛选，搜索结果会显示所属专题或教程系列，并对关键词做高亮。
+## 近期运营动作
+
+### 提交 sitemap 到搜索引擎
+
+站点构建后会生成：
+
+```text
+https://jackssybin.cn/sitemap.xml
+https://jackssybin.cn/robots.txt
+```
+
+提交步骤：
+
+- 百度搜索资源平台：登录后添加 `jackssybin.cn`，完成站点验证，在“资源提交 / Sitemap”中提交 `https://jackssybin.cn/sitemap.xml`。
+- Google Search Console：添加域名资源或网址前缀资源，完成 DNS 或 HTML 验证，在“Sitemaps”中提交 `https://jackssybin.cn/sitemap.xml`。
+- 提交后重点观察：收录量、抓取异常、404 页面、核心教程页是否被索引。
+
+### GoAccess 每日报表
+
+服务器安装：
+
+```bash
+sudo apt update
+sudo apt install goaccess apache2-utils -y
+```
+
+生成日报：
+
+```bash
+sudo mkdir -p /var/www/jackssybin/admin
+sudo goaccess /var/log/nginx/access.log \
+  --log-format=COMBINED \
+  -o /var/www/jackssybin/admin/report.html
+```
+
+每天凌晨自动生成：
+
+```bash
+crontab -e
+```
+
+加入：
+
+```bash
+5 0 * * * goaccess /var/log/nginx/access.log --log-format=COMBINED -o /var/www/jackssybin/admin/report.html
+```
+
+建议用 Nginx basic auth 保护 `/admin/report.html`，避免公开访问数据。每周重点看：访问最多页面、404、搜索引擎爬虫、来源站点、移动端比例，并据此继续优化 3-5 篇文章。
+
+### 内容增长节奏
+
+- 每周维护 `/weekly.html`：自动汇总实时热点、核心文章和教程入口。
+- 每周基于 GoAccess 报表挑选 3-5 篇有访问或有潜力的旧文，补充摘要、导读、相关推荐和更清晰标题。
+- 每月重点打磨 1 个教程系列首页，例如 MySQL、Spring Boot 4、Netty。

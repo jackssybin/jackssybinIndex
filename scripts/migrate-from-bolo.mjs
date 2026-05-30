@@ -13,9 +13,10 @@ const navSourceDir = path.join(root, "content", "navigation");
 const navDataFile = path.join(navSourceDir, "webstack.yml");
 const navLogoSourceDir = path.join(navSourceDir, "logos");
 const navLogoPublicDir = path.join(publicDir, "nav-logos");
-const mysqlTutorialDir = path.join(root, "mysql_project_all", "111101");
-const springBoot4TutorialDir = path.join(root, "springboot4_project_all", "1223");
-const nettyTutorialDir = path.join(root, "netty_project_all", "1226");
+const mysqlTutorialDir = path.join(contentDir, "tutorials", "mysql");
+const springBoot4TutorialDir = path.join(contentDir, "tutorials", "springboot4");
+const nettyTutorialDir = path.join(contentDir, "tutorials", "netty");
+const hotNewsDataFile = path.join(contentDir, "hot-news.json");
 
 const tutorialSeriesDefinitions = [
   {
@@ -24,14 +25,19 @@ const tutorialSeriesDefinitions = [
     title: "MySQL教程",
     shortTitle: "MySQL",
     sourceDir: mysqlTutorialDir,
-    description: "MySQL从新手到专家完整教程，包含安装、SQL、索引、事务锁、日志备份、性能优化、主从高可用和故障排查。",
+    description: "MySQL 从新手到专家完整教程，覆盖安装、SQL、索引、事务锁、日志备份、性能优化、主从高可用和故障排查。",
     keywords: ["MySQL", "SQL", "索引优化", "事务", "binlog", "备份恢复", "性能优化"],
-    heroTitle: "MySQL从新手到专家完整教程",
+    heroTitle: "MySQL 从新手到专家完整教程",
     heroDescription: "系统学习 MySQL 安装配置、SQL 基础、索引优化、事务锁、日志备份、性能调优、主从高可用、监控诊断和实战面试。",
+    audience: "适合后端开发、数据库初学者、需要系统补齐 MySQL 基础与调优能力的工程师。",
+    prerequisites: ["掌握基本命令行操作", "了解至少一种后端语言", "能读懂基础 SQL"],
+    outcomes: ["能独立完成 MySQL 安装和常用 SQL 编写", "理解索引、事务、锁和日志体系", "能处理慢 SQL、备份恢复、高可用和常见线上故障"],
+    projectFocus: "建议完成一个包含用户、订单、库存、日志审计的业务库设计，并补充索引优化、备份恢复和读写分离演练。",
+    interviewFocus: "重点准备索引失效、事务隔离级别、MVCC、间隙锁、binlog/redo log/undo log、主从复制和分库分表。",
     quickLinks: [
-      ["快速开始指南.md", "快速开始"],
-      ["MySQL学习路线图.md", "学习路线图"],
-      ["学习进度检查清单.md", "进度检查"]
+      ["mysql.md", "学习路线图"],
+      ["01/01-mysql.md", "从安装开始"],
+      ["09/32.md", "面试题精选"]
     ]
   },
   {
@@ -42,12 +48,17 @@ const tutorialSeriesDefinitions = [
     sourceDir: springBoot4TutorialDir,
     description: "Spring Boot 4 系列教程，覆盖框架新特性、Web、数据访问、安全、可观测性、云原生、性能优化和迁移实践。",
     keywords: ["Spring Boot 4", "Spring Framework 7", "Spring Security 7", "GraalVM", "虚拟线程", "云原生"],
-    heroTitle: "Spring Boot 4完整教程",
+    heroTitle: "Spring Boot 4 完整教程",
     heroDescription: "系统整理 Spring Boot 4、Spring Framework 7、Spring Security 7、云原生、GraalVM、性能优化和从 Boot 3 迁移的完整学习路径。",
+    audience: "适合有 Java/Spring 基础、准备升级 Spring Boot 3/4 或搭建新后端项目的开发者。",
+    prerequisites: ["熟悉 Java 基础和 Maven/Gradle", "了解 Spring MVC 或 REST API", "具备基础数据库和 HTTP 知识"],
+    outcomes: ["理解 Spring Boot 4 的核心变化", "能完成 Web、数据、安全、消息和观测能力集成", "能制定从 Boot 3 到 Boot 4 的迁移清单"],
+    projectFocus: "建议完成一个带登录认证、REST API、数据库访问、Kafka 消息、指标监控和容器部署的后端服务。",
+    interviewFocus: "重点准备自动配置、Bean 生命周期、事务、WebFlux/MVC 差异、Spring Security、可观测性和 GraalVM Native Image。",
     quickLinks: [
-      ["快速导航.md", "快速导航"],
-      ["README.md", "教程首页"],
-      ["附录/附录D-迁移检查清单.md", "迁移清单"]
+      ["E7_AC_AC_E4_B8_80_E9_83_A8_E5_88_86-_E6_A6_82_E8_A7_88/1-springboot4.md", "框架概览"],
+      ["E9_99_84_E5_BD_95/a-boot3vs4.md", "Boot 3 vs 4"],
+      ["E9_99_84_E5_BD_95/d.md", "迁移清单"]
     ]
   },
   {
@@ -58,12 +69,17 @@ const tutorialSeriesDefinitions = [
     sourceDir: nettyTutorialDir,
     description: "Netty 系列教程，覆盖网络编程基础、核心组件、ByteBuf、编解码、粘包拆包、线程模型、性能优化和实战项目。",
     keywords: ["Netty", "Java NIO", "网络编程", "ByteBuf", "编解码器", "粘包拆包", "EventLoop", "高性能"],
-    heroTitle: "Netty完整教程",
+    heroTitle: "Netty 完整教程",
     heroDescription: "系统学习 Netty 网络编程、核心组件、缓冲区、编解码、协议支持、EventLoop 线程模型、零拷贝、高性能优化和实战项目。",
+    audience: "适合 Java 后端、即时通信、网关、RPC、中间件和高性能网络编程方向的开发者。",
+    prerequisites: ["掌握 Java 基础和多线程", "了解 Socket/TCP/IP 基础", "最好读过 Java NIO 的基本概念"],
+    outcomes: ["理解 Channel、Pipeline、Handler、ByteBuf 和 EventLoop", "能处理编解码、粘包拆包、心跳和连接管理", "能设计一个简单协议并完成 Netty 服务端/客户端"],
+    projectFocus: "建议完成一个支持登录、心跳、消息编解码和连接管理的即时通信或 RPC Demo。",
+    interviewFocus: "重点准备 Reactor 模型、EventLoop、ByteBuf 内存管理、零拷贝、粘包拆包、心跳检测和性能调优。",
     quickLinks: [
-      ["第一部分-基础入门/第1章-Netty简介与环境搭建.md", "环境搭建"],
-      ["第一部分-基础入门/第3章-Netty核心组件.md", "核心组件"],
-      ["第二部分-核心特性/第10章-EventLoop与线程模型.md", "线程模型"]
+      ["E7_AC_AC_E4_B8_80_E9_83_A8_E5_88_86-_E5_9F_BA_E7_A1_80_E5_85_A5_E9_97_A8/1-netty.md", "环境搭建"],
+      ["E7_AC_AC_E4_B8_80_E9_83_A8_E5_88_86-_E5_9F_BA_E7_A1_80_E5_85_A5_E9_97_A8/3-netty.md", "核心组件"],
+      ["E7_AC_AC_E4_BA_8C_E9_83_A8_E5_88_86-_E6_A0_B8_E5_BF_83_E7_89_B9_E6_80_A7/10-eventloop.md", "线程模型"]
     ]
   }
 ];
@@ -320,8 +336,19 @@ function markdownToHtml(source = "") {
   return md.render(String(source));
 }
 
-function stripMarkdown(source = "") {
+function stripFrontmatter(source = "") {
+  return String(source).replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/u, "").trim();
+}
+
+function stripHtml(source = "") {
   return String(source)
+    .replace(/<script[\s\S]*?<\/script>/giu, " ")
+    .replace(/<style[\s\S]*?<\/style>/giu, " ")
+    .replace(/<[^>]+>/gu, " ");
+}
+
+function stripMarkdown(source = "") {
+  return stripHtml(source)
     .replace(/^---[\s\S]*?---\s*/u, "")
     .replace(/```[\s\S]*?```/gu, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/gu, "")
@@ -392,6 +419,8 @@ function logoPath(logo = "") {
 }
 
 function slugifyAscii(value = "") {
+  const raw = String(value);
+  if (/^[A-Za-z0-9_]+(?:-[A-Za-z0-9_]+)*$/u.test(raw)) return raw;
   const ascii = String(value)
     .toLowerCase()
     .replace(/['"]/gu, "")
@@ -491,6 +520,19 @@ async function writePage(permalink, title, html, seo = {}) {
   await fs.writeFile(file, pageDocument(title, permalink, pageId, seo), "utf8");
 }
 
+async function writeFileRetry(file, content, encoding = "utf8", retries = 6) {
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      await fs.writeFile(file, content, encoding);
+      return;
+    } catch (error) {
+      const transient = ["UNKNOWN", "EBUSY", "EPERM", "EACCES"].includes(error.code);
+      if (!transient || attempt === retries) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 250 * (attempt + 1)));
+    }
+  }
+}
+
 async function resetGeneratedDocs() {
   const entries = await fs.readdir(docsDir, { withFileTypes: true }).catch(() => []);
   for (const entry of entries) {
@@ -520,6 +562,8 @@ function makeHeader({ blogTitle, blogSubtitle, pages }) {
                 <a href="/"><i class="icon-home"></i> 首页</a>
                 ${navPages}
                 <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
+                <a href="/news.html" rel="section"><i class="icon-list"></i> 实时新闻</a>
+                <a href="/weekly.html" rel="section"><i class="icon-list"></i> 每周精选</a>
                 <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
                 <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
                 <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
@@ -567,7 +611,7 @@ function makeArticleCard(article) {
     <header>
         <h2>
             ${core}
-            <a rel="bookmark" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleTitle)}</a>
+            <a rel="bookmark" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a>
             ${article.hasUpdated ? `<sup><a href="${escapeAttr(article.articlePermalink)}">有更新！</a></sup>` : ""}
         </h2>
         <div class="meta">
@@ -684,7 +728,7 @@ function makeRelatedArticles(article, site) {
     <h3>同专题推荐</h3>
     <ul>
       ${related.map((item) => `<li>
-        <a href="${escapeAttr(item.articlePermalink)}">${item.coreEnhancement ? `<span>核心</span>` : ""}${escapeHtml(item.articleTitle)}</a>
+        <a href="${escapeAttr(item.articlePermalink)}">${item.coreEnhancement ? `<span>核心</span>` : ""}${escapeHtml(item.articleSeoTitle || item.articleTitle)}</a>
         <em>${formatDate(item.articleCreated)}</em>
       </li>`).join("\n")}
     </ul>
@@ -706,7 +750,7 @@ function makeArticlePage(article, site, prev, next, commentsByArticle) {
   const inner = `<main>
     <article class="post post--detail">
         <header>
-            <h2><a rel="bookmark" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleTitle)}</a></h2>
+            <h2><a rel="bookmark" href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a></h2>
             <div class="meta">
                 <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="${article.hasUpdated ? "更新日期" : "创建日期"}">
                     <i class="icon-date"></i>
@@ -743,9 +787,72 @@ function makePagination(currentPage, pageCount, basePath = "/") {
   return `<div class="fn-clear"><nav class="pagination fn-right">${items.join("\n")}</nav></div>`;
 }
 
+function makeHomeEntrance(site, pageArticles) {
+  const latest = site.articles.slice(0, 5);
+  const recommendedTutorials = (site.tutorialSeriesList || []).slice(0, 3);
+  const hotTopics = topicDefinitions
+    .map((topic) => ({
+      ...topic,
+      count: site.articles.filter((article) => article.topic?.slug === topic.slug).length
+    }))
+    .filter((topic) => topic.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 6);
+  const coreArticles = site.articles
+    .filter((article) => article.coreEnhancement)
+    .sort(compareArticlesForTopic)
+    .slice(0, 6);
+  const recentUpdates = [...latest, ...recommendedTutorials.flatMap((series) => series.tutorials.slice(0, 1))]
+    .slice(0, 6);
+
+  return `<section class="home-portal">
+      <div class="home-portal-hero">
+        <span>内容入口</span>
+        <h2>从博客沉淀到系统教程的技术知识库</h2>
+        <p>这里汇总历史技术笔记、专题阅读路线、系统教程和常用导航。可以按最新文章浏览，也可以直接进入教程中心或专题路线学习。</p>
+        <div>
+          <a href="/tutorials.html">进入教程中心</a>
+          <a href="/topics.html">查看专题路线</a>
+          <a href="/search.html">全站搜索</a>
+        </div>
+      </div>
+      ${makeHotNewsWidget(site.hotNews)}
+      <div class="home-portal-grid">
+        <section>
+          <h3>最新文章</h3>
+          ${latest.map((article) => `<a href="${escapeAttr(article.articlePermalink)}"><strong>${escapeHtml(article.articleSeoTitle || article.articleTitle)}</strong><span>${formatDate(article.articleCreated)}</span></a>`).join("\n")}
+        </section>
+        <section>
+          <h3>推荐教程</h3>
+          ${recommendedTutorials.map((series) => `<a href="/${escapeAttr(series.slug)}.html"><strong>${escapeHtml(series.shortTitle || series.title)}</strong><span>${series.tutorials.length} 篇教程</span></a>`).join("\n")}
+        </section>
+        <section>
+          <h3>热门专题</h3>
+          ${hotTopics.map((topic) => `<a href="/topics/${escapeAttr(topic.slug)}.html"><strong>${escapeHtml(topic.title)}</strong><span>${topic.count} 篇文章</span></a>`).join("\n")}
+        </section>
+      </div>
+      <section class="home-learning-path">
+        <h3>学习路线</h3>
+        <ol>
+          ${coreArticles.map((article) => `<li><a href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a><span>${escapeHtml(article.topic?.title || "技术笔记")}</span></li>`).join("\n")}
+        </ol>
+      </section>
+      <section class="home-recent-updates">
+        <h3>最近更新</h3>
+        <div>
+          ${recentUpdates.map((item) => item.articlePermalink
+            ? `<a href="${escapeAttr(item.articlePermalink)}"><strong>${escapeHtml(item.articleSeoTitle || item.articleTitle)}</strong><span>文章 / ${formatDate(item.articleCreated)}</span></a>`
+            : `<a href="${escapeAttr(item.permalink)}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.seriesTitle || "教程")}</span></a>`).join("\n")}
+        </div>
+      </section>
+    </section>`;
+}
+
 function makeHomePage(pageArticles, site, currentPage, pageCount) {
+  const entrance = currentPage === 1 ? makeHomeEntrance(site, pageArticles) : "";
   const inner = `<main>
     <div>
+        ${entrance}
         ${pageArticles.map(makeArticleCard).join("\n")}
         ${makePagination(currentPage, pageCount)}
     </div>
@@ -797,7 +904,7 @@ function makeTopicOverviewPage(topics, site) {
         <h3><a href="/topics/${topic.slug}.html">${escapeHtml(topic.title)}</a></h3>
         <p>${escapeHtml(topic.description)}</p>
         <ol class="topic-roadmap">
-          ${topic.articles.slice(0, 4).map((article) => `<li><a href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleTitle)}</a></li>`).join("\n")}
+          ${topic.articles.slice(0, 4).map((article) => `<li><a href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a></li>`).join("\n")}
         </ol>
         <span>${topic.articles.length} 篇文章</span>
       </section>`).join("\n")}
@@ -812,7 +919,7 @@ function makeTopicRoadmap(topic) {
     <h3>推荐阅读顺序</h3>
     <ol>
       ${starter.map((article) => `<li>
-        <a href="${escapeAttr(article.articlePermalink)}">${article.coreEnhancement ? `<span>核心</span>` : ""}${escapeHtml(article.articleTitle)}</a>
+        <a href="${escapeAttr(article.articlePermalink)}">${article.coreEnhancement ? `<span>核心</span>` : ""}${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a>
         <p>${escapeHtml(article.articleGuide || article.articleSeoDescription || "")}</p>
       </li>`).join("\n")}
     </ol>
@@ -824,6 +931,37 @@ async function readNavData() {
   if (!source.trim()) return [];
   const parsed = YAML.parse(source) || [];
   return parsed.filter((section) => section && section.taxonomy);
+}
+
+async function readHotNewsData() {
+  const source = await fs.readFile(hotNewsDataFile, "utf8").catch(() => "");
+  if (!source.trim()) {
+    return {
+      generatedAt: "",
+      source: "https://github.com/orz-ai/hot_news",
+      api: "https://orz.ai/api/v1/dailynews/",
+      groups: [],
+      errors: []
+    };
+  }
+  try {
+    const parsed = JSON.parse(source);
+    return {
+      generatedAt: parsed.generatedAt || "",
+      source: parsed.source || "https://github.com/orz-ai/hot_news",
+      api: parsed.api || "https://orz.ai/api/v1/dailynews/",
+      groups: Array.isArray(parsed.groups) ? parsed.groups : [],
+      errors: Array.isArray(parsed.errors) ? parsed.errors : []
+    };
+  } catch {
+    return {
+      generatedAt: "",
+      source: "https://github.com/orz-ai/hot_news",
+      api: "https://orz.ai/api/v1/dailynews/",
+      groups: [],
+      errors: []
+    };
+  }
 }
 
 function flattenNavLinks(navSections) {
@@ -854,6 +992,99 @@ function makeNavCards(links) {
       <em>${escapeHtml(link.description || link.url)}</em>
     </span>
   </a>`).join("\n");
+}
+
+function formatHotNewsGeneratedAt(value = "") {
+  if (!value) return "尚未生成";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleString("zh-CN", { hour12: false });
+}
+
+function makeHotNewsCards(groups = [], limitPerGroup = 8) {
+  return groups
+    .filter((group) => group.items?.length > 0)
+    .map((group) => `<section class="hot-news-source">
+      <h3>${escapeHtml(group.platformName || group.platform)}</h3>
+      <ol>
+        ${group.items.slice(0, limitPerGroup).map((item) => `<li>
+          <a href="${escapeAttr(item.url)}" target="_blank" rel="noopener nofollow">
+            <span>${item.rank || ""}</span>
+            <strong>${escapeHtml(item.title)}</strong>
+          </a>
+          ${item.content ? `<p>${escapeHtml(item.content).slice(0, 120)}</p>` : ""}
+        </li>`).join("\n")}
+      </ol>
+    </section>`)
+    .join("\n");
+}
+
+function makeHotNewsWidget(hotNews) {
+  const groups = (hotNews?.groups || []).filter((group) => group.items?.length > 0).slice(0, 4);
+  if (groups.length === 0) return "";
+  return `<section class="home-hot-news">
+    <div>
+      <h3>实时热点</h3>
+      <a href="/news.html">查看全部 &raquo;</a>
+    </div>
+    <p>每小时从 orz-ai/hot_news 聚合一次，更新时间：${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</p>
+    <div class="hot-news-grid">${makeHotNewsCards(groups, 5)}</div>
+  </section>`;
+}
+
+function makeHotNewsPage(hotNews, site) {
+  const groups = (hotNews?.groups || []).filter((group) => group.items?.length > 0);
+  const body = `<section class="hot-news-page">
+    <div class="hot-news-hero">
+      <h2>实时新闻</h2>
+      <p>内容来源于 <a href="${escapeAttr(hotNews.source || "https://github.com/orz-ai/hot_news")}" target="_blank" rel="noopener">orz-ai/hot_news</a>，本站按静态站方式每小时生成一次，用来快速浏览技术、财经、社区和综合热点。</p>
+      <span>最后生成：${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</span>
+    </div>
+    ${groups.length > 0 ? `<div class="hot-news-grid hot-news-grid--page">${makeHotNewsCards(groups, 20)}</div>` : `<p class="ft-gray">暂时没有抓取到新闻数据。</p>`}
+  </section>`;
+  return makeOtherPage("实时新闻", "icon-list", body, site);
+}
+
+function makeWeeklyPage(site) {
+  const hotNewsGroups = (site.hotNews?.groups || []).filter((group) => group.items?.length > 0).slice(0, 4);
+  const coreArticles = site.articles
+    .filter((article) => article.coreEnhancement)
+    .sort(compareArticlesForTopic)
+    .slice(0, 8);
+  const tutorials = (site.tutorialSeriesList || []).slice(0, 3);
+  const body = `<section class="weekly-page">
+    <div class="weekly-hero">
+      <h2>每周精选</h2>
+      <p>把实时热点、站内核心文章和系统教程放在一起，方便每周快速回看技术趋势，也给读者一个更稳定的学习入口。</p>
+      <span>新闻数据更新时间：${escapeHtml(formatHotNewsGeneratedAt(site.hotNews?.generatedAt))}</span>
+    </div>
+    <div class="weekly-grid">
+      <section>
+        <h3>本周技术热点</h3>
+        ${hotNewsGroups.map((group) => `<article>
+          <h4>${escapeHtml(group.platformName || group.platform)}</h4>
+          <ol>${group.items.slice(0, 5).map((item) => `<li><a href="${escapeAttr(item.url)}" target="_blank" rel="noopener nofollow">${escapeHtml(item.title)}</a></li>`).join("\n")}</ol>
+        </article>`).join("\n")}
+      </section>
+      <section>
+        <h3>站内推荐阅读</h3>
+        <ol class="weekly-core-list">
+          ${coreArticles.map((article) => `<li>
+            <a href="${escapeAttr(article.articlePermalink)}">${escapeHtml(article.articleSeoTitle || article.articleTitle)}</a>
+            <p>${escapeHtml(article.articleGuide || article.articleSeoDescription || "")}</p>
+          </li>`).join("\n")}
+        </ol>
+      </section>
+      <section>
+        <h3>教程路线</h3>
+        ${tutorials.map((series) => `<a class="weekly-tutorial-card" href="/${escapeAttr(series.slug)}.html">
+          <strong>${escapeHtml(series.title)}</strong>
+          <span>${series.tutorials.length} 篇教程 / ${escapeHtml(series.audience || "系统学习路线")}</span>
+        </a>`).join("\n")}
+      </section>
+    </div>
+  </section>`;
+  return makeOtherPage("每周精选", "icon-list", body, site);
 }
 
 function makeNavPage(navSections, site) {
@@ -909,9 +1140,28 @@ async function walkMarkdownFiles(dir) {
 }
 
 function tutorialTitle(source, file) {
+  const frontmatterTitle = String(source).match(/^title:\s*["']?(.+?)["']?\s*$/mu)?.[1]?.trim();
+  if (frontmatterTitle) return frontmatterTitle.replace(/\s+-\s+jackssybin.*$/u, "").replace(/\s+-\s+.*教程$/u, "").trim();
   const heading = String(source).match(/^#\s+(.+)$/mu)?.[1]?.trim();
   if (heading) return heading.replace(/[#*`]/gu, "").trim();
   return path.basename(file, ".md").replace(/^\d+[-_]/u, "");
+}
+
+async function extractSoloPageBody(source) {
+  const pageId = String(source).match(/<SoloPage\s+id=["']([^"']+)["']\s*\/>/u)?.[1];
+  if (!pageId) return source;
+  const pageFile = path.join(docsDir, ".vuepress", "page-data", `${pageId}.ts`);
+  const moduleSource = await fs.readFile(pageFile, "utf8").catch(() => "");
+  const json = moduleSource.match(/export default\s+(.+);\s*$/su)?.[1];
+  if (!json) return source;
+  try {
+    const html = JSON.parse(json);
+    const content = html.match(/<div[^>]*class="[^"]*post__content[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<footer/u)?.[1]
+      || html.match(/<div[^>]*class="[^"]*post__content[^"]*"[^>]*>([\s\S]*?)<\/div>/u)?.[1];
+    return content || html;
+  } catch {
+    return source;
+  }
 }
 
 function tutorialPermalink(relativePath, series) {
@@ -920,10 +1170,21 @@ function tutorialPermalink(relativePath, series) {
   return `/${series.slug}/${clean.split("/").map((part) => slugifyAscii(part)).join("/")}.html`;
 }
 
+function decodeHexPathSegment(value = "") {
+  return String(value).replace(/(?:[0-9A-Fa-f]{2}_){2,}[0-9A-Fa-f]{2}/gu, (match) => {
+    try {
+      const bytes = Uint8Array.from(match.split("_").map((part) => Number.parseInt(part, 16)));
+      return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+    } catch {
+      return match;
+    }
+  });
+}
+
 function tutorialGroup(relativePath) {
   const parts = relativePath.replace(/\\/gu, "/").split("/");
   if (parts.length === 1) return "入门导航";
-  return parts[0].replace(/^\d+[-_]/u, "");
+  return decodeHexPathSegment(parts[0].replace(/^\d+[-_]/u, ""));
 }
 
 function chineseSectionNumber(value = "") {
@@ -987,11 +1248,13 @@ async function readTutorialSeries(series) {
   for (const file of files) {
     const relativePath = path.relative(series.sourceDir, file).replace(/\\/gu, "/");
     const source = await fs.readFile(file, "utf8");
+    const bodySource = await extractSoloPageBody(source);
     tutorials.push({
       file,
       relativePath,
       title: tutorialTitle(source, file),
       source,
+      bodySource,
       group: tutorialGroup(relativePath),
       permalink: tutorialPermalink(relativePath, series),
       seriesId: series.id,
@@ -1009,7 +1272,7 @@ async function readTutorialSeries(series) {
   }
   const tutorialMaps = { byRelative, byBasename };
   for (const item of tutorials) {
-    item.body = rewriteTutorialLinks(item.source, item.relativePath, tutorialMaps);
+    item.body = stripFrontmatter(rewriteTutorialLinks(item.bodySource || item.source, item.relativePath, tutorialMaps));
     item.excerpt = excerptText(item.body, 180);
     item.content = stripMarkdown(item.body).slice(0, 4000);
   }
@@ -1033,12 +1296,48 @@ function makeTutorialNav(tutorials, currentPermalink = "", series = { title: "�
   }
   return `<aside class="mysql-tutorial-nav tutorial-series-nav">
     <h3>${escapeHtml(series.title)}目录</h3>
-    <h3>MySQL教程目录</h3>
     ${[...groups.entries()].map(([group, items]) => `<section>
       <h4>${escapeHtml(group)}</h4>
       ${items.map((item) => `<a class="${item.permalink === currentPermalink ? "current" : ""}" href="${escapeAttr(item.permalink)}">${escapeHtml(item.title)}</a>`).join("\n")}
     </section>`).join("\n")}
   </aside>`;
+}
+
+function makeTutorialLearningRoute(tutorials, series) {
+  const groups = new Map();
+  for (const item of tutorials.filter((tutorial) => tutorial.permalink !== `/${series.slug}.html`)) {
+    if (!groups.has(item.group)) groups.set(item.group, []);
+    groups.get(item.group).push(item);
+  }
+  return `<section class="tutorial-route">
+    <div class="tutorial-route-intro">
+      <h3>统一学习路线</h3>
+      <p><strong>适合人群：</strong>${escapeHtml(series.audience || "适合希望系统学习该技术方向的开发者。")}</p>
+      <p><strong>前置要求：</strong>${(series.prerequisites || []).map(escapeHtml).join("、")}</p>
+    </div>
+    <div class="tutorial-route-grid">
+      ${[...groups.entries()].map(([group, items], index) => `<article>
+        <span>第 ${index + 1} 阶段</span>
+        <h4>${escapeHtml(group)}</h4>
+        <p>建议按目录顺序阅读 ${items.length} 篇内容，完成后应能掌握本阶段的核心概念、常见使用方式和排错入口。</p>
+        <ol>${items.slice(0, 5).map((item) => `<li><a href="${escapeAttr(item.permalink)}">${escapeHtml(item.title)}</a></li>`).join("\n")}</ol>
+      </article>`).join("\n")}
+    </div>
+    <div class="tutorial-route-focus">
+      <section>
+        <h4>学完能掌握什么</h4>
+        <ul>${(series.outcomes || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("\n")}</ul>
+      </section>
+      <section>
+        <h4>实战项目</h4>
+        <p>${escapeHtml(series.projectFocus || "建议围绕真实业务场景完成一个小型项目，串联主要知识点。")}</p>
+      </section>
+      <section>
+        <h4>面试重点</h4>
+        <p>${escapeHtml(series.interviewFocus || "重点关注核心概念、原理边界、性能优化和线上问题排查。")}</p>
+      </section>
+    </div>
+  </section>`;
 }
 
 function makeMysqlOverviewPage(tutorials, site) {
@@ -1110,6 +1409,7 @@ function makeTutorialSeriesOverviewPage(tutorials, site, series) {
     <section class="mysql-course tutorial-series">
       ${makeTutorialNav(tutorials, `/${series.slug}.html`, series)}
       <main class="mysql-course-main">
+        ${makeTutorialLearningRoute(tutorials, series)}
         <div class="mysql-chapter-grid">${chapterItems}</div>
       </main>
     </section>`;
@@ -1195,7 +1495,7 @@ function makeRss(articles, options) {
   const blogTitle = options.blogTitle || "jackssybin 的个人博客";
   const blogSubtitle = options.blogSubtitle || "记录精彩的程序人生";
   const items = articles.slice(0, Number(options.feedOutputCnt || 10)).map((article) => `<item>
-    <title>${escapeHtml(article.articleTitle)}</title>
+    <title>${escapeHtml(article.articleSeoTitle || article.articleTitle)}</title>
     <link>https://jackssybin.cn${escapeHtml(article.articlePermalink)}</link>
     <guid>https://jackssybin.cn${escapeHtml(article.articlePermalink)}</guid>
     <pubDate>${new Date(Number(article.articleCreated)).toUTCString()}</pubDate>
@@ -1261,6 +1561,10 @@ async function main() {
     article.topic = article.coreEnhancement?.topicSlug
       ? topicsBySlug.get(article.coreEnhancement.topicSlug) || resolveTopic(article)
       : resolveTopic(article);
+    article.articleSeoTitle = article.coreEnhancement?.seoTitle || article.coreEnhancement?.title || article.articleTitle;
+    if (article.coreEnhancement?.summary) {
+      article.articleSeoDescription = article.coreEnhancement.seoDescription || article.coreEnhancement.summary;
+    }
     article.articleGuide = buildArticleGuide(article);
   }
 
@@ -1301,7 +1605,9 @@ async function main() {
   const navLinks = flattenNavLinks(navSections);
   const tutorialSeriesList = await readTutorialSeriesList();
   const allTutorials = tutorialSeriesList.flatMap((series) => series.tutorials);
+  const hotNews = await readHotNewsData();
   site.tutorialSeriesList = tutorialSeriesList;
+  site.hotNews = hotNews;
 
   await resetGeneratedDocs();
   await fs.rm(navLogoPublicDir, { recursive: true, force: true });
@@ -1321,7 +1627,7 @@ async function main() {
     const next = articles[index - 1];
     await writePage(
       article.articlePermalink,
-      `${article.articleTitle} - ${site.blogTitle}`,
+      `${article.articleSeoTitle || article.articleTitle} - ${site.blogTitle}`,
       makeArticlePage(article, site, prev, next, commentsByArticle),
       {
         description: article.articleSeoDescription,
@@ -1389,6 +1695,16 @@ async function main() {
     description: "jackssybin 个人技术博客的内容方向、技术栈、专题路线图和维护说明。"
   });
 
+  await writePage("/news.html", `实时新闻 - ${site.blogTitle}`, makeHotNewsPage(hotNews, site), {
+    description: "jackssybin 实时新闻模块，每小时从 orz-ai/hot_news 聚合热点新闻、技术社区和开源趋势。",
+    keywords: ["实时新闻", "热点", "GitHub Trending", "知乎热榜", "掘金", "Hacker News"]
+  });
+
+  await writePage("/weekly.html", `每周精选 - ${site.blogTitle}`, makeWeeklyPage(site), {
+    description: "jackssybin 每周精选，汇总实时热点、核心文章和教程路线，帮助读者按周回看技术趋势与站内重点内容。",
+    keywords: ["每周精选", "技术热点", "推荐阅读", "教程路线", "核心文章"]
+  });
+
   if (navSections.length > 0) {
     await writePage("/nav.html", `网址导航 - ${site.blogTitle}`, makeNavPage(navSections, site), {
       description: "jackssybin 网址导航，收集 AI 工具、开发资源、学习资料、实用工具和常用站点。"
@@ -1427,6 +1743,7 @@ async function main() {
   );
 
   await fs.writeFile(path.join(publicDir, "rss.xml"), makeRss(articles, options), "utf8");
+  await fs.writeFile(path.join(publicDir, "hot-news.json"), JSON.stringify(hotNews, null, 2), "utf8");
   const pageDataDir = path.join(docsDir, ".vuepress", "page-data");
   await fs.rm(pageDataDir, { recursive: true, force: true });
   await fs.mkdir(pageDataDir, { recursive: true });
@@ -1437,19 +1754,22 @@ async function main() {
       "utf8"
     );
   }
-  await fs.writeFile(
+  await writeFileRetry(
     path.join(docsDir, ".vuepress", "page-data.ts"),
     `export const pages: Record<string, () => Promise<{ default: string }>> = {\n${pageData.map((page) => `  ${JSON.stringify(page.id)}: () => import("./page-data/${page.id}.js")`).join(",\n")}\n};\n`,
     "utf8"
   );
-  await fs.writeFile(
+  await writeFileRetry(
     path.join(docsDir, ".vuepress", "search-index.ts"),
     `export const searchIndex = ${JSON.stringify(articles.map((article) => ({
-      title: article.articleTitle,
+      title: article.articleSeoTitle || article.articleTitle,
       url: article.articlePermalink,
+      type: "blog",
       date: formatDate(article.articleCreated),
       topic: article.topic.title,
+      topicSlug: article.topic.slug,
       core: Boolean(article.coreEnhancement),
+      priority: article.coreEnhancement ? 80 : 20,
       readingOrder: article.coreEnhancement?.order || 999,
       tags: splitTags(article.articleTags),
       excerpt: article.articleSeoDescription || article.articleAbstractText || "",
@@ -1460,6 +1780,8 @@ async function main() {
 export const navIndex = ${JSON.stringify(navLinks.map((link) => ({
       title: link.title,
       url: link.url,
+      type: "nav",
+      priority: 10,
       taxonomy: link.taxonomy,
       term: link.term,
       description: link.description || ""
@@ -1468,7 +1790,10 @@ export const navIndex = ${JSON.stringify(navLinks.map((link) => ({
 export const tutorialIndex = ${JSON.stringify(allTutorials.map((item) => ({
       title: item.title,
       url: item.permalink,
+      type: "tutorial",
+      priority: item.permalink === `/${item.seriesSlug}.html` ? 90 : 60,
       series: item.seriesTitle,
+      seriesSlug: item.seriesSlug,
       group: item.group,
       excerpt: item.excerpt,
       content: item.content
@@ -1488,6 +1813,9 @@ export const tutorialIndex = ${JSON.stringify(allTutorials.map((item) => ({
     navLinks: navLinks.length,
     tutorialSeries: tutorialSeriesList.length,
     tutorials: allTutorials.length,
+    hotNewsSources: hotNews.groups.filter((group) => group.items?.length > 0).length,
+    hotNewsItems: hotNews.groups.reduce((total, group) => total + (group.items?.length || 0), 0),
+    weeklyPage: true,
     pages: pageRows.length,
     links: linkRows.length,
     generatedAt: new Date().toISOString()

@@ -5,11 +5,11 @@
   <link>https://jackssybin.cn/</link>
   <description>记录精彩的程序人生</description>
   <item>
-    <title>我把一个老 Solo/Bolo 博客迁成了 VuePress 静态站：完整迁移手册</title>
+    <title>老博客静态化迁移实战</title>
     <link>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</link>
     <guid>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</guid>
     <pubDate>Wed, 27 May 2026 16:00:00 GMT</pubDate>
-    <description><![CDATA[先说背景：我手上有一个运行多年的个人博客 jackssybin.cn，原来是 Solo/Bolo 系统，通过 Tomcat 部署，数据在 MySQL 里。后来我希望把它迁成一个更轻、更容易维护的静态站：文章继续保留，旧链接尽量不失效，样式尽量接近原站，但不再依赖 Tomcat、后台和数据库服务。 这篇文章记录的是一次完...]]></description>
+    <description><![CDATA[这篇文章适合作为本站建设路线的入口，重点看如何把 Solo/Bolo 的数据库、皮肤、旧链接和静态站构建流程拆开处理。]]></description>
   </item>
 <item>
     <title>LocalDateTime操作</title>
@@ -19,18 +19,18 @@
     <description><![CDATA[1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...]]></description>
   </item>
 <item>
-    <title>MySQL Transaction--RR事务隔离级别下加锁测试</title>
+    <title>MySQL RR 隔离级别锁测试</title>
     <link>https://jackssybin.cn/articles/2021/06/08/1623116860957.html</link>
     <guid>https://jackssybin.cn/articles/2021/06/08/1623116860957.html</guid>
     <pubDate>Tue, 08 Jun 2021 01:47:41 GMT</pubDate>
-    <description><![CDATA[============================================================================== 按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c...]]></description>
+    <description><![CDATA[这篇文章是 MySQL 事务与锁专题的核心实验记录，适合用来理解 RR 隔离级别下非索引更新、删除操作为什么会扩大锁范围。]]></description>
   </item>
 <item>
-    <title>springBoot启动扩展点精析</title>
+    <title>Spring Boot 启动扩展点</title>
     <link>https://jackssybin.cn/articles/2021/05/14/1620960509044.html</link>
     <guid>https://jackssybin.cn/articles/2021/05/14/1620960509044.html</guid>
     <pubDate>Fri, 14 May 2021 02:48:29 GMT</pubDate>
-    <description><![CDATA[1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...]]></description>
+    <description><![CDATA[这篇文章是 Spring Boot 专题的核心长文，适合系统梳理 Bean 生命周期、容器刷新过程和自动装配前后的扩展点。]]></description>
   </item>
 <item>
     <title>使用@ConditionalOnExpression决定是否生效</title>

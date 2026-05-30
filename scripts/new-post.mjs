@@ -49,19 +49,19 @@ comment: false
 
 # ${title}
 
-这里写文章摘要。建议第一段直接说明本文解决什么问题。
+这里写文章摘要。建议第一段直接说明本文解决什么问题、适合谁阅读。
 
 ## 背景
 
-这里写背景。
+这里写背景和问题来源。
 
 ## 正文
 
-这里写正文。
+这里写正文，可以加入代码块、表格、图片和步骤说明。
 
 ## 总结
 
-这里写总结。
+这里写本文结论、适用边界和后续阅读建议。
 `;
 
 try {
@@ -69,7 +69,7 @@ try {
   await fs.writeFile(articlePath, content, { encoding: "utf8", flag: "wx" });
   console.log(`Created: ${path.relative(root, articlePath)}`);
   console.log(`Permalink: ${permalink}`);
-  console.log("Next: pnpm migrate && pnpm dev --port 8080");
+  console.log("Next: pnpm update-content && pnpm dev --port 8080");
 } catch (error) {
   if (error.code === "EEXIST") {
     console.error(`File already exists: ${path.relative(root, articlePath)}`);

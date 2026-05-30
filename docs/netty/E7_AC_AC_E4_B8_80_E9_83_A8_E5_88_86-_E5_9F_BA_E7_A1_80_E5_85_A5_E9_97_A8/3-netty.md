@@ -5,7 +5,7 @@ description: "第3章：Netty 核心组件 本章导读 Netty 的强大之处在
 head:
   - - meta
     - name: keywords
-      content: "Netty,Java NIO,网络编程,ByteBuf,编解码器,粘包拆包,EventLoop,高性能,第一部分-基础入门,第3章：Netty 核心组件"
+      content: "Netty,Java NIO,网络编程,ByteBuf,编解码器,粘包拆包,EventLoop,高性能,第一部分-_基础入门,第3章：Netty 核心组件"
   - - meta
     - property: og:description
       content: "第3章：Netty 核心组件 本章导读 Netty 的强大之处在于其优雅的组件设计。本章将深入讲解 Netty 的五大核心组件：Channel、EventLoop、ChannelFuture、ChannelHandler 和 ChannelPipeline，理解这些组件是掌握 Netty 的关键。 3.1 Channel（通道） 3.1.1 Channel ..."
@@ -21,4 +21,4 @@ lastUpdated: false
 comment: false
 ---
 
-<SoloPage id="p416" />
+<SoloPage id="p418" />
