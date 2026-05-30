@@ -563,7 +563,6 @@ function makeHeader({ blogTitle, blogSubtitle, pages }) {
                 ${navPages}
                 <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
                 <a href="/news.html" rel="section"><i class="icon-list"></i> 实时新闻</a>
-                <a href="/weekly.html" rel="section"><i class="icon-list"></i> 每周精选</a>
                 <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
                 <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
                 <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
@@ -813,6 +812,7 @@ function makeHomeEntrance(site, pageArticles) {
         <div>
           <a href="/tutorials.html">进入教程中心</a>
           <a href="/topics.html">查看专题路线</a>
+          <a href="/weekly.html">每周精选</a>
           <a href="/search.html">全站搜索</a>
         </div>
       </div>
@@ -1019,16 +1019,29 @@ function makeHotNewsCards(groups = [], limitPerGroup = 8) {
     .join("\n");
 }
 
+function flattenHotNewsItems(hotNews, limit = 8) {
+  const items = [];
+  for (const group of (hotNews?.groups || []).filter((item) => item.items?.length > 0)) {
+    for (const item of group.items.slice(0, 2)) {
+      items.push({ ...item, platformName: group.platformName || group.platform });
+      if (items.length >= limit) return items;
+    }
+  }
+  return items;
+}
+
 function makeHotNewsWidget(hotNews) {
-  const groups = (hotNews?.groups || []).filter((group) => group.items?.length > 0).slice(0, 4);
-  if (groups.length === 0) return "";
+  const items = flattenHotNewsItems(hotNews, 8);
+  if (items.length === 0) return "";
   return `<section class="home-hot-news" data-hot-news-live="home">
     <div>
       <h3>实时热点</h3>
       <a href="/news.html">查看全部 &raquo;</a>
     </div>
-    <p>每小时从 orz-ai/hot_news 聚合一次，更新时间：${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</p>
-    <div class="hot-news-grid">${makeHotNewsCards(groups, 5)}</div>
+    <p>轻量展示，每小时更新：<span data-hot-news-time>${escapeHtml(formatHotNewsGeneratedAt(hotNews.generatedAt))}</span></p>
+    <ul class="home-hot-news-list" data-hot-news-list>
+      ${items.map((item) => `<li><span>${escapeHtml(item.platformName || item.source || "")}</span><a href="${escapeAttr(item.url)}" target="_blank" rel="noopener nofollow">${escapeHtml(item.title)}</a></li>`).join("\n")}
+    </ul>
     ${makeHotNewsClientScript()}
   </section>`;
 }
@@ -1051,6 +1064,17 @@ function makeHotNewsClientScript() {
     }).join("");
     return '<section class="hot-news-source"><h3>' + escapeHtml(group.platformName || group.platform) + '</h3><ol>' + items + '</ol></section>';
   }
+  function compactList(groups, limit) {
+    var items = [];
+    groups.forEach(function (group) {
+      (group.items || []).slice(0, 2).forEach(function (item) {
+        if (items.length < limit) items.push({ item: item, platformName: group.platformName || group.platform });
+      });
+    });
+    return items.map(function (entry) {
+      return '<li><span>' + escapeHtml(entry.platformName) + '</span><a href="' + escapeHtml(entry.item.url) + '" target="_blank" rel="noopener nofollow">' + escapeHtml(entry.item.title) + '</a></li>';
+    }).join("");
+  }
   fetch("/hot-news.json", { cache: "no-store" })
     .then(function (response) { return response.ok ? response.json() : null; })
     .then(function (data) {
@@ -1059,8 +1083,10 @@ function makeHotNewsClientScript() {
         var isHome = box.getAttribute("data-hot-news-live") === "home";
         var groups = data.groups.filter(function (group) { return group.items && group.items.length; }).slice(0, isHome ? 4 : 99);
         var grid = box.querySelector(".hot-news-grid");
+        var list = box.querySelector("[data-hot-news-list]");
         var time = box.querySelector("[data-hot-news-time]");
         if (grid) grid.innerHTML = groups.map(function (group) { return card(group, isHome ? 5 : 20); }).join("");
+        if (list) list.innerHTML = compactList(groups, 8);
         if (time) time.textContent = formatTime(data.generatedAt);
       });
     })

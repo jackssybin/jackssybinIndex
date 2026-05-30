@@ -914,12 +914,17 @@ html[data-solo-theme="dark"] .solo-static .tutorial-route-focus li {
 html[data-solo-theme="dark"] .solo-static .home-portal-grid a,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates a,
 html[data-solo-theme="dark"] .solo-static .home-learning-path li,
+html[data-solo-theme="dark"] .solo-static .home-hot-news-list li,
 html[data-solo-theme="dark"] .solo-static .hot-news-source li,
 html[data-solo-theme="dark"] .solo-static .weekly-grid article,
 html[data-solo-theme="dark"] .solo-static .weekly-tutorial-card,
 html[data-solo-theme="dark"] .solo-static .tutorial-route-grid article,
 html[data-solo-theme="dark"] .solo-static .tutorial-route-focus section {
   border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .home-hot-news-list a {
+  color: #f1f5fb;
 }
 
 html[data-solo-theme="dark"] .solo-static .tutorial-route-grid article,
@@ -1315,6 +1320,42 @@ html[data-solo-theme="dark"] .solo-static .footer {
 .solo-static .weekly-tutorial-card span {
   color: #707988;
   line-height: 1.7;
+}
+
+.solo-static .home-hot-news-list {
+  display: grid;
+  gap: 8px 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.solo-static .home-hot-news-list li {
+  align-items: baseline;
+  border-top: 1px solid #eee;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.solo-static .home-hot-news-list span {
+  color: #ff4d3a;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.solo-static .home-hot-news-list a {
+  color: #333;
+  min-width: 0;
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .solo-static .hot-news-grid {
@@ -1965,6 +2006,7 @@ html[data-solo-theme="dark"] .solo-static .mysql-tutorial-nav h3 {
   }
 
   .solo-static .home-portal-grid,
+  .solo-static .home-hot-news-list,
   .solo-static .hot-news-grid,
   .solo-static .hot-news-grid--page,
   .solo-static .weekly-grid,
