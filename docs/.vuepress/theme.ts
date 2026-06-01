@@ -15,6 +15,7 @@ export default hopeTheme({
   pure: true,
   displayFooter: false,
   plugins: {
+    icon: false,
     copyCode: true,
     slimsearch: false
   },
