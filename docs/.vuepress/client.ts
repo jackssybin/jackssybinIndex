@@ -1,5 +1,5 @@
 import { defineClientConfig } from "vuepress/client";
-import SearchPage from "./components/SearchPage.vue";
+import { defineAsyncComponent } from "vue";
 import SoloPage from "./components/SoloPage.vue";
 
 const THEME_KEY = "solo-theme";
@@ -26,7 +26,7 @@ function getInitialSoloTheme(): "light" | "dark" {
 export default defineClientConfig({
   enhance({ app }) {
     app.component("SoloPage", SoloPage);
-    app.component("SearchPage", SearchPage);
+    app.component("SearchPage", defineAsyncComponent(() => import("./components/SearchPage.vue")));
   },
   setup() {
     if (typeof window === "undefined") return;
