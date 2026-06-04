@@ -1,14 +1,14 @@
 ---
-title: "Odysseus：一个值得关注的本地 AI 工作台 - jackssybin 的个人博客"
+title: "Odysseus 本地 AI 工作台体验 - jackssybin 的个人博客"
 permalink: "/articles/2026/06/03/odysseus-zhihu.html"
-description: "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。"
+description: "这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。"
 head:
   - - meta
     - name: keywords
       content: "AI,Odysseus,本地 AI,Agent,自托管"
   - - meta
     - property: og:description
-      content: "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。"
+      content: "这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。"
   - - meta
     - property: og:url
       content: "https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html"

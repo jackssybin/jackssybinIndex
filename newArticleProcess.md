@@ -73,7 +73,100 @@ comment: false
 - 代码块：必须写语言标识，例如 ` ```java `、` ```bash `、` ```powershell `。
 - 图片：优先放到 `docs/.vuepress/public/images/`，正文中使用 `/images/xxx.png` 引用。
 
-## 4. 生成站点内容
+## 4. 专题归类与调整
+
+本站专题页不是在 `docs/topics` 下手工长期维护的，而是由迁移脚本自动生成：
+
+```text
+scripts/migrate-from-bolo.mjs
+```
+
+核心配置有两个：
+
+- `topicDefinitions`：定义有哪些专题、专题标题、URL slug、简介和关键词。
+- `coreArticleEnhancements`：给核心文章做人工增强，可以强制指定某篇文章属于哪个专题。
+
+### 4.1 当前建议保留的专题
+
+一个技术人博客建议至少覆盖这些内容入口：
+
+- `AI、Agent 与本地模型`：AI 工具、本地大模型、Agent、MCP、自托管 AI、AI 编程。
+- `Java 与 JVM`：Java 基础、集合、反射、并发、JVM、GC、线上排障。
+- `Spring Boot 与后端框架`：Spring Boot、Spring Framework、MyBatis、WebFlux、微服务实践。
+- `MySQL 与数据架构`：索引、事务、锁、SQL 优化、分库分表、数据一致性。
+- `中间件与分布式`：Redis、Zookeeper、消息队列、网关、限流、分布式锁、可观测性。
+- `Linux 运维与部署`：Linux、Nginx、服务器部署、日志、监控、故障排查。
+- `Python 爬虫与自动化`：Python、Scrapy、Selenium、自动化脚本。
+- `工具、效率与博客建设`：VuePress、博客迁移、GitHub、效率工具、建站经验。
+
+后续如果内容变多，可以继续拆出这些专题：
+
+- `云原生与容器化`：Docker、Kubernetes、CI/CD、容器部署。
+- `架构设计与系统设计`：高并发、可用性、容量规划、系统拆分。
+- `性能优化与故障排查`：JVM、数据库、Linux、链路追踪、压测。
+- `安全与攻防基础`：认证授权、接口安全、漏洞修复、服务器加固。
+- `开源项目与产品实践`：项目复盘、工具评测、源码阅读、产品化经验。
+
+### 4.2 新增一个专题
+
+在 `scripts/migrate-from-bolo.mjs` 的 `topicDefinitions` 数组中新增一项：
+
+```js
+{
+  title: "AI、Agent 与本地模型",
+  slug: "ai-agent",
+  description: "AI 工具、本地大模型、Agent、MCP、自托管 AI 工作台和 AI 编程实践。",
+  keywords: ["ai", "人工智能", "大模型", "llm", "agent", "mcp", "ollama", "chatgpt", "claude", "deepseek"]
+}
+```
+
+字段说明：
+
+- `title`：专题显示名称。
+- `slug`：专题访问路径，例如 `/topics/ai-agent.html`，上线后不要轻易修改。
+- `description`：专题页简介，会展示在专题列表中。
+- `keywords`：自动归类关键词，脚本会从文章标题、标签、摘要中匹配。
+
+新增专题后执行：
+
+```bash
+pnpm migrate
+pnpm build
+```
+
+### 4.3 调整某篇文章到指定专题
+
+如果文章被自动分错专题，不要只改生成后的 `docs/topics/*.md`，因为下次迁移会被覆盖。
+
+推荐在 `coreArticleEnhancements` 中给文章固定专题：
+
+```js
+"/articles/2026/06/03/odysseus-zhihu.html": {
+  topicSlug: "ai-agent",
+  order: 10,
+  title: "Odysseus 本地 AI 工作台体验",
+  summary: "这篇文章适合作为 AI、Agent 与本地模型专题的入口。",
+  takeaways: ["理解本地优先 AI 工作台的定位。", "了解 Agent、MCP、自托管等能力。"]
+}
+```
+
+其中：
+
+- `topicSlug`：必须对应 `topicDefinitions` 中已有的 `slug`。
+- `order`：同专题内的推荐阅读顺序，数字越小越靠前。
+- `title`：可以给专题页和详情页展示一个更适合阅读路线的标题。
+- `summary`：文章导读摘要。
+- `takeaways`：读完这篇文章应该掌握的重点。
+
+### 4.4 标签与专题的关系
+
+标签适合表达细粒度关键词，例如 `AI`、`Odysseus`、`本地 AI`、`Agent`。
+
+专题适合表达阅读路线和内容版块，例如 `AI、Agent 与本地模型`。
+
+一篇文章可以有多个标签，但通常只归入一个主专题。新增文章时，先想清楚它属于哪个专题，再补充 3 到 6 个标签。
+
+## 5. 生成站点内容
 
 新增或修改文章后，执行：
 
@@ -104,7 +197,7 @@ pnpm.cmd migrate
 pnpm.cmd build
 ```
 
-## 5. 本地预览
+## 6. 本地预览
 
 构建前预览：
 
@@ -133,7 +226,7 @@ pnpm dev -- --port 8082
 - 搜索页是否能搜到标题和关键词。
 - RSS 是否包含新文章。
 
-## 6. 构建验证
+## 7. 构建验证
 
 上线前执行：
 
@@ -149,7 +242,7 @@ docs/.vuepress/dist/
 
 如果构建失败，先处理 Markdown 语法、frontmatter、链接或图片路径问题。
 
-## 7. 提交到 Git
+## 8. 提交到 Git
 
 确认变更：
 
@@ -173,7 +266,7 @@ git push origin main
 
 具体以 `git status` 为准。
 
-## 8. 上线后展示位置
+## 9. 上线后展示位置
 
 新文章上线后会出现在：
 
@@ -192,7 +285,7 @@ git push origin main
 https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html
 ```
 
-## 9. 常见问题
+## 10. 常见问题
 
 ### 新文章没有出现在首页
 

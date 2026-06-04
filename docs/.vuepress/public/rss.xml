@@ -5,11 +5,11 @@
   <link>https://jackssybin.cn/</link>
   <description>记录精彩的程序人生</description>
   <item>
-    <title>Odysseus：一个值得关注的本地 AI 工作台</title>
+    <title>Odysseus 本地 AI 工作台体验</title>
     <link>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</link>
     <guid>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</guid>
     <pubDate>Tue, 02 Jun 2026 16:00:00 GMT</pubDate>
-    <description><![CDATA[本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。]]></description>
+    <description><![CDATA[这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。]]></description>
   </item>
 <item>
     <title>老博客静态化迁移实战</title>

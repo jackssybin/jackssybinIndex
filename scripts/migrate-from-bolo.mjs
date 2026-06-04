@@ -116,6 +116,12 @@ const topicDefinitions = [
     keywords: ["spring", "springboot", "spring boot", "springbatch", "mybatis", "swagger", "knife4j", "webflux", "bean", "conditional"]
   },
   {
+    title: "AI、Agent 与本地模型",
+    slug: "ai-agent",
+    description: "AI 工具、本地大模型、Agent、MCP、自托管 AI 工作台和 AI 编程实践。",
+    keywords: ["ai", "人工智能", "大模型", "llm", "agent", "mcp", "ollama", "chatgpt", "claude", "deepseek", "odysseus", "本地模型", "本地 ai", "自托管", "ai 编程"]
+  },
+  {
     title: "MySQL 与数据架构",
     slug: "mysql-data",
     description: "MySQL 索引、事务、锁、分库分表、冷热分离、数据一致性与大表优化。",
@@ -180,6 +186,13 @@ const tagAliases = new Map([
 ]);
 
 const coreArticleEnhancements = new Map(Object.entries({
+  "/articles/2026/06/03/odysseus-zhihu.html": {
+    topicSlug: "ai-agent",
+    order: 10,
+    title: "Odysseus 本地 AI 工作台体验",
+    summary: "这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。",
+    takeaways: ["理解本地优先、自托管 AI 工作台适合解决什么问题。", "关注 Agent、MCP、文件、Shell 和记忆等能力如何整合到一个工作空间。", "适合作为后续 AI 工具评测、本地模型部署和 AI 编程实践文章的起点。"]
+  },
   "/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html": {
     topicSlug: "tools-blog",
     order: 10,
@@ -874,13 +887,25 @@ function resolveTopic(article) {
   let best = topicDefinitions[topicDefinitions.length - 1];
   let bestScore = -1;
   for (const topic of topicDefinitions) {
-    const score = topic.keywords.reduce((total, keyword) => haystack.includes(keyword.toLowerCase()) ? total + 1 : total, 0);
+    const score = topic.keywords.reduce((total, keyword) => topicKeywordMatches(haystack, keyword) ? total + 1 : total, 0);
     if (score > bestScore) {
       best = topic;
       bestScore = score;
     }
   }
   return best;
+}
+
+function topicKeywordMatches(haystack, keyword) {
+  const normalized = keyword.toLowerCase();
+  if (/^[a-z0-9+#.]{1,3}$/u.test(normalized)) {
+    return new RegExp(`(^|[^a-z0-9+#.])${escapeRegExp(normalized)}([^a-z0-9+#.]|$)`, "u").test(haystack);
+  }
+  return haystack.includes(normalized);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }
 
 function compareArticlesForTopic(a, b) {
@@ -1707,7 +1732,7 @@ async function main() {
   await writePage("/tags.html", `标签墙 - ${site.blogTitle}`, makeOtherPage(`总计 ${tags.filter((tag) => tag.count > 0).length} 个标签`, "icon-tags", tagWall, site));
 
   await writePage("/topics.html", `专题系列 - ${site.blogTitle}`, makeTopicOverviewPage(topics, site), {
-    description: "按 Java、Spring Boot、MySQL、Linux、Python 爬虫、中间件和博客建设重新组织的专题阅读入口。"
+    description: "按 AI、Java、Spring Boot、MySQL、Linux、Python 爬虫、中间件和博客建设重新组织的专题阅读入口。"
   });
   for (const topic of topics) {
     const body = `<section class="topic-detail">
