@@ -438,5 +438,9 @@ export const pages: Record<string, () => Promise<{ default: string }>> = {
   "p436": () => import("./page-data/p436.js"),
   "p437": () => import("./page-data/p437.js"),
   "p438": () => import("./page-data/p438.js"),
-  "p439": () => import("./page-data/p439.js")
+  "p439": () => import("./page-data/p439.js"),
+  "p440": () => import("./page-data/p440.js"),
+  "p441": () => import("./page-data/p441.js"),
+  "p442": () => import("./page-data/p442.js"),
+  "p443": () => import("./page-data/p443.js")
 };

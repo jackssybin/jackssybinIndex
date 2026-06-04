@@ -1,11 +1,11 @@
 {
   "articles": 103,
   "publishedArticles": 103,
-  "manualArticles": 2,
-  "totalArticles": 105,
+  "manualArticles": 3,
+  "totalArticles": 106,
   "comments": 12,
   "tags": 157,
-  "usedTags": 154,
+  "usedTags": 157,
   "topics": 8,
   "navSections": 34,
   "navLinks": 663,
@@ -16,5 +16,5 @@
   "weeklyPage": true,
   "pages": 2,
   "links": 3,
-  "generatedAt": "2026-06-04T02:34:03.854Z"
+  "generatedAt": "2026-06-04T11:29:51.052Z"
 }

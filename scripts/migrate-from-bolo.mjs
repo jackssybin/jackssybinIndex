@@ -119,7 +119,7 @@ const topicDefinitions = [
     title: "AI、Agent 与本地模型",
     slug: "ai-agent",
     description: "AI 工具、本地大模型、Agent、MCP、自托管 AI 工作台和 AI 编程实践。",
-    keywords: ["ai", "人工智能", "大模型", "llm", "agent", "mcp", "ollama", "chatgpt", "claude", "deepseek", "odysseus", "本地模型", "本地 ai", "自托管", "ai 编程"]
+    keywords: ["ai", "人工智能", "大模型", "llm", "agent", "mcp", "ollama", "chatgpt", "claude", "deepseek", "openai", "codex", "odysseus", "本地模型", "本地 ai", "自托管", "ai 编程"]
   },
   {
     title: "MySQL 与数据架构",

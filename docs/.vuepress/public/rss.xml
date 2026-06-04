@@ -5,6 +5,13 @@
   <link>https://jackssybin.cn/</link>
   <description>记录精彩的程序人生</description>
   <item>
+    <title>一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS</title>
+    <link>https://jackssybin.cn/articles/2026/06/04/codex-oss-zhihu.html</link>
+    <guid>https://jackssybin.cn/articles/2026/06/04/codex-oss-zhihu.html</guid>
+    <pubDate>Wed, 03 Jun 2026 16:00:00 GMT</pubDate>
+    <description><![CDATA[本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。]]></description>
+  </item>
+<item>
     <title>Odysseus 本地 AI 工作台体验</title>
     <link>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</link>
     <guid>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</guid>
@@ -66,13 +73,6 @@
     <guid>https://jackssybin.cn/articles/2021/03/25/1616640074000.html</guid>
     <pubDate>Thu, 25 Mar 2021 02:41:14 GMT</pubDate>
     <description><![CDATA[一、业务场景三 为了便于理解，我们通过一个业务场景来入手。 有一个电商系统架构优化工作，该系统中包含用户和订单2个主要实体，每个实体涵盖数据量如下表所示： 实体数据量增长趋势 用户千万级每日10万 订单亿级每日百万级，后续可能千万级 从上表中发现，目前订单数据量已达上亿，并且每日以百万级速度增长，之后还可能是千万级。 ...]]></description>
-  </item>
-<item>
-    <title>表数据量大读写缓慢如何优化【查询分离】</title>
-    <link>https://jackssybin.cn/articles/2021/03/25/1616638627630.html</link>
-    <guid>https://jackssybin.cn/articles/2021/03/25/1616638627630.html</guid>
-    <pubDate>Thu, 25 Mar 2021 02:17:07 GMT</pubDate>
-    <description><![CDATA[业务场景二 某 SaaS 客服系统，系统里有一个工单查询功能，工单表中存放了几千万条数据，且查询工单表数据时需要关联十几个子表，每个子表的数据也是超亿条。 面对如此庞大的数据量，跟前面的冷热分离一样，每次客户查询数据时几十秒才能返回结果，即便我们使用了索引、SQL 等数据库优化技巧，效果依然不明显。 加上工单表中有些数...]]></description>
   </item>
 </channel>
 </rss>
