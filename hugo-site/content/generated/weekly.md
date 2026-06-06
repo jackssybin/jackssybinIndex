@@ -1,0 +1,223 @@
+---
+title: 每周精选
+description: jackssybin 每周精选，汇总实时热点、核心文章和教程路线，帮助读者按周回看技术趋势与站内重点内容。
+url: /weekly.html
+kind: page
+---
+
+<header>
+    <div class="banner">
+        <div class="fn-clear wrapper">
+            <h1 class="fn-inline"><a href="/" rel="start">jackssybin 的个人博客</a></h1>
+            <small> &nbsp; 记录精彩的程序人生</small>
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="fn-clear wrapper">
+            <nav class="fn-left">
+                <a href="/"><i class="icon-home"></i> 首页</a>
+                <a href="/my-github-repos" target="_self" rel="section"><img class="page-icon" src="/images/github-icon.png" alt="">我的开源</a>
+<a href="https://blog.csdn.net/jackssybin" target="_self" rel="section">我的scdn</a>
+                <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
+                <a href="/news.html" rel="section"><i class="icon-list"></i> 实时新闻</a>
+                <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
+                <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
+                <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
+                <a href="/archives.html"><i class="icon-inbox"></i> 存档</a>
+                <a href="/about.html" rel="section"><i class="icon-user"></i> 关于本站</a>
+                <a rel="archive" href="/links.html"><i class="icon-link"></i> 友情链接</a>
+                <a rel="alternate" href="/rss.xml" rel="section"><i class="icon-rss"></i> RSS</a>
+            </nav>
+            <div class="fn-right">
+                <button class="theme-toggle" type="button" aria-label="切换黑夜模式" title="切换黑夜模式" data-theme-toggle>夜</button>
+                <form class="form" action="/search.html" method="get">
+                    <input placeholder="搜索文章标题" id="search" type="text" name="keyword">
+                    <button type="submit"><i class="icon-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="main-wrap">
+        <main class="other">
+    <div class="title"><h2><i class="icon-list"></i>&nbsp;每周精选</h2></div>
+    <section class="weekly-page">
+    <div class="weekly-hero">
+      <h2>每周精选</h2>
+      <p>把实时热点、站内核心文章和系统教程放在一起，方便每周快速回看技术趋势，也给读者一个更稳定的学习入口。</p>
+      <span>新闻数据更新时间：2026/5/30 17:43:32</span>
+    </div>
+    <div class="weekly-grid">
+      <section>
+        <h3>本周技术热点</h3>
+        <article>
+          <h4>百度热搜</h4>
+          <ol><li><a href="https://www.baidu.com/s?word=%E7%A7%91%E5%AD%A6%E5%AE%B6%E7%B2%BE%E7%A5%9E%E6%98%AF%E5%AE%9D%E8%B4%B5%E7%9A%84%E7%B2%BE%E7%A5%9E%E8%B4%A2%E5%AF%8C&amp;sa=fyb_news" target="_blank" rel="noopener nofollow">科学家精神是宝贵的精神财富</a></li>
+<li><a href="https://www.baidu.com/s?word=%E9%9E%A0%E8%90%8D%E5%A7%90%E5%A7%906%E6%9C%881%E6%97%A5%E6%AD%A3%E5%BC%8F%E9%80%80%E4%BC%91&amp;sa=fyb_news" target="_blank" rel="noopener nofollow">鞠萍姐姐6月1日正式退休</a></li>
+<li><a href="https://www.baidu.com/s?word=%E5%84%BF%E5%AD%90%E5%8E%BB%E4%B8%96+%E5%A6%88%E5%A6%88%E7%BB%B7%E4%B8%8D%E4%BD%8F%E5%9C%A8%E9%9D%99%E9%9F%B3%E8%BD%A6%E5%8E%A2%E7%97%9B%E5%93%AD&amp;sa=fyb_news" target="_blank" rel="noopener nofollow">儿子去世 妈妈绷不住在静音车厢痛哭</a></li>
+<li><a href="https://www.baidu.com/s?word=%E6%AC%A2%E8%BF%8E%E5%9B%9E%E5%AE%B6%EF%BC%81%E7%A5%9E%E4%BA%8C%E5%8D%81%E4%B8%80%E4%B9%98%E7%BB%84%E8%BF%94%E5%9B%9E%E5%85%A8%E8%AE%B0%E5%BD%95&amp;sa=fyb_news" target="_blank" rel="noopener nofollow">欢迎回家！神二十一乘组返回全记录</a></li>
+<li><a href="https://www.baidu.com/s?word=%E2%80%9C%E8%BD%A6%E4%B8%8D%E5%B0%B1%E6%98%AF%E8%AE%A9%E4%BA%BA%E5%9D%90%E7%9A%84%E5%90%97%E2%80%9D&amp;sa=fyb_news" target="_blank" rel="noopener nofollow">“车不就是让人坐的吗”</a></li></ol>
+        </article>
+<article>
+          <h4>微博热搜</h4>
+          <ol><li><a href="https://s.weibo.com/weibo?q=%23微信几乎把每个人捆绑在线上%23" target="_blank" rel="noopener nofollow">微信几乎把每个人捆绑在线上</a></li>
+<li><a href="https://s.weibo.com/weibo?q=%23D1804次列车被困隧道内超2小时%23" target="_blank" rel="noopener nofollow">D1804次列车被困隧道内超2小时</a></li>
+<li><a href="https://s.weibo.com/weibo?q=%23科技工作者一生坚守的赤诚心声%23" target="_blank" rel="noopener nofollow">科技工作者一生坚守的赤诚心声</a></li>
+<li><a href="https://s.weibo.com/weibo?q=%23住东北就别熬夜了%23" target="_blank" rel="noopener nofollow">住东北就别熬夜了</a></li>
+<li><a href="https://s.weibo.com/weibo?q=%23生命树被标注白玉兰奖%23" target="_blank" rel="noopener nofollow">生命树被标注白玉兰奖</a></li></ol>
+        </article>
+<article>
+          <h4>知乎热榜</h4>
+          <ol><li><a href="https://www.zhihu.com/question/2043773481611786018" target="_blank" rel="noopener nofollow">雷军称被何小鹏李斌骗了，「他们说造车很有意思，实际很苦」，从当前发展看，如何评价小米入局造车这一选择？</a></li>
+<li><a href="https://www.zhihu.com/question/2041195866896209545" target="_blank" rel="noopener nofollow">为什么全世界很多地方把土豆当口粮，中国人却更爱把它当菜？</a></li>
+<li><a href="https://www.zhihu.com/question/2043761895782536236" target="_blank" rel="noopener nofollow">如何看待59岁「高考钉子户」梁实将第30次参加高考？</a></li>
+<li><a href="https://www.zhihu.com/question/2043430360453842107" target="_blank" rel="noopener nofollow">为什么比亚迪既能自研芯片，又敢兜底 1 年？如何评价？</a></li>
+<li><a href="https://www.zhihu.com/question/2042567073533097662" target="_blank" rel="noopener nofollow">如何看待深圳常住人口首破1800万，增量居全国城市首位？</a></li></ol>
+        </article>
+<article>
+          <h4>掘金</h4>
+          <ol><li><a href="https://juejin.cn/post/7644206599271858226" target="_blank" rel="noopener nofollow">【SpringBoot 3.x】夯爆了，数据库访问性能优化实战详解！</a></li>
+<li><a href="https://juejin.cn/post/7644845137235689472" target="_blank" rel="noopener nofollow">苦撑13年，创始人离职出走，拉勾终究还是倒下了…</a></li>
+<li><a href="https://juejin.cn/post/7644427751187333154" target="_blank" rel="noopener nofollow">820亿Credits等于多少Tokens?</a></li>
+<li><a href="https://juejin.cn/post/7644085410189082634" target="_blank" rel="noopener nofollow">3行代码接入！魔珐星云让我3分钟搭出可交互数字人</a></li>
+<li><a href="https://juejin.cn/post/7644918322454593546" target="_blank" rel="noopener nofollow">Claude Opus 4.8 实测：AI 终于学会「承认自己不知道」了？</a></li></ol>
+        </article>
+      </section>
+      <section>
+        <h3>站内推荐阅读</h3>
+        <ol class="weekly-core-list">
+          <li>
+            <a href="/articles/2026/06/03/odysseus-zhihu.html">Odysseus 本地 AI 工作台体验</a>
+            <p>核心文章：这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。</p>
+          </li>
+<li>
+            <a href="/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html">老博客静态化迁移实战</a>
+            <p>核心文章：这篇文章适合作为本站建设路线的入口，重点看如何把 Solo/Bolo 的数据库、皮肤、旧链接和静态站构建流程拆开处理。</p>
+          </li>
+<li>
+            <a href="/articles/2021/06/08/1623116860957.html">MySQL RR 隔离级别锁测试</a>
+            <p>核心文章：这篇文章是 MySQL 事务与锁专题的核心实验记录，适合用来理解 RR 隔离级别下非索引更新、删除操作为什么会扩大锁范围。</p>
+          </li>
+<li>
+            <a href="/articles/2021/05/14/1620960509044.html">Spring Boot 启动扩展点</a>
+            <p>核心文章：这篇文章是 Spring Boot 专题的核心长文，适合系统梳理 Bean 生命周期、容器刷新过程和自动装配前后的扩展点。</p>
+          </li>
+<li>
+            <a href="/articles/2020/05/28/1590656168798.html">Redis 缓存穿透、击穿、雪崩</a>
+            <p>核心文章：这篇文章适合作为缓存稳定性专题的入口，覆盖高并发系统里最常见的缓存失效风险和防护思路。</p>
+          </li>
+<li>
+            <a href="/articles/2019/09/17/1568731586414.html">JVM 基础总览</a>
+            <p>核心文章：这篇文章适合作为 Java 与 JVM 专题的第一站，用来建立运行时数据区、类加载、对象创建和 GC 的基础框架。</p>
+          </li>
+<li>
+            <a href="/articles/2019/09/16/1568641811471.html">Scrapy 框架入门</a>
+            <p>核心文章：这篇文章适合作为 Python 爬虫专题的路线入口，先建立 Scrapy 项目结构、Spider、Item 和 Pipeline 的基础认识。</p>
+          </li>
+<li>
+            <a href="/articles/2021/03/16/1615897840354.html">Spring Integration 中文手册</a>
+            <p>核心文章：这篇文章适合作为 Spring 生态集成能力的参考资料，用来理解消息通道、端点、适配器和企业集成模式。</p>
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h3>教程路线</h3>
+        <a class="weekly-tutorial-card" href="/mysql.html">
+          <strong>MySQL教程</strong>
+          <span>34 篇教程 / 适合后端开发、数据库初学者、需要系统补齐 MySQL 基础与调优能力的工程师。</span>
+        </a>
+<a class="weekly-tutorial-card" href="/springboot4.html">
+          <strong>Spring Boot 4教程</strong>
+          <span>21 篇教程 / 适合有 Java/Spring 基础、准备升级 Spring Boot 3/4 或搭建新后端项目的开发者。</span>
+        </a>
+<a class="weekly-tutorial-card" href="/netty.html">
+          <strong>Netty教程</strong>
+          <span>16 篇教程 / 适合 Java 后端、即时通信、网关、RPC、中间件和高性能网络编程方向的开发者。</span>
+        </a>
+      </section>
+    </div>
+  </section>
+</main>
+        <aside>
+    <section>
+        <div class="module">
+            <header><h2>专题</h2></header>
+            <main class="topic-list">
+                <a href="/topics/java-jvm.html">Java 与 JVM</a>
+<a href="/topics/spring-backend.html">Spring Boot 与后端框架</a>
+<a href="/topics/ai-agent.html">AI、Agent 与本地模型</a>
+<a href="/topics/mysql-data.html">MySQL 与数据架构</a>
+<a href="/topics/linux-ops.html">Linux 运维与部署</a>
+<a href="/topics/python-crawler.html">Python 爬虫与自动化</a>
+<a href="/topics/middleware-distributed.html">中间件与分布式</a>
+<a href="/topics/tools-blog.html">工具、效率与博客建设</a>
+            </main>
+        </div>
+        <div class="module">
+            <header><h2>标签</h2></header>
+            <main>
+                <a rel="tag" href="/tags/Python.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="24 篇文章">Python</a>
+<a rel="tag" href="/tags/Java.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="18 篇文章">Java</a>
+<a rel="tag" href="/tags/CentOS.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="10 篇文章">CentOS</a>
+<a rel="tag" href="/tags/MySQL.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="10 篇文章">MySQL</a>
+<a rel="tag" href="/tags/Python_20_E7_88_AC_E8_99_AB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="9 篇文章">Python 爬虫</a>
+<a rel="tag" href="/tags/JVM.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="8 篇文章">JVM</a>
+<a rel="tag" href="/tags/Linux.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="6 篇文章">Linux</a>
+<a rel="tag" href="/tags/Scrapy.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="6 篇文章">Scrapy</a>
+<a rel="tag" href="/tags/E5_9E_83_E5_9C_BE_E5_9B_9E_E6_94_B6_E7_AE_97_E6_B3_95.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">垃圾回收算法</a>
+<a rel="tag" href="/tags/Spring_20Batch.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">Spring Batch</a>
+<a rel="tag" href="/tags/Spring_20Boot.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">Spring Boot</a>
+<a rel="tag" href="/tags/E5_A4_A7_E8_A1_A8_E4_BC_98_E5_8C_96.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">大表优化</a>
+<a rel="tag" href="/tags/E8_B0_83_E4_BC_98.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">调优</a>
+<a rel="tag" href="/tags/E9_AB_98_E5_B9_B6_E5_8F_91.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">高并发</a>
+<a rel="tag" href="/tags/E5_86_B7_E7_83_AD_E5_88_86_E7_A6_BB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">冷热分离</a>
+<a rel="tag" href="/tags/E5_8D_83_E4_B8_87_E7_BA_A7_E8_A1_A8_E4_BC_98_E5_8C_96.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">千万级表优化</a>
+<a rel="tag" href="/tags/E7_BA_BF_E7_A8_8B.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">线程</a>
+<a rel="tag" href="/tags/Nginx.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">Nginx</a>
+<a rel="tag" href="/tags/E5_BE_85_E5_88_86_E7_B1_BB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="2 篇文章">待分类</a>
+<a rel="tag" href="/tags/E5_BC_80_E6_BA_90.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="2 篇文章">开源</a>
+            </main>
+        </div>
+        <div class="module tutorial-sidebar">
+            <header><h2>教程中心</h2></header>
+            <main>
+                <a class="tutorial-sidebar-card" href="/mysql.html">
+        <strong>MySQL</strong>
+        <span>34 篇教程</span>
+    </a>
+<a class="tutorial-sidebar-card" href="/springboot4.html">
+        <strong>Spring Boot 4</strong>
+        <span>21 篇教程</span>
+    </a>
+<a class="tutorial-sidebar-card" href="/netty.html">
+        <strong>Netty</strong>
+        <span>16 篇教程</span>
+    </a>
+                <a class="tutorial-sidebar-more" href="/tutorials.html">查看全部教程 &raquo;</a>
+            </main>
+        </div>
+        <div class="module meta">
+            <header><h2 class="ft__center"><a href="https://github.com/jackssybin" target="_blank" rel="noopener">GitHub</a></h2></header>
+            <main class="fn__clear">
+                <img src="/images/sidebar-avatar.jpg" aria-label="88250">
+                <div class="fn-right">
+                    <a href="/archives.html">106 <span class="ft-gray">文章</span></a><br>
+                    3 <span class="ft-gray">友链</span>
+                </div>
+            </main>
+        </div>
+    </section>
+</aside>
+    </div>
+</div>
+<footer class="footer fn-clear">
+    &copy; 2026
+    <a href="/">jackssybin 的个人博客</a>
+    <br>
+    Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank" rel="noopener">Bolo</a>
+    <span class="ft-warn">&heartsuit;</span>
+    Theme bolo-9IPHP
+    <sup>[<a href="https://github.com/9IPHP/9IPHP" target="_blank" rel="noopener">ref</a>]</sup>
+    by <a href="http://vanessa.b3log.org" target="_blank" rel="noopener">Vanessa</a>
+</footer>

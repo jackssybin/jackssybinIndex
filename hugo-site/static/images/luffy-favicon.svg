@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Straw hat pirate boy avatar">
+  <defs>
+    <clipPath id="round">
+      <circle cx="64" cy="64" r="60"/>
+    </clipPath>
+    <linearGradient id="bg" x1="20" x2="108" y1="18" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#232936"/>
+      <stop offset="1" stop-color="#10151d"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="62" fill="url(#bg)"/>
+  <g clip-path="url(#round)">
+    <path d="M16 58c11-22 30-34 49-34s37 12 47 34c-18 8-78 8-96 0Z" fill="#f0c86a"/>
+    <path d="M15 56c18 10 80 10 98 0l4 10c-21 11-85 11-106 0l4-10Z" fill="#d63d33"/>
+    <path d="M27 62c5-18 20-29 37-29s32 11 37 29c-21 7-53 7-74 0Z" fill="#f6d77e"/>
+    <path d="M24 70c4-20 20-34 40-34s36 14 40 34c-5 3-12 5-19 6-4-9-12-14-21-14s-17 5-21 14c-7-1-14-3-19-6Z" fill="#161a22"/>
+    <path d="M35 76c4-20 15-31 29-31s25 11 29 31v28H35V76Z" fill="#f3b07f"/>
+    <path d="M38 76c4-14 13-23 26-23s22 9 26 23c-10-3-17-9-21-17-5 9-16 15-31 17Z" fill="#11141b"/>
+    <circle cx="48" cy="83" r="5" fill="#11141b"/>
+    <circle cx="80" cy="83" r="5" fill="#11141b"/>
+    <path d="M53 100c7 6 16 6 23 0" fill="none" stroke="#7b2d25" stroke-linecap="round" stroke-width="5"/>
+    <path d="M61 86c-2 6-3 10 2 11" fill="none" stroke="#c87955" stroke-linecap="round" stroke-width="3"/>
+    <path d="M25 117c8-16 22-25 39-25s31 9 39 25H25Z" fill="#d7352c"/>
+    <path d="M56 94h16l-8 13-8-13Z" fill="#f9d8ba"/>
+  </g>
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#2f3746" stroke-width="4"/>
+</svg>

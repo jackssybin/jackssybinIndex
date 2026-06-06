@@ -1,0 +1,33 @@
+.solo-static {
+  min-height: 100vh;
+}
+
+.hugo-search-box {
+  display: flex;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.hugo-search-box input,
+.hugo-search-box select {
+  min-height: 38px;
+  border: 1px solid #374151;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 0 10px;
+}
+
+.hugo-search-box input {
+  flex: 1;
+}
+
+.hugo-search-result {
+  border-top: 1px solid #2b3442;
+  padding: 16px 0;
+}
+
+.hugo-search-result mark {
+  color: #111827;
+  background: #fbbf24;
+  padding: 0 2px;
+}

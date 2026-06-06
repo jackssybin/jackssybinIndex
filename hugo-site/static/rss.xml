@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>jackssybin 的个人博客</title>
+  <link>https://jackssybin.cn/</link>
+  <description>记录精彩的程序人生</description>
+  <item>
+    <title>一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS</title>
+    <link>https://jackssybin.cn/articles/2026/06/04/codex-oss-zhihu.html</link>
+    <guid>https://jackssybin.cn/articles/2026/06/04/codex-oss-zhihu.html</guid>
+    <pubDate>Wed, 03 Jun 2026 16:00:00 GMT</pubDate>
+    <description><![CDATA[本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。]]></description>
+  </item>
+<item>
+    <title>Odysseus 本地 AI 工作台体验</title>
+    <link>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</link>
+    <guid>https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html</guid>
+    <pubDate>Tue, 02 Jun 2026 16:00:00 GMT</pubDate>
+    <description><![CDATA[这篇文章适合作为 AI、Agent 与本地模型专题的入口，重点记录 Odysseus 作为本地优先、自托管 AI 工作台的定位、部署体验和适用场景。]]></description>
+  </item>
+<item>
+    <title>老博客静态化迁移实战</title>
+    <link>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</link>
+    <guid>https://jackssybin.cn/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html</guid>
+    <pubDate>Wed, 27 May 2026 16:00:00 GMT</pubDate>
+    <description><![CDATA[这篇文章适合作为本站建设路线的入口，重点看如何把 Solo/Bolo 的数据库、皮肤、旧链接和静态站构建流程拆开处理。]]></description>
+  </item>
+<item>
+    <title>LocalDateTime操作</title>
+    <link>https://jackssybin.cn/articles/2025/07/16/1752652246705.html</link>
+    <guid>https://jackssybin.cn/articles/2025/07/16/1752652246705.html</guid>
+    <pubDate>Wed, 16 Jul 2025 07:50:46 GMT</pubDate>
+    <description><![CDATA[1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...]]></description>
+  </item>
+<item>
+    <title>MySQL RR 隔离级别锁测试</title>
+    <link>https://jackssybin.cn/articles/2021/06/08/1623116860957.html</link>
+    <guid>https://jackssybin.cn/articles/2021/06/08/1623116860957.html</guid>
+    <pubDate>Tue, 08 Jun 2021 01:47:41 GMT</pubDate>
+    <description><![CDATA[这篇文章是 MySQL 事务与锁专题的核心实验记录，适合用来理解 RR 隔离级别下非索引更新、删除操作为什么会扩大锁范围。]]></description>
+  </item>
+<item>
+    <title>Spring Boot 启动扩展点</title>
+    <link>https://jackssybin.cn/articles/2021/05/14/1620960509044.html</link>
+    <guid>https://jackssybin.cn/articles/2021/05/14/1620960509044.html</guid>
+    <pubDate>Fri, 14 May 2021 02:48:29 GMT</pubDate>
+    <description><![CDATA[这篇文章是 Spring Boot 专题的核心长文，适合系统梳理 Bean 生命周期、容器刷新过程和自动装配前后的扩展点。]]></description>
+  </item>
+<item>
+    <title>使用@ConditionalOnExpression决定是否生效</title>
+    <link>https://jackssybin.cn/articles/2021/04/21/1618973105136.html</link>
+    <guid>https://jackssybin.cn/articles/2021/04/21/1618973105136.html</guid>
+    <pubDate>Wed, 21 Apr 2021 02:45:05 GMT</pubDate>
+    <description><![CDATA[@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 消费者总开关，0关1开 mq.cumsumer.enabled=1 rocketmq消费者开关，true开启，false关闭 rocketmq.comsumer.enabled=fa...]]></description>
+  </item>
+<item>
+    <title>springBatch监控相关</title>
+    <link>https://jackssybin.cn/articles/2021/04/21/1618967915021.html</link>
+    <guid>https://jackssybin.cn/articles/2021/04/21/1618967915021.html</guid>
+    <pubDate>Wed, 21 Apr 2021 01:18:35 GMT</pubDate>
+    <description><![CDATA[Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...]]></description>
+  </item>
+<item>
+    <title>java内省机制与反射机制的区别</title>
+    <link>https://jackssybin.cn/articles/2021/03/29/1617000615780.html</link>
+    <guid>https://jackssybin.cn/articles/2021/03/29/1617000615780.html</guid>
+    <pubDate>Mon, 29 Mar 2021 06:50:16 GMT</pubDate>
+    <description><![CDATA[概念上的区别 反射是在运行状态把Java类中的各种成分映射成相应的Java类，可以动态的获取所有的属性以及动态调用任意一个方法，强调的是运行状态。 内省(IntroSpector) 是Java 语言对 JavaBean（简称VO）类属性、事件的一种缺省处理方法。内省机制是通过反射来实现。例如类User中有属性name，...]]></description>
+  </item>
+<item>
+    <title>表数据量大读写缓慢如何优化【分库分表】</title>
+    <link>https://jackssybin.cn/articles/2021/03/25/1616640074000.html</link>
+    <guid>https://jackssybin.cn/articles/2021/03/25/1616640074000.html</guid>
+    <pubDate>Thu, 25 Mar 2021 02:41:14 GMT</pubDate>
+    <description><![CDATA[一、业务场景三 为了便于理解，我们通过一个业务场景来入手。 有一个电商系统架构优化工作，该系统中包含用户和订单2个主要实体，每个实体涵盖数据量如下表所示： 实体数据量增长趋势 用户千万级每日10万 订单亿级每日百万级，后续可能千万级 从上表中发现，目前订单数据量已达上亿，并且每日以百万级速度增长，之后还可能是千万级。 ...]]></description>
+  </item>
+</channel>
+</rss>

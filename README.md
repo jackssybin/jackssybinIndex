@@ -891,3 +891,45 @@ sudo systemctl reload nginx
 - 每周维护 `/weekly.html`：自动汇总实时热点、核心文章和教程入口。
 - 每周基于 GoAccess 报表挑选 3-5 篇有访问或有潜力的旧文，补充摘要、导读、相关推荐和更清晰标题。
 - 每月重点打磨 1 个教程系列首页，例如 MySQL、Spring Boot 4、Netty。
+
+## 十三、Hugo + Obsidian 迁移分支说明
+
+当前 `codex/hugo-obsidian-migration` 分支用于验证 Hugo + Obsidian 写作流，不影响线上 `main` 分支。
+
+本分支采用平行迁移方式：
+
+- 继续保留现有 `docs` 和 VuePress 站点，作为可回退来源。
+- 使用 `scripts/export-to-hugo.mjs` 把现有 VuePress 页面导出到 `hugo-site/content/generated`。
+- Hugo 通过 frontmatter 中的 `url` 保持旧文章访问地址，例如 `/articles/2026/06/04/codex-oss-zhihu.html`。
+- `hugo-site/static/search-index.json` 复用现有搜索索引，Hugo 站点的 `/search.html` 可以继续按文章、教程、导航和专题搜索。
+- 后续 Obsidian 原生写作可以放入 `hugo-site/content/articles`，再逐步替换 `generated` 中的迁移内容。
+
+常用命令：
+
+```bash
+pnpm install
+pnpm export:hugo
+hugo --source hugo-site --destination hugo-site/public --minify
+```
+
+本地需要安装 Hugo Extended。Windows 可以用 Scoop、Chocolatey 或直接下载 Hugo Extended：
+
+```powershell
+scoop install hugo-extended
+# 或
+choco install hugo-extended
+```
+
+Obsidian 建议直接打开 `hugo-site/content` 作为 vault。新增文章有两种方式：
+
+```bash
+hugo new --source hugo-site articles/2026/06/hello-hugo.md
+```
+
+也可以在 Obsidian QuickAdd 中使用 `hugo-site/obs_scripts/NewBlog.js` 脚本生成文章草稿。文章发布前建议确认：
+
+- frontmatter 里有 `title`、`date`、`description`、`tags`、`topic`。
+- 需要保留固定访问地址时，显式填写 `url`。
+- 新内容构建后能进入 `/search.html` 和站点地图。
+
+GitHub Actions 已在本分支调整为 Hugo 构建流程：推送到 `main` 时先导出 Hugo 内容，再构建 `hugo-site/public` 并同步到服务器。迁移验证完成前，不建议把该分支合并到 `main`。

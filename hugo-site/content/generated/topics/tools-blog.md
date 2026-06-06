@@ -1,0 +1,250 @@
+---
+title: 工具、效率与博客建设
+description: 开发工具、网络分析、Rust 学习、博客迁移、静态站建设和零散效率笔记。
+url: /topics/tools-blog.html
+kind: page
+---
+
+<header>
+    <div class="banner">
+        <div class="fn-clear wrapper">
+            <h1 class="fn-inline"><a href="/" rel="start">jackssybin 的个人博客</a></h1>
+            <small> &nbsp; 记录精彩的程序人生</small>
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="fn-clear wrapper">
+            <nav class="fn-left">
+                <a href="/"><i class="icon-home"></i> 首页</a>
+                <a href="/my-github-repos" target="_self" rel="section"><img class="page-icon" src="/images/github-icon.png" alt="">我的开源</a>
+<a href="https://blog.csdn.net/jackssybin" target="_self" rel="section">我的scdn</a>
+                <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
+                <a href="/news.html" rel="section"><i class="icon-list"></i> 实时新闻</a>
+                <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
+                <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
+                <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
+                <a href="/archives.html"><i class="icon-inbox"></i> 存档</a>
+                <a href="/about.html" rel="section"><i class="icon-user"></i> 关于本站</a>
+                <a rel="archive" href="/links.html"><i class="icon-link"></i> 友情链接</a>
+                <a rel="alternate" href="/rss.xml" rel="section"><i class="icon-rss"></i> RSS</a>
+            </nav>
+            <div class="fn-right">
+                <button class="theme-toggle" type="button" aria-label="切换黑夜模式" title="切换黑夜模式" data-theme-toggle>夜</button>
+                <form class="form" action="/search.html" method="get">
+                    <input placeholder="搜索文章标题" id="search" type="text" name="keyword">
+                    <button type="submit"><i class="icon-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="main-wrap">
+        <main class="other">
+    <div class="title"><h2><i class="icon-list"></i>&nbsp;工具、效率与博客建设 (5)</h2></div>
+    <section class="topic-detail">
+      <p>开发工具、网络分析、Rust 学习、博客迁移、静态站建设和零散效率笔记。</p>
+      <section class="topic-roadmap-panel">
+    <h3>推荐阅读顺序</h3>
+    <ol>
+      <li>
+        <a href="/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html"><span>核心</span>老博客静态化迁移实战</a>
+        <p>核心文章：这篇文章适合作为本站建设路线的入口，重点看如何把 Solo/Bolo 的数据库、皮肤、旧链接和静态站构建流程拆开处理。</p>
+      </li>
+    </ol>
+  </section>
+      <div><article class="post post--summary">
+    <header>
+        <h2>
+            <span class="core-badge">核心</span>
+            <a rel="bookmark" href="/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html">老博客静态化迁移实战</a>
+            
+        </h2>
+        <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+                <i class="icon-date"></i> <time>2026-05-28</time>
+            </span>
+        </div>
+    </header>
+    <div class="vditor-reset post__excerpt"><p>先说背景：我手上有一个运行多年的个人博客 <a href="http://jackssybin.cn">jackssybin.cn</a>，原来是 Solo/Bolo 系统，通过 Tomcat 部署，数据在 MySQL 里。后来我希望把它迁成一个更轻、更容易维护的静态站：文章继续保留，旧链接尽量不失效，样式尽量接近原站，但不再依赖 Tomcat、后台和数据库服务。 这篇文章记录的是一次完整迁移过程。不是泛泛而谈“把博客迁到静态站”，而是把一个真实的 Solo/Bolo 项目拆开，迁移到 VuePress ...</p>
+</div>
+    <footer class="post__actions tags">
+        <a class="topic-pill" href="/topics/tools-blog.html">工具、效率与博客建设</a>
+        <a class="tag" rel="tag" href="/tags/VuePress.html">VuePress</a>
+<a class="tag" rel="tag" href="/tags/Bolo.html">Bolo</a>
+<a class="tag" rel="tag" href="/tags/Solo.html">Solo</a>
+<a class="tag" rel="tag" href="/tags/E9_9D_99_E6_80_81_E7_BD_91_E7_AB_99.html">静态网站</a>
+<a class="tag" rel="tag" href="/tags/E5_8D_9A_E5_AE_A2_E8_BF_81_E7_A7_BB.html">博客迁移</a>
+        <a href="/articles/2026/05/28/zhihu-bolo-to-vuepress-migration.html#more" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+    </footer>
+</article>
+<article class="post post--summary">
+    <header>
+        <h2>
+            
+            <a rel="bookmark" href="/articles/2020/10/29/1603968711195.html">Drools语法</a>
+            
+        </h2>
+        <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+                <i class="icon-date"></i> <time>2020-10-29</time>
+            </span>
+        </div>
+    </header>
+    <div class="vditor-reset post__excerpt"><p>Drools语法-Language 关键词   Hard keywords(Cannot use any): true,false,null   Soft keywords(avoid use) lock-on-active date-effective date-expires no-loop auto-focus activation-group agenda-group ruleflow-group entry-point duration package import dialect salience enabled attributes rule extend when then template query declare function global eval not in or and exists forall accumulate collect from action reverse result end over init   注释   单行注释 rule &quot;Testing Comments&quot; when // this is a single line com....</p>
+</div>
+    <footer class="post__actions tags">
+        <a class="topic-pill" href="/topics/tools-blog.html">工具、效率与博客建设</a>
+        <a class="tag" rel="tag" href="/tags/Drools.html">Drools</a>
+<a class="tag" rel="tag" href="/tags/E8_A7_84_E5_88_99_E5_BC_95_E6_93_8E.html">规则引擎</a>
+        <a href="/articles/2020/10/29/1603968711195.html#more" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+    </footer>
+</article>
+<article class="post post--summary">
+    <header>
+        <h2>
+            
+            <a rel="bookmark" href="/articles/2020/01/04/1578123919824.html">wireshark安装和基本语法</a>
+            
+        </h2>
+        <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+                <i class="icon-date"></i> <time>2020-01-04</time>
+            </span>
+        </div>
+    </header>
+    <div class="vditor-reset post__excerpt"><p>1.过滤IP，如来源IP或者目标IP等于某个IP 例子: ip.src eq 192.168.1.108 or ip.dst eq 192.168.1.108 或者 ip.addr eq 192.168.1.108 // 都能显示来源IP和目标IP 2.过滤端 口 例子: tcp.port eq 80 // 不管端口是来源的还是目标的都显示 tcp.port == 80 tcp.port eq 2722 tcp.port eq 80 or udp.port eq 80 tcp.dstport == 80 // 只显tcp协议的目标端口80 tcp.srcport == 80 // 只显tcp协议的来源端口80 udp.port eq 15000 过滤端口范围 tcp.port &gt;= 1 and tcp.port &lt;= 80 3.过滤协议 例子: tcp udp arp icmp http smtp ftp dns msnms ip ssl oicq bootp 等 等 排除arp包，如!arp  或者  not arp 4.过滤MAC 太以网头过滤 et....</p>
+</div>
+    <footer class="post__actions tags">
+        <a class="topic-pill" href="/topics/tools-blog.html">工具、效率与博客建设</a>
+        <a class="tag" rel="tag" href="/tags/wireshark.html">wireshark</a>
+<a class="tag" rel="tag" href="/tags/E7_BD_91_E7_BB_9C_E5_97_85_E6_8E_A2.html">网络嗅探</a>
+        <a href="/articles/2020/01/04/1578123919824.html#more" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+    </footer>
+</article>
+<article class="post post--summary">
+    <header>
+        <h2>
+            
+            <a rel="bookmark" href="/articles/2019/09/24/1569312462439.html">Rust学习之二猜字谜</a>
+            
+        </h2>
+        <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+                <i class="icon-date"></i> <time>2019-09-24</time>
+            </span>
+        </div>
+    </header>
+    <div class="vditor-reset post__excerpt"><p>1.首先cargo一个项目  cargo new guessing_game  2.修改toxml 添加依赖 [dependencies] rand = &quot;0.3.14&quot;  3.切换数据源,一来源 对于在国内的人来说，Rust开发时有时使用官方的源太慢，可以考虑更换使用国内中科大的源。更换方法如下： 在 $HOME/.cargo/config 中添加如下内容（如果文件不存在请直接新建该文件）： [source.crates-io] registry = &quot;<a href="https://mirrors.ustc.edu.cn/crates.io-index">https://mirrors.ustc.edu.cn/crates.io-index</a>&quot; replace-with = 'ustc' [source.ustc] registry = &quot;<a href="https://mirrors.ustc.edu.cn/crates.io-index">https://mirrors.ustc.edu.cn/crates.io-index</a>&quot;  4.引入依赖的api文档 cargo doc --open  5.最终代码 use std::io; use std::cmp::Ordering; use rand::Rng; fn main() { println!(&quot;Guess the....</p>
+</div>
+    <footer class="post__actions tags">
+        <a class="topic-pill" href="/topics/tools-blog.html">工具、效率与博客建设</a>
+        <a class="tag" rel="tag" href="/tags/Rust_E5_AD_A6_E4_B9_A0.html">Rust学习</a>
+        <a href="/articles/2019/09/24/1569312462439.html#more" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+    </footer>
+</article>
+<article class="post post--summary">
+    <header>
+        <h2>
+            
+            <a rel="bookmark" href="/articles/2019/09/21/1568996899251.html">Rust 学习一之环境安装</a>
+            <sup><a href="/articles/2019/09/21/1568996899251.html">有更新！</a></sup>
+        </h2>
+        <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="更新日期">
+                <i class="icon-date"></i> <time>2019-09-21</time>
+            </span>
+        </div>
+    </header>
+    <div class="vditor-reset post__excerpt"><p>1.社区 <a href="https://rustlang-cn.org/">https://rustlang-cn.org/</a> 2.环境安装 windows 下载地址 <a href="https://www.rust-lang.org/install.html">https://www.rust-lang.org/install.html</a>  下载完之后》rustup-init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 rustc --version  我安装完，报错了 no default toolchain configured 执行命令 更行版本 rustup update  卸载rust rustup self uninstall  3.hello word 走一波 新建文件main.rs编写程序 fn main() { println!(&quot;Hello, world!&quot;); }  然后编译一下 rustc <a href="http://main.rs">main.rs</a> 生成编译文件 和可执行文件如图  看生成了 main.exe 文件 windows用.\main.exe 执行一下这个可执行文件。看看效果哈。  熟悉的世界你好。跃然屏幕上。心情很好。没遇到啥问题很好哈 学习了hello word 然后再看看rust的依赖包管理工具cargo 4.hel....</p>
+</div>
+    <footer class="post__actions tags">
+        <a class="topic-pill" href="/topics/tools-blog.html">工具、效率与博客建设</a>
+        <a class="tag" rel="tag" href="/tags/E5_AD_A6_E4_B9_A0.html">学习</a>
+        <a href="/articles/2019/09/21/1568996899251.html#more" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+    </footer>
+</article></div>
+    </section>
+</main>
+        <aside>
+    <section>
+        <div class="module">
+            <header><h2>专题</h2></header>
+            <main class="topic-list">
+                <a href="/topics/java-jvm.html">Java 与 JVM</a>
+<a href="/topics/spring-backend.html">Spring Boot 与后端框架</a>
+<a href="/topics/ai-agent.html">AI、Agent 与本地模型</a>
+<a href="/topics/mysql-data.html">MySQL 与数据架构</a>
+<a href="/topics/linux-ops.html">Linux 运维与部署</a>
+<a href="/topics/python-crawler.html">Python 爬虫与自动化</a>
+<a href="/topics/middleware-distributed.html">中间件与分布式</a>
+<a href="/topics/tools-blog.html">工具、效率与博客建设</a>
+            </main>
+        </div>
+        <div class="module">
+            <header><h2>标签</h2></header>
+            <main>
+                <a rel="tag" href="/tags/Python.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="24 篇文章">Python</a>
+<a rel="tag" href="/tags/Java.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="18 篇文章">Java</a>
+<a rel="tag" href="/tags/CentOS.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="10 篇文章">CentOS</a>
+<a rel="tag" href="/tags/MySQL.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="10 篇文章">MySQL</a>
+<a rel="tag" href="/tags/Python_20_E7_88_AC_E8_99_AB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="9 篇文章">Python 爬虫</a>
+<a rel="tag" href="/tags/JVM.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="8 篇文章">JVM</a>
+<a rel="tag" href="/tags/Linux.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="6 篇文章">Linux</a>
+<a rel="tag" href="/tags/Scrapy.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="6 篇文章">Scrapy</a>
+<a rel="tag" href="/tags/E5_9E_83_E5_9C_BE_E5_9B_9E_E6_94_B6_E7_AE_97_E6_B3_95.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">垃圾回收算法</a>
+<a rel="tag" href="/tags/Spring_20Batch.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">Spring Batch</a>
+<a rel="tag" href="/tags/Spring_20Boot.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="4 篇文章">Spring Boot</a>
+<a rel="tag" href="/tags/E5_A4_A7_E8_A1_A8_E4_BC_98_E5_8C_96.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">大表优化</a>
+<a rel="tag" href="/tags/E8_B0_83_E4_BC_98.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">调优</a>
+<a rel="tag" href="/tags/E9_AB_98_E5_B9_B6_E5_8F_91.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">高并发</a>
+<a rel="tag" href="/tags/E5_86_B7_E7_83_AD_E5_88_86_E7_A6_BB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">冷热分离</a>
+<a rel="tag" href="/tags/E5_8D_83_E4_B8_87_E7_BA_A7_E8_A1_A8_E4_BC_98_E5_8C_96.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">千万级表优化</a>
+<a rel="tag" href="/tags/E7_BA_BF_E7_A8_8B.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">线程</a>
+<a rel="tag" href="/tags/Nginx.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="3 篇文章">Nginx</a>
+<a rel="tag" href="/tags/E5_BE_85_E5_88_86_E7_B1_BB.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="2 篇文章">待分类</a>
+<a rel="tag" href="/tags/E5_BC_80_E6_BA_90.html" class="tag vditor-tooltipped vditor-tooltipped__n" aria-label="2 篇文章">开源</a>
+            </main>
+        </div>
+        <div class="module tutorial-sidebar">
+            <header><h2>教程中心</h2></header>
+            <main>
+                <a class="tutorial-sidebar-card" href="/mysql.html">
+        <strong>MySQL</strong>
+        <span>34 篇教程</span>
+    </a>
+<a class="tutorial-sidebar-card" href="/springboot4.html">
+        <strong>Spring Boot 4</strong>
+        <span>21 篇教程</span>
+    </a>
+<a class="tutorial-sidebar-card" href="/netty.html">
+        <strong>Netty</strong>
+        <span>16 篇教程</span>
+    </a>
+                <a class="tutorial-sidebar-more" href="/tutorials.html">查看全部教程 &raquo;</a>
+            </main>
+        </div>
+        <div class="module meta">
+            <header><h2 class="ft__center"><a href="https://github.com/jackssybin" target="_blank" rel="noopener">GitHub</a></h2></header>
+            <main class="fn__clear">
+                <img src="/images/sidebar-avatar.jpg" aria-label="88250">
+                <div class="fn-right">
+                    <a href="/archives.html">106 <span class="ft-gray">文章</span></a><br>
+                    3 <span class="ft-gray">友链</span>
+                </div>
+            </main>
+        </div>
+    </section>
+</aside>
+    </div>
+</div>
+<footer class="footer fn-clear">
+    &copy; 2026
+    <a href="/">jackssybin 的个人博客</a>
+    <br>
+    Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank" rel="noopener">Bolo</a>
+    <span class="ft-warn">&heartsuit;</span>
+    Theme bolo-9IPHP
+    <sup>[<a href="https://github.com/9IPHP/9IPHP" target="_blank" rel="noopener">ref</a>]</sup>
+    by <a href="http://vanessa.b3log.org" target="_blank" rel="noopener">Vanessa</a>
+</footer>

@@ -29,14 +29,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: latest
+          extended: true
+
       - name: Fetch hourly hot news
         run: pnpm fetch-hot-news
 
-      - name: Build static site
-        run: pnpm build
+      - name: Export Hugo content
+        run: pnpm export:hugo
+
+      - name: Build Hugo static site
+        run: hugo --source hugo-site --destination hugo-site/public --minify
 
       - name: Publish latest hot news JSON
-        run: cp content/hot-news.json docs/.vuepress/dist/hot-news.json
+        run: cp content/hot-news.json hugo-site/public/hot-news.json
 
       - name: Deploy dist to server
         uses: easingthemes/ssh-deploy@v5.1.0
@@ -45,6 +54,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT || 22 }}
-          SOURCE: docs/.vuepress/dist/
+          SOURCE: hugo-site/public/
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
