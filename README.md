@@ -933,3 +933,45 @@ hugo new --source hugo-site articles/2026/06/hello-hugo.md
 - 新内容构建后能进入 `/search.html` 和站点地图。
 
 GitHub Actions 已在本分支调整为 Hugo 构建流程：推送到 `main` 时先导出 Hugo 内容，再构建 `hugo-site/public` 并同步到服务器。迁移验证完成前，不建议把该分支合并到 `main`。
+
+### Hugo 教程原文维护规范
+
+Hugo 版本的教程原文统一放在：
+
+```text
+hugo-site/content/tutorials/
+```
+
+当前三套教程分别是：
+
+```text
+hugo-site/content/tutorials/mysql
+hugo-site/content/tutorials/springboot4
+hugo-site/content/tutorials/netty
+```
+
+这些文件是长期维护用的 Markdown 原文，可以直接用 Obsidian 编辑。不要再维护 `hugo-site/content/generated/mysql`、`hugo-site/content/generated/springboot4`、`hugo-site/content/generated/netty`，这些旧 HTML 教程页已经由 Markdown 原文接管。
+
+如果需要从备份目录重新导入教程原文：
+
+```bash
+pnpm import:hugo-tutorials
+pnpm export:hugo
+```
+
+`bak/mysql_project_all`、`bak/springboot4_project_all`、`bak/netty_project_all` 只作为本地备份输入，不作为线上发布目录。导入脚本会保留旧访问地址，例如 `/mysql/01/01-mysql.html`，但源码路径使用可读的 Markdown 目录，方便后续整理和 Obsidian 写作。
+
+以后新增教程系列时，建议先在 `hugo-site/content/tutorials/<series>` 下维护 Markdown 原文，并给每篇文章补充：
+
+```yaml
+title: "文章标题"
+description: "摘要"
+url: "/series/old-or-stable-url.html"
+layout: "tutorial"
+kind: "tutorial"
+series: "series-id"
+seriesTitle: "系列名称"
+weight: 10
+tags: ["标签1", "标签2"]
+draft: false
+```

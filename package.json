@@ -10,6 +10,7 @@
     "new-post": "node scripts/new-post.mjs",
     "fetch-hot-news": "node scripts/fetch-hot-news.mjs",
     "update-content": "node scripts/update-content.mjs",
+    "import:hugo-tutorials": "node scripts/import-hugo-tutorials.mjs",
     "export:hugo": "node scripts/export-to-hugo.mjs",
     "build:hugo": "pnpm export:hugo && hugo --source hugo-site --destination hugo-site/public",
     "migrate": "node scripts/migrate-from-bolo.mjs",

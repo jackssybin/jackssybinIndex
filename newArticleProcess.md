@@ -318,3 +318,77 @@ pnpm build
 ```
 
 再访问 `/search.html` 验证。
+
+## 11. Hugo 教程系列原文维护流程
+
+Hugo + Obsidian 迁移分支中，教程系列的长期原文统一维护在：
+
+```text
+hugo-site/content/tutorials/
+```
+
+当前已有：
+
+```text
+hugo-site/content/tutorials/mysql
+hugo-site/content/tutorials/springboot4
+hugo-site/content/tutorials/netty
+```
+
+这些目录里的文件必须保持 Markdown 正文。代码示例中的 HTML 字符串或 HTML 示例可以保留，但不要把整篇正文转换成 `<h1>`、`<p>`、`<pre><code>` 形式。
+
+### 从备份目录重新导入教程
+
+当 `bak` 中有原始教程 Markdown 时，执行：
+
+```bash
+pnpm import:hugo-tutorials
+pnpm export:hugo
+```
+
+导入脚本会：
+
+- 从 `bak/mysql_project_all`、`bak/springboot4_project_all`、`bak/netty_project_all` 读取 UTF-8 Markdown。
+- 只发布章节、README、目录、学习路线、快速开始、附录。
+- 排除完成报告、项目进度、编写进度和 Netty 项目代码。
+- 给每篇教程补充 Hugo frontmatter。
+- 保留旧访问地址，例如 `/mysql/01/01-mysql.html`。
+
+### 新增教程系列
+
+新增教程系列时，建议新建：
+
+```text
+hugo-site/content/tutorials/<series-id>/
+```
+
+每篇教程至少包含：
+
+```yaml
+title: "教程标题"
+description: "教程摘要"
+url: "/series/stable-url.html"
+layout: "tutorial"
+kind: "tutorial"
+series: "series-id"
+seriesTitle: "系列名称"
+weight: 10
+tags: ["Java", "教程"]
+draft: false
+```
+
+字段说明：
+
+- `url` 是线上稳定访问地址，后续尽量不要修改。
+- `series` 用于搜索、教程目录和上一篇/下一篇。
+- `weight` 用于章节排序。
+- `tags` 用于搜索和标签聚合。
+
+新增或调整教程后，至少检查：
+
+```bash
+pnpm export:hugo
+pnpm build:hugo
+```
+
+并抽查 `/tutorials.html`、对应系列首页、任意章节详情页和 `/search.html`。

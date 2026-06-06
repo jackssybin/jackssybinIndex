@@ -9,6 +9,7 @@ const pageDataDir = path.join(vuepressDir, "page-data");
 const publicDir = path.join(vuepressDir, "public");
 const hugoDir = path.join(root, "hugo-site");
 const hugoContentDir = path.join(hugoDir, "content");
+const hugoTutorialsDir = path.join(hugoContentDir, "tutorials");
 const hugoLayoutsDir = path.join(hugoDir, "layouts");
 const hugoStaticDir = path.join(hugoDir, "static");
 
@@ -70,6 +71,15 @@ function localContentPathForUrl(url) {
     .replace(/[^a-zA-Z0-9/_-]+/gu, "-")
     .replace(/\/+/gu, "/");
   return path.join(hugoContentDir, "generated", `${safe || "index"}.md`);
+}
+
+function isTutorialUrl(url = "") {
+  return url === "/mysql.html"
+    || url === "/springboot4.html"
+    || url === "/netty.html"
+    || url.startsWith("/mysql/")
+    || url.startsWith("/springboot4/")
+    || url.startsWith("/netty/");
 }
 
 function dateFromUrl(url) {
@@ -178,6 +188,65 @@ async function writeLayouts() {
 `);
   await write(path.join(hugoLayoutsDir, "_default", "search.html"), `{{ define "main" }}{{ .Content }}{{ end }}
 `);
+  await write(path.join(hugoLayoutsDir, "_default", "tutorial.html"), `{{ define "main" }}
+<header>
+  <div class="banner">
+    <div class="fn-clear wrapper">
+      <h1 class="fn-inline"><a href="/" rel="start">{{ .Site.Title }}</a></h1>
+      <small> &nbsp; {{ .Site.Params.description }}</small>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="fn-clear wrapper">
+      <nav class="fn-left">
+        <a href="/">首页</a>
+        <a href="/tutorials.html">教程中心</a>
+        <a href="/topics.html">专题</a>
+        <a href="/nav.html">网址导航</a>
+        <a href="/tags.html">标签墙</a>
+        <a href="/archives.html">存档</a>
+        <a href="/search.html">搜索</a>
+      </nav>
+    </div>
+  </div>
+</header>
+{{ $series := .Params.series }}
+{{ $pages := sort (where .Site.RegularPages "Params.series" $series) "Params.weight" }}
+{{ $prev := "" }}
+{{ $next := "" }}
+{{ range $index, $page := $pages }}
+  {{ if eq $page.RelPermalink $.RelPermalink }}
+    {{ if gt $index 0 }}{{ $prev = index $pages (sub $index 1) }}{{ end }}
+    {{ if lt (add $index 1) (len $pages) }}{{ $next = index $pages (add $index 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+<div class="wrapper main-wrap fn-clear hugo-tutorial-layout">
+  <main class="main">
+    <article class="post hugo-tutorial-post">
+      <header class="hugo-tutorial-meta">
+        <p>{{ .Params.seriesTitle }}{{ with .Params.weight }} / 第 {{ . }} 节{{ end }}</p>
+      </header>
+      <div class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+      <footer class="post__footer fn-clear hugo-tutorial-pager">
+        {{ with $prev }}<a class="fn-left" href="{{ .RelPermalink }}">上一篇：{{ .Title }}</a>{{ end }}
+        {{ with $next }}<a class="fn-right" href="{{ .RelPermalink }}">下一篇：{{ .Title }}</a>{{ end }}
+      </footer>
+    </article>
+  </main>
+  <aside class="side hugo-tutorial-side">
+    <section class="module">
+      <header><h2>{{ .Params.seriesTitle }}目录</h2></header>
+      <div class="module-panel">
+        {{ range $pages }}
+          <a class="{{ if eq .RelPermalink $.RelPermalink }}current{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end }}
+      </div>
+    </section>
+  </aside>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}
+`);
   await write(path.join(hugoLayoutsDir, "_default", "rss.xml"), `{{- printf "<?xml version=\\"1.0\\" encoding=\\"utf-8\\" standalone=\\"yes\\"?>" | safeHTML }}
 <rss version="2.0">
   <channel>
@@ -231,6 +300,65 @@ async function writeBridgeAssets() {
   color: #111827;
   background: #fbbf24;
   padding: 0 2px;
+}
+
+.hugo-markdown-content {
+  line-height: 1.85;
+}
+
+.hugo-markdown-content h1 {
+  font-size: 30px;
+  line-height: 1.35;
+  margin-top: 0;
+}
+
+.hugo-markdown-content h2,
+.hugo-markdown-content h3 {
+  margin-top: 28px;
+}
+
+.hugo-markdown-content pre {
+  overflow-x: auto;
+}
+
+.hugo-tutorial-meta p {
+  color: #9ca3af;
+  margin: 0 0 16px;
+}
+
+.hugo-tutorial-side .module-panel {
+  max-height: calc(100vh - 180px);
+  overflow: auto;
+}
+
+.hugo-tutorial-side .module-panel a {
+  display: block;
+  color: inherit;
+  line-height: 1.45;
+  padding: 7px 0;
+}
+
+.hugo-tutorial-side .module-panel a.current {
+  color: #ff5a4f;
+  font-weight: 700;
+}
+
+.hugo-tutorial-pager {
+  border-top: 1px solid #2b3442;
+  margin-top: 28px;
+  padding-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .hugo-tutorial-layout .main,
+  .hugo-tutorial-layout .side {
+    float: none;
+    width: auto;
+  }
+
+  .hugo-tutorial-side .module-panel {
+    max-height: 320px;
+  }
 }
 `);
   await write(path.join(hugoStaticDir, "assets", "hugo-theme.js"), `(function () {
@@ -339,7 +467,10 @@ function searchPageHtml() {
 }
 
 async function exportSoloPages() {
-  await fs.rm(hugoContentDir, { recursive: true, force: true });
+  await fs.rm(path.join(hugoContentDir, "generated"), { recursive: true, force: true });
+  await fs.rm(path.join(hugoContentDir, "_index.md"), { force: true });
+  await fs.rm(path.join(hugoContentDir, "search.md"), { force: true });
+  const hasTutorialSources = await exists(hugoTutorialsDir);
   const markdownFiles = await listFiles(docsDir, (file) => file.endsWith(".md"));
   let count = 0;
   for (const file of markdownFiles) {
@@ -349,6 +480,7 @@ async function exportSoloPages() {
     if (!pageId || !data.permalink) continue;
     const html = await readPageHtml(pageId);
     const url = data.permalink;
+    if (hasTutorialSources && isTutorialUrl(url)) continue;
     const out = localContentPathForUrl(url);
     const frontmatter = {
       title: cleanTitle(data.title || "jackssybin 的个人博客"),
@@ -370,16 +502,55 @@ async function exportSoloPages() {
   return count;
 }
 
+function stripMarkdownForSearch(source = "") {
+  return source
+    .replace(/^---[\s\S]*?\n---\s*/u, "")
+    .replace(/```[\s\S]*?```/gu, " ")
+    .replace(/`([^`]+)`/gu, "$1")
+    .replace(/!\[[^\]]*\]\([^)]+\)/gu, " ")
+    .replace(/\[([^\]]+)\]\([^)]+\)/gu, "$1")
+    .replace(/[#>*_\-|]/gu, " ")
+    .replace(/\s+/gu, " ")
+    .trim();
+}
+
+async function readHugoTutorialSearchItems() {
+  if (!await exists(hugoTutorialsDir)) return [];
+  const files = await listFiles(hugoTutorialsDir, (file) => file.endsWith(".md"));
+  const items = [];
+  for (const file of files) {
+    const source = await fs.readFile(file, "utf8");
+    const { data, body } = parseFrontmatter(source);
+    if (!data.url) continue;
+    const content = stripMarkdownForSearch(body);
+    items.push({
+      title: data.title || path.basename(file, ".md"),
+      url: data.url,
+      description: data.description || content.slice(0, 180),
+      excerpt: data.description || content.slice(0, 180),
+      content: content.slice(0, 5000),
+      tags: data.tags || [],
+      type: "tutorial",
+      series: data.seriesTitle || data.series || "教程",
+      priority: 95
+    });
+  }
+  return items;
+}
+
 async function writeSearchIndex() {
   const source = await fs.readFile(path.join(vuepressDir, "search-index.ts"), "utf8");
   const searchIndex = extractConstArray(source, "searchIndex");
   const topicIndex = extractConstArray(source, "topicIndex");
   const tutorialIndex = extractConstArray(source, "tutorialIndex");
   const navIndex = extractConstArray(source, "navIndex");
+  const hugoTutorialIndex = await readHugoTutorialSearchItems();
+  const tutorialUrls = new Set(hugoTutorialIndex.map((item) => item.url));
   await write(path.join(hugoStaticDir, "search-index.json"), JSON.stringify([
     ...searchIndex,
     ...topicIndex.map((item) => ({ ...item, type: "topic", priority: 70 })),
-    ...tutorialIndex,
+    ...tutorialIndex.filter((item) => !tutorialUrls.has(item.url)),
+    ...hugoTutorialIndex,
     ...navIndex
   ], null, 2));
 }

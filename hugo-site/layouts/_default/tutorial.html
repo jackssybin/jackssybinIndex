@@ -1,0 +1,58 @@
+{{ define "main" }}
+<header>
+  <div class="banner">
+    <div class="fn-clear wrapper">
+      <h1 class="fn-inline"><a href="/" rel="start">{{ .Site.Title }}</a></h1>
+      <small> &nbsp; {{ .Site.Params.description }}</small>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="fn-clear wrapper">
+      <nav class="fn-left">
+        <a href="/">首页</a>
+        <a href="/tutorials.html">教程中心</a>
+        <a href="/topics.html">专题</a>
+        <a href="/nav.html">网址导航</a>
+        <a href="/tags.html">标签墙</a>
+        <a href="/archives.html">存档</a>
+        <a href="/search.html">搜索</a>
+      </nav>
+    </div>
+  </div>
+</header>
+{{ $series := .Params.series }}
+{{ $pages := sort (where .Site.RegularPages "Params.series" $series) "Params.weight" }}
+{{ $prev := "" }}
+{{ $next := "" }}
+{{ range $index, $page := $pages }}
+  {{ if eq $page.RelPermalink $.RelPermalink }}
+    {{ if gt $index 0 }}{{ $prev = index $pages (sub $index 1) }}{{ end }}
+    {{ if lt (add $index 1) (len $pages) }}{{ $next = index $pages (add $index 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+<div class="wrapper main-wrap fn-clear hugo-tutorial-layout">
+  <main class="main">
+    <article class="post hugo-tutorial-post">
+      <header class="hugo-tutorial-meta">
+        <p>{{ .Params.seriesTitle }}{{ with .Params.weight }} / 第 {{ . }} 节{{ end }}</p>
+      </header>
+      <div class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+      <footer class="post__footer fn-clear hugo-tutorial-pager">
+        {{ with $prev }}<a class="fn-left" href="{{ .RelPermalink }}">上一篇：{{ .Title }}</a>{{ end }}
+        {{ with $next }}<a class="fn-right" href="{{ .RelPermalink }}">下一篇：{{ .Title }}</a>{{ end }}
+      </footer>
+    </article>
+  </main>
+  <aside class="side hugo-tutorial-side">
+    <section class="module">
+      <header><h2>{{ .Params.seriesTitle }}目录</h2></header>
+      <div class="module-panel">
+        {{ range $pages }}
+          <a class="{{ if eq .RelPermalink $.RelPermalink }}current{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ end }}
+      </div>
+    </section>
+  </aside>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

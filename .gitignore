@@ -10,6 +10,8 @@ bak/
 # Hugo build output
 hugo-site/public/
 hugo-site/resources/
+hugo-site/hugo-site/
+hugo-site/.hugo_build.lock
 
 # Local environment
 .env
