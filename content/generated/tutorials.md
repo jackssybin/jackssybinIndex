@@ -1,6 +1,6 @@
 ---
 title: 教程中心
-description: jackssybin 教程中心，集中发布 MySQL、Spring Boot、Netty 等成体系技术教程。
+description: jackssybin 教程中心，集中发布 MySQL、Spring Boot、Netty、Linux 等成体系技术教程。
 url: /tutorials.html
 layout: content-page
 contentType: page
@@ -26,5 +26,10 @@ contentType: page
         <strong>Netty教程</strong>
         <span>16 篇教程</span>
         <em>Netty 系列教程，覆盖网络编程基础、核心组件、ByteBuf、编解码、粘包拆包、线程模型、性能优化和实战项目。</em>
+      </a>
+<a href="/linux.html">
+        <strong>Linux教程</strong>
+        <span>19 篇教程</span>
+        <em>Linux 开发者基础命令教程，覆盖文件系统、权限用户、Git、网络传输、Shell 脚本、开发环境和 Web 项目部署实战。</em>
       </a>
     </div>
