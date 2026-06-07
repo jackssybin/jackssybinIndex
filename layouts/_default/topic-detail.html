@@ -1,0 +1,44 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+{{ $slug := .Params.topicSlug }}
+{{ $topic := dict }}
+{{ range hugo.Data.topics }}{{ if eq .slug $slug }}{{ $topic = . }}{{ end }}{{ end }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main class="other">
+      <div class="title"><h2><i class="icon-list"></i>&nbsp;{{ cond $topic.title $topic.title .Title }}{{ with $topic.count }} ({{ . }}){{ end }}</h2></div>
+      <section class="topic-detail">
+        <p>{{ $topic.description }}</p>
+        <section class="topic-roadmap-panel">
+          <h3>推荐阅读顺序</h3>
+          <ol>
+            {{ range first 8 $topic.articles }}
+              <li><a href="{{ .url }}">{{ if .core }}<span>核心</span>{{ end }}{{ .title }}</a>{{ with .guide }}<p>{{ . }}</p>{{ else }}{{ with .description }}<p>{{ . }}</p>{{ end }}{{ end }}</li>
+            {{ end }}
+          </ol>
+        </section>
+        <div class="topic-article-list">
+          {{ range $topic.articles }}
+            <article class="post post--summary">
+              <header>
+                <h2>{{ if .core }}<span class="core-badge">核心</span>{{ end }}<a rel="bookmark" href="{{ .url }}">{{ .title }}</a></h2>
+                <div class="meta"><span><i class="icon-date"></i> <time>{{ .date }}</time></span></div>
+              </header>
+              <div class="vditor-reset post__excerpt"><p>{{ .excerpt }}</p></div>
+              <footer class="post__actions tags">
+                {{ range .tags }}<span class="tag">#{{ . }}</span>{{ end }}
+                <a href="{{ .url }}" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+              </footer>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+    </main>
+    <aside>
+      <section class="module"><header><h2>专题</h2></header><main class="topic-list">{{ range hugo.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main></section>
+      <section class="module tutorial-sidebar"><header><h2>教程中心</h2></header><main><a class="tutorial-sidebar-card" href="/mysql.html"><strong>MySQL</strong><span>系统教程</span></a><a class="tutorial-sidebar-card" href="/springboot4.html"><strong>Spring Boot 4</strong><span>系统教程</span></a><a class="tutorial-sidebar-card" href="/netty.html"><strong>Netty</strong><span>系统教程</span></a></main></section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

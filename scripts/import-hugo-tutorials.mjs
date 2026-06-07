@@ -4,7 +4,7 @@ import YAML from "yaml";
 
 const root = process.cwd();
 const contentTutorialsDir = path.join(root, "content", "tutorials");
-const hugoTutorialsDir = path.join(root, "hugo-site", "content", "tutorials");
+const hugoTutorialsDir = path.join(root, "content", "tutorials");
 
 const seriesList = [
   {
@@ -232,7 +232,7 @@ async function importSeries(series) {
       description: descriptionFromMarkdown(rewritten),
       url: item.url,
       layout: "tutorial",
-      kind: "tutorial",
+      contentType: "tutorial",
       series: series.id,
       seriesTitle: series.title,
       weight: item.weight,

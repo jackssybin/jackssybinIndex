@@ -11,25 +11,15 @@
     "fetch-hot-news": "node scripts/fetch-hot-news.mjs",
     "update-content": "node scripts/update-content.mjs",
     "import:hugo-tutorials": "node scripts/import-hugo-tutorials.mjs",
-    "export:hugo": "node scripts/export-to-hugo.mjs",
-    "build:hugo": "pnpm export:hugo && hugo --source hugo-site --destination hugo-site/public",
-    "migrate": "node scripts/migrate-from-bolo.mjs",
-    "dev": "vuepress dev docs --host 0.0.0.0",
-    "build": "vuepress build docs",
-    "preview": "vuepress dev docs --host 0.0.0.0"
+    "sync:hugo": "node scripts/sync-site.mjs",
+    "dev": "pnpm sync:hugo && hugo server --bind 0.0.0.0 --baseURL http://127.0.0.1:1313/",
+    "build": "pnpm sync:hugo && hugo --destination public --minify --cleanDestinationDir",
+    "preview": "hugo server --bind 0.0.0.0 --baseURL http://127.0.0.1:1313/",
+    "build:hugo": "pnpm build"
   },
   "dependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.30",
-    "iconv-lite": "^0.7.2",
-    "markdown-it": "^14.1.0",
-    "mysql2": "^3.15.3",
-    "vue": "^3.5.24",
-    "vuepress": "2.0.0-rc.30",
-    "vuepress-theme-hope": "2.0.0-rc.107",
     "yaml": "^2.9.0"
   },
-  "devDependencies": {
-    "sass-embedded": "^1.93.3"
-  },
+  "devDependencies": {},
   "packageManager": "pnpm@10.33.0"
 }

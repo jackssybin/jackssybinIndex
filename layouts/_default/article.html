@@ -1,0 +1,62 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main>
+      <article class="post post--detail">
+        <header>
+          <h2><a rel="bookmark" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <div class="meta">
+            <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+              <i class="icon-date"></i>
+              <time>{{ .Date.Format "2006-01-02" }}</time>
+            </span>
+          </div>
+        </header>
+        {{ with .Description }}
+          <section class="article-guide">
+            <div><strong>导读</strong><span>{{ . }}</span></div>
+          </section>
+        {{ end }}
+        <div id="more" class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+        {{ with .Params.tags }}
+          <footer class="tags">
+            {{ range . }}<a class="tag" href="/search.html?keyword={{ . | urlquery }}">{{ . }}</a>{{ end }}
+          </footer>
+        {{ end }}
+      </article>
+    </main>
+    <aside>
+      <section class="module meta">
+        <header><h2>关于我</h2></header>
+        <main class="fn-clear">
+          <img src="/images/sidebar-avatar.jpg" alt="jackssybin">
+          <p>jackssybin</p>
+          <p class="ft-gray">记录精彩的程序人生</p>
+        </main>
+      </section>
+      <section class="module">
+        <header><h2>教程中心</h2></header>
+        <main class="list">
+          <ul>
+            <li><a href="/mysql.html">MySQL 教程</a></li>
+            <li><a href="/springboot4.html">Spring Boot 4 教程</a></li>
+            <li><a href="/netty.html">Netty 教程</a></li>
+          </ul>
+        </main>
+      </section>
+      <section class="module">
+        <header><h2>最新文章</h2></header>
+        <main class="list">
+          <ul>
+            {{ range first 8 (where .Site.RegularPages "Params.contentType" "article") }}
+              <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          </ul>
+        </main>
+      </section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

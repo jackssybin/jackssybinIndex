@@ -2,7 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
-const outputFile = path.join(root, "content", "hot-news.json");
+const staticOutputFile = path.join(root, "static", "hot-news.json");
+const dataOutputFile = path.join(root, "data", "hot-news.json");
 const apiBase = "https://orz.ai/api/v1/dailynews/";
 
 const defaultPlatforms = [
@@ -72,23 +73,26 @@ async function main() {
   }
 
   if (groups.length === 0) {
-    const previous = await fs.readFile(outputFile, "utf8").catch(() => "");
+    const previous = await fs.readFile(staticOutputFile, "utf8").catch(() => "");
     if (previous) {
-      console.warn("All hot news requests failed, keeping existing content/hot-news.json");
+      console.warn("All hot news requests failed, keeping existing static/hot-news.json");
       return;
     }
     throw new Error("All hot news requests failed and no previous hot-news.json exists");
   }
 
-  await fs.mkdir(path.dirname(outputFile), { recursive: true });
-  await fs.writeFile(outputFile, JSON.stringify({
+  const payload = JSON.stringify({
     generatedAt: new Date().toISOString(),
     source: "https://github.com/orz-ai/hot_news",
     api: apiBase,
     groups,
     errors
-  }, null, 2), "utf8");
-  console.log(`Hot news written to ${path.relative(root, outputFile)}`);
+  }, null, 2);
+  await fs.mkdir(path.dirname(staticOutputFile), { recursive: true });
+  await fs.mkdir(path.dirname(dataOutputFile), { recursive: true });
+  await fs.writeFile(staticOutputFile, payload, "utf8");
+  await fs.writeFile(dataOutputFile, payload, "utf8");
+  console.log(`Hot news written to ${path.relative(root, staticOutputFile)} and ${path.relative(root, dataOutputFile)}`);
 }
 
 main().catch((error) => {

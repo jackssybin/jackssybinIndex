@@ -1,0 +1,32 @@
+<header>
+  <div class="banner">
+    <div class="fn-clear wrapper">
+      <h1 class="fn-inline"><a href="/" rel="start">{{ .Site.Title }}</a></h1>
+      <small> &nbsp; {{ .Site.Params.description }}</small>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="fn-clear wrapper">
+      <nav class="fn-left">
+        <a href="/"><i class="icon-home"></i> 首页</a>
+        <a href="/my-github-repos" rel="section">我的开源</a>
+        <a href="https://blog.csdn.net/jackssybin" rel="section">我的scdn</a>
+        <a href="/tutorials.html" rel="section"><i class="icon-list"></i> 教程中心</a>
+        <a href="/news.html" rel="section"><i class="icon-list"></i> 实时新闻</a>
+        <a href="/topics.html" rel="section"><i class="icon-list"></i> 专题</a>
+        <a href="/nav.html" rel="section"><i class="icon-link"></i> 网址导航</a>
+        <a href="/tags.html" rel="section"><i class="icon-tags"></i> 标签墙</a>
+        <a href="/archives.html"><i class="icon-inbox"></i> 存档</a>
+        <a href="/about.html" rel="section">关于本站</a>
+        <a href="/links.html" rel="archive"><i class="icon-link"></i> 友情链接</a>
+      </nav>
+      <div class="fn-right">
+        <button class="theme-toggle" type="button" data-theme-toggle>日</button>
+        <form class="form" action="/search.html" method="get">
+          <input placeholder="搜索文章标题" type="text" name="keyword">
+          <button type="submit"><i class="icon-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+{{ $prefix := .Params.archivePrefix }}
+<div class="wrapper"><div class="main-wrap"><main class="other">
+  <div class="title"><h2><i class="icon-inbox"></i>&nbsp;{{ $prefix }} 归档</h2></div>
+  <div class="topic-article-list">
+    {{ range hugo.Data.home.allArticles }}
+      {{ if hasPrefix .date $prefix }}
+        <article class="post post--summary"><header><h2><a rel="bookmark" href="{{ .url }}">{{ .title }}</a></h2><div class="meta"><span><i class="icon-date"></i> <time>{{ .date }}</time></span></div></header><div class="vditor-reset post__excerpt"><p>{{ .excerpt }}</p></div><footer class="post__actions tags"><a href="{{ .url }}" rel="contents" class="fn-right">阅读全文 &raquo;</a></footer></article>
+      {{ end }}
+    {{ end }}
+  </div>
+</main><aside><section class="module"><header><h2>专题</h2></header><main class="topic-list">{{ range hugo.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main></section></aside></div></div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

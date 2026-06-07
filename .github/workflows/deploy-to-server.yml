@@ -38,14 +38,11 @@ jobs:
       - name: Fetch hourly hot news
         run: pnpm fetch-hot-news
 
-      - name: Export Hugo content
-        run: pnpm export:hugo
+      - name: Sync Hugo data
+        run: pnpm sync:hugo
 
       - name: Build Hugo static site
-        run: hugo --source hugo-site --destination hugo-site/public --minify
-
-      - name: Publish latest hot news JSON
-        run: cp content/hot-news.json hugo-site/public/hot-news.json
+        run: hugo --destination public --minify --cleanDestinationDir
 
       - name: Deploy dist to server
         uses: easingthemes/ssh-deploy@v5.1.0
@@ -54,6 +51,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT || 22 }}
-          SOURCE: hugo-site/public/
+          SOURCE: public/
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**

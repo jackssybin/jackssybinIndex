@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN" data-solo-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
+  {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" href="/rss.xml" title="RSS" type="application/rss+xml">
+  <link rel="stylesheet" href="/assets/solo-base.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/hugo-bridge.css?v=20260607j">
+</head>
+<body>
+  <div class="solo-static">
+    {{ block "main" . }}{{ end }}
+  </div>
+  <script src="/assets/hugo-theme.js"></script>
+  {{ if eq .Params.layout "search" }}<script src="/assets/hugo-search.js"></script>{{ end }}
+</body>
+</html>

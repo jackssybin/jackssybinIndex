@@ -1,0 +1,22 @@
+baseURL = "https://jackssybin.cn/"
+title = "jackssybin 的个人博客"
+locale = "zh-cn"
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputs]
+home = ["HTML", "RSS"]
+section = ["HTML"]
+page = ["HTML"]
+
+[outputFormats.RSS]
+baseName = "rss"
+mediaType = "application/rss+xml"
+
+[params]
+description = "记录精彩的程序人生"

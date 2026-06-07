@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main class="other">
+      <div class="title"><h2><i class="icon-list"></i>&nbsp;专题系列</h2></div>
+      <div class="topic-grid">
+        {{ range hugo.Data.topics }}
+          <section class="topic-card">
+            <h3><a href="{{ .url }}">{{ .title }}</a></h3>
+            <p>{{ .description }}</p>
+            <ol class="topic-roadmap">
+              {{ range first 4 .articles }}<li><a href="{{ .url }}">{{ .title }}</a></li>{{ end }}
+            </ol>
+            <span>{{ .count }} 篇文章</span>
+          </section>
+        {{ end }}
+      </div>
+    </main>
+    <aside>
+      <section class="module">
+        <header><h2>专题</h2></header>
+        <main class="topic-list">{{ range hugo.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main>
+      </section>
+      <section class="module tutorial-sidebar">
+        <header><h2>教程中心</h2></header>
+        <main>
+          <a class="tutorial-sidebar-card" href="/mysql.html"><strong>MySQL</strong><span>系统教程</span></a>
+          <a class="tutorial-sidebar-card" href="/springboot4.html"><strong>Spring Boot 4</strong><span>系统教程</span></a>
+          <a class="tutorial-sidebar-card" href="/netty.html"><strong>Netty</strong><span>系统教程</span></a>
+        </main>
+      </section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

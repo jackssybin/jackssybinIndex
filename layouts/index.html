@@ -1,0 +1,98 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main>
+      <section class="home-portal">
+        <div class="home-portal-hero">
+          <span>内容入口</span>
+          <h2>从博客沉淀到系统教程的技术知识库</h2>
+          <p>这里汇总历史技术笔记、专题阅读路线、系统教程和常用导航。可以按最新文章浏览，也可以直接进入教程中心或专题路线学习。</p>
+          <div>
+            <a href="/tutorials.html">进入教程中心</a>
+            <a href="/topics.html">查看专题路线</a>
+            <a href="/weekly.html">每周精选</a>
+            <a href="/search.html">全站搜索</a>
+          </div>
+        </div>
+        <section class="home-hot-news" data-hot-news-live="home">
+          <div><h3>实时热点</h3><a href="/news.html">查看全部 &raquo;</a></div>
+          <p>轻量展示，每小时更新：<span data-hot-news-time>加载中</span></p>
+          <ul class="home-hot-news-list" data-hot-news-list></ul>
+        </section>
+        <div class="home-portal-grid">
+          <section>
+            <h3>最新文章</h3>
+            {{ range hugo.Data.home.latestArticles }}
+              <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .date }}</span></a>
+            {{ end }}
+          </section>
+          <section>
+            <h3>推荐教程</h3>
+            <a href="/mysql.html"><strong>MySQL</strong><span>数据库基础、事务、索引与运维</span></a>
+            <a href="/springboot4.html"><strong>Spring Boot 4</strong><span>后端框架升级与实战</span></a>
+            <a href="/netty.html"><strong>Netty</strong><span>网络编程与高性能通信</span></a>
+          </section>
+          <section>
+            <h3>热门专题</h3>
+            {{ range first 6 hugo.Data.home.topics }}
+              <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .count }} 篇文章</span></a>
+            {{ end }}
+          </section>
+        </div>
+        <section class="home-learning-path">
+          <h3>学习路线</h3>
+          <ol>
+            {{ range hugo.Data.home.learningPath }}
+              <li><a href="{{ .url }}">{{ .title }}</a><span>{{ .topic }}</span></li>
+            {{ end }}
+          </ol>
+        </section>
+        <section class="home-recent-updates">
+          <h3>最近更新</h3>
+          <div>
+            {{ range hugo.Data.home.recentUpdates }}
+              <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .type }}{{ with .date }} / {{ . }}{{ end }}</span></a>
+            {{ end }}
+          </div>
+        </section>
+      </section>
+      {{ range hugo.Data.home.articles }}
+        <article class="post post--summary">
+          <header>
+            <h2><a rel="bookmark" href="{{ .url }}">{{ .title }}</a></h2>
+            <div class="meta"><span><i class="icon-date"></i> <time>{{ .date }}</time></span></div>
+          </header>
+          {{ with .excerpt }}<div class="vditor-reset post__excerpt"><p>{{ . }}</p></div>{{ end }}
+          <footer class="post__actions tags">
+            {{ with .topic }}<span class="topic-pill">{{ . }}</span>{{ end }}
+            {{ range first 6 .tags }}<a class="tag" href="/search.html?keyword={{ . | urlquery }}">{{ . }}</a>{{ end }}
+            <a href="{{ .url }}" rel="contents" class="fn-right">阅读全文 &raquo;</a>
+          </footer>
+        </article>
+      {{ end }}
+    </main>
+    <aside>
+      <section class="module">
+        <header><h2>专题</h2></header>
+        <main class="topic-list">
+          {{ range hugo.Data.home.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}
+        </main>
+      </section>
+      <section class="module tutorial-sidebar">
+        <header><h2>教程中心</h2></header>
+        <main>
+          <a class="tutorial-sidebar-card" href="/mysql.html"><strong>MySQL</strong><span>系统教程</span></a>
+          <a class="tutorial-sidebar-card" href="/springboot4.html"><strong>Spring Boot 4</strong><span>系统教程</span></a>
+          <a class="tutorial-sidebar-card" href="/netty.html"><strong>Netty</strong><span>系统教程</span></a>
+        </main>
+      </section>
+      <section class="module meta">
+        <header><h2>GitHub</h2></header>
+        <main class="fn-clear"><img src="/images/sidebar-avatar.jpg" alt="jackssybin"><p>jackssybin</p><p class="ft-gray">记录精彩的程序人生</p></main>
+      </section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

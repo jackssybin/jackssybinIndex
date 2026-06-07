@@ -35,16 +35,14 @@ const permalink = `/articles/${year}/${month}/${day}/${slug}.html`;
 
 const content = `---
 title: ${JSON.stringify(title)}
-permalink: ${JSON.stringify(permalink)}
+url: ${JSON.stringify(permalink)}
+date: ${JSON.stringify(`${year}-${month}-${day}`)}
 description: ""
 tags: ["待分类"]
-pageClass: solo-page
-sidebar: false
-breadcrumb: false
-pageInfo: false
-contributors: false
-lastUpdated: false
-comment: false
+topic: ""
+topicSlug: ""
+layout: article
+contentType: article
 ---
 
 # ${title}
@@ -69,7 +67,7 @@ try {
   await fs.writeFile(articlePath, content, { encoding: "utf8", flag: "wx" });
   console.log(`Created: ${path.relative(root, articlePath)}`);
   console.log(`Permalink: ${permalink}`);
-  console.log("Next: pnpm update-content && pnpm dev --port 8080");
+  console.log("Next: pnpm update-content && pnpm dev");
 } catch (error) {
   if (error.code === "EEXIST") {
     console.error(`File already exists: ${path.relative(root, articlePath)}`);

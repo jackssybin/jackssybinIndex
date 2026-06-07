@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+{{ $news := index hugo.Data "hot-news" }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main class="other">
+      <div class="title"><h2><i class="icon-list"></i>&nbsp;实时新闻</h2></div>
+      <section class="hot-news-page" data-hot-news-live="page">
+        <div class="hot-news-hero">
+          <h2>实时新闻</h2>
+          <p>内容来源于 <a href="{{ $news.source | default "https://github.com/orz-ai/hot_news" }}" target="_blank" rel="noopener">orz-ai/hot_news</a>，本站按静态站方式每小时生成一次，用来快速浏览技术、财经、社区和综合热点。</p>
+          <span>最后生成：<b data-hot-news-time>{{ with $news.generatedAt }}{{ replace (substr . 0 19) "T" " " }}{{ else }}等待生成{{ end }}</b></span>
+        </div>
+        <div class="hot-news-grid hot-news-grid--page">
+          {{ range $group := $news.groups }}
+            <section class="hot-news-source">
+              <h3>{{ $group.platformName }}</h3>
+              <ol>
+                {{ range $item := first 12 $group.items }}
+                  <li>
+                    <a href="{{ $item.url }}" target="_blank" rel="noopener nofollow">
+                      <span>{{ $item.rank }}</span>
+                      <strong>{{ $item.title }}</strong>
+                    </a>
+                    {{ with $item.content }}<p>{{ . }}</p>{{ end }}
+                  </li>
+                {{ end }}
+              </ol>
+            </section>
+          {{ end }}
+        </div>
+      </section>
+    </main>
+    <aside>
+      <section class="module">
+        <header><h2>专题</h2></header>
+        <main class="list">
+          <ul>
+            {{ range first 8 hugo.Data.topics }}
+              <li><a href="{{ .url }}">{{ .title }}</a></li>
+            {{ end }}
+          </ul>
+        </main>
+      </section>
+      <section class="module">
+        <header><h2>教程中心</h2></header>
+        <main class="list">
+          <ul>
+            <li><a href="/mysql.html">MySQL 教程</a></li>
+            <li><a href="/springboot4.html">Spring Boot 4 教程</a></li>
+            <li><a href="/netty.html">Netty 教程</a></li>
+          </ul>
+        </main>
+      </section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}

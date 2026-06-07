@@ -1,17 +1,10 @@
 # Dependencies
 node_modules/
 
-# VuePress build output
-docs/.vuepress/dist/
-docs/.vuepress/.cache/
-docs/.vuepress/.temp/
-bak/
-
 # Hugo build output
-hugo-site/public/
-hugo-site/resources/
-hugo-site/hugo-site/
-hugo-site/.hugo_build.lock
+public/
+resources/
+.hugo_build.lock
 
 # Local environment
 .env
@@ -19,6 +12,7 @@ hugo-site/.hugo_build.lock
 !.env.example
 
 # Original migration inputs kept locally by default
+bak/
 ROOT/
 jackssybin.github.io-master/
 mysql_project_all/

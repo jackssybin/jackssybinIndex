@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+{{ $pageNumber := int .Params.pageNumber }}{{ $pageSize := 20 }}{{ $start := mul (sub $pageNumber 1) $pageSize }}
+<div class="wrapper"><div class="main-wrap"><main class="main">
+  {{ range first $pageSize (after $start hugo.Data.home.allArticles) }}
+    <article class="post post--summary">
+      <header><h2>{{ if .core }}<span class="core-badge">核心</span>{{ end }}<a rel="bookmark" href="{{ .url }}">{{ .title }}</a></h2><div class="meta"><span><i class="icon-date"></i> <time>{{ .date }}</time></span></div></header>
+      <div class="vditor-reset post__excerpt"><p>{{ .excerpt }}</p></div>
+      <footer class="post__actions tags">{{ range .tags }}<span class="tag">#{{ . }}</span>{{ end }}<a href="{{ .url }}" rel="contents" class="fn-right">阅读全文 &raquo;</a></footer>
+    </article>
+  {{ end }}
+</main><aside><section class="module"><header><h2>专题</h2></header><main class="topic-list">{{ range hugo.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main></section></aside></div></div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}
