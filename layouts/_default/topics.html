@@ -5,7 +5,7 @@
     <main class="other">
       <div class="title"><h2><i class="icon-list"></i>&nbsp;专题系列</h2></div>
       <div class="topic-grid">
-        {{ range hugo.Data.topics }}
+        {{ range site.Data.topics }}
           <section class="topic-card">
             <h3><a href="{{ .url }}">{{ .title }}</a></h3>
             <p>{{ .description }}</p>
@@ -20,7 +20,7 @@
     <aside>
       <section class="module">
         <header><h2>专题</h2></header>
-        <main class="topic-list">{{ range hugo.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main>
+        <main class="topic-list">{{ range site.Data.topics }}<a href="{{ .url }}">{{ .title }}</a>{{ end }}</main>
       </section>
       <section class="module tutorial-sidebar">
         <header><h2>教程中心</h2></header>

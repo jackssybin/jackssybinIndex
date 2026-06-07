@@ -2,6 +2,8 @@
 title: Odysseus：一个值得关注的本地 AI 工作台
 description: 本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。
 url: /articles/2026/06/03/odysseus-zhihu.html
+date: "2026-06-03T00:00:00+08:00"
+lastmod: "2026-06-03T00:00:00+08:00"
 tags:
   - AI
   - Odysseus

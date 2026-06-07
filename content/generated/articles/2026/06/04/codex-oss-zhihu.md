@@ -3,6 +3,8 @@ title: 一个开源维护者视角：为什么我建议大家关注 OpenAI Codex
 description: 本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA
   插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。
 url: /articles/2026/06/04/codex-oss-zhihu.html
+date: "2026-06-04T00:00:00+08:00"
+lastmod: "2026-06-04T00:00:00+08:00"
 tags:
   - AI
   - Codex

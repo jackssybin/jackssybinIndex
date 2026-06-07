@@ -67,8 +67,11 @@ function excerpt(body, length = 180) {
 
 function normalizeDate(value = "") {
   if (!value) return "";
+  const raw = String(value);
+  const localDate = raw.match(/^(\d{4}-\d{2}-\d{2})/u);
+  if (localDate) return localDate[1];
   const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? String(value) : date.toISOString().slice(0, 10);
+  return Number.isNaN(date.getTime()) ? raw : date.toISOString().slice(0, 10);
 }
 
 function inferType(file, params) {

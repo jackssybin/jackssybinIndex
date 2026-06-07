@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ partial "site-header.html" . }}
-{{ $news := index hugo.Data "hot-news" }}
+{{ $news := index site.Data "hot-news" }}
 <div class="wrapper">
   <div class="main-wrap">
     <main class="other">
@@ -36,7 +36,7 @@
         <header><h2>专题</h2></header>
         <main class="list">
           <ul>
-            {{ range first 8 hugo.Data.topics }}
+            {{ range first 8 site.Data.topics }}
               <li><a href="{{ .url }}">{{ .title }}</a></li>
             {{ end }}
           </ul>

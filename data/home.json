@@ -1,6 +1,47 @@
 {
   "allArticles": [
     {
+      "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
+      "url": "/articles/2026/06/04/codex-oss-zhihu.html",
+      "type": "blog",
+      "date": "2026-06-04",
+      "description": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "excerpt": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Codex",
+        "OpenAI",
+        "开源",
+        "Spring Batch",
+        "IDEA 插件"
+      ],
+      "priority": 0,
+      "content": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS，也欢迎支持我的 Spring Batch IDEA 插件 先说背景：我最近把自己维护的一个开源项目整理了一遍，并提交了 OpenAI 的 Codex for Open Source 申请。 项目是这个： https://github.com/jackssybin/spring batch monitor plugin 它是一个 IntelliJ IDEA 插件，用来在 IDE 里直接查看 Spring Batch 的 job / step execution 信息。简单说，就是不用额外搭后端服务，也不用每次手写 SQL 查批处理元数据，开发者可以直接在 IDEA 里看任务执行历史、失败状态、step 指标和统计信息。 这篇文章想聊三件事： 1. OpenAI Codex for OSS 到底适合哪些开源项目。 2. 为什么独立开源维护者需要这类支持。 3. 如果你也做 Java / Spring Batch / IntelliJ 插件开发，欢迎一起关注和支持这个项目。 一、Codex for OSS 是什么？ OpenAI 最近开放了一个面向开源维护者的项目：Codex for Open Source。 申请入口在这里： https://openai.com/form/codex for oss/ 从申请页面的信息看，它主要面向活跃开源项目的 primary maintainer 或 core maintainer。入选维护者可能获得： 6 个月 ChatGPT Pro（包含 Codex）使用权限。 Codex Security 的有条件访问权限。 用于开源维护、代码审查、发布工作流和自动化的 API credits。 它看重的不是单纯“项目有没有 AI 概念”，而是这个项目是否有实际维护价值，例如： 是否是活跃开源项目。 是否有真实使用者或生态价值。 维护者是否承担 PR review、issue triage、release、security review 等工作。 Codex 是否能帮助项目提升代码质量、安全性和维护效率。 这点我觉得挺重要：它不是一个“只给大明星项目”的表单。页面里也提到，如果项目不完全符合典型资格，但对生态系统有重要作用，仍然可以提交并说明理由。 二、为什么独立开源项目尤其需要这类支持？ 做过开源的人都知道，真正累的往往不是写第一版代码，而是长期维护。 一个项目从“能跑”到“值得别人用”，中间有很多隐形成本： README 要写清楚。 issue 要有人看。 bug 要能复现。 PR 要能 review。 release 要能稳定发。 安全问题要有人处理。 用户环境差异要有人兜底。 尤其是开发者工具类项目，维护成本会更明显。 比如 IntelliJ 插件，你不仅要考虑业务功能，还要考虑： IDEA 版本兼容性。 Gradle IntelliJ Plugin 配置。 插件描述和 Marketplace 元信息。 UI 行为和用户体验。 Java 版本、JBR、CI 构建。 文档、截图、安装方式、故障排查。 这些事情单独看都不大，但叠在一起，就会消耗大量维护者时间。 Codex 这类工具真正有价值的地方，不只是“帮你写几行代码”，而是能参与到维护流程里： 帮忙做代码审查。 帮忙补测试。 帮忙发现潜在安全问题。 帮忙整理 release note。 帮忙把英文文档和中文文档同步维护。 帮忙检查 CI、构建和项目结构。 对独立维护者来说，这种支持是实打实的。 三、我的项目：Spring Batch Monitor Plugin 我这次提交申请的项目是： jackssybin/spring batch monitor plugin 项目定位很简单： 让 Spring Batch 开发者在 IntelliJ IDEA 里直接查看批处理元数据。 Spring Batch 本身会在数据库里保存很多执行状态，比如： BATCH JOB INSTANCE BATCH JOB EXECUTION BATCH STEP EXECUTION 这些表里有很重要的信息： 哪个 job 执行失败了？ 哪个 step 失败或耗时过长？ read / write / skip 数量是多少？ 某个执行实例什么时候开始、什么时候结束？ 不同环境里的批处理表现是否一致？ 实际开发里，很多人还是靠手写 SQL 查这些表。 这个插件想解决的就是这个小而真实的问题： 把 Spring Batch 的执行状态放回开发者最常待的 IDE 里。 目前项目支持的方向包括： 直接连接 Spring Batch 元数据数据库。 查看 job execution 历史。 查看 step execution 指标。 支持多数据源配置。 支持连接测试。 支持统计视图。 支持中英文文档。 支持 MySQL、PostgreSQL、Oracle、SQL Server、H2、SQLite 等常见数据库。 项目地址： https://github.com/jackssybin/spring batch monitor plugin 四、为了申请 Codex for OSS，我做了哪些整..."
+    },
+    {
+      "title": "Odysseus：一个值得关注的本地 AI 工作台",
+      "url": "/articles/2026/06/03/odysseus-zhihu.html",
+      "type": "blog",
+      "date": "2026-06-03",
+      "description": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "excerpt": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "本地 AI",
+        "Agent",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
+    },
+    {
       "title": "LocalDateTime操作",
       "url": "/articles/2025/07/16/1752652246705.html",
       "type": "blog",
@@ -35,7 +76,7 @@
         "加锁"
       ],
       "priority": 0,
-      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 ========================================= 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); ========================================= 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format;..."
+      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
     },
     {
       "title": "springBoot启动扩展点精析",
@@ -1793,12 +1834,14 @@
       ],
       "priority": 0,
       "content": "Lists.transform的使用 Lists.transform：能够轻松的从一种类型的list转换为另一种类型的list 。 结果如下 还有采坑的，得需要注意下 zhangsan test lisi test wangwu test =======change lambda 方式 zhangsan lisi wangwu class UserVo{ private String id; private String name; } class User{ private String id; private String name; } 对原数据集users的修改会直接影响到Lists.transform方法返回的结果userVos， 解决方案还是用 lambda 把方便快捷 参考https://blog.csdn.net/mnmlist/article/details/53870520"
-    },
+    }
+  ],
+  "articles": [
     {
       "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
       "url": "/articles/2026/06/04/codex-oss-zhihu.html",
       "type": "blog",
-      "date": "",
+      "date": "2026-06-04",
       "description": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
       "excerpt": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
       "topic": "",
@@ -1819,7 +1862,7 @@
       "title": "Odysseus：一个值得关注的本地 AI 工作台",
       "url": "/articles/2026/06/03/odysseus-zhihu.html",
       "type": "blog",
-      "date": "",
+      "date": "2026-06-03",
       "description": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
       "excerpt": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
       "topic": "",
@@ -1834,9 +1877,7 @@
       ],
       "priority": 0,
       "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
-    }
-  ],
-  "articles": [
+    },
     {
       "title": "LocalDateTime操作",
       "url": "/articles/2025/07/16/1752652246705.html",
@@ -1872,7 +1913,7 @@
         "加锁"
       ],
       "priority": 0,
-      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 ========================================= 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); ========================================= 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format;..."
+      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
     },
     {
       "title": "springBoot启动扩展点精析",
@@ -2162,43 +2203,50 @@
       ],
       "priority": 0,
       "content": "问题： 分析： 1 强一致性思想 2 最终一致性思想 (1)先更新数据库，还是先更新缓存 先更新数据库 先更新缓存 不再更新缓存，直接删除，为什么？ 业务角度考虑 性价比角度考虑 举个栗子，一个缓存涉及的表的字段，在 1 分钟内就修改了 20 次，或者是 100 次，那么缓存更新 20 次、100 次；但是这个缓存在 1 分钟内只被读取了 1 次，有大量的冷数据。实际上，如果你只是删除缓存的话，那么在 1 分钟内，这个缓存不过就重新计算一次而已，开销大幅度降低。用到缓存才去算缓存。 设计角度考虑 (2)先删缓存，再更新数据库 问题一：线程顺序 问题二：如果你用了mysql的读写分离架构怎么办？ 解决一：采用延时双删策略 伪代码如下 那么，这个1秒怎么确定的，具体该休眠多久呢？ 采用这种同步淘汰策略，吞吐量降低怎么办？ 解决二：异步 （1）请求A进行写操作，删除缓存 （2）请求B查询发现缓存不存在 （3）请求B去数据库查询得到旧值 （4）请求B将旧值写入缓存 （5）请求A将新值写入数据库 （6）请求A试图去删除请求B写入对缓存值，结果失败了。 ok,这也就是说。如果第二次删除缓存失败，会再次出现缓存和数据库不一致的问题。 如何解决呢？我们继续往下看。 (3)先更新数据库，再删缓存 Cache Aside pattern 问题 解决 异步优化方式：消息队列 异步优化方式：基于订阅binlog的同步机制 流程如下图所示： 参考： 如何保证缓存与数据库一致性 Java进阶面试必问：如何保证缓存与数据库的双写一致性？ 数据库缓存最终一致性的四种方案，你真的了解过吗？"
-    },
-    {
-      "title": "Drools语法",
-      "url": "/articles/2020/10/29/1603968711195.html",
-      "type": "blog",
-      "date": "2020-10-29",
-      "description": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
-      "excerpt": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "Drools",
-        "规则引擎"
-      ],
-      "priority": 0,
-      "content": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus activation group agenda group ruleflow group entry point duration package import dialect salience enabled attributes rule extend when then template query declare function global eval not in or and exists forall accumulate collect from action reverse result end over init 注释 单行注释 多行注释 Pakage package package表示一个命名空间.package是必须定义的，必须放在规则文件第一行. import import语句的工作方式类似于Java中的import语句。您需要为要在规则中使用的任何对象指定完全限定路径和类型名称。 global global用于定义全局变量。 Rules: Set the global value: Function function function是一种将语义代码放置在规则源文件中的方法，而不是普通的Java类 Query query query是一种搜索工作内存中与指定条件匹配的事实的简单方法. Rule rule定义规则。rule \"ruleName\"。 一个规则可以包含三个部分：属性部分,条件部分：即LHS,结果部分：即RHS. 属性部分 Attributes 定义当前规则执行的一些属性等，比如是否可被重复执行、过期时间、生效时间等。 activation group agenda group auto focus date effective date expires dialect duration duration value enabled lock on active no loop ruleflow group salience no loop 默认值：false 类型：Boolean 在一个规则当中如果条件满足就对Working Memory当中的某个Fact对象进行了修改，比如使用update 将其更新到当前的Working Memory当中，这时引擎会再次检查所有的规则是否满足条件，如果满足会再次执行. ruleflow group 默认值：N/A 类型：String Ruleflow是一个Drools功能，可让您控制规则的触发。由相同的规则流组标识汇编的规则仅在其组处于活动状态时触发。将规则划分为一个个的组，然后在规则流当中通过使用ruleflow group属性的值，从而使用对应的规则。 lock on active 默认值：false 类型：Boolean 当在规则上使用ruleflow group 属性或agenda group 属性的时候，将lock on action 属性的值设置为true，可能避免因某些Fact 对象被修改而使已经执行过的规则再次被激活执行。可以看出该属性与no loop 属性有相似之处，no loop 属性是为了避免Fact 修改或调用了insert、retract、update 之类而导致规则再次激活执行，这里的lock on action 属性也是起这个作用，lock on active 是no loop 的增强版属性，它主要作用在使用ruleflow group 属性或agenda group 属性的时候 salience 默认值：0 类型：integer 设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数. 规则的salience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机的. agenda group 默认值：MAIN 类型：String 规则的调用与执行是通过StatelessSession 或StatefulSession 来实现的，一般的顺序是创建一个StatelessSession 或StatefulSession，将各种经过编译的规则的package 添加到session当中，接下来将规则当中可能用到的Global对象和Fact对象插入到Session 当中，最后调用fireAllRules 方法来触发、执行规则。在没有调用最后一步fireAllRules方法之前，所有的规则及插入的Fact对象都存放在一个名叫Agenda表的对象当中，这个Agenda表中每一个规则及与其匹配相关业务数据叫做Activation，在调用fireAllRules方法后，这些Activation 会依次执行，这些位于Agenda 表中的Activation 的执行顺序在没有设置相关用来控制顺序的属性时（比如salience 属性），它的执行顺..."
-    },
-    {
-      "title": "线程流转状态图",
-      "url": "/articles/2020/10/22/1603355147679.html",
-      "type": "blog",
-      "date": "2020-10-22",
-      "description": "新建状态(New): 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如，thread.start()。处于就绪状态的线程，随时可...",
-      "excerpt": "新建状态(New): 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如，thread.start()。处于就绪状态的线程，随时可...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "Thread",
-        "线程状态转换"
-      ],
-      "priority": 0,
-      "content": "1. 新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 2. 就绪状态(Runnable) : 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如， thread.start() 。处于就绪状态的线程，随时可能被CPU调度执行。 3. 运行状态(Running) : 线程获取CPU权限进行执行。需要注意的是，线程只能从就绪状态进入到运行状态。 4. 阻塞状态(Blocked) : 阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种： (01) 等待阻塞（左下角Blocket） 通过调用线程的wait()方法，让线程等待某工作的完成。该方法会 释放锁 ， 进入等待池 。当他唤醒后就 进入锁池 等待获得锁，获得锁后继续完成wait()方法后面的代码，才能进入到就绪状态。 (02) 同步阻塞 （右下角Blocket） 线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态（进入锁池）。 (03) 其他阻塞（最上面的Blocket） 通过调用线程的sleep()（sleep不会释放锁）或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。 5. 死亡(dead) :线程 run ()、 main () 方法执行结束，或者因异常退出了 run ()方法，则该线程结束生命周期。死亡的线程不可再次复生。 yield相关 我们知道 start() 方法是启动线程，让线程变成就绪状态等待 CPU 调度后执行。 那 yield() 方法是干什么用的呢？来看下源码。 yield 即 “谦让”，也是 Thread 类的方法。它让掉当前线程 CPU 的时间片，使正在运行中的线程重新变成就绪状态，并重新竞争 CPU 的调度权。它可能会获取到，也有可能被其他线程获取到。 实战 下面是一个使用示例。 这个示例每当执行完 20 个之后就让出 CPU，每次谦让后就会马上获取到调度权继续执行。 运行以上程序，可以有以下两种结果。 结果1：栈长让出了 CPU 资源，小蜜成功上位。 结果2：栈长让出了 CPU 资源，栈长继续运行。 而如果我们把两个线程加上线程优先级，那输出的结果又不一样。 因为给小蜜加了最高优先权，栈长加了最低优先权，即使栈长先启动，那小蜜还是有很大的概率比栈长先会输出完的，大家可以试一下。 yield 和 sleep 的异同 1. yield, sleep 都能暂停当前线程，sleep 可以指定具体休眠的时间，而 yield 则依赖 CPU 的时间片划分。 2. yield, sleep 两个在暂停过程中，如已经持有锁，则都不会释放锁资源。 3. yield 不能被中断，而 sleep 则可以接受中断。 如果一定要用它的话，一句话解释就是：yield 方法可以很好的控制多线程，如执行某项复杂的任务时，如果担心占用资源过多，可以在完成某个重要的工作后使用 yield 方法让掉当前 CPU 的调度权，等下次获取到再继续执行，这样不但能完成自己的重要工作，也能给其他线程一些运行的机会，避免一个线程长时间占有 CPU 资源。"
     }
   ],
   "latestArticles": [
+    {
+      "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
+      "url": "/articles/2026/06/04/codex-oss-zhihu.html",
+      "type": "blog",
+      "date": "2026-06-04",
+      "description": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "excerpt": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Codex",
+        "OpenAI",
+        "开源",
+        "Spring Batch",
+        "IDEA 插件"
+      ],
+      "priority": 0,
+      "content": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS，也欢迎支持我的 Spring Batch IDEA 插件 先说背景：我最近把自己维护的一个开源项目整理了一遍，并提交了 OpenAI 的 Codex for Open Source 申请。 项目是这个： https://github.com/jackssybin/spring batch monitor plugin 它是一个 IntelliJ IDEA 插件，用来在 IDE 里直接查看 Spring Batch 的 job / step execution 信息。简单说，就是不用额外搭后端服务，也不用每次手写 SQL 查批处理元数据，开发者可以直接在 IDEA 里看任务执行历史、失败状态、step 指标和统计信息。 这篇文章想聊三件事： 1. OpenAI Codex for OSS 到底适合哪些开源项目。 2. 为什么独立开源维护者需要这类支持。 3. 如果你也做 Java / Spring Batch / IntelliJ 插件开发，欢迎一起关注和支持这个项目。 一、Codex for OSS 是什么？ OpenAI 最近开放了一个面向开源维护者的项目：Codex for Open Source。 申请入口在这里： https://openai.com/form/codex for oss/ 从申请页面的信息看，它主要面向活跃开源项目的 primary maintainer 或 core maintainer。入选维护者可能获得： 6 个月 ChatGPT Pro（包含 Codex）使用权限。 Codex Security 的有条件访问权限。 用于开源维护、代码审查、发布工作流和自动化的 API credits。 它看重的不是单纯“项目有没有 AI 概念”，而是这个项目是否有实际维护价值，例如： 是否是活跃开源项目。 是否有真实使用者或生态价值。 维护者是否承担 PR review、issue triage、release、security review 等工作。 Codex 是否能帮助项目提升代码质量、安全性和维护效率。 这点我觉得挺重要：它不是一个“只给大明星项目”的表单。页面里也提到，如果项目不完全符合典型资格，但对生态系统有重要作用，仍然可以提交并说明理由。 二、为什么独立开源项目尤其需要这类支持？ 做过开源的人都知道，真正累的往往不是写第一版代码，而是长期维护。 一个项目从“能跑”到“值得别人用”，中间有很多隐形成本： README 要写清楚。 issue 要有人看。 bug 要能复现。 PR 要能 review。 release 要能稳定发。 安全问题要有人处理。 用户环境差异要有人兜底。 尤其是开发者工具类项目，维护成本会更明显。 比如 IntelliJ 插件，你不仅要考虑业务功能，还要考虑： IDEA 版本兼容性。 Gradle IntelliJ Plugin 配置。 插件描述和 Marketplace 元信息。 UI 行为和用户体验。 Java 版本、JBR、CI 构建。 文档、截图、安装方式、故障排查。 这些事情单独看都不大，但叠在一起，就会消耗大量维护者时间。 Codex 这类工具真正有价值的地方，不只是“帮你写几行代码”，而是能参与到维护流程里： 帮忙做代码审查。 帮忙补测试。 帮忙发现潜在安全问题。 帮忙整理 release note。 帮忙把英文文档和中文文档同步维护。 帮忙检查 CI、构建和项目结构。 对独立维护者来说，这种支持是实打实的。 三、我的项目：Spring Batch Monitor Plugin 我这次提交申请的项目是： jackssybin/spring batch monitor plugin 项目定位很简单： 让 Spring Batch 开发者在 IntelliJ IDEA 里直接查看批处理元数据。 Spring Batch 本身会在数据库里保存很多执行状态，比如： BATCH JOB INSTANCE BATCH JOB EXECUTION BATCH STEP EXECUTION 这些表里有很重要的信息： 哪个 job 执行失败了？ 哪个 step 失败或耗时过长？ read / write / skip 数量是多少？ 某个执行实例什么时候开始、什么时候结束？ 不同环境里的批处理表现是否一致？ 实际开发里，很多人还是靠手写 SQL 查这些表。 这个插件想解决的就是这个小而真实的问题： 把 Spring Batch 的执行状态放回开发者最常待的 IDE 里。 目前项目支持的方向包括： 直接连接 Spring Batch 元数据数据库。 查看 job execution 历史。 查看 step execution 指标。 支持多数据源配置。 支持连接测试。 支持统计视图。 支持中英文文档。 支持 MySQL、PostgreSQL、Oracle、SQL Server、H2、SQLite 等常见数据库。 项目地址： https://github.com/jackssybin/spring batch monitor plugin 四、为了申请 Codex for OSS，我做了哪些整..."
+    },
+    {
+      "title": "Odysseus：一个值得关注的本地 AI 工作台",
+      "url": "/articles/2026/06/03/odysseus-zhihu.html",
+      "type": "blog",
+      "date": "2026-06-03",
+      "description": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "excerpt": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "本地 AI",
+        "Agent",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
+    },
     {
       "title": "LocalDateTime操作",
       "url": "/articles/2025/07/16/1752652246705.html",
@@ -2234,7 +2282,7 @@
         "加锁"
       ],
       "priority": 0,
-      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 ========================================= 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); ========================================= 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format;..."
+      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
     },
     {
       "title": "springBoot启动扩展点精析",
@@ -2252,40 +2300,6 @@
       ],
       "priority": 0,
       "content": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开发中间件和公共依赖工具的时候也会用到这个特性。让使用者以最小的代价接入。想要把自动装配玩的转，就必须要了解spring对于bean的构造生命周期以及各个扩展接口。当然了解了bean的各个生命周期也能促进我们加深对spring的理解。业务代码也能合理利用这些扩展点写出更加漂亮的代码。 在网上搜索spring扩展点，发现很少有博文说的很全的，只有一些常用的扩展点的说明。 所以在这篇文章里，我总结了几乎Spring & Springboot所有的扩展接口，以及各个扩展点的使用场景。并且整理出了一个bean在spring内部从被加载到最后初始化完成所有可扩展点的顺序调用图。从而我们也能窥探到bean是如何一步步加载到spring容器中的。 2.可扩展的接口启动调用顺序图 以下是我整理的spring容器中Bean的生命周期内所有可扩展的点的调用顺序，下面会一个个分析 3.ApplicationContextInitializer org.springframework.context.ApplicationContextInitializer 这是整个spring容器在刷新之前初始化ConfigurableApplicationContext的回调接口，简单来说，就是在容器刷新之前调用此类的initialize方法。这个点允许被用户自己扩展。用户可以在整个spring容器还没被初始化之前做一些事情。 可以想到的场景可能为，在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作。 扩展方式为： 因为这时候spring容器还没被初始化，所以想要自己的扩展的生效，有以下三种方式： 在启动类中用springApplication.addInitializers(new TestApplicationContextInitializer())语句加入 配置文件配置context.initializer.classes=com.example.demo.TestApplicationContextInitializer Spring SPI扩展，在spring.factories中加入org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer 4.BeanDefinitionRegistryPostProcessor org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor 这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点 使用场景：你可以在这里动态注册自己的beanDefinition，可以加载classpath之外的bean 扩展方式为: 5.BeanFactoryPostProcessor org.springframework.beans.factory.config.BeanFactoryPostProcessor 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。 在这个时机，用户可以通过实现这个扩展接口来自行处理一些东西，比如修改已经注册的beanDefinition的元信息。 扩展方式为： 6.InstantiationAwareBeanPostProcessor org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor 该接口继承了BeanPostProcess接口，区别如下： BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。 该类主要的扩展点有以下5个方法，主要在bean生命周期的两大阶段： 实例化阶段 和 初始化阶段 ，下面一起进行说明，按调用顺序为： postProcessBeforeInstantiation：实例化bean之前，相当于new这个bean之前 postProcessAfterInstantiation：实例化bean之后，相当于new这个bean之后 postProcessPropertyValues：bean已经实例化完成，在属性注入时阶段触发，@Autowired,@Resource等注解原理基于此方法实现 postProcessBeforeInitialization：初始化bean之前，..."
-    },
-    {
-      "title": "使用@ConditionalOnExpression决定是否生效",
-      "url": "/articles/2021/04/21/1618973105136.html",
-      "type": "blog",
-      "date": "2021-04-21",
-      "description": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 消费者总开关，0关1开 mq.cumsumer.enabled=1 rocketmq消费者开关，true开启，false关闭 rocketmq.comsumer.enabled=fa...",
-      "excerpt": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 消费者总开关，0关1开 mq.cumsumer.enabled=1 rocketmq消费者开关，true开启，false关闭 rocketmq.comsumer.enabled=fa...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springbatch"
-      ],
-      "priority": 0,
-      "content": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 //布尔值和数字 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"${mq.cumsumer.enabled:0}==1&&${rabbitmq.comsumer.enabled:false}\") //字符串 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"'${mq.comsumer}'.equals('rabbitmq')\") // 直接使用boolean 的校验 // spring.batch.job.enabled = true @ConditionalOnProperty(prefix = \"spring.batch.job\", name = \"enabled\", havingValue = \"true\", matchIfMissing = true)"
-    },
-    {
-      "title": "springBatch监控相关",
-      "url": "/articles/2021/04/21/1618967915021.html",
-      "type": "blog",
-      "date": "2021-04-21",
-      "description": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "excerpt": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springBatch",
-        "prometheus",
-        "自定义监控"
-      ],
-      "priority": 0,
-      "content": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, Influx, Wavefront, New Relic等。这些系统提供了非常好的仪表盘、图标、分析和告警等功能，使得你可以通过统一的接口轻松的监控和管理你的应用。 Actuator使用Micrometer来整合上面提到的外部应用监控系统。这使得只要通过非常小的配置就可以集成任何应用监控系统。 预备知识: 监控 micrometer actuator promethes 概念 类似slf4j门面模式。提供接口和方法 调用micrometer对springboot体系提供了健康检查，对spring体系的扩展。也可以自定义监控。 监控的一类客户端。获取的数据格式需要定制化。micrometer有单独的门面扩展包 1.配置pom 2. 配置文件 3.支持的接口 4.具体接口 请求: http://localhost:8089/metrics/metrics/http.server.requests 4. springBatch 接口 需要项目运行过job任务。 在源码层次手动注入过，AbstractJob,AbstractStep excute抽象方法 添加了micrometer 记录方法。 默认支持 metrics name type Description Tags spring.batch.job TIMER 作业job执行期间 name, status spring.batch.job.active LONG TASK TIMER 正在运行的job name spring.batch.step TIMER 作业step执行情况 name, job.name, status spring.batch.item.read TIMER 作业read情况 job.name, step.name,status spring.batch.item.process TIMER 作业process情况 job.name, step.name,status spring.batch.chunk.write TIMER 作业write情况 job.name, step.name,status 1. http://localhost:8099/actuator/metrics/spring.batch.step 查看系统中Step的运行情况 2. http://localhost:8097/actuator/metrics/spring.batch.job.active 查看系统中的job运行状态 3. http://localhost:8099/actuator/metrics/spring.batch.job 查看系统运行中job的状况 4. http://localhost:8099/actuator/prometheus 支持的promethes 接口数据 4. 增加自定义属性 6. 自定义监控"
     }
   ],
   "tutorials": [
@@ -3283,7 +3297,7 @@
           "title": "Odysseus：一个值得关注的本地 AI 工作台",
           "url": "/articles/2026/06/03/odysseus-zhihu.html",
           "type": "blog",
-          "date": "",
+          "date": "2026-06-03",
           "description": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
           "excerpt": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
           "topic": "",
@@ -3303,7 +3317,7 @@
           "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
           "url": "/articles/2026/06/04/codex-oss-zhihu.html",
           "type": "blog",
-          "date": "",
+          "date": "2026-06-04",
           "description": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
           "excerpt": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
           "topic": "",
@@ -3374,7 +3388,7 @@
             "加锁"
           ],
           "priority": 0,
-          "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 ========================================= 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); ========================================= 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format;..."
+          "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
         },
         {
           "title": "终极分库分表方案",
@@ -4875,6 +4889,47 @@
   ],
   "recentUpdates": [
     {
+      "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
+      "url": "/articles/2026/06/04/codex-oss-zhihu.html",
+      "type": "文章",
+      "date": "2026-06-04",
+      "description": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "excerpt": "本文从开源维护者视角介绍 OpenAI Codex for OSS 的价值，并结合 Spring Batch IDEA 插件项目，聊聊独立开发者如何借助 AI 改善代码审查、文档、测试和发布流程。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Codex",
+        "OpenAI",
+        "开源",
+        "Spring Batch",
+        "IDEA 插件"
+      ],
+      "priority": 0,
+      "content": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS，也欢迎支持我的 Spring Batch IDEA 插件 先说背景：我最近把自己维护的一个开源项目整理了一遍，并提交了 OpenAI 的 Codex for Open Source 申请。 项目是这个： https://github.com/jackssybin/spring batch monitor plugin 它是一个 IntelliJ IDEA 插件，用来在 IDE 里直接查看 Spring Batch 的 job / step execution 信息。简单说，就是不用额外搭后端服务，也不用每次手写 SQL 查批处理元数据，开发者可以直接在 IDEA 里看任务执行历史、失败状态、step 指标和统计信息。 这篇文章想聊三件事： 1. OpenAI Codex for OSS 到底适合哪些开源项目。 2. 为什么独立开源维护者需要这类支持。 3. 如果你也做 Java / Spring Batch / IntelliJ 插件开发，欢迎一起关注和支持这个项目。 一、Codex for OSS 是什么？ OpenAI 最近开放了一个面向开源维护者的项目：Codex for Open Source。 申请入口在这里： https://openai.com/form/codex for oss/ 从申请页面的信息看，它主要面向活跃开源项目的 primary maintainer 或 core maintainer。入选维护者可能获得： 6 个月 ChatGPT Pro（包含 Codex）使用权限。 Codex Security 的有条件访问权限。 用于开源维护、代码审查、发布工作流和自动化的 API credits。 它看重的不是单纯“项目有没有 AI 概念”，而是这个项目是否有实际维护价值，例如： 是否是活跃开源项目。 是否有真实使用者或生态价值。 维护者是否承担 PR review、issue triage、release、security review 等工作。 Codex 是否能帮助项目提升代码质量、安全性和维护效率。 这点我觉得挺重要：它不是一个“只给大明星项目”的表单。页面里也提到，如果项目不完全符合典型资格，但对生态系统有重要作用，仍然可以提交并说明理由。 二、为什么独立开源项目尤其需要这类支持？ 做过开源的人都知道，真正累的往往不是写第一版代码，而是长期维护。 一个项目从“能跑”到“值得别人用”，中间有很多隐形成本： README 要写清楚。 issue 要有人看。 bug 要能复现。 PR 要能 review。 release 要能稳定发。 安全问题要有人处理。 用户环境差异要有人兜底。 尤其是开发者工具类项目，维护成本会更明显。 比如 IntelliJ 插件，你不仅要考虑业务功能，还要考虑： IDEA 版本兼容性。 Gradle IntelliJ Plugin 配置。 插件描述和 Marketplace 元信息。 UI 行为和用户体验。 Java 版本、JBR、CI 构建。 文档、截图、安装方式、故障排查。 这些事情单独看都不大，但叠在一起，就会消耗大量维护者时间。 Codex 这类工具真正有价值的地方，不只是“帮你写几行代码”，而是能参与到维护流程里： 帮忙做代码审查。 帮忙补测试。 帮忙发现潜在安全问题。 帮忙整理 release note。 帮忙把英文文档和中文文档同步维护。 帮忙检查 CI、构建和项目结构。 对独立维护者来说，这种支持是实打实的。 三、我的项目：Spring Batch Monitor Plugin 我这次提交申请的项目是： jackssybin/spring batch monitor plugin 项目定位很简单： 让 Spring Batch 开发者在 IntelliJ IDEA 里直接查看批处理元数据。 Spring Batch 本身会在数据库里保存很多执行状态，比如： BATCH JOB INSTANCE BATCH JOB EXECUTION BATCH STEP EXECUTION 这些表里有很重要的信息： 哪个 job 执行失败了？ 哪个 step 失败或耗时过长？ read / write / skip 数量是多少？ 某个执行实例什么时候开始、什么时候结束？ 不同环境里的批处理表现是否一致？ 实际开发里，很多人还是靠手写 SQL 查这些表。 这个插件想解决的就是这个小而真实的问题： 把 Spring Batch 的执行状态放回开发者最常待的 IDE 里。 目前项目支持的方向包括： 直接连接 Spring Batch 元数据数据库。 查看 job execution 历史。 查看 step execution 指标。 支持多数据源配置。 支持连接测试。 支持统计视图。 支持中英文文档。 支持 MySQL、PostgreSQL、Oracle、SQL Server、H2、SQLite 等常见数据库。 项目地址： https://github.com/jackssybin/spring batch monitor plugin 四、为了申请 Codex for OSS，我做了哪些整..."
+    },
+    {
+      "title": "Odysseus：一个值得关注的本地 AI 工作台",
+      "url": "/articles/2026/06/03/odysseus-zhihu.html",
+      "type": "文章",
+      "date": "2026-06-03",
+      "description": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "excerpt": "本文介绍 Odysseus 这个本地优先、隐私优先、可自托管的 AI 工作台，记录 Windows 本地部署体验、适用人群、亮点和使用建议。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "本地 AI",
+        "Agent",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
+    },
+    {
       "title": "LocalDateTime操作",
       "url": "/articles/2025/07/16/1752652246705.html",
       "type": "文章",
@@ -4909,7 +4964,7 @@
         "加锁"
       ],
       "priority": 0,
-      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 ========================================= 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); ========================================= 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin ========================================= 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format;..."
+      "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
     },
     {
       "title": "springBoot启动扩展点精析",
@@ -4927,40 +4982,6 @@
       ],
       "priority": 0,
       "content": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开发中间件和公共依赖工具的时候也会用到这个特性。让使用者以最小的代价接入。想要把自动装配玩的转，就必须要了解spring对于bean的构造生命周期以及各个扩展接口。当然了解了bean的各个生命周期也能促进我们加深对spring的理解。业务代码也能合理利用这些扩展点写出更加漂亮的代码。 在网上搜索spring扩展点，发现很少有博文说的很全的，只有一些常用的扩展点的说明。 所以在这篇文章里，我总结了几乎Spring & Springboot所有的扩展接口，以及各个扩展点的使用场景。并且整理出了一个bean在spring内部从被加载到最后初始化完成所有可扩展点的顺序调用图。从而我们也能窥探到bean是如何一步步加载到spring容器中的。 2.可扩展的接口启动调用顺序图 以下是我整理的spring容器中Bean的生命周期内所有可扩展的点的调用顺序，下面会一个个分析 3.ApplicationContextInitializer org.springframework.context.ApplicationContextInitializer 这是整个spring容器在刷新之前初始化ConfigurableApplicationContext的回调接口，简单来说，就是在容器刷新之前调用此类的initialize方法。这个点允许被用户自己扩展。用户可以在整个spring容器还没被初始化之前做一些事情。 可以想到的场景可能为，在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作。 扩展方式为： 因为这时候spring容器还没被初始化，所以想要自己的扩展的生效，有以下三种方式： 在启动类中用springApplication.addInitializers(new TestApplicationContextInitializer())语句加入 配置文件配置context.initializer.classes=com.example.demo.TestApplicationContextInitializer Spring SPI扩展，在spring.factories中加入org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer 4.BeanDefinitionRegistryPostProcessor org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor 这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点 使用场景：你可以在这里动态注册自己的beanDefinition，可以加载classpath之外的bean 扩展方式为: 5.BeanFactoryPostProcessor org.springframework.beans.factory.config.BeanFactoryPostProcessor 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。 在这个时机，用户可以通过实现这个扩展接口来自行处理一些东西，比如修改已经注册的beanDefinition的元信息。 扩展方式为： 6.InstantiationAwareBeanPostProcessor org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor 该接口继承了BeanPostProcess接口，区别如下： BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。 该类主要的扩展点有以下5个方法，主要在bean生命周期的两大阶段： 实例化阶段 和 初始化阶段 ，下面一起进行说明，按调用顺序为： postProcessBeforeInstantiation：实例化bean之前，相当于new这个bean之前 postProcessAfterInstantiation：实例化bean之后，相当于new这个bean之后 postProcessPropertyValues：bean已经实例化完成，在属性注入时阶段触发，@Autowired,@Resource等注解原理基于此方法实现 postProcessBeforeInitialization：初始化bean之前，..."
-    },
-    {
-      "title": "使用@ConditionalOnExpression决定是否生效",
-      "url": "/articles/2021/04/21/1618973105136.html",
-      "type": "文章",
-      "date": "2021-04-21",
-      "description": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 消费者总开关，0关1开 mq.cumsumer.enabled=1 rocketmq消费者开关，true开启，false关闭 rocketmq.comsumer.enabled=fa...",
-      "excerpt": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 消费者总开关，0关1开 mq.cumsumer.enabled=1 rocketmq消费者开关，true开启，false关闭 rocketmq.comsumer.enabled=fa...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springbatch"
-      ],
-      "priority": 0,
-      "content": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 //布尔值和数字 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"${mq.cumsumer.enabled:0}==1&&${rabbitmq.comsumer.enabled:false}\") //字符串 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"'${mq.comsumer}'.equals('rabbitmq')\") // 直接使用boolean 的校验 // spring.batch.job.enabled = true @ConditionalOnProperty(prefix = \"spring.batch.job\", name = \"enabled\", havingValue = \"true\", matchIfMissing = true)"
-    },
-    {
-      "title": "springBatch监控相关",
-      "url": "/articles/2021/04/21/1618967915021.html",
-      "type": "文章",
-      "date": "2021-04-21",
-      "description": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "excerpt": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springBatch",
-        "prometheus",
-        "自定义监控"
-      ],
-      "priority": 0,
-      "content": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, Influx, Wavefront, New Relic等。这些系统提供了非常好的仪表盘、图标、分析和告警等功能，使得你可以通过统一的接口轻松的监控和管理你的应用。 Actuator使用Micrometer来整合上面提到的外部应用监控系统。这使得只要通过非常小的配置就可以集成任何应用监控系统。 预备知识: 监控 micrometer actuator promethes 概念 类似slf4j门面模式。提供接口和方法 调用micrometer对springboot体系提供了健康检查，对spring体系的扩展。也可以自定义监控。 监控的一类客户端。获取的数据格式需要定制化。micrometer有单独的门面扩展包 1.配置pom 2. 配置文件 3.支持的接口 4.具体接口 请求: http://localhost:8089/metrics/metrics/http.server.requests 4. springBatch 接口 需要项目运行过job任务。 在源码层次手动注入过，AbstractJob,AbstractStep excute抽象方法 添加了micrometer 记录方法。 默认支持 metrics name type Description Tags spring.batch.job TIMER 作业job执行期间 name, status spring.batch.job.active LONG TASK TIMER 正在运行的job name spring.batch.step TIMER 作业step执行情况 name, job.name, status spring.batch.item.read TIMER 作业read情况 job.name, step.name,status spring.batch.item.process TIMER 作业process情况 job.name, step.name,status spring.batch.chunk.write TIMER 作业write情况 job.name, step.name,status 1. http://localhost:8099/actuator/metrics/spring.batch.step 查看系统中Step的运行情况 2. http://localhost:8097/actuator/metrics/spring.batch.job.active 查看系统中的job运行状态 3. http://localhost:8099/actuator/metrics/spring.batch.job 查看系统运行中job的状况 4. http://localhost:8099/actuator/prometheus 支持的promethes 接口数据 4. 增加自定义属性 6. 自定义监控"
     },
     {
       "title": "第01章：MySQL概述与安装",
