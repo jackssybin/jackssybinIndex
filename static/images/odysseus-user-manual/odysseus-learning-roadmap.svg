@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <text x="60" y="76" fill="#f9fafb" font-size="36" font-family="Microsoft YaHei, Arial" font-weight="700">Odysseus 学习路线</text>
+  <text x="60" y="116" fill="#cbd5e1" font-size="20" font-family="Microsoft YaHei, Arial">从能启动，到能搭建自己的 AI 工作台</text>
+  <line x1="155" y1="305" x2="1035" y2="305" stroke="url(#accent)" stroke-width="8" stroke-linecap="round"/>
+  <g font-family="Microsoft YaHei, Arial" filter="url(#shadow)">
+    <g transform="translate(70 190)">
+      <circle cx="85" cy="115" r="62" fill="#0f766e"/>
+      <text x="85" y="105" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">入门</text>
+      <text x="85" y="136" text-anchor="middle" fill="#d1fae5" font-size="16">启动 + 登录</text>
+      <rect x="0" y="205" width="170" height="120" rx="14" fill="#111827" stroke="#334155"/>
+      <text x="85" y="242" text-anchor="middle" fill="#e5e7eb" font-size="17">安装依赖</text>
+      <text x="85" y="274" text-anchor="middle" fill="#e5e7eb" font-size="17">配置账号</text>
+      <text x="85" y="306" text-anchor="middle" fill="#e5e7eb" font-size="17">打开页面</text>
+    </g>
+    <g transform="translate(315 190)">
+      <circle cx="85" cy="115" r="62" fill="#2563eb"/>
+      <text x="85" y="105" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">熟练</text>
+      <text x="85" y="136" text-anchor="middle" fill="#dbeafe" font-size="16">模型 + Chat</text>
+      <rect x="0" y="205" width="170" height="120" rx="14" fill="#111827" stroke="#334155"/>
+      <text x="85" y="242" text-anchor="middle" fill="#e5e7eb" font-size="17">Ollama/API</text>
+      <text x="85" y="274" text-anchor="middle" fill="#e5e7eb" font-size="17">会话管理</text>
+      <text x="85" y="306" text-anchor="middle" fill="#e5e7eb" font-size="17">文档写作</text>
+    </g>
+    <g transform="translate(560 190)">
+      <circle cx="85" cy="115" r="62" fill="#7c3aed"/>
+      <text x="85" y="105" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">进阶</text>
+      <text x="85" y="136" text-anchor="middle" fill="#ede9fe" font-size="16">Agent + 记忆</text>
+      <rect x="0" y="205" width="170" height="120" rx="14" fill="#111827" stroke="#334155"/>
+      <text x="85" y="242" text-anchor="middle" fill="#e5e7eb" font-size="17">Memory</text>
+      <text x="85" y="274" text-anchor="middle" fill="#e5e7eb" font-size="17">Skills</text>
+      <text x="85" y="306" text-anchor="middle" fill="#e5e7eb" font-size="17">MCP 工具</text>
+    </g>
+    <g transform="translate(805 190)">
+      <circle cx="85" cy="115" r="62" fill="#dc2626"/>
+      <text x="85" y="105" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">精通</text>
+      <text x="85" y="136" text-anchor="middle" fill="#fee2e2" font-size="16">工作流设计</text>
+      <rect x="0" y="205" width="170" height="120" rx="14" fill="#111827" stroke="#334155"/>
+      <text x="85" y="242" text-anchor="middle" fill="#e5e7eb" font-size="17">自动化任务</text>
+      <text x="85" y="274" text-anchor="middle" fill="#e5e7eb" font-size="17">私有部署</text>
+      <text x="85" y="306" text-anchor="middle" fill="#e5e7eb" font-size="17">备份迁移</text>
+    </g>
+  </g>
+  <text x="60" y="570" fill="#94a3b8" font-size="18" font-family="Microsoft YaHei, Arial">建议：先跑通 Chat，再学 Documents / Deep Research，最后再开放 Agent、MCP 和自动化能力。</text>
+</svg>

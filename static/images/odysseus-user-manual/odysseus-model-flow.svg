@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#172554"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto">
+      <path d="M 0 0 L 14 7 L 0 14 z" fill="#67e8f9"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="url(#bg)"/>
+  <text x="60" y="78" fill="#f8fafc" font-size="36" font-family="Microsoft YaHei, Arial" font-weight="700">模型接入关系图</text>
+  <text x="60" y="118" fill="#bfdbfe" font-size="20" font-family="Microsoft YaHei, Arial">Odysseus 是工作台，本地或云端模型才是“大脑”</text>
+  <g font-family="Microsoft YaHei, Arial" font-size="20">
+    <rect x="70" y="235" width="220" height="150" rx="18" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="180" y="292" text-anchor="middle" fill="#f8fafc" font-size="30" font-weight="700">用户</text>
+    <text x="180" y="330" text-anchor="middle" fill="#cbd5e1">浏览器访问</text>
+    <text x="180" y="360" text-anchor="middle" fill="#cbd5e1">http://127.0.0.1:7000</text>
+    <rect x="425" y="205" width="300" height="210" rx="22" fill="#082f49" stroke="#67e8f9" stroke-width="3"/>
+    <text x="575" y="270" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="700">Odysseus</text>
+    <text x="575" y="314" text-anchor="middle" fill="#bae6fd">Chat / Agent / Memory</text>
+    <text x="575" y="346" text-anchor="middle" fill="#bae6fd">Documents / Research</text>
+    <text x="575" y="378" text-anchor="middle" fill="#bae6fd">Settings / Tools</text>
+    <rect x="860" y="110" width="250" height="95" rx="16" fill="#064e3b" stroke="#34d399" stroke-width="2"/>
+    <text x="985" y="150" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">Ollama / LM Studio</text>
+    <text x="985" y="180" text-anchor="middle" fill="#d1fae5">本地模型</text>
+    <rect x="860" y="265" width="250" height="95" rx="16" fill="#4c1d95" stroke="#c084fc" stroke-width="2"/>
+    <text x="985" y="305" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">OpenAI / OpenRouter</text>
+    <text x="985" y="335" text-anchor="middle" fill="#ede9fe">云端 API 模型</text>
+    <rect x="860" y="420" width="250" height="95" rx="16" fill="#7f1d1d" stroke="#fca5a5" stroke-width="2"/>
+    <text x="985" y="460" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">vLLM / llama.cpp</text>
+    <text x="985" y="490" text-anchor="middle" fill="#fee2e2">服务器或本地推理</text>
+    <line x1="290" y1="310" x2="415" y2="310" stroke="#67e8f9" stroke-width="5" marker-end="url(#arrow)"/>
+    <line x1="725" y1="310" x2="840" y2="158" stroke="#67e8f9" stroke-width="5" marker-end="url(#arrow)"/>
+    <line x1="725" y1="310" x2="840" y2="312" stroke="#67e8f9" stroke-width="5" marker-end="url(#arrow)"/>
+    <line x1="725" y1="310" x2="840" y2="468" stroke="#67e8f9" stroke-width="5" marker-end="url(#arrow)"/>
+  </g>
+  <text x="70" y="570" fill="#cbd5e1" font-size="18" font-family="Microsoft YaHei, Arial">新手建议：先用 Ollama 或 OpenAI-compatible API 跑通一个模型，再逐步添加更多 provider。</text>
+</svg>

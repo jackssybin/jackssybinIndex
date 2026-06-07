@@ -1,6 +1,27 @@
 {
   "allArticles": [
     {
+      "title": "Odysseus 使用说明：从入门到精通",
+      "url": "/articles/2026/06/08/odysseus-user-manual.html",
+      "type": "blog",
+      "date": "2026-06-08",
+      "description": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "excerpt": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "Agent",
+        "MCP",
+        "本地 AI",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus 使用说明：从入门到精通 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。 本手册基于本机已下载的 Odysseus 项目整理： 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 你可以把它理解成： 它不是大模型本身，而是一个统一入口。你需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 Odysseus 适合这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 建议不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 你需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 你需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 你需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 你需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 你本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果你已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果你想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合 Linux、服务器或希望服务隔离的用户： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示你输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后建议第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 把临时密码换成你自己的强密码。 不要关闭认证 .env 中有一个重要变量： 建议保持开启，尤其是当你准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 新手阶段只建议绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果你在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible endpoint： Ollama 默认不一定需要真实 API Key，但很多 OpenAI compatible 客户端要求填写一个值，可..."
+    },
+    {
       "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
       "url": "/articles/2026/06/04/codex-oss-zhihu.html",
       "type": "blog",
@@ -1838,6 +1859,27 @@
   ],
   "articles": [
     {
+      "title": "Odysseus 使用说明：从入门到精通",
+      "url": "/articles/2026/06/08/odysseus-user-manual.html",
+      "type": "blog",
+      "date": "2026-06-08",
+      "description": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "excerpt": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "Agent",
+        "MCP",
+        "本地 AI",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus 使用说明：从入门到精通 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。 本手册基于本机已下载的 Odysseus 项目整理： 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 你可以把它理解成： 它不是大模型本身，而是一个统一入口。你需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 Odysseus 适合这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 建议不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 你需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 你需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 你需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 你需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 你本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果你已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果你想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合 Linux、服务器或希望服务隔离的用户： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示你输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后建议第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 把临时密码换成你自己的强密码。 不要关闭认证 .env 中有一个重要变量： 建议保持开启，尤其是当你准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 新手阶段只建议绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果你在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible endpoint： Ollama 默认不一定需要真实 API Key，但很多 OpenAI compatible 客户端要求填写一个值，可..."
+    },
+    {
       "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
       "url": "/articles/2026/06/04/codex-oss-zhihu.html",
       "type": "blog",
@@ -2184,28 +2226,30 @@
       ],
       "priority": 0,
       "content": "想要了解反射生成class和创建java对象，首先我们要了解什么是反射？ 一、什么是反射？ Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。 我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。 二、反射生成Class的三种方式 1.第一种方式（利用getClass（）方法） 2.第二种方式（直接对象的.class） 3.第三种方式（Class.forName()） 注意：此种方法通过对象的全路径来获取Class的，当对象不存在时，会出现ClassNotFoundException异常。详细的可以看下Class.forName()的底层代码。 三、反射生成java对象的两种方式 1.第一种方式newInstance(); 调用public无参构造器 ，若是没有，则会报异常 Object o = clazz.newInstance(); 没有无参构造函数异常： 2.第二种方式： 有带参数的构造函数的类，先获取到其构造对象，再通过该构造方法类获取实例： / /获取构造函数类的对象 Constroctor constroctor = User.class.getConstructor(String.class); // 使用构造器对象的newInstance方法初始化对象 Object obj = constroctor.newInstance(\"name\"); 四、使用reflectasm调用生成对象调用 1. 依赖 2.代码 3.结论 每种方式执行1亿次运行结果如下： get耗时35ms 缓存反射耗时223ms reflectasm先拿到方法index反射耗时39ms reflectasm每次按照方法名查找然后反射耗时350ms reflectasm相比通过名称来访问成员，使用索引的方式会更快。如果需要重复地访问同一个成员，那么通过索引来访问该成员效率更高 4.reflectasm原理为啥这么快 jdk反射慢原因有三: 1.变长参数方法导致的 Object 数组 2.基本类型的自动装箱、拆箱 3.还有最重要的方法内联 reflectasm快原因: ReflectASM是一个很小的java类库，主要是通过asm生产类来实现java反射。他的主要代码还是get方法，但是由于get方法源码比较多，就不在博客中贴出来了，大家可以自己点进去看。这里我们给出实现invoke的抽象方法。 由代码可以看出来，实际上ReflectASM就是把类的各个方法缓存起来，然后通过case选择，直接调用，因此速度会快上很多。但是它的get方法同样会消耗很大的时间，因此就算是使用ReflectASM的朋友也记得请在启动的时候就初始化get方法计入缓存 读写字段 通过 FieldAccess 可以读写类的字段： 调用方法 通过 MethodAccess 可以调用对象实例的方法： 构造实例 通过 ConstructorAccess 可以构造对象实例： 索引 相比通过名称来访问成员，使用索引的方式会更快。如果需要重复地访问同一个成员，那么通过索引来访问该成员效率更高： 遍历字段 遍历一个类的所有字段："
-    },
-    {
-      "title": "缓存和数据库一致性问题",
-      "url": "/articles/2020/11/04/1604469398210.html",
-      "type": "blog",
-      "date": "2020-11-04",
-      "description": "问题： 你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？ 分析： 先做一个说明，从理论上来说，有两种处理思维，一种需保证数据强一致性，这样性能肯定大打折扣；另外我们可以采用最终一致性，保证性能的基础上，允许一定时间内的数据不一致，但最终数据是一致的...",
-      "excerpt": "问题： 你只要用缓存，就可能会涉及到缓存与数据库双存储双写，你只要是双写，就一定会有数据一致性的问题，那么你如何解决一致性问题？ 分析： 先做一个说明，从理论上来说，有两种处理思维，一种需保证数据强一致性，这样性能肯定大打折扣；另外我们可以采用最终一致性，保证性能的基础上，允许一定时间内的数据不一致，但最终数据是一致的...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "分布式",
-        "数据库更新",
-        "缓存更新",
-        "分布式缓存一致性"
-      ],
-      "priority": 0,
-      "content": "问题： 分析： 1 强一致性思想 2 最终一致性思想 (1)先更新数据库，还是先更新缓存 先更新数据库 先更新缓存 不再更新缓存，直接删除，为什么？ 业务角度考虑 性价比角度考虑 举个栗子，一个缓存涉及的表的字段，在 1 分钟内就修改了 20 次，或者是 100 次，那么缓存更新 20 次、100 次；但是这个缓存在 1 分钟内只被读取了 1 次，有大量的冷数据。实际上，如果你只是删除缓存的话，那么在 1 分钟内，这个缓存不过就重新计算一次而已，开销大幅度降低。用到缓存才去算缓存。 设计角度考虑 (2)先删缓存，再更新数据库 问题一：线程顺序 问题二：如果你用了mysql的读写分离架构怎么办？ 解决一：采用延时双删策略 伪代码如下 那么，这个1秒怎么确定的，具体该休眠多久呢？ 采用这种同步淘汰策略，吞吐量降低怎么办？ 解决二：异步 （1）请求A进行写操作，删除缓存 （2）请求B查询发现缓存不存在 （3）请求B去数据库查询得到旧值 （4）请求B将旧值写入缓存 （5）请求A将新值写入数据库 （6）请求A试图去删除请求B写入对缓存值，结果失败了。 ok,这也就是说。如果第二次删除缓存失败，会再次出现缓存和数据库不一致的问题。 如何解决呢？我们继续往下看。 (3)先更新数据库，再删缓存 Cache Aside pattern 问题 解决 异步优化方式：消息队列 异步优化方式：基于订阅binlog的同步机制 流程如下图所示： 参考： 如何保证缓存与数据库一致性 Java进阶面试必问：如何保证缓存与数据库的双写一致性？ 数据库缓存最终一致性的四种方案，你真的了解过吗？"
     }
   ],
   "latestArticles": [
+    {
+      "title": "Odysseus 使用说明：从入门到精通",
+      "url": "/articles/2026/06/08/odysseus-user-manual.html",
+      "type": "blog",
+      "date": "2026-06-08",
+      "description": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "excerpt": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "Agent",
+        "MCP",
+        "本地 AI",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus 使用说明：从入门到精通 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。 本手册基于本机已下载的 Odysseus 项目整理： 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 你可以把它理解成： 它不是大模型本身，而是一个统一入口。你需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 Odysseus 适合这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 建议不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 你需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 你需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 你需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 你需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 你本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果你已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果你想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合 Linux、服务器或希望服务隔离的用户： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示你输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后建议第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 把临时密码换成你自己的强密码。 不要关闭认证 .env 中有一个重要变量： 建议保持开启，尤其是当你准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 新手阶段只建议绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果你在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible endpoint： Ollama 默认不一定需要真实 API Key，但很多 OpenAI compatible 客户端要求填写一个值，可..."
+    },
     {
       "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
       "url": "/articles/2026/06/04/codex-oss-zhihu.html",
@@ -2283,23 +2327,6 @@
       ],
       "priority": 0,
       "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
-    },
-    {
-      "title": "springBoot启动扩展点精析",
-      "url": "/articles/2021/05/14/1620960509044.html",
-      "type": "blog",
-      "date": "2021-05-14",
-      "description": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "excerpt": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springboot自动扩展",
-        "BeanFactoryAware"
-      ],
-      "priority": 0,
-      "content": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开发中间件和公共依赖工具的时候也会用到这个特性。让使用者以最小的代价接入。想要把自动装配玩的转，就必须要了解spring对于bean的构造生命周期以及各个扩展接口。当然了解了bean的各个生命周期也能促进我们加深对spring的理解。业务代码也能合理利用这些扩展点写出更加漂亮的代码。 在网上搜索spring扩展点，发现很少有博文说的很全的，只有一些常用的扩展点的说明。 所以在这篇文章里，我总结了几乎Spring & Springboot所有的扩展接口，以及各个扩展点的使用场景。并且整理出了一个bean在spring内部从被加载到最后初始化完成所有可扩展点的顺序调用图。从而我们也能窥探到bean是如何一步步加载到spring容器中的。 2.可扩展的接口启动调用顺序图 以下是我整理的spring容器中Bean的生命周期内所有可扩展的点的调用顺序，下面会一个个分析 3.ApplicationContextInitializer org.springframework.context.ApplicationContextInitializer 这是整个spring容器在刷新之前初始化ConfigurableApplicationContext的回调接口，简单来说，就是在容器刷新之前调用此类的initialize方法。这个点允许被用户自己扩展。用户可以在整个spring容器还没被初始化之前做一些事情。 可以想到的场景可能为，在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作。 扩展方式为： 因为这时候spring容器还没被初始化，所以想要自己的扩展的生效，有以下三种方式： 在启动类中用springApplication.addInitializers(new TestApplicationContextInitializer())语句加入 配置文件配置context.initializer.classes=com.example.demo.TestApplicationContextInitializer Spring SPI扩展，在spring.factories中加入org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer 4.BeanDefinitionRegistryPostProcessor org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor 这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点 使用场景：你可以在这里动态注册自己的beanDefinition，可以加载classpath之外的bean 扩展方式为: 5.BeanFactoryPostProcessor org.springframework.beans.factory.config.BeanFactoryPostProcessor 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。 在这个时机，用户可以通过实现这个扩展接口来自行处理一些东西，比如修改已经注册的beanDefinition的元信息。 扩展方式为： 6.InstantiationAwareBeanPostProcessor org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor 该接口继承了BeanPostProcess接口，区别如下： BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。 该类主要的扩展点有以下5个方法，主要在bean生命周期的两大阶段： 实例化阶段 和 初始化阶段 ，下面一起进行说明，按调用顺序为： postProcessBeforeInstantiation：实例化bean之前，相当于new这个bean之前 postProcessAfterInstantiation：实例化bean之后，相当于new这个bean之后 postProcessPropertyValues：bean已经实例化完成，在属性注入时阶段触发，@Autowired,@Resource等注解原理基于此方法实现 postProcessBeforeInitialization：初始化bean之前，..."
     }
   ],
   "tutorials": [
@@ -3266,7 +3293,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 2,
+      "count": 3,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3333,11 +3360,33 @@
           ],
           "priority": 0,
           "content": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS，也欢迎支持我的 Spring Batch IDEA 插件 先说背景：我最近把自己维护的一个开源项目整理了一遍，并提交了 OpenAI 的 Codex for Open Source 申请。 项目是这个： https://github.com/jackssybin/spring batch monitor plugin 它是一个 IntelliJ IDEA 插件，用来在 IDE 里直接查看 Spring Batch 的 job / step execution 信息。简单说，就是不用额外搭后端服务，也不用每次手写 SQL 查批处理元数据，开发者可以直接在 IDEA 里看任务执行历史、失败状态、step 指标和统计信息。 这篇文章想聊三件事： 1. OpenAI Codex for OSS 到底适合哪些开源项目。 2. 为什么独立开源维护者需要这类支持。 3. 如果你也做 Java / Spring Batch / IntelliJ 插件开发，欢迎一起关注和支持这个项目。 一、Codex for OSS 是什么？ OpenAI 最近开放了一个面向开源维护者的项目：Codex for Open Source。 申请入口在这里： https://openai.com/form/codex for oss/ 从申请页面的信息看，它主要面向活跃开源项目的 primary maintainer 或 core maintainer。入选维护者可能获得： 6 个月 ChatGPT Pro（包含 Codex）使用权限。 Codex Security 的有条件访问权限。 用于开源维护、代码审查、发布工作流和自动化的 API credits。 它看重的不是单纯“项目有没有 AI 概念”，而是这个项目是否有实际维护价值，例如： 是否是活跃开源项目。 是否有真实使用者或生态价值。 维护者是否承担 PR review、issue triage、release、security review 等工作。 Codex 是否能帮助项目提升代码质量、安全性和维护效率。 这点我觉得挺重要：它不是一个“只给大明星项目”的表单。页面里也提到，如果项目不完全符合典型资格，但对生态系统有重要作用，仍然可以提交并说明理由。 二、为什么独立开源项目尤其需要这类支持？ 做过开源的人都知道，真正累的往往不是写第一版代码，而是长期维护。 一个项目从“能跑”到“值得别人用”，中间有很多隐形成本： README 要写清楚。 issue 要有人看。 bug 要能复现。 PR 要能 review。 release 要能稳定发。 安全问题要有人处理。 用户环境差异要有人兜底。 尤其是开发者工具类项目，维护成本会更明显。 比如 IntelliJ 插件，你不仅要考虑业务功能，还要考虑： IDEA 版本兼容性。 Gradle IntelliJ Plugin 配置。 插件描述和 Marketplace 元信息。 UI 行为和用户体验。 Java 版本、JBR、CI 构建。 文档、截图、安装方式、故障排查。 这些事情单独看都不大，但叠在一起，就会消耗大量维护者时间。 Codex 这类工具真正有价值的地方，不只是“帮你写几行代码”，而是能参与到维护流程里： 帮忙做代码审查。 帮忙补测试。 帮忙发现潜在安全问题。 帮忙整理 release note。 帮忙把英文文档和中文文档同步维护。 帮忙检查 CI、构建和项目结构。 对独立维护者来说，这种支持是实打实的。 三、我的项目：Spring Batch Monitor Plugin 我这次提交申请的项目是： jackssybin/spring batch monitor plugin 项目定位很简单： 让 Spring Batch 开发者在 IntelliJ IDEA 里直接查看批处理元数据。 Spring Batch 本身会在数据库里保存很多执行状态，比如： BATCH JOB INSTANCE BATCH JOB EXECUTION BATCH STEP EXECUTION 这些表里有很重要的信息： 哪个 job 执行失败了？ 哪个 step 失败或耗时过长？ read / write / skip 数量是多少？ 某个执行实例什么时候开始、什么时候结束？ 不同环境里的批处理表现是否一致？ 实际开发里，很多人还是靠手写 SQL 查这些表。 这个插件想解决的就是这个小而真实的问题： 把 Spring Batch 的执行状态放回开发者最常待的 IDE 里。 目前项目支持的方向包括： 直接连接 Spring Batch 元数据数据库。 查看 job execution 历史。 查看 step execution 指标。 支持多数据源配置。 支持连接测试。 支持统计视图。 支持中英文文档。 支持 MySQL、PostgreSQL、Oracle、SQL Server、H2、SQLite 等常见数据库。 项目地址： https://github.com/jackssybin/spring batch monitor plugin 四、为了申请 Codex for OSS，我做了哪些整..."
+        },
+        {
+          "title": "Odysseus 使用说明：从入门到精通",
+          "url": "/articles/2026/06/08/odysseus-user-manual.html",
+          "type": "blog",
+          "date": "2026-06-08",
+          "description": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+          "excerpt": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+          "topic": "AI、Agent 与本地模型",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI",
+            "Odysseus",
+            "Agent",
+            "MCP",
+            "本地 AI",
+            "自托管"
+          ],
+          "priority": 0,
+          "content": "Odysseus 使用说明：从入门到精通 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。 本手册基于本机已下载的 Odysseus 项目整理： 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 你可以把它理解成： 它不是大模型本身，而是一个统一入口。你需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 Odysseus 适合这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 建议不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 你需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 你需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 你需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 你需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 你本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果你已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果你想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合 Linux、服务器或希望服务隔离的用户： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示你输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后建议第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 把临时密码换成你自己的强密码。 不要关闭认证 .env 中有一个重要变量： 建议保持开启，尤其是当你准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 新手阶段只建议绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果你在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible endpoint： Ollama 默认不一定需要真实 API Key，但很多 OpenAI compatible 客户端要求填写一个值，可..."
         }
       ],
       "articleTitles": [
         "Odysseus：一个值得关注的本地 AI 工作台",
-        "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS"
+        "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
+        "Odysseus 使用说明：从入门到精通"
       ]
     },
     {
@@ -4889,6 +4938,27 @@
   ],
   "recentUpdates": [
     {
+      "title": "Odysseus 使用说明：从入门到精通",
+      "url": "/articles/2026/06/08/odysseus-user-manual.html",
+      "type": "文章",
+      "date": "2026-06-08",
+      "description": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "excerpt": "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "Odysseus",
+        "Agent",
+        "MCP",
+        "本地 AI",
+        "自托管"
+      ],
+      "priority": 0,
+      "content": "Odysseus 使用说明：从入门到精通 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。 本手册基于本机已下载的 Odysseus 项目整理： 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 你可以把它理解成： 它不是大模型本身，而是一个统一入口。你需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 Odysseus 适合这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 建议不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 你需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 你需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 你需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 你需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 你本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果你已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果你想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合 Linux、服务器或希望服务隔离的用户： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示你输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后建议第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 把临时密码换成你自己的强密码。 不要关闭认证 .env 中有一个重要变量： 建议保持开启，尤其是当你准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 新手阶段只建议绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果你在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible endpoint： Ollama 默认不一定需要真实 API Key，但很多 OpenAI compatible 客户端要求填写一个值，可..."
+    },
+    {
       "title": "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
       "url": "/articles/2026/06/04/codex-oss-zhihu.html",
       "type": "文章",
@@ -4965,23 +5035,6 @@
       ],
       "priority": 0,
       "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
-    },
-    {
-      "title": "springBoot启动扩展点精析",
-      "url": "/articles/2021/05/14/1620960509044.html",
-      "type": "文章",
-      "date": "2021-05-14",
-      "description": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "excerpt": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springboot自动扩展",
-        "BeanFactoryAware"
-      ],
-      "priority": 0,
-      "content": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开发中间件和公共依赖工具的时候也会用到这个特性。让使用者以最小的代价接入。想要把自动装配玩的转，就必须要了解spring对于bean的构造生命周期以及各个扩展接口。当然了解了bean的各个生命周期也能促进我们加深对spring的理解。业务代码也能合理利用这些扩展点写出更加漂亮的代码。 在网上搜索spring扩展点，发现很少有博文说的很全的，只有一些常用的扩展点的说明。 所以在这篇文章里，我总结了几乎Spring & Springboot所有的扩展接口，以及各个扩展点的使用场景。并且整理出了一个bean在spring内部从被加载到最后初始化完成所有可扩展点的顺序调用图。从而我们也能窥探到bean是如何一步步加载到spring容器中的。 2.可扩展的接口启动调用顺序图 以下是我整理的spring容器中Bean的生命周期内所有可扩展的点的调用顺序，下面会一个个分析 3.ApplicationContextInitializer org.springframework.context.ApplicationContextInitializer 这是整个spring容器在刷新之前初始化ConfigurableApplicationContext的回调接口，简单来说，就是在容器刷新之前调用此类的initialize方法。这个点允许被用户自己扩展。用户可以在整个spring容器还没被初始化之前做一些事情。 可以想到的场景可能为，在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作。 扩展方式为： 因为这时候spring容器还没被初始化，所以想要自己的扩展的生效，有以下三种方式： 在启动类中用springApplication.addInitializers(new TestApplicationContextInitializer())语句加入 配置文件配置context.initializer.classes=com.example.demo.TestApplicationContextInitializer Spring SPI扩展，在spring.factories中加入org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer 4.BeanDefinitionRegistryPostProcessor org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor 这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点 使用场景：你可以在这里动态注册自己的beanDefinition，可以加载classpath之外的bean 扩展方式为: 5.BeanFactoryPostProcessor org.springframework.beans.factory.config.BeanFactoryPostProcessor 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。 在这个时机，用户可以通过实现这个扩展接口来自行处理一些东西，比如修改已经注册的beanDefinition的元信息。 扩展方式为： 6.InstantiationAwareBeanPostProcessor org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor 该接口继承了BeanPostProcess接口，区别如下： BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。 该类主要的扩展点有以下5个方法，主要在bean生命周期的两大阶段： 实例化阶段 和 初始化阶段 ，下面一起进行说明，按调用顺序为： postProcessBeforeInstantiation：实例化bean之前，相当于new这个bean之前 postProcessAfterInstantiation：实例化bean之后，相当于new这个bean之后 postProcessPropertyValues：bean已经实例化完成，在属性注入时阶段触发，@Autowired,@Resource等注解原理基于此方法实现 postProcessBeforeInitialization：初始化bean之前，..."
     },
     {
       "title": "第01章：MySQL概述与安装",
