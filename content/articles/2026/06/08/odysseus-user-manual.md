@@ -1,19 +1,19 @@
 ---
-title: "Odysseus 使用说明：从入门到精通"
+title: "Odysseus 教程：本地 AI 工作台、Agent 与 MCP 从入门到精通"
 url: "/articles/2026/06/08/odysseus-user-manual.html"
 date: "2026-06-08T00:00:00+08:00"
 lastmod: "2026-06-08T00:00:00+08:00"
-description: "一篇面向新手和进阶用户的 Odysseus 使用手册，覆盖安装启动、模型配置、Chat、Agent、MCP、Cookbook、Deep Research、数据备份和安全访问。"
-tags: ["AI", "Odysseus", "Agent", "MCP", "本地 AI", "自托管"]
+description: "Odysseus 中文教程与使用手册，系统讲解本地 AI 工作台搭建、模型配置、Chat、AI Agent、MCP、Deep Research、Cookbook、数据备份和安全访问。"
+tags: ["AI", "Odysseus", "Odysseus 教程", "Agent", "AI Agent", "MCP", "本地 AI", "本地大模型", "自托管"]
 topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"
 layout: article
 contentType: article
 ---
 
-# Odysseus 使用说明：从入门到精通
+# Odysseus 教程：本地 AI 工作台、Agent 与 MCP 从入门到精通
 
-> 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。
+> 适用对象：刚接触 Odysseus 的新手、想搭建本地 AI 工作台的个人用户、希望研究 AI Agent / MCP / 本地模型工作流的进阶用户。本文是一篇 Odysseus 中文教程和使用手册，重点覆盖安装启动、模型配置、Chat、Agent、MCP、Deep Research、Cookbook、数据备份和安全访问。
 
 本手册基于本机已下载的 Odysseus 项目整理：
 
@@ -27,7 +27,7 @@ D:\code\ai_codex_project\hermes_project\odysseus
 https://github.com/pewdiepie-archdaemon/odysseus
 ```
 
-![Odysseus 项目封面](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/odysseus.jpg)
+![Odysseus 项目封面](/images/odysseus-user-manual/official/odysseus.jpg)
 
 ## 目录
 
@@ -371,7 +371,7 @@ Chat 是最基础的入口。
 
 ![本地 Odysseus Chat 首页截图](/images/odysseus-user-manual/odysseus-screenshots/02-home-chat.png)
 
-![Odysseus Chat 与 Agent 演示](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/chat.gif)
+![Odysseus Chat 与 Agent 演示](/images/odysseus-user-manual/official/chat.gif)
 
 你可以用它做：
 
@@ -433,7 +433,7 @@ Documents 更适合长文本写作和编辑。
 
 ![本地 Odysseus 新建文档截图](/images/odysseus-user-manual/odysseus-screenshots/05-documents-new.png)
 
-![Odysseus Documents 演示](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/document.gif)
+![Odysseus Documents 演示](/images/odysseus-user-manual/official/document.gif)
 
 可以用于：
 
@@ -603,7 +603,7 @@ Deep Research 用于多步骤资料收集、阅读、综合和报告生成。
 
 ![本地 Odysseus Deep Research 截图](/images/odysseus-user-manual/odysseus-screenshots/06-deep-research.png)
 
-![Odysseus Deep Research 演示](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/research.gif)
+![Odysseus Deep Research 演示](/images/odysseus-user-manual/official/research.gif)
 
 适合任务：
 
@@ -639,7 +639,7 @@ Compare 用来对比多个模型的输出。
 
 ![本地 Odysseus Compare 截图](/images/odysseus-user-manual/odysseus-screenshots/07-compare.png)
 
-![Odysseus Compare 演示](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/compare.gif)
+![Odysseus Compare 演示](/images/odysseus-user-manual/official/compare.gif)
 
 适合：
 
@@ -670,7 +670,7 @@ Odysseus 不是只做聊天，它也尝试覆盖个人工作流。
 
 ![本地 Odysseus Tasks 截图](/images/odysseus-user-manual/odysseus-screenshots/09-tasks.png)
 
-![Odysseus Notes 与 Tasks 演示](https://raw.githubusercontent.com/pewdiepie-archdaemon/odysseus/main/docs/notes.gif)
+![Odysseus Notes 与 Tasks 演示](/images/odysseus-user-manual/official/notes.gif)
 
 ### Notes
 
