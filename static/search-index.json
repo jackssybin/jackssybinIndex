@@ -24,6 +24,26 @@
     "content": "Odysseus 教程：本地 AI 工作台、Agent 与 MCP 从入门到精通 这篇文章记录我从零开始使用 Odysseus 的完整过程。我会用第一人称梳理本地 AI 工作台搭建、模型配置、Chat、Agent、MCP、Deep Research、Cookbook、数据备份和安全访问，方便后来继续复盘，也方便刚接触 Odysseus 的朋友按步骤实践。 官方仓库： 目录 1. Odysseus 是什么 2. 学习路线：从入门到精通 3. 安装与启动 4. 首次登录与基础配置 5. 模型配置：让 Odysseus 真正能聊天 6. 基础使用：Chat、会话、文件、文档 7. 进阶功能：Agent、Memory、Skills、MCP 8. Cookbook：本地模型下载与服务 9. Deep Research：深度研究工作流 10. Compare：模型横向对比 11. Notes、Tasks、Calendar、Email 12. 数据目录与备份 13. 安全设置与局域网访问 14. 常用命令速查 15. 常见问题排查 16. 精通路线：如何把 Odysseus 用成个人 AI 工作台 1. Odysseus 是什么 Odysseus 是一个开源、自托管、本地优先的 AI 工作台。 我更愿意把它理解成： 它不是大模型本身，而是一个统一入口。我需要给它配置模型来源，比如 Ollama、LM Studio、OpenAI、OpenRouter、vLLM 或 llama.cpp。 我会把 Odysseus 用在这些场景： 在本地搭建自己的 AI 聊天工作台 统一管理本地模型和云端模型 使用 Agent 执行文件、Shell、搜索、MCP 等任务 做资料调研、文档写作、模型对比 构建个人长期记忆和知识工作流 尝试自托管 AI 工作空间 2. 学习路线：从入门到精通 我的建议是不要一上来就研究所有功能。Odysseus 的能力很多，按阶段学习会更稳。 第一阶段：入门 目标：能启动、登录、配置模型、完成一次普通聊天。 我需要掌握： 项目目录在哪里 如何启动和停止服务 如何登录后台 如何配置一个模型 如何创建新会话 如何上传文件或使用文档功能 第二阶段：熟练 目标：把 Odysseus 当成日常 AI 工作台使用。 我需要掌握： Chat 会话管理 Documents 文档写作 Presets 预设提示词 Memory 记忆管理 Notes 和 Tasks Deep Research Compare 模型对比 第三阶段：进阶 目标：让 Odysseus 连接更多工具，开始执行任务。 我需要掌握： Agent 的工具权限 MCP 服务配置 本地文件和 Shell 工具的风险 Cookbook 下载和启动模型 Search、SearXNG、Tavily、Brave 等搜索服务 API token 和 Webhook 第四阶段：精通 目标：构建自己的 AI 工作流。 我需要掌握： 多模型路由 本地模型和云端模型搭配 长期记忆维护 技能沉淀 自动化任务 私有化部署和安全加固 备份、迁移、更新、日志排查 3. 安装与启动 本机已经下载好了 Odysseus，路径是： Windows 推荐启动方式 如果我已经安装过依赖，可以直接启动： 启动后打开： Windows 一键初始化方式 首次安装可以使用官方脚本： 这个脚本会自动完成： 检查 Python 3.11+ 创建 venv 安装依赖 运行 setup.py 启动服务 Windows 手动安装方式 如果我想理解每一步，可以手动执行： 如果 py 3.12 不可用，可以改用： 前提是 python version 显示 3.11 或更高。 Docker 启动方式 官方推荐 Docker，适合我在 Linux、服务器或希望服务隔离时使用： 查看状态： 查看日志： 停止： 4. 首次登录与基础配置 首次运行 setup.py 时，Odysseus 会创建管理员账号。 如果是交互式终端，它会提示我输入账号和密码；如果是非交互环境，可能会生成临时密码并打印在终端或 Docker 日志里。 登录后我会第一时间做三件事： 1. 修改管理员密码 2. 检查是否开启注册 3. 配置模型来源 修改密码 进入页面后打开： 我会把临时密码换成自己的强密码。 不要关闭认证 .env 中有一个重要变量： 我会保持开启，尤其是当我准备让局域网或其他设备访问时。 不要随便开放公网 Odysseus 具备 Shell、文件、Agent、模型、上传、API token 等高权限能力。它应该被当作一个管理员控制台，而不是普通网页。 在新手阶段，我只会绑定本机： 5. 模型配置：让 Odysseus 真正能聊天 Odysseus 本身不是大模型。要聊天，需要接入模型服务。 常见选择： Ollama：本地最容易上手 LM Studio：图形界面友好 OpenAI：云端能力强 OpenRouter：模型多，统一 API vLLM：适合服务器部署 llama.cpp：适合 GGUF 模型 配置 Ollama 如果我在 Windows 上用 Ollama，通常地址是： 在 Odysseus 中进入： 添加 OpenAI compatible e..."
   },
   {
+    "title": "HyperFrames 中文从 0 到 1 完全使用教程",
+    "url": "/articles/2026/06/09/zero-to-one-zh.html",
+    "type": "blog",
+    "date": "2026-06-09",
+    "description": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
+    "excerpt": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
+    "topic": "AI、Agent 与本地模型",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI",
+      "HyperFrames",
+      "视频生成",
+      "HTML 视频",
+      "教程"
+    ],
+    "priority": 0,
+    "content": "HyperFrames 中文从 0 到 1 完全使用教程 这篇教程面向第一次接触 HyperFrames 的开发者和 AI Agent 使用者。读完后，你会理解 HyperFrames 的基本模型，能从空项目创建一个视频，完成预览、校验、渲染，并能用三组递进案例从简单标题动画扩展到多场景、可参数化的视频项目。 配套可运行项目位于 ./hyperframes zero to one projects/，本文中的案例截图均由这些项目实际运行后生成。 1. 认识 HyperFrames HyperFrames 是一个把 HTML、CSS、媒体文件和可 seek 动画渲染成视频的开源框架。你写的不是传统剪辑软件里的拖拽时间线，而是一份可以被浏览器打开、可以被代码生成、也可以被 AI Agent 修改的 HTML 视频工程。 核心思路： HTML 是视频源文件 ：文字、图片、视频、音频、子场景都写在 HTML 里。 data 属性定义时间线 ：元素什么时候出现、持续多久、在哪条 track 上，都由声明式属性控制。 CSS 控制画面 ：布局、颜色、层级、字体、背景效果都按网页方式编写。 GSAP 等动画库负责可 seek 动画 ：渲染器可以跳到任意时间点捕获画面，保证逐帧确定性。 CLI 负责预览和渲染 ：本地浏览器预览，最终用 Chrome + FFmpeg 渲染成 MP4 或 WebM。 适合场景包括产品介绍、功能发布、数据可视化、社媒短视频、字幕卡，以及“文档/CSV/网页 → 视频”的 AI 自动化视频流水线。 2. 环境准备 HyperFrames 本地使用需要这些工具： 依赖 要求 用途 Node.js 22 或更高 运行 npx hyperframes CLI npm / npx 或 bun 任一即可 安装和执行命令 FFmpeg 推荐 7.x 或更高 把捕获帧编码成视频 检查 Node.js： 检查 FFmpeg： 安装 FFmpeg： 确认 CLI 可运行： 如果渲染失败，优先运行环境诊断： 3. 创建第一个项目 交互式创建项目： 从最小空白项目开始： 典型项目结构： 路径 作用 index.html 根 Composition，视频入口文件 compositions/ 可复用子 Composition，例如 intro、outro、字幕层 assets/ 图片、视频、音频、字体等素材 meta.json 项目元信息 启动预览： 渲染视频： 4. 配套项目如何运行 本教程已经按三个案例创建了可运行项目，统一放在： 运行任意项目的方式相同。以案例 1 为例： 预览启动后，在浏览器打开 Studio 地址，例如： 后面的三个案例都可以直接打开对应目录运行，不需要再手动从零复制代码。文档保留关键代码，是为了方便你理解每个项目的结构。 5. 核心概念 Composition：视频画布 Composition 是 HyperFrames 的基本场景单位。根 Composition 通常写在 index.html 中： 关键属性： data composition id：Composition 的唯一 ID。 data width / data height：视频尺寸，例如横屏 1920x1080，竖屏 1080x1920。 data start：根 Composition 通常从 0 开始。 Clip：时间线元素 Clip 是时间线上会出现的一段内容，可以是文字、图片、视频、音频或子 Composition。 关键规则： 定时元素必须加 class=\"clip\"，这样运行时才能管理显示和隐藏。 data start 表示开始时间，单位是秒。 data duration 表示持续时间，单位是秒。 data track index 表示时间线 track，同一 track 上的 clips 不能重叠。 Track：时间线冲突，不是视觉层级 data track index 用于组织时间线，避免同一 track 上出现时间重叠。它不等于 CSS 层级。如果你想控制谁盖在谁上面，使用 CSS z index。 Timing：绝对时间和相对时间 绝对秒数： 引用另一个 clip 的结束时间： 这里 main 会在 intro 结束后 0.5 秒开始。 GSAP：可 seek 动画 HyperFrames 常用 GSAP 写动画。重点是：timeline 必须暂停，并注册到 window. timelines。 Variables：一份模板，多次渲染 Variables 让同一个 Composition 可以用不同标题、颜色、CTA、图片进行渲染。 读取变量： 渲染时覆盖： 6. 推荐开发闭环 写 HyperFrames 项目时，建议按这个顺序迭代： 命令 用途 npx hyperframes lint 静态检查 HTML 结构、时间线、属性问题 npx hyperframes validate 在浏览器环境中验证运行时错误和缺失素材 npx hyperframes inspect 采样检查画面布局，例如文字溢出、裁切、出画布 npx hyperframes preview 启动 Studio 预览并热更新 npx hyperfra..."
+  },
+  {
     "title": "关于本站",
     "url": "/about.html",
     "type": "page",

@@ -1,0 +1,68 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260">
+  <style>
+    text { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .box { rx: 14; fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+    .label { font-size: 18px; fill: #0f172a; font-weight: 700; }
+    .sub { font-size: 13px; fill: #64748b; }
+    .arrow { stroke: #94a3b8; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .num { font-size: 15px; fill: #fff; font-weight: 800; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1 -->
+  <rect class="box" x="20" y="40" width="170" height="180"/>
+  <circle cx="105" cy="80" r="18" fill="#7c3aed"/>
+  <text class="num" x="105" y="86" text-anchor="middle">1</text>
+  <text class="label" x="105" y="125" text-anchor="middle">init</text>
+  <text class="sub" x="105" y="150" text-anchor="middle">npx hyperframes</text>
+  <text class="sub" x="105" y="168" text-anchor="middle">init my-video</text>
+  <text class="sub" x="105" y="200" text-anchor="middle">创建项目骨架</text>
+
+  <line class="arrow" x1="195" y1="130" x2="245" y2="130"/>
+
+  <!-- Step 2 -->
+  <rect class="box" x="250" y="40" width="170" height="180"/>
+  <circle cx="335" cy="80" r="18" fill="#7c3aed"/>
+  <text class="num" x="335" y="86" text-anchor="middle">2</text>
+  <text class="label" x="335" y="125" text-anchor="middle">write</text>
+  <text class="sub" x="335" y="150" text-anchor="middle">编写 HTML</text>
+  <text class="sub" x="335" y="168" text-anchor="middle">data-* + GSAP</text>
+  <text class="sub" x="335" y="200" text-anchor="middle">CSS + 媒体</text>
+
+  <line class="arrow" x1="425" y1="130" x2="475" y2="130"/>
+
+  <!-- Step 3 -->
+  <rect class="box" x="480" y="40" width="170" height="180"/>
+  <circle cx="565" cy="80" r="18" fill="#7c3aed"/>
+  <text class="num" x="565" y="86" text-anchor="middle">3</text>
+  <text class="label" x="565" y="125" text-anchor="middle">lint</text>
+  <text class="sub" x="565" y="150" text-anchor="middle">npx hyperframes</text>
+  <text class="sub" x="565" y="168" text-anchor="middle">lint</text>
+  <text class="sub" x="565" y="200" text-anchor="middle">静态结构检查</text>
+
+  <line class="arrow" x1="655" y1="130" x2="705" y2="130"/>
+
+  <!-- Step 4 -->
+  <rect class="box" x="710" y="40" width="170" height="180"/>
+  <circle cx="795" cy="80" r="18" fill="#7c3aed"/>
+  <text class="num" x="795" y="86" text-anchor="middle">4</text>
+  <text class="label" x="795" y="125" text-anchor="middle">preview</text>
+  <text class="sub" x="795" y="150" text-anchor="middle">npx hyperframes</text>
+  <text class="sub" x="795" y="168" text-anchor="middle">preview</text>
+  <text class="sub" x="795" y="200" text-anchor="middle">浏览器实时预览</text>
+
+  <line class="arrow" x1="885" y1="130" x2="935" y2="130"/>
+
+  <!-- Step 5 -->
+  <rect class="box" x="940" y="40" width="170" height="180"/>
+  <circle cx="1025" cy="80" r="18" fill="#7c3aed"/>
+  <text class="num" x="1025" y="86" text-anchor="middle">5</text>
+  <text class="label" x="1025" y="125" text-anchor="middle">render</text>
+  <text class="sub" x="1025" y="150" text-anchor="middle">npx hyperframes</text>
+  <text class="sub" x="1025" y="168" text-anchor="middle">render</text>
+  <text class="sub" x="1025" y="200" text-anchor="middle">输出 MP4/WebM</text>
+</svg>
