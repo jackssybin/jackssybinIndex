@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <text x="80" y="88" font-family="Segoe UI, Arial" font-size="38" font-weight="700" fill="#111827">复杂场景：组合模型 + 自动降级 + 用量观察</text>
+  <g font-family="Segoe UI, Arial" font-size="20">
+    <rect x="100" y="175" width="245" height="105" rx="18" fill="#fff7ed" stroke="#fdba74"/><text x="140" y="218" font-weight="700" fill="#9a3412">Combo: coding</text><text x="140" y="250" fill="#7c2d12">优先高质量模型</text>
+    <path d="M345 228 H475" stroke="#f97316" stroke-width="5" marker-end="url(#arrow)"/>
+    <rect x="500" y="145" width="260" height="165" rx="22" fill="#ffffff" stroke="#e5e7eb"/><text x="545" y="195" font-weight="700" fill="#111827">路由策略</text><text x="545" y="235" fill="#4b5563">1. 订阅模型</text><text x="545" y="268" fill="#4b5563">2. 低价 API</text><text x="545" y="301" fill="#4b5563">3. 免费模型</text>
+    <path d="M760 228 H895" stroke="#f97316" stroke-width="5" marker-end="url(#arrow)"/>
+    <rect x="920" y="175" width="260" height="105" rx="18" fill="#ecfdf5" stroke="#bbf7d0"/><text x="960" y="218" font-weight="700" fill="#047857">持续可用</text><text x="960" y="250" fill="#065f46">失败自动 fallback</text>
+  </g>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#f97316"/></marker></defs>
+  <rect x="100" y="390" width="1080" height="210" rx="22" fill="#111827"/>
+  <text x="135" y="445" font-family="Consolas, monospace" font-size="22" fill="#fde68a">建议配置：</text>
+  <text x="135" y="490" font-family="Consolas, monospace" font-size="20" fill="#d1fae5">Combo coding = kr/claude-sonnet-4.5 → glm/glm-4.6 → openrouter/deepseek/deepseek-chat-v3.1:free</text>
+  <text x="135" y="535" font-family="Consolas, monospace" font-size="20" fill="#d1fae5">客户端只填 model: "coding"，9Router 负责切换、统计和错误隔离。</text>
+</svg>

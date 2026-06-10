@@ -1,0 +1,26 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <text x="80" y="88" font-family="Segoe UI, Arial" font-size="38" font-weight="700" fill="#111827">媒体场景：图片、语音、视频统一路由</text>
+  <g font-family="Segoe UI, Arial">
+    <rect x="95" y="160" width="325" height="430" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="135" y="220" font-size="27" font-weight="700" fill="#7c3aed">图片生成</text>
+    <text x="135" y="270" font-size="18" fill="#4b5563">Endpoint</text><text x="135" y="302" font-size="18" fill="#111827">/v1/images/generations</text>
+    <text x="135" y="360" font-size="18" fill="#4b5563">模型示例</text><text x="135" y="392" font-size="18" fill="#111827">auto:image</text>
+    <text x="135" y="448" font-size="18" fill="#4b5563">用途</text><text x="135" y="480" font-size="18" fill="#111827">海报、插图、封面</text>
+    <rect x="135" y="520" width="215" height="38" rx="19" fill="#ede9fe"/><text x="168" y="546" font-size="17" fill="#6d28d9">Text → Image</text>
+
+    <rect x="478" y="160" width="325" height="430" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="518" y="220" font-size="27" font-weight="700" fill="#0f766e">音频处理</text>
+    <text x="518" y="270" font-size="18" fill="#4b5563">TTS</text><text x="518" y="302" font-size="18" fill="#111827">/v1/audio/speech</text>
+    <text x="518" y="350" font-size="18" fill="#4b5563">STT</text><text x="518" y="382" font-size="18" fill="#111827">/v1/audio/transcriptions</text>
+    <text x="518" y="438" font-size="18" fill="#4b5563">用途</text><text x="518" y="470" font-size="18" fill="#111827">配音、会议转写、字幕</text>
+    <rect x="518" y="520" width="215" height="38" rx="19" fill="#ccfbf1"/><text x="560" y="546" font-size="17" fill="#0f766e">Text ↔ Audio</text>
+
+    <rect x="861" y="160" width="325" height="430" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="901" y="220" font-size="27" font-weight="700" fill="#be123c">视频生成</text>
+    <text x="901" y="270" font-size="18" fill="#4b5563">Endpoint</text><text x="901" y="302" font-size="18" fill="#111827">/v1/video/generations</text>
+    <text x="901" y="360" font-size="18" fill="#4b5563">模型示例</text><text x="901" y="392" font-size="18" fill="#111827">auto:video</text>
+    <text x="901" y="448" font-size="18" fill="#4b5563">用途</text><text x="901" y="480" font-size="18" fill="#111827">短视频、广告、演示片</text>
+    <rect x="901" y="520" width="215" height="38" rx="19" fill="#ffe4e6"/><text x="946" y="546" font-size="17" fill="#be123c">Text → Video</text>
+  </g>
+</svg>
