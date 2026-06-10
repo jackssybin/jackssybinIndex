@@ -1,6 +1,26 @@
 {
   "allArticles": [
     {
+      "title": "9Router 使用教程：从文本到音频、图片、视频的完整实践",
+      "url": "/articles/2026/06/10/9router-usage-tutorial.html",
+      "type": "blog",
+      "date": "2026-06-10",
+      "description": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "excerpt": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "9Router",
+        "AI 网关",
+        "多模型路由",
+        "教程"
+      ],
+      "priority": 0,
+      "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
+    },
+    {
       "title": "HyperFrames 中文从 0 到 1 完全使用教程",
       "url": "/articles/2026/06/09/zero-to-one-zh.html",
       "type": "blog",
@@ -1882,6 +1902,26 @@
   ],
   "articles": [
     {
+      "title": "9Router 使用教程：从文本到音频、图片、视频的完整实践",
+      "url": "/articles/2026/06/10/9router-usage-tutorial.html",
+      "type": "blog",
+      "date": "2026-06-10",
+      "description": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "excerpt": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "9Router",
+        "AI 网关",
+        "多模型路由",
+        "教程"
+      ],
+      "priority": 0,
+      "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
+    },
+    {
       "title": "HyperFrames 中文从 0 到 1 完全使用教程",
       "url": "/articles/2026/06/09/zero-to-one-zh.html",
       "type": "blog",
@@ -2236,26 +2276,29 @@
       ],
       "priority": 0,
       "content": "在MySQL 5.7 password字段已从mysql.user表中删除，新的字段名是“authenticalion string”. 选择数据库：use mysql; 更新root的密码："
-    },
-    {
-      "title": "Java 逐行读取文本文件的几种方式以及效率对比",
-      "url": "/articles/2020/11/10/1605004504728.html",
-      "type": "blog",
-      "date": "2020-11-10",
-      "description": "先放结果 1000000 行文本读取结果比对: BufferedReader 耗时: 49ms Scanner 耗时: 653ms Apache Commons IO 耗时: 44ms InputStreamReader 耗时: 191ms FileInputStream 耗时: 3171ms BufferedInpu...",
-      "excerpt": "先放结果 1000000 行文本读取结果比对: BufferedReader 耗时: 49ms Scanner 耗时: 653ms Apache Commons IO 耗时: 44ms InputStreamReader 耗时: 191ms FileInputStream 耗时: 3171ms BufferedInpu...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "java行模式读取文件",
-        "读文件效率对比"
-      ],
-      "priority": 0,
-      "content": "先放结果 1000000 行文本读取结果比对: 24488656 行文本读取结果比对: 可见, 当文件较小时: ApacheCommonsIO 流 表现最佳; FileUtils,BufferedReader 居其二; BufferedInputStream,Files 随其后; InputStreamReader,Scanner,FileInputStream 略慢. 当文件较大时, Apache Commons IO 流, BufferedReader 依然出色, Files, FileUtils 速度开始变慢. 简要分析 使用到的工具类包括: java.io.BufferedReader java.util.Scanner org.apache.commons.io.FileUtils java.io.InputStreamReader java.io.FileInputStream java.io.BufferedInputStream com.google.common.io.Files 其中: Apache Commons IO 流 和 BufferedReader 使用到了缓冲区, 所以在不消耗大量内存的情况下提高了处理速度; FileUtils 和 Files 是先把文件内容全部读入内存, 然后在进行操作, 是典型的空间换时间案例. 这种方法可能会大 量消耗内存 , 建议酌情使用; 其他几个工具类本来就不擅长逐行读取, 效率底下也是情理之中. 建议 在逐行读取文本内容的需求下，建议使用 Apache Commons IO 流，或者 BufferedReader, 既不会过多地占用内存，也保证了优异的处理速度. 附录 源代码: 参考文献: [[Java] 读取文件方法大全 ](http://www.cnblogs.com/lovebread/archive/2009/11/23/1609122.html) — lovebread java 读取文件 API 速度对比 — fengxingzhe001 Java 高效读取大文件 — Eugen Paraschiv [文] / ImportNew 进林 [译] https://blog.diqigan.cn/posts/java read file by line.html"
     }
   ],
   "latestArticles": [
+    {
+      "title": "9Router 使用教程：从文本到音频、图片、视频的完整实践",
+      "url": "/articles/2026/06/10/9router-usage-tutorial.html",
+      "type": "blog",
+      "date": "2026-06-10",
+      "description": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "excerpt": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "9Router",
+        "AI 网关",
+        "多模型路由",
+        "教程"
+      ],
+      "priority": 0,
+      "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
+    },
     {
       "title": "HyperFrames 中文从 0 到 1 完全使用教程",
       "url": "/articles/2026/06/09/zero-to-one-zh.html",
@@ -2340,24 +2383,6 @@
       ],
       "priority": 0,
       "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
-    },
-    {
-      "title": "LocalDateTime操作",
-      "url": "/articles/2025/07/16/1752652246705.html",
-      "type": "blog",
-      "date": "2025-07-16",
-      "description": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "excerpt": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "LocalDateTime",
-        "Duration",
-        "时间操作"
-      ],
-      "priority": 0,
-      "content": "1.LocalDateTime时间转换 2.DateTimeUtils操作时间 3.完整LocalDateTime使用场景和用法 关键场景说明： 1. 获取当前时间 LocalDateTime.now() 获取系统当前日期时间 2. 创建指定时间 LocalDateTime.of() 创建精确到分钟的时间对象 3. 日期时间转字符串 使用 DateTimeFormatter 自定义格式（如 \"yyyy MM dd HH:mm:ss\"） 4. 字符串转日期时间 LocalDateTime.parse() 配合格式化器解析字符串 5. 日期时间加减 plusDays(), minusHours() 等方法进行时间运算 6. 获取时间单位 getYear(), getMonth() 等方法提取时间分量 7. 时间比较 isBefore(), isAfter() 方法比较时间先后 8. 计算时间间隔 Duration.between() 计算两个时间的差值 9. 时区转换 通过 atZone() 和 withZoneSameInstant() 处理时区 10. 与传统Date互转 通过 Instant 对象实现与旧版Date的转换 高级用法： 最佳实践（注意事项）： 1. 时区处理 ：始终明确时区，避免隐式使用系统默认时区 2. 不可变性 ：所有操作返回新对象，原对象不变 3. 线程安全 ：LocalDateTime 是线程安全的类 4. 格式化重用 ：复用 DateTimeFormatter 实例提升性能 5. 空值处理 ：使用 Optional 包装可能为空的日期时间值"
     }
   ],
   "tutorials": [
@@ -3324,7 +3349,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 4,
+      "count": 5,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3435,13 +3460,34 @@
           ],
           "priority": 0,
           "content": "HyperFrames 中文从 0 到 1 完全使用教程 这篇教程面向第一次接触 HyperFrames 的开发者和 AI Agent 使用者。读完后，你会理解 HyperFrames 的基本模型，能从空项目创建一个视频，完成预览、校验、渲染，并能用三组递进案例从简单标题动画扩展到多场景、可参数化的视频项目。 配套可运行项目位于 ./hyperframes zero to one projects/，本文中的案例截图均由这些项目实际运行后生成。 1. 认识 HyperFrames HyperFrames 是一个把 HTML、CSS、媒体文件和可 seek 动画渲染成视频的开源框架。你写的不是传统剪辑软件里的拖拽时间线，而是一份可以被浏览器打开、可以被代码生成、也可以被 AI Agent 修改的 HTML 视频工程。 核心思路： HTML 是视频源文件 ：文字、图片、视频、音频、子场景都写在 HTML 里。 data 属性定义时间线 ：元素什么时候出现、持续多久、在哪条 track 上，都由声明式属性控制。 CSS 控制画面 ：布局、颜色、层级、字体、背景效果都按网页方式编写。 GSAP 等动画库负责可 seek 动画 ：渲染器可以跳到任意时间点捕获画面，保证逐帧确定性。 CLI 负责预览和渲染 ：本地浏览器预览，最终用 Chrome + FFmpeg 渲染成 MP4 或 WebM。 适合场景包括产品介绍、功能发布、数据可视化、社媒短视频、字幕卡，以及“文档/CSV/网页 → 视频”的 AI 自动化视频流水线。 2. 环境准备 HyperFrames 本地使用需要这些工具： 依赖 要求 用途 Node.js 22 或更高 运行 npx hyperframes CLI npm / npx 或 bun 任一即可 安装和执行命令 FFmpeg 推荐 7.x 或更高 把捕获帧编码成视频 检查 Node.js： 检查 FFmpeg： 安装 FFmpeg： 确认 CLI 可运行： 如果渲染失败，优先运行环境诊断： 3. 创建第一个项目 交互式创建项目： 从最小空白项目开始： 典型项目结构： 路径 作用 index.html 根 Composition，视频入口文件 compositions/ 可复用子 Composition，例如 intro、outro、字幕层 assets/ 图片、视频、音频、字体等素材 meta.json 项目元信息 启动预览： 渲染视频： 4. 配套项目如何运行 本教程已经按三个案例创建了可运行项目，统一放在： 运行任意项目的方式相同。以案例 1 为例： 预览启动后，在浏览器打开 Studio 地址，例如： 后面的三个案例都可以直接打开对应目录运行，不需要再手动从零复制代码。文档保留关键代码，是为了方便你理解每个项目的结构。 5. 核心概念 Composition：视频画布 Composition 是 HyperFrames 的基本场景单位。根 Composition 通常写在 index.html 中： 关键属性： data composition id：Composition 的唯一 ID。 data width / data height：视频尺寸，例如横屏 1920x1080，竖屏 1080x1920。 data start：根 Composition 通常从 0 开始。 Clip：时间线元素 Clip 是时间线上会出现的一段内容，可以是文字、图片、视频、音频或子 Composition。 关键规则： 定时元素必须加 class=\"clip\"，这样运行时才能管理显示和隐藏。 data start 表示开始时间，单位是秒。 data duration 表示持续时间，单位是秒。 data track index 表示时间线 track，同一 track 上的 clips 不能重叠。 Track：时间线冲突，不是视觉层级 data track index 用于组织时间线，避免同一 track 上出现时间重叠。它不等于 CSS 层级。如果你想控制谁盖在谁上面，使用 CSS z index。 Timing：绝对时间和相对时间 绝对秒数： 引用另一个 clip 的结束时间： 这里 main 会在 intro 结束后 0.5 秒开始。 GSAP：可 seek 动画 HyperFrames 常用 GSAP 写动画。重点是：timeline 必须暂停，并注册到 window. timelines。 Variables：一份模板，多次渲染 Variables 让同一个 Composition 可以用不同标题、颜色、CTA、图片进行渲染。 读取变量： 渲染时覆盖： 6. 推荐开发闭环 写 HyperFrames 项目时，建议按这个顺序迭代： 命令 用途 npx hyperframes lint 静态检查 HTML 结构、时间线、属性问题 npx hyperframes validate 在浏览器环境中验证运行时错误和缺失素材 npx hyperframes inspect 采样检查画面布局，例如文字溢出、裁切、出画布 npx hyperframes preview 启动 Studio 预览并热更新 npx hyperfra..."
+        },
+        {
+          "title": "9Router 使用教程：从文本到音频、图片、视频的完整实践",
+          "url": "/articles/2026/06/10/9router-usage-tutorial.html",
+          "type": "blog",
+          "date": "2026-06-10",
+          "description": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+          "excerpt": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+          "topic": "AI、Agent 与本地模型",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI",
+            "9Router",
+            "AI 网关",
+            "多模型路由",
+            "教程"
+          ],
+          "priority": 0,
+          "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
         }
       ],
       "articleTitles": [
         "Odysseus：一个值得关注的本地 AI 工作台",
         "一个开源维护者视角：为什么我建议大家关注 OpenAI Codex for OSS",
         "Odysseus 教程：本地 AI 工作台、Agent 与 MCP 从入门到精通",
-        "HyperFrames 中文从 0 到 1 完全使用教程"
+        "HyperFrames 中文从 0 到 1 完全使用教程",
+        "9Router 使用教程：从文本到音频、图片、视频的完整实践"
       ]
     },
     {
@@ -4993,6 +5039,26 @@
   ],
   "recentUpdates": [
     {
+      "title": "9Router 使用教程：从文本到音频、图片、视频的完整实践",
+      "url": "/articles/2026/06/10/9router-usage-tutorial.html",
+      "type": "文章",
+      "date": "2026-06-10",
+      "description": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "excerpt": "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI",
+        "9Router",
+        "AI 网关",
+        "多模型路由",
+        "教程"
+      ],
+      "priority": 0,
+      "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
+    },
+    {
       "title": "HyperFrames 中文从 0 到 1 完全使用教程",
       "url": "/articles/2026/06/09/zero-to-one-zh.html",
       "type": "文章",
@@ -5076,24 +5142,6 @@
       ],
       "priority": 0,
       "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
-    },
-    {
-      "title": "LocalDateTime操作",
-      "url": "/articles/2025/07/16/1752652246705.html",
-      "type": "文章",
-      "date": "2025-07-16",
-      "description": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "excerpt": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "LocalDateTime",
-        "Duration",
-        "时间操作"
-      ],
-      "priority": 0,
-      "content": "1.LocalDateTime时间转换 2.DateTimeUtils操作时间 3.完整LocalDateTime使用场景和用法 关键场景说明： 1. 获取当前时间 LocalDateTime.now() 获取系统当前日期时间 2. 创建指定时间 LocalDateTime.of() 创建精确到分钟的时间对象 3. 日期时间转字符串 使用 DateTimeFormatter 自定义格式（如 \"yyyy MM dd HH:mm:ss\"） 4. 字符串转日期时间 LocalDateTime.parse() 配合格式化器解析字符串 5. 日期时间加减 plusDays(), minusHours() 等方法进行时间运算 6. 获取时间单位 getYear(), getMonth() 等方法提取时间分量 7. 时间比较 isBefore(), isAfter() 方法比较时间先后 8. 计算时间间隔 Duration.between() 计算两个时间的差值 9. 时区转换 通过 atZone() 和 withZoneSameInstant() 处理时区 10. 与传统Date互转 通过 Instant 对象实现与旧版Date的转换 高级用法： 最佳实践（注意事项）： 1. 时区处理 ：始终明确时区，避免隐式使用系统默认时区 2. 不可变性 ：所有操作返回新对象，原对象不变 3. 线程安全 ：LocalDateTime 是线程安全的类 4. 格式化重用 ：复用 DateTimeFormatter 实例提升性能 5. 空值处理 ：使用 Optional 包装可能为空的日期时间值"
     },
     {
       "title": "第01章：MySQL概述与安装",

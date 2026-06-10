@@ -37,6 +37,7 @@ async function listFiles(dir, predicate = () => true) {
 }
 
 function parseFrontmatter(source) {
+  source = source.replace(/^\uFEFF/u, "");
   if (!source.startsWith("---")) return { data: {}, body: source };
   const end = source.indexOf("\n---", 3);
   if (end < 0) return { data: {}, body: source };
