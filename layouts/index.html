@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ partial "site-header.html" . }}
+{{ $news := index site.Data "hot-news" }}
 <div class="wrapper">
   <div class="main-wrap">
     <main>
@@ -17,8 +18,17 @@
         </div>
         <section class="home-hot-news" data-hot-news-live="home">
           <div><h3>实时热点</h3><a href="/news.html">查看全部 &raquo;</a></div>
-          <p>轻量展示，每小时更新：<span data-hot-news-time>加载中</span></p>
-          <ul class="home-hot-news-list" data-hot-news-list></ul>
+          <p>轻量展示，每小时更新：<span data-hot-news-time>{{ with $news.generatedAtText }}{{ . }}{{ else }}{{ with $news.generatedAt }}{{ replace (substr . 0 19) "T" " " }}{{ else }}等待生成{{ end }}{{ end }}</span></p>
+          <ul class="home-hot-news-list" data-hot-news-list>
+            {{ range $group := first 4 $news.groups }}
+              {{ range $item := first 2 $group.items }}
+                <li>
+                  <span>{{ $group.platformName }} #{{ $item.rank }}</span>
+                  <a href="{{ $item.url }}" target="_blank" rel="noopener nofollow">{{ $item.title }}</a>
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
         </section>
         <div class="home-portal-grid">
           <section>

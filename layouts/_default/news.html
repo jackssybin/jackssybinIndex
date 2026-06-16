@@ -9,7 +9,7 @@
         <div class="hot-news-hero">
           <h2>实时新闻</h2>
           <p>内容来源于 <a href="{{ $news.source | default "https://github.com/orz-ai/hot_news" }}" target="_blank" rel="noopener">orz-ai/hot_news</a>，本站按静态站方式每小时生成一次，用来快速浏览技术、财经、社区和综合热点。</p>
-          <span>最后生成：<b data-hot-news-time>{{ with $news.generatedAt }}{{ replace (substr . 0 19) "T" " " }}{{ else }}等待生成{{ end }}</b></span>
+          <span>最后生成：<b data-hot-news-time>{{ with $news.generatedAtText }}{{ . }}{{ else }}{{ with $news.generatedAt }}{{ replace (substr . 0 19) "T" " " }}{{ else }}等待生成{{ end }}{{ end }}</b>{{ with $news.timezone }}（{{ . }}）{{ end }}</span>
         </div>
         <div class="hot-news-grid hot-news-grid--page">
           {{ range $group := $news.groups }}

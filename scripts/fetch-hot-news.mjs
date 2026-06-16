@@ -26,6 +26,21 @@ const platforms = configuredPlatforms.length > 0
   ? configuredPlatforms.map((code) => [code, platformNameMap.get(code) || code])
   : defaultPlatforms;
 
+function formatBeijingTime(date) {
+  const formatter = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false
+  });
+  const parts = Object.fromEntries(formatter.formatToParts(date).map((part) => [part.type, part.value]));
+  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
+}
+
 function normalizeItem(item, platform, platformName, index) {
   return {
     title: String(item.title || "").trim(),
@@ -81,8 +96,11 @@ async function main() {
     throw new Error("All hot news requests failed and no previous hot-news.json exists");
   }
 
+  const generatedAt = new Date();
   const payload = JSON.stringify({
-    generatedAt: new Date().toISOString(),
+    generatedAt: generatedAt.toISOString(),
+    generatedAtText: formatBeijingTime(generatedAt),
+    timezone: "Asia/Shanghai",
     source: "https://github.com/orz-ai/hot_news",
     api: apiBase,
     groups,
