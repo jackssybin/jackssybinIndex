@@ -533,7 +533,7 @@
   align-items: baseline;
   display: grid;
   gap: 8px;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: 92px minmax(0, 1fr);
   min-width: 0;
 }
 
@@ -960,6 +960,7 @@ html[data-solo-theme="dark"] .solo-static .navbar {
 
 html[data-solo-theme="dark"] .solo-static .navbar nav a,
 html[data-solo-theme="dark"] .solo-static .list a,
+html[data-solo-theme="dark"] .solo-static .home-hot-news-list a,
 html[data-solo-theme="dark"] .solo-static .home-portal-grid a,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates a,
 html[data-solo-theme="dark"] .solo-static .weekly-grid a,
