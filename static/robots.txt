@@ -1,7 +1,3 @@
-User-agent: *
-Disallow: /*.do
-Disallow: /start
-Disallow: /logout
-Disallow: /authors/*
-Disallow: /console/*
-Disallow: /error/*
+﻿User-agent: *
+Allow: /
+Sitemap: https://jackssybin.cn/sitemap.xml

@@ -1,15 +1,64 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN" data-solo-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
   <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+  
+  {{ $siteKeywords := slice }}
+  {{ with .Site.Params.keywords }}
+    {{ $siteKeywords = split . "," }}
+  {{ end }}
+  
+  {{ $pageKeywords := slice }}
+  {{ with .Params.tags }}
+    {{ $pageKeywords = . }}
+  {{ end }}
+  
+  {{ $allKeywords := union $siteKeywords $pageKeywords }}
+  {{ if gt (len $allKeywords) 0 }}
+  <meta name="keywords" content="{{ delimit $allKeywords "," }}">
+  {{ end }}
+  
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ with .Site.Params.seo.google_verify }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.seo.baidu_verify }}<meta name="baidu-site-verification" content="{{ . }}">{{ end }}
+  
+  <!-- Geo SEO -->
+  {{ with .Site.Params.geo.region }}<meta name="geo.region" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.geo.placename }}<meta name="geo.placename" content="{{ . }}">{{ end }}
+  <meta name="ICBM" content="China">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
+  {{ with .Description }}
+  <meta property="og:description" content="{{ . }}">
+  {{ else }}
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:locale" content="zh_CN">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
+  {{ with .Description }}
+  <meta name="twitter:description" content="{{ . }}">
+  {{ else }}
+  <meta name="twitter:description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" href="/rss.xml" title="RSS" type="application/rss+xml">
   <link rel="stylesheet" href="/assets/solo-base.css">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/hugo-bridge.css?v=20260607j">
+  {{ template "_internal/schema.html" . }}
 </head>
 <body>
   <div class="solo-static">

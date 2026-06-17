@@ -1,16 +1,20 @@
 baseURL = "https://jackssybin.cn/"
 title = "jackssybin 的个人博客"
+description = "记录精彩的程序人生，分享技术教程与成长经验"
+author = "jackssybin"
 locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
 enableRobotsTXT = true
+enableEmoji = true
+paginate = 10
 disableKinds = ["taxonomy", "term"]
 
 [markup.goldmark.renderer]
 unsafe = true
 
 [outputs]
-home = ["HTML", "RSS"]
+home = ["HTML", "RSS", "SITEMAP"]
 section = ["HTML"]
 page = ["HTML"]
 
@@ -18,5 +22,25 @@ page = ["HTML"]
 baseName = "rss"
 mediaType = "application/rss+xml"
 
+[outputFormats.SITEMAP]
+baseName = "sitemap"
+mediaType = "application/xml"
+isPlainText = true
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
+
 [params]
-description = "记录精彩的程序人生"
+description = "记录精彩的程序人生，分享Java、SpringBoot、Netty等技术教程"
+keywords = "编程,Java,SpringBoot,后端开发,技术博客"
+author = "jackssybin"
+
+[params.geo]
+region = "CN"
+placename = "China"
+
+[params.seo]
+google_verify = ""
+baidu_verify = ""

@@ -1,0 +1,12 @@
+﻿# TEAM
+
+jackssybin <https://github.com/jackssybin>
+
+# THANKS
+
+Powered by Hugo
+Theme: Solo
+
+# SITE
+
+https://jackssybin.cn
