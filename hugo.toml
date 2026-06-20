@@ -7,8 +7,10 @@ defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
 enableRobotsTXT = true
 enableEmoji = true
-paginate = 10
 disableKinds = ["taxonomy", "term"]
+
+[pagination]
+pagerSize = 10
 
 [markup.goldmark.renderer]
 unsafe = true
