@@ -180,6 +180,27 @@
     "content": "CodeGraph：给 AI 编程助手装一个本地代码大脑 我越来越觉得，AI 编程助手最浪费时间的地方，不是写代码，而是找代码。 你问它“这个登录流程怎么走”“改这个函数会影响哪里”，它经常先 grep 一轮，再打开几个文件，发现方向不对，又换关键词。小项目还好，大一点的仓库里，这个过程既烧 token，也烧耐心。更麻烦的是，它读到的只是文件片段，不一定知道谁调用谁、哪个 route 绑到哪个 handler、一个改动会波及哪些地方。 CodeGraph 想解决的就是这件事。它不是另一个聊天机器人，也不是云端代码托管服务。按仓库文档和源码看，它更像一个本地代码索引层：用 tree sitter 解析项目，把函数、类、方法、路由、组件这些符号抽成节点，把调用、导入、继承、引用这些关系连成边，存进项目里的 .codegraph/codegraph.db。然后通过 MCP Server，把这张图交给 Claude Code、Cursor、Codex、opencode、Hermes Agent、Gemini 等 AI 工具查询。 一句话：让 Agent 少一点临时翻箱倒柜，多一点直接问“图谱”。 它到底做了什么 CodeGraph 的 README 把自己定位成 local first code intelligence library + CLI + MCP server。这个定位挺准确。 从源码看，核心流程大概是这样： 第一步是 extraction。src/extraction/ 里有 tree sitter 相关逻辑，也有各语言的 extractor。site/src/content/docs/reference/languages.md 里列了 20 多种语言：TypeScript、JavaScript、Python、Go、Rust、Java、C 、PHP、Ruby、C/C++、Swift、Kotlin、Scala、Dart、Svelte、Vue、Liquid、Pascal/Delphi、Lua、Luau、R 等。 第二步是 storage。src/db/schema.sql 里能看到几张关键表：nodes 存符号，edges 存关系，files 存文件记录，unresolved refs 存待解析引用。它还用了 SQLite FTS5 做全文搜索。这个选择很朴素，但很实用：索引在本地，数据不出机器，也不需要你给它配 API key。 第三步是 resolution。解析 AST 只能知道“这里有个名字”，但不一定知道这个名字指向哪里。CodeGraph 会继续解析 import、函数调用、继承关系和一些框架路由模式。官方文档里也提到，它会给部分动态分发场景补启发式边，比如 callback / observer 注册、EventEmitter、React re render、JSX child、Django ORM descriptors。这里要注意，“启发式”不等于百分百正确，它更像是把静态分析容易断掉的地方补起来，让 Agent 有更完整的线索。 第四步是 MCP。site/src/content/docs/reference/mcp server.md 里列出的工具包括 codegraph search、codegraph callers、codegraph callees、codegraph impact、codegraph node、codegraph explore、codegraph files、codegraph status。对 Agent 来说，这些工具比裸 grep 更像“先问结构，再读细节”。 最小可用路径 如果只是试用，不需要把事情搞复杂。 macOS / Linux 用户可以按官方 README： 如果你已经有 Node，也可以： 仓库的 package.json 显示当前包名是 @colbymchenry/codegraph，版本 1.0.1，Node 版本要求是 =20.0.0 <25.0.0。它的 CLI 名叫 codegraph。 装完以后，先接入你的 Agent： src/installer/targets/registry.ts 里能看到目前支持的 target：Claude Code、Cursor、Codex、opencode、Hermes、Gemini、Antigravity、Kiro。 然后进入你的项目： init i 会创建 .codegraph/ 并建立索引。之后你可以用 CLI 直接查，也可以让已接入的 Agent 通过 MCP 查。 几个命令很适合作为第一轮验证： 如果这些命令能返回节点、边、文件统计和调用信息，说明图谱已经建起来了。 我会拿它解决哪几类问题 第一类是陌生项目 onboarding。以前接手一个仓库，常规动作是看目录、看 README、搜入口文件。CodeGraph 的 context 或 MCP 里的 codegraph explore 更适合问：“支付流程从哪里开始？”“订单状态在哪里变化？”这种问题不只是搜名字，而是要把几个文件串起来。 第二类是改代码前看影响面。比如你要改 AuthMiddleware，普通搜索只能告诉你哪里出现了这个字符..."
   },
   {
+    "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+    "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+    "type": "blog",
+    "date": "2026-06-20",
+    "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+    "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+    "topic": "AI、Agent 与本地工具",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "CLI",
+      "WPS",
+      "Zotero",
+      "自动化",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
+  },
+  {
     "title": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
     "url": "/articles/2026/06/20/headroom-ai-context-compression.html",
     "type": "blog",

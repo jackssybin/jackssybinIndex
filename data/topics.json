@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 8,
+    "count": 9,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -927,6 +927,27 @@
         ],
         "priority": 0,
         "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
+      },
+      {
+        "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+        "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+        "type": "blog",
+        "date": "2026-06-20",
+        "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+        "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+        "topic": "AI、Agent 与本地工具",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "CLI",
+          "WPS",
+          "Zotero",
+          "自动化",
+          "开源项目"
+        ],
+        "priority": 0,
+        "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
       }
     ],
     "articleTitles": [
@@ -937,7 +958,8 @@
       "9Router 使用教程：从文本到音频、图片、视频的完整实践",
       "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
       "我拆了一遍 video-use：AI 剪视频真正难的不是看画面，而是读懂时间线",
-      "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩"
+      "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
+      "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件"
     ]
   },
   {

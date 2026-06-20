@@ -21,6 +21,27 @@
       "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
     },
     {
+      "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+      "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+      "type": "blog",
+      "date": "2026-06-20",
+      "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "topic": "AI、Agent 与本地工具",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "CLI",
+        "WPS",
+        "Zotero",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
+    },
+    {
       "title": "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
       "url": "/articles/2026/06/12/claw-code-agent-harness-deep-dive.html",
       "type": "blog",
@@ -1986,6 +2007,27 @@
       "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
     },
     {
+      "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+      "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+      "type": "blog",
+      "date": "2026-06-20",
+      "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "topic": "AI、Agent 与本地工具",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "CLI",
+        "WPS",
+        "Zotero",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
+    },
+    {
       "title": "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
       "url": "/articles/2026/06/12/claw-code-agent-harness-deep-dive.html",
       "type": "blog",
@@ -2332,24 +2374,6 @@
       ],
       "priority": 0,
       "content": "ApplicationContext是什么？ 简单来说就是Spring中的容器，可以用来获取容器中的各种bean组件，注册监听事件，加载资源文件等功能。 Application Context获取的几种方式 1 直接使用Autowired注入 2 利用 spring4.3 的新特性 使用spring4.3新特性但是存在一定的局限性，必须满足以下两点： 1. 构造函数只能有一个，如果有多个，就必须有一个无参数的构造函数，此时，spring会调用无参的构造函数 2. 构造函数的参数，必须在spring容器中存在 3 实现spring提供的接口 ApplicationContextAware spring 在bean 初始化后会判断是不是ApplicationContextAware的子类，调用setApplicationContext（）方法， 会将容器中ApplicationContext传入进去 结果获取三次："
-    },
-    {
-      "title": "各种法则定律-引论",
-      "url": "/articles/2020/12/25/1608882277320.html",
-      "type": "blog",
-      "date": "2020-12-25",
-      "description": "参考： 一、墨菲定律：如果事情可能出错，它就会出错。 二、布鲁克定律：大部分情况下，为已经延期的软件项目增加人手只会让项目延期得更厉害。 三、霍夫施塔特定律：项目的实际完成时间总是比预期的要长。 四、康威定律：组织所设计的系统的结构受限于组织的通信结构。（如果某人想要改变的东西属于其他人，那么他就很难改变这些东西。根据...",
-      "excerpt": "参考： 一、墨菲定律：如果事情可能出错，它就会出错。 二、布鲁克定律：大部分情况下，为已经延期的软件项目增加人手只会让项目延期得更厉害。 三、霍夫施塔特定律：项目的实际完成时间总是比预期的要长。 四、康威定律：组织所设计的系统的结构受限于组织的通信结构。（如果某人想要改变的东西属于其他人，那么他就很难改变这些东西。根据...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "康威定律",
-        "摩尔定律",
-        "墨菲定律"
-      ],
-      "priority": 0,
-      "content": "参考： 一、墨菲定律：如果事情可能出错，它就会出错。 二、布鲁克定律：大部分情况下，为已经延期的软件项目增加人手只会让项目延期得更厉害。 三、霍夫施塔特定律：项目的实际完成时间总是比预期的要长。 四、康威定律：组织所设计的系统的结构受限于组织的通信结构。（如果某人想要改变的东西属于其他人，那么他就很难改变这些东西。根据目标软件架构来组建团队可以更容易实现软件架构，而这就是对抗康威法律的一种有效方式 —— 微服务等架构） 五、 8/2 法则：80％的成果源于 20％的原因。 六、彼得法则：在一个等级制度中，每个员工都倾向于晋升到他无法胜任的职位。 七、摩尔定律：计算机的处理速度每两年翻一番！ 八、沃斯定律：软件比硬件更容易变慢。（可以参考摩尔定律） 九、克努特优化法则：过早优化是万恶之源。（先写代码，然后找出瓶颈，最后才优化！） 十、诺维格定律：当一家公司在某个领域的市场占有率超过 50% 以后，将无法再使市场占有率翻番，就必须寻找新的市场。 十一、羊群效应：从众心理 十二、蝴蝶效应：微小的变化能带来巨大的连锁反应 十三、青蛙效应：温水煮青蛙，生于忧患死于安乐 十四、破窗效应：墙倒众人推，落井下石人很多。 十五、马太效应：两极分化，强者越强，弱者越弱。 十六、波克定理：无摩擦便无磨合，有争论才有高论。在争辩中，才可能诞生最好的主意和最好的决定。 十七、刺猬理论 ： 人际交往中需要保持一定的距离，才能互惠互利，否则容易受伤。 十八、沃尔森法则：把信息和情报放在第一位，金钱就会滚滚而来。把握信息差，就能变现。情报信息最值钱。 十九、吉德林法则 ： 把难题清清楚楚地写出来,便已经解决了一半。 二十、幸存者偏差：人们只能看到经过某中筛选而产生的結果。被筛选掉的信息是无法传达到你这边的，只能接收到片面的信息，因为死人是不会说话的。"
     }
   ],
   "latestArticles": [
@@ -2372,6 +2396,27 @@
       ],
       "priority": 0,
       "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
+    },
+    {
+      "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+      "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+      "type": "blog",
+      "date": "2026-06-20",
+      "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "topic": "AI、Agent 与本地工具",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "CLI",
+        "WPS",
+        "Zotero",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
     },
     {
       "title": "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
@@ -2436,26 +2481,6 @@
       ],
       "priority": 0,
       "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
-    },
-    {
-      "title": "HyperFrames 中文从 0 到 1 完全使用教程",
-      "url": "/articles/2026/06/09/zero-to-one-zh.html",
-      "type": "blog",
-      "date": "2026-06-09",
-      "description": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
-      "excerpt": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI",
-        "HyperFrames",
-        "视频生成",
-        "HTML 视频",
-        "教程"
-      ],
-      "priority": 0,
-      "content": "HyperFrames 中文从 0 到 1 完全使用教程 这篇教程面向第一次接触 HyperFrames 的开发者和 AI Agent 使用者。读完后，你会理解 HyperFrames 的基本模型，能从空项目创建一个视频，完成预览、校验、渲染，并能用三组递进案例从简单标题动画扩展到多场景、可参数化的视频项目。 配套可运行项目位于 ./hyperframes zero to one projects/，本文中的案例截图均由这些项目实际运行后生成。 1. 认识 HyperFrames HyperFrames 是一个把 HTML、CSS、媒体文件和可 seek 动画渲染成视频的开源框架。你写的不是传统剪辑软件里的拖拽时间线，而是一份可以被浏览器打开、可以被代码生成、也可以被 AI Agent 修改的 HTML 视频工程。 核心思路： HTML 是视频源文件 ：文字、图片、视频、音频、子场景都写在 HTML 里。 data 属性定义时间线 ：元素什么时候出现、持续多久、在哪条 track 上，都由声明式属性控制。 CSS 控制画面 ：布局、颜色、层级、字体、背景效果都按网页方式编写。 GSAP 等动画库负责可 seek 动画 ：渲染器可以跳到任意时间点捕获画面，保证逐帧确定性。 CLI 负责预览和渲染 ：本地浏览器预览，最终用 Chrome + FFmpeg 渲染成 MP4 或 WebM。 适合场景包括产品介绍、功能发布、数据可视化、社媒短视频、字幕卡，以及“文档/CSV/网页 → 视频”的 AI 自动化视频流水线。 2. 环境准备 HyperFrames 本地使用需要这些工具： 依赖 要求 用途 Node.js 22 或更高 运行 npx hyperframes CLI npm / npx 或 bun 任一即可 安装和执行命令 FFmpeg 推荐 7.x 或更高 把捕获帧编码成视频 检查 Node.js： 检查 FFmpeg： 安装 FFmpeg： 确认 CLI 可运行： 如果渲染失败，优先运行环境诊断： 3. 创建第一个项目 交互式创建项目： 从最小空白项目开始： 典型项目结构： 路径 作用 index.html 根 Composition，视频入口文件 compositions/ 可复用子 Composition，例如 intro、outro、字幕层 assets/ 图片、视频、音频、字体等素材 meta.json 项目元信息 启动预览： 渲染视频： 4. 配套项目如何运行 本教程已经按三个案例创建了可运行项目，统一放在： 运行任意项目的方式相同。以案例 1 为例： 预览启动后，在浏览器打开 Studio 地址，例如： 后面的三个案例都可以直接打开对应目录运行，不需要再手动从零复制代码。文档保留关键代码，是为了方便你理解每个项目的结构。 5. 核心概念 Composition：视频画布 Composition 是 HyperFrames 的基本场景单位。根 Composition 通常写在 index.html 中： 关键属性： data composition id：Composition 的唯一 ID。 data width / data height：视频尺寸，例如横屏 1920x1080，竖屏 1080x1920。 data start：根 Composition 通常从 0 开始。 Clip：时间线元素 Clip 是时间线上会出现的一段内容，可以是文字、图片、视频、音频或子 Composition。 关键规则： 定时元素必须加 class=\"clip\"，这样运行时才能管理显示和隐藏。 data start 表示开始时间，单位是秒。 data duration 表示持续时间，单位是秒。 data track index 表示时间线 track，同一 track 上的 clips 不能重叠。 Track：时间线冲突，不是视觉层级 data track index 用于组织时间线，避免同一 track 上出现时间重叠。它不等于 CSS 层级。如果你想控制谁盖在谁上面，使用 CSS z index。 Timing：绝对时间和相对时间 绝对秒数： 引用另一个 clip 的结束时间： 这里 main 会在 intro 结束后 0.5 秒开始。 GSAP：可 seek 动画 HyperFrames 常用 GSAP 写动画。重点是：timeline 必须暂停，并注册到 window. timelines。 Variables：一份模板，多次渲染 Variables 让同一个 Composition 可以用不同标题、颜色、CTA、图片进行渲染。 读取变量： 渲染时覆盖： 6. 推荐开发闭环 写 HyperFrames 项目时，建议按这个顺序迭代： 命令 用途 npx hyperframes lint 静态检查 HTML 结构、时间线、属性问题 npx hyperframes validate 在浏览器环境中验证运行时错误和缺失素材 npx hyperframes inspect 采样检查画面布局，例如文字溢出、裁切、出画布 npx hyperframes preview 启动 Studio 预览并热更新 npx hyperfra..."
     }
   ],
   "tutorials": [
@@ -3422,7 +3447,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 8,
+      "count": 9,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3617,6 +3642,27 @@
           ],
           "priority": 0,
           "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
+        },
+        {
+          "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+          "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+          "type": "blog",
+          "date": "2026-06-20",
+          "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+          "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+          "topic": "AI、Agent 与本地工具",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "CLI",
+            "WPS",
+            "Zotero",
+            "自动化",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
         }
       ],
       "articleTitles": [
@@ -3627,7 +3673,8 @@
         "9Router 使用教程：从文本到音频、图片、视频的完整实践",
         "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
         "我拆了一遍 video-use：AI 剪视频真正难的不是看画面，而是读懂时间线",
-        "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩"
+        "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
+        "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件"
       ]
     },
     {
@@ -5199,6 +5246,27 @@
       "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
     },
     {
+      "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+      "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+      "type": "文章",
+      "date": "2026-06-20",
+      "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
+      "topic": "AI、Agent 与本地工具",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "CLI",
+        "WPS",
+        "Zotero",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
+    },
+    {
       "title": "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
       "url": "/articles/2026/06/12/claw-code-agent-harness-deep-dive.html",
       "type": "文章",
@@ -5261,26 +5329,6 @@
       ],
       "priority": 0,
       "content": "9Router 使用教程：从文本到音频、图片、视频的完整实践 适合对象：刚安装 9Router 的新用户、想把 Codex / Claude Code / Cline / Cursor 等工具统一接入多个模型的开发者，以及需要同时使用文本、语音、图片、视频能力的创作者。 目录 1. 9Router 是什么 2. 准备环境 3. 第一次启动与界面认识 4. 场景一：最简单的文本对话 5. 场景二：接入 Codex / Cline / Cursor 等编程工具 6. 场景三：用 Combo 做自动降级和多模型路由 7. 场景四：图片生成 8. 场景五：文本转语音 TTS 9. 场景六：语音转文字 STT 10. 场景七：视频生成 11. 场景八：网页搜索、网页抓取与 Embedding 12. 场景九：用量统计、限额和排障 13. 常见问题 9Router 是什么 9Router 可以理解为一个本地 AI 网关。你把各种客户端都连到 9Router，9Router 再根据模型名、账户状态、限额、组合策略，把请求转发到不同的上游模型提供商。 核心价值： 统一入口 ：大多数工具只需要配置 http://localhost:20128/v1。 兼容 OpenAI API ：支持 /v1/chat/completions、/v1/audio/speech、/v1/audio/transcriptions、/v1/images/generations、/v1/video/generations 等接口。 多提供商路由 ：一个客户端可以使用 Kiro、OpenCode Free、Gemini、OpenRouter、GLM、MiniMax、Ollama、本地 SD WebUI、ComfyUI 等不同来源。 自动降级 ：上游限流、余额不足或模型不可用时，可以切换到备用模型。 RTK Token 节省 ：编程工具场景中，9Router 可压缩 tool result，减少 token 消耗。 准备环境 方式 A：全局安装 启动后访问： OpenAI 兼容 API 地址： 方式 B：从本仓库源码运行 Windows PowerShell： 生产模式： 你需要准备什么 用途 推荐先接入 说明 编程文本 Kiro、OpenCode Free、GLM、OpenRouter、Gemini 先保证 /v1/chat/completions 可用 图片生成 Gemini、Cloudflare、SD WebUI、ComfyUI、Fal、Stability、Recraft 等 具体可用模型以控制台 Media Providers 为准 文本转语音 Gemini TTS、Edge TTS、Google TTS、ElevenLabs、AWS Polly、NVIDIA 等 需要在 TTS 媒体提供商里配置 语音转文字 Gemini STT、Deepgram、AssemblyAI 等 使用 multipart 上传音频文件 视频生成 Runway、Fal、部分支持 video 的提供商 使用 /v1/video/generations 第一次启动与界面认识 打开： 你会主要用到这些页面： Dashboard ：总览当前状态。 Providers ：连接文本大模型提供商，例如 Kiro、OpenCode Free、Gemini、OpenRouter、GLM。 Media Providers ：连接图片、语音、视频、搜索、Embedding 等媒体能力。 CLI Tools ：查看 Codex、Claude Code、Cline、OpenClaw、Cursor 等工具的配置方式。 Combos ：创建组合模型，实现 fallback 或轮询。 Usage ：查看请求、token、费用和失败记录。 Endpoint ：复制本地端点、隧道端点或云端端点。 首次建议按这个顺序配置： 1. 进入 Providers ，先添加一个文本模型提供商。 2. 进入 Basic Chat ，选择模型发一句测试消息。 3. 进入 Endpoint 或 CLI Tools ，复制 API Base URL 和 API Key。 4. 进入 Media Providers ，按需添加 TTS、STT、Image、Video。 5. 进入 Usage ，确认请求是否被正确记录。 场景一：最简单的文本对话 目标 用 9Router 的 OpenAI 兼容接口完成一次文本问答。 第 1 步：连接一个文本提供商 在控制台进入： 新手推荐顺序： 1. Kiro AI ：适合编程模型场景。 2. OpenCode Free ：简单测试可用性。 3. Gemini ：用 API Key 接入，覆盖文本、语音、图片等多种能力。 4. OpenRouter ：模型丰富，适合统一入口。 5. GLM / MiniMax ：成本低，适合作为备用模型。 连接后点击测试，确保状态为可用。 第 2 步：获取 API Key 进入控制台的 API Key / Endpoint 相关页面，复制 9Router 的本地 API Key。如果你在设置里关闭了 Require API Key，本地测试可以不传；生产或局域网使用时建..."
-    },
-    {
-      "title": "HyperFrames 中文从 0 到 1 完全使用教程",
-      "url": "/articles/2026/06/09/zero-to-one-zh.html",
-      "type": "文章",
-      "date": "2026-06-09",
-      "description": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
-      "excerpt": "从环境准备到渲染成片，完整掌握 HyperFrames 的 HTML 视频工作流。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI",
-        "HyperFrames",
-        "视频生成",
-        "HTML 视频",
-        "教程"
-      ],
-      "priority": 0,
-      "content": "HyperFrames 中文从 0 到 1 完全使用教程 这篇教程面向第一次接触 HyperFrames 的开发者和 AI Agent 使用者。读完后，你会理解 HyperFrames 的基本模型，能从空项目创建一个视频，完成预览、校验、渲染，并能用三组递进案例从简单标题动画扩展到多场景、可参数化的视频项目。 配套可运行项目位于 ./hyperframes zero to one projects/，本文中的案例截图均由这些项目实际运行后生成。 1. 认识 HyperFrames HyperFrames 是一个把 HTML、CSS、媒体文件和可 seek 动画渲染成视频的开源框架。你写的不是传统剪辑软件里的拖拽时间线，而是一份可以被浏览器打开、可以被代码生成、也可以被 AI Agent 修改的 HTML 视频工程。 核心思路： HTML 是视频源文件 ：文字、图片、视频、音频、子场景都写在 HTML 里。 data 属性定义时间线 ：元素什么时候出现、持续多久、在哪条 track 上，都由声明式属性控制。 CSS 控制画面 ：布局、颜色、层级、字体、背景效果都按网页方式编写。 GSAP 等动画库负责可 seek 动画 ：渲染器可以跳到任意时间点捕获画面，保证逐帧确定性。 CLI 负责预览和渲染 ：本地浏览器预览，最终用 Chrome + FFmpeg 渲染成 MP4 或 WebM。 适合场景包括产品介绍、功能发布、数据可视化、社媒短视频、字幕卡，以及“文档/CSV/网页 → 视频”的 AI 自动化视频流水线。 2. 环境准备 HyperFrames 本地使用需要这些工具： 依赖 要求 用途 Node.js 22 或更高 运行 npx hyperframes CLI npm / npx 或 bun 任一即可 安装和执行命令 FFmpeg 推荐 7.x 或更高 把捕获帧编码成视频 检查 Node.js： 检查 FFmpeg： 安装 FFmpeg： 确认 CLI 可运行： 如果渲染失败，优先运行环境诊断： 3. 创建第一个项目 交互式创建项目： 从最小空白项目开始： 典型项目结构： 路径 作用 index.html 根 Composition，视频入口文件 compositions/ 可复用子 Composition，例如 intro、outro、字幕层 assets/ 图片、视频、音频、字体等素材 meta.json 项目元信息 启动预览： 渲染视频： 4. 配套项目如何运行 本教程已经按三个案例创建了可运行项目，统一放在： 运行任意项目的方式相同。以案例 1 为例： 预览启动后，在浏览器打开 Studio 地址，例如： 后面的三个案例都可以直接打开对应目录运行，不需要再手动从零复制代码。文档保留关键代码，是为了方便你理解每个项目的结构。 5. 核心概念 Composition：视频画布 Composition 是 HyperFrames 的基本场景单位。根 Composition 通常写在 index.html 中： 关键属性： data composition id：Composition 的唯一 ID。 data width / data height：视频尺寸，例如横屏 1920x1080，竖屏 1080x1920。 data start：根 Composition 通常从 0 开始。 Clip：时间线元素 Clip 是时间线上会出现的一段内容，可以是文字、图片、视频、音频或子 Composition。 关键规则： 定时元素必须加 class=\"clip\"，这样运行时才能管理显示和隐藏。 data start 表示开始时间，单位是秒。 data duration 表示持续时间，单位是秒。 data track index 表示时间线 track，同一 track 上的 clips 不能重叠。 Track：时间线冲突，不是视觉层级 data track index 用于组织时间线，避免同一 track 上出现时间重叠。它不等于 CSS 层级。如果你想控制谁盖在谁上面，使用 CSS z index。 Timing：绝对时间和相对时间 绝对秒数： 引用另一个 clip 的结束时间： 这里 main 会在 intro 结束后 0.5 秒开始。 GSAP：可 seek 动画 HyperFrames 常用 GSAP 写动画。重点是：timeline 必须暂停，并注册到 window. timelines。 Variables：一份模板，多次渲染 Variables 让同一个 Composition 可以用不同标题、颜色、CTA、图片进行渲染。 读取变量： 渲染时覆盖： 6. 推荐开发闭环 写 HyperFrames 项目时，建议按这个顺序迭代： 命令 用途 npx hyperframes lint 静态检查 HTML 结构、时间线、属性问题 npx hyperframes validate 在浏览器环境中验证运行时错误和缺失素材 npx hyperframes inspect 采样检查画面布局，例如文字溢出、裁切、出画布 npx hyperframes preview 启动 Studio 预览并热更新 npx hyperfra..."
     },
     {
       "title": "第01章：MySQL概述与安装",
