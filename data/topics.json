@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 9,
+    "count": 11,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -948,6 +948,47 @@
         ],
         "priority": 0,
         "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
+      },
+      {
+        "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
+        "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
+        "type": "blog",
+        "date": "2026-06-21",
+        "description": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
+        "excerpt": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI 视频",
+          "短剧",
+          "开源项目",
+          "FastAPI",
+          "React",
+          "工具教程"
+        ],
+        "priority": 0,
+        "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
+      },
+      {
+        "title": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
+        "url": "/articles/2026/06/20/openmontage-agentic-video-production.html",
+        "type": "blog",
+        "date": "2026-06-20",
+        "description": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
+        "excerpt": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "AI 视频",
+          "开源项目",
+          "Remotion",
+          "工具教程"
+        ],
+        "priority": 0,
+        "content": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线 多数 AI 视频工具都在卖一个很诱人的入口：输入一句话，等它吐出一段视频。 问题是，真正做视频不是这么简单。你要定选题，找资料，写脚本，做分镜，生成或挑选素材，配音，配乐，上字幕，剪辑，渲染，最后还要检查黑帧、音量、字幕、画面是不是像 PPT。 OpenMontage 的思路不一样。它不是再做一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf、Codex 这类 AI Coding Assistant 当成“导演”，让它读 Pipeline、读 Skill、调用工具、写检查点，最后产出一条视频。 项目地址：https://github.com/calesthio/OpenMontage。我本地查看的是提交 9066dcb，GitHub API 显示项目约 6.7k stars、1.1k forks，许可为 AGPL 3.0。 1. 它解决的不是“生成一个片段”，而是“组织一条生产线” README 对 OpenMontage 的定义很直接：the first open source, agentic video production system。更关键的一句是：turn your AI coding assistant into a full video production studio。 这句话容易被当成宣传语，但看完仓库结构后，我觉得它指向的是一个具体设计： OpenMontage 没有把所有智能都塞进一个 Python orchestrator。文档里反复强调：AI coding assistant 本身就是 orchestrator。Python 主要提供工具、注册表、配置、预算和检查点；真正的生产规则写在 YAML 和 Markdown 里。 这会带来一个很实际的差异：你不是只能相信一个黑盒按钮，而是可以打开 pipeline defs/ 看每条生产线怎么走，打开 skills/pipelines/ 看每个阶段怎么执行，打开 schemas/ 看产物结构怎么校验。 2. Agent first：让模型读“剧本”，而不是临场发挥 AGENT GUIDE.md 里有一条硬规则：所有视频生产请求都必须走 pipeline system。 典型流程是： 这个设计的好处是，把 Agent 最容易失控的地方框住了。 如果你直接让模型“帮我做个视频”，它可能今天写脚本，明天跳过素材检查，后天直接调用一个最贵的模型。OpenMontage 要求它先选 pipeline，再按阶段读 director skill，每个关键选择都要留下 decision log。 我看 AGENT GUIDE.md 时最有感觉的是这句：The intelligence is in the skills, not in improvised code。也就是说，它不鼓励 Agent 临时写脚本乱拼，而是鼓励 Agent 先读规则，再调用工具。 这和现在很多 Agent 工程的趋势一致：模型不一定更自由才更可靠。恰恰相反，越是昂贵、长链路、容易出错的任务，越需要可读的操作契约。 3. 它内置的不是一条视频链路，而是多条 Pipeline OpenMontage 的 pipeline defs/ 里能看到 13 个 YAML，其中 12 条是面向真实生产的 pipeline，另有一条 smoke test。README 里列出的类型包括 Animated Explainer、Screen Demo、Clip Factory、Documentary Montage、Cinematic、Animation、Localization & Dub、Podcast Repurpose、Talking Head 等。 这点很重要。因为“做视频”其实不是一种任务。 做一个产品演示，需要屏幕录制、节奏控制和注释层。做一个播客切片，需要转写、找高能片段、重排和字幕。做一个纪录片蒙太奇，需要素材检索、镜头选择、音乐和节奏。做一个角色动画，又会牵涉 SVG rig、动作库和 GSAP 时间线。 如果把这些都塞进一个超级 prompt，结果通常很脆。OpenMontage 的做法是先承认任务类型不同，再给每类任务独立的阶段、工具和审查重点。 4. 免费路径不是噱头：真实素材和本地工具也能跑 README 里有一个容易被忽略的点：OpenMontage 不只会做“几张图动一动”的视频。它强调可以走 real footage documentary path：从 Archive.org、NASA、Wikimedia Commons，以及 Pexels、Pixabay、Unsplash 这类免费素材源构建语义可检索的素材库，再剪成真正的 motion footage 时间线。 它也支持图像视频路线。没有视频生成 API 时，可以用 Piper TTS、Remotion、HyperFrames、FFmpeg，把图片、字幕、图表、音频组织成可交付的视频。 所以它的上手路径不应该是“一口气把所有 API Key 都配上”。更合理的是： 第一层，零成本验证。..."
       }
     ],
     "articleTitles": [
@@ -959,7 +1000,9 @@
       "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行",
       "我拆了一遍 video-use：AI 剪视频真正难的不是看画面，而是读懂时间线",
       "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
-      "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件"
+      "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
+      "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
+      "OpenMontage：把 AI Coding Assistant 变成视频制作流水线"
     ]
   },
   {

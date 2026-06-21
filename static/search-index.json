@@ -221,6 +221,47 @@
     "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
   },
   {
+    "title": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
+    "url": "/articles/2026/06/20/openmontage-agentic-video-production.html",
+    "type": "blog",
+    "date": "2026-06-20",
+    "description": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
+    "excerpt": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
+    "topic": "AI、Agent 与本地模型",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "AI 视频",
+      "开源项目",
+      "Remotion",
+      "工具教程"
+    ],
+    "priority": 0,
+    "content": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线 多数 AI 视频工具都在卖一个很诱人的入口：输入一句话，等它吐出一段视频。 问题是，真正做视频不是这么简单。你要定选题，找资料，写脚本，做分镜，生成或挑选素材，配音，配乐，上字幕，剪辑，渲染，最后还要检查黑帧、音量、字幕、画面是不是像 PPT。 OpenMontage 的思路不一样。它不是再做一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf、Codex 这类 AI Coding Assistant 当成“导演”，让它读 Pipeline、读 Skill、调用工具、写检查点，最后产出一条视频。 项目地址：https://github.com/calesthio/OpenMontage。我本地查看的是提交 9066dcb，GitHub API 显示项目约 6.7k stars、1.1k forks，许可为 AGPL 3.0。 1. 它解决的不是“生成一个片段”，而是“组织一条生产线” README 对 OpenMontage 的定义很直接：the first open source, agentic video production system。更关键的一句是：turn your AI coding assistant into a full video production studio。 这句话容易被当成宣传语，但看完仓库结构后，我觉得它指向的是一个具体设计： OpenMontage 没有把所有智能都塞进一个 Python orchestrator。文档里反复强调：AI coding assistant 本身就是 orchestrator。Python 主要提供工具、注册表、配置、预算和检查点；真正的生产规则写在 YAML 和 Markdown 里。 这会带来一个很实际的差异：你不是只能相信一个黑盒按钮，而是可以打开 pipeline defs/ 看每条生产线怎么走，打开 skills/pipelines/ 看每个阶段怎么执行，打开 schemas/ 看产物结构怎么校验。 2. Agent first：让模型读“剧本”，而不是临场发挥 AGENT GUIDE.md 里有一条硬规则：所有视频生产请求都必须走 pipeline system。 典型流程是： 这个设计的好处是，把 Agent 最容易失控的地方框住了。 如果你直接让模型“帮我做个视频”，它可能今天写脚本，明天跳过素材检查，后天直接调用一个最贵的模型。OpenMontage 要求它先选 pipeline，再按阶段读 director skill，每个关键选择都要留下 decision log。 我看 AGENT GUIDE.md 时最有感觉的是这句：The intelligence is in the skills, not in improvised code。也就是说，它不鼓励 Agent 临时写脚本乱拼，而是鼓励 Agent 先读规则，再调用工具。 这和现在很多 Agent 工程的趋势一致：模型不一定更自由才更可靠。恰恰相反，越是昂贵、长链路、容易出错的任务，越需要可读的操作契约。 3. 它内置的不是一条视频链路，而是多条 Pipeline OpenMontage 的 pipeline defs/ 里能看到 13 个 YAML，其中 12 条是面向真实生产的 pipeline，另有一条 smoke test。README 里列出的类型包括 Animated Explainer、Screen Demo、Clip Factory、Documentary Montage、Cinematic、Animation、Localization & Dub、Podcast Repurpose、Talking Head 等。 这点很重要。因为“做视频”其实不是一种任务。 做一个产品演示，需要屏幕录制、节奏控制和注释层。做一个播客切片，需要转写、找高能片段、重排和字幕。做一个纪录片蒙太奇，需要素材检索、镜头选择、音乐和节奏。做一个角色动画，又会牵涉 SVG rig、动作库和 GSAP 时间线。 如果把这些都塞进一个超级 prompt，结果通常很脆。OpenMontage 的做法是先承认任务类型不同，再给每类任务独立的阶段、工具和审查重点。 4. 免费路径不是噱头：真实素材和本地工具也能跑 README 里有一个容易被忽略的点：OpenMontage 不只会做“几张图动一动”的视频。它强调可以走 real footage documentary path：从 Archive.org、NASA、Wikimedia Commons，以及 Pexels、Pixabay、Unsplash 这类免费素材源构建语义可检索的素材库，再剪成真正的 motion footage 时间线。 它也支持图像视频路线。没有视频生成 API 时，可以用 Piper TTS、Remotion、HyperFrames、FFmpeg，把图片、字幕、图表、音频组织成可交付的视频。 所以它的上手路径不应该是“一口气把所有 API Key 都配上”。更合理的是： 第一层，零成本验证。..."
+  },
+  {
+    "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
+    "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
+    "type": "blog",
+    "date": "2026-06-21",
+    "description": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
+    "excerpt": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
+    "topic": "AI、Agent 与本地模型",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI 视频",
+      "短剧",
+      "开源项目",
+      "FastAPI",
+      "React",
+      "工具教程"
+    ],
+    "priority": 0,
+    "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
+  },
+  {
     "title": "关于本站",
     "url": "/about.html",
     "type": "page",
