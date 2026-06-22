@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 13,
+    "count": 14,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1031,6 +1031,27 @@
         ],
         "priority": 0,
         "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
+      },
+      {
+        "title": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
+        "url": "/articles/2026/06/22/browser-use-ai-browser-agent-tutorial.html",
+        "type": "blog",
+        "date": "2026-06-22",
+        "description": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
+        "excerpt": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "浏览器自动化",
+          "Python",
+          "开源项目",
+          "LLM",
+          "自动化"
+        ],
+        "priority": 0,
+        "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
       }
     ],
     "articleTitles": [
@@ -1046,7 +1067,8 @@
       "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
       "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
       "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
-      "Harness：用一句话生成 Claude Code 的 Agent 团队"
+      "Harness：用一句话生成 Claude Code 的 Agent 团队",
+      "Browser Use：让 AI 真的打开网页、点击按钮、填写表单"
     ]
   },
   {

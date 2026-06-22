@@ -283,6 +283,27 @@
     "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
   },
   {
+    "title": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
+    "url": "/articles/2026/06/22/browser-use-ai-browser-agent-tutorial.html",
+    "type": "blog",
+    "date": "2026-06-22",
+    "description": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
+    "excerpt": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
+    "topic": "AI、Agent 与本地模型",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "浏览器自动化",
+      "Python",
+      "开源项目",
+      "LLM",
+      "自动化"
+    ],
+    "priority": 0,
+    "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
+  },
+  {
     "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
     "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
     "type": "blog",
