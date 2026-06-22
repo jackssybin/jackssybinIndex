@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 11,
+    "count": 12,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -989,6 +989,27 @@
         ],
         "priority": 0,
         "content": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线 多数 AI 视频工具都在卖一个很诱人的入口：输入一句话，等它吐出一段视频。 问题是，真正做视频不是这么简单。你要定选题，找资料，写脚本，做分镜，生成或挑选素材，配音，配乐，上字幕，剪辑，渲染，最后还要检查黑帧、音量、字幕、画面是不是像 PPT。 OpenMontage 的思路不一样。它不是再做一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf、Codex 这类 AI Coding Assistant 当成“导演”，让它读 Pipeline、读 Skill、调用工具、写检查点，最后产出一条视频。 项目地址：https://github.com/calesthio/OpenMontage。我本地查看的是提交 9066dcb，GitHub API 显示项目约 6.7k stars、1.1k forks，许可为 AGPL 3.0。 1. 它解决的不是“生成一个片段”，而是“组织一条生产线” README 对 OpenMontage 的定义很直接：the first open source, agentic video production system。更关键的一句是：turn your AI coding assistant into a full video production studio。 这句话容易被当成宣传语，但看完仓库结构后，我觉得它指向的是一个具体设计： OpenMontage 没有把所有智能都塞进一个 Python orchestrator。文档里反复强调：AI coding assistant 本身就是 orchestrator。Python 主要提供工具、注册表、配置、预算和检查点；真正的生产规则写在 YAML 和 Markdown 里。 这会带来一个很实际的差异：你不是只能相信一个黑盒按钮，而是可以打开 pipeline defs/ 看每条生产线怎么走，打开 skills/pipelines/ 看每个阶段怎么执行，打开 schemas/ 看产物结构怎么校验。 2. Agent first：让模型读“剧本”，而不是临场发挥 AGENT GUIDE.md 里有一条硬规则：所有视频生产请求都必须走 pipeline system。 典型流程是： 这个设计的好处是，把 Agent 最容易失控的地方框住了。 如果你直接让模型“帮我做个视频”，它可能今天写脚本，明天跳过素材检查，后天直接调用一个最贵的模型。OpenMontage 要求它先选 pipeline，再按阶段读 director skill，每个关键选择都要留下 decision log。 我看 AGENT GUIDE.md 时最有感觉的是这句：The intelligence is in the skills, not in improvised code。也就是说，它不鼓励 Agent 临时写脚本乱拼，而是鼓励 Agent 先读规则，再调用工具。 这和现在很多 Agent 工程的趋势一致：模型不一定更自由才更可靠。恰恰相反，越是昂贵、长链路、容易出错的任务，越需要可读的操作契约。 3. 它内置的不是一条视频链路，而是多条 Pipeline OpenMontage 的 pipeline defs/ 里能看到 13 个 YAML，其中 12 条是面向真实生产的 pipeline，另有一条 smoke test。README 里列出的类型包括 Animated Explainer、Screen Demo、Clip Factory、Documentary Montage、Cinematic、Animation、Localization & Dub、Podcast Repurpose、Talking Head 等。 这点很重要。因为“做视频”其实不是一种任务。 做一个产品演示，需要屏幕录制、节奏控制和注释层。做一个播客切片，需要转写、找高能片段、重排和字幕。做一个纪录片蒙太奇，需要素材检索、镜头选择、音乐和节奏。做一个角色动画，又会牵涉 SVG rig、动作库和 GSAP 时间线。 如果把这些都塞进一个超级 prompt，结果通常很脆。OpenMontage 的做法是先承认任务类型不同，再给每类任务独立的阶段、工具和审查重点。 4. 免费路径不是噱头：真实素材和本地工具也能跑 README 里有一个容易被忽略的点：OpenMontage 不只会做“几张图动一动”的视频。它强调可以走 real footage documentary path：从 Archive.org、NASA、Wikimedia Commons，以及 Pexels、Pixabay、Unsplash 这类免费素材源构建语义可检索的素材库，再剪成真正的 motion footage 时间线。 它也支持图像视频路线。没有视频生成 API 时，可以用 Piper TTS、Remotion、HyperFrames、FFmpeg，把图片、字幕、图表、音频组织成可交付的视频。 所以它的上手路径不应该是“一口气把所有 API Key 都配上”。更合理的是： 第一层，零成本验证。..."
+      },
+      {
+        "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
+        "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
+        "type": "blog",
+        "date": "2026-06-22",
+        "description": "基于 yikart/AiToEarn README、Docker Compose、前后端 package 与 MCP 发布控制器源码，拆解这个 TypeScript 开源项目如何把内容变现、AI 草稿、多平台发布和互动运营接成一条链。",
+        "excerpt": "基于 yikart/AiToEarn README、Docker Compose、前后端 package 与 MCP 发布控制器源码，拆解这个 TypeScript 开源项目如何把内容变现、AI 草稿、多平台发布和互动运营接成一条链。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "内容营销",
+          "MCP",
+          "开源项目",
+          "TypeScript",
+          "自媒体工具"
+        ],
+        "priority": 0,
+        "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
       }
     ],
     "articleTitles": [
@@ -1002,7 +1023,8 @@
       "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
       "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
       "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
-      "OpenMontage：把 AI Coding Assistant 变成视频制作流水线"
+      "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
+      "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台"
     ]
   },
   {
