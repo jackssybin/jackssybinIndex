@@ -22,6 +22,27 @@
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
     },
     {
+      "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
+      "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
+      "type": "blog",
+      "date": "2026-06-22",
+      "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "多 Agent",
+        "开源项目",
+        "Prompt Engineering",
+        "自动化"
+      ],
+      "priority": 0,
+      "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
+    },
+    {
       "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
       "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
       "type": "blog",
@@ -2070,6 +2091,27 @@
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
     },
     {
+      "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
+      "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
+      "type": "blog",
+      "date": "2026-06-22",
+      "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "多 Agent",
+        "开源项目",
+        "Prompt Engineering",
+        "自动化"
+      ],
+      "priority": 0,
+      "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
+    },
+    {
       "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
       "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
       "type": "blog",
@@ -2425,25 +2467,6 @@
       ],
       "priority": 0,
       "content": "业务场景二 某 SaaS 客服系统，系统里有一个工单查询功能，工单表中存放了几千万条数据，且查询工单表数据时需要关联十几个子表，每个子表的数据也是超亿条。 面对如此庞大的数据量，跟前面的冷热分离一样，每次客户查询数据时几十秒才能返回结果，即便我们使用了索引、SQL 等数据库优化技巧，效果依然不明显。 加上工单表中有些数据是几年前的，但是这些数据涉及诉讼问题，需要继续保持更新，因此无法将这些旧数据封存到别的地方，也就没法通过前面的冷热分离方案来解决。 最终采用了查询分离的解决方案，才得以将这个问题顺利解决：将更新的数据放在一个数据库里，而查询的数据放在另外一个系统里。因为数据的更新都是单表更新，不需要关联也没有外键，所以更新速度立马得到提升，数据的查询则通过一个专门处理大数据量的查询引擎来解决，也快速地满足了实际的查询需求。 通过这种解决方案处理后，每次查询数据时，500ms 内就可得到返回结果，客户再也不抱怨了。 通过上面这个例子，大家对查询分离的业务场景已经有了一定认知，但如果想掌握整个业务场景，继续往下看吧。 什么是查询分离？ 关于查询分离的概念，从简单的字面意思上也好理解，即每次写数据时保存一份数据到另外的存储系统里，用户查询数据时直接从另外的存储系统里获取数据。示意图如下： 何种场景下使用查询分离？ 当在实际业务中遇到以下情形，则可以考虑使用查询分离解决方案。 数据量大； 所有写数据的请求效率尚可； 查询数据的请求效率很低； 所有的数据任何时候都可能被修改； 业务希望优化查询数据的效率； 大家对查询分离这个概念特别熟悉，但是对于查询分离的使用场景一无所知，这可不行，只有了解了查询分离的真正使用场景，才能在遇到实际问题时采取最正确的解决方案。 查询分离实现思路 在实际工作中，如果业务要求必须使用查询分离的解决方案，我们就务必掌握查询分离的实现思路。也只有这样，我们真正遇到问题时才能有条不紊地开展工作。 查询分离解决方案的实现思路如下： 1. 如何触发查询分离？ 2. 如何实现查询分离？ 3. 查询数据如何存储？ 4. 查询数据如何使用？ 针对以上问题，我们一点一点来讨论。 （一）如何触发查询分离？ 这个问题说明的是我们应该在什么时候保存一份数据到查询数据中，即什么时候触发查询分离这个动作。 一般来说，查询分离的触发逻辑分为3种。 （1）修改业务代码：在写入常规数据后，同步建立查询数据。 （2）修改业务代码：在写入常规数据后，异步建立查询数据。 （3）监控数据库日志：如有数据变更，更新查询数据。 通过观察以上3种触发逻辑示意图，发现了什么吗？3种触发逻辑的优缺点对比表如下： 修改业务代码同步建立查询数据 修改业务代码异步建立查询数据 监控数据库日志 优点 1、保证查询数据的实时性和一致性。2、业务逻辑灵活可控 1、不影响主流程 1、不影响主流程。2、业务代码0侵入 缺点 1、侵入业务代码。2、减缓写操作速度。 1、查询数据更新前，用户可能会查询到过时的数据。 1、查询数据更新前，用户可能会查询到过时的数据。2、架构复杂一些 为方便理解表中的内容，我们来一起聊一下其中的几个概念。 什么叫业务灵活逻辑可控？ 举个例子：一般来说，写业务代码的人能从业务逻辑中快速判断出何种情况下更新查询数据，而监控数据库日志的人并不能将全部的数据库变更分支穷举，再把所有的可能性关联到对应的更新查询数据逻辑中，最终导致任何数据的变更都需要重新建立查询数据。 什么叫减缓写操作速度？ 建立查询数据的一个动作能减缓多少写操作速度？答案：很多。举个例子：当你只是简单更新了订单的一个标识，本来查询数据时间只需要 2ms，而在查询数据时可能会涉及重建（比如使用 ES 查询数据时会涉及索引、分片、主从备份，其中每个动作又细分为很多子动作，这些内容后面文章会聊到），这时建立查询数据的过程可能就需要 1s 了，从 2ms 变成 1s，你说减缓幅度大不大？ 查询数据更新前，用户可能查询到过时数据。 这里我们结合第 2 种触发逻辑来讲，比如某个操作正处于订单更新状态，状态更新时会通过异步更新查询数据，更新完后订单才从“待审核”状态变为“已审核”状态。假设查询数据的更新时间需要 1 秒，这 1 秒中如果用户正在查询订单状态，这时主数据虽然已变为“已审核”状态，但最终查询的结果还是显示“待审核”状态。 根据前面的对比表，总结每种触发逻辑的适用场景如下： 触发逻辑 适用场景 修改业务代码，同步建立查询数据 业务代码比较简单且对写操作响应速度要求不高 修改业务代码，异步建立查询数据 业务代码比较简单且对写操作响应 监控数据库日志 业务代码比较复杂，或者改动代价太大 这里，结合实战案例说明下：在一个真实业务场景中，虽然我们对业务的代码比较熟悉，但是业务要求每次修改工单请求时响应速度快，我们最终就选择了修改业务代码异步建立查询数据这种触发逻辑。 （二）如何实现查询分离？ 以上共谈到 3 种触发逻辑，第 1 种是同步建立查询数据的过程比较简单，这里就不展开说明，第 3 种监控数据库日志我会在 13 讲具体讲解，所以这部分内容我们主要围绕第 2 种讨论。 关于第 2 种触发方案：修改业务代码异步建立查询数据，最基本的实现方式是单独起一个线程建立查询数据，不过这种做法会出现如下情..."
-    },
-    {
-      "title": "表数据量大读写缓慢如何优化【分库分表】",
-      "url": "/articles/2021/03/25/1616640074000.html",
-      "type": "blog",
-      "date": "2021-03-25",
-      "description": "一、业务场景三 为了便于理解，我们通过一个业务场景来入手。 有一个电商系统架构优化工作，该系统中包含用户和订单2个主要实体，每个实体涵盖数据量如下表所示： 实体数据量增长趋势 用户千万级每日10万 订单亿级每日百万级，后续可能千万级 从上表中发现，目前订单数据量已达上亿，并且每日以百万级速度增长，之后还可能是千万级。 ...",
-      "excerpt": "一、业务场景三 为了便于理解，我们通过一个业务场景来入手。 有一个电商系统架构优化工作，该系统中包含用户和订单2个主要实体，每个实体涵盖数据量如下表所示： 实体数据量增长趋势 用户千万级每日10万 订单亿级每日百万级，后续可能千万级 从上表中发现，目前订单数据量已达上亿，并且每日以百万级速度增长，之后还可能是千万级。 ...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "mysql",
-        "冷热分离",
-        "大表优化",
-        "千万级表优化"
-      ],
-      "priority": 0,
-      "content": "一、业务场景三 为了便于理解，我们通过一个业务场景来入手。 有一个电商系统架构优化工作，该系统中包含用户和订单2个主要实体，每个实体涵盖数据量如下表所示： 实体 数据量 增长趋势 用户 千万级 每日10万 订单 亿级 每日百万级，后续可能千万级 从上表中发现，目前订单数据量已达上亿，并且每日以百万级速度增长，之后还可能是千万级。 面对如此大的数据量，此时存储订单的数据库竟然还是一个单库单表。对于单库单表而言，一旦数据量实现疯狂增长，无论是IO还是CPU都会扛不住。 为了使系统抗住千万级数据量的压力，各种SQL优化都已经做完，最终确定下来的方式是将订单表拆分，再进行分布存储，这也就是本章我们要讨论的内容——分库分表。 说到分库分表解决方案，我们首先需要做的就是搞定拆分存储的技术选型问题。 二、拆分存储的技术选型 关于拆分存储常用的技术解决方案，市面上目前主要分为4种：MySQL的分区技术、NoSql、NewSQL、基于MySQL的分库分表。 1、MySQL的分区技术 MySQL的分区主要在文件存储层做文章，它可以将一张表的不同存放在不同存储文件中，这对使用者来说比较透明。 在以往的实战项目中，我们不使用它的原因主要有三点。 1. MySQL的实例只有一个，它仅仅分摊了存储，无法分摊请求负载。 2. 正式因为MySQL的分区对用户透明，所以用户在实际操作时往往不太注意，使得跨分区操作严重影响系统性能。 3. 当然，MySQL还有一些其他限制，比如不支持query cache、位操作表达式等。感兴趣的朋友可以看看这个文章：[](https://dev.mysql.com/doc/refman/5.7/en/partitioning limitations.html%E3%80%82)https://dev.mysql.com/doc/refman/5.7/en/partitioning limitations.html。 2、NoSQL（如MongoDB） 比较典型的NoSQL数据库就是MongoDB啦。MongoDB的分片功能从并发性和数据量这两个角度已经能满足一版大数据量的需求，但是需要注意这三大要点。 1、约束考量 ：MongoDB不是关系型数据库而是文档型数据库，它的每一行记录都是一个结构灵活可变的JSON，比如存储非常重要的订单数据时，我们就不能使用MongoDB，因为订单数据必须使用强约束的关系型数据库进行存储。 2、业务功能考量 ：多年来，事务、锁、SQL、表达式等千奇百怪的操作都在MySQL身上一一验证过，MySQL可以说是久经考验，因此在功能上MySQL能满足我们所有的业务需求，MongoDB却不能，且大部分的NoSQL也存在类似的问题。 3、稳定性考量 ：我们对MySQL的运维已经很熟悉了，它的稳定性没有问题，然而MongoDB的稳定性我们没法保证，毕竟不熟悉，因此在之前的拆分存储技术选型中，我们没使用过NoSQL。 3、NewSQL（如TiDB） NewSQL技术还比较新，我们曾今想在一些不重要的数据中使用NewSQL（比如TiDB），但从稳定性和功能扩展性两方面来考量后，最终没有使用，具体原因与MongoDB类似。 4、基于MySQL的分库分表 什么是分库分表？分表是将一份大的表数据拆分存放至多个结构一样的拆分表；分库就是将一个大的数据库拆分成多个结构一样的小库。 前面介绍的三种拆分存储技术，在我们以往的项目中都没有使用过，而是选择了基于MySQL的分库分表，主要是有一个重要考量：分库分表对于第三方依赖较少，业务逻辑灵活可控，它本身并不需要非常复杂的底层处理，也不需要重新做数据库，只是根据不同的逻辑使用不同的SQL语句和数据源而已。 如果使用分库分表方式，存在三个技术通用需求需要实现。 1、SQL组合 ：因为我们关联的表名是动态的，所以我们需要根据逻辑组装动态的SQL。 2、数据库路由 ：因为数据库名也是动态的，所以我们需要根据不同的逻辑使用不同的数据库。 3、执行结果合并 ：有些需求需要通过多个分库执行，再合并归集使用。 而市面上能解决以上问题的中间件分为2类：Proxy模式、Client模式。 （1）Proxy模式：直接拿ShardingSphere官方文档里的图进行说明，我们重点看看中间Sharding Proxy层，如下图所示： 以上这种设计模式，把SQL组合、数据库路由、执行结果合并等功能全部存放在一个代理服务中，而与分库分表相关的处理逻辑全部存放在另外的服务中，这种设计模式的优点是对业务代码无侵入，业务只需要关注自身的业务逻辑即可。 （2）Client模式：还是借用shardingSphere官方文档的图来说明，如下图所示： 以上这种设计模式，把分库分表相关逻辑存放在客户端，一版客户端的应用会引用一个jar，然后再jar中处理SQL组合、数据库路由、执行结果合并等相关功能。 市面上，关于这两种模式的中间件有如下选择： 中间件技术 模式 厂家 语言 MyCat Proxy Java KingShard Proxy Go Atlas Proxy 360 C zebra Client 美团 Java cobar Proxy 阿里 Java Sharding JDBC Client Apache ..."
     }
   ],
   "latestArticles": [
@@ -2467,6 +2490,27 @@
       ],
       "priority": 0,
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
+    },
+    {
+      "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
+      "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
+      "type": "blog",
+      "date": "2026-06-22",
+      "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "多 Agent",
+        "开源项目",
+        "Prompt Engineering",
+        "自动化"
+      ],
+      "priority": 0,
+      "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
     },
     {
       "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
@@ -2529,26 +2573,6 @@
       ],
       "priority": 0,
       "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
-    },
-    {
-      "title": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
-      "url": "/articles/2026/06/20/openmontage-agentic-video-production.html",
-      "type": "blog",
-      "date": "2026-06-20",
-      "description": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
-      "excerpt": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "AI 视频",
-        "开源项目",
-        "Remotion",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线 多数 AI 视频工具都在卖一个很诱人的入口：输入一句话，等它吐出一段视频。 问题是，真正做视频不是这么简单。你要定选题，找资料，写脚本，做分镜，生成或挑选素材，配音，配乐，上字幕，剪辑，渲染，最后还要检查黑帧、音量、字幕、画面是不是像 PPT。 OpenMontage 的思路不一样。它不是再做一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf、Codex 这类 AI Coding Assistant 当成“导演”，让它读 Pipeline、读 Skill、调用工具、写检查点，最后产出一条视频。 项目地址：https://github.com/calesthio/OpenMontage。我本地查看的是提交 9066dcb，GitHub API 显示项目约 6.7k stars、1.1k forks，许可为 AGPL 3.0。 1. 它解决的不是“生成一个片段”，而是“组织一条生产线” README 对 OpenMontage 的定义很直接：the first open source, agentic video production system。更关键的一句是：turn your AI coding assistant into a full video production studio。 这句话容易被当成宣传语，但看完仓库结构后，我觉得它指向的是一个具体设计： OpenMontage 没有把所有智能都塞进一个 Python orchestrator。文档里反复强调：AI coding assistant 本身就是 orchestrator。Python 主要提供工具、注册表、配置、预算和检查点；真正的生产规则写在 YAML 和 Markdown 里。 这会带来一个很实际的差异：你不是只能相信一个黑盒按钮，而是可以打开 pipeline defs/ 看每条生产线怎么走，打开 skills/pipelines/ 看每个阶段怎么执行，打开 schemas/ 看产物结构怎么校验。 2. Agent first：让模型读“剧本”，而不是临场发挥 AGENT GUIDE.md 里有一条硬规则：所有视频生产请求都必须走 pipeline system。 典型流程是： 这个设计的好处是，把 Agent 最容易失控的地方框住了。 如果你直接让模型“帮我做个视频”，它可能今天写脚本，明天跳过素材检查，后天直接调用一个最贵的模型。OpenMontage 要求它先选 pipeline，再按阶段读 director skill，每个关键选择都要留下 decision log。 我看 AGENT GUIDE.md 时最有感觉的是这句：The intelligence is in the skills, not in improvised code。也就是说，它不鼓励 Agent 临时写脚本乱拼，而是鼓励 Agent 先读规则，再调用工具。 这和现在很多 Agent 工程的趋势一致：模型不一定更自由才更可靠。恰恰相反，越是昂贵、长链路、容易出错的任务，越需要可读的操作契约。 3. 它内置的不是一条视频链路，而是多条 Pipeline OpenMontage 的 pipeline defs/ 里能看到 13 个 YAML，其中 12 条是面向真实生产的 pipeline，另有一条 smoke test。README 里列出的类型包括 Animated Explainer、Screen Demo、Clip Factory、Documentary Montage、Cinematic、Animation、Localization & Dub、Podcast Repurpose、Talking Head 等。 这点很重要。因为“做视频”其实不是一种任务。 做一个产品演示，需要屏幕录制、节奏控制和注释层。做一个播客切片，需要转写、找高能片段、重排和字幕。做一个纪录片蒙太奇，需要素材检索、镜头选择、音乐和节奏。做一个角色动画，又会牵涉 SVG rig、动作库和 GSAP 时间线。 如果把这些都塞进一个超级 prompt，结果通常很脆。OpenMontage 的做法是先承认任务类型不同，再给每类任务独立的阶段、工具和审查重点。 4. 免费路径不是噱头：真实素材和本地工具也能跑 README 里有一个容易被忽略的点：OpenMontage 不只会做“几张图动一动”的视频。它强调可以走 real footage documentary path：从 Archive.org、NASA、Wikimedia Commons，以及 Pexels、Pixabay、Unsplash 这类免费素材源构建语义可检索的素材库，再剪成真正的 motion footage 时间线。 它也支持图像视频路线。没有视频生成 API 时，可以用 Piper TTS、Remotion、HyperFrames、FFmpeg，把图片、字幕、图表、音频组织成可交付的视频。 所以它的上手路径不应该是“一口气把所有 API Key 都配上”。更合理的是： 第一层，零成本验证。..."
     }
   ],
   "tutorials": [
@@ -3515,7 +3539,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 12,
+      "count": 13,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3793,6 +3817,27 @@
           ],
           "priority": 0,
           "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
+        },
+        {
+          "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
+          "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
+          "type": "blog",
+          "date": "2026-06-22",
+          "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+          "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+          "topic": "AI、Agent 与本地模型",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Claude Code",
+            "多 Agent",
+            "开源项目",
+            "Prompt Engineering",
+            "自动化"
+          ],
+          "priority": 0,
+          "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
         }
       ],
       "articleTitles": [
@@ -3807,7 +3852,8 @@
         "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
         "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
         "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
-        "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台"
+        "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
+        "Harness：用一句话生成 Claude Code 的 Agent 团队"
       ]
     },
     {
@@ -5380,6 +5426,27 @@
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
     },
     {
+      "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
+      "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
+      "type": "文章",
+      "date": "2026-06-22",
+      "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
+      "topic": "AI、Agent 与本地模型",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "多 Agent",
+        "开源项目",
+        "Prompt Engineering",
+        "自动化"
+      ],
+      "priority": 0,
+      "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
+    },
+    {
       "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
       "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
       "type": "文章",
@@ -5440,26 +5507,6 @@
       ],
       "priority": 0,
       "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
-    },
-    {
-      "title": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
-      "url": "/articles/2026/06/20/openmontage-agentic-video-production.html",
-      "type": "文章",
-      "date": "2026-06-20",
-      "description": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
-      "excerpt": "基于 calesthio/OpenMontage 仓库 README、AGENT_GUIDE、架构文档和源码，拆解这个开源 Agentic Video Production 系统如何用 Pipeline、Skill、工具注册表、Provider Selector 和质量门禁，把 Claude Code、Cursor、Codex 等 AI Coding Assistant 变成视频制作团队。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "AI 视频",
-        "开源项目",
-        "Remotion",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "OpenMontage：把 AI Coding Assistant 变成视频制作流水线 多数 AI 视频工具都在卖一个很诱人的入口：输入一句话，等它吐出一段视频。 问题是，真正做视频不是这么简单。你要定选题，找资料，写脚本，做分镜，生成或挑选素材，配音，配乐，上字幕，剪辑，渲染，最后还要检查黑帧、音量、字幕、画面是不是像 PPT。 OpenMontage 的思路不一样。它不是再做一个网页生成器，而是把 Claude Code、Cursor、Copilot、Windsurf、Codex 这类 AI Coding Assistant 当成“导演”，让它读 Pipeline、读 Skill、调用工具、写检查点，最后产出一条视频。 项目地址：https://github.com/calesthio/OpenMontage。我本地查看的是提交 9066dcb，GitHub API 显示项目约 6.7k stars、1.1k forks，许可为 AGPL 3.0。 1. 它解决的不是“生成一个片段”，而是“组织一条生产线” README 对 OpenMontage 的定义很直接：the first open source, agentic video production system。更关键的一句是：turn your AI coding assistant into a full video production studio。 这句话容易被当成宣传语，但看完仓库结构后，我觉得它指向的是一个具体设计： OpenMontage 没有把所有智能都塞进一个 Python orchestrator。文档里反复强调：AI coding assistant 本身就是 orchestrator。Python 主要提供工具、注册表、配置、预算和检查点；真正的生产规则写在 YAML 和 Markdown 里。 这会带来一个很实际的差异：你不是只能相信一个黑盒按钮，而是可以打开 pipeline defs/ 看每条生产线怎么走，打开 skills/pipelines/ 看每个阶段怎么执行，打开 schemas/ 看产物结构怎么校验。 2. Agent first：让模型读“剧本”，而不是临场发挥 AGENT GUIDE.md 里有一条硬规则：所有视频生产请求都必须走 pipeline system。 典型流程是： 这个设计的好处是，把 Agent 最容易失控的地方框住了。 如果你直接让模型“帮我做个视频”，它可能今天写脚本，明天跳过素材检查，后天直接调用一个最贵的模型。OpenMontage 要求它先选 pipeline，再按阶段读 director skill，每个关键选择都要留下 decision log。 我看 AGENT GUIDE.md 时最有感觉的是这句：The intelligence is in the skills, not in improvised code。也就是说，它不鼓励 Agent 临时写脚本乱拼，而是鼓励 Agent 先读规则，再调用工具。 这和现在很多 Agent 工程的趋势一致：模型不一定更自由才更可靠。恰恰相反，越是昂贵、长链路、容易出错的任务，越需要可读的操作契约。 3. 它内置的不是一条视频链路，而是多条 Pipeline OpenMontage 的 pipeline defs/ 里能看到 13 个 YAML，其中 12 条是面向真实生产的 pipeline，另有一条 smoke test。README 里列出的类型包括 Animated Explainer、Screen Demo、Clip Factory、Documentary Montage、Cinematic、Animation、Localization & Dub、Podcast Repurpose、Talking Head 等。 这点很重要。因为“做视频”其实不是一种任务。 做一个产品演示，需要屏幕录制、节奏控制和注释层。做一个播客切片，需要转写、找高能片段、重排和字幕。做一个纪录片蒙太奇，需要素材检索、镜头选择、音乐和节奏。做一个角色动画，又会牵涉 SVG rig、动作库和 GSAP 时间线。 如果把这些都塞进一个超级 prompt，结果通常很脆。OpenMontage 的做法是先承认任务类型不同，再给每类任务独立的阶段、工具和审查重点。 4. 免费路径不是噱头：真实素材和本地工具也能跑 README 里有一个容易被忽略的点：OpenMontage 不只会做“几张图动一动”的视频。它强调可以走 real footage documentary path：从 Archive.org、NASA、Wikimedia Commons，以及 Pexels、Pixabay、Unsplash 这类免费素材源构建语义可检索的素材库，再剪成真正的 motion footage 时间线。 它也支持图像视频路线。没有视频生成 API 时，可以用 Piper TTS、Remotion、HyperFrames、FFmpeg，把图片、字幕、图表、音频组织成可交付的视频。 所以它的上手路径不应该是“一口气把所有 API Key 都配上”。更合理的是： 第一层，零成本验证。..."
     },
     {
       "title": "第01章：MySQL概述与安装",
