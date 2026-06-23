@@ -38,6 +38,19 @@ jobs:
       - name: Fetch hourly hot news
         run: pnpm fetch-hot-news
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install AI nav scraper deps
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Refresh AI nav data
+        continue-on-error: true
+        run: python scripts/ai-nav/update.py
+
+
       - name: Sync Hugo data
         run: pnpm sync:hugo
 
@@ -54,3 +67,8 @@ jobs:
           SOURCE: public/
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
+      - name: Submit URLs to Baidu
+        continue-on-error: true
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: node scripts/baidu-push.mjs https://jackssybin.cn/sitemap.xml

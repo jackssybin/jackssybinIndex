@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN" data-solo-theme="dark">
 <head>
   <meta charset="utf-8">
@@ -7,31 +7,31 @@
   <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-  
+
   {{ $siteKeywords := slice }}
   {{ with .Site.Params.keywords }}
     {{ $siteKeywords = split . "," }}
   {{ end }}
-  
+
   {{ $pageKeywords := slice }}
   {{ with .Params.tags }}
     {{ $pageKeywords = . }}
   {{ end }}
-  
+
   {{ $allKeywords := union $siteKeywords $pageKeywords }}
   {{ if gt (len $allKeywords) 0 }}
   <meta name="keywords" content="{{ delimit $allKeywords "," }}">
   {{ end }}
-  
+
   <link rel="canonical" href="{{ .Permalink }}">
   {{ with .Site.Params.seo.google_verify }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
   {{ with .Site.Params.seo.baidu_verify }}<meta name="baidu-site-verification" content="{{ . }}">{{ end }}
-  
+
   <!-- Geo SEO -->
   {{ with .Site.Params.geo.region }}<meta name="geo.region" content="{{ . }}">{{ end }}
   {{ with .Site.Params.geo.placename }}<meta name="geo.placename" content="{{ . }}">{{ end }}
   <meta name="ICBM" content="China">
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
   {{ with .Description }}
@@ -43,7 +43,7 @@
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ .Site.Title }}">
   <meta property="og:locale" content="zh_CN">
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
@@ -52,7 +52,7 @@
   {{ else }}
   <meta name="twitter:description" content="{{ .Site.Params.description }}">
   {{ end }}
-  
+
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" href="/rss.xml" title="RSS" type="application/rss+xml">
   <link rel="stylesheet" href="/assets/solo-base.css">
@@ -62,9 +62,53 @@
 </head>
 <body>
   <div class="solo-static">
+    {{ if .IsPage }}
+    <nav class="breadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+      <span property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="/"><span property="name">首页</span></a>
+        <meta property="position" content="1">
+      </span>
+      <span class="sep">›</span>
+      <span property="itemListElement" typeof="ListItem">
+        <a property="item" typeof="WebPage" href="{{ .CurrentSection.RelPermalink }}"><span property="name">{{ .CurrentSection.Title }}</span></a>
+        <meta property="position" content="2">
+      </span>
+      <span class="sep">›</span>
+      <span property="itemListElement" typeof="ListItem">
+        <span property="name">{{ .Title }}</span>
+        <meta property="position" content="3">
+      </span>
+    </nav>
+    {{ end }}
+
     {{ block "main" . }}{{ end }}
   </div>
+
   <script src="/assets/hugo-theme.js"></script>
   {{ if eq .Params.layout "search" }}<script src="/assets/hugo-search.js"></script>{{ end }}
+
+  {{ if not (in (slice "search" "404") .Params.layout) }}
+  {{ if hugo.IsProduction }}
+  <!-- Baidu Tongji -->
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?{{ .Site.Params.seo.baidu_tongji }}";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.seo.google_analytics }}"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ .Site.Params.seo.google_analytics }}');
+  </script>
+  {{ end }}
+  {{ end }}
 </body>
 </html>

@@ -15,7 +15,9 @@
     "dev": "pnpm sync:hugo && hugo server --bind 0.0.0.0 --baseURL http://127.0.0.1:1313/",
     "build": "pnpm sync:hugo && hugo --destination public --minify --cleanDestinationDir",
     "preview": "hugo server --bind 0.0.0.0 --baseURL http://127.0.0.1:1313/",
-    "build:hugo": "pnpm build"
+    "build:hugo": "pnpm build",
+    "nav:update": "python scripts/ai-nav/update.py",
+    "baidu-push": "node scripts/baidu-push.mjs"
   },
   "dependencies": {
     "yaml": "^2.9.0"

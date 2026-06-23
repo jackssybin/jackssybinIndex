@@ -1,0 +1,4 @@
+﻿{{- $alt := .Text -}}
+{{- $src := .Destination -}}
+{{- $title := .Title -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async">

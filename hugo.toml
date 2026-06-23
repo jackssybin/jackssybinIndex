@@ -46,3 +46,5 @@ placename = "China"
 [params.seo]
 google_verify = ""
 baidu_verify = ""
+baidu_tongji = "YOUR_BAIDU_TONGJI_ID"
+google_analytics = "G-YOUR_GA_ID"

@@ -1,1 +1,79 @@
-{{ define "main" }}{{ .Content }}{{ end }}
+{{ define "main" }}
+{{ partial "site-header.html" . }}
+<div class="wrapper">
+  <div class="main-wrap">
+    <main class="{{ if eq .Section "articles" }}post post--detail{{ else }}other{{ end }}">
+      {{ if eq .Section "articles" }}
+      <header>
+        <h2><a rel="bookmark" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <div class="meta">
+          <span class="vditor-tooltipped vditor-tooltipped__n" aria-label="创建日期">
+            <i class="icon-date"></i>
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+          </span>
+        </div>
+      </header>
+      {{ with .Description }}
+        <section class="article-guide">
+          <div><strong>导读</strong><span>{{ . }}</span></div>
+        </section>
+      {{ end }}
+      {{ end }}
+
+      {{ .Content }}
+
+      {{ if eq .Section "articles" }}
+      {{ with .Params.tags }}
+        <footer class="tags">
+          {{ range . }}<a class="tag" href="/search.html?keyword={{ . | urlquery }}">{{ . }}</a>{{ end }}
+        </footer>
+      {{ end }}
+
+      {{ $related := where (.Site.RegularPages.Related .) "Section" "articles" | first 6 }}
+      {{ if $related }}
+      <section class="related-posts">
+        <h3>推荐阅读</h3>
+        <div class="related-posts-grid">
+          {{ range $related }}
+          <a href="{{ .RelPermalink }}" class="related-post-card">
+            <strong>{{ .Title }}</strong>
+            <span>{{ .Date.Format "2006-01-02" }}{{ with .Description }} &#183; {{ substr . 0 60 }}{{ if gt (len .) 60 }}...{{ end }}{{ end }}</span>
+          </a>
+          {{ end }}
+        </div>
+      </section>
+      {{ end }}
+
+      <div class="share-buttons">
+        <span>分享到：</span>
+        <a class="share-btn" href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+        <a class="share-btn" href="https://service.weibo.com/share/share.php?url={{ .Permalink | urlquery }}&title={{ .Title | urlquery }}" target="_blank" rel="noopener noreferrer">微博</a>
+        <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='Copied!';setTimeout(function(){this.textContent='Copy Link'},2000)">Copy Link</button>
+      </div>
+      {{ end }}
+    </main>
+    <aside>
+      <section class="module meta">
+        <header><h2>关于我</h2></header>
+        <main class="fn-clear">
+          <img src="/images/sidebar-avatar.jpg" alt="jackssybin">
+          <p>jackssybin</p>
+          <p class="ft-gray">记录精彩的程序人生</p>
+        </main>
+      </section>
+      <section class="module">
+        <header><h2>教程中心</h2></header>
+        <main class="list">
+          <ul>
+            <li><a href="/mysql.html">MySQL 教程</a></li>
+            <li><a href="/springboot4.html">Spring Boot 4 教程</a></li>
+            <li><a href="/netty.html">Netty 教程</a></li>
+            <li><a href="/linux.html">Linux 教程</a></li>
+          </ul>
+        </main>
+      </section>
+    </aside>
+  </div>
+</div>
+<footer class="footer fn-clear">&copy; 2026 <a href="/">jackssybin 的个人博客</a><br>Powered by Hugo + Obsidian</footer>
+{{ end }}
