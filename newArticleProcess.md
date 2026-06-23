@@ -150,3 +150,21 @@ git push
 
 - 检查 `static/search-index.json` 是否包含文章标题。
 - 重新执行 `pnpm sync:hugo`。
+
+## 10. 一稿三发热点选题、草稿审核与发布流程
+
+热点选题、飞书审核队列、一稿三发草稿生成规则和复盘模板统一维护在：
+
+```text
+content-ops/hot-topic-monitor.md
+content-ops/templates/hot-topic-pool.csv
+content-ops/templates/three-channel-execution.csv
+content-ops/templates/daily-review.md
+```
+
+最终目标是用户只需要审核生成的三端文章草稿，然后发布：
+
+1. 上午把知乎、微信公众号、微信指数、百度指数等候选热点录入 `hot-topic-pool.csv` 对应的飞书热点池，后续可升级为自动采集。
+2. 中午按评分公式筛出主选题，生成网站版、公众号版、知乎版三端草稿包。
+3. 下午在飞书执行池查看 `待审核` 草稿，只做通过、需修改或拒绝判断。
+4. 晚上发布 `已通过` 草稿，并回填三端链接、发布状态和次日复盘数据。

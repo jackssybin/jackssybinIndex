@@ -59,6 +59,7 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/hugo-bridge.css?v=20260607j">
   {{ template "_internal/schema.html" . }}
+  {{ partial "json-ld.html" . }}
 </head>
 <body>
   <div class="solo-static">
@@ -112,3 +113,5 @@
   {{ end }}
 </body>
 </html>
+
+

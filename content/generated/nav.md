@@ -10,6 +10,7 @@ contentType: page
     <section class="nav-hero">
     <h2>网址导航</h2>
     <p>收集常用工具、AI 服务、开发资源、学习资料和娱乐入口。导航数据来自原 jackssybin.github.io 静态站，现已集成到主站统一维护。</p>
+    <p class="nav-ai-entry"><a class="nav-ai-btn" href="/ai-nav/" target="_blank" rel="noopener">✨ AI 工具导航（2400+ 工具，每日更新）→</a></p>
     <form class="form nav-search" action="/search.html" method="get">
       <input type="search" name="keyword" placeholder="搜索工具、网站或说明">
       <button type="submit">搜索</button>

@@ -27,7 +27,6 @@ mediaType = "application/rss+xml"
 [outputFormats.SITEMAP]
 baseName = "sitemap"
 mediaType = "application/xml"
-isPlainText = true
 
 [sitemap]
 changefreq = "weekly"
@@ -46,5 +45,5 @@ placename = "China"
 [params.seo]
 google_verify = ""
 baidu_verify = ""
-baidu_tongji = "YOUR_BAIDU_TONGJI_ID"
+baidu_tongji = "10d1cd6a3ceba53d97fa13e1b96ce44d"
 google_analytics = "G-YOUR_GA_ID"
