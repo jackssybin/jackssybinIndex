@@ -325,6 +325,27 @@
     "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
   },
   {
+    "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
+    "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
+    "type": "blog",
+    "date": "2026-06-24",
+    "description": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
+    "excerpt": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
+    "topic": "AI Agent",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI写作",
+      "Agent Skills",
+      "Claude Code",
+      "Hermes",
+      "Cursor",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "现在很多人说文章有“AI 味”。问题是，这句话通常没法执行。你让模型“写得像人一点”，它可能只是换几个词，删几个破折号，再把文章磨得更平，最后反而更像机器写的。 conorbronsdon/avoid ai writing 做的事更具体：它把“AI 味”拆成一组可审计的写作模式，再包装成一个可以放进 Claude Code、Hermes、OpenClaw、Cursor、Codex 等 Agent 工具里的 SKILL.md。它不是商业 AI 检测器，也不把结果当成判决；它更像一份写作质检清单，告诉 Agent 该看哪里、怎么改、什么时候只标记不改。 我看完 README、SKILL.md、detector/、Cursor 规则和插件脚本后，觉得这个项目最值得学的不是“列了多少禁词”，而是它把一个主观写作问题做成了工程化流程：规则有层级，输出有格式，检测器有测试，跨 Agent 分发也有同步脚本。 先看项目状态 几个可验证信息放在前面： 仓库：conorbronsdon/avoid ai writing GitHub 描述：用于审计和重写内容，移除 AI 写作模式，可配合 Claude Code、OpenClaw、Hermes 等 Agent 使用 License：MIT 当前浅克隆提交：6e1369d，提交信息是 Detector: cover inflected forms of single form verb patterns ( 38) SKILL.md frontmatter 版本：3.10.0 GitHub API 查询：约 1.9k+ stars、200+ forks，默认分支 main package.json 里检测器要求 Node =18，测试命令是 node detector/patterns.test.js && node detector/categories.test.js 我本地执行 npm test，检测器 fixtures 和 CATEGORIES.md 映射校验均通过 这里有一个容易误解的点：README 说它是 “Audit & rewrite content to remove AI writing patterns”，但 SKILL.md 第一段就把边界讲清楚了。它是写作质量工具，不是判定一个人是否使用 AI 的证据。规则会误伤非母语写作者、赶稿的人、技术文档和某些平台化写法，所以它更适合用来改稿，而不是审判作者。 它解决的不是“检测”，而是“可执行的改稿” 普通提示词通常长这样： 这句话的问题是没有验收标准。什么叫自然？哪些句子必须改？哪些只是风格选择？改完之后怎么确认没有把原意改坏？ avoid ai writing 的做法是把任务拆成三个模式。 1. rewrite 是默认模式。Agent 要先列出命中的 AI 写作痕迹，再给出重写版本，然后说明改了什么，最后做一次 second pass audit。 2. detect 只标记不改写。适合审稿、分析别人的文章，或者你不想让模型直接动原文的时候。 3. edit 面向文件。用户指向 draft.md 或 README，Agent 只做局部修改，保留已经自然的段落，并在最后报告改动和验证结果。 这个设计比一句“humanize”更可靠。因为它让 Agent 先解释问题，再动手改稿；如果你不同意某个判断，可以回到具体句子讨论，而不是和模型争论“有没有 AI 味”。 规则层级：先救命，再润色 SKILL.md 里不是把所有问题混在一起，而是给出了 P0、P1、P2 三层优先级。 P0 是可信度杀手，比如： “As of my last update” 这种模型截止声明； “Great question!”、“I hope this helps!” 这类聊天界面残留； “Experts believe” 但没有任何专家或研究来源； 把普通事件硬写成 “watershed moment” 或 “marking a pivotal moment”。 P1 是发布前应该修掉的明显 AI 味，比如 delve、leverage、robust 这类词表命中，模板句，let's explore 开头，过度同义词轮换，社交媒体里“this one is worth your time” 这种空推荐。 P2 更像风格润色：段落长度太整齐、结尾太泛、结构太像模板、偶发的 “serves as / features / boasts”。这些不一定毁稿，但会让文章看起来像流水线产物。 这个分层很实用。真实改稿时，不应该把所有规则当铁律。先清 P0，再处理 P1，最后看 P2 是否真的影响阅读。否则你会陷入另一种机器味：每个句子都“正确”，但没有人的呼吸。 它不是单纯禁词表 README 里提到 109 entry word replacement table across 3 tiers + 10 Tier 3 phrases，很容易让人以为这只是一个禁词清单。源码并不是这么简单。 SKILL.md 把规则分成几类： 词和短语：例如 delve、leverage、game changer、the future looks bright； 句式：例如 ..."
+  },
+  {
     "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
     "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
     "type": "blog",
