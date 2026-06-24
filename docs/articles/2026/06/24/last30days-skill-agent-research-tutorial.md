@@ -1,8 +1,8 @@
 ---
 title: "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达"
 url: "/articles/2026/06/24/last30days-skill-agent-research-tutorial/"
-date: 2026-06-24T20:30:00+08:00
-lastmod: 2026-06-24T20:30:00+08:00
+date: "2026-06-24T00:00:00+08:00"
+lastmod: "2026-06-24T00:00:00+08:00"
 description: "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。"
 tags: ["AI Agent", "Agent Skills", "开源项目", "信息检索", "GitHub"]
 topic: "AI Agent"
