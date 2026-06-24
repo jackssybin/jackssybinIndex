@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 14,
+    "count": 15,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1052,6 +1052,26 @@
         ],
         "priority": 0,
         "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
+      },
+      {
+        "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+        "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+        "type": "blog",
+        "date": "2026-06-24",
+        "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+        "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+        "topic": "AI Agent",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "Agent Skills",
+          "开源项目",
+          "信息检索",
+          "GitHub"
+        ],
+        "priority": 0,
+        "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
       }
     ],
     "articleTitles": [
@@ -1068,7 +1088,8 @@
       "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
       "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "Harness：用一句话生成 Claude Code 的 Agent 团队",
-      "Browser Use：让 AI 真的打开网页、点击按钮、填写表单"
+      "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
+      "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达"
     ]
   },
   {

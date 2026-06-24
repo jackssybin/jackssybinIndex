@@ -1,6 +1,26 @@
 {
   "allArticles": [
     {
+      "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Agent Skills",
+        "开源项目",
+        "信息检索",
+        "GitHub"
+      ],
+      "priority": 0,
+      "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "blog",
@@ -2091,6 +2111,26 @@
   ],
   "articles": [
     {
+      "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Agent Skills",
+        "开源项目",
+        "信息检索",
+        "GitHub"
+      ],
+      "priority": 0,
+      "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "blog",
@@ -2471,28 +2511,29 @@
       ],
       "priority": 0,
       "content": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, Influx, Wavefront, New Relic等。这些系统提供了非常好的仪表盘、图标、分析和告警等功能，使得你可以通过统一的接口轻松的监控和管理你的应用。 Actuator使用Micrometer来整合上面提到的外部应用监控系统。这使得只要通过非常小的配置就可以集成任何应用监控系统。 预备知识: 监控 micrometer actuator promethes 概念 类似slf4j门面模式。提供接口和方法 调用micrometer对springboot体系提供了健康检查，对spring体系的扩展。也可以自定义监控。 监控的一类客户端。获取的数据格式需要定制化。micrometer有单独的门面扩展包 1.配置pom 2. 配置文件 3.支持的接口 4.具体接口 请求: http://localhost:8089/metrics/metrics/http.server.requests 4. springBatch 接口 需要项目运行过job任务。 在源码层次手动注入过，AbstractJob,AbstractStep excute抽象方法 添加了micrometer 记录方法。 默认支持 metrics name type Description Tags spring.batch.job TIMER 作业job执行期间 name, status spring.batch.job.active LONG TASK TIMER 正在运行的job name spring.batch.step TIMER 作业step执行情况 name, job.name, status spring.batch.item.read TIMER 作业read情况 job.name, step.name,status spring.batch.item.process TIMER 作业process情况 job.name, step.name,status spring.batch.chunk.write TIMER 作业write情况 job.name, step.name,status 1. http://localhost:8099/actuator/metrics/spring.batch.step 查看系统中Step的运行情况 2. http://localhost:8097/actuator/metrics/spring.batch.job.active 查看系统中的job运行状态 3. http://localhost:8099/actuator/metrics/spring.batch.job 查看系统运行中job的状况 4. http://localhost:8099/actuator/prometheus 支持的promethes 接口数据 4. 增加自定义属性 6. 自定义监控"
-    },
-    {
-      "title": "java内省机制与反射机制的区别",
-      "url": "/articles/2021/03/29/1617000615780.html",
-      "type": "blog",
-      "date": "2021-03-29",
-      "description": "概念上的区别 反射是在运行状态把Java类中的各种成分映射成相应的Java类，可以动态的获取所有的属性以及动态调用任意一个方法，强调的是运行状态。 内省(IntroSpector) 是Java 语言对 JavaBean（简称VO）类属性、事件的一种缺省处理方法。内省机制是通过反射来实现。例如类User中有属性name，...",
-      "excerpt": "概念上的区别 反射是在运行状态把Java类中的各种成分映射成相应的Java类，可以动态的获取所有的属性以及动态调用任意一个方法，强调的是运行状态。 内省(IntroSpector) 是Java 语言对 JavaBean（简称VO）类属性、事件的一种缺省处理方法。内省机制是通过反射来实现。例如类User中有属性name，...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "java反射",
-        "java内省",
-        "reflect",
-        "Introspector"
-      ],
-      "priority": 0,
-      "content": "概念上的区别 反射 是在运行状态把Java类中的各种成分映射成相应的Java类，可以动态的获取所有的属性以及动态调用任意一个方法，强调的是运行状态。 内省(IntroSpector) 是Java 语言对 JavaBean（简称VO）类属性、事件的一种缺省处理方法。内省机制是通过反射来实现。例如类User中有属性name，那么必定有getName，setName方法，我们可以通过他们来获取或者设置值。Java提供了一套API来访问某个属性的getter/setter方法，这些API存放在java.beans中。 内省涉及的类 Introspector BeanInfo PropertyDescriptor 实现内省的步骤 1. 通过类 Introspector 的 getBeanInfo方法 来获取某个对象的 BeanInfo 信息。 2. 通过 BeanInfo 来获取属性描述器(PropertyDescriptor)。 3. 通过获取的属性描述器就可以获取某个属性对应的 getter/setter 方法。 4. 通过反射机制调用获取到的getter/setter 方法。 5. 测试User类; 1、反射操作name属性 2、内省操作name属性"
     }
   ],
   "latestArticles": [
+    {
+      "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Agent Skills",
+        "开源项目",
+        "信息检索",
+        "GitHub"
+      ],
+      "priority": 0,
+      "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+    },
     {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
@@ -2576,26 +2617,6 @@
       ],
       "priority": 0,
       "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
-    },
-    {
-      "title": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
-      "url": "/articles/2026/06/20/headroom-ai-context-compression.html",
-      "type": "blog",
-      "date": "2026-06-20",
-      "description": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "excerpt": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "LLM",
-        "上下文工程",
-        "开源项目",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
     }
   ],
   "tutorials": [
@@ -3562,7 +3583,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 14,
+      "count": 15,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3882,6 +3903,26 @@
           ],
           "priority": 0,
           "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
+        },
+        {
+          "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+          "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+          "type": "blog",
+          "date": "2026-06-24",
+          "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+          "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Agent Skills",
+            "开源项目",
+            "信息检索",
+            "GitHub"
+          ],
+          "priority": 0,
+          "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
         }
       ],
       "articleTitles": [
@@ -3898,7 +3939,8 @@
         "OpenMontage：把 AI Coding Assistant 变成视频制作流水线",
         "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
         "Harness：用一句话生成 Claude Code 的 Agent 团队",
-        "Browser Use：让 AI 真的打开网页、点击按钮、填写表单"
+        "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
+        "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达"
       ]
     },
     {
@@ -5450,6 +5492,26 @@
   ],
   "recentUpdates": [
     {
+      "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+      "type": "文章",
+      "date": "2026-06-24",
+      "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Agent Skills",
+        "开源项目",
+        "信息检索",
+        "GitHub"
+      ],
+      "priority": 0,
+      "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "文章",
@@ -5532,26 +5594,6 @@
       ],
       "priority": 0,
       "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
-    },
-    {
-      "title": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
-      "url": "/articles/2026/06/20/headroom-ai-context-compression.html",
-      "type": "文章",
-      "date": "2026-06-20",
-      "description": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "excerpt": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "LLM",
-        "上下文工程",
-        "开源项目",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
     },
     {
       "title": "第01章：MySQL概述与安装",
