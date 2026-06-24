@@ -21,6 +21,27 @@
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
     },
     {
+      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
+      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "topic": "AI工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI绘图",
+        "小红书",
+        "开源项目",
+        "Docker",
+        "Vue",
+        "Flask"
+      ],
+      "priority": 0,
+      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "blog",
@@ -2131,6 +2152,27 @@
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
     },
     {
+      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
+      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "topic": "AI工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI绘图",
+        "小红书",
+        "开源项目",
+        "Docker",
+        "Vue",
+        "Flask"
+      ],
+      "priority": 0,
+      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "blog",
@@ -2493,24 +2535,6 @@
       ],
       "priority": 0,
       "content": "@ConditionalOnExpression 根据表达式选择性加载 @ConditionalOnProperty 根据配置选择性加载 //布尔值和数字 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"${mq.cumsumer.enabled:0}==1&&${rabbitmq.comsumer.enabled:false}\") //字符串 @Component @RabbitListener(queues = \"monitorDataQueue\") @ConditionalOnExpression(\"'${mq.comsumer}'.equals('rabbitmq')\") // 直接使用boolean 的校验 // spring.batch.job.enabled = true @ConditionalOnProperty(prefix = \"spring.batch.job\", name = \"enabled\", havingValue = \"true\", matchIfMissing = true)"
-    },
-    {
-      "title": "springBatch监控相关",
-      "url": "/articles/2021/04/21/1618967915021.html",
-      "type": "blog",
-      "date": "2021-04-21",
-      "description": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "excerpt": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, I...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springBatch",
-        "prometheus",
-        "自定义监控"
-      ],
-      "priority": 0,
-      "content": "Spring Boot Actuator可以帮助你监控和管理Spring Boot应用，比如健康检查、审计、统计和HTTP追踪等。所有的这些特性可以通过JMX或者HTTP endpoints来获得。 Actuator同时还可以与外部应用监控系统整合，比如 Prometheus, Graphite, DataDog, Influx, Wavefront, New Relic等。这些系统提供了非常好的仪表盘、图标、分析和告警等功能，使得你可以通过统一的接口轻松的监控和管理你的应用。 Actuator使用Micrometer来整合上面提到的外部应用监控系统。这使得只要通过非常小的配置就可以集成任何应用监控系统。 预备知识: 监控 micrometer actuator promethes 概念 类似slf4j门面模式。提供接口和方法 调用micrometer对springboot体系提供了健康检查，对spring体系的扩展。也可以自定义监控。 监控的一类客户端。获取的数据格式需要定制化。micrometer有单独的门面扩展包 1.配置pom 2. 配置文件 3.支持的接口 4.具体接口 请求: http://localhost:8089/metrics/metrics/http.server.requests 4. springBatch 接口 需要项目运行过job任务。 在源码层次手动注入过，AbstractJob,AbstractStep excute抽象方法 添加了micrometer 记录方法。 默认支持 metrics name type Description Tags spring.batch.job TIMER 作业job执行期间 name, status spring.batch.job.active LONG TASK TIMER 正在运行的job name spring.batch.step TIMER 作业step执行情况 name, job.name, status spring.batch.item.read TIMER 作业read情况 job.name, step.name,status spring.batch.item.process TIMER 作业process情况 job.name, step.name,status spring.batch.chunk.write TIMER 作业write情况 job.name, step.name,status 1. http://localhost:8099/actuator/metrics/spring.batch.step 查看系统中Step的运行情况 2. http://localhost:8097/actuator/metrics/spring.batch.job.active 查看系统中的job运行状态 3. http://localhost:8099/actuator/metrics/spring.batch.job 查看系统运行中job的状况 4. http://localhost:8099/actuator/prometheus 支持的promethes 接口数据 4. 增加自定义属性 6. 自定义监控"
     }
   ],
   "latestArticles": [
@@ -2533,6 +2557,27 @@
       ],
       "priority": 0,
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+    },
+    {
+      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
+      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+      "type": "blog",
+      "date": "2026-06-24",
+      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "topic": "AI工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI绘图",
+        "小红书",
+        "开源项目",
+        "Docker",
+        "Vue",
+        "Flask"
+      ],
+      "priority": 0,
+      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
     },
     {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
@@ -2596,27 +2641,6 @@
       ],
       "priority": 0,
       "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
-    },
-    {
-      "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
-      "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
-      "type": "blog",
-      "date": "2026-06-21",
-      "description": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "excerpt": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI 视频",
-        "短剧",
-        "开源项目",
-        "FastAPI",
-        "React",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
     }
   ],
   "tutorials": [
@@ -5512,6 +5536,27 @@
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
     },
     {
+      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
+      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+      "type": "文章",
+      "date": "2026-06-24",
+      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
+      "topic": "AI工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI绘图",
+        "小红书",
+        "开源项目",
+        "Docker",
+        "Vue",
+        "Flask"
+      ],
+      "priority": 0,
+      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
+    },
+    {
       "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
       "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
       "type": "文章",
@@ -5573,27 +5618,6 @@
       ],
       "priority": 0,
       "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
-    },
-    {
-      "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
-      "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
-      "type": "文章",
-      "date": "2026-06-21",
-      "description": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "excerpt": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI 视频",
-        "短剧",
-        "开源项目",
-        "FastAPI",
-        "React",
-        "工具教程"
-      ],
-      "priority": 0,
-      "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
     },
     {
       "title": "第01章：MySQL概述与安装",
