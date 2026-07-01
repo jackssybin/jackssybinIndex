@@ -1,6 +1,27 @@
 {
   "allArticles": [
     {
+      "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+      "type": "blog",
+      "date": "2026-07-01",
+      "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI投研",
+        "Agent Skills",
+        "Claude Code",
+        "Codex",
+        "价值投资",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "blog",
@@ -2153,6 +2174,27 @@
   ],
   "articles": [
     {
+      "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+      "type": "blog",
+      "date": "2026-07-01",
+      "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI投研",
+        "Agent Skills",
+        "Claude Code",
+        "Codex",
+        "价值投资",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "blog",
@@ -2544,26 +2586,30 @@
       ],
       "priority": 0,
       "content": "按照非索引列更新 在可重复读的事务隔离级别下，在非索引列上进行更新和删除会对所有数据行进行加锁，阻止其他会话对边进行任何数据的增删改操作。 如果更新或删除条件为c3=4且c3列上没有索引则： 1. 不允许其他会话插入任意记录，因为所有记录的主键索引上存在X排他锁，无法申请插入意向X锁（lock mode X insert intention waiting Record lock） 2. 不允许其他会话删除任意记录，因为所有记录的主键索引上存在X排他锁 3. 不允许其他会话更新任意记录。因为所有记录的主键索引上存在X排他锁 测试数据： CREATE TABLE tb4001 ( id bigint(20) NOT NULL AUTO INCREMENT, c1 int(11) DEFAULT NULL, c2 varchar(200) DEFAULT NULL, c3 int(11) DEFAULT NULL, PRIMARY KEY (id), KEY idx c1 (c1) ) ENGINE=InnoDB AUTO INCREMENT=1 DEFAULT CHARSET=utf8; insert into tb4001(c1,c2,c3) values(2,2,2); insert into tb4001(c1,c2,c3) values(4,4,4); insert into tb4001(c1,c2,c3) values(7,7,7); insert into tb4001(c1,c2,c3) values(8,8,8); 测试1：在没有索引的列上更新 事务隔离级别：RR 会话1： SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=777 where c3=7; 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; insert into tb4001(c1,c2,c3) values(9,9,9); 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 13 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X insert intention waiting Record lock, heap no 1 PHYSICAL RECORD: n fields 1; compact format; info bits 0 0: len 8; hex 73757072656d756d; asc supremum;; TRANSACTION 10571, ACTIVE 404 sec 2 lock struct(s), heap size 1136, 5 row lock(s), undo log entries 1 MySQL thread id 52, OS thread handle 140674621650688, query id 1201 127.0.0.1 admin 会话2: SET SESSION tx isolation='REPEATABLE READ'; START TRANSACTION; SELECT @@GLOBAL.tx isolation, @@SESSION.tx isolation; update tb4001 set c2=888 where c3=8; 执行结果：会话2被阻塞 使用SHOW ENGINE INNODB STATUS \\G查看阻塞发生时的锁信息 TRX HAS BEEN WAITING 5 SEC FOR THIS LOCK TO BE GRANTED: RECORD LOCKS space id 75 page no 3 n bits 80 index PRIMARY of table test1.tb4001 trx id 10573 lock mode X waiting Record lock, heap no 2 PHYSICAL RECORD: n fields 6; compact format; info bits 0 0: len 8; hex 8000000000000001; asc ;; 1: len 6; hex 00000000293c; asc ) 4的记录，但不允许插入c1=4的记录 2. 允许其他会话更新c1< 4的记录，但不允许将记录更新为c1=4的记录 3. 允许其他会话删除c1< 4的记录。 4. 允..."
-    },
-    {
-      "title": "springBoot启动扩展点精析",
-      "url": "/articles/2021/05/14/1620960509044.html",
-      "type": "blog",
-      "date": "2021-05-14",
-      "description": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "excerpt": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "springboot自动扩展",
-        "BeanFactoryAware"
-      ],
-      "priority": 0,
-      "content": "1.背景 Spring的核心思想就是容器，当容器refresh的时候，外部看上去风平浪静，其实内部则是一片惊涛骇浪，汪洋一片。Springboot更是封装了Spring，遵循约定大于配置，加上自动装配的机制。很多时候我们只要引用了一个依赖，几乎是零配置就能完成一个功能的装配。 我非常喜欢这种自动装配的机制，所以在自己开发中间件和公共依赖工具的时候也会用到这个特性。让使用者以最小的代价接入。想要把自动装配玩的转，就必须要了解spring对于bean的构造生命周期以及各个扩展接口。当然了解了bean的各个生命周期也能促进我们加深对spring的理解。业务代码也能合理利用这些扩展点写出更加漂亮的代码。 在网上搜索spring扩展点，发现很少有博文说的很全的，只有一些常用的扩展点的说明。 所以在这篇文章里，我总结了几乎Spring & Springboot所有的扩展接口，以及各个扩展点的使用场景。并且整理出了一个bean在spring内部从被加载到最后初始化完成所有可扩展点的顺序调用图。从而我们也能窥探到bean是如何一步步加载到spring容器中的。 2.可扩展的接口启动调用顺序图 以下是我整理的spring容器中Bean的生命周期内所有可扩展的点的调用顺序，下面会一个个分析 3.ApplicationContextInitializer org.springframework.context.ApplicationContextInitializer 这是整个spring容器在刷新之前初始化ConfigurableApplicationContext的回调接口，简单来说，就是在容器刷新之前调用此类的initialize方法。这个点允许被用户自己扩展。用户可以在整个spring容器还没被初始化之前做一些事情。 可以想到的场景可能为，在最开始激活一些配置，或者利用这时候class还没被类加载器加载的时机，进行动态字节码注入等操作。 扩展方式为： 因为这时候spring容器还没被初始化，所以想要自己的扩展的生效，有以下三种方式： 在启动类中用springApplication.addInitializers(new TestApplicationContextInitializer())语句加入 配置文件配置context.initializer.classes=com.example.demo.TestApplicationContextInitializer Spring SPI扩展，在spring.factories中加入org.springframework.context.ApplicationContextInitializer=com.example.demo.TestApplicationContextInitializer 4.BeanDefinitionRegistryPostProcessor org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor 这个接口在读取项目中的beanDefinition之后执行，提供一个补充的扩展点 使用场景：你可以在这里动态注册自己的beanDefinition，可以加载classpath之外的bean 扩展方式为: 5.BeanFactoryPostProcessor org.springframework.beans.factory.config.BeanFactoryPostProcessor 这个接口是beanFactory的扩展接口，调用时机在spring在读取beanDefinition信息之后，实例化bean之前。 在这个时机，用户可以通过实现这个扩展接口来自行处理一些东西，比如修改已经注册的beanDefinition的元信息。 扩展方式为： 6.InstantiationAwareBeanPostProcessor org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor 该接口继承了BeanPostProcess接口，区别如下： BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，把可扩展的范围增加了实例化阶段和属性注入阶段。 该类主要的扩展点有以下5个方法，主要在bean生命周期的两大阶段： 实例化阶段 和 初始化阶段 ，下面一起进行说明，按调用顺序为： postProcessBeforeInstantiation：实例化bean之前，相当于new这个bean之前 postProcessAfterInstantiation：实例化bean之后，相当于new这个bean之后 postProcessPropertyValues：bean已经实例化完成，在属性注入时阶段触发，@Autowired,@Resource等注解原理基于此方法实现 postProcessBeforeInitialization：初始化bean之前，..."
     }
   ],
   "latestArticles": [
+    {
+      "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+      "type": "blog",
+      "date": "2026-07-01",
+      "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI投研",
+        "Agent Skills",
+        "Claude Code",
+        "Codex",
+        "价值投资",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+    },
     {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
@@ -2646,27 +2692,6 @@
       ],
       "priority": 0,
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
-    },
-    {
-      "title": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
-      "url": "/articles/2026/06/22/browser-use-ai-browser-agent-tutorial.html",
-      "type": "blog",
-      "date": "2026-06-22",
-      "description": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "excerpt": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "浏览器自动化",
-        "Python",
-        "开源项目",
-        "LLM",
-        "自动化"
-      ],
-      "priority": 0,
-      "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
     }
   ],
   "tutorials": [
@@ -3633,7 +3658,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 16,
+      "count": 17,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -3994,6 +4019,27 @@
           ],
           "priority": 0,
           "content": "现在很多人说文章有“AI 味”。问题是，这句话通常没法执行。你让模型“写得像人一点”，它可能只是换几个词，删几个破折号，再把文章磨得更平，最后反而更像机器写的。 conorbronsdon/avoid ai writing 做的事更具体：它把“AI 味”拆成一组可审计的写作模式，再包装成一个可以放进 Claude Code、Hermes、OpenClaw、Cursor、Codex 等 Agent 工具里的 SKILL.md。它不是商业 AI 检测器，也不把结果当成判决；它更像一份写作质检清单，告诉 Agent 该看哪里、怎么改、什么时候只标记不改。 我看完 README、SKILL.md、detector/、Cursor 规则和插件脚本后，觉得这个项目最值得学的不是“列了多少禁词”，而是它把一个主观写作问题做成了工程化流程：规则有层级，输出有格式，检测器有测试，跨 Agent 分发也有同步脚本。 先看项目状态 几个可验证信息放在前面： 仓库：conorbronsdon/avoid ai writing GitHub 描述：用于审计和重写内容，移除 AI 写作模式，可配合 Claude Code、OpenClaw、Hermes 等 Agent 使用 License：MIT 当前浅克隆提交：6e1369d，提交信息是 Detector: cover inflected forms of single form verb patterns ( 38) SKILL.md frontmatter 版本：3.10.0 GitHub API 查询：约 1.9k+ stars、200+ forks，默认分支 main package.json 里检测器要求 Node =18，测试命令是 node detector/patterns.test.js && node detector/categories.test.js 我本地执行 npm test，检测器 fixtures 和 CATEGORIES.md 映射校验均通过 这里有一个容易误解的点：README 说它是 “Audit & rewrite content to remove AI writing patterns”，但 SKILL.md 第一段就把边界讲清楚了。它是写作质量工具，不是判定一个人是否使用 AI 的证据。规则会误伤非母语写作者、赶稿的人、技术文档和某些平台化写法，所以它更适合用来改稿，而不是审判作者。 它解决的不是“检测”，而是“可执行的改稿” 普通提示词通常长这样： 这句话的问题是没有验收标准。什么叫自然？哪些句子必须改？哪些只是风格选择？改完之后怎么确认没有把原意改坏？ avoid ai writing 的做法是把任务拆成三个模式。 1. rewrite 是默认模式。Agent 要先列出命中的 AI 写作痕迹，再给出重写版本，然后说明改了什么，最后做一次 second pass audit。 2. detect 只标记不改写。适合审稿、分析别人的文章，或者你不想让模型直接动原文的时候。 3. edit 面向文件。用户指向 draft.md 或 README，Agent 只做局部修改，保留已经自然的段落，并在最后报告改动和验证结果。 这个设计比一句“humanize”更可靠。因为它让 Agent 先解释问题，再动手改稿；如果你不同意某个判断，可以回到具体句子讨论，而不是和模型争论“有没有 AI 味”。 规则层级：先救命，再润色 SKILL.md 里不是把所有问题混在一起，而是给出了 P0、P1、P2 三层优先级。 P0 是可信度杀手，比如： “As of my last update” 这种模型截止声明； “Great question!”、“I hope this helps!” 这类聊天界面残留； “Experts believe” 但没有任何专家或研究来源； 把普通事件硬写成 “watershed moment” 或 “marking a pivotal moment”。 P1 是发布前应该修掉的明显 AI 味，比如 delve、leverage、robust 这类词表命中，模板句，let's explore 开头，过度同义词轮换，社交媒体里“this one is worth your time” 这种空推荐。 P2 更像风格润色：段落长度太整齐、结尾太泛、结构太像模板、偶发的 “serves as / features / boasts”。这些不一定毁稿，但会让文章看起来像流水线产物。 这个分层很实用。真实改稿时，不应该把所有规则当铁律。先清 P0，再处理 P1，最后看 P2 是否真的影响阅读。否则你会陷入另一种机器味：每个句子都“正确”，但没有人的呼吸。 它不是单纯禁词表 README 里提到 109 entry word replacement table across 3 tiers + 10 Tier 3 phrases，很容易让人以为这只是一个禁词清单。源码并不是这么简单。 SKILL.md 把规则分成几类： 词和短语：例如 delve、leverage、game changer、the future looks bright； 句式：例如 ..."
+        },
+        {
+          "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+          "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+          "type": "blog",
+          "date": "2026-07-01",
+          "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+          "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI投研",
+            "Agent Skills",
+            "Claude Code",
+            "Codex",
+            "价值投资",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
         }
       ],
       "articleTitles": [
@@ -4012,7 +4058,8 @@
         "Harness：用一句话生成 Claude Code 的 Agent 团队",
         "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
         "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-        "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill"
+        "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
+        "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流"
       ]
     },
     {
@@ -5564,6 +5611,27 @@
   ],
   "recentUpdates": [
     {
+      "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+      "type": "文章",
+      "date": "2026-07-01",
+      "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI投研",
+        "Agent Skills",
+        "Claude Code",
+        "Codex",
+        "价值投资",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "文章",
@@ -5645,27 +5713,6 @@
       ],
       "priority": 0,
       "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
-    },
-    {
-      "title": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
-      "url": "/articles/2026/06/22/browser-use-ai-browser-agent-tutorial.html",
-      "type": "文章",
-      "date": "2026-06-22",
-      "description": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "excerpt": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "浏览器自动化",
-        "Python",
-        "开源项目",
-        "LLM",
-        "自动化"
-      ],
-      "priority": 0,
-      "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
     },
     {
       "title": "第01章：MySQL概述与安装",
