@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 17,
+    "count": 18,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1114,6 +1114,26 @@
         ],
         "priority": 0,
         "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+      },
+      {
+        "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
+        "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
+        "type": "blog",
+        "date": "2026-07-02",
+        "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
+        "excerpt": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
+        "topic": "AI Agent",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "Agent Skills",
+          "开源项目",
+          "情报聚合",
+          "GitHub Trending"
+        ],
+        "priority": 0,
+        "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
       }
     ],
     "articleTitles": [
@@ -1133,7 +1153,8 @@
       "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
       "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
       "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
-      "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流"
+      "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+      "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的"
     ]
   },
   {
