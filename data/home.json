@@ -42,6 +42,25 @@
       "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
     },
     {
+      "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
+      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+      "type": "blog",
+      "date": "2026-06-28",
+      "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "excerpt": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "topic": "AI 工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI 视频",
+        "Next.js",
+        "开源项目",
+        "AI Agent"
+      ],
+      "priority": 0,
+      "content": "做视频太麻烦了，是不是？ 写脚本、画分镜、找图片、配音、剪字幕，一套流程下来大半天过去了。如果你只是想快速做一个知识分享或者技术演示视频，其实没必要这么麻烦。 最近 GitHub 上看到一个国人开源的项目 ai video agent ，它做的事情很简单： 你输入一句话主题，AI 帮你做完剩下的所有事情 —— 大纲生成、分镜生成、旁白配音、字幕同步，最后直接导出 MP4。 项目支持两种创作模式： 图片模式 ：文生图分镜，适合知识讲解、口播轮播 HTML 模式 ：AI 生成 HTML/CSS/JS 动画分镜，适合科技演示、动态可视化 它解决了什么痛点？ 做短视频的流程，相信很多人都熟： 1. 想主题 → 写脚本 → 改三五遍 2. 找图片素材 → 或者自己画分镜 3. 找配音工具 → 导出音频 → 对齐时间轴 4. 剪视频 → 加字幕 → 导出 大半天过去了，视频还没出来。如果你是做知识分享、技术演示，其实不需要这么复杂 —— 你需要的只是一个 快速出草稿 的工具。 ai video agent 就是干这个的： 对话式创作，AI 自动流水线，你只需要改改不满意的地方，不用从头搭框架 。 它能帮你做这些： 自动判断你是要生成大纲还是改某个分镜 自动生成视频大纲，包含标题、旁白、分镜提示 图片模式自动生成分镜图 + 旁白音频 + 字幕 HTML 模式自动生成可播放的网页动画分镜 支持单个分镜重生成，不用推倒重来 长任务中断也不怕，已完成内容自动保留 浏览器直接预览，支持 MP4 导出 两种模式，三种风格 两种创作模式 模式 适用场景 说明 图片模式 知识讲解、口播轮播 每一镜生成一张图，配上旁白 HTML 模式 科技演示、动态可视化 AI 直接生成 HTML/CSS/JS 动画 三种内置风格（仅 HTML 模式） 三种风格针对不同场景： 1. 科技博主 (cyber clean) ：深色科技感、青色霓虹、卡片化布局，适合测评、拆解、科技分享 2. 黑客风 (terminal matrix) ：终端界面、Matrix 绿、ASCII 装饰、扫描线效果，适合技术演示和极客内容 3. 暖色系 (warm story) ：奶油米色、暖橘琥珀、衬线标题大留白，适合人文、生活方式、故事表达 技术栈 Next.js 14 + React 18 + TypeScript Prisma + MySQL 8 Tailwind CSS OpenAI SDK（兼容任意 OpenAI 接口网关） Vitest 五分钟本地部署 我把完整步骤写在这里，跟着走就行： 1. 环境准备 需要： Node.js 22+ MySQL 8+ OpenAI 兼容的 API 网关（支持聊天 + TTS） 如果你本地没有 MySQL，可以直接用项目里的 Docker 启动： 这会启动一个叫 ai video mysql 的 MySQL 8 实例。 2. 拉代码装依赖 3. 配置环境变量 编辑 .env，填上你的配置： 几点说明： AI BASE URL 需要是 OpenAI 兼容协议地址，任何网关都能用 如果只体验 HTML 模式，可以不配置图片相关变量 图片模式依赖单独的文生图接口，目前按 z image turbo 适配 4. 初始化数据库 5. 启动 浏览器打开 http://localhost:3000 就能用了。 实际怎么用？ 基本流程很简单： 1. 首页选 图片轮播模式 或 HTML 动画模式 2. 创建项目，在聊天框输入你的主题 3. AI 先生成视频大纲 4. 逐镜生成图片/HTML 动画，同时生成旁白音频 5. 预览试听，不满意可以单独重生成某一镜 6. 最后导出 MP4 输入示例参考： 帮我做一个 30 秒的视频，讲清楚什么是 RAG 做一个科技感强一点的 AI Agent 工作流介绍 把第 3 镜改成更偏数据可视化，不要人物 删掉最后一镜，再补一个总结镜头 界面布局：左侧项目管理，中间预览，右侧对话创作，一目了然。 体验完说点感受 这是一个实验性开源项目，作者也说了可能还有 Bug，但这个方向是对的： AI native 视频创作，就是应该对话驱动，自动流水线，把人从繁琐的手工操作里解放出来 。 如果你： 经常做知识分享类短视频 需要快速出视频草稿给客户看 想自己搭一个内部 AI 视频创作工具 对 AI 自动生成视频这个方向感兴趣 那这个项目非常值得你 clone 下来试试。 作者还有一个商业化版本 SVG Animate，功能更完整更稳定，如果这个实验性版本满足不了你，可以去试试官方服务。 项目信息 GitHub：https://github.com/xuanyuanzhifeng/ai video agent 作者：@xuanyuanzhifeng 许可证：README 没写，建议 issue 里问一下再商用 体验完整功能：https://svganimate.ai"
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "blog",
@@ -2235,6 +2254,25 @@
       "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
     },
     {
+      "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
+      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+      "type": "blog",
+      "date": "2026-06-28",
+      "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "excerpt": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "topic": "AI 工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI 视频",
+        "Next.js",
+        "开源项目",
+        "AI Agent"
+      ],
+      "priority": 0,
+      "content": "做视频太麻烦了，是不是？ 写脚本、画分镜、找图片、配音、剪字幕，一套流程下来大半天过去了。如果你只是想快速做一个知识分享或者技术演示视频，其实没必要这么麻烦。 最近 GitHub 上看到一个国人开源的项目 ai video agent ，它做的事情很简单： 你输入一句话主题，AI 帮你做完剩下的所有事情 —— 大纲生成、分镜生成、旁白配音、字幕同步，最后直接导出 MP4。 项目支持两种创作模式： 图片模式 ：文生图分镜，适合知识讲解、口播轮播 HTML 模式 ：AI 生成 HTML/CSS/JS 动画分镜，适合科技演示、动态可视化 它解决了什么痛点？ 做短视频的流程，相信很多人都熟： 1. 想主题 → 写脚本 → 改三五遍 2. 找图片素材 → 或者自己画分镜 3. 找配音工具 → 导出音频 → 对齐时间轴 4. 剪视频 → 加字幕 → 导出 大半天过去了，视频还没出来。如果你是做知识分享、技术演示，其实不需要这么复杂 —— 你需要的只是一个 快速出草稿 的工具。 ai video agent 就是干这个的： 对话式创作，AI 自动流水线，你只需要改改不满意的地方，不用从头搭框架 。 它能帮你做这些： 自动判断你是要生成大纲还是改某个分镜 自动生成视频大纲，包含标题、旁白、分镜提示 图片模式自动生成分镜图 + 旁白音频 + 字幕 HTML 模式自动生成可播放的网页动画分镜 支持单个分镜重生成，不用推倒重来 长任务中断也不怕，已完成内容自动保留 浏览器直接预览，支持 MP4 导出 两种模式，三种风格 两种创作模式 模式 适用场景 说明 图片模式 知识讲解、口播轮播 每一镜生成一张图，配上旁白 HTML 模式 科技演示、动态可视化 AI 直接生成 HTML/CSS/JS 动画 三种内置风格（仅 HTML 模式） 三种风格针对不同场景： 1. 科技博主 (cyber clean) ：深色科技感、青色霓虹、卡片化布局，适合测评、拆解、科技分享 2. 黑客风 (terminal matrix) ：终端界面、Matrix 绿、ASCII 装饰、扫描线效果，适合技术演示和极客内容 3. 暖色系 (warm story) ：奶油米色、暖橘琥珀、衬线标题大留白，适合人文、生活方式、故事表达 技术栈 Next.js 14 + React 18 + TypeScript Prisma + MySQL 8 Tailwind CSS OpenAI SDK（兼容任意 OpenAI 接口网关） Vitest 五分钟本地部署 我把完整步骤写在这里，跟着走就行： 1. 环境准备 需要： Node.js 22+ MySQL 8+ OpenAI 兼容的 API 网关（支持聊天 + TTS） 如果你本地没有 MySQL，可以直接用项目里的 Docker 启动： 这会启动一个叫 ai video mysql 的 MySQL 8 实例。 2. 拉代码装依赖 3. 配置环境变量 编辑 .env，填上你的配置： 几点说明： AI BASE URL 需要是 OpenAI 兼容协议地址，任何网关都能用 如果只体验 HTML 模式，可以不配置图片相关变量 图片模式依赖单独的文生图接口，目前按 z image turbo 适配 4. 初始化数据库 5. 启动 浏览器打开 http://localhost:3000 就能用了。 实际怎么用？ 基本流程很简单： 1. 首页选 图片轮播模式 或 HTML 动画模式 2. 创建项目，在聊天框输入你的主题 3. AI 先生成视频大纲 4. 逐镜生成图片/HTML 动画，同时生成旁白音频 5. 预览试听，不满意可以单独重生成某一镜 6. 最后导出 MP4 输入示例参考： 帮我做一个 30 秒的视频，讲清楚什么是 RAG 做一个科技感强一点的 AI Agent 工作流介绍 把第 3 镜改成更偏数据可视化，不要人物 删掉最后一镜，再补一个总结镜头 界面布局：左侧项目管理，中间预览，右侧对话创作，一目了然。 体验完说点感受 这是一个实验性开源项目，作者也说了可能还有 Bug，但这个方向是对的： AI native 视频创作，就是应该对话驱动，自动流水线，把人从繁琐的手工操作里解放出来 。 如果你： 经常做知识分享类短视频 需要快速出视频草稿给客户看 想自己搭一个内部 AI 视频创作工具 对 AI 自动生成视频这个方向感兴趣 那这个项目非常值得你 clone 下来试试。 作者还有一个商业化版本 SVG Animate，功能更完整更稳定，如果这个实验性版本满足不了你，可以去试试官方服务。 项目信息 GitHub：https://github.com/xuanyuanzhifeng/ai video agent 作者：@xuanyuanzhifeng 许可证：README 没写，建议 issue 里问一下再商用 体验完整功能：https://svganimate.ai"
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "blog",
@@ -2589,24 +2627,6 @@
       ],
       "priority": 0,
       "content": "Odysseus：一个值得关注的本地 AI 工作台 最近我折腾了一下 Odysseus ，一个开源的自托管 AI 工作台。简单说，它想做的是： 把 ChatGPT、Claude 这类 AI 对话体验，搬到你自己的电脑或服务器上，并且尽量把聊天、Agent、文档、研究、记忆、工具调用这些能力整合在一起。 我实际把它部署到了 Windows 本地环境，跑起来之后，感觉它不是那种“又一个聊天壳子”，而是更接近一个面向个人或小团队的 AI 工作空间 。 项目地址： https://github.com/pewdiepie archdaemon/odysseus 一、为什么我会关注 Odysseus？ 现在 AI 工具有一个很明显的问题：能力越来越强，但使用场景越来越分散。 你可能会遇到这些情况： 聊天用 ChatGPT 本地模型用 Ollama 文档写作用 Notion 或 Markdown 编辑器 搜索研究用 Perplexity 或浏览器 自动执行任务又要接入 Agent、MCP、脚本工具 长期记忆、个人资料、文件、模型配置还要分散管理 结果就是：工具很多，但工作流并没有真正连起来。 Odysseus 想解决的正是这个问题。它不是只提供一个聊天框，而是把多个 AI 工作能力放进一个统一界面里。 二、Odysseus 是什么？ 如果用一句话概括： Odysseus 是一个本地优先、隐私优先、可自托管的 AI 工作台。 它的核心特点包括： 1. 支持本地模型和 API 模型 2. 支持 Agent 工具调用 3. 支持 MCP、文件、Shell、技能、记忆等能力 4. 内置 Deep Research、模型对比、文档、笔记、任务、邮件、日历等功能 5. 可以通过 Docker 或本地 Python 环境部署 6. 支持移动端访问和 PWA 使用 它更像是一个“个人 AI 操作系统”的雏形，而不是单纯的聊天机器人。 三、它适合哪些人？ 我觉得 Odysseus 特别适合下面几类用户。 第一类：喜欢折腾本地 AI 的人。 如果你已经在用 Ollama、LM Studio、llama.cpp、vLLM 之类的工具，Odysseus 可以作为一个统一入口，把模型调用、聊天、Agent 和文件处理串起来。 第二类：重视隐私和数据控制的人。 很多人不希望所有文档、聊天记录、知识库都交给云端服务。Odysseus 的自托管属性，让你可以把数据尽量留在自己的电脑或服务器上。 第三类：想搭建个人 AI 工作流的人。 比如写作、资料整理、深度研究、邮件处理、日程管理、文件分析、模型对比等，Odysseus 都提供了一些内置模块。 第四类：想研究 Agent 产品形态的人。 它里面不只是 Chat，还包括工具调用、记忆、技能、MCP、任务调度等机制。对于想理解 AI Agent 怎么从“聊天”走向“执行”的人，很有参考价值。 四、我实际部署后的感受 我这次是在 Windows 本地部署的。 官方提供了 Docker 方式，也提供了 Windows 原生启动脚本。实际体验下来，如果 Docker 构建比较慢，Windows 用户可以直接用 Python 虚拟环境启动： 启动后访问： 首次启动会初始化数据库、管理员账号和本地数据目录。 需要注意的是，Odysseus 本身不是“大模型”，它是 AI 工作台。也就是说，你还需要配置模型来源，比如： Ollama LM Studio OpenAI API OpenRouter vLLM llama.cpp 如果你已经有 Ollama，本地使用会比较顺手。 五、Odysseus 的亮点 1. 不只是聊天，而是工作台 很多开源 AI 项目本质上只是一个 Chat UI，能切模型、能保存历史，就算完成度不错。 Odysseus 的野心更大一些。它把 Chat、Agent、文档、研究、记忆、任务、邮件、日历等能力放在一起，这让它更接近“日常工作入口”。 这点很重要。 因为 AI 真正有价值的地方，不只是回答一句问题，而是参与完整工作流。 2. 支持 Agent 和工具调用 Odysseus 的 Agent 能力支持工具、文件、Shell、MCP、技能和记忆。 这意味着它可以从“回答问题”进一步走向“执行任务”。 比如： 分析一个项目目录 根据文件内容生成总结 调用工具完成某个步骤 结合记忆理解你的长期偏好 通过 MCP 接入外部系统 当然，Agent 能力是否稳定，还要看具体模型、工具权限和任务复杂度。但这个方向是对的。 3. Cookbook 对本地模型用户很友好 Odysseus 里有一个 Cookbook 模块，用来扫描硬件、推荐模型、下载模型、启动服务。 对于新手来说，本地模型最难的地方往往不是“有没有模型”，而是： 我的显卡能跑多大的模型？ 应该下载 GGUF、FP8 还是 AWQ？ 用 Ollama、llama.cpp 还是 vLLM？ 显存不够怎么办？ 模型下载后怎么 serve？ Cookbook 的价值就在这里：它试图把这些复杂选择变得更可操作。 4. Deep Research 很适合知识工作者 Odysseus 内置 Deep Research，可以做多步骤资料收集、阅读和综合。 这类能力对写..."
-    },
-    {
-      "title": "LocalDateTime操作",
-      "url": "/articles/2025/07/16/1752652246705.html",
-      "type": "blog",
-      "date": "2025-07-16",
-      "description": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "excerpt": "1.LocalDateTime时间转换 import java.time.LocalDateTime; import java.time.format.DateTimeFormatter; ​ public class DateTimeConversionExample { public static void mai...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "LocalDateTime",
-        "Duration",
-        "时间操作"
-      ],
-      "priority": 0,
-      "content": "1.LocalDateTime时间转换 2.DateTimeUtils操作时间 3.完整LocalDateTime使用场景和用法 关键场景说明： 1. 获取当前时间 LocalDateTime.now() 获取系统当前日期时间 2. 创建指定时间 LocalDateTime.of() 创建精确到分钟的时间对象 3. 日期时间转字符串 使用 DateTimeFormatter 自定义格式（如 \"yyyy MM dd HH:mm:ss\"） 4. 字符串转日期时间 LocalDateTime.parse() 配合格式化器解析字符串 5. 日期时间加减 plusDays(), minusHours() 等方法进行时间运算 6. 获取时间单位 getYear(), getMonth() 等方法提取时间分量 7. 时间比较 isBefore(), isAfter() 方法比较时间先后 8. 计算时间间隔 Duration.between() 计算两个时间的差值 9. 时区转换 通过 atZone() 和 withZoneSameInstant() 处理时区 10. 与传统Date互转 通过 Instant 对象实现与旧版Date的转换 高级用法： 最佳实践（注意事项）： 1. 时区处理 ：始终明确时区，避免隐式使用系统默认时区 2. 不可变性 ：所有操作返回新对象，原对象不变 3. 线程安全 ：LocalDateTime 是线程安全的类 4. 格式化重用 ：复用 DateTimeFormatter 实例提升性能 5. 空值处理 ：使用 Optional 包装可能为空的日期时间值"
     }
   ],
   "latestArticles": [
@@ -2652,6 +2672,25 @@
       "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
     },
     {
+      "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
+      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+      "type": "blog",
+      "date": "2026-06-28",
+      "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "excerpt": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "topic": "AI 工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI 视频",
+        "Next.js",
+        "开源项目",
+        "AI Agent"
+      ],
+      "priority": 0,
+      "content": "做视频太麻烦了，是不是？ 写脚本、画分镜、找图片、配音、剪字幕，一套流程下来大半天过去了。如果你只是想快速做一个知识分享或者技术演示视频，其实没必要这么麻烦。 最近 GitHub 上看到一个国人开源的项目 ai video agent ，它做的事情很简单： 你输入一句话主题，AI 帮你做完剩下的所有事情 —— 大纲生成、分镜生成、旁白配音、字幕同步，最后直接导出 MP4。 项目支持两种创作模式： 图片模式 ：文生图分镜，适合知识讲解、口播轮播 HTML 模式 ：AI 生成 HTML/CSS/JS 动画分镜，适合科技演示、动态可视化 它解决了什么痛点？ 做短视频的流程，相信很多人都熟： 1. 想主题 → 写脚本 → 改三五遍 2. 找图片素材 → 或者自己画分镜 3. 找配音工具 → 导出音频 → 对齐时间轴 4. 剪视频 → 加字幕 → 导出 大半天过去了，视频还没出来。如果你是做知识分享、技术演示，其实不需要这么复杂 —— 你需要的只是一个 快速出草稿 的工具。 ai video agent 就是干这个的： 对话式创作，AI 自动流水线，你只需要改改不满意的地方，不用从头搭框架 。 它能帮你做这些： 自动判断你是要生成大纲还是改某个分镜 自动生成视频大纲，包含标题、旁白、分镜提示 图片模式自动生成分镜图 + 旁白音频 + 字幕 HTML 模式自动生成可播放的网页动画分镜 支持单个分镜重生成，不用推倒重来 长任务中断也不怕，已完成内容自动保留 浏览器直接预览，支持 MP4 导出 两种模式，三种风格 两种创作模式 模式 适用场景 说明 图片模式 知识讲解、口播轮播 每一镜生成一张图，配上旁白 HTML 模式 科技演示、动态可视化 AI 直接生成 HTML/CSS/JS 动画 三种内置风格（仅 HTML 模式） 三种风格针对不同场景： 1. 科技博主 (cyber clean) ：深色科技感、青色霓虹、卡片化布局，适合测评、拆解、科技分享 2. 黑客风 (terminal matrix) ：终端界面、Matrix 绿、ASCII 装饰、扫描线效果，适合技术演示和极客内容 3. 暖色系 (warm story) ：奶油米色、暖橘琥珀、衬线标题大留白，适合人文、生活方式、故事表达 技术栈 Next.js 14 + React 18 + TypeScript Prisma + MySQL 8 Tailwind CSS OpenAI SDK（兼容任意 OpenAI 接口网关） Vitest 五分钟本地部署 我把完整步骤写在这里，跟着走就行： 1. 环境准备 需要： Node.js 22+ MySQL 8+ OpenAI 兼容的 API 网关（支持聊天 + TTS） 如果你本地没有 MySQL，可以直接用项目里的 Docker 启动： 这会启动一个叫 ai video mysql 的 MySQL 8 实例。 2. 拉代码装依赖 3. 配置环境变量 编辑 .env，填上你的配置： 几点说明： AI BASE URL 需要是 OpenAI 兼容协议地址，任何网关都能用 如果只体验 HTML 模式，可以不配置图片相关变量 图片模式依赖单独的文生图接口，目前按 z image turbo 适配 4. 初始化数据库 5. 启动 浏览器打开 http://localhost:3000 就能用了。 实际怎么用？ 基本流程很简单： 1. 首页选 图片轮播模式 或 HTML 动画模式 2. 创建项目，在聊天框输入你的主题 3. AI 先生成视频大纲 4. 逐镜生成图片/HTML 动画，同时生成旁白音频 5. 预览试听，不满意可以单独重生成某一镜 6. 最后导出 MP4 输入示例参考： 帮我做一个 30 秒的视频，讲清楚什么是 RAG 做一个科技感强一点的 AI Agent 工作流介绍 把第 3 镜改成更偏数据可视化，不要人物 删掉最后一镜，再补一个总结镜头 界面布局：左侧项目管理，中间预览，右侧对话创作，一目了然。 体验完说点感受 这是一个实验性开源项目，作者也说了可能还有 Bug，但这个方向是对的： AI native 视频创作，就是应该对话驱动，自动流水线，把人从繁琐的手工操作里解放出来 。 如果你： 经常做知识分享类短视频 需要快速出视频草稿给客户看 想自己搭一个内部 AI 视频创作工具 对 AI 自动生成视频这个方向感兴趣 那这个项目非常值得你 clone 下来试试。 作者还有一个商业化版本 SVG Animate，功能更完整更稳定，如果这个实验性版本满足不了你，可以去试试官方服务。 项目信息 GitHub：https://github.com/xuanyuanzhifeng/ai video agent 作者：@xuanyuanzhifeng 许可证：README 没写，建议 issue 里问一下再商用 体验完整功能：https://svganimate.ai"
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "blog",
@@ -2691,27 +2730,6 @@
       ],
       "priority": 0,
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
-    },
-    {
-      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
-      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
-      "type": "blog",
-      "date": "2026-06-24",
-      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "topic": "AI工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI绘图",
-        "小红书",
-        "开源项目",
-        "Docker",
-        "Vue",
-        "Flask"
-      ],
-      "priority": 0,
-      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
     }
   ],
   "tutorials": [
@@ -5693,6 +5711,25 @@
       "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
     },
     {
+      "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
+      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+      "type": "文章",
+      "date": "2026-06-28",
+      "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "excerpt": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
+      "topic": "AI 工具",
+      "topicSlug": "ai-tools",
+      "series": "",
+      "tags": [
+        "AI 视频",
+        "Next.js",
+        "开源项目",
+        "AI Agent"
+      ],
+      "priority": 0,
+      "content": "做视频太麻烦了，是不是？ 写脚本、画分镜、找图片、配音、剪字幕，一套流程下来大半天过去了。如果你只是想快速做一个知识分享或者技术演示视频，其实没必要这么麻烦。 最近 GitHub 上看到一个国人开源的项目 ai video agent ，它做的事情很简单： 你输入一句话主题，AI 帮你做完剩下的所有事情 —— 大纲生成、分镜生成、旁白配音、字幕同步，最后直接导出 MP4。 项目支持两种创作模式： 图片模式 ：文生图分镜，适合知识讲解、口播轮播 HTML 模式 ：AI 生成 HTML/CSS/JS 动画分镜，适合科技演示、动态可视化 它解决了什么痛点？ 做短视频的流程，相信很多人都熟： 1. 想主题 → 写脚本 → 改三五遍 2. 找图片素材 → 或者自己画分镜 3. 找配音工具 → 导出音频 → 对齐时间轴 4. 剪视频 → 加字幕 → 导出 大半天过去了，视频还没出来。如果你是做知识分享、技术演示，其实不需要这么复杂 —— 你需要的只是一个 快速出草稿 的工具。 ai video agent 就是干这个的： 对话式创作，AI 自动流水线，你只需要改改不满意的地方，不用从头搭框架 。 它能帮你做这些： 自动判断你是要生成大纲还是改某个分镜 自动生成视频大纲，包含标题、旁白、分镜提示 图片模式自动生成分镜图 + 旁白音频 + 字幕 HTML 模式自动生成可播放的网页动画分镜 支持单个分镜重生成，不用推倒重来 长任务中断也不怕，已完成内容自动保留 浏览器直接预览，支持 MP4 导出 两种模式，三种风格 两种创作模式 模式 适用场景 说明 图片模式 知识讲解、口播轮播 每一镜生成一张图，配上旁白 HTML 模式 科技演示、动态可视化 AI 直接生成 HTML/CSS/JS 动画 三种内置风格（仅 HTML 模式） 三种风格针对不同场景： 1. 科技博主 (cyber clean) ：深色科技感、青色霓虹、卡片化布局，适合测评、拆解、科技分享 2. 黑客风 (terminal matrix) ：终端界面、Matrix 绿、ASCII 装饰、扫描线效果，适合技术演示和极客内容 3. 暖色系 (warm story) ：奶油米色、暖橘琥珀、衬线标题大留白，适合人文、生活方式、故事表达 技术栈 Next.js 14 + React 18 + TypeScript Prisma + MySQL 8 Tailwind CSS OpenAI SDK（兼容任意 OpenAI 接口网关） Vitest 五分钟本地部署 我把完整步骤写在这里，跟着走就行： 1. 环境准备 需要： Node.js 22+ MySQL 8+ OpenAI 兼容的 API 网关（支持聊天 + TTS） 如果你本地没有 MySQL，可以直接用项目里的 Docker 启动： 这会启动一个叫 ai video mysql 的 MySQL 8 实例。 2. 拉代码装依赖 3. 配置环境变量 编辑 .env，填上你的配置： 几点说明： AI BASE URL 需要是 OpenAI 兼容协议地址，任何网关都能用 如果只体验 HTML 模式，可以不配置图片相关变量 图片模式依赖单独的文生图接口，目前按 z image turbo 适配 4. 初始化数据库 5. 启动 浏览器打开 http://localhost:3000 就能用了。 实际怎么用？ 基本流程很简单： 1. 首页选 图片轮播模式 或 HTML 动画模式 2. 创建项目，在聊天框输入你的主题 3. AI 先生成视频大纲 4. 逐镜生成图片/HTML 动画，同时生成旁白音频 5. 预览试听，不满意可以单独重生成某一镜 6. 最后导出 MP4 输入示例参考： 帮我做一个 30 秒的视频，讲清楚什么是 RAG 做一个科技感强一点的 AI Agent 工作流介绍 把第 3 镜改成更偏数据可视化，不要人物 删掉最后一镜，再补一个总结镜头 界面布局：左侧项目管理，中间预览，右侧对话创作，一目了然。 体验完说点感受 这是一个实验性开源项目，作者也说了可能还有 Bug，但这个方向是对的： AI native 视频创作，就是应该对话驱动，自动流水线，把人从繁琐的手工操作里解放出来 。 如果你： 经常做知识分享类短视频 需要快速出视频草稿给客户看 想自己搭一个内部 AI 视频创作工具 对 AI 自动生成视频这个方向感兴趣 那这个项目非常值得你 clone 下来试试。 作者还有一个商业化版本 SVG Animate，功能更完整更稳定，如果这个实验性版本满足不了你，可以去试试官方服务。 项目信息 GitHub：https://github.com/xuanyuanzhifeng/ai video agent 作者：@xuanyuanzhifeng 许可证：README 没写，建议 issue 里问一下再商用 体验完整功能：https://svganimate.ai"
+    },
+    {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
       "type": "文章",
@@ -5732,27 +5769,6 @@
       ],
       "priority": 0,
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
-    },
-    {
-      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
-      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
-      "type": "文章",
-      "date": "2026-06-24",
-      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "topic": "AI工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI绘图",
-        "小红书",
-        "开源项目",
-        "Docker",
-        "Vue",
-        "Flask"
-      ],
-      "priority": 0,
-      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
     },
     {
       "title": "第01章：MySQL概述与安装",
