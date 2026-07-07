@@ -180,6 +180,45 @@
     "content": "CodeGraph：给 AI 编程助手装一个本地代码大脑 我越来越觉得，AI 编程助手最浪费时间的地方，不是写代码，而是找代码。 你问它“这个登录流程怎么走”“改这个函数会影响哪里”，它经常先 grep 一轮，再打开几个文件，发现方向不对，又换关键词。小项目还好，大一点的仓库里，这个过程既烧 token，也烧耐心。更麻烦的是，它读到的只是文件片段，不一定知道谁调用谁、哪个 route 绑到哪个 handler、一个改动会波及哪些地方。 CodeGraph 想解决的就是这件事。它不是另一个聊天机器人，也不是云端代码托管服务。按仓库文档和源码看，它更像一个本地代码索引层：用 tree sitter 解析项目，把函数、类、方法、路由、组件这些符号抽成节点，把调用、导入、继承、引用这些关系连成边，存进项目里的 .codegraph/codegraph.db。然后通过 MCP Server，把这张图交给 Claude Code、Cursor、Codex、opencode、Hermes Agent、Gemini 等 AI 工具查询。 一句话：让 Agent 少一点临时翻箱倒柜，多一点直接问“图谱”。 它到底做了什么 CodeGraph 的 README 把自己定位成 local first code intelligence library + CLI + MCP server。这个定位挺准确。 从源码看，核心流程大概是这样： 第一步是 extraction。src/extraction/ 里有 tree sitter 相关逻辑，也有各语言的 extractor。site/src/content/docs/reference/languages.md 里列了 20 多种语言：TypeScript、JavaScript、Python、Go、Rust、Java、C 、PHP、Ruby、C/C++、Swift、Kotlin、Scala、Dart、Svelte、Vue、Liquid、Pascal/Delphi、Lua、Luau、R 等。 第二步是 storage。src/db/schema.sql 里能看到几张关键表：nodes 存符号，edges 存关系，files 存文件记录，unresolved refs 存待解析引用。它还用了 SQLite FTS5 做全文搜索。这个选择很朴素，但很实用：索引在本地，数据不出机器，也不需要你给它配 API key。 第三步是 resolution。解析 AST 只能知道“这里有个名字”，但不一定知道这个名字指向哪里。CodeGraph 会继续解析 import、函数调用、继承关系和一些框架路由模式。官方文档里也提到，它会给部分动态分发场景补启发式边，比如 callback / observer 注册、EventEmitter、React re render、JSX child、Django ORM descriptors。这里要注意，“启发式”不等于百分百正确，它更像是把静态分析容易断掉的地方补起来，让 Agent 有更完整的线索。 第四步是 MCP。site/src/content/docs/reference/mcp server.md 里列出的工具包括 codegraph search、codegraph callers、codegraph callees、codegraph impact、codegraph node、codegraph explore、codegraph files、codegraph status。对 Agent 来说，这些工具比裸 grep 更像“先问结构，再读细节”。 最小可用路径 如果只是试用，不需要把事情搞复杂。 macOS / Linux 用户可以按官方 README： 如果你已经有 Node，也可以： 仓库的 package.json 显示当前包名是 @colbymchenry/codegraph，版本 1.0.1，Node 版本要求是 =20.0.0 <25.0.0。它的 CLI 名叫 codegraph。 装完以后，先接入你的 Agent： src/installer/targets/registry.ts 里能看到目前支持的 target：Claude Code、Cursor、Codex、opencode、Hermes、Gemini、Antigravity、Kiro。 然后进入你的项目： init i 会创建 .codegraph/ 并建立索引。之后你可以用 CLI 直接查，也可以让已接入的 Agent 通过 MCP 查。 几个命令很适合作为第一轮验证： 如果这些命令能返回节点、边、文件统计和调用信息，说明图谱已经建起来了。 我会拿它解决哪几类问题 第一类是陌生项目 onboarding。以前接手一个仓库，常规动作是看目录、看 README、搜入口文件。CodeGraph 的 context 或 MCP 里的 codegraph explore 更适合问：“支付流程从哪里开始？”“订单状态在哪里变化？”这种问题不只是搜名字，而是要把几个文件串起来。 第二类是改代码前看影响面。比如你要改 AuthMiddleware，普通搜索只能告诉你哪里出现了这个字符..."
   },
   {
+    "title": "AIUsage：一站式管理所有 AI 订阅的 macOS 原生看板",
+    "url": "/articles/2026/06/19/aiusage-dashboard-tutorial/",
+    "type": "blog",
+    "date": "2026-06-19",
+    "description": "AIUsage 是一个开源的 macOS 原生 SwiftUI 应用，把 Claude Code、Codex、OpenCode 等 12 个 AI 编程工具的账号、额度、成本聚合到一个仪表盘，还内置三个代理，让这些工具能一键切换到任何 OpenAI 兼容模型。",
+    "excerpt": "AIUsage 是一个开源的 macOS 原生 SwiftUI 应用，把 Claude Code、Codex、OpenCode 等 12 个 AI 编程工具的账号、额度、成本聚合到一个仪表盘，还内置三个代理，让这些工具能一键切换到任何 OpenAI 兼容模型。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "AI 订阅",
+      "macOS",
+      "Claude Code",
+      "Codex",
+      "OpenCode"
+    ],
+    "priority": 0,
+    "content": "如果你像我一样，同时用好几个 AI 编程工具——Claude Code、Codex CLI、OpenCode——每个工具又有多个账号或者多个上游 API，你一定懂那种痛苦： 想让 Claude Code 跑 DeepSeek，得手动改配置格式 Codex 切换订阅账号，要手编辑 /.codex/config.toml 各个平台的额度用了多少，花了多少钱，只能挨个登录去看 装了一大堆 MCP 服务器和技能，哪些是真的在用，哪些早已吃灰？ 最近发现了一个开源项目 AIUsage ，完美解决了这些痛点，忍不住分享给大家。 是什么？ AIUsage is a native macOS app (written in SwiftUI) that puts all your AI subscription quotas, costs, and accounts in one dashboard. It also includes three built in proxies that let Claude Code, Codex, and OpenCode switch to any OpenAI compatible model with one click. It supports 12+ common AI programming services: Codex (OpenAI Codex CLI) GitHub Copilot Cursor Claude Code OpenCode Kimi, MiniMax, and more Three things it does really well: keep all costs and quotas in one place, switch models with one click via proxy, and show you which tools you actually use. Core features 1. Multi account management, all costs in one place The most basic and useful feature. Each provider supports multiple accounts, refreshes independently, and shows remaining quota with a colored progress bar. No more opening half a dozen websites just to check \"how much quota do I have left this month\". 2. Claude Code proxy: run any model in Claude Code This is probably the most wanted feature—you have a Claude Code subscription but sometimes want to try DeepSeek or a local Ollama model. What do you do? AIUsage's Claude Code proxy helps: OpenAI proxy mode : automatically converts Claude API format to OpenAI format, letting Claude Code CLI use any OpenAI compatible upstream model Anthropic passthrough : if you're already using Anthropic API, it transparently forwards requests and accurately tracks input/output/cache tokens so you know exactly how much you're spending Setup is ridiculously simple: open AIUsage → Claude Code Proxy → New Node → fill in the info → Activate. Done. Config writes automatically to /.claude/settings.json, you don't need to touch the file. 3. Codex / OpenCode proxy: switch upstream in one click For Codex CLI and OpenCode, AIUsage has elegant solutions too: Codex proxy: Points Codex CLI at any OpenAI compatible upstream Unified switch between subscription accounts and API nodes—only one active at a time Smart co..."
+  },
+  {
+    "title": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
+    "url": "/articles/2026/06/19/browseract-skills-tutorial/",
+    "type": "blog",
+    "date": "2026-06-19",
+    "description": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
+    "excerpt": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
+    "topic": "AI Agent",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "浏览器",
+      "自动化",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
+  },
+  {
     "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
     "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
     "type": "blog",
@@ -387,6 +426,62 @@
     "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
   },
   {
+    "title": "Skill Zoo：统一管理所有 AI 编程工具的技能库",
+    "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager/",
+    "type": "blog",
+    "date": "2026-06-25",
+    "description": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
+    "excerpt": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
+    "topic": "AI Agent",
+    "topicSlug": "ai-agent",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "技能管理",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "你是否也遇到过这个问题：同时使用 Claude Code、Cursor、Codex、Gemini、OpenCode、Hermes 等多个 AI 编程工具，每个工具都把技能存在不同的目录里。想要安装一个新技能，需要手动复制粘贴到对应的路径；同一个技能安装到多个工具后，各自修改慢慢产生差异；想看看社区里有什么好用的技能，得挨个仓库去翻找。 如果你也被这些问题困扰，今天介绍的这个开源项目 Skill Zoo 就是你的解药。 问题：技能为什么会混乱？ AI 编程工具越来越流行，\"技能\"（Skill / GPTs / Agent）的生态也越来越丰富。一个技能就是一份预设好的提示词、工作流或者指令集，能让 AI 更好地帮你完成特定任务。 但现状是： 每个 AI 编程工具技能的存储位置都不一样 没有统一的社区发现渠道，好技能容易被埋 多工具重复安装，难以同步更新 手动管理容易出错，出现冲突找不到问题所在 以前你需要这样做： 1. 在 GitHub 找到一个感兴趣的技能 2. 打开自己电脑上 Claude Code 的技能目录 3. 手动克隆/复制进去 4. 再打开 Cursor 的技能目录，重复一遍 5. 过了半个月，忘记这个技能装到哪里了 6. 更新的时候，不知道哪个是最新版本 现在有了 Skill Zoo，你只需要： 1. 打开 Skill Zoo 搜索技能 2. 点击安装，选择要安装到哪些 AI 编程工具 3. 完成 — 就是这么简单 什么是 Skill Zoo？ Skill Zoo 是一个 本地优先 的 AI 技能管理工具，基于 Tauri v2 构建，提供美观的桌面客户端，同时也支持 CLI 和 Web UI。它支持目前主流的几乎所有 AI 编程工具： Claude Code Codex Gemini CLI OpenCode Cursor Rules Trae Hermes Agent OpenClaw 更多工具持续添加中 核心设计哲学 Skill Zoo 的设计思路非常清晰： 1. 本地优先 ：所有数据都存在你自己电脑上，不依赖云端服务 2. 无厂商锁定 ：技能仍然以标准格式保存在各个工具原来的位置，Skill Zoo 只是帮你管理它们 3. 安全透明 ：所有操作都需要你确认，不会偷偷修改你的文件 4. 开源可审计 ：完整代码开源，构建过程公开，任何人都可以审计代码 主要功能 1. 探索发现：一键安装社区技能 Skill Zoo 内置了技能仓库发现功能，你可以直接在界面中搜索 GitHub 上共享的技能，浏览描述，一键安装到你选中的所有 AI 编程工具中。 不需要再手动 git clone 或者复制粘贴，点一下鼠标就搞定。 2. 自动更新：保持所有技能最新 安装的技能有更新了怎么办？Skill Zoo 会帮你检测，并一键更新到 GitHub 仓库的最新版本。不用你自己去挨个拉取。 3. 批量操作解决重复技能 如果你像我一样，同一个技能不小心装了好几次，分散在多个位置，可以用 批量删除/合并 功能一键整理。 Skill Zoo 会检查内容哈希，只有内容完全一致才允许合并，保证不会出错。 4. 安全审计：帮你把关技能质量 Skill Zoo 集成了 skills.sh 社区的安全评分，会展示每个技能的审计结果，帮你判断是否安全。 5. 主动检测不一致问题 Skill Zoo 会主动帮你检测三种常见问题： 技能文件损坏 链接不一致 重复冲突 并且提供一键修复功能。 6. 技能创作：内置 Markdown 编辑器 想要写一个自己用的技能？不需要打开外部编辑器，Skill Zoo 内置了基于 CodeMirror 6 的 Markdown 编辑器，你可以直接在里面创作，实时预览。 7. 技能归档：让常用列表保持清爽 有些技能不常用但又舍不得删？可以转到归档区，降低主界面的上下文负担，想用的时候再恢复。 8. CLI + WUI：编程也能管理 如果你更喜欢在终端里工作，Skill Zoo 也提供了 npm 包的 CLI 版本： 支持哪些 AI 编程工具？ 目前开箱即用支持这些工具： 工具 支持状态 Claude Code 完整支持 OpenAI Codex 完整支持 Gemini CLI 完整支持 OpenCode 完整支持 Cursor (Rules) 完整支持 Trae 完整支持 Hermes Agent 完整支持 OpenClaw 完整支持 Qoder CN 默认隐藏（可开启） WorkBuddy 默认隐藏（可开启） 如果你的工具不在列表里，也可以手动添加自定义路径，Skill Zoo 一样可以管理。 安装使用 桌面客户端安装 最简单的方式是直接从 GitHub Releases 下载安装包： macOS ： 1. 下载 .dmg 文件 2. 打开后将 skill zoo.app 拖入 Applications 文件夹 Windows ： 1. 下载 .exe 安装包 2. 运行安装包，自动创建快捷方式并支持自动更新 3. 如果 SmartScreen 弹出警告，点击\"更多信息\" → \"仍要运行\" Linux ： 下载与你 CPU 架构匹配的 AppImage 或 .deb 包： 体验流程 安装完成后，第一次打开： 1. 添..."
+  },
+  {
+    "title": "MediaCrawler 教程：一键爬取小红书/抖音/B站/知乎等多平台自媒体数据",
+    "url": "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial/",
+    "type": "blog",
+    "date": "2026-06-27",
+    "description": "MediaCrawler 是一个基于 Playwright 的强大自媒体爬虫工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大平台，无需逆向 JS 加密，CDP 模式复用浏览器登录态，大幅降低风控概率。本文带你完整上手，从环境配置到实际爬取。",
+    "excerpt": "MediaCrawler 是一个基于 Playwright 的强大自媒体爬虫工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大平台，无需逆向 JS 加密，CDP 模式复用浏览器登录态，大幅降低风控概率。本文带你完整上手，从环境配置到实际爬取。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "爬虫",
+      "数据采集",
+      "多平台",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "MediaCrawler 教程：一键爬取小红书/抖音/B站/知乎等多平台自媒体数据 做自媒体内容分析、竞品调研、数据挖掘的时候，你是不是遇到过这些痛点： 想要批量采集竞品笔记内容，一个个手动复制太折磨人 各大平台反爬机制越来越严，接口说封就封 网上的爬虫教程要么过时，要么需要复杂的 JS 逆向，新手根本搞不定 每个平台都要写不同的爬虫，维护成本太高 今天给大家介绍一个 GitHub 上 13k+ Star 的开源项目 MediaCrawler ，它完美解决了这些问题。 什么是 MediaCrawler MediaCrawler 是一个功能强大的 多平台自媒体数据采集工具 ，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大主流平台的公开信息抓取。 它最聪明的地方在于技术路线的选择： 基于 Playwright 浏览器自动化 ，直接操作真实浏览器 利用浏览器登录态 ，不需要逆向复杂的签名算法 支持 CDP 模式 ，连接你自己已经登录的 Chrome 浏览器，风控概率极低 代码结构清晰 ，每个平台解耦，二次开发很方便 功能特性一览 平台 关键词搜索 指定帖子爬取 二级评论 创作者主页 登录缓存 IP代理池 词云图 小红书 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 抖音 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 快手 ✅ ✅ ✅ ✅ ✅ ✅ ✅ B 站 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 微博 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 贴吧 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 知乎 ✅ ✅ ✅ ✅ ✅ ✅ ✅ 支持多种数据存储格式：CSV、JSON、JSONL、Excel、SQLite、MySQL。爬完直接分析，非常方便。 还自带 WebUI 可视化界面 ，不用记命令也能玩： 技术原理：为什么它不容易被封 传统爬虫的思路是： 1. 抓包分析接口 2. 逆向 JS 找到加密签名算法 3. 模拟请求获取数据 这条路现在越来越难走： 各大平台签名算法经常变，今天能用明天就挂 IP 风控严格，请求几次就限流 需要不停维护，精力都花在适配反爬上了 MediaCrawler 换了个思路： 优点显而易见： 1. 无需 JS 逆向 ：不用跟加密算法斗智斗勇 2. 登录态复用 ：你已经在浏览器登录过，不需要再处理二维码登录（当然也支持二维码） 3. 极低风控 ：请求来自真实浏览器，指纹就是你的指纹，很难被检测 4. 稳定性高 ：平台界面变了只要结构不变，代码不用大改 5 分钟快速上手 环境要求 Python 3.10+ Node.js 16+（抖音、知乎需要） uv（推荐，比 pip 快 10x） 步骤 1：克隆项目 步骤 2：安装依赖 推荐用 uv 安装： 如果你坚持用 pip： 步骤 3：浏览器驱动安装（标准模式需要） 如果你用默认的 CDP 模式（连接已有 Chrome）， 这一步可以跳过 。只有切换到标准 Playwright 模式才需要： 步骤 4：配置 Chrome 远程调试（推荐 CDP 模式） CDP 模式是我最推荐的方式，因为它复用你已经登录的浏览器，几乎不会被封。 开启方法： 1. 确保安装了 Chrome = 144 2. 在 Chrome 地址栏输入：chrome://inspect/ remote debugging 3. 勾选 \"Allow remote debugging for this browser instance\" 4. 看到 Server running at: 127.0.0.1:9222 就好了 运行爬虫后，Chrome 会弹出连接确认框，点接受即可。程序会等你 60 秒。 如果不想用 CDP 模式，在 config/base config.py 里改： 步骤 5：修改配置 打开 config/base config.py，根据需要修改： 每个配置项都有中文注释，很容易懂。 步骤 6：运行爬取 关键词搜索示例（小红书）： 参数说明： platform xhs：指定平台，xhs=小红书，douyin=抖音，bilibili=B站，zhihu=知乎... lt qrcode：登录方式，qrcode=二维码，cdp=连接已有浏览器 type search：爬取类型，search=关键词搜索，detail=指定帖子详情 指定帖子详情示例： 查看所有支持的参数： 使用 WebUI 可视化界面 不想敲命令？项目自带 WebUI： 打开浏览器访问 http://localhost:8080，就能可视化操作： 选择平台、登录方式、爬取类型 填写关键词或帖子 ID 实时查看运行日志 预览导出数据 数据存储配置 MediaCrawler 支持多种存储方式，在 base config.py 里配置： 配置好自动创建表，不用自己建。 常见问题 Q1: 会被封号吗？ A: CDP 模式用的是你自己已经登录的浏览器，请求完全模拟真人，只要不是太疯狂的爬速度，概率极低。作者用了几年都没事。建议控制一下请求间隔，不要每秒请求几十次。 Q2: 为什么需要 Node.js？ A: 抖音和知乎的部分签名逻辑需要用 Node.js 执行，这是从官方客户端 JS 直接抠出来的，比 Python 重新实现稳定很多。 Q3: 支持手机号验证码登录吗？ A: 支持。项目里有 recv sms.py 可..."
+  },
+  {
+    "title": "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室",
+    "url": "/articles/2026/06/27/openmontage-ai-video-studio/",
+    "type": "blog",
+    "date": "2026-06-27",
+    "description": "OpenMontage 是首个开源的智能体化视频制作系统，它能把 Claude Code/Cursor 变成全自动视频工作室，从创意到成品视频一条龙，全程智能体自动完成研究、脚本、素材、剪辑、合成。",
+    "excerpt": "OpenMontage 是首个开源的智能体化视频制作系统，它能把 Claude Code/Cursor 变成全自动视频工作室，从创意到成品视频一条龙，全程智能体自动完成研究、脚本、素材、剪辑、合成。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "AI 视频",
+      "Remotion",
+      "工具教程",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室 你有没有想过：只需要给一句话描述，就能从创意到成品自动产出一整部视频？研究脚本素材剪辑合成一条龙，不用你手动开各种软件，AI 智能体自己全搞定？ 最近 GitHub Trending 榜首的 OpenMontage 做到了。它是 首个开源的代理化（agentic）视频制作系统 ，能把你已有的 Claude Code、Cursor、Copilot 变成一个完整的视频制作工作室。 它到底能做什么？ 给它一句提示，比如： \"制作一个 60 秒的动画解说视频，讲解神经网络是如何学习的\" 或者： \"制作一部 75 秒的纪录片蒙太奇，展现雨中的城市生活。只使用真实素材，无旁白，需要一种挽歌般的基调和配乐。\" 然后它就会自动完成： 1. 网络研究 — 搜索相关主题，收集事实数据，确保内容准确 2. 提案阶段 — 给出 2 3 个概念方案，预估成本，等你批准 3. 脚本编写 — 撰写分镜头脚本，规划时长节奏 4. 资产生成/检索 — AI 生成图像视频，或从免费素材库检索真实 footage 5. 剪辑编排 — 按照时间线剪辑拼接 6. 配音配乐 — TTS 旁白，自动找免版税音乐 7. 字幕生成 — 词级时间轴字幕 8. 合成输出 — 使用 Remotion 或 FFmpeg 渲染最终视频 9. 质量检查 — 自我审查，ffprobe 验证，确保输出可用 整个过程中，它只在关键创意决策点问你意见，其他全自动。 和其他 AI 视频工具有什么区别？ 特性 传统 AI 视频工具 OpenMontage 端到端自动化 ❌ 大多只能生成单一片段 ✅ 从创意到成品完整流水线 真实素材剪辑 ❌ 大多是\"图片动一动\" ✅ 能从免费素材库检索剪辑真实动态 footage 智能体协作 ❌ 单一模型生成 ✅ 你的 AI 编程助手就是编排器 多提供商支持 ❌ 绑定单一平台 ✅ 50+ 提供商，自动评分选最优 开源可扩展 ❌ 大多闭源 ✅ 完全开源，AGPLv3 预算控制 ❌ 无预估 ✅ 事前预估成本，每步都要你批准 最核心的区别： 大多数 AI 视频工具只给你一个片段，OpenMontage 给你一整部完成的视频，就像一个迷你制作团队 。 它也不是那种\"把几张静态图片加个 Ken Burns 效果就叫视频\"的把戏 — 它真的能从 Archive.org、Pexels、Pixabay 这些免费素材库挖真实动态片段，然后剪成一部完整的纪录片蒙太奇。 五分钟快速上手 环境要求 Python 3.10+ FFmpeg Node.js 18+ 一个 AI 编程助手（Claude Code、Cursor、Copilot、Windsurf、Codex 都可以） 安装 如果没有 make，手动来： 添加 API 密钥（可选，密钥越多能力越强） 编辑 .env 文件： 重点：零密钥也能用！ 开箱即用就支持： Piper TTS 离线免费旁白 Archive.org + NASA + Wikimedia Commons 免费素材 Remotion 合成渲染 FFmpeg 后期制作 自动字幕生成 零密钥就能做：基于静态图像的动画视频、纪录片蒙太奇（只用开源档案素材）、数据可视化解说。 开始制作 在你的 AI 编程助手打开项目，输入： 就是这么简单。剩下的交给智能体。 核心架构：智能体优先设计 OpenMontage 走的是 agent first 架构，思路很聪明： 三层知识架构设计得很清晰： 层级 内容 作用 第 1 层 tools/ + pipeline defs/ \"有什么功能\" — 可执行工具 + 流水线编排 第 2 层 skills/ \"怎么用\" — OpenMontage 约定和质量标准 第 3 层 .agents/skills/ \"深入原理\" — 外部技术知识包 所有创意决策、选择推理都记录在 JSON 检查点里，完全可审计可追溯。你可以随时看到它为什么选这个提供商不选那个。 支持的流水线 OpenMontage 内置 12 条完整流水线，覆盖常见场景： 流水线 适用场景 动画解说 教育内容、教程、主题解析 动画 社交媒体短片、产品演示、抽象概念 化身代言 数字人演讲、企业培训、公告 电影级 预告片、品牌宣传片 片段工厂 长内容切分社交媒体短片 纪录片蒙太奇 真实素材剪辑、情绪短片、空镜头 混合 源素材 + AI 生成辅助画面 本地化与配音 多语言翻译配音 播客重制 播客片段转视频 屏幕演示 软件演示、产品教程 口播 真人出镜演讲、vlog、访谈 每条流水线都是完整的工作流，从创意到成品。 示例作品 作者已经用它做出了不少成品： 作品 说明 成本 来自明天的信号 科幻预告片，概念→剧本→Veo 片段→配乐→合成 完整电影级 最后的香蕉 60 秒皮克斯风格动画短片，Kling v3 + Google Chirp3 HD $1.33 虚空神经接口 产品广告，GPT Image 1 + TTS + 自动音乐 $0.69 糖果乐园的午后 吉卜力风格动画，12 张 FLUX 图像 + 动画 + 配乐 $0.15 森林之灵 吉卜力风格动画，静态图像转动态 $0.15 全部示例视频在 项目 README 可..."
+  },
+  {
     "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
     "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
     "type": "blog",
@@ -404,6 +499,26 @@
     ],
     "priority": 0,
     "content": "做视频太麻烦了，是不是？ 写脚本、画分镜、找图片、配音、剪字幕，一套流程下来大半天过去了。如果你只是想快速做一个知识分享或者技术演示视频，其实没必要这么麻烦。 最近 GitHub 上看到一个国人开源的项目 ai video agent ，它做的事情很简单： 你输入一句话主题，AI 帮你做完剩下的所有事情 —— 大纲生成、分镜生成、旁白配音、字幕同步，最后直接导出 MP4。 项目支持两种创作模式： 图片模式 ：文生图分镜，适合知识讲解、口播轮播 HTML 模式 ：AI 生成 HTML/CSS/JS 动画分镜，适合科技演示、动态可视化 它解决了什么痛点？ 做短视频的流程，相信很多人都熟： 1. 想主题 → 写脚本 → 改三五遍 2. 找图片素材 → 或者自己画分镜 3. 找配音工具 → 导出音频 → 对齐时间轴 4. 剪视频 → 加字幕 → 导出 大半天过去了，视频还没出来。如果你是做知识分享、技术演示，其实不需要这么复杂 —— 你需要的只是一个 快速出草稿 的工具。 ai video agent 就是干这个的： 对话式创作，AI 自动流水线，你只需要改改不满意的地方，不用从头搭框架 。 它能帮你做这些： 自动判断你是要生成大纲还是改某个分镜 自动生成视频大纲，包含标题、旁白、分镜提示 图片模式自动生成分镜图 + 旁白音频 + 字幕 HTML 模式自动生成可播放的网页动画分镜 支持单个分镜重生成，不用推倒重来 长任务中断也不怕，已完成内容自动保留 浏览器直接预览，支持 MP4 导出 两种模式，三种风格 两种创作模式 模式 适用场景 说明 图片模式 知识讲解、口播轮播 每一镜生成一张图，配上旁白 HTML 模式 科技演示、动态可视化 AI 直接生成 HTML/CSS/JS 动画 三种内置风格（仅 HTML 模式） 三种风格针对不同场景： 1. 科技博主 (cyber clean) ：深色科技感、青色霓虹、卡片化布局，适合测评、拆解、科技分享 2. 黑客风 (terminal matrix) ：终端界面、Matrix 绿、ASCII 装饰、扫描线效果，适合技术演示和极客内容 3. 暖色系 (warm story) ：奶油米色、暖橘琥珀、衬线标题大留白，适合人文、生活方式、故事表达 技术栈 Next.js 14 + React 18 + TypeScript Prisma + MySQL 8 Tailwind CSS OpenAI SDK（兼容任意 OpenAI 接口网关） Vitest 五分钟本地部署 我把完整步骤写在这里，跟着走就行： 1. 环境准备 需要： Node.js 22+ MySQL 8+ OpenAI 兼容的 API 网关（支持聊天 + TTS） 如果你本地没有 MySQL，可以直接用项目里的 Docker 启动： 这会启动一个叫 ai video mysql 的 MySQL 8 实例。 2. 拉代码装依赖 3. 配置环境变量 编辑 .env，填上你的配置： 几点说明： AI BASE URL 需要是 OpenAI 兼容协议地址，任何网关都能用 如果只体验 HTML 模式，可以不配置图片相关变量 图片模式依赖单独的文生图接口，目前按 z image turbo 适配 4. 初始化数据库 5. 启动 浏览器打开 http://localhost:3000 就能用了。 实际怎么用？ 基本流程很简单： 1. 首页选 图片轮播模式 或 HTML 动画模式 2. 创建项目，在聊天框输入你的主题 3. AI 先生成视频大纲 4. 逐镜生成图片/HTML 动画，同时生成旁白音频 5. 预览试听，不满意可以单独重生成某一镜 6. 最后导出 MP4 输入示例参考： 帮我做一个 30 秒的视频，讲清楚什么是 RAG 做一个科技感强一点的 AI Agent 工作流介绍 把第 3 镜改成更偏数据可视化，不要人物 删掉最后一镜，再补一个总结镜头 界面布局：左侧项目管理，中间预览，右侧对话创作，一目了然。 体验完说点感受 这是一个实验性开源项目，作者也说了可能还有 Bug，但这个方向是对的： AI native 视频创作，就是应该对话驱动，自动流水线，把人从繁琐的手工操作里解放出来 。 如果你： 经常做知识分享类短视频 需要快速出视频草稿给客户看 想自己搭一个内部 AI 视频创作工具 对 AI 自动生成视频这个方向感兴趣 那这个项目非常值得你 clone 下来试试。 作者还有一个商业化版本 SVG Animate，功能更完整更稳定，如果这个实验性版本满足不了你，可以去试试官方服务。 项目信息 GitHub：https://github.com/xuanyuanzhifeng/ai video agent 作者：@xuanyuanzhifeng 许可证：README 没写，建议 issue 里问一下再商用 体验完整功能：https://svganimate.ai"
+  },
+  {
+    "title": "RTK：帮你省下 80% LLM Token 的 CLI 代理工具",
+    "url": "/articles/2026/06/28/rtk-reduce-llm-tokens/",
+    "type": "blog",
+    "date": "2026-06-28",
+    "description": "一款用 Rust 写的高性能 CLI 代理，可以将 LLM 日常开发中的 Token 消耗降低 60-90%。单一二进制文件，零依赖， overhead 不到 10ms。支持 Claude Code、Copilot、Cursor 等所有主流 AI 编程工具。",
+    "excerpt": "一款用 Rust 写的高性能 CLI 代理，可以将 LLM 日常开发中的 Token 消耗降低 60-90%。单一二进制文件，零依赖， overhead 不到 10ms。支持 Claude Code、Copilot、Cursor 等所有主流 AI 编程工具。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "LLM",
+      "Rust",
+      "CLI",
+      "AI 编程",
+      "Token"
+    ],
+    "priority": 0,
+    "content": "RTK：帮你省下 80% LLM Token 的 CLI 代理工具 你有没有算过，AI 编程一天要吃掉你多少 Token？ 我用 Claude Code 开发的时候，一天下来光 git status、cargo test、ls 这些命令输出就能轻松耗掉几万 Token —— 大部分都是重复日志、无关输出、冗长的样板文本。这些东西对 AI 其实没什么用，但实实在在花了你的钱，还拉长了上下文窗口。 最近 GitHub 上火了一个项目叫 RTK (Rust Token Killer) ，它做的事情非常简单：在命令输出到达 LLM 上下文之前，帮你过滤和压缩。实测下来，30 分钟的 Claude Code 会话能从 11.8万 Token 降到 2.4万 Token， 直接省了 80% 。 痛点：为什么命令输出这么耗 Token？ 我们来算一笔账： 操作 频率 原始 Token RTK 后 节省比例 ls / tree 10次 2,000 400 80% cat / 读文件 20次 40,000 12,000 70% grep / rg 8次 16,000 3,200 80% git status 10次 3,000 600 80% git diff 5次 10,000 2,500 75% cargo test / npm test 5次 25,000 2,500 90% 总计 118,000 23,900 80% 看到了吗？大部分 Token 都浪费在了： 测试输出中成百上千行\"ok\" git push 的冗长进度信息 目录列表里一大堆无关文件 重复的日志行和空行 RTK 就是来解决这个问题的。 工作原理：四个压缩策略 RTK 的工作原理其实非常简单，就是一个透明代理： 它对每个命令输出应用四种压缩策略： 1. 智能过滤 ：去掉注释、空白、样板文本这些噪音 2. 分组聚合 ：相似内容按目录/类型分组，不一一列出 3. 智能截断 ：只保留相关上下文，砍掉冗余信息 4. 去重合并 ：重复的日志行合并计数，不重复展示 举几个例子感受一下： 例子 1：git push 对比 原始输出（15行 200 Token）： RTK 输出（1行 10 Token）： 例子 2：测试运行对比 原始输出（200+行，失败情况下）： RTK 输出（只显示失败， 20行）： 例子 3：目录列表对比 原始 ls la（45行 800 Token）： RTK ls（12行 150 Token）： 安装：一分钟就能搞定 RTK 是单一 Rust 二进制文件，零依赖，安装非常简单。 方式一：Homebrew（推荐 macOS 用户） 方式二：一键脚本（Linux/macOS） 脚本会安装到 /.local/bin，如果没在 PATH 里，加上这一行： 方式三：Cargo 源码编译 ⚠️ 注意 ：crates.io 上有另一个叫\"rtk\"的项目（Rust Type Kit）重名了。如果 rtk gain 报错，说明你装错了，用上面的方式重装。 验证安装 快速上手：给你的 AI 工具接上 RTK RTK 支持目前几乎所有主流 AI 编程工具，一句话就能初始化： 初始化之后， 重启你的 AI 工具 就搞定了。之后你在 AI 工具里执行的命令都会被自动拦截并重写为 rtk 版本，你什么都不用管，透明省下 Token。 比如你输入 git status，AI 工具会自动执行 rtk git status，返回压缩后的结果。 常用命令速查 RTK 支持 100+ 种常用开发命令，这里列几个最常用的： 文件操作 Git 操作 测试运行 构建和检查 容器和云服务 Token 节省统计 RTK 自带分析，帮你看看省了多少： 实际体验：我用了一周的感受 我在自己的开发环境里装了 RTK 用了一周，有几个感受： 好的方面 1. 真的省 ：我这种一天跟 AI 聊几个小时的，确实能感觉到上下文膨胀慢了很多。原来一天要重启两三次 Claude，现在一天一次够了。 2. 几乎感觉不到 ：Rust 写的，单次执行 overhead 不到 10ms，你根本感觉不出来延迟。 3. 失败了还给你完整输出 ：如果命令执行失败，RTK 会把完整输出存在临时文件里，告诉你路径，AI 还是能看完整日志。这个设计很贴心。 4. 隐私做得到位 ：遥测默认关闭，要你手动开启，而且就算开了也只收集匿名聚合统计，不收集你的代码、命令参数、文件路径这些敏感东西。 需要注意的地方 1. 自动 hooks 只对 Bash 命令生效 ：Claude Code 自带的 Read、Grep 这些内置工具不经过 Bash，所以不会被自动重写。想要压缩就得自己用 rtk read 这种形式。 2. Windows 原生支持有限 ：自动重写钩子需要 Unix shell，原生 Windows 只能用 CLAUDE.md 注入模式，需要手动调用 rtk。推荐用 WSL，体验完整。 3. 如果你用的命令 RTK 还不支持 ：它会透明透传，不影响使用，只是没压缩而已，不会坏事儿。 配置：简单几行就能自定义 配置文件在 /.config/rtk/config.toml（macOS 在 /Library/Application Suppor..."
   },
   {
     "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
@@ -445,6 +560,86 @@
     ],
     "priority": 0,
     "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
+  },
+  {
+    "title": "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill",
+    "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator/",
+    "type": "blog",
+    "date": "2026-07-03",
+    "description": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
+    "excerpt": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "Agent Skill",
+      "架构图",
+      "Diagrams as Code",
+      "Claude",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "先说个具体的场景。 你正在写一份技术方案评审文档，需要一张架构图：React 前端调 Node API，Postgres 做主库，Redis 挡在前面做缓存，JWT 鉴权，CDN 卡在 CloudFront 上。三年前你会打开 draw.io，拖二十个盒子，连三十条线，配一套自己觉得还行的颜色，导一张 PNG。半小时。改一个组件位置，再花十分钟。 这几年常见的替代是 Mermaid。你写一段 DSL，浏览器渲一张图。快，但那张图长得像所有别人写出来的 Mermaid：一个自动布局把方块摆成网格，语义颜色你不管就没有，安全边界你不写就没有——它是 流程图 ，不是 架构图 。 tt a1i/archify 是一条第三路：把画图这件事完全塞进 agent。你在 Claude Code 或者 Codex CLI 里用大白话描述系统，它调用一个叫 archify 的 skill，输出一个 单文件 HTML ——里面是一整张 SVG，深浅色一键切，导 PNG / JPEG / WebP 都是浏览器 4× 原生光栅化，SVG 甚至自带两套主题变量，贴进 GitHub README 后跟随读者的 prefers color scheme 自动切色。 我把仓库拉下来，通读了 README.md、archify/SKILL.md、五套 schema、CHANGELOG 从 2.0 一路到 2.8——这篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Mermaid、draw.io、Excalidraw 的真实边界在哪里 。 反例：那些\"看着不错\"的 AI 画图工具，问题出在哪 先摆一个大多数 AI 画图工具的通病。 它们的产品叙事都是\"聊天式作图\"：你说\"给我画一张 SaaS 架构\"，它给你一张图。听着丝滑，实际用下来往往是： 布局是自动的 。dagre、ELK 之类布局引擎会把节点摊成一个均匀网格。八个组件的图看起来跟四十个组件的图布局逻辑一样，节奏感是没有的。 语义色是没有的 。所有盒子是同一种蓝，你说\"鉴权用玫红\"，它下一次生成又忘了。 边界画不出来 。VPC、安全组、PII 边界这些\"包住一组节点\"的概念，Mermaid 靠 subgraph，draw.io 靠手拖，两者都在自动布局里塌成一坨。 改一个组件位置就整张图漂 。你说\"把 Redis 挪到左边\"，坐标系里所有节点跟着重排。 真实的架构图不是这样看的。真实的架构图里，Auth Provider 就应该 画在 AWS 区域框外面（因为它是 Auth0 或者 Cognito 边缘服务），S3 就应该 画在 CloudFront 下方（因为读者从上到下扫图会自然理解成 \"CDN 回源到 S3\"）。 布局本身就是信息 。 Archify 的 ROADMAP.md 里有一段话把这件事说得很明白： 自动布局 (dagre / elk js) 对 archify 是一条死路。审美——Auth Provider 特意画在 AWS 区域外面、S3 特意放在 CloudFront 下方来暗示服务关系、30/50 padding 的安全组边界、legend 嵌在死角、总结卡片—— 这些布局决策本身就是产品 。 Archify 的选择是让 布局回到 LLM 手里 ：Claude 决定坐标、Claude 决定颜色语义、Claude 决定边界——archify 只提供五套渲染器 + schema 校验 + 一套 CSS 变量主题系统，把机械的事挡下来，把审美判断留给 Claude。 机制：从大白话到\"能贴到任何地方的一张图\" archify 的核心是一条六段流水线。 自然语言 → JSON IR → Renderer → SVG + HTML → Checker → 导出。每一段的分工： 自然语言 / Mermaid 输入。 用户在 chat 里描述系统，也可以粘一段 Mermaid。SKILL.md 明确写：粘 Mermaid 不走 parser，只读结构，然后 从零重新布局 。作者做过一个专门的实验（experiments/v3 mermaid validation/），结论是 Mermaid + archify CSS 并不比原生 Mermaid 明显更好看——所以 Mermaid 只是输入方言，不是渲染目标。 JSON IR。 中间格式是 JSON，不是 YAML。原因写在 ROADMAP 里：LLM 生成 YAML 的\"看着对、解析错\"比例高，缩进敏感、行内流式 pos: [40, 80] 和 sublabel: \"Redis :6379\" 都会撞 YAML 的引号陷阱。JSON 有明确的解析规则、原生 JSON.parse、成熟的 JSON Schema 校验，git diff 友好度也够用。 Renderer。 五套渲染器：architecture / workflow / sequence / dataflow / lifecycle。每一套有自己的 schema（archify/schemas/ .schema.json）和 example（archify/examples/ .json），LLM 照着 example 抄字段结构比自己想着写靠谱。..."
+  },
+  {
+    "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
+    "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
+    "type": "blog",
+    "date": "2026-07-03",
+    "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
+    "excerpt": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "AI Terminal",
+      "Tauri",
+      "Rust",
+      "Agent Skills",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "先说结论。 绝大多数「AI 终端」的做法，是在旧终端旁边挂一个 chat 面板：右侧多一列，输入框里塞一段 prompt，回车把答案打在窗口里。这套做法上手快，但它治不了一件事——真正的终端工作永远发生在 当前工作目录里，和当前的进程共享同一颗心跳 。侧栏拿不到你正在跑的服务、拿不到 shell 的退出码、拿不到你刚刚 stage 但还没 commit 的 diff。它只是一个更贵的浏览器书签。 crynta/terax ai 走的是另一条路。它不是把 AI 塞进终端，而是把终端重新设计成「AI 天生就是一等原语」的形态。 我把它的仓库拉下来，通读了 20k 字的 TERAX.md（这个仓库自己的架构文档，也是它塞给 AI Agent 当项目记忆的那份），然后按源码往下摸。这一篇是我对它的完整判断——包括谁应该现在装、谁再等一等、以及它跟 Warp、Wave、Cursor、iTerm2 的真实边界。 一个具体的差距：调 AI 修一个跑挂的 dev server 先摆一个真实场景。你在跑一个 pnpm dev，端口 3000，控制台开始报一个组件里的 hydration mismatch。传统流程是： 1. 复制报错，切窗口到 Cursor 或者浏览器。 2. 粘到 chat 里，AI 说：需要看那个组件的代码。 3. 你再复制粘贴文件路径、内容、prompt、context…… 4. AI 给个改法，你再切回终端手动改。 5. 保存，等热更新，看结果。 这中间发生了什么？你和 AI 之间隔着 四层复制粘贴 。终端知道 cwd、编辑器知道文件树、浏览器知道报错、chat 什么都不知道——只知道你此刻塞给它的那点字符串。 Terax 的做法是这样：AI Agent 挂在同一个进程里，能直接调用「当前活跃 tab 的 cwd + 缓冲区末尾 300 行」（源码里叫 live context bridge，App.tsx 里 setLive 那一段），能调 read file / fs grep 自动读文件，能开 shell bg spawn 后台跑命令，甚至能通过 sub agent 拆任务。 你只需要说「fix 这个 hydration 错误」，剩下的动作它自己完成 。写文件之前会弹一个 diff 让你 hunk by hunk 接受，跑 shell 会弹一个审批卡片，防止它 rm rf。 这才叫「AI 是一等原语」。不是 UI 上多一列，是 架构上让 AI 直接摸到终端的状态 。 项目一句话说清 Terax 是一个用 Tauri 2 + Rust 做后端、 React 19 + xterm.js 做前端的开源桌面终端，产物只有 7 8 MB。它把多标签终端、代码编辑器、文件浏览器、带 commit graph 的 git 面板、本地 dev server 预览、以及一个可以调 BYOK 云端模型或本地模型的 Agent 工作流塞进同一个可执行文件里。密钥进操作系统钥匙串，不做遥测，不需要注册账户。 跨平台：macOS、Linux（deb / rpm / AppImage）、Windows（NSIS + WebView2），Windows 上 WSL 是一等 workspace 环境，不是套壳。 许可证 Apache 2.0。 我看过太多号称「AI 原生」但实际上是套壳的项目，Terax 是少数 从进程模型开始就把 AI 当基础设施 的。 架构：两进程模型是它一切能力的根 这张图是我读完 TERAX.md 之后最想第一时间画出来的。所有 OS 层能力都在 Rust 侧，webview 从不直接触碰 FS、进程或网络——所有跨界调用走 invoke()。 Rust 侧划分得很干净（都能在 src tauri/src/lib.rs 里找到对应命令）： pty:: — portable pty 拉起的长生命周期 PTY 会话，输出通过 Tauri Channel 流式回前端。 fs::tree:: / fs::file:: / fs::mutate:: / fs::search:: / fs::grep:: — 文件浏览器和编辑器 IO、模糊查找、内容搜索（基于 ignore + grep crate）。 git::commands:: — 一整套 git surface：git status、git diff、git stage、git commit、git fetch、git pull ff only、git push、git log、git show commit……都走 workspace 授权注册表。 shell::shell run command / shell::shell session / shell::shell bg — 三档 shell：一次性执行、跨调用状态的会话、以及带环形日志的后台进程（dev 服务器就靠这个）。 net::ai http request / ai http stream / lm ping — 带 SSRF 防护的 AI HTTP 代理。所有 provider 调用不从 webview 直接出，从 Rust 出，天然避开了浏览器同源和 CSP 的一堆坑。 secrets::sec..."
+  },
+  {
+    "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
+    "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
+    "type": "blog",
+    "date": "2026-07-05",
+    "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
+    "excerpt": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "AI 视频",
+      "小说改编",
+      "Claude Agent SDK",
+      "开源项目",
+      "多模态"
+    ],
+    "priority": 0,
+    "content": "先说一个具体的场景。 你手里有一本 8 万字的小说，觉得改成短视频能火。要做的事按行业惯例大致是这样：先把稿子拆成一集一集，每集再拆成三十来个分镜，然后一个个开 AI 生图工具画角色、画场景、画分镜，再把每一张导进另一个视频生成平台做图生视频，最后所有 4 秒片段丢进剪映拼起来，配音、加字幕、配音乐。 这是一份 工具编排工作 ，不是创作工作。真做过的人都知道，八成的时间花在这里：文件在本地和五六个平台之间来回搬，角色在这一场戴帽子下一场又不戴了，某个道具的样子第一集像 Zippo、第五集变成打火机、第八集又变成蜡烛。你没法让这五六家工具「记住上下文」，也没法让它们互相引用彼此生成的图。 ArcReel/ArcReel（GitHub）是把这件事重新做了一遍——不是又开一个 SaaS 让你去平台上点按钮，而是 把整条流水线做成一个可自托管的 Web 应用 ，用 Claude Agent SDK 编排 AI 智能体，前后串接八家图/视频/文本供应商，Docker 一条命令跑起来。 我把仓库拉下来，读完 20K 字的 AGENTS.md（也就是它塞给 AI Agent 当项目记忆的那份）、通读 README.md / docs/getting started.md / docs/adr/，翻了一遍 CHANGELOG（这个项目已经迭到 v0.20.1，光 2026 年就发了 20 个 minor + patch），跑了一遍源码结构。这一篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Sora Web 端 / 剪映 / 一众 SaaS 视频工具的真实边界在哪里 。 一、痛点：AI 视频真正的瓶颈不在生成，而在编排 先把「AI 生视频」这四个字拆开。 生成本身 这几年已经不是问题。Veo 3.1、Seedance 2.0、Sora 2、可灵 v3、Vidu Q3——单看每一家的样片，都能把一句话生成 5 10 秒电影级画面。价格从 Fast 档的 $0.15/秒 到旗舰档的 $0.40/秒 不等，一分钟视频 $10 20 就能搞完。 真正卡人的是四件事： 1. 角色一致性。 同一个角色出现在三十个分镜里，如果不锚定参考图，AI 每一次都会重新想象一遍。第一镜是黑发少年，第五镜变成金发少女，观众立刻出戏。 2. 道具/场景一致性。 女主的红色项链、男主的黑色皮夹克、村口的老槐树，这些「线索」在剧本里可能出现几十次，需要跨镜头保持视觉稳定。 3. 叙事结构。 8 万字小说不能直接扔给视频模型。得先做「全局角色/线索提取 → 分集规划 → 单集剧本 → 分镜」四步语言层加工，每一步都需要人机确认。 4. 任务编排。 一集 30 个分镜，每个分镜要 1 张分镜图 + 1 个 4 秒视频，就是 60 次 API 调用。要处理限速、断点续传、重试、版本回滚、费用追踪——单机脚本堆到最后就是一份意大利面。 ArcReel 没做「更好的生成器」——它接的还是那八家现成的模型。它做的是 上面这四件事的编排层 ，让生成器专注生成，让工作台专心处理连贯性、状态机和上下文。 二、方案：三层架构 + Claude Agent SDK 编排 架构上 ArcReel 是很干净的三层： frontend/ — React 19 + TypeScript + Tailwind CSS 4 + wouter 路由 + zustand 状态管理。SPA 通过 Vite 代理把 /api 打到 http://127.0.0.1:1241 的后端。 server/ — FastAPI + Python 3.12+ + Pydantic 2。路由都挂在 /api/v1 下（server/routers/），认证用 JWT + API Key（arc 前缀，SHA 256 哈希入库）。实时通信是 SSE：助手 /assistant/sessions/{id}/stream、项目事件 /projects/{name}/events/stream。 lib/ — 核心库。多供应商后端抽象（image backends/ / video backends/ / text backends/）、异步任务队列（generation queue.py）、项目管理器（project manager.py）、用量追踪（usage tracker.py）都在这里。 数据库层是 SQLAlchemy 2.0 async ORM，开发默认 SQLite（projects/.arcreel.db），生产走 PostgreSQL（asyncpg）。迁移用 Alembic。这套技术栈的选择很务实——2026 年的默认答案，没花架子。 真正有意思的是 智能体层 。ArcReel 没用自研 Agent 框架，而是直接接了 Anthropic 官方的 Claude Agent SDK（早年叫 Claude Code SDK），走的是「编排 Skill + 聚焦 Subagent」这套多智能体模式： 翻译成人话： 编排 Skill（manga workflow） 是主 agent 加载的一个 skill 文件，它的任务是 读 project.json 和文件系统，判断项目卡在..."
+  },
+  {
+    "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
+    "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
+    "type": "blog",
+    "date": "2026-07-05",
+    "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
+    "excerpt": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
+    "topic": "AI 工具",
+    "topicSlug": "ai-tools",
+    "series": "",
+    "tags": [
+      "Java 性能",
+      "async-profiler",
+      "Flame Graph",
+      "JVM",
+      "开源项目"
+    ],
+    "priority": 0,
+    "content": "先说一个具体现场。 线上 Java 服务 CPU 打到 80%，但 top / htop 看不出是谁在烧、jstack 抓 5 次栈每次都不一样、JFR 打开觉得开销心里没底、VisualVM 附加过去看到的又只是抽样式的方法调用次数——这条链路你走过一次，就知道传统 Java profiler 有两个绕不开的死穴： 1. safepoint bias ——绝大多数「Java 采样式 profiler」采样时其实是在等 JVM 到达一个 safepoint，一旦你的热点代码在 loop 里被 JIT 编译成了 counted loop、里面根本不放 safepoint poll，profiler 就看不见它。你以为你在采「谁在烧 CPU」，其实你采的是「谁最快能停下来」。 2. 看不见 JVM 内部和内核栈 ——GC 线程、JIT 编译线程、glibc memcpy、内核 futex 等待——这些东西在传统 Java profiler 里全是「(Native method)」或者一片空白。你只看到自己那部分 Java 栈，看不到锅到底在 GC、JIT 还是内核。 async profiler/async profiler（GitHub，2026 年 4 月刚发 v4.4）是把这两件事都解掉了的一个 native agent。它已经在生产被用了差不多十年，是 Java 性能圈几乎所有排障文章都会提到的那一个工具。这一篇我把 4.4 版本的源码结构、六份核心文档（docs/CpuSamplingEngines.md、docs/ProfilingModes.md、docs/StackWalkingModes.md、docs/ProfilerOptions.md、docs/OutputFormats.md、docs/Heatmap.md）通读完，把它拆到能讲清楚每一个开关背后的机制。 一、痛点：Java 采样 profiler 的两个死穴 Safepoint bias 这四个字，Java 性能圈的老兵一听就知道说什么。传统的采样式 profiler 走的都是 JVMTI GetStackTrace——但这个 API 只能在 safepoint 生效。JVM 会在每个方法入口、循环回边、native 调用外围插「safepoint poll」，profiler 采样时其实是先请求 safepoint，等所有线程停在最近的 poll 上，然后再抓栈。这套机制的问题在于： 热点代码可能根本不到 safepoint 。JIT 会把 hot loop 编译成 counted loop（编译期能证明循环次数有限），counted loop 中间不放 safepoint poll——你在里面烧 CPU 也没人抓得到。 采样时机被扭曲 。你抓到的栈是「离 safepoint 最近的那一行」，不是「正在跑 CPU 的那一行」。这两者可能差得很远。 这就是 Nitsan Wakart 那篇著名博客 Why (Most) Sampling Java Profilers Are Fucking Terrible 的核心论点。async profiler 的名字来自 HotSpot 的 AsyncGetCallTrace——这是一个非标准的 JVM 内部 API，可以 在信号处理器里、不用 safepoint 就能取 Java 栈。这条路径避开了 safepoint bias，代价是要处理 AGCT 本身的一系列 corner case bug（后面会讲到 VM Structs 栈行走怎么绕过这个坑）。 第二个死穴是 看不见 JVM 内部和内核栈 。传统 Java profiler 只在 Java 层面工作，看到的都是 Java 类名。但真实的性能问题经常出在别处： GC 线程在跑 Young GC / Full GC； JIT 编译线程在编 C2； Java 代码通过 JNI 调进了一段 native 库； 你的 read() 在内核里等 I/O； 你的 synchronized 在内核里等 futex 唤醒。 async profiler 用的是 混合栈行走 ：perf events 抓内核栈 + VM Structs 或 AsyncGetCallTrace 抓 Java/JVM 栈，然后把两条栈 在信号处理器里当场对齐 ，最后画出来的一张火焰图里，Java 方法（绿色）、JDK 内联（青色）、JVM 内部 C++（黄色）、native 库（红色/黄色）、内核（橙色） 共存于同一根调用栈 。 看一眼实际输出你就懂了： 图里最左边黄绿色的 GenCollectedHeap::collect generation → DefNewGeneration::collect 是 JVM 内部的 GC C++ 栈，中间一大片绿色的 java/util/stream/ → TimSort.sort 是你的应用代码，右上角橙色的一柱是内核栈——这些东西 同时出现 在一张图里。传统 Java profiler 只能给你中间那块绿色。 二、方案：三种 CPU 采样引擎 × 三种栈行走模式 async profiler 的可配置面，本质上是「怎么触发采样」和「怎么把栈抓..."
   },
   {
     "title": "关于本站",
