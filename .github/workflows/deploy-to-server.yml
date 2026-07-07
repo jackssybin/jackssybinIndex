@@ -1,4 +1,4 @@
-name: Deploy to Server
+﻿name: Deploy to Server
 
 on:
   push:
@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -67,8 +69,21 @@ jobs:
           SOURCE: public/
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
-      - name: Submit URLs to Baidu
+      - name: Submit changed URLs to Baidu
         continue-on-error: true
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-        run: node scripts/baidu-push.mjs https://jackssybin.cn/sitemap.xml
+        run: |
+          # 只推送本次部署里改动的正文，避免耗尽百度当日配额（新站每天 10 条）
+          if [ -z "$BAIDU_PUSH_TOKEN" ]; then
+            echo "BAIDU_PUSH_TOKEN 未配置，跳过百度推送"
+            exit 0
+          fi
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE="HEAD~1"
+          fi
+          echo "Diff range: $BEFORE..HEAD"
+          export BAIDU_PUSH_DIFF_BASE="$BEFORE"
+          export BAIDU_PUSH_DIFF_HEAD="HEAD"
+          node scripts/baidu-push.mjs --changed

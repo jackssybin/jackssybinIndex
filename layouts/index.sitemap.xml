@@ -1,8 +1,38 @@
 ﻿{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{/*
+    Exclude low-value aggregation / listing pages from the sitemap so
+    search engines (especially Baidu) focus on real content. Any page
+    whose RelPermalink starts with one of these prefixes is skipped,
+    plus a handful of top-level index/aggregation URLs.
+  */}}
+  {{- $skipPrefixes := slice
+      "/tags/"
+      "/nav/"
+      "/topics/"
+      "/archives/"
+      "/page/"
+      "/generated/"
+  }}
+  {{- $skipExact := slice
+      "/tags.html"
+      "/nav.html"
+      "/topics.html"
+      "/archives.html"
+      "/search.html"
+      "/news.html"
+      "/weekly.html"
+  }}
   {{- range .Site.Pages }}
-  {{- if .Permalink }}
+    {{- $rel := .RelPermalink }}
+    {{- $skip := false }}
+    {{- if not .Permalink }}{{ $skip = true }}{{ end }}
+    {{- if in $skipExact $rel }}{{ $skip = true }}{{ end }}
+    {{- range $skipPrefixes }}
+      {{- if hasPrefix $rel . }}{{ $skip = true }}{{ end }}
+    {{- end }}
+    {{- if not $skip }}
   <url>
     <loc>{{ .Permalink }}</loc>
     {{- with .Lastmod }}
@@ -11,6 +41,6 @@
     <changefreq>weekly</changefreq>
     <priority>{{ if .IsPage }}0.8{{ else }}0.5{{ end }}</priority>
   </url>
-  {{- end }}
+    {{- end }}
   {{- end }}
 </urlset>
