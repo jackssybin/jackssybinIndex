@@ -1,0 +1,188 @@
+# Claude Code + 9 个命令 + 双 agent，我看到了 AI 用得最深的一份求职工作台
+
+先给结论：如果你想找一个「把 AI 用得最深」的开源项目学工程结构，请去 GitHub 搜 **`MadsLorentzen/ai-job-search`**。
+
+我最初以为它只是又一个「AI 帮我写简历」工具。fork 下来读完 `.claude/commands/` 里 9 个命令文件之后我意识到——**这不是简历生成器，这是一整套围绕 Claude Code 搭起来的求职工作台，把「投简历」拆成了一条可复用的流水线**。它做了三件我在别的 AI 项目里没见过认真处理的事：
+
+- 把求职周期拆成 9 个 slash 命令，主流程 5 个（`/setup /scrape /rank /apply /outcome`）+ 辅助 4 个
+- `/apply` 里起两个 agent，drafter 写、reviewer 从**空 context** 独立挑刺
+- 强制编译 PDF 亲眼看 + `pdftotext` 抽文本层校对 ATS，两层都不过就打回改 LaTeX
+
+这篇文章拆完这三件事，你可以直接判断这个仓库值不值得 fork——**我给的答案是"值"，而且它的架构模式可以套到你自己的领域**。
+
+![封面](https://jackssybin.cn/images/ai-job-search-claude-code-career-workbench/cover-zhihu.png)
+
+---
+
+## 一、9 个命令：求职流程被压成一条流水线
+
+先看目录：
+
+```
+.claude/commands/
+├── setup.md          建立你的候选人档案
+├── scrape.md         扫多个招聘门户
+├── rank.md           批量给新岗位打分排序
+├── apply.md          drafter + reviewer + PDF 双验证
+├── outcome.md        记录申请结果、归档材料
+├── expand.md         从 GitHub/Portfolio 补齐档案
+├── upskill.md        分析技能差距 + 学习计划
+├── add-template.md   注册自定义 LaTeX CV 模板
+├── add-portal.md     生成本地招聘门户 skill
+└── reset.md          清档案 / 清素材
+```
+
+流水线是这样跑的：
+
+![流水线](https://jackssybin.cn/images/ai-job-search-claude-code-career-workbench/01-pipeline.png)
+
+每个命令都有明确的输入和输出：**上一步的产物就是下一步的输入**。
+
+- **`/setup`** 三条路径任选：Documents 模式（把 CV/LinkedIn 导出/学位证/推荐信丢进 `documents/` 自动读）、粘贴模式（chat 里粘 CV 文本）、访谈模式（问答填）。产物是 `CLAUDE.md` 里的候选人档案 + `.claude/skills/job-application-assistant/01-candidate-profile.md`
+- **`/scrape`** 跑仓库自带 5 个门户 skill：`jobbank-search`、`jobdanmark-search`、`jobindex-search`、`jobnet-search`（丹麦四大门户）+ `linkedin-search`（国家无关）。抓完去重 + 跨轮追踪 `seen_jobs`。
+- **`/rank`** 关键设计：如果一轮 `/scrape` 扔回 30 个岗位懒得挨个看，`/rank` 并行派多个 agent（默认每 agent 处理约 5 岗），独立 fetch 岗位 URL + 按同一份 rubric 打 4 维分（技术/经验/行为/职业方向）。**这里只做 triage 打分，不做公司调研、不做 salary 查询、不派 reviewer**——用便宜的排序过滤，让昂贵的 apply 只花在 top N 上。
+- **`/apply`** 主戏，下节详拆。
+- **`/outcome`** 归档：CV + Cover Letter + 岗位文本进 `documents/applications/<company>_<role>/`，写 `outcome.md`，更新 `job_search_tracker.csv`。积累够几条后 `/outcome` 会提示你回过头再跑 `/setup`——**用「真拿到面试」的岗位反推你的评估框架该怎么调**。
+
+辅助 4 个：`/expand` 从公开源扒技能；`/upskill` 岗位 vs 档案的差距 + 学习计划；`/add-template` 注册你自己的 LaTeX 模板（强制先跑 test compile）；`/add-portal` 生成本地招聘门户 skill。
+
+**这里就有一个可复制的架构模式：多命令 + 单档案。** 所有命令共享同一份档案（`CLAUDE.md` + `01-candidate-profile.md`），每个命令按需读，档案本身随 `/setup` `/expand` `/outcome` 演进。这个模式可以立刻套到读书笔记（`/collect` 建书单、`/absorb` 存重点、`/link` 拉主题、`/write` 出博客）、代码 review（`/scan` 扫仓库、`/rank` 排优先级、`/review` 深评审）、任何多阶段人机协作的场景。
+
+---
+
+## 二、`/apply` 的双 agent：drafter 写，reviewer 挑刺
+
+`/apply` 的命令定义有 284 行，核心是 6 步流程 + 空 context 的 reviewer agent。
+
+![drafter-reviewer](https://jackssybin.cn/images/ai-job-search-claude-code-career-workbench/02-drafter-reviewer.png)
+
+```
+Step 0  DRAFTER：解析 URL 或粘贴的岗位描述
+Step 1  DRAFTER：对着 04-job-evaluation.md 打 5 维分
+        可选 salary_lookup.py 查薪资分位
+        向用户确认「继续起草吗？」
+Step 2  DRAFTER：写 cv/main_<company>.tex
+             +  cover_letters/cover_<company>_<role>.tex
+Step 3  REVIEWER：空 context 起新 agent，做公司调研 + 读四份档案文件
+        返回：
+        - Part A：JSON 结构化 edits (old_string → new_string)
+        - Part B：叙述式反馈 (missed keywords / company angle
+                             / reframing / tone)
+Step 4  DRAFTER：按 Part A 直接 patch，按 Part B 判断结构
+Step 5  DRAFTER：lualatex 编 CV，xelatex 编 CL，读渲染出的 PDF
+        循环修 LaTeX 直到 CV 正好 2 页、CL 正好 1 页
+Step 6  DRAFTER：pdftotext 抽文本层 → ATS 校对 + 完整 checklist
+```
+
+最见工程功力的三个决定：
+
+**1. Reviewer 从空 context 起。** 复用 drafter 的 context 会让 reviewer 被 drafter 已经写下的框架带跑——drafter 写什么它跟着夸什么。空 context 的 reviewer 得从头解析岗位、独立研究公司，才会挑出 drafter 完全没想到的角度。比如 drafter 觉得「机器学习」和岗位描述里的 "MLOps + feature store" 意思差不多，空 context reviewer 会直接标红。
+
+**2. 草稿内联传给 reviewer，不让它读文件。** 看似小的优化实则关键：跨 agent 的 file read 会重复 token。让 reviewer 从 `<CV_DRAFT>...</CV_DRAFT>` 这样的 inline block 直接拿到内容，一次读一次，剩下的 token 预算全花在 WebSearch 公司调研和写反馈上。
+
+**3. Reviewer 输出 Part A（JSON edits）+ Part B（narrative）。** Part A 是可以直接 apply 的机械 patch，Part B 是判断题（比如「整个开头段太被动了，建议围绕你和岗位最强的一个 match 重构」）。drafter 就能自动 apply 掉一半反馈，剩下一半人为决策。
+
+作者在 workflow 顶部写了三条 **token-efficiency rules**：
+
+- Never re-Read a file whose contents are already in your context from an earlier step.
+- When dispatching the reviewer agent, pass draft content inline in the agent prompt.
+- Run the full verification checklist exactly once, at the end.
+
+这三条不是废话，是这个仓库和「让 AI 帮我写简历」类项目的分水岭。**多 agent 系统的失败 90% 在 context 管理，而不是在 prompt 写得好不好**。
+
+---
+
+## 三、别信 .tex：PDF 视觉 + ATS 双重验证循环
+
+![PDF ATS 循环](https://jackssybin.cn/images/ai-job-search-claude-code-career-workbench/03-pdf-ats-loop.png)
+
+这段是我看过所有「AI 生成 CV」项目里唯一认真处理的一段。问题背景：
+
+- **LaTeX 分页决策不可预测**：多加一行 bullet 可能把最后一段挤到下页；`\cventry` 标题可能孤零零推到下页页首，正文 bullets 留在上一页；`cover.cls` 里的 `\lettercontent{}` 会**吞掉** `\begin{itemize}` 的字体设置，让整段 bullets 从 Raleway 回退到默认 Computer Modern，视觉上像换了一个人写的。
+- **ATS 读的是 PDF 文本层，不是渲染页**：LaTeX 可以静默生成一份视觉完美、但文本层是 `(cid:*)` 乱码的 PDF；contact info 如果只挂在 `\faEnvelope` 图标上，`pdftotext` 抽出来的是 `Envelope` 字样，你的邮箱**压根不在文本里**。人事在 ATS 搜 `@` 一无所获。
+
+`/apply` 的 Step 5 + Step 6 把这套检查写死成**强制不可跳过**的步骤：
+
+```
+CV 视觉：
+  ├── 正好 2 页（不是 1 也不是 3）
+  ├── 没有 orphaned \cventry —— 标题不许在页底、bullets 甩到下页
+  │   兜底：\needspace{5\baselineskip}
+  │   救场：\enlargethispage{2-3\baselineskip}
+  └── 用 lualatex 编（modern MiKTeX 上 pdflatex 会因 fontawesome5 报错）
+
+Cover Letter 视觉：
+  ├── 正好 1 页，signature 与正文在一起
+  ├── bullets 字体不能回退
+  │   规避：\lettercontent{} 里不许直接放 itemize
+  │   办法：{\raggedright\fontspec{Raleway} \begin{itemize}...\end{itemize}\par}
+  └── 用 xelatex 编（cover.cls 需要 fontspec）
+
+ATS 文本层：
+  ├── pdftotext -layout 抽出来无 (cid:*)、无 �
+  ├── 邮箱/电话作为 literal 明文出现（不是只挂在图标上）
+  ├── 阅读顺序与视觉顺序一致（多列布局是重灾区）
+  └── 岗位关键词覆盖 —— 能诚实覆盖的加进 bullets，
+      真的没有就承认 gap，绝不 keyword stuffing
+```
+
+`03-writing-style.md` 里有一条我很喜欢的规则叫 **"interview backtrack test"**：给某个 bullet 加了强度之后，问自己「如果面试官追问，我能不能不带犹豫地解释这条？」如果得说「哦其实我意思是……」那就是过界了。命令里还写死：如果 Step 1 的 experience match 打分**低于 50**，Step 2 之前要先警告用户「这个岗位需要大幅重构框架，你确定继续吗？」——**不留悄悄地把简历吹圆的空间**。
+
+对我来说这套做法的意义在于：它让 AI 生成的 CV **能过 ATS**，而不是只在 PDF 预览里好看。用过太多「AI 简历」工具，产出的 PDF 打开挺漂亮，扔进 workday 或者 lever 就被吃掉一半信息。**这仓库把 PDF 层和 ATS 层的检查全都自动化了，是我见过最诚实的做法。**
+
+---
+
+## 四、5 分钟上手 + 换成中文招聘门户
+
+前置：Claude Code CLI、Python 3.10+、Bun、TeX Live/MacTeX/MiKTeX，可选 poppler-utils（Linux）/ brew install poppler（macOS）。
+
+```bash
+gh repo fork MadsLorentzen/ai-job-search --clone
+cd ai-job-search
+
+# 装 5 个门户 CLI 依赖
+for portal in jobbank-search jobdanmark-search jobindex-search \
+              jobnet-search linkedin-search; do
+  (cd .agents/skills/$portal/cli && bun install)
+done
+
+claude
+> /setup
+> /scrape
+> /rank
+> /apply https://jobindex.dk/job/12345
+> /outcome
+```
+
+**换成 BOSS 直聘、拉勾、猎聘**：
+
+```
+> /add-portal https://www.zhipin.com/web/geek/job?query=data+scientist&city=101010100
+```
+
+`/add-portal` 会 WebFetch 探测门户搜索 URL 模式、结果页 DOM、访问规则，从既有 skill 的结构脚手架出新 skill，**强制跑一次 live query test** 确认能跑通再接进 `/scrape`。
+
+诚实提醒：BOSS/猎聘/拉勾都有不同程度的反爬和登陆墙。test query 失败的话 `/add-portal` 直接停在测试步骤，让你人肉判断要接 cookie 还是换匿名友好的门户。**这个行为本身就是一种保护——不给你搭一个跑不通的空壳 skill**。
+
+---
+
+## 五、我从这个仓库学到的三件事（可复用清单）
+
+**1. 多命令 + 单档案，是一个可复制的架构模式。** 整个仓库的所有命令共享同一份候选人档案，档案本身随命令演进。这个模式我看完之后立刻想套到别的领域：读书笔记、代码 review、内容运营。
+
+**2. 贵/便宜命令分开，是成本控制。** `/rank` 30 个岗位一起跑只看文本；`/apply` 一次一个独立起 reviewer。这不是 AI 能力问题，是工程决策——**你得替 AI 决定什么时候可以省 token，什么时候必须多花**。
+
+**3. 验证要挂在真实产物上，不挂在中间态。** 不让 drafter 承诺「我写的 LaTeX 一定 2 页」而是编出来 PDF 亲眼看；不让它承诺「关键词都覆盖了」而是用 `pdftotext` 抽出来 grep。任何 AI 工作流走到最后都要挂一个客观的、可运行的验证——**这才是它区别于「AI 帮我写点东西」的分水岭**。
+
+---
+
+## 参考
+
+- 主仓库：github.com/MadsLorentzen/ai-job-search
+- Claude Code：claude.com/claude-code
+- moderncv LaTeX 包：ctan.org/pkg/moderncv
+- poppler / pdftotext：poppler.freedesktop.org
+
+如果你正在换工作窗口期，或者只是想找一个把 Claude Code 用得最深的项目学结构，这个仓库值得 fork 下来跑一遍 `/setup`。**半小时就能感受到 drafter-reviewer 循环的价值**。
+
+如果觉得有用，帮我点个 👍——我在收集这种「把 AI 用到极致」的开源项目案例，会持续拆解。
