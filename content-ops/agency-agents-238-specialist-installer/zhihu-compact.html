@@ -1,0 +1,91 @@
+<h1>Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes</h1><p>先说个真实场景。你手上同时装了 Claude Code、Cursor、Codex、Gemini CLI、Hermes 五六个 agentic 工具，每个工具你都想装一套「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师。你怎么维护？</p><p>我一开始的答案是「每个工具单独写一份 prompt 模板」。写到第 30 个 agent 的时候我放弃了。每个工具目录不同、frontmatter 不同、Codex 要 TOML、Cursor 要 <code>.mdc</code>、Osaurus 要 <code>SKILL.md</code>——改一次要在七八个位置同步。</p><p>后来在 GitHub 找到 <a href="https://github.com/msitarzewski/agency-agents" target="_blank">msitarzewski/agency-agents</a>——这是目前我看到把「多工具、多角色、多分工」解决得最彻底的开源仓库。</p><p><b>这篇文章拆三件事</b>：</p><ol><li>这个仓库到底和「打包一堆 prompt 模板」有什么本质区别。</li><li><code>convert.sh</code> / <code>install.sh</code> 双脚本的工作方式，以及为什么 Hermes 单独走懒加载 router。</li><li>NEXUS-Micro / Sprint / Full 三种编队怎么用，附可直接抄的三段激活 prompt。</li></ol><h2>旧认知 vs 新认知</h2><p>先把观念校准一下。</p><p><b>旧认知</b>：agent 定义 = 一段 prompt。想复用就复制粘贴到每个工具目录。</p><p><b>新认知</b>：agent 定义 = 一份工程 artifact。它需要版本管理、CI 校验、跨工具渲染、可选安装、可回滚、可 dry-run。</p><p>一旦你接受了新认知，你会发现单纯的 prompt 库根本不够用。你需要的是：</p><ul><li>权威清单：<code>tools.json</code> / <code>divisions.json</code> 记录支持的工具和 division。</li><li>渲染器：把源 agent 转成 15 种工具格式。</li><li>分发器：按选择的工具 + division + agent 组合安装。</li><li>CI 守护：任何漂移直接挂。</li><li>编队 runbook：把单个 agent 组成协作流水线。</li></ul><p>Agency Agents 是我看到的第一个把这五件事都做齐的开源实现。</p><h2>一、238 个专家的结构</h2><img class="content_image" src="https://jackssybin.cn/images/agency-agents-238-specialist-installer/01-divisions-map.png" alt="Agency Agents 17 divisions 238 specialists"><p>各 division 的 agent 数（clone 后 <code>find *.md</code> 计数）：</p><table><thead><tr><th>Division</th><th>数量</th><th>代表角色</th></tr></thead><tbody><tr><td>specialized</td><td>53</td><td>Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough</td></tr><tr><td>engineering</td><td>36</td><td>Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer</td></tr><tr><td>marketing</td><td>36</td><td>Growth Hacker、SEO Specialist、Newsletter Strategist</td></tr><tr><td>gis</td><td>13</td><td>GIS Analyst、Cartographer、Remote Sensing</td></tr><tr><td>security</td><td>10</td><td>AppSec、Cloud Security、Incident Responder</td></tr><tr><td>design</td><td>9</td><td>UI Designer、UX Researcher、Whimsy Injector</td></tr><tr><td>sales</td><td>9</td><td>Outbound Strategist、Deal Strategist</td></tr><tr><td>testing</td><td>9</td><td>API Tester、Evidence Collector</td></tr><tr><td>paid-media</td><td>7</td><td>PPC Strategist、Tracking Specialist</td></tr><tr><td>project-management</td><td>7</td><td>Sprint Prioritizer、Project Shepherd</td></tr><tr><td>spatial-computing</td><td>6</td><td>XR Interface Architect</td></tr><tr><td>support</td><td>6</td><td>Support Responder、Community Manager</td></tr><tr><td>academic / finance / game-dev / product</td><td>5 each</td><td>略</td></tr><tr><td>healthcare</td><td>2</td><td>Clinical Ops、Health Data</td></tr></tbody></table><p>每个 agent 长这样（Multi-Agent Systems Architect 节选）：</p><pre lang="yaml"><code>---
+name: Multi-Agent Systems Architect
+description: Systems architect specializing in the design, coordination,
+  and governance of multi-agent AI pipelines...
+vibe: Treats a team of AI agents like a distributed system — if it only
+  survives the demo and not production load, ambiguous inputs, and cascading
+  failures, it isn't architecture yet.
+---
+
+## 🧠 Your Identity &amp; Memory
+- Personality: 分布式系统严谨 + demo 怀疑派。看到有人把五个 agent 串成链、
+  不做 failure handling 就说&quot;完成了&quot;会明显不安。
+- Memory: 跟踪 topology、每个 agent 的 I/O 契约、权限范围、
+  失败恢复路径、HITL 关卡、context 预算。</code></pre><p>关键差别不是「你是前端工程师」这种角色扮演，而是把<b>性格、记忆、经验、沟通风格、拒绝什么、交付什么</b>都写具体。等于给 agent 一份带明确失败判据的合同。</p><h2>二、convert.sh + install.sh 双段式</h2><p>15 个官方支持工具（<code>tools.json</code>）：Claude Code、Codex、Gemini CLI、GitHub Copilot、Qwen Code、Cursor、OpenCode、Osaurus、Aider、Antigravity、Kimi Code、OpenClaw、Windsurf、Hermes、Mistral Vibe。每个工具格式都不同。</p><p>仓库的解法是 <code>tools.json</code> 做权威、两个脚本干活：</p><img class="content_image" src="https://jackssybin.cn/images/agency-agents-238-specialist-installer/02-two-scripts-flow.png" alt="convert.sh + install.sh 双段式工作流"><p>两段式设计的三个好处：</p><ol><li><b>可回滚</b>：<code>integrations/</code> 是平铺产物区，出问题先 diff 再 install。</li><li><b>可 CI 校验</b>：<code>check-tools.sh</code> / <code>check-divisions.sh</code> / <code>lint-agents.sh</code> 校验 <code>tools.json</code>、<code>divisions.json</code>、目录、convert.sh、install.sh 是否一致。</li><li><b>可组合安装</b>：三个筛选维度可以叠加。</li></ol><pre lang="bash"><code># 只装工程组 + 安全组，铺到 Claude Code
+./scripts/install.sh --tool claude-code --division engineering,security
+
+# 只装两个具体 agent，铺到 Cursor
+./scripts/install.sh --tool cursor --agent frontend-developer,ui-designer
+
+# 用清单文件批量指定
+./scripts/install.sh --tool opencode --agents-file agents-to-install.example
+
+# dry-run 看清单
+./scripts/install.sh --tool opencode --division engineering --dry-run</code></pre><p><b>踩坑</b>：OpenCode 现在只能注册 ~119 个 agent，超过静默丢弃（<a href="https://github.com/anomalyco/opencode/issues/27988" target="_blank">upstream #27988</a>）。装 OpenCode 一定要 <code>--division</code> 筛。</p><h2>三、Hermes 的例外：懒加载 Router</h2><p>前面 14 个工具都是「一 agent 一文件塞目录」。Hermes 是例外——单独做了一个 <code>agency-agents-router</code> 插件。</p><p>看官方 README 原话：</p><blockquote><p>这个 integration 装的是<b>一个</b> Hermes 插件，而不是往 <code>skills.external_dirs</code> 里加 232+ 个 skill。Hermes 启动时看到的是一个小的固定 tool surface，全套 roster 保存在 <code>data/agents.json</code> 里按需搜索/加载。</p></blockquote><p>对外只暴露四个入口：</p><img class="content_image" src="https://jackssybin.cn/images/agency-agents-238-specialist-installer/03-hermes-router.png" alt="Hermes 懒加载 Router"><ul><li><code>agency_agents_search</code>：按 query / division 搜专家。</li><li><code>agency_agents_inspect</code>：查专家 metadata / 完整 body。</li><li><code>agency_agents_load</code>：把专家 prompt 合到当前任务。</li><li><code>agency_agents_delegate</code>：转交 Hermes <code>delegate_task</code> 独立跑。</li></ul><p><b>为什么必须这样</b>：直接把 232 个 agent 当 skill 塞进 Hermes，system prompt token 迅速膨胀，反而让 agent 变笨。Router 模式让 Hermes 只知道「Agency 是可搜的花名册」，用谁再拉谁，启动开销 O(1)。</p><p>这是这个仓库让我觉得作者靠谱的关键点——他知道多 agent 时代 context budget 是真金白银。</p><h2>四、五分钟上手（Claude Code）</h2><pre lang="bash"><code>git clone https://github.com/msitarzewski/agency-agents.git
+cd agency-agents
+./scripts/convert.sh                       # 生成 integrations/
+./scripts/install.sh --tool claude-code    # 铺到 ~/.claude/agents/</code></pre><p>激活时在会话里说：</p><pre lang="text"><code>Activate Frontend Developer.
+
+Task: 用 React + Vite 给我搭一个 SaaS 项目的登录页，
+要求 mobile-first、A11y AA、支持深色模式。</code></pre><p>Claude Code 自己去 <code>~/.claude/agents/</code> 匹配。</p><p><b>必须知道的三个坑</b>：</p><ol><li>clone 完必须先 <code>./scripts/convert.sh</code>，<code>integrations/</code> 不在版本控制里。</li><li>Cursor / OpenCode / Aider / Windsurf / Qwen 是<b>项目级</b>，要在目标项目根目录里跑。</li><li>想让 upstream 更新自动生效，加 <code>--link</code> 用软链而不是复制。</li></ol><h2>五、NEXUS 三种编队</h2><p>单 agent 价值有限。仓库 <code>strategy/</code> 目录把 agent 打包成三种编队，官方叫 NEXUS。</p><table><thead><tr><th>模式</th><th>用途</th><th>agent 数</th><th>建议时长</th></tr></thead><tbody><tr><td>NEXUS-Micro</td><td>单一任务（bug 修复、audit、campaign）</td><td>5-10</td><td>1-5 天</td></tr><tr><td>NEXUS-Sprint</td><td>一个 feature 或 MVP</td><td>15-25</td><td>2-6 周</td></tr><tr><td>NEXUS-Full</td><td>从 0 到 1 完整产品</td><td>全部</td><td>12-24 周</td></tr></tbody></table><p><b>NEXUS-Micro：修一个线上 bug</b></p><pre lang="text"><code>Activate Agents Orchestrator in NEXUS-Micro mode.
+
+Task: 排查生产环境 Java 内存泄漏。JVM heap 每 6 小时涨 300 MB，
+GC 后不回退。仅限阅读代码 + 分析 flamegraph + 提出补丁方案，
+不改动生产。
+
+Team: Incident Response Commander (lead)、SRE (metrics owner)、
+Senior Developer (Java patch)、Reality Checker (最终把关)。</code></pre><p><b>NEXUS-Sprint：4 周做完 SaaS MVP</b></p><pre lang="text"><code>Activate Agents Orchestrator in NEXUS-Sprint mode.
+
+Project: RetroBoard，为远程团队做的实时回顾工具。
+Timeline: 4 weeks to MVP。
+Constraints: solo dev, React + Node.js, Vercel + Railway。
+
+Team: Sprint Prioritizer、UX Researcher、Backend Architect、
+Frontend Developer、Rapid Prototyper、Growth Hacker、Reality Checker。
+
+在每个 sprint 结束前，让 Reality Checker 出 gate report。</code></pre><p><b>NEXUS-Full：完整产品</b></p><pre lang="text"><code>Activate Agents Orchestrator in NEXUS-Full mode.
+
+Project: Nexus Spatial Discovery，AI agent 编排 × 空间计算。
+Deliverables: 市场验证、8-service 架构 + SQL schema、
+品牌与视觉、GTM、Support 蓝图、UX 研究、35 周排期与 65 个 sprint 工单、
+XR 空间界面规范。
+
+Deploy the full agency. 每个 phase 结束由 Project Shepherd 汇总，
+Reality Checker 放行。</code></pre><p>第三段真实运行结果在 <code>examples/nexus-spatial-discovery.md</code>：8 个 agent 并行，交付交叉引用一致的完整蓝图，无人工协调。</p><h2>六、判断：谁该用，谁该等</h2><p><b>适合马上用</b>：</p><ul><li>一个人或小团队同时用 2 个以上 agentic 工具。</li><li>有 SaaS / 产品从 0 到 1 sprint。</li><li>想把 agent 纳入版本控制，写 CI 校验。</li></ul><p><b>可以观望</b>：</p><ul><li>只用一个工具、只跑 3-5 个固定 prompt 的独立开发者。</li><li>完全依赖 OpenCode（119 上限没修好之前）。</li></ul><p><b>不建议直接用</b>：</p><ul><li>追求即插即用中文效果。仓库主要是英文 agent，中文场景要自己后置调整。</li></ul><h2>七、可收藏的命令清单</h2><p>一次装齐（用户级 + 项目级混合）：</p><pre lang="bash"><code>git clone https://github.com/msitarzewski/agency-agents.git
+cd agency-agents
+./scripts/convert.sh
+
+# 用户级
+./scripts/install.sh --tool claude-code
+./scripts/install.sh --tool codex
+./scripts/install.sh --tool copilot
+./scripts/install.sh --tool antigravity
+./scripts/install.sh --tool osaurus
+./scripts/install.sh --tool hermes
+
+# 项目级（切到目标项目根目录）
+cd ~/projects/my-saas
+./scripts/install.sh --tool cursor --division engineering,design
+./scripts/install.sh --tool aider
+./scripts/install.sh --tool windsurf
+
+# OpenCode 必须限制规模
+./scripts/install.sh --tool opencode --division engineering,design,testing,security</code></pre><p>只装最常用 12 个 agent：</p><pre lang="bash"><code>cat &gt; /tmp/my-agents.txt &lt;&lt;'EOF'
+frontend-developer
+backend-architect
+senior-developer
+devops-automator
+sre
+code-reviewer
+prompt-engineer
+ui-designer
+ux-researcher
+sprint-prioritizer
+reality-checker
+agents-orchestrator
+EOF
+
+./scripts/install.sh --tool claude-code --agents-file /tmp/my-agents.txt</code></pre><p>日常查找与更新：</p><pre lang="bash"><code>./scripts/install.sh --list teams
+./scripts/install.sh --list agents
+./scripts/install.sh --link                # 软链自动跟 upstream
+git -C ~/…/agency-agents pull &amp;&amp; ./scripts/convert.sh</code></pre><h2>八、我的最终判断</h2><p>以前我对「agent 大合集」的第一反应是「又是一个 prompt 商店」。这次改看法。</p><p>Agency Agents 值得看，不是因为 agent 数量多，而是因为它把 agent 定义当作<b>可 CI、可 diff、可 dry-run 的工程 artifact</b>：</p><ul><li><code>tools.json</code> / <code>divisions.json</code> 生死绑定 convert / install / lint 三条链。</li><li>单独给 Hermes 做懒加载 router，说明作者理解 context budget 的实际代价。</li><li>NEXUS 把 Reality Checker、Evidence Collector 抽出来当 gate，说明作者理解 pipeline 失败点通常不在专家身上，在没人把关。</li></ul><p>从今天起我不用在多个工具之间搬 prompt 了。维护一份 fork，agent 变更走 PR，CI 挂 <code>check-tools.sh</code>，剩下的交给两个脚本。</p><p>如果你在维护多工具的 agent 配置，直接 clone 下来跑一遍 <code>convert.sh</code>，按前面清单挑子集装到 Claude Code。跑一次你就知道它是不是你的菜。</p><hr><p><b>参考</b>：</p><ul><li>主仓库：<a href="https://github.com/msitarzewski/agency-agents" target="_blank">https://github.com/msitarzewski/agency-agents</a></li><li>App：<a href="https://agencyagents.app" target="_blank">https://agencyagents.app</a></li><li>OpenCode 上限 issue：<a href="https://github.com/anomalyco/opencode/issues/27988" target="_blank">https://github.com/anomalyco/opencode/issues/27988</a></li><li>完整示例产物：<code>examples/nexus-spatial-discovery.md</code></li></ul>
