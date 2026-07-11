@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 20,
+    "count": 21,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1171,6 +1171,26 @@
         ],
         "priority": 0,
         "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
+      },
+      {
+        "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+        "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+        "type": "blog",
+        "date": "2026-07-08",
+        "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+        "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+        "topic": "AI Agent",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI Agent",
+          "Claude Code",
+          "Cursor",
+          "Hermes",
+          "开源项目"
+        ],
+        "priority": 0,
+        "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
       }
     ],
     "articleTitles": [
@@ -1193,7 +1213,8 @@
       "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
       "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
       "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-      "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器"
+      "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
+      "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes"
     ]
   },
   {

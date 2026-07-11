@@ -1,6 +1,66 @@
 {
   "allArticles": [
     {
+      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+      "type": "blog",
+      "date": "2026-07-10",
+      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Codex",
+        "tldraw",
+        "MCP",
+        "AI 画布",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
+    },
+    {
+      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+      "type": "blog",
+      "date": "2026-07-08",
+      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "Cursor",
+        "Hermes",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
+    },
+    {
+      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+      "type": "blog",
+      "date": "2026-07-08",
+      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Claude Code",
+        "AI 求职",
+        "LaTeX",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
+    },
+    {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
       "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
       "type": "blog",
@@ -2408,6 +2468,66 @@
   ],
   "articles": [
     {
+      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+      "type": "blog",
+      "date": "2026-07-10",
+      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Codex",
+        "tldraw",
+        "MCP",
+        "AI 画布",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
+    },
+    {
+      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+      "type": "blog",
+      "date": "2026-07-08",
+      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "Cursor",
+        "Hermes",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
+    },
+    {
+      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+      "type": "blog",
+      "date": "2026-07-08",
+      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Claude Code",
+        "AI 求职",
+        "LaTeX",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
+    },
+    {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
       "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
       "type": "blog",
@@ -2747,71 +2867,69 @@
       ],
       "priority": 0,
       "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
-    },
+    }
+  ],
+  "latestArticles": [
     {
-      "title": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线",
-      "url": "/articles/2026/06/21/jellyfish-ai-short-drama-studio.html",
+      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
       "type": "blog",
-      "date": "2026-06-21",
-      "description": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "excerpt": "基于 Forget-C/Jellyfish README、Docker Compose、站点文档和源码，拆解这个约 4.45k stars 的开源 AI 短剧工作台如何把剧本、分镜、资产一致性和异步生成任务组织成一条可控生产线。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
+      "date": "2026-07-10",
+      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
       "series": "",
       "tags": [
-        "AI 视频",
-        "短剧",
-        "开源项目",
-        "FastAPI",
-        "React",
-        "工具教程"
+        "Codex",
+        "tldraw",
+        "MCP",
+        "AI 画布",
+        "开源项目"
       ],
       "priority": 0,
-      "content": "Jellyfish：把 AI 短剧从“一键生成”拆成可控生产线 AI 短剧工具最容易讲成一句话：“输入剧本，自动生成视频。” 这句话很诱人，但也很容易骗人。真正做一条短剧，不是把一段文字丢给视频模型就结束。你要先把剧本拆成镜头，确认每个镜头里有哪些角色、场景、道具和对白，再处理角色一致性、关键帧、视频提示词、生成任务、失败重试和素材回写。 Jellyfish 值得看的地方正在这里。它不是另一个“prompt 到视频”的玩具，而是一个面向 AI 短剧的生产工作台：把剧本、分镜、资产和长耗时生成任务放进同一套数据流里。 我本地调研的是提交 a967819。GitHub API 显示项目约 4.45k stars、775 forks，许可是 Apache 2.0。下面这篇不是 README 翻译，而是从 README、Docker Compose、站点文档和源码结构里拆出来的一条上手路线。 1. 它解决的不是“生成”，而是“生成前后怎么组织” 很多 AI 视频产品把注意力集中在最后一步：调用模型，得到视频。Jellyfish 的 README 反而把前面的工作拆得很细：script understanding、shot preparation、asset consistency、generation execution、task tracking。 这几个词放在一起，说明它关心的是生产链路，而不是单点模型能力。 一个典型流程是： 这比“一键生成”麻烦，但也更接近真实生产。因为短剧最怕的不是第一帧不好看，而是第 8 个镜头里同一个角色突然换脸，第 12 个镜头场景关系断了，第 20 个镜头任务失败后没人知道结果去哪了。 Jellyfish 把这些中间状态做成显式对象。源码和文档里能看到 shot extracted candidates、shot extracted dialogue candidates、GenerationTask、GenerationTaskLink 这类概念。它们听起来不性感，但对生产系统很关键。 2. 一个关键设计：ready 不是 generating 我觉得 Jellyfish 最值得新手注意的细节，是它对 shot.status 的收敛。 站点架构文档 site/content/docs/architecture/shot status flow.md 里写得很清楚：shot.status 只保留 pending 和 ready 两种正式状态。它表示“信息提取确认是否完成”，不表示“正在生成”。 这和很多原型项目的做法不一样。 差的做法是把所有状态都塞进一个字段： 看起来省事，后面一定乱。因为“分镜准备好了”和“某个视频任务正在跑”不是同一类状态。一个镜头可能已经 ready，但视频任务失败；也可能有多个图片任务和一个视频任务同时存在。 Jellyfish 的做法是拆开： 这就是工程上的非显眼收益。它不只是让页面更清楚，也让任务恢复、取消、重试和跳转更容易做。site/content/docs/architecture/task execution.md 里还写到，前端不直接读取 Celery task 状态，GenerationTask 才是业务任务的真相源。 3. 源码结构：前端是工作台，后端是任务和数据流 从仓库结构看，Jellyfish 是一个比较典型的前后端分离项目，但它的模块划分围绕短剧生产而不是围绕技术名词。 前端在 front/：React 18、Vite、Ant Design、Zustand。front/package.json 里可以看到 pnpm run openapi:update，会从后端拉 openapi.json 并生成 front/src/services/generated/。这点很重要：前端调用后端不是靠手写一堆 service，而是尽量走 OpenAPI generated client。 后端在 backend/：FastAPI、SQLAlchemy async、Pydantic、LangChain/LangGraph、Celery、Redis。backend/app/api/v1/ init .py 把路由聚合成四组： 这四组刚好对应生产链路：工作台对象、生成任务、模型管理、剧本处理。 数据和基础设施上，Docker Compose 默认拉起 MySQL、Redis、RustFS、backend、celery worker、front。RustFS 是 S3 兼容对象存储，用来放素材文件；Redis 是 Celery broker；MySQL 存业务数据。 这里有一个实际判断：Jellyfish 不是“下载即玩”的轻量小工具。它更像一个本地 AI Studio。你愿意跑一套服务，它才有意义。 4. 分镜准备页和工作室分工明确 项目里的 AGENTS.md 对页面职责写得很硬： 分镜编辑页 = 准备，负责资产、对白提取、候选确认、基础信息修正； 分镜工作室 = 生成，负责视频准备度、关键帧、图片、视频参数与视频生成； 任务中心 = 通用任务状态面板，只展示状态、进度、成功失败、取消与回跳入口。 这个边界很实际。很多 AI 内容工具会把“编辑”“确认”“生成..."
+      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
     },
     {
-      "title": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩",
-      "url": "/articles/2026/06/20/headroom-ai-context-compression.html",
+      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
       "type": "blog",
-      "date": "2026-06-20",
-      "description": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "excerpt": "基于 chopratejas/headroom 仓库 README、benchmark 文档和源码，拆解这个上下文压缩层如何在 Agent 与模型之间压缩工具输出、日志、RAG 和文件内容，并给出代理模式、SDK 接入、适用边界和风险检查。",
-      "topic": "AI、Agent 与本地模型",
+      "date": "2026-07-08",
+      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "topic": "AI Agent",
       "topicSlug": "ai-agent",
       "series": "",
       "tags": [
         "AI Agent",
-        "LLM",
-        "上下文工程",
-        "开源项目",
-        "工具教程"
+        "Claude Code",
+        "Cursor",
+        "Hermes",
+        "开源项目"
       ],
       "priority": 0,
-      "content": "别再把一整坨日志塞给模型了：Headroom 给 AI Agent 做上下文压缩 AI Agent 用久了，最烦人的问题不一定是模型不够聪明，而是上下文被工具输出撑爆。 一次 grep，几百行。一次测试失败，上千行。RAG 返回一批文档，真正有用的也许只有几段。你当然可以换更大上下文窗口，但这通常只是把问题往后推：成本更高，延迟更长，模型也更容易在噪声里迷路。 Headroom 做的是另一件事：在 Agent 和 LLM 之间加一层上下文压缩，把工具输出、日志、RAG chunk、文件内容、对话历史先处理一遍，再送进模型。 项目地址：https://github.com/chopratejas/headroom。我本地查看的是提交 3fc2a78，GitHub API 显示项目约 38.6k stars、Apache 2.0 许可。 1. 这个项目解决的不是“提示词太长”，而是“上下文里垃圾太多” README 里有一句话很直接：Headroom compresses everything your AI agent reads before it reaches the LLM。它处理的不是最终回答，而是模型读到的输入。 典型来源包括： 工具输出，比如搜索结果、文件列表、API 返回 JSON； 构建和测试日志； RAG 检索出来的 chunk； 被 Agent 读进上下文的文件； 多轮对话历史。 坏的做法是把这些东西原封不动塞给模型。好的做法是先判断内容类型，再用不同策略压缩。 源码里的 TransformPipeline 也印证了这个思路。默认顺序大致是：先做 CacheAligner，再由 ContentRouter 接管内容感知压缩。ContentRouter 里明确写了路由策略：JSON array 走 SmartCrusher，日志走 LogCompressor，普通文本可走 Kompress，代码则尽量用 AST aware 的方式处理。 这点比“直接摘要一下工具输出”要可靠得多。日志、代码、JSON、普通文章不是一种东西，用同一个摘要器压缩，很容易把关键异常、结构字段或者代码语义抹掉。 2. 三种用法：代理、SDK、MCP Headroom 不是只给某一个 Agent 做插件。README 里列了几种入口： 如果你只是想先验证效果，最简单的是代理模式。 OpenAI 兼容客户端则可以这样接： 如果你在写自己的 Agent 或 RAG 服务，可以把它当库用，在调用模型前压缩 messages。 我的建议是：先用代理模式做旁路验证。它改动小，失败了也容易回滚。等你确认某类工作流确实节省 token，再考虑把 SDK 放进生产链路。 3. 它的关键设计：压缩不是一次性丢弃，而是可找回 传统压缩最怕什么？怕压掉了真正重要的信息。 Headroom 文档里有一个 CCR 设计，意思是 Compress Cache Retrieve。它会把原始内容缓存在本地，压缩后的内容里带引用。模型如果需要更多信息，可以通过 retrieval 工具把原文取回来。 文档里的例子是：1000 个 item 被 SmartCrusher 压到 20 个，原始数组用 hash 缓存。如果模型靠这 20 个 item 已经能解决问题，那就省掉大部分 token；如果不够，它再按 hash 取回完整数据。 这个设计的价值在于，它把“省 token”和“怕丢信息”的冲突缓和了。你不用一开始就把所有东西都喂进去，也不必完全赌压缩器不会犯错。 4. 能省多少？要看场景，不要只看最大数字 README 的 Proof 部分给了几个 Agent workload 数字： 项目文档 wiki/benchmarks.md 里还有更细的测试：JSON array、shell output、build log 都有明显压缩；但 grep results 和 Python source 在某些测试里是 0% 压缩，因为它们已经是相对紧凑或需要保真。 这反而是好事。一个可靠的压缩层不应该见什么都压。代码、搜索结果这类内容如果乱压，可能省了一点 token，最后把任务做错。 文档也写得比较克制：短对话的中位压缩只有 4.8%，长工具会话、JSON heavy、构建日志、多工具 Agent 才更明显。 5. 最小上手流程 如果你想在本地试一下，可以按这个顺序来。 第一步，安装： 第二步，跑一个本地代理： 第三步，把你的 Agent 指到代理。 Claude Code： OpenAI SDK： 第四步，看代理状态和节省情况： 如果你只想测试压缩服务，不想真的调用模型，文档里也提供了 /v1/compress。 6. 什么时候值得用，什么时候别急 值得试的情况： 你在重度使用 Claude Code、Codex、Cursor、Aider 这类 Agent； 工具调用多，日志、JSON、RAG 返回内容经常很长； 上下文窗口经常不够，或者成本/延迟明显上升； 团队愿意接受一个本地代理层，并能监控它的效果。 暂时没必要的情况： 只是偶尔问几句单轮问题； 主要是短 prompt，不跑工具链； 对供应链和代理层非常敏感，还没时间审计； 你的瓶颈是模型能力，而不是上下文噪声。..."
+      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
     },
     {
-      "title": "harness-anything：让 AI Agent 操控 WPS、Zotero 和设计软件",
-      "url": "/articles/2026/06/20/harness-anything-ai-control-hub.html",
+      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
       "type": "blog",
-      "date": "2026-06-20",
-      "description": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
-      "excerpt": "基于 yb2460/harness-anything 仓库 README、setup.py、SKILL 文档和源码，拆解这个项目如何把 WPS、Zotero、Photoshop、Illustrator 等桌面软件封装成 AI Agent 可调用的 CLI，并给出最小验证路径、适用边界和风险检查。",
-      "topic": "AI、Agent 与本地工具",
-      "topicSlug": "ai-agent",
+      "date": "2026-07-08",
+      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
       "series": "",
       "tags": [
-        "AI Agent",
-        "CLI",
-        "WPS",
-        "Zotero",
+        "Claude Code",
+        "AI 求职",
+        "LaTeX",
         "自动化",
         "开源项目"
       ],
       "priority": 0,
-      "content": "harness anything：让 AI Agent 操控 WPS、Zotero 和设计软件 AI Agent 最尴尬的地方，不是不会写一段 Python，而是它经常卡在真实软件前面。 写报告要用 WPS，整理文献要用 Zotero，做海报要用 Photoshop 或 Illustrator。人类点几下菜单就能完成的动作，对 Agent 来说反而像一堵墙。它能生成一段建议，却不一定能打开软件、改文档、导出文件。 harness anything 想解决的就是这件事：把这些桌面软件包一层命令行接口，让 Agent 像调用普通 CLI 一样调用 WPS、Zotero、Photoshop、Illustrator。 我本地查看的是提交 b3a42f0。GitHub API 显示项目约 852 stars、47 forks，MIT 许可。这个项目还很新，别把它当成成熟商业 RPA。但它的方向值得看：它不是让模型“描述怎么做”，而是给模型一个可以执行的控制层。 1. 它解决的不是“生成内容”，而是“操作软件” 很多 AI 工具停在内容生成层：写一段文字、给一份 Markdown、生成一段脚本。真正落地时，人还要把内容复制到 Office、改格式、导出 PDF、整理引用、处理图片。 harness anything 的思路更像“控制适配器”。它把桌面软件已有的可编程接口封装成 CLI： WPS 走 Windows COM，入口包括 KWPS.Application、KET.Application、KWPP.Application； Zotero 组合 Local API、GUI 选中上下文和本地数据； Photoshop / Illustrator 方向也走 COM 自动化； 上层统一提供命令、 json 输出、项目文件、REPL 和 Agent 使用说明。 这和“让模型生成一个 docx 文件”不太一样。后者经常绕开真实软件渲染，格式细节容易翻车。COM 自动化的好处是调用真实 WPS 或 Adobe 程序，让软件自己完成编辑和导出。 代价也很明确：Windows 依赖更重，软件必须安装好，GUI/COM 进程清理也要认真处理。 2. 先看 WPS：这是目前最完整的一条线 仓库里的 README CN.md 主要讲的是 cli anything wps。它把 WPS Writer、Calc、Impress 拆成三组能力。 Writer 能创建文档、添加段落/标题/列表/表格/图片/分页符，并导出 DOCX、PDF、TXT、HTML 等格式。Calc 能操作工作表、单元格、区域、公式和合并单元格，并导出 XLSX、CSV、PDF。Impress 能添加幻灯片、设置内容、添加元素，并导出 PPTX 或 PDF。 setup.py 里能看到 Python 包名是 cli anything wps，入口命令是： 依赖也写得比较清楚：Python 3.10+，click、prompt toolkit，以及仅在 Windows 上安装的 pywin32。 最小路径大概是这样： 然后新建一个 Writer 文档项目： 我这里是在 Linux 环境调研源码，不能实际启动 WPS COM 导出。仓库的 CONTRIBUTING.md 写了 WPS core 单测路径，cli anything/wps/tests/test core.py 覆盖文档创建、Writer、Calc、Impress、Session 等数据层操作；但真实导出仍然需要 Windows + WPS + pywin32。 这点别忽略。你要验证这个项目，最好找一台干净 Windows 机器，而不是在服务器上硬跑。 3. 为什么它对 Agent 友好： json、项目 JSON 和会话 一个 CLI 给人用和给 Agent 用，差别很大。 人可以读一屏文字，猜下一步怎么做。Agent 更需要稳定结构：命令执行成功了吗？输出文件在哪？当前项目是什么类型？下一步能不能撤销？ WPS harness 在这方面做了几件实用的小事： 所有命令都可以走 json。session.py 里还有项目状态、撤销/重做栈和最多 50 步历史。项目本身是 JSON，这意味着 Agent 可以把一次文档编辑拆成多步：先生成项目文件，再逐步添加内容，最后导出。 这比直接让模型吐一个复杂二进制文档可靠。中间态可检查，失败了也能知道失败在哪。 4. Zotero 线：更像科研工作流入口 cli anything/zotero/skills/SKILL.md 显示，Zotero harness 不是重写 Zotero，而是组合 Zotero 的真实本地能力。 它的命令组包括 app、collection、item、search、tag、style、import、note、session。几个典型动作： 限制也写得比较诚实：搜索、导出、引用和 bibliography 依赖 Zotero Local API；添加 note 依赖正在运行的 Zotero GUI 上下文；一些 SQLite 写入命令属于本地 power user 操作，不该当稳定接口乱用。 它更适合做“科研 Agent 的资料入口”：选中一批文献，提取..."
-    }
-  ],
-  "latestArticles": [
+      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
+    },
     {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
       "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
@@ -2851,66 +2969,6 @@
       ],
       "priority": 0,
       "content": "先说一个具体现场。 线上 Java 服务 CPU 打到 80%，但 top / htop 看不出是谁在烧、jstack 抓 5 次栈每次都不一样、JFR 打开觉得开销心里没底、VisualVM 附加过去看到的又只是抽样式的方法调用次数——这条链路你走过一次，就知道传统 Java profiler 有两个绕不开的死穴： 1. safepoint bias ——绝大多数「Java 采样式 profiler」采样时其实是在等 JVM 到达一个 safepoint，一旦你的热点代码在 loop 里被 JIT 编译成了 counted loop、里面根本不放 safepoint poll，profiler 就看不见它。你以为你在采「谁在烧 CPU」，其实你采的是「谁最快能停下来」。 2. 看不见 JVM 内部和内核栈 ——GC 线程、JIT 编译线程、glibc memcpy、内核 futex 等待——这些东西在传统 Java profiler 里全是「(Native method)」或者一片空白。你只看到自己那部分 Java 栈，看不到锅到底在 GC、JIT 还是内核。 async profiler/async profiler（GitHub，2026 年 4 月刚发 v4.4）是把这两件事都解掉了的一个 native agent。它已经在生产被用了差不多十年，是 Java 性能圈几乎所有排障文章都会提到的那一个工具。这一篇我把 4.4 版本的源码结构、六份核心文档（docs/CpuSamplingEngines.md、docs/ProfilingModes.md、docs/StackWalkingModes.md、docs/ProfilerOptions.md、docs/OutputFormats.md、docs/Heatmap.md）通读完，把它拆到能讲清楚每一个开关背后的机制。 一、痛点：Java 采样 profiler 的两个死穴 Safepoint bias 这四个字，Java 性能圈的老兵一听就知道说什么。传统的采样式 profiler 走的都是 JVMTI GetStackTrace——但这个 API 只能在 safepoint 生效。JVM 会在每个方法入口、循环回边、native 调用外围插「safepoint poll」，profiler 采样时其实是先请求 safepoint，等所有线程停在最近的 poll 上，然后再抓栈。这套机制的问题在于： 热点代码可能根本不到 safepoint 。JIT 会把 hot loop 编译成 counted loop（编译期能证明循环次数有限），counted loop 中间不放 safepoint poll——你在里面烧 CPU 也没人抓得到。 采样时机被扭曲 。你抓到的栈是「离 safepoint 最近的那一行」，不是「正在跑 CPU 的那一行」。这两者可能差得很远。 这就是 Nitsan Wakart 那篇著名博客 Why (Most) Sampling Java Profilers Are Fucking Terrible 的核心论点。async profiler 的名字来自 HotSpot 的 AsyncGetCallTrace——这是一个非标准的 JVM 内部 API，可以 在信号处理器里、不用 safepoint 就能取 Java 栈。这条路径避开了 safepoint bias，代价是要处理 AGCT 本身的一系列 corner case bug（后面会讲到 VM Structs 栈行走怎么绕过这个坑）。 第二个死穴是 看不见 JVM 内部和内核栈 。传统 Java profiler 只在 Java 层面工作，看到的都是 Java 类名。但真实的性能问题经常出在别处： GC 线程在跑 Young GC / Full GC； JIT 编译线程在编 C2； Java 代码通过 JNI 调进了一段 native 库； 你的 read() 在内核里等 I/O； 你的 synchronized 在内核里等 futex 唤醒。 async profiler 用的是 混合栈行走 ：perf events 抓内核栈 + VM Structs 或 AsyncGetCallTrace 抓 Java/JVM 栈，然后把两条栈 在信号处理器里当场对齐 ，最后画出来的一张火焰图里，Java 方法（绿色）、JDK 内联（青色）、JVM 内部 C++（黄色）、native 库（红色/黄色）、内核（橙色） 共存于同一根调用栈 。 看一眼实际输出你就懂了： 图里最左边黄绿色的 GenCollectedHeap::collect generation → DefNewGeneration::collect 是 JVM 内部的 GC C++ 栈，中间一大片绿色的 java/util/stream/ → TimSort.sort 是你的应用代码，右上角橙色的一柱是内核栈——这些东西 同时出现 在一张图里。传统 Java profiler 只能给你中间那块绿色。 二、方案：三种 CPU 采样引擎 × 三种栈行走模式 async profiler 的可配置面，本质上是「怎么触发采样」和「怎么把栈抓..."
-    },
-    {
-      "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
-      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
-      "type": "blog",
-      "date": "2026-07-03",
-      "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
-      "excerpt": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI Terminal",
-        "Tauri",
-        "Rust",
-        "Agent Skills",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说结论。 绝大多数「AI 终端」的做法，是在旧终端旁边挂一个 chat 面板：右侧多一列，输入框里塞一段 prompt，回车把答案打在窗口里。这套做法上手快，但它治不了一件事——真正的终端工作永远发生在 当前工作目录里，和当前的进程共享同一颗心跳 。侧栏拿不到你正在跑的服务、拿不到 shell 的退出码、拿不到你刚刚 stage 但还没 commit 的 diff。它只是一个更贵的浏览器书签。 crynta/terax ai 走的是另一条路。它不是把 AI 塞进终端，而是把终端重新设计成「AI 天生就是一等原语」的形态。 我把它的仓库拉下来，通读了 20k 字的 TERAX.md（这个仓库自己的架构文档，也是它塞给 AI Agent 当项目记忆的那份），然后按源码往下摸。这一篇是我对它的完整判断——包括谁应该现在装、谁再等一等、以及它跟 Warp、Wave、Cursor、iTerm2 的真实边界。 一个具体的差距：调 AI 修一个跑挂的 dev server 先摆一个真实场景。你在跑一个 pnpm dev，端口 3000，控制台开始报一个组件里的 hydration mismatch。传统流程是： 1. 复制报错，切窗口到 Cursor 或者浏览器。 2. 粘到 chat 里，AI 说：需要看那个组件的代码。 3. 你再复制粘贴文件路径、内容、prompt、context…… 4. AI 给个改法，你再切回终端手动改。 5. 保存，等热更新，看结果。 这中间发生了什么？你和 AI 之间隔着 四层复制粘贴 。终端知道 cwd、编辑器知道文件树、浏览器知道报错、chat 什么都不知道——只知道你此刻塞给它的那点字符串。 Terax 的做法是这样：AI Agent 挂在同一个进程里，能直接调用「当前活跃 tab 的 cwd + 缓冲区末尾 300 行」（源码里叫 live context bridge，App.tsx 里 setLive 那一段），能调 read file / fs grep 自动读文件，能开 shell bg spawn 后台跑命令，甚至能通过 sub agent 拆任务。 你只需要说「fix 这个 hydration 错误」，剩下的动作它自己完成 。写文件之前会弹一个 diff 让你 hunk by hunk 接受，跑 shell 会弹一个审批卡片，防止它 rm rf。 这才叫「AI 是一等原语」。不是 UI 上多一列，是 架构上让 AI 直接摸到终端的状态 。 项目一句话说清 Terax 是一个用 Tauri 2 + Rust 做后端、 React 19 + xterm.js 做前端的开源桌面终端，产物只有 7 8 MB。它把多标签终端、代码编辑器、文件浏览器、带 commit graph 的 git 面板、本地 dev server 预览、以及一个可以调 BYOK 云端模型或本地模型的 Agent 工作流塞进同一个可执行文件里。密钥进操作系统钥匙串，不做遥测，不需要注册账户。 跨平台：macOS、Linux（deb / rpm / AppImage）、Windows（NSIS + WebView2），Windows 上 WSL 是一等 workspace 环境，不是套壳。 许可证 Apache 2.0。 我看过太多号称「AI 原生」但实际上是套壳的项目，Terax 是少数 从进程模型开始就把 AI 当基础设施 的。 架构：两进程模型是它一切能力的根 这张图是我读完 TERAX.md 之后最想第一时间画出来的。所有 OS 层能力都在 Rust 侧，webview 从不直接触碰 FS、进程或网络——所有跨界调用走 invoke()。 Rust 侧划分得很干净（都能在 src tauri/src/lib.rs 里找到对应命令）： pty:: — portable pty 拉起的长生命周期 PTY 会话，输出通过 Tauri Channel 流式回前端。 fs::tree:: / fs::file:: / fs::mutate:: / fs::search:: / fs::grep:: — 文件浏览器和编辑器 IO、模糊查找、内容搜索（基于 ignore + grep crate）。 git::commands:: — 一整套 git surface：git status、git diff、git stage、git commit、git fetch、git pull ff only、git push、git log、git show commit……都走 workspace 授权注册表。 shell::shell run command / shell::shell session / shell::shell bg — 三档 shell：一次性执行、跨调用状态的会话、以及带环形日志的后台进程（dev 服务器就靠这个）。 net::ai http request / ai http stream / lm ping — 带 SSRF 防护的 AI HTTP 代理。所有 provider 调用不从 webview 直接出，从 Rust 出，天然避开了浏览器同源和 CSP 的一堆坑。 secrets::sec..."
-    },
-    {
-      "title": "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill",
-      "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator/",
-      "type": "blog",
-      "date": "2026-07-03",
-      "description": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
-      "excerpt": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "Agent Skill",
-        "架构图",
-        "Diagrams as Code",
-        "Claude",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说个具体的场景。 你正在写一份技术方案评审文档，需要一张架构图：React 前端调 Node API，Postgres 做主库，Redis 挡在前面做缓存，JWT 鉴权，CDN 卡在 CloudFront 上。三年前你会打开 draw.io，拖二十个盒子，连三十条线，配一套自己觉得还行的颜色，导一张 PNG。半小时。改一个组件位置，再花十分钟。 这几年常见的替代是 Mermaid。你写一段 DSL，浏览器渲一张图。快，但那张图长得像所有别人写出来的 Mermaid：一个自动布局把方块摆成网格，语义颜色你不管就没有，安全边界你不写就没有——它是 流程图 ，不是 架构图 。 tt a1i/archify 是一条第三路：把画图这件事完全塞进 agent。你在 Claude Code 或者 Codex CLI 里用大白话描述系统，它调用一个叫 archify 的 skill，输出一个 单文件 HTML ——里面是一整张 SVG，深浅色一键切，导 PNG / JPEG / WebP 都是浏览器 4× 原生光栅化，SVG 甚至自带两套主题变量，贴进 GitHub README 后跟随读者的 prefers color scheme 自动切色。 我把仓库拉下来，通读了 README.md、archify/SKILL.md、五套 schema、CHANGELOG 从 2.0 一路到 2.8——这篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Mermaid、draw.io、Excalidraw 的真实边界在哪里 。 反例：那些\"看着不错\"的 AI 画图工具，问题出在哪 先摆一个大多数 AI 画图工具的通病。 它们的产品叙事都是\"聊天式作图\"：你说\"给我画一张 SaaS 架构\"，它给你一张图。听着丝滑，实际用下来往往是： 布局是自动的 。dagre、ELK 之类布局引擎会把节点摊成一个均匀网格。八个组件的图看起来跟四十个组件的图布局逻辑一样，节奏感是没有的。 语义色是没有的 。所有盒子是同一种蓝，你说\"鉴权用玫红\"，它下一次生成又忘了。 边界画不出来 。VPC、安全组、PII 边界这些\"包住一组节点\"的概念，Mermaid 靠 subgraph，draw.io 靠手拖，两者都在自动布局里塌成一坨。 改一个组件位置就整张图漂 。你说\"把 Redis 挪到左边\"，坐标系里所有节点跟着重排。 真实的架构图不是这样看的。真实的架构图里，Auth Provider 就应该 画在 AWS 区域框外面（因为它是 Auth0 或者 Cognito 边缘服务），S3 就应该 画在 CloudFront 下方（因为读者从上到下扫图会自然理解成 \"CDN 回源到 S3\"）。 布局本身就是信息 。 Archify 的 ROADMAP.md 里有一段话把这件事说得很明白： 自动布局 (dagre / elk js) 对 archify 是一条死路。审美——Auth Provider 特意画在 AWS 区域外面、S3 特意放在 CloudFront 下方来暗示服务关系、30/50 padding 的安全组边界、legend 嵌在死角、总结卡片—— 这些布局决策本身就是产品 。 Archify 的选择是让 布局回到 LLM 手里 ：Claude 决定坐标、Claude 决定颜色语义、Claude 决定边界——archify 只提供五套渲染器 + schema 校验 + 一套 CSS 变量主题系统，把机械的事挡下来，把审美判断留给 Claude。 机制：从大白话到\"能贴到任何地方的一张图\" archify 的核心是一条六段流水线。 自然语言 → JSON IR → Renderer → SVG + HTML → Checker → 导出。每一段的分工： 自然语言 / Mermaid 输入。 用户在 chat 里描述系统，也可以粘一段 Mermaid。SKILL.md 明确写：粘 Mermaid 不走 parser，只读结构，然后 从零重新布局 。作者做过一个专门的实验（experiments/v3 mermaid validation/），结论是 Mermaid + archify CSS 并不比原生 Mermaid 明显更好看——所以 Mermaid 只是输入方言，不是渲染目标。 JSON IR。 中间格式是 JSON，不是 YAML。原因写在 ROADMAP 里：LLM 生成 YAML 的\"看着对、解析错\"比例高，缩进敏感、行内流式 pos: [40, 80] 和 sublabel: \"Redis :6379\" 都会撞 YAML 的引号陷阱。JSON 有明确的解析规则、原生 JSON.parse、成熟的 JSON Schema 校验，git diff 友好度也够用。 Renderer。 五套渲染器：architecture / workflow / sequence / dataflow / lifecycle。每一套有自己的 schema（archify/schemas/ .schema.json）和 example（archify/examples/ .json），LLM 照着 example 抄字段结构比自己想着写靠谱。..."
-    },
-    {
-      "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-      "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
-      "type": "blog",
-      "date": "2026-07-02",
-      "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-      "excerpt": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-      "topic": "AI Agent",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Agent Skills",
-        "开源项目",
-        "情报聚合",
-        "GitHub Trending"
-      ],
-      "priority": 0,
-      "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
     }
   ],
   "tutorials": [
@@ -3877,7 +3935,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 20,
+      "count": 21,
       "slug": "ai-agent",
       "core": false,
       "priority": 77,
@@ -4316,6 +4374,26 @@
           ],
           "priority": 0,
           "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
+        },
+        {
+          "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+          "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+          "type": "blog",
+          "date": "2026-07-08",
+          "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+          "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Claude Code",
+            "Cursor",
+            "Hermes",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
         }
       ],
       "articleTitles": [
@@ -4338,7 +4416,8 @@
         "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
         "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
         "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-        "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器"
+        "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
+        "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes"
       ]
     },
     {
@@ -5890,6 +5969,66 @@
   ],
   "recentUpdates": [
     {
+      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+      "type": "文章",
+      "date": "2026-07-10",
+      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Codex",
+        "tldraw",
+        "MCP",
+        "AI 画布",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
+    },
+    {
+      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+      "type": "文章",
+      "date": "2026-07-08",
+      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+      "topic": "AI Agent",
+      "topicSlug": "ai-agent",
+      "series": "",
+      "tags": [
+        "AI Agent",
+        "Claude Code",
+        "Cursor",
+        "Hermes",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
+    },
+    {
+      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+      "type": "文章",
+      "date": "2026-07-08",
+      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
+      "topic": "AI 工作流",
+      "topicSlug": "ai-workflow",
+      "series": "",
+      "tags": [
+        "Claude Code",
+        "AI 求职",
+        "LaTeX",
+        "自动化",
+        "开源项目"
+      ],
+      "priority": 0,
+      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
+    },
+    {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
       "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
       "type": "文章",
@@ -5928,66 +6067,6 @@
       ],
       "priority": 0,
       "content": "先说一个具体现场。 线上 Java 服务 CPU 打到 80%，但 top / htop 看不出是谁在烧、jstack 抓 5 次栈每次都不一样、JFR 打开觉得开销心里没底、VisualVM 附加过去看到的又只是抽样式的方法调用次数——这条链路你走过一次，就知道传统 Java profiler 有两个绕不开的死穴： 1. safepoint bias ——绝大多数「Java 采样式 profiler」采样时其实是在等 JVM 到达一个 safepoint，一旦你的热点代码在 loop 里被 JIT 编译成了 counted loop、里面根本不放 safepoint poll，profiler 就看不见它。你以为你在采「谁在烧 CPU」，其实你采的是「谁最快能停下来」。 2. 看不见 JVM 内部和内核栈 ——GC 线程、JIT 编译线程、glibc memcpy、内核 futex 等待——这些东西在传统 Java profiler 里全是「(Native method)」或者一片空白。你只看到自己那部分 Java 栈，看不到锅到底在 GC、JIT 还是内核。 async profiler/async profiler（GitHub，2026 年 4 月刚发 v4.4）是把这两件事都解掉了的一个 native agent。它已经在生产被用了差不多十年，是 Java 性能圈几乎所有排障文章都会提到的那一个工具。这一篇我把 4.4 版本的源码结构、六份核心文档（docs/CpuSamplingEngines.md、docs/ProfilingModes.md、docs/StackWalkingModes.md、docs/ProfilerOptions.md、docs/OutputFormats.md、docs/Heatmap.md）通读完，把它拆到能讲清楚每一个开关背后的机制。 一、痛点：Java 采样 profiler 的两个死穴 Safepoint bias 这四个字，Java 性能圈的老兵一听就知道说什么。传统的采样式 profiler 走的都是 JVMTI GetStackTrace——但这个 API 只能在 safepoint 生效。JVM 会在每个方法入口、循环回边、native 调用外围插「safepoint poll」，profiler 采样时其实是先请求 safepoint，等所有线程停在最近的 poll 上，然后再抓栈。这套机制的问题在于： 热点代码可能根本不到 safepoint 。JIT 会把 hot loop 编译成 counted loop（编译期能证明循环次数有限），counted loop 中间不放 safepoint poll——你在里面烧 CPU 也没人抓得到。 采样时机被扭曲 。你抓到的栈是「离 safepoint 最近的那一行」，不是「正在跑 CPU 的那一行」。这两者可能差得很远。 这就是 Nitsan Wakart 那篇著名博客 Why (Most) Sampling Java Profilers Are Fucking Terrible 的核心论点。async profiler 的名字来自 HotSpot 的 AsyncGetCallTrace——这是一个非标准的 JVM 内部 API，可以 在信号处理器里、不用 safepoint 就能取 Java 栈。这条路径避开了 safepoint bias，代价是要处理 AGCT 本身的一系列 corner case bug（后面会讲到 VM Structs 栈行走怎么绕过这个坑）。 第二个死穴是 看不见 JVM 内部和内核栈 。传统 Java profiler 只在 Java 层面工作，看到的都是 Java 类名。但真实的性能问题经常出在别处： GC 线程在跑 Young GC / Full GC； JIT 编译线程在编 C2； Java 代码通过 JNI 调进了一段 native 库； 你的 read() 在内核里等 I/O； 你的 synchronized 在内核里等 futex 唤醒。 async profiler 用的是 混合栈行走 ：perf events 抓内核栈 + VM Structs 或 AsyncGetCallTrace 抓 Java/JVM 栈，然后把两条栈 在信号处理器里当场对齐 ，最后画出来的一张火焰图里，Java 方法（绿色）、JDK 内联（青色）、JVM 内部 C++（黄色）、native 库（红色/黄色）、内核（橙色） 共存于同一根调用栈 。 看一眼实际输出你就懂了： 图里最左边黄绿色的 GenCollectedHeap::collect generation → DefNewGeneration::collect 是 JVM 内部的 GC C++ 栈，中间一大片绿色的 java/util/stream/ → TimSort.sort 是你的应用代码，右上角橙色的一柱是内核栈——这些东西 同时出现 在一张图里。传统 Java profiler 只能给你中间那块绿色。 二、方案：三种 CPU 采样引擎 × 三种栈行走模式 async profiler 的可配置面，本质上是「怎么触发采样」和「怎么把栈抓..."
-    },
-    {
-      "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
-      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
-      "type": "文章",
-      "date": "2026-07-03",
-      "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
-      "excerpt": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI Terminal",
-        "Tauri",
-        "Rust",
-        "Agent Skills",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说结论。 绝大多数「AI 终端」的做法，是在旧终端旁边挂一个 chat 面板：右侧多一列，输入框里塞一段 prompt，回车把答案打在窗口里。这套做法上手快，但它治不了一件事——真正的终端工作永远发生在 当前工作目录里，和当前的进程共享同一颗心跳 。侧栏拿不到你正在跑的服务、拿不到 shell 的退出码、拿不到你刚刚 stage 但还没 commit 的 diff。它只是一个更贵的浏览器书签。 crynta/terax ai 走的是另一条路。它不是把 AI 塞进终端，而是把终端重新设计成「AI 天生就是一等原语」的形态。 我把它的仓库拉下来，通读了 20k 字的 TERAX.md（这个仓库自己的架构文档，也是它塞给 AI Agent 当项目记忆的那份），然后按源码往下摸。这一篇是我对它的完整判断——包括谁应该现在装、谁再等一等、以及它跟 Warp、Wave、Cursor、iTerm2 的真实边界。 一个具体的差距：调 AI 修一个跑挂的 dev server 先摆一个真实场景。你在跑一个 pnpm dev，端口 3000，控制台开始报一个组件里的 hydration mismatch。传统流程是： 1. 复制报错，切窗口到 Cursor 或者浏览器。 2. 粘到 chat 里，AI 说：需要看那个组件的代码。 3. 你再复制粘贴文件路径、内容、prompt、context…… 4. AI 给个改法，你再切回终端手动改。 5. 保存，等热更新，看结果。 这中间发生了什么？你和 AI 之间隔着 四层复制粘贴 。终端知道 cwd、编辑器知道文件树、浏览器知道报错、chat 什么都不知道——只知道你此刻塞给它的那点字符串。 Terax 的做法是这样：AI Agent 挂在同一个进程里，能直接调用「当前活跃 tab 的 cwd + 缓冲区末尾 300 行」（源码里叫 live context bridge，App.tsx 里 setLive 那一段），能调 read file / fs grep 自动读文件，能开 shell bg spawn 后台跑命令，甚至能通过 sub agent 拆任务。 你只需要说「fix 这个 hydration 错误」，剩下的动作它自己完成 。写文件之前会弹一个 diff 让你 hunk by hunk 接受，跑 shell 会弹一个审批卡片，防止它 rm rf。 这才叫「AI 是一等原语」。不是 UI 上多一列，是 架构上让 AI 直接摸到终端的状态 。 项目一句话说清 Terax 是一个用 Tauri 2 + Rust 做后端、 React 19 + xterm.js 做前端的开源桌面终端，产物只有 7 8 MB。它把多标签终端、代码编辑器、文件浏览器、带 commit graph 的 git 面板、本地 dev server 预览、以及一个可以调 BYOK 云端模型或本地模型的 Agent 工作流塞进同一个可执行文件里。密钥进操作系统钥匙串，不做遥测，不需要注册账户。 跨平台：macOS、Linux（deb / rpm / AppImage）、Windows（NSIS + WebView2），Windows 上 WSL 是一等 workspace 环境，不是套壳。 许可证 Apache 2.0。 我看过太多号称「AI 原生」但实际上是套壳的项目，Terax 是少数 从进程模型开始就把 AI 当基础设施 的。 架构：两进程模型是它一切能力的根 这张图是我读完 TERAX.md 之后最想第一时间画出来的。所有 OS 层能力都在 Rust 侧，webview 从不直接触碰 FS、进程或网络——所有跨界调用走 invoke()。 Rust 侧划分得很干净（都能在 src tauri/src/lib.rs 里找到对应命令）： pty:: — portable pty 拉起的长生命周期 PTY 会话，输出通过 Tauri Channel 流式回前端。 fs::tree:: / fs::file:: / fs::mutate:: / fs::search:: / fs::grep:: — 文件浏览器和编辑器 IO、模糊查找、内容搜索（基于 ignore + grep crate）。 git::commands:: — 一整套 git surface：git status、git diff、git stage、git commit、git fetch、git pull ff only、git push、git log、git show commit……都走 workspace 授权注册表。 shell::shell run command / shell::shell session / shell::shell bg — 三档 shell：一次性执行、跨调用状态的会话、以及带环形日志的后台进程（dev 服务器就靠这个）。 net::ai http request / ai http stream / lm ping — 带 SSRF 防护的 AI HTTP 代理。所有 provider 调用不从 webview 直接出，从 Rust 出，天然避开了浏览器同源和 CSP 的一堆坑。 secrets::sec..."
-    },
-    {
-      "title": "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill",
-      "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator/",
-      "type": "文章",
-      "date": "2026-07-03",
-      "description": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
-      "excerpt": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "Agent Skill",
-        "架构图",
-        "Diagrams as Code",
-        "Claude",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说个具体的场景。 你正在写一份技术方案评审文档，需要一张架构图：React 前端调 Node API，Postgres 做主库，Redis 挡在前面做缓存，JWT 鉴权，CDN 卡在 CloudFront 上。三年前你会打开 draw.io，拖二十个盒子，连三十条线，配一套自己觉得还行的颜色，导一张 PNG。半小时。改一个组件位置，再花十分钟。 这几年常见的替代是 Mermaid。你写一段 DSL，浏览器渲一张图。快，但那张图长得像所有别人写出来的 Mermaid：一个自动布局把方块摆成网格，语义颜色你不管就没有，安全边界你不写就没有——它是 流程图 ，不是 架构图 。 tt a1i/archify 是一条第三路：把画图这件事完全塞进 agent。你在 Claude Code 或者 Codex CLI 里用大白话描述系统，它调用一个叫 archify 的 skill，输出一个 单文件 HTML ——里面是一整张 SVG，深浅色一键切，导 PNG / JPEG / WebP 都是浏览器 4× 原生光栅化，SVG 甚至自带两套主题变量，贴进 GitHub README 后跟随读者的 prefers color scheme 自动切色。 我把仓库拉下来，通读了 README.md、archify/SKILL.md、五套 schema、CHANGELOG 从 2.0 一路到 2.8——这篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Mermaid、draw.io、Excalidraw 的真实边界在哪里 。 反例：那些\"看着不错\"的 AI 画图工具，问题出在哪 先摆一个大多数 AI 画图工具的通病。 它们的产品叙事都是\"聊天式作图\"：你说\"给我画一张 SaaS 架构\"，它给你一张图。听着丝滑，实际用下来往往是： 布局是自动的 。dagre、ELK 之类布局引擎会把节点摊成一个均匀网格。八个组件的图看起来跟四十个组件的图布局逻辑一样，节奏感是没有的。 语义色是没有的 。所有盒子是同一种蓝，你说\"鉴权用玫红\"，它下一次生成又忘了。 边界画不出来 。VPC、安全组、PII 边界这些\"包住一组节点\"的概念，Mermaid 靠 subgraph，draw.io 靠手拖，两者都在自动布局里塌成一坨。 改一个组件位置就整张图漂 。你说\"把 Redis 挪到左边\"，坐标系里所有节点跟着重排。 真实的架构图不是这样看的。真实的架构图里，Auth Provider 就应该 画在 AWS 区域框外面（因为它是 Auth0 或者 Cognito 边缘服务），S3 就应该 画在 CloudFront 下方（因为读者从上到下扫图会自然理解成 \"CDN 回源到 S3\"）。 布局本身就是信息 。 Archify 的 ROADMAP.md 里有一段话把这件事说得很明白： 自动布局 (dagre / elk js) 对 archify 是一条死路。审美——Auth Provider 特意画在 AWS 区域外面、S3 特意放在 CloudFront 下方来暗示服务关系、30/50 padding 的安全组边界、legend 嵌在死角、总结卡片—— 这些布局决策本身就是产品 。 Archify 的选择是让 布局回到 LLM 手里 ：Claude 决定坐标、Claude 决定颜色语义、Claude 决定边界——archify 只提供五套渲染器 + schema 校验 + 一套 CSS 变量主题系统，把机械的事挡下来，把审美判断留给 Claude。 机制：从大白话到\"能贴到任何地方的一张图\" archify 的核心是一条六段流水线。 自然语言 → JSON IR → Renderer → SVG + HTML → Checker → 导出。每一段的分工： 自然语言 / Mermaid 输入。 用户在 chat 里描述系统，也可以粘一段 Mermaid。SKILL.md 明确写：粘 Mermaid 不走 parser，只读结构，然后 从零重新布局 。作者做过一个专门的实验（experiments/v3 mermaid validation/），结论是 Mermaid + archify CSS 并不比原生 Mermaid 明显更好看——所以 Mermaid 只是输入方言，不是渲染目标。 JSON IR。 中间格式是 JSON，不是 YAML。原因写在 ROADMAP 里：LLM 生成 YAML 的\"看着对、解析错\"比例高，缩进敏感、行内流式 pos: [40, 80] 和 sublabel: \"Redis :6379\" 都会撞 YAML 的引号陷阱。JSON 有明确的解析规则、原生 JSON.parse、成熟的 JSON Schema 校验，git diff 友好度也够用。 Renderer。 五套渲染器：architecture / workflow / sequence / dataflow / lifecycle。每一套有自己的 schema（archify/schemas/ .schema.json）和 example（archify/examples/ .json），LLM 照着 example 抄字段结构比自己想着写靠谱。..."
-    },
-    {
-      "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-      "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
-      "type": "文章",
-      "date": "2026-07-02",
-      "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-      "excerpt": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-      "topic": "AI Agent",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Agent Skills",
-        "开源项目",
-        "情报聚合",
-        "GitHub Trending"
-      ],
-      "priority": 0,
-      "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
     },
     {
       "title": "第01章：MySQL概述与安装",
