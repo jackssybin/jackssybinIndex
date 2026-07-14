@@ -2542,7 +2542,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 4,
+    "count": 5,
     "slug": "tools-blog",
     "core": false,
     "priority": 80,
@@ -2627,13 +2627,38 @@
         ],
         "priority": 0,
         "content": "1.社区 https://rustlang cn.org/ 2.环境安装 windows 下载地址 https://www.rust lang.org/install.html 下载完之后》rustup init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 我安装完，报错了 no default toolchain configured 执行命令 更行版本 卸载rust 3.hello word 走一波 新建文件main.rs编写程序 然后编译一下 rustc main.rs 生成编译文件 和可执行文件如图 看生成了 main.exe 文件 windows用.\\main.exe 执行一下这个可执行文件。看看效果哈。 熟悉的世界你好。跃然屏幕上。心情很好。没遇到啥问题很好哈 学习了hello word 然后再看看rust的依赖包管理工具cargo 4.hello cargo 接着干 Cargo 是 Rust 的构建系统和包管理器，它可以处理很多任务，比如构建代码、下载依赖库并编译这些库。 官方默认是安装了的 version查看一下 5.使用 Cargo 创建项目 运行完这个命令会自动给你生成一个helloword文件的哈。切换到跟目录build一下 效果图如下 cargo.lock文件系统用的，不用管他，也不要修改他 生成的文件在target\\debug下面 熟悉的helloword 又出现了。 接着说下发布。 总结一下啊 1. rust安装 1. rust运行命令 rustc main.rs 1. cargo命令：cargo version, cargo new hello cargo,cargo build,cargo check,cargo run,cargo build release git已上传：https://github.com/jackssybin/rust items.git 友链：https://blog.csdn.net/jackssybin/article/details/101109616"
+      },
+      {
+        "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+        "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+        "type": "blog",
+        "date": "2026-07-14",
+        "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+        "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+        "topic": "工具、效率与博客建设",
+        "topicSlug": "tools-blog",
+        "series": "",
+        "tags": [
+          "开源策略",
+          "边界设计",
+          "better-douyin",
+          "Open Shell",
+          "GitHub",
+          "抖音",
+          "工程实践",
+          "React",
+          "TypeScript"
+        ],
+        "priority": 0,
+        "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
       }
     ],
     "articleTitles": [
       "Drools语法",
       "wireshark安装和基本语法",
       "Rust学习之二猜字谜",
-      "Rust 学习一之环境安装"
+      "Rust 学习一之环境安装",
+      "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解"
     ]
   }
 ]

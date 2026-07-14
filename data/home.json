@@ -1,6 +1,30 @@
 {
   "allArticles": [
     {
+      "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+      "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+      "type": "blog",
+      "date": "2026-07-14",
+      "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "topic": "工具、效率与博客建设",
+      "topicSlug": "tools-blog",
+      "series": "",
+      "tags": [
+        "开源策略",
+        "边界设计",
+        "better-douyin",
+        "Open Shell",
+        "GitHub",
+        "抖音",
+        "工程实践",
+        "React",
+        "TypeScript"
+      ],
+      "priority": 0,
+      "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
+    },
+    {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
       "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
       "type": "blog",
@@ -2468,6 +2492,30 @@
   ],
   "articles": [
     {
+      "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+      "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+      "type": "blog",
+      "date": "2026-07-14",
+      "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "topic": "工具、效率与博客建设",
+      "topicSlug": "tools-blog",
+      "series": "",
+      "tags": [
+        "开源策略",
+        "边界设计",
+        "better-douyin",
+        "Open Shell",
+        "GitHub",
+        "抖音",
+        "工程实践",
+        "React",
+        "TypeScript"
+      ],
+      "priority": 0,
+      "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
+    },
+    {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
       "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
       "type": "blog",
@@ -2846,30 +2894,33 @@
       ],
       "priority": 0,
       "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
-    },
-    {
-      "title": "Harness：用一句话生成 Claude Code 的 Agent 团队",
-      "url": "/articles/2026/06/22/revfactory-harness-agent-team-factory.html",
-      "type": "blog",
-      "date": "2026-06-22",
-      "description": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
-      "excerpt": "基于 revfactory/harness README、plugin manifest、Quickstart、SKILL 与 agent design pattern 文档，拆解这个 Claude Code 插件如何从一句领域描述生成 Agent 团队与 skills，并给出上手路径、适用边界和风险判断。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Claude Code",
-        "多 Agent",
-        "开源项目",
-        "Prompt Engineering",
-        "自动化"
-      ],
-      "priority": 0,
-      "content": "Harness：用一句话生成 Claude Code 的 Agent 团队 很多团队第一次用 AI 写代码，都会走到同一个尴尬点：提示词越写越长，Agent 的角色越来越多，但这些东西只存在聊天记录里。 今天让它做架构师，明天让它做 reviewer，后天又让它当测试工程师。每次都要重新解释背景、分工、输出格式和验收标准。项目一复杂，所谓“多 Agent 协作”就变成了人肉调度。 revfactory/harness 解决的不是“再给你一组万能 Prompt”，而是把团队结构写进项目。你给它一句领域描述，它在 Claude Code 项目里生成 .claude/agents/ 和 .claude/skills/，让不同 Agent 有自己的角色、协作协议和执行方法。 我本地调研的是 revfactory/harness 的 main 分支提交 cceac68。GitHub API 显示项目约 7.1k stars、998 forks，Apache 2.0 License，仓库主语言显示为 HTML。下面不是 README 翻译，而是按“它到底解决什么、怎么用、风险在哪里”来拆。 1. 它不是 Prompt 合集，而是团队架构工厂 Harness 在 README 里的自我定位很直接：The Team Architecture Factory for Claude Code。 这句话比“多 Agent 工具”更准确。 普通 Prompt 合集解决的是一句话怎么写。Harness 解决的是：一个复杂任务里，应该有哪些角色，它们怎么分工，谁先做，谁复核，哪些工作适合并行，哪些工作必须顺序推进。 它预置了 6 种团队架构模式： 这 6 种模式覆盖了常见的 AI 工作流： 这背后的判断很实用：很多失败的 Agent 项目，不是模型不会回答，而是团队结构没设计。你把研究、实现、测试、安全审查、文档全部塞给一个 Agent，它当然容易漏东西。 差的做法是： 更好的做法是： Harness 想把后一种做法变成项目资产，而不是每次重新口述。 2. 它实际会生成什么 README 和 quickstart 都写得很清楚：安装后，在 Claude Code 里说类似下面的话： Harness 会根据你的领域描述生成两类目录： 我看了 skills/harness/SKILL.md，它不是简单让模型“自由发挥”。里面有一套比较明确的流程： Phase 0：先审计项目里已有的 .claude/agents/、.claude/skills/ 和 CLAUDE.md，避免重复造角色； Phase 1：分析领域和任务类型； Phase 2：选择团队架构模式； Phase 3：生成 agent 定义； Phase 4：生成 skill； Phase 5：把团队组织起来，写清楚数据怎么传、错误怎么处理； Phase 6：验证与测试。 这里有个细节值得注意：Harness 强调 agent 和 skill 分开。 Agent 回答“谁来做”：架构师、实现者、QA、研究员。Skill 回答“怎么做”：如何审查 API shape，如何写测试，如何抽取资料，如何输出检查表。 这比把所有规则都塞进一个长 Prompt 更利于维护。一个角色可以换技能，一个技能也可以被多个角色复用。 3. 最小上手路径 Quickstart 给出的目标是 5 分钟跑通。前置条件是 Claude Code v2.x 或更高，能访问 GitHub 和 Anthropic API，并且要启用 Agent Teams 实验开关。 按 quickstart 的写法，命令大概是： README 里也保留了 Claude Code 内部 slash command 风格的写法： 如果你本地 Claude Code 版本不同，两种命令可能表现不一样。我的建议是：先按 docs/quickstart.md 里的 CLI 命令执行；如果插件没有出现在列表里，再用 claude plugin list、claude plugin enable harness@harness 检查状态。 生成后至少做两件事： 然后丢一个真实任务给它，而不是只看文件是否存在。比如 README 里的金融风控例子：让团队对一个中型制造企业的 500 万美元授信申请做一页风险评估，覆盖信用历史、行业集中度和监管风险。 这个例子好在足够复杂。只有复杂任务，才能看出“团队结构”是不是有价值。 4. 它最值得看的工程点：把协作规则文件化 很多多 Agent Demo 的问题是，运行时看起来热闹，结束后什么也没留下。下次要复现同样的工作流，还得靠人记得上次怎么分工。 Harness 的产物是 Markdown 文件。这一点朴素，但很关键。 .claude/agents/ .md 里应该写角色、工作原则、输入输出协议、错误处理、团队通信协议；.claude/skills/ /SKILL.md 里写具体执行步骤和可选 reference。CLAUDE.md 只留下触发规则和变更记录，不把所有细节堆进去。 这是一种很现实的工程取舍： 从团队管理角度看，Harness 更像“AI 团队脚手架”。它的价值不是第一次生成有多惊艳，而是后续能不能被..."
     }
   ],
   "latestArticles": [
+    {
+      "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+      "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+      "type": "blog",
+      "date": "2026-07-14",
+      "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "topic": "工具、效率与博客建设",
+      "topicSlug": "tools-blog",
+      "series": "",
+      "tags": [
+        "开源策略",
+        "边界设计",
+        "better-douyin",
+        "Open Shell",
+        "GitHub",
+        "抖音",
+        "工程实践",
+        "React",
+        "TypeScript"
+      ],
+      "priority": 0,
+      "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
+    },
     {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
       "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
@@ -2949,26 +3000,6 @@
       ],
       "priority": 0,
       "content": "先说一个具体的场景。 你手里有一本 8 万字的小说，觉得改成短视频能火。要做的事按行业惯例大致是这样：先把稿子拆成一集一集，每集再拆成三十来个分镜，然后一个个开 AI 生图工具画角色、画场景、画分镜，再把每一张导进另一个视频生成平台做图生视频，最后所有 4 秒片段丢进剪映拼起来，配音、加字幕、配音乐。 这是一份 工具编排工作 ，不是创作工作。真做过的人都知道，八成的时间花在这里：文件在本地和五六个平台之间来回搬，角色在这一场戴帽子下一场又不戴了，某个道具的样子第一集像 Zippo、第五集变成打火机、第八集又变成蜡烛。你没法让这五六家工具「记住上下文」，也没法让它们互相引用彼此生成的图。 ArcReel/ArcReel（GitHub）是把这件事重新做了一遍——不是又开一个 SaaS 让你去平台上点按钮，而是 把整条流水线做成一个可自托管的 Web 应用 ，用 Claude Agent SDK 编排 AI 智能体，前后串接八家图/视频/文本供应商，Docker 一条命令跑起来。 我把仓库拉下来，读完 20K 字的 AGENTS.md（也就是它塞给 AI Agent 当项目记忆的那份）、通读 README.md / docs/getting started.md / docs/adr/，翻了一遍 CHANGELOG（这个项目已经迭到 v0.20.1，光 2026 年就发了 20 个 minor + patch），跑了一遍源码结构。这一篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Sora Web 端 / 剪映 / 一众 SaaS 视频工具的真实边界在哪里 。 一、痛点：AI 视频真正的瓶颈不在生成，而在编排 先把「AI 生视频」这四个字拆开。 生成本身 这几年已经不是问题。Veo 3.1、Seedance 2.0、Sora 2、可灵 v3、Vidu Q3——单看每一家的样片，都能把一句话生成 5 10 秒电影级画面。价格从 Fast 档的 $0.15/秒 到旗舰档的 $0.40/秒 不等，一分钟视频 $10 20 就能搞完。 真正卡人的是四件事： 1. 角色一致性。 同一个角色出现在三十个分镜里，如果不锚定参考图，AI 每一次都会重新想象一遍。第一镜是黑发少年，第五镜变成金发少女，观众立刻出戏。 2. 道具/场景一致性。 女主的红色项链、男主的黑色皮夹克、村口的老槐树，这些「线索」在剧本里可能出现几十次，需要跨镜头保持视觉稳定。 3. 叙事结构。 8 万字小说不能直接扔给视频模型。得先做「全局角色/线索提取 → 分集规划 → 单集剧本 → 分镜」四步语言层加工，每一步都需要人机确认。 4. 任务编排。 一集 30 个分镜，每个分镜要 1 张分镜图 + 1 个 4 秒视频，就是 60 次 API 调用。要处理限速、断点续传、重试、版本回滚、费用追踪——单机脚本堆到最后就是一份意大利面。 ArcReel 没做「更好的生成器」——它接的还是那八家现成的模型。它做的是 上面这四件事的编排层 ，让生成器专注生成，让工作台专心处理连贯性、状态机和上下文。 二、方案：三层架构 + Claude Agent SDK 编排 架构上 ArcReel 是很干净的三层： frontend/ — React 19 + TypeScript + Tailwind CSS 4 + wouter 路由 + zustand 状态管理。SPA 通过 Vite 代理把 /api 打到 http://127.0.0.1:1241 的后端。 server/ — FastAPI + Python 3.12+ + Pydantic 2。路由都挂在 /api/v1 下（server/routers/），认证用 JWT + API Key（arc 前缀，SHA 256 哈希入库）。实时通信是 SSE：助手 /assistant/sessions/{id}/stream、项目事件 /projects/{name}/events/stream。 lib/ — 核心库。多供应商后端抽象（image backends/ / video backends/ / text backends/）、异步任务队列（generation queue.py）、项目管理器（project manager.py）、用量追踪（usage tracker.py）都在这里。 数据库层是 SQLAlchemy 2.0 async ORM，开发默认 SQLite（projects/.arcreel.db），生产走 PostgreSQL（asyncpg）。迁移用 Alembic。这套技术栈的选择很务实——2026 年的默认答案，没花架子。 真正有意思的是 智能体层 。ArcReel 没用自研 Agent 框架，而是直接接了 Anthropic 官方的 Claude Agent SDK（早年叫 Claude Code SDK），走的是「编排 Skill + 聚焦 Subagent」这套多智能体模式： 翻译成人话： 编排 Skill（manga workflow） 是主 agent 加载的一个 skill 文件，它的任务是 读 project.json 和文件系统，判断项目卡在..."
-    },
-    {
-      "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
-      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
-      "type": "blog",
-      "date": "2026-07-05",
-      "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
-      "excerpt": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "Java 性能",
-        "async-profiler",
-        "Flame Graph",
-        "JVM",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说一个具体现场。 线上 Java 服务 CPU 打到 80%，但 top / htop 看不出是谁在烧、jstack 抓 5 次栈每次都不一样、JFR 打开觉得开销心里没底、VisualVM 附加过去看到的又只是抽样式的方法调用次数——这条链路你走过一次，就知道传统 Java profiler 有两个绕不开的死穴： 1. safepoint bias ——绝大多数「Java 采样式 profiler」采样时其实是在等 JVM 到达一个 safepoint，一旦你的热点代码在 loop 里被 JIT 编译成了 counted loop、里面根本不放 safepoint poll，profiler 就看不见它。你以为你在采「谁在烧 CPU」，其实你采的是「谁最快能停下来」。 2. 看不见 JVM 内部和内核栈 ——GC 线程、JIT 编译线程、glibc memcpy、内核 futex 等待——这些东西在传统 Java profiler 里全是「(Native method)」或者一片空白。你只看到自己那部分 Java 栈，看不到锅到底在 GC、JIT 还是内核。 async profiler/async profiler（GitHub，2026 年 4 月刚发 v4.4）是把这两件事都解掉了的一个 native agent。它已经在生产被用了差不多十年，是 Java 性能圈几乎所有排障文章都会提到的那一个工具。这一篇我把 4.4 版本的源码结构、六份核心文档（docs/CpuSamplingEngines.md、docs/ProfilingModes.md、docs/StackWalkingModes.md、docs/ProfilerOptions.md、docs/OutputFormats.md、docs/Heatmap.md）通读完，把它拆到能讲清楚每一个开关背后的机制。 一、痛点：Java 采样 profiler 的两个死穴 Safepoint bias 这四个字，Java 性能圈的老兵一听就知道说什么。传统的采样式 profiler 走的都是 JVMTI GetStackTrace——但这个 API 只能在 safepoint 生效。JVM 会在每个方法入口、循环回边、native 调用外围插「safepoint poll」，profiler 采样时其实是先请求 safepoint，等所有线程停在最近的 poll 上，然后再抓栈。这套机制的问题在于： 热点代码可能根本不到 safepoint 。JIT 会把 hot loop 编译成 counted loop（编译期能证明循环次数有限），counted loop 中间不放 safepoint poll——你在里面烧 CPU 也没人抓得到。 采样时机被扭曲 。你抓到的栈是「离 safepoint 最近的那一行」，不是「正在跑 CPU 的那一行」。这两者可能差得很远。 这就是 Nitsan Wakart 那篇著名博客 Why (Most) Sampling Java Profilers Are Fucking Terrible 的核心论点。async profiler 的名字来自 HotSpot 的 AsyncGetCallTrace——这是一个非标准的 JVM 内部 API，可以 在信号处理器里、不用 safepoint 就能取 Java 栈。这条路径避开了 safepoint bias，代价是要处理 AGCT 本身的一系列 corner case bug（后面会讲到 VM Structs 栈行走怎么绕过这个坑）。 第二个死穴是 看不见 JVM 内部和内核栈 。传统 Java profiler 只在 Java 层面工作，看到的都是 Java 类名。但真实的性能问题经常出在别处： GC 线程在跑 Young GC / Full GC； JIT 编译线程在编 C2； Java 代码通过 JNI 调进了一段 native 库； 你的 read() 在内核里等 I/O； 你的 synchronized 在内核里等 futex 唤醒。 async profiler 用的是 混合栈行走 ：perf events 抓内核栈 + VM Structs 或 AsyncGetCallTrace 抓 Java/JVM 栈，然后把两条栈 在信号处理器里当场对齐 ，最后画出来的一张火焰图里，Java 方法（绿色）、JDK 内联（青色）、JVM 内部 C++（黄色）、native 库（红色/黄色）、内核（橙色） 共存于同一根调用栈 。 看一眼实际输出你就懂了： 图里最左边黄绿色的 GenCollectedHeap::collect generation → DefNewGeneration::collect 是 JVM 内部的 GC C++ 栈，中间一大片绿色的 java/util/stream/ → TimSort.sort 是你的应用代码，右上角橙色的一柱是内核栈——这些东西 同时出现 在一张图里。传统 Java profiler 只能给你中间那块绿色。 二、方案：三种 CPU 采样引擎 × 三种栈行走模式 async profiler 的可配置面，本质上是「怎么触发采样」和「怎么把栈抓..."
     }
   ],
   "tutorials": [
@@ -5745,7 +5776,7 @@
       "topicSlug": "",
       "tags": [],
       "type": "topic",
-      "count": 4,
+      "count": 5,
       "slug": "tools-blog",
       "core": false,
       "priority": 80,
@@ -5830,13 +5861,38 @@
           ],
           "priority": 0,
           "content": "1.社区 https://rustlang cn.org/ 2.环境安装 windows 下载地址 https://www.rust lang.org/install.html 下载完之后》rustup init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 我安装完，报错了 no default toolchain configured 执行命令 更行版本 卸载rust 3.hello word 走一波 新建文件main.rs编写程序 然后编译一下 rustc main.rs 生成编译文件 和可执行文件如图 看生成了 main.exe 文件 windows用.\\main.exe 执行一下这个可执行文件。看看效果哈。 熟悉的世界你好。跃然屏幕上。心情很好。没遇到啥问题很好哈 学习了hello word 然后再看看rust的依赖包管理工具cargo 4.hello cargo 接着干 Cargo 是 Rust 的构建系统和包管理器，它可以处理很多任务，比如构建代码、下载依赖库并编译这些库。 官方默认是安装了的 version查看一下 5.使用 Cargo 创建项目 运行完这个命令会自动给你生成一个helloword文件的哈。切换到跟目录build一下 效果图如下 cargo.lock文件系统用的，不用管他，也不要修改他 生成的文件在target\\debug下面 熟悉的helloword 又出现了。 接着说下发布。 总结一下啊 1. rust安装 1. rust运行命令 rustc main.rs 1. cargo命令：cargo version, cargo new hello cargo,cargo build,cargo check,cargo run,cargo build release git已上传：https://github.com/jackssybin/rust items.git 友链：https://blog.csdn.net/jackssybin/article/details/101109616"
+        },
+        {
+          "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+          "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+          "type": "blog",
+          "date": "2026-07-14",
+          "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+          "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+          "topic": "工具、效率与博客建设",
+          "topicSlug": "tools-blog",
+          "series": "",
+          "tags": [
+            "开源策略",
+            "边界设计",
+            "better-douyin",
+            "Open Shell",
+            "GitHub",
+            "抖音",
+            "工程实践",
+            "React",
+            "TypeScript"
+          ],
+          "priority": 0,
+          "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
         }
       ],
       "articleTitles": [
         "Drools语法",
         "wireshark安装和基本语法",
         "Rust学习之二猜字谜",
-        "Rust 学习一之环境安装"
+        "Rust 学习一之环境安装",
+        "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解"
       ]
     }
   ],
@@ -5969,6 +6025,30 @@
   ],
   "recentUpdates": [
     {
+      "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
+      "url": "/articles/2026/07/14/better-douyin-open-shell.html",
+      "type": "文章",
+      "date": "2026-07-14",
+      "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
+      "topic": "工具、效率与博客建设",
+      "topicSlug": "tools-blog",
+      "series": "",
+      "tags": [
+        "开源策略",
+        "边界设计",
+        "better-douyin",
+        "Open Shell",
+        "GitHub",
+        "抖音",
+        "工程实践",
+        "React",
+        "TypeScript"
+      ],
+      "priority": 0,
+      "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
+    },
+    {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
       "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
       "type": "文章",
@@ -6047,26 +6127,6 @@
       ],
       "priority": 0,
       "content": "先说一个具体的场景。 你手里有一本 8 万字的小说，觉得改成短视频能火。要做的事按行业惯例大致是这样：先把稿子拆成一集一集，每集再拆成三十来个分镜，然后一个个开 AI 生图工具画角色、画场景、画分镜，再把每一张导进另一个视频生成平台做图生视频，最后所有 4 秒片段丢进剪映拼起来，配音、加字幕、配音乐。 这是一份 工具编排工作 ，不是创作工作。真做过的人都知道，八成的时间花在这里：文件在本地和五六个平台之间来回搬，角色在这一场戴帽子下一场又不戴了，某个道具的样子第一集像 Zippo、第五集变成打火机、第八集又变成蜡烛。你没法让这五六家工具「记住上下文」，也没法让它们互相引用彼此生成的图。 ArcReel/ArcReel（GitHub）是把这件事重新做了一遍——不是又开一个 SaaS 让你去平台上点按钮，而是 把整条流水线做成一个可自托管的 Web 应用 ，用 Claude Agent SDK 编排 AI 智能体，前后串接八家图/视频/文本供应商，Docker 一条命令跑起来。 我把仓库拉下来，读完 20K 字的 AGENTS.md（也就是它塞给 AI Agent 当项目记忆的那份）、通读 README.md / docs/getting started.md / docs/adr/，翻了一遍 CHANGELOG（这个项目已经迭到 v0.20.1，光 2026 年就发了 20 个 minor + patch），跑了一遍源码结构。这一篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Sora Web 端 / 剪映 / 一众 SaaS 视频工具的真实边界在哪里 。 一、痛点：AI 视频真正的瓶颈不在生成，而在编排 先把「AI 生视频」这四个字拆开。 生成本身 这几年已经不是问题。Veo 3.1、Seedance 2.0、Sora 2、可灵 v3、Vidu Q3——单看每一家的样片，都能把一句话生成 5 10 秒电影级画面。价格从 Fast 档的 $0.15/秒 到旗舰档的 $0.40/秒 不等，一分钟视频 $10 20 就能搞完。 真正卡人的是四件事： 1. 角色一致性。 同一个角色出现在三十个分镜里，如果不锚定参考图，AI 每一次都会重新想象一遍。第一镜是黑发少年，第五镜变成金发少女，观众立刻出戏。 2. 道具/场景一致性。 女主的红色项链、男主的黑色皮夹克、村口的老槐树，这些「线索」在剧本里可能出现几十次，需要跨镜头保持视觉稳定。 3. 叙事结构。 8 万字小说不能直接扔给视频模型。得先做「全局角色/线索提取 → 分集规划 → 单集剧本 → 分镜」四步语言层加工，每一步都需要人机确认。 4. 任务编排。 一集 30 个分镜，每个分镜要 1 张分镜图 + 1 个 4 秒视频，就是 60 次 API 调用。要处理限速、断点续传、重试、版本回滚、费用追踪——单机脚本堆到最后就是一份意大利面。 ArcReel 没做「更好的生成器」——它接的还是那八家现成的模型。它做的是 上面这四件事的编排层 ，让生成器专注生成，让工作台专心处理连贯性、状态机和上下文。 二、方案：三层架构 + Claude Agent SDK 编排 架构上 ArcReel 是很干净的三层： frontend/ — React 19 + TypeScript + Tailwind CSS 4 + wouter 路由 + zustand 状态管理。SPA 通过 Vite 代理把 /api 打到 http://127.0.0.1:1241 的后端。 server/ — FastAPI + Python 3.12+ + Pydantic 2。路由都挂在 /api/v1 下（server/routers/），认证用 JWT + API Key（arc 前缀，SHA 256 哈希入库）。实时通信是 SSE：助手 /assistant/sessions/{id}/stream、项目事件 /projects/{name}/events/stream。 lib/ — 核心库。多供应商后端抽象（image backends/ / video backends/ / text backends/）、异步任务队列（generation queue.py）、项目管理器（project manager.py）、用量追踪（usage tracker.py）都在这里。 数据库层是 SQLAlchemy 2.0 async ORM，开发默认 SQLite（projects/.arcreel.db），生产走 PostgreSQL（asyncpg）。迁移用 Alembic。这套技术栈的选择很务实——2026 年的默认答案，没花架子。 真正有意思的是 智能体层 。ArcReel 没用自研 Agent 框架，而是直接接了 Anthropic 官方的 Claude Agent SDK（早年叫 Claude Code SDK），走的是「编排 Skill + 聚焦 Subagent」这套多智能体模式： 翻译成人话： 编排 Skill（manga workflow） 是主 agent 加载的一个 skill 文件，它的任务是 读 project.json 和文件系统，判断项目卡在..."
-    },
-    {
-      "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
-      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
-      "type": "文章",
-      "date": "2026-07-05",
-      "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
-      "excerpt": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "Java 性能",
-        "async-profiler",
-        "Flame Graph",
-        "JVM",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "先说一个具体现场。 线上 Java 服务 CPU 打到 80%，但 top / htop 看不出是谁在烧、jstack 抓 5 次栈每次都不一样、JFR 打开觉得开销心里没底、VisualVM 附加过去看到的又只是抽样式的方法调用次数——这条链路你走过一次，就知道传统 Java profiler 有两个绕不开的死穴： 1. safepoint bias ——绝大多数「Java 采样式 profiler」采样时其实是在等 JVM 到达一个 safepoint，一旦你的热点代码在 loop 里被 JIT 编译成了 counted loop、里面根本不放 safepoint poll，profiler 就看不见它。你以为你在采「谁在烧 CPU」，其实你采的是「谁最快能停下来」。 2. 看不见 JVM 内部和内核栈 ——GC 线程、JIT 编译线程、glibc memcpy、内核 futex 等待——这些东西在传统 Java profiler 里全是「(Native method)」或者一片空白。你只看到自己那部分 Java 栈，看不到锅到底在 GC、JIT 还是内核。 async profiler/async profiler（GitHub，2026 年 4 月刚发 v4.4）是把这两件事都解掉了的一个 native agent。它已经在生产被用了差不多十年，是 Java 性能圈几乎所有排障文章都会提到的那一个工具。这一篇我把 4.4 版本的源码结构、六份核心文档（docs/CpuSamplingEngines.md、docs/ProfilingModes.md、docs/StackWalkingModes.md、docs/ProfilerOptions.md、docs/OutputFormats.md、docs/Heatmap.md）通读完，把它拆到能讲清楚每一个开关背后的机制。 一、痛点：Java 采样 profiler 的两个死穴 Safepoint bias 这四个字，Java 性能圈的老兵一听就知道说什么。传统的采样式 profiler 走的都是 JVMTI GetStackTrace——但这个 API 只能在 safepoint 生效。JVM 会在每个方法入口、循环回边、native 调用外围插「safepoint poll」，profiler 采样时其实是先请求 safepoint，等所有线程停在最近的 poll 上，然后再抓栈。这套机制的问题在于： 热点代码可能根本不到 safepoint 。JIT 会把 hot loop 编译成 counted loop（编译期能证明循环次数有限），counted loop 中间不放 safepoint poll——你在里面烧 CPU 也没人抓得到。 采样时机被扭曲 。你抓到的栈是「离 safepoint 最近的那一行」，不是「正在跑 CPU 的那一行」。这两者可能差得很远。 这就是 Nitsan Wakart 那篇著名博客 Why (Most) Sampling Java Profilers Are Fucking Terrible 的核心论点。async profiler 的名字来自 HotSpot 的 AsyncGetCallTrace——这是一个非标准的 JVM 内部 API，可以 在信号处理器里、不用 safepoint 就能取 Java 栈。这条路径避开了 safepoint bias，代价是要处理 AGCT 本身的一系列 corner case bug（后面会讲到 VM Structs 栈行走怎么绕过这个坑）。 第二个死穴是 看不见 JVM 内部和内核栈 。传统 Java profiler 只在 Java 层面工作，看到的都是 Java 类名。但真实的性能问题经常出在别处： GC 线程在跑 Young GC / Full GC； JIT 编译线程在编 C2； Java 代码通过 JNI 调进了一段 native 库； 你的 read() 在内核里等 I/O； 你的 synchronized 在内核里等 futex 唤醒。 async profiler 用的是 混合栈行走 ：perf events 抓内核栈 + VM Structs 或 AsyncGetCallTrace 抓 Java/JVM 栈，然后把两条栈 在信号处理器里当场对齐 ，最后画出来的一张火焰图里，Java 方法（绿色）、JDK 内联（青色）、JVM 内部 C++（黄色）、native 库（红色/黄色）、内核（橙色） 共存于同一根调用栈 。 看一眼实际输出你就懂了： 图里最左边黄绿色的 GenCollectedHeap::collect generation → DefNewGeneration::collect 是 JVM 内部的 GC C++ 栈，中间一大片绿色的 java/util/stream/ → TimSort.sort 是你的应用代码，右上角橙色的一柱是内核栈——这些东西 同时出现 在一张图里。传统 Java profiler 只能给你中间那块绿色。 二、方案：三种 CPU 采样引擎 × 三种栈行走模式 async profiler 的可配置面，本质上是「怎么触发采样」和「怎么把栈抓..."
     },
     {
       "title": "第01章：MySQL概述与安装",
