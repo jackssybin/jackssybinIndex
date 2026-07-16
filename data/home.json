@@ -1,6 +1,48 @@
 {
   "allArticles": [
     {
+      "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "excerpt": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频编辑",
+        "开源",
+        "CapCut",
+        "Rust",
+        "WASM",
+        "Next.js"
+      ],
+      "priority": 0,
+      "content": "上周有朋友让我推荐一个能替代 CapCut 的开源工具——他不想再把家庭视频上传给字节的服务器做剪辑。我第一反应是 opencut app/opencut，GitHub 上 71.9k star，README 顶上写着 \"A free and open source video editor\"，看着就是那个答案。 真去 clone 下来才发现问题：主仓库当前只有一个 web scaffold 和一个 Rust 空窗口，跑起来就一句 hello world!。README 自己在第一段承认：\"OpenCut is being rewritten from the ground up... You can still find the previous version at opencut classic, which is the one to reach for today.\" 也就是说，你在 GitHub 上看到那个 71.9k star 的项目， 当前是不能用的 。真正能剪视频的版本，在一个刚被拆出去、只有 154 star、且已经 archived 的仓库里。 这篇讲清楚三件事：一，两个仓库分别是什么状态，为什么会分裂；二，opencut classic 本地跑起来的完整命令，5 分钟能开到编辑器界面；三，rewrite 到底动了什么，什么时候应该切过去。 两个 OpenCut：一张对照表 先把 GitHub API 返回的事实摆上，避免绕来绕去。 维度 opencut app/opencut（新版 / rewrite） opencut app/opencut classic Star 数 71,933 154 状态 活跃开发，主分支 main archived ，只读 最后 push 2026 07 10 2026 05 17 前端 TanStack Start（Vite）+ shadcn Next.js 16 + shadcn 桌面 Rust + GPUI（空窗口 scaffold） Rust + GPUI（同上，进行中） API Elysia on Cloudflare Workers Next.js Route Handlers 编辑器 UI 无（/ 只显示 hello world!） 完整 ：Timeline、Preview、Effects、Export 依赖复杂度 bun + proto + moon bun + Docker Compose 想动手做视频 别用 用它 想追架构演化 关注它 参考起点 Star 数的分裂是最直觉迷惑人的地方：71.9k 的历史 star 留在了「新版」仓库名下（因为 rewrite 是就地推倒，不是新建 repo），而真正能跑的代码被剥离到 classic 后重新计数。所以你搜「OpenCut」看到的那个热门 repo，就是那个空壳。 结论直接给： 如果你今天就想在本机剪一段视频，clone opencut classic 。追新版的动机应该是「我关心它 rewrite 之后架构长什么样」，不是「我想装个工具」。 opencut classic 5 分钟跑通 前提：本机已装 Bun 和 Docker。没装 Bun 就一条 curl fsSL https://bun.sh/install bash。 打开 http://localhost:3000。第一次点 \"New project\" 会调 /api/auth（better auth）建一个本地账号，然后跳进编辑器。到这一步你就有一个可以拖时间线、加剪辑点、加特效、导出的浏览器视频编辑器。 想直接跑生产构建（跳过开发模式），用它自带的 Docker Compose： 这一版把 web 也打成镜像，访问 http://localhost:3100。适合放在一台家庭服务器上给自己用。 几个第一次跑会踩的坑： docker compose.yml 里 serverless redis http 用的是 hiett/serverless redis http——它本地模拟 Upstash Redis 的 REST 接口，是 better auth 的 rate limit 需要的。少了这个容器登录会 500。 .env.example 里的 FREESOUND CLIENT ID / FREESOUND API KEY 是可选的，只影响音效搜索面板。不填就是空搜索结果，不影响主流程。 Node 版本不重要，因为 packageManager 写死 bun@1.2.18，全流程都走 bun。不要用 npm/pnpm 装依赖，会因为 workspace 依赖解析差异卡住。 Rewrite 到底动了什么 看 opencut classic 的目录结构，能看出作者两个明确的判断。这两个判断决定了他为什么要推倒重写。 判断一：把业务逻辑从 TypeScript 迁到 Rust classic 版本已经开工了这件事。仓库根有一个 rust/ 目录： AGENTS.md 里作者写得直白： \"An ongoing migration is moving all business logic into rust/. Each app under ..."
+    },
+    {
+      "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
+      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "excerpt": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频下载",
+        "开源工具",
+        "Go",
+        "命令行",
+        "yt-dlp",
+        "Bilibili"
+      ],
+      "priority": 0,
+      "content": "上周三我在 macOS 上装 yt dlp，brew install yt dlp 装完跑第一条命令就报 ImportError: cannot import name 'brotli' from 'urllib3'——很典型的 Python 依赖冲突，跟本机装过的另外几个 Python CLI 打架。折腾了 40 分钟，走的是\"清 pip cache → pyenv 装干净 3.11 → 重装 yt dlp → 又报 ffmpeg 版本\"的老路子。 同事看不下去，甩了我一个仓库：iawia002/lux。31.5k star，Go 写的，一个 8MB 的二进制，没任何运行时依赖。装完以后我用它扒了 B 站的一个开源课公开视频（已获得作者授权归档），5 秒钟拿到 MP4。回过头我才想通一件事： 中文站视频下载这件事上，yt dlp 已经不是最优解了。 这篇文章讲清楚三件事： 1. 为什么 lux 在中文站上比 yt dlp 顺手 ——49 个 extractor 里差不多一半是中文站，包括 B 站、知乎、微博、小红书、抖音、优酷、爱奇艺、QQ、网易云、喜马拉雅。 2. release 停在 v0.24.1 但 master 还在活跃提交的坑 ——如果你 brew install lux 装到的是 2024 05 的老版本，YouTube 字幕这类新功能你根本用不上。绕过办法在文末。 3. 完整 5 分钟上手命令 ，以及 什么场景应该切回 yt dlp （结论前置：YouTube 长期还是 yt dlp）。 一、Lux 是什么 iawia002/lux（GitHub 仓库）是一个用 Go 写的视频下载 CLI，作者是 Xinzhao Xu。项目 2018 02 开始，到 2025 12 仍有活跃提交。定位是 fast and simple video downloader ——slogan 里的 Let there be Lux! 是圣经\"要有光\"的双关。 核心数据 （截至 2026 07）： 项 数据 GitHub star 31,526 fork 3,314 open issues 545 license MIT 最后一次提交 2025 12 29 最新 release v0.24.1（2024 05 06） 支持站点 49 个 extractor 主要语言 Go 二进制大小 8MB（无依赖） 支持的中文视频/图片/音频站点 （不完全列表）： 视频： 哔哩哔哩 · 抖音 · 快手 · 小红书 · 微博 · 知乎 · 爱奇艺 · 优酷 · 腾讯视频 · 芒果 TV · AcFun · 好看视频 · 西瓜视频/头条 · 斗鱼 · 虎牙 · 秒拍 · 糖豆广场舞 图片： 半次元（bcy） · pixivision · 小红书 · 抖音 音频： 网易云音乐 · 喜马拉雅 · 音悦台 海外：YouTube · Vimeo · Facebook · Instagram · Threads · Twitter · TikTok · Reddit · Pinterest · Tumblr · Odysee · Rumble · VKontakte · Bitchute · StreamTape · Zing MP3 · XVIDEOS · Pornhub · Eporner 其它： 极客时间 · 联合新闻网（udn） · Universal（通用抓取） 这里的对比落差点很清晰 ：yt dlp 对海外站点（YouTube/Twitter/Instagram/TikTok）覆盖是行业顶配，几乎每周都在打补丁；但对中文站点，yt dlp 靠社区志愿维护，B 站的 DASH 修复、抖音的动态签名、优酷的 ccode/ckey 这些细节，长期不如 lux 上心。Lux 反过来—— 中文站是它的主战场，海外站是补充 。 二、为什么单文件二进制这件事很重要 用过 yt dlp 的都知道那个感觉：装完 yt dlp，还得单独装 ffmpeg，Python 版本要对，pip install upgrade 时经常和其他工具打架，Windows 用户还得处理 PATH。 Lux 是 Go 写的，编译产物就是单文件。你可以： 唯一的外部依赖是 ffmpeg ，只用来合并分片（B 站的 DASH、YouTube 的 video/audio 分流下载后合并成一个 MP4）。如果你只下已经是单文件的视频，连 ffmpeg 都不需要。 三、5 分钟上手：完整命令清单 先明确一个前提： 下面所有演示我都用作者公开授权的视频 （Rick Astley 的官方 YouTube MV、B 站官方版权视频等）。工具本身是中性的，用来做什么由使用者负责——归档自己上传的内容、抢救即将下线的开源课程、备份免费公开演讲，都是常见合规场景。 3.1 看视频有哪些清晰度可选 i 是 info only，不下载，只列出所有 stream 选项。会打印一个表格，告诉你有 1080p / 720p / 480p 分别多大、编码是什么、下载命令是什么。 3.2 直接下载（默认最高清晰度） Lux 默认取最高清晰度。你会看到进度条、下载速度、剩余时间。下完是一个 MP4 或 FLV，文件名默..."
+    },
+    {
       "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
       "url": "/articles/2026/07/14/better-douyin-open-shell.html",
       "type": "blog",
@@ -2492,6 +2534,48 @@
   ],
   "articles": [
     {
+      "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "excerpt": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频编辑",
+        "开源",
+        "CapCut",
+        "Rust",
+        "WASM",
+        "Next.js"
+      ],
+      "priority": 0,
+      "content": "上周有朋友让我推荐一个能替代 CapCut 的开源工具——他不想再把家庭视频上传给字节的服务器做剪辑。我第一反应是 opencut app/opencut，GitHub 上 71.9k star，README 顶上写着 \"A free and open source video editor\"，看着就是那个答案。 真去 clone 下来才发现问题：主仓库当前只有一个 web scaffold 和一个 Rust 空窗口，跑起来就一句 hello world!。README 自己在第一段承认：\"OpenCut is being rewritten from the ground up... You can still find the previous version at opencut classic, which is the one to reach for today.\" 也就是说，你在 GitHub 上看到那个 71.9k star 的项目， 当前是不能用的 。真正能剪视频的版本，在一个刚被拆出去、只有 154 star、且已经 archived 的仓库里。 这篇讲清楚三件事：一，两个仓库分别是什么状态，为什么会分裂；二，opencut classic 本地跑起来的完整命令，5 分钟能开到编辑器界面；三，rewrite 到底动了什么，什么时候应该切过去。 两个 OpenCut：一张对照表 先把 GitHub API 返回的事实摆上，避免绕来绕去。 维度 opencut app/opencut（新版 / rewrite） opencut app/opencut classic Star 数 71,933 154 状态 活跃开发，主分支 main archived ，只读 最后 push 2026 07 10 2026 05 17 前端 TanStack Start（Vite）+ shadcn Next.js 16 + shadcn 桌面 Rust + GPUI（空窗口 scaffold） Rust + GPUI（同上，进行中） API Elysia on Cloudflare Workers Next.js Route Handlers 编辑器 UI 无（/ 只显示 hello world!） 完整 ：Timeline、Preview、Effects、Export 依赖复杂度 bun + proto + moon bun + Docker Compose 想动手做视频 别用 用它 想追架构演化 关注它 参考起点 Star 数的分裂是最直觉迷惑人的地方：71.9k 的历史 star 留在了「新版」仓库名下（因为 rewrite 是就地推倒，不是新建 repo），而真正能跑的代码被剥离到 classic 后重新计数。所以你搜「OpenCut」看到的那个热门 repo，就是那个空壳。 结论直接给： 如果你今天就想在本机剪一段视频，clone opencut classic 。追新版的动机应该是「我关心它 rewrite 之后架构长什么样」，不是「我想装个工具」。 opencut classic 5 分钟跑通 前提：本机已装 Bun 和 Docker。没装 Bun 就一条 curl fsSL https://bun.sh/install bash。 打开 http://localhost:3000。第一次点 \"New project\" 会调 /api/auth（better auth）建一个本地账号，然后跳进编辑器。到这一步你就有一个可以拖时间线、加剪辑点、加特效、导出的浏览器视频编辑器。 想直接跑生产构建（跳过开发模式），用它自带的 Docker Compose： 这一版把 web 也打成镜像，访问 http://localhost:3100。适合放在一台家庭服务器上给自己用。 几个第一次跑会踩的坑： docker compose.yml 里 serverless redis http 用的是 hiett/serverless redis http——它本地模拟 Upstash Redis 的 REST 接口，是 better auth 的 rate limit 需要的。少了这个容器登录会 500。 .env.example 里的 FREESOUND CLIENT ID / FREESOUND API KEY 是可选的，只影响音效搜索面板。不填就是空搜索结果，不影响主流程。 Node 版本不重要，因为 packageManager 写死 bun@1.2.18，全流程都走 bun。不要用 npm/pnpm 装依赖，会因为 workspace 依赖解析差异卡住。 Rewrite 到底动了什么 看 opencut classic 的目录结构，能看出作者两个明确的判断。这两个判断决定了他为什么要推倒重写。 判断一：把业务逻辑从 TypeScript 迁到 Rust classic 版本已经开工了这件事。仓库根有一个 rust/ 目录： AGENTS.md 里作者写得直白： \"An ongoing migration is moving all business logic into rust/. Each app under ..."
+    },
+    {
+      "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
+      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "excerpt": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频下载",
+        "开源工具",
+        "Go",
+        "命令行",
+        "yt-dlp",
+        "Bilibili"
+      ],
+      "priority": 0,
+      "content": "上周三我在 macOS 上装 yt dlp，brew install yt dlp 装完跑第一条命令就报 ImportError: cannot import name 'brotli' from 'urllib3'——很典型的 Python 依赖冲突，跟本机装过的另外几个 Python CLI 打架。折腾了 40 分钟，走的是\"清 pip cache → pyenv 装干净 3.11 → 重装 yt dlp → 又报 ffmpeg 版本\"的老路子。 同事看不下去，甩了我一个仓库：iawia002/lux。31.5k star，Go 写的，一个 8MB 的二进制，没任何运行时依赖。装完以后我用它扒了 B 站的一个开源课公开视频（已获得作者授权归档），5 秒钟拿到 MP4。回过头我才想通一件事： 中文站视频下载这件事上，yt dlp 已经不是最优解了。 这篇文章讲清楚三件事： 1. 为什么 lux 在中文站上比 yt dlp 顺手 ——49 个 extractor 里差不多一半是中文站，包括 B 站、知乎、微博、小红书、抖音、优酷、爱奇艺、QQ、网易云、喜马拉雅。 2. release 停在 v0.24.1 但 master 还在活跃提交的坑 ——如果你 brew install lux 装到的是 2024 05 的老版本，YouTube 字幕这类新功能你根本用不上。绕过办法在文末。 3. 完整 5 分钟上手命令 ，以及 什么场景应该切回 yt dlp （结论前置：YouTube 长期还是 yt dlp）。 一、Lux 是什么 iawia002/lux（GitHub 仓库）是一个用 Go 写的视频下载 CLI，作者是 Xinzhao Xu。项目 2018 02 开始，到 2025 12 仍有活跃提交。定位是 fast and simple video downloader ——slogan 里的 Let there be Lux! 是圣经\"要有光\"的双关。 核心数据 （截至 2026 07）： 项 数据 GitHub star 31,526 fork 3,314 open issues 545 license MIT 最后一次提交 2025 12 29 最新 release v0.24.1（2024 05 06） 支持站点 49 个 extractor 主要语言 Go 二进制大小 8MB（无依赖） 支持的中文视频/图片/音频站点 （不完全列表）： 视频： 哔哩哔哩 · 抖音 · 快手 · 小红书 · 微博 · 知乎 · 爱奇艺 · 优酷 · 腾讯视频 · 芒果 TV · AcFun · 好看视频 · 西瓜视频/头条 · 斗鱼 · 虎牙 · 秒拍 · 糖豆广场舞 图片： 半次元（bcy） · pixivision · 小红书 · 抖音 音频： 网易云音乐 · 喜马拉雅 · 音悦台 海外：YouTube · Vimeo · Facebook · Instagram · Threads · Twitter · TikTok · Reddit · Pinterest · Tumblr · Odysee · Rumble · VKontakte · Bitchute · StreamTape · Zing MP3 · XVIDEOS · Pornhub · Eporner 其它： 极客时间 · 联合新闻网（udn） · Universal（通用抓取） 这里的对比落差点很清晰 ：yt dlp 对海外站点（YouTube/Twitter/Instagram/TikTok）覆盖是行业顶配，几乎每周都在打补丁；但对中文站点，yt dlp 靠社区志愿维护，B 站的 DASH 修复、抖音的动态签名、优酷的 ccode/ckey 这些细节，长期不如 lux 上心。Lux 反过来—— 中文站是它的主战场，海外站是补充 。 二、为什么单文件二进制这件事很重要 用过 yt dlp 的都知道那个感觉：装完 yt dlp，还得单独装 ffmpeg，Python 版本要对，pip install upgrade 时经常和其他工具打架，Windows 用户还得处理 PATH。 Lux 是 Go 写的，编译产物就是单文件。你可以： 唯一的外部依赖是 ffmpeg ，只用来合并分片（B 站的 DASH、YouTube 的 video/audio 分流下载后合并成一个 MP4）。如果你只下已经是单文件的视频，连 ffmpeg 都不需要。 三、5 分钟上手：完整命令清单 先明确一个前提： 下面所有演示我都用作者公开授权的视频 （Rick Astley 的官方 YouTube MV、B 站官方版权视频等）。工具本身是中性的，用来做什么由使用者负责——归档自己上传的内容、抢救即将下线的开源课程、备份免费公开演讲，都是常见合规场景。 3.1 看视频有哪些清晰度可选 i 是 info only，不下载，只列出所有 stream 选项。会打印一个表格，告诉你有 1080p / 720p / 480p 分别多大、编码是什么、下载命令是什么。 3.2 直接下载（默认最高清晰度） Lux 默认取最高清晰度。你会看到进度条、下载速度、剩余时间。下完是一个 MP4 或 FLV，文件名默..."
+    },
+    {
       "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
       "url": "/articles/2026/07/14/better-douyin-open-shell.html",
       "type": "blog",
@@ -2852,51 +2936,51 @@
       ],
       "priority": 0,
       "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
-    },
-    {
-      "title": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
-      "url": "/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html",
-      "type": "blog",
-      "date": "2026-06-22",
-      "description": "基于 yikart/AiToEarn README、Docker Compose、前后端 package 与 MCP 发布控制器源码，拆解这个 TypeScript 开源项目如何把内容变现、AI 草稿、多平台发布和互动运营接成一条链。",
-      "excerpt": "基于 yikart/AiToEarn README、Docker Compose、前后端 package 与 MCP 发布控制器源码，拆解这个 TypeScript 开源项目如何把内容变现、AI 草稿、多平台发布和互动运营接成一条链。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "内容营销",
-        "MCP",
-        "开源项目",
-        "TypeScript",
-        "自媒体工具"
-      ],
-      "priority": 0,
-      "content": "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台 很多人第一次看到 AiToEarn 这个名字，会下意识把它理解成“AI 帮我自动发帖赚钱”。 这个理解只对了一小半。 我把它的 README、Docker Compose、前后端 package 和几个 MCP Controller 看了一遍，真正让我停下来的不是“能发多少平台”，而是它把内容生意拆成了四件事：先找到变现任务，再生成草稿，然后按平台规则发布，最后把互动运营和证据记录接回来。 如果你只想找一个定时发微博的小脚本，AiToEarn 可能太重了。但如果你做的是多平台内容矩阵、品牌任务、达人投放，或者想让 Agent 接手一部分内容运营流程，它就值得认真看。 我本地调研的是 yikart/AiToEarn 的 main 分支提交 e88aa14。GitHub API 显示项目约 21.7k stars、3.2k forks，主语言 TypeScript，MIT License。下面不是 README 翻译，而是按“它到底解决什么问题、怎么跑、边界在哪里”来拆。 1. 它解决的不是“发一条内容”，而是“内容变现链路太碎” 做内容运营最烦的地方不在写一条文案，而在链路断得厉害。 你可能在一个平台接品牌任务，在另一个表格里记录预算和结算方式，用 ChatGPT 写草稿，再切到小红书、B 站、TikTok、公众号分别发。发完还要回头看评论、截图、转化线索和交付证据。 这不是一个“写作问题”，而是工作流问题。 AiToEarn 的 README 把自己放在 Monetize · Publish · Engage · Create 这四个词上。顺序看起来有点反常，通常工具会先讲“创作”，它先讲“Monetize”。这其实说明了项目的野心：它不想只做内容生成器，而是想从任务、预算、草稿、发布、互动证据一起管。 我更愿意这样理解它： 这里的关键点不是“AI 写得多快”，而是内容从商业目标到平台交付之间少掉多少手工搬运。 2. 源码看下来，它不是单页 Demo AiToEarn 的仓库不是一个轻量脚本。根目录有 Docker Compose，下面分前端、后端、AI 服务和基础设施。 从我看的文件看，主要结构是这样： project/aitoearn web：Next 14、React 18、Zustand、Ant Design、TipTap/Lexical、ECharts、Playwright； project/aitoearn backend：Nx + NestJS 风格的后端服务，包含账号、渠道、发布、素材、草稿、MCP 等模块； docker compose.yml：MongoDB、Redis、RustFS、初始化服务、aitoearn ai、aitoearn server、Web； presentation/：项目展示图和截图，能看到 Agent Mode、数据中心、渠道页等界面。 这类结构说明一件事：AiToEarn 的复杂度不在“调用一个模型生成文字”，而在把内容运营里的对象都建出来。账号、素材、草稿、发布任务、平台规则、互动都要有自己的位置。 我最关注的是 MCP 相关源码。unified mcp.module.ts 里能看到： 它把能力通过 /api/unified/mcp 这一类入口暴露出来。README 里也给了两个 MCP 地址： 国内版和国际版 API Key 不能混用。README 里写得很直白：如果 aitoearn.cn 和 aitoearn.ai 的 Key/域名不匹配，会 401。这个细节一定要记住，不然排错时很容易怀疑是 Claude、Cursor 或 MCP 客户端的问题。 3. 最值得看的源码：平台发布不是裸发文本 我建议直接看 publish.mcp.controller.ts。 这里不是只有一个“把 content POST 到平台”的接口，而是把平台限制也做进了工具层。源码里维护了不同平台的发布规则，例如： YouTube 标题最多 100 字符； TikTok 描述最多 2200 字符； Twitter/X 描述最多 280 字符； 小红书图片最多 9 张； 不同平台对 title、description、thumbUrl、accountId、videoUrl、images 等字段要求不同。 它还暴露了多个发布工具：Bilibili、微信公众号、YouTube、Pinterest、Threads、TikTok、Facebook、Instagram、Kwai、Twitter 等。 这点很重要。很多“多平台发布”原型只是把同一段内容复制到多个地方，失败了再说。AiToEarn 至少在设计上承认一件事：平台之间的约束不一样，发布前就应该让 Agent 知道边界。 这会改变 Agent 的工作方式。 差的方式是： 更可靠的方式是： AiToEarn 的 MCP 控制器就在往这个方向做。 4. 内容、草稿、账号也通过 MCP 暴露 除了发布，我还看了几个 controller。 content.mcp.controller.ts 里有素材组、素材、草稿组、草稿的创建和查询工具，例如 createMedia、createMat..."
-    },
-    {
-      "title": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
-      "url": "/articles/2026/06/22/browser-use-ai-browser-agent-tutorial.html",
-      "type": "blog",
-      "date": "2026-06-22",
-      "description": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "excerpt": "基于 browser-use/browser-use 的 README、Python 包配置、CLI 文档、skills、examples 与开放源码文档，拆解这个浏览器 Agent 框架如何把网页变成可观察、可点击、可恢复的自动化环境，并给出上手路径、适用边界和安全护栏。",
-      "topic": "AI、Agent 与本地模型",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "浏览器自动化",
-        "Python",
-        "开源项目",
-        "LLM",
-        "自动化"
-      ],
-      "priority": 0,
-      "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
     }
   ],
   "latestArticles": [
+    {
+      "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "excerpt": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频编辑",
+        "开源",
+        "CapCut",
+        "Rust",
+        "WASM",
+        "Next.js"
+      ],
+      "priority": 0,
+      "content": "上周有朋友让我推荐一个能替代 CapCut 的开源工具——他不想再把家庭视频上传给字节的服务器做剪辑。我第一反应是 opencut app/opencut，GitHub 上 71.9k star，README 顶上写着 \"A free and open source video editor\"，看着就是那个答案。 真去 clone 下来才发现问题：主仓库当前只有一个 web scaffold 和一个 Rust 空窗口，跑起来就一句 hello world!。README 自己在第一段承认：\"OpenCut is being rewritten from the ground up... You can still find the previous version at opencut classic, which is the one to reach for today.\" 也就是说，你在 GitHub 上看到那个 71.9k star 的项目， 当前是不能用的 。真正能剪视频的版本，在一个刚被拆出去、只有 154 star、且已经 archived 的仓库里。 这篇讲清楚三件事：一，两个仓库分别是什么状态，为什么会分裂；二，opencut classic 本地跑起来的完整命令，5 分钟能开到编辑器界面；三，rewrite 到底动了什么，什么时候应该切过去。 两个 OpenCut：一张对照表 先把 GitHub API 返回的事实摆上，避免绕来绕去。 维度 opencut app/opencut（新版 / rewrite） opencut app/opencut classic Star 数 71,933 154 状态 活跃开发，主分支 main archived ，只读 最后 push 2026 07 10 2026 05 17 前端 TanStack Start（Vite）+ shadcn Next.js 16 + shadcn 桌面 Rust + GPUI（空窗口 scaffold） Rust + GPUI（同上，进行中） API Elysia on Cloudflare Workers Next.js Route Handlers 编辑器 UI 无（/ 只显示 hello world!） 完整 ：Timeline、Preview、Effects、Export 依赖复杂度 bun + proto + moon bun + Docker Compose 想动手做视频 别用 用它 想追架构演化 关注它 参考起点 Star 数的分裂是最直觉迷惑人的地方：71.9k 的历史 star 留在了「新版」仓库名下（因为 rewrite 是就地推倒，不是新建 repo），而真正能跑的代码被剥离到 classic 后重新计数。所以你搜「OpenCut」看到的那个热门 repo，就是那个空壳。 结论直接给： 如果你今天就想在本机剪一段视频，clone opencut classic 。追新版的动机应该是「我关心它 rewrite 之后架构长什么样」，不是「我想装个工具」。 opencut classic 5 分钟跑通 前提：本机已装 Bun 和 Docker。没装 Bun 就一条 curl fsSL https://bun.sh/install bash。 打开 http://localhost:3000。第一次点 \"New project\" 会调 /api/auth（better auth）建一个本地账号，然后跳进编辑器。到这一步你就有一个可以拖时间线、加剪辑点、加特效、导出的浏览器视频编辑器。 想直接跑生产构建（跳过开发模式），用它自带的 Docker Compose： 这一版把 web 也打成镜像，访问 http://localhost:3100。适合放在一台家庭服务器上给自己用。 几个第一次跑会踩的坑： docker compose.yml 里 serverless redis http 用的是 hiett/serverless redis http——它本地模拟 Upstash Redis 的 REST 接口，是 better auth 的 rate limit 需要的。少了这个容器登录会 500。 .env.example 里的 FREESOUND CLIENT ID / FREESOUND API KEY 是可选的，只影响音效搜索面板。不填就是空搜索结果，不影响主流程。 Node 版本不重要，因为 packageManager 写死 bun@1.2.18，全流程都走 bun。不要用 npm/pnpm 装依赖，会因为 workspace 依赖解析差异卡住。 Rewrite 到底动了什么 看 opencut classic 的目录结构，能看出作者两个明确的判断。这两个判断决定了他为什么要推倒重写。 判断一：把业务逻辑从 TypeScript 迁到 Rust classic 版本已经开工了这件事。仓库根有一个 rust/ 目录： AGENTS.md 里作者写得直白： \"An ongoing migration is moving all business logic into rust/. Each app under ..."
+    },
+    {
+      "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
+      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "type": "blog",
+      "date": "2026-07-16",
+      "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "excerpt": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频下载",
+        "开源工具",
+        "Go",
+        "命令行",
+        "yt-dlp",
+        "Bilibili"
+      ],
+      "priority": 0,
+      "content": "上周三我在 macOS 上装 yt dlp，brew install yt dlp 装完跑第一条命令就报 ImportError: cannot import name 'brotli' from 'urllib3'——很典型的 Python 依赖冲突，跟本机装过的另外几个 Python CLI 打架。折腾了 40 分钟，走的是\"清 pip cache → pyenv 装干净 3.11 → 重装 yt dlp → 又报 ffmpeg 版本\"的老路子。 同事看不下去，甩了我一个仓库：iawia002/lux。31.5k star，Go 写的，一个 8MB 的二进制，没任何运行时依赖。装完以后我用它扒了 B 站的一个开源课公开视频（已获得作者授权归档），5 秒钟拿到 MP4。回过头我才想通一件事： 中文站视频下载这件事上，yt dlp 已经不是最优解了。 这篇文章讲清楚三件事： 1. 为什么 lux 在中文站上比 yt dlp 顺手 ——49 个 extractor 里差不多一半是中文站，包括 B 站、知乎、微博、小红书、抖音、优酷、爱奇艺、QQ、网易云、喜马拉雅。 2. release 停在 v0.24.1 但 master 还在活跃提交的坑 ——如果你 brew install lux 装到的是 2024 05 的老版本，YouTube 字幕这类新功能你根本用不上。绕过办法在文末。 3. 完整 5 分钟上手命令 ，以及 什么场景应该切回 yt dlp （结论前置：YouTube 长期还是 yt dlp）。 一、Lux 是什么 iawia002/lux（GitHub 仓库）是一个用 Go 写的视频下载 CLI，作者是 Xinzhao Xu。项目 2018 02 开始，到 2025 12 仍有活跃提交。定位是 fast and simple video downloader ——slogan 里的 Let there be Lux! 是圣经\"要有光\"的双关。 核心数据 （截至 2026 07）： 项 数据 GitHub star 31,526 fork 3,314 open issues 545 license MIT 最后一次提交 2025 12 29 最新 release v0.24.1（2024 05 06） 支持站点 49 个 extractor 主要语言 Go 二进制大小 8MB（无依赖） 支持的中文视频/图片/音频站点 （不完全列表）： 视频： 哔哩哔哩 · 抖音 · 快手 · 小红书 · 微博 · 知乎 · 爱奇艺 · 优酷 · 腾讯视频 · 芒果 TV · AcFun · 好看视频 · 西瓜视频/头条 · 斗鱼 · 虎牙 · 秒拍 · 糖豆广场舞 图片： 半次元（bcy） · pixivision · 小红书 · 抖音 音频： 网易云音乐 · 喜马拉雅 · 音悦台 海外：YouTube · Vimeo · Facebook · Instagram · Threads · Twitter · TikTok · Reddit · Pinterest · Tumblr · Odysee · Rumble · VKontakte · Bitchute · StreamTape · Zing MP3 · XVIDEOS · Pornhub · Eporner 其它： 极客时间 · 联合新闻网（udn） · Universal（通用抓取） 这里的对比落差点很清晰 ：yt dlp 对海外站点（YouTube/Twitter/Instagram/TikTok）覆盖是行业顶配，几乎每周都在打补丁；但对中文站点，yt dlp 靠社区志愿维护，B 站的 DASH 修复、抖音的动态签名、优酷的 ccode/ckey 这些细节，长期不如 lux 上心。Lux 反过来—— 中文站是它的主战场，海外站是补充 。 二、为什么单文件二进制这件事很重要 用过 yt dlp 的都知道那个感觉：装完 yt dlp，还得单独装 ffmpeg，Python 版本要对，pip install upgrade 时经常和其他工具打架，Windows 用户还得处理 PATH。 Lux 是 Go 写的，编译产物就是单文件。你可以： 唯一的外部依赖是 ffmpeg ，只用来合并分片（B 站的 DASH、YouTube 的 video/audio 分流下载后合并成一个 MP4）。如果你只下已经是单文件的视频，连 ffmpeg 都不需要。 三、5 分钟上手：完整命令清单 先明确一个前提： 下面所有演示我都用作者公开授权的视频 （Rick Astley 的官方 YouTube MV、B 站官方版权视频等）。工具本身是中性的，用来做什么由使用者负责——归档自己上传的内容、抢救即将下线的开源课程、备份免费公开演讲，都是常见合规场景。 3.1 看视频有哪些清晰度可选 i 是 info only，不下载，只列出所有 stream 选项。会打印一个表格，告诉你有 1080p / 720p / 480p 分别多大、编码是什么、下载命令是什么。 3.2 直接下载（默认最高清晰度） Lux 默认取最高清晰度。你会看到进度条、下载速度、剩余时间。下完是一个 MP4 或 FLV，文件名默..."
+    },
     {
       "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
       "url": "/articles/2026/07/14/better-douyin-open-shell.html",
@@ -2960,46 +3044,6 @@
       ],
       "priority": 0,
       "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
-    },
-    {
-      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
-      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
-      "type": "blog",
-      "date": "2026-07-08",
-      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
-      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
-      "topic": "AI 工作流",
-      "topicSlug": "ai-workflow",
-      "series": "",
-      "tags": [
-        "Claude Code",
-        "AI 求职",
-        "LaTeX",
-        "自动化",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
-    },
-    {
-      "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
-      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
-      "type": "blog",
-      "date": "2026-07-05",
-      "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
-      "excerpt": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI 视频",
-        "小说改编",
-        "Claude Agent SDK",
-        "开源项目",
-        "多模态"
-      ],
-      "priority": 0,
-      "content": "先说一个具体的场景。 你手里有一本 8 万字的小说，觉得改成短视频能火。要做的事按行业惯例大致是这样：先把稿子拆成一集一集，每集再拆成三十来个分镜，然后一个个开 AI 生图工具画角色、画场景、画分镜，再把每一张导进另一个视频生成平台做图生视频，最后所有 4 秒片段丢进剪映拼起来，配音、加字幕、配音乐。 这是一份 工具编排工作 ，不是创作工作。真做过的人都知道，八成的时间花在这里：文件在本地和五六个平台之间来回搬，角色在这一场戴帽子下一场又不戴了，某个道具的样子第一集像 Zippo、第五集变成打火机、第八集又变成蜡烛。你没法让这五六家工具「记住上下文」，也没法让它们互相引用彼此生成的图。 ArcReel/ArcReel（GitHub）是把这件事重新做了一遍——不是又开一个 SaaS 让你去平台上点按钮，而是 把整条流水线做成一个可自托管的 Web 应用 ，用 Claude Agent SDK 编排 AI 智能体，前后串接八家图/视频/文本供应商，Docker 一条命令跑起来。 我把仓库拉下来，读完 20K 字的 AGENTS.md（也就是它塞给 AI Agent 当项目记忆的那份）、通读 README.md / docs/getting started.md / docs/adr/，翻了一遍 CHANGELOG（这个项目已经迭到 v0.20.1，光 2026 年就发了 20 个 minor + patch），跑了一遍源码结构。这一篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Sora Web 端 / 剪映 / 一众 SaaS 视频工具的真实边界在哪里 。 一、痛点：AI 视频真正的瓶颈不在生成，而在编排 先把「AI 生视频」这四个字拆开。 生成本身 这几年已经不是问题。Veo 3.1、Seedance 2.0、Sora 2、可灵 v3、Vidu Q3——单看每一家的样片，都能把一句话生成 5 10 秒电影级画面。价格从 Fast 档的 $0.15/秒 到旗舰档的 $0.40/秒 不等，一分钟视频 $10 20 就能搞完。 真正卡人的是四件事： 1. 角色一致性。 同一个角色出现在三十个分镜里，如果不锚定参考图，AI 每一次都会重新想象一遍。第一镜是黑发少年，第五镜变成金发少女，观众立刻出戏。 2. 道具/场景一致性。 女主的红色项链、男主的黑色皮夹克、村口的老槐树，这些「线索」在剧本里可能出现几十次，需要跨镜头保持视觉稳定。 3. 叙事结构。 8 万字小说不能直接扔给视频模型。得先做「全局角色/线索提取 → 分集规划 → 单集剧本 → 分镜」四步语言层加工，每一步都需要人机确认。 4. 任务编排。 一集 30 个分镜，每个分镜要 1 张分镜图 + 1 个 4 秒视频，就是 60 次 API 调用。要处理限速、断点续传、重试、版本回滚、费用追踪——单机脚本堆到最后就是一份意大利面。 ArcReel 没做「更好的生成器」——它接的还是那八家现成的模型。它做的是 上面这四件事的编排层 ，让生成器专注生成，让工作台专心处理连贯性、状态机和上下文。 二、方案：三层架构 + Claude Agent SDK 编排 架构上 ArcReel 是很干净的三层： frontend/ — React 19 + TypeScript + Tailwind CSS 4 + wouter 路由 + zustand 状态管理。SPA 通过 Vite 代理把 /api 打到 http://127.0.0.1:1241 的后端。 server/ — FastAPI + Python 3.12+ + Pydantic 2。路由都挂在 /api/v1 下（server/routers/），认证用 JWT + API Key（arc 前缀，SHA 256 哈希入库）。实时通信是 SSE：助手 /assistant/sessions/{id}/stream、项目事件 /projects/{name}/events/stream。 lib/ — 核心库。多供应商后端抽象（image backends/ / video backends/ / text backends/）、异步任务队列（generation queue.py）、项目管理器（project manager.py）、用量追踪（usage tracker.py）都在这里。 数据库层是 SQLAlchemy 2.0 async ORM，开发默认 SQLite（projects/.arcreel.db），生产走 PostgreSQL（asyncpg）。迁移用 Alembic。这套技术栈的选择很务实——2026 年的默认答案，没花架子。 真正有意思的是 智能体层 。ArcReel 没用自研 Agent 框架，而是直接接了 Anthropic 官方的 Claude Agent SDK（早年叫 Claude Code SDK），走的是「编排 Skill + 聚焦 Subagent」这套多智能体模式： 翻译成人话： 编排 Skill（manga workflow） 是主 agent 加载的一个 skill 文件，它的任务是 读 project.json 和文件系统，判断项目卡在..."
     }
   ],
   "tutorials": [
@@ -6025,6 +6069,48 @@
   ],
   "recentUpdates": [
     {
+      "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "type": "文章",
+      "date": "2026-07-16",
+      "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "excerpt": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频编辑",
+        "开源",
+        "CapCut",
+        "Rust",
+        "WASM",
+        "Next.js"
+      ],
+      "priority": 0,
+      "content": "上周有朋友让我推荐一个能替代 CapCut 的开源工具——他不想再把家庭视频上传给字节的服务器做剪辑。我第一反应是 opencut app/opencut，GitHub 上 71.9k star，README 顶上写着 \"A free and open source video editor\"，看着就是那个答案。 真去 clone 下来才发现问题：主仓库当前只有一个 web scaffold 和一个 Rust 空窗口，跑起来就一句 hello world!。README 自己在第一段承认：\"OpenCut is being rewritten from the ground up... You can still find the previous version at opencut classic, which is the one to reach for today.\" 也就是说，你在 GitHub 上看到那个 71.9k star 的项目， 当前是不能用的 。真正能剪视频的版本，在一个刚被拆出去、只有 154 star、且已经 archived 的仓库里。 这篇讲清楚三件事：一，两个仓库分别是什么状态，为什么会分裂；二，opencut classic 本地跑起来的完整命令，5 分钟能开到编辑器界面；三，rewrite 到底动了什么，什么时候应该切过去。 两个 OpenCut：一张对照表 先把 GitHub API 返回的事实摆上，避免绕来绕去。 维度 opencut app/opencut（新版 / rewrite） opencut app/opencut classic Star 数 71,933 154 状态 活跃开发，主分支 main archived ，只读 最后 push 2026 07 10 2026 05 17 前端 TanStack Start（Vite）+ shadcn Next.js 16 + shadcn 桌面 Rust + GPUI（空窗口 scaffold） Rust + GPUI（同上，进行中） API Elysia on Cloudflare Workers Next.js Route Handlers 编辑器 UI 无（/ 只显示 hello world!） 完整 ：Timeline、Preview、Effects、Export 依赖复杂度 bun + proto + moon bun + Docker Compose 想动手做视频 别用 用它 想追架构演化 关注它 参考起点 Star 数的分裂是最直觉迷惑人的地方：71.9k 的历史 star 留在了「新版」仓库名下（因为 rewrite 是就地推倒，不是新建 repo），而真正能跑的代码被剥离到 classic 后重新计数。所以你搜「OpenCut」看到的那个热门 repo，就是那个空壳。 结论直接给： 如果你今天就想在本机剪一段视频，clone opencut classic 。追新版的动机应该是「我关心它 rewrite 之后架构长什么样」，不是「我想装个工具」。 opencut classic 5 分钟跑通 前提：本机已装 Bun 和 Docker。没装 Bun 就一条 curl fsSL https://bun.sh/install bash。 打开 http://localhost:3000。第一次点 \"New project\" 会调 /api/auth（better auth）建一个本地账号，然后跳进编辑器。到这一步你就有一个可以拖时间线、加剪辑点、加特效、导出的浏览器视频编辑器。 想直接跑生产构建（跳过开发模式），用它自带的 Docker Compose： 这一版把 web 也打成镜像，访问 http://localhost:3100。适合放在一台家庭服务器上给自己用。 几个第一次跑会踩的坑： docker compose.yml 里 serverless redis http 用的是 hiett/serverless redis http——它本地模拟 Upstash Redis 的 REST 接口，是 better auth 的 rate limit 需要的。少了这个容器登录会 500。 .env.example 里的 FREESOUND CLIENT ID / FREESOUND API KEY 是可选的，只影响音效搜索面板。不填就是空搜索结果，不影响主流程。 Node 版本不重要，因为 packageManager 写死 bun@1.2.18，全流程都走 bun。不要用 npm/pnpm 装依赖，会因为 workspace 依赖解析差异卡住。 Rewrite 到底动了什么 看 opencut classic 的目录结构，能看出作者两个明确的判断。这两个判断决定了他为什么要推倒重写。 判断一：把业务逻辑从 TypeScript 迁到 Rust classic 版本已经开工了这件事。仓库根有一个 rust/ 目录： AGENTS.md 里作者写得直白： \"An ongoing migration is moving all business logic into rust/. Each app under ..."
+    },
+    {
+      "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
+      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "type": "文章",
+      "date": "2026-07-16",
+      "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "excerpt": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "视频下载",
+        "开源工具",
+        "Go",
+        "命令行",
+        "yt-dlp",
+        "Bilibili"
+      ],
+      "priority": 0,
+      "content": "上周三我在 macOS 上装 yt dlp，brew install yt dlp 装完跑第一条命令就报 ImportError: cannot import name 'brotli' from 'urllib3'——很典型的 Python 依赖冲突，跟本机装过的另外几个 Python CLI 打架。折腾了 40 分钟，走的是\"清 pip cache → pyenv 装干净 3.11 → 重装 yt dlp → 又报 ffmpeg 版本\"的老路子。 同事看不下去，甩了我一个仓库：iawia002/lux。31.5k star，Go 写的，一个 8MB 的二进制，没任何运行时依赖。装完以后我用它扒了 B 站的一个开源课公开视频（已获得作者授权归档），5 秒钟拿到 MP4。回过头我才想通一件事： 中文站视频下载这件事上，yt dlp 已经不是最优解了。 这篇文章讲清楚三件事： 1. 为什么 lux 在中文站上比 yt dlp 顺手 ——49 个 extractor 里差不多一半是中文站，包括 B 站、知乎、微博、小红书、抖音、优酷、爱奇艺、QQ、网易云、喜马拉雅。 2. release 停在 v0.24.1 但 master 还在活跃提交的坑 ——如果你 brew install lux 装到的是 2024 05 的老版本，YouTube 字幕这类新功能你根本用不上。绕过办法在文末。 3. 完整 5 分钟上手命令 ，以及 什么场景应该切回 yt dlp （结论前置：YouTube 长期还是 yt dlp）。 一、Lux 是什么 iawia002/lux（GitHub 仓库）是一个用 Go 写的视频下载 CLI，作者是 Xinzhao Xu。项目 2018 02 开始，到 2025 12 仍有活跃提交。定位是 fast and simple video downloader ——slogan 里的 Let there be Lux! 是圣经\"要有光\"的双关。 核心数据 （截至 2026 07）： 项 数据 GitHub star 31,526 fork 3,314 open issues 545 license MIT 最后一次提交 2025 12 29 最新 release v0.24.1（2024 05 06） 支持站点 49 个 extractor 主要语言 Go 二进制大小 8MB（无依赖） 支持的中文视频/图片/音频站点 （不完全列表）： 视频： 哔哩哔哩 · 抖音 · 快手 · 小红书 · 微博 · 知乎 · 爱奇艺 · 优酷 · 腾讯视频 · 芒果 TV · AcFun · 好看视频 · 西瓜视频/头条 · 斗鱼 · 虎牙 · 秒拍 · 糖豆广场舞 图片： 半次元（bcy） · pixivision · 小红书 · 抖音 音频： 网易云音乐 · 喜马拉雅 · 音悦台 海外：YouTube · Vimeo · Facebook · Instagram · Threads · Twitter · TikTok · Reddit · Pinterest · Tumblr · Odysee · Rumble · VKontakte · Bitchute · StreamTape · Zing MP3 · XVIDEOS · Pornhub · Eporner 其它： 极客时间 · 联合新闻网（udn） · Universal（通用抓取） 这里的对比落差点很清晰 ：yt dlp 对海外站点（YouTube/Twitter/Instagram/TikTok）覆盖是行业顶配，几乎每周都在打补丁；但对中文站点，yt dlp 靠社区志愿维护，B 站的 DASH 修复、抖音的动态签名、优酷的 ccode/ckey 这些细节，长期不如 lux 上心。Lux 反过来—— 中文站是它的主战场，海外站是补充 。 二、为什么单文件二进制这件事很重要 用过 yt dlp 的都知道那个感觉：装完 yt dlp，还得单独装 ffmpeg，Python 版本要对，pip install upgrade 时经常和其他工具打架，Windows 用户还得处理 PATH。 Lux 是 Go 写的，编译产物就是单文件。你可以： 唯一的外部依赖是 ffmpeg ，只用来合并分片（B 站的 DASH、YouTube 的 video/audio 分流下载后合并成一个 MP4）。如果你只下已经是单文件的视频，连 ffmpeg 都不需要。 三、5 分钟上手：完整命令清单 先明确一个前提： 下面所有演示我都用作者公开授权的视频 （Rick Astley 的官方 YouTube MV、B 站官方版权视频等）。工具本身是中性的，用来做什么由使用者负责——归档自己上传的内容、抢救即将下线的开源课程、备份免费公开演讲，都是常见合规场景。 3.1 看视频有哪些清晰度可选 i 是 info only，不下载，只列出所有 stream 选项。会打印一个表格，告诉你有 1080p / 720p / 480p 分别多大、编码是什么、下载命令是什么。 3.2 直接下载（默认最高清晰度） Lux 默认取最高清晰度。你会看到进度条、下载速度、剩余时间。下完是一个 MP4 或 FLV，文件名默..."
+    },
+    {
       "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
       "url": "/articles/2026/07/14/better-douyin-open-shell.html",
       "type": "文章",
@@ -6087,46 +6173,6 @@
       ],
       "priority": 0,
       "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
-    },
-    {
-      "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
-      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
-      "type": "文章",
-      "date": "2026-07-08",
-      "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
-      "excerpt": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
-      "topic": "AI 工作流",
-      "topicSlug": "ai-workflow",
-      "series": "",
-      "tags": [
-        "Claude Code",
-        "AI 求职",
-        "LaTeX",
-        "自动化",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "AI Job Search 教程：把 Claude Code 变成 drafter reviewer 求职工作台 我最近想搞清楚一件事：如果我打算换工作，我到底希望 AI 帮我做什么？ 一种答案是「让 AI 给我写简历」。这个答案的坏处是，它把 AI 用得太浅：写完你还是要自己看要求、自己判断要不要投、自己排简历、自己想面试怎么答。AI 只是替你把打字这一段抹掉了。 另一种答案是「让 AI 陪我跑完整个求职周期」。这就复杂多了，因为求职是一个多阶段流程——找岗位、评估匹配度、按岗位改简历和 cover letter、生成 PDF、检查 PDF 会不会被 ATS 系统抓坏、面试准备，最后还有跟踪结果并反过来校准评估标准。任何一个环节掉链子，整条链就白跑。 在 GitHub 上翻到 MadsLorentzen/ai job search 后，我意识到有人已经把这件事做完了——不是又一个「AI 简历生成器」，而是一个 围绕 Claude Code 搭起来的求职工作台 ，把整套流程压成 9 个 slash 命令、两个协作 agent、一条自我验证的 PDF ATS 循环。这篇文章拆三件事： 1. 这套流水线到底长什么样，为什么把 9 个命令拉出来比塞一个大 agent 更好； 2. /apply 里的 drafter reviewer 双 agent 分离到底解决了什么问题； 3. 强制 PDF 视觉 + ATS 文本层双重验证的循环怎么运作、能挡住哪些「.tex 看着挺好」的坑。 顺带附一份 5 分钟上手清单和「换成中文招聘门户」的路径。 一、流水线：从 /setup 到 /outcome，9 个命令 先看骨架。仓库的核心是 .claude/commands/ 目录下 9 个命令文件： 其中 /setup、/scrape、/rank、/apply、/outcome 是主流程，另外四个是辅助命令。整条流水线是这样跑的： 每个命令都有明确的输入和输出：上一步的产物就是下一步的输入。 /setup ：三条路径任选。一是把 CV PDF、LinkedIn 导出、学位证、推荐信、过往申请材料丢进 documents/，命令自动读；二是在聊天里粘一份 CV；三是走一遍访谈问题。产物是 CLAUDE.md 里的候选人档案 + .claude/skills/job application assistant/01 candidate profile.md。 /scrape ：对着 .agents/skills/ 里配好的招聘门户 skill 跑抓取。仓库自带 5 个：jobbank search、jobdanmark search、jobindex search、jobnet search（丹麦四大门户）+ linkedin search（国家无关）。抓完去重、跨轮追踪 seen jobs。产物是 job scraper/seen jobs.json + 一份候选清单。 /rank ：如果一轮 /scrape 扔回 30 个岗位你懒得挨个看，就 /rank 让它一次性打分。命令内部并行派多个 agent（默认每个 agent 处理约 5 个岗位），每个 agent 独立 fetch 岗位 URL、按同一份 rubric 打分（技术 / 经验 / 行为 / 职业方向），deadline 加急标，dead posting 直接标 expired。产物是 top N 短单。 /apply ：主戏。传一个 URL 或者粘岗位描述，走完 drafter reviewer 双 agent 流程，最终产物是一份编译过并做过 ATS 检查的 CV PDF + Cover Letter PDF。下面第二节详细讲。 /outcome ：投完之后追踪。把 CV、Cover Letter、岗位文本归档进 documents/applications/ /，写一份 outcome.md（面试进展 / offer / 拒信 / 沉默），更新 job search tracker.csv。积累够几条之后，/outcome 会提示你回过头再跑 /setup，用「真拿到面试」的岗位反推你的评估框架该怎么调。 四个辅助命令解决三种「顺手要做的事」： /expand ：档案填完还嫌薄？让它爬你的 GitHub、portfolio、Kaggle、Google Scholar，把你显式没写但公开可见的技能扒回来，标注来源。 /upskill ：跑完一轮 tracker 或者对着某个具体岗位，问「我离这个岗位的差距是啥？该学什么？先学哪个？」生成一份带 web search 来源的学习计划。 /add template ：默认 CV 是 moderncv/banking 风格，Cover Letter 是自定义 cover.cls。你自己有一套 LaTeX 模板？/add template 会先做一次强制 test compile 再注册进 /apply。 /add portal ：这是个「地区无关化」的钩子。仓库自带的是丹麦门户，你在中国就跑 /add portal https://www.zhipin.com/... 让它探测这个门户的搜索 URL、结果结构、访问规则，脚手架自动..."
-    },
-    {
-      "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
-      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
-      "type": "文章",
-      "date": "2026-07-05",
-      "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
-      "excerpt": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
-      "topic": "AI 工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI 视频",
-        "小说改编",
-        "Claude Agent SDK",
-        "开源项目",
-        "多模态"
-      ],
-      "priority": 0,
-      "content": "先说一个具体的场景。 你手里有一本 8 万字的小说，觉得改成短视频能火。要做的事按行业惯例大致是这样：先把稿子拆成一集一集，每集再拆成三十来个分镜，然后一个个开 AI 生图工具画角色、画场景、画分镜，再把每一张导进另一个视频生成平台做图生视频，最后所有 4 秒片段丢进剪映拼起来，配音、加字幕、配音乐。 这是一份 工具编排工作 ，不是创作工作。真做过的人都知道，八成的时间花在这里：文件在本地和五六个平台之间来回搬，角色在这一场戴帽子下一场又不戴了，某个道具的样子第一集像 Zippo、第五集变成打火机、第八集又变成蜡烛。你没法让这五六家工具「记住上下文」，也没法让它们互相引用彼此生成的图。 ArcReel/ArcReel（GitHub）是把这件事重新做了一遍——不是又开一个 SaaS 让你去平台上点按钮，而是 把整条流水线做成一个可自托管的 Web 应用 ，用 Claude Agent SDK 编排 AI 智能体，前后串接八家图/视频/文本供应商，Docker 一条命令跑起来。 我把仓库拉下来，读完 20K 字的 AGENTS.md（也就是它塞给 AI Agent 当项目记忆的那份）、通读 README.md / docs/getting started.md / docs/adr/，翻了一遍 CHANGELOG（这个项目已经迭到 v0.20.1，光 2026 年就发了 20 个 minor + patch），跑了一遍源码结构。这一篇是我读完之后的完整判断： 它到底解了什么问题，谁应该现在装，谁再等一等，以及它跟 Sora Web 端 / 剪映 / 一众 SaaS 视频工具的真实边界在哪里 。 一、痛点：AI 视频真正的瓶颈不在生成，而在编排 先把「AI 生视频」这四个字拆开。 生成本身 这几年已经不是问题。Veo 3.1、Seedance 2.0、Sora 2、可灵 v3、Vidu Q3——单看每一家的样片，都能把一句话生成 5 10 秒电影级画面。价格从 Fast 档的 $0.15/秒 到旗舰档的 $0.40/秒 不等，一分钟视频 $10 20 就能搞完。 真正卡人的是四件事： 1. 角色一致性。 同一个角色出现在三十个分镜里，如果不锚定参考图，AI 每一次都会重新想象一遍。第一镜是黑发少年，第五镜变成金发少女，观众立刻出戏。 2. 道具/场景一致性。 女主的红色项链、男主的黑色皮夹克、村口的老槐树，这些「线索」在剧本里可能出现几十次，需要跨镜头保持视觉稳定。 3. 叙事结构。 8 万字小说不能直接扔给视频模型。得先做「全局角色/线索提取 → 分集规划 → 单集剧本 → 分镜」四步语言层加工，每一步都需要人机确认。 4. 任务编排。 一集 30 个分镜，每个分镜要 1 张分镜图 + 1 个 4 秒视频，就是 60 次 API 调用。要处理限速、断点续传、重试、版本回滚、费用追踪——单机脚本堆到最后就是一份意大利面。 ArcReel 没做「更好的生成器」——它接的还是那八家现成的模型。它做的是 上面这四件事的编排层 ，让生成器专注生成，让工作台专心处理连贯性、状态机和上下文。 二、方案：三层架构 + Claude Agent SDK 编排 架构上 ArcReel 是很干净的三层： frontend/ — React 19 + TypeScript + Tailwind CSS 4 + wouter 路由 + zustand 状态管理。SPA 通过 Vite 代理把 /api 打到 http://127.0.0.1:1241 的后端。 server/ — FastAPI + Python 3.12+ + Pydantic 2。路由都挂在 /api/v1 下（server/routers/），认证用 JWT + API Key（arc 前缀，SHA 256 哈希入库）。实时通信是 SSE：助手 /assistant/sessions/{id}/stream、项目事件 /projects/{name}/events/stream。 lib/ — 核心库。多供应商后端抽象（image backends/ / video backends/ / text backends/）、异步任务队列（generation queue.py）、项目管理器（project manager.py）、用量追踪（usage tracker.py）都在这里。 数据库层是 SQLAlchemy 2.0 async ORM，开发默认 SQLite（projects/.arcreel.db），生产走 PostgreSQL（asyncpg）。迁移用 Alembic。这套技术栈的选择很务实——2026 年的默认答案，没花架子。 真正有意思的是 智能体层 。ArcReel 没用自研 Agent 框架，而是直接接了 Anthropic 官方的 Claude Agent SDK（早年叫 Claude Code SDK），走的是「编排 Skill + 聚焦 Subagent」这套多智能体模式： 翻译成人话： 编排 Skill（manga workflow） 是主 agent 加载的一个 skill 文件，它的任务是 读 project.json 和文件系统，判断项目卡在..."
     },
     {
       "title": "第01章：MySQL概述与安装",
