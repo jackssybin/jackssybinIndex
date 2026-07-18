@@ -1,6 +1,27 @@
 {
   "allArticles": [
     {
+      "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "type": "blog",
+      "date": "2026-07-18",
+      "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "excerpt": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "Codex",
+        "开源工具",
+        "桌面美化",
+        "CDP",
+        "macOS",
+        "Windows"
+      ],
+      "priority": 0,
+      "content": "上周三我在 Codex 桌面端翻设置想给背景换个色调，翻完设置面板才想起来——官方只给了 Light / Dark 两个开关，连一个自定义强调色都没有。搜到有人在 Reddit 抱怨同一个问题，下面第一条回复贴了一个仓库地址：Fei Away/Codex Dream Skin。 点过去看时间戳，2026 07 15 才建的仓库，我打开那天已经 5.4k star；今天早上再看，8660 star / 921 fork / 3 天。Trending 榜上排第 4，中文技术圈的公众号还没怎么开始写。 我把源码翻了一遍，也在自己 Mac 上跑了一遍。这篇讲清楚三件事： 1. 它到底动了什么 — 一张壁纸怎么就能盖满整个 Codex 窗口，同时侧栏、输入框、项目选择还能正常点。答案是 CDP 注入 + CSS + 装饰 DOM ，一个字节的 app.asar 都没改。 2. 5 分钟安装完整命令 — macOS 双击 .command、Windows 一条 PowerShell，把 8 张官方预设 / 两套精选主题装到本机。 3. 踩坑清单和适用边界 — 什么场景装、什么场景别碰、和「AI 中转 / 换 API 供应商」有什么严格边界。 一、先给判断，节约你 5 分钟 先把可收藏的对照结论摆上： 你的诉求 是否推荐这个项目 想给 Codex 桌面端换背景/氛围图 强烈推荐 想自定义 Codex 强调色、深浅之外的主题 推荐 macOS/Windows 想要一键装、一键恢复 推荐（脚本齐全） 想同时改 Codex 的 API 供应商 / Base URL 别装（作者明确不做，需要单独配置中转） 想改 Codex 官方二进制或 app.asar 别用（作者拒绝这条路） 想给 VS Code / Cursor / Zed 换肤 别装（只针对 Codex Desktop） 一句话总结 ： 给 Codex 桌面端换脸 ，除此之外不做任何事。装了不会动你的 API Key，不改官方安装包，一键恢复。 二、Codex Dream Skin 是什么 Fei Away/Codex Dream Skin（GitHub 仓库）是一个针对 OpenAI Codex 桌面端 的换肤工具，用作者的原话说：「给 Codex 桌面端换一张会呼吸的脸」。 核心事实 （截至 2026 07 18）： Star：8660，Fork：921，Issue：83 open 首次提交：2026 07 15，最近推送：2026 07 17 License：MIT 平台：macOS（Apple Silicon / Intel） + Windows（Store 版官方 Codex） 语言：JavaScript / Shell / PowerShell 目录：macos/ + windows/ + docs/ 它做了这样一件事：让你选一张自己的 16:9 壁纸，铺满整个 Codex 窗口，同时让 Codex 的 原生侧栏、原生输入框、原生项目选择、原生建议卡片 继续可交互——它不是把整个窗口贴一张假截图。 上面这张是「哥特虚空远征 / Gothic Void Crusade」预设的实机截图。作者原话： 侧栏、建议卡、项目选择、输入框都是原生可点控件 ，你能看到的所有控件都是 Codex 官方渲染出来的，只是背景层和一部分 CSS 被换了。 三、为什么不改 app.asar：CDP 注入是什么 这块是这个项目最值得看的技术判断。 改 Electron 应用外观的常见做法有 3 条： 1. 改 app.asar ：解包 → 改文件 → 重新打包 → 覆盖原文件。粗暴，签名校验会挂，Codex 每次更新都要重来。 2. 写一个 Electron 扩展 ：Codex 官方没有扩展接口，走不通。 3. CDP 注入 ：启动 Codex 时打开 Chromium DevTools Protocol 端口，从外部注入 CSS 和 DOM 装饰层。 Codex Dream Skin 选了第 3 条。整个架构非常直白： 这条路径带来的好处 ： Codex 官方签名不变。macOS 上 App Bundle Team ID 校验、Windows 上 Store 包身份校验都能过。 Codex 官方更新以后，通常只需要重跑一次注入脚本，不需要重做 asar。 一键恢复真的就是「杀掉注入的 CDP 会话 + 重开 Codex」，没有残留。 CDP 只绑 127.0.0.1，不开局域网端口。 风险点也要说清楚 （这也是作者在 README 上明写的）： CDP 本身没有同用户认证。 在皮肤运行期间不要在同一台电脑上跑来路不明的本机程序 ——理论上任何本机进程都能连你的 CDP 端口发指令。 换肤和 API 中转（比如你用 Passion8、OpenRouter 之类的第三方 base url）是 两件严格分开的事 。作者在 README 里反复强调：换肤脚本 不会自动改写 你的 API Key / Base URL。 四、macOS 5 分钟安装 前提：Apple Silicon 或 Intel Mac，官方 Codex Desktop 已装。 装完之后 Codex 首页大概长这样： 浅色和暗色是同一个主..."
+    },
+    {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
       "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
       "type": "blog",
@@ -2534,6 +2555,27 @@
   ],
   "articles": [
     {
+      "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "type": "blog",
+      "date": "2026-07-18",
+      "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "excerpt": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "Codex",
+        "开源工具",
+        "桌面美化",
+        "CDP",
+        "macOS",
+        "Windows"
+      ],
+      "priority": 0,
+      "content": "上周三我在 Codex 桌面端翻设置想给背景换个色调，翻完设置面板才想起来——官方只给了 Light / Dark 两个开关，连一个自定义强调色都没有。搜到有人在 Reddit 抱怨同一个问题，下面第一条回复贴了一个仓库地址：Fei Away/Codex Dream Skin。 点过去看时间戳，2026 07 15 才建的仓库，我打开那天已经 5.4k star；今天早上再看，8660 star / 921 fork / 3 天。Trending 榜上排第 4，中文技术圈的公众号还没怎么开始写。 我把源码翻了一遍，也在自己 Mac 上跑了一遍。这篇讲清楚三件事： 1. 它到底动了什么 — 一张壁纸怎么就能盖满整个 Codex 窗口，同时侧栏、输入框、项目选择还能正常点。答案是 CDP 注入 + CSS + 装饰 DOM ，一个字节的 app.asar 都没改。 2. 5 分钟安装完整命令 — macOS 双击 .command、Windows 一条 PowerShell，把 8 张官方预设 / 两套精选主题装到本机。 3. 踩坑清单和适用边界 — 什么场景装、什么场景别碰、和「AI 中转 / 换 API 供应商」有什么严格边界。 一、先给判断，节约你 5 分钟 先把可收藏的对照结论摆上： 你的诉求 是否推荐这个项目 想给 Codex 桌面端换背景/氛围图 强烈推荐 想自定义 Codex 强调色、深浅之外的主题 推荐 macOS/Windows 想要一键装、一键恢复 推荐（脚本齐全） 想同时改 Codex 的 API 供应商 / Base URL 别装（作者明确不做，需要单独配置中转） 想改 Codex 官方二进制或 app.asar 别用（作者拒绝这条路） 想给 VS Code / Cursor / Zed 换肤 别装（只针对 Codex Desktop） 一句话总结 ： 给 Codex 桌面端换脸 ，除此之外不做任何事。装了不会动你的 API Key，不改官方安装包，一键恢复。 二、Codex Dream Skin 是什么 Fei Away/Codex Dream Skin（GitHub 仓库）是一个针对 OpenAI Codex 桌面端 的换肤工具，用作者的原话说：「给 Codex 桌面端换一张会呼吸的脸」。 核心事实 （截至 2026 07 18）： Star：8660，Fork：921，Issue：83 open 首次提交：2026 07 15，最近推送：2026 07 17 License：MIT 平台：macOS（Apple Silicon / Intel） + Windows（Store 版官方 Codex） 语言：JavaScript / Shell / PowerShell 目录：macos/ + windows/ + docs/ 它做了这样一件事：让你选一张自己的 16:9 壁纸，铺满整个 Codex 窗口，同时让 Codex 的 原生侧栏、原生输入框、原生项目选择、原生建议卡片 继续可交互——它不是把整个窗口贴一张假截图。 上面这张是「哥特虚空远征 / Gothic Void Crusade」预设的实机截图。作者原话： 侧栏、建议卡、项目选择、输入框都是原生可点控件 ，你能看到的所有控件都是 Codex 官方渲染出来的，只是背景层和一部分 CSS 被换了。 三、为什么不改 app.asar：CDP 注入是什么 这块是这个项目最值得看的技术判断。 改 Electron 应用外观的常见做法有 3 条： 1. 改 app.asar ：解包 → 改文件 → 重新打包 → 覆盖原文件。粗暴，签名校验会挂，Codex 每次更新都要重来。 2. 写一个 Electron 扩展 ：Codex 官方没有扩展接口，走不通。 3. CDP 注入 ：启动 Codex 时打开 Chromium DevTools Protocol 端口，从外部注入 CSS 和 DOM 装饰层。 Codex Dream Skin 选了第 3 条。整个架构非常直白： 这条路径带来的好处 ： Codex 官方签名不变。macOS 上 App Bundle Team ID 校验、Windows 上 Store 包身份校验都能过。 Codex 官方更新以后，通常只需要重跑一次注入脚本，不需要重做 asar。 一键恢复真的就是「杀掉注入的 CDP 会话 + 重开 Codex」，没有残留。 CDP 只绑 127.0.0.1，不开局域网端口。 风险点也要说清楚 （这也是作者在 README 上明写的）： CDP 本身没有同用户认证。 在皮肤运行期间不要在同一台电脑上跑来路不明的本机程序 ——理论上任何本机进程都能连你的 CDP 端口发指令。 换肤和 API 中转（比如你用 Passion8、OpenRouter 之类的第三方 base url）是 两件严格分开的事 。作者在 README 里反复强调：换肤脚本 不会自动改写 你的 API Key / Base URL。 四、macOS 5 分钟安装 前提：Apple Silicon 或 Intel Mac，官方 Codex Desktop 已装。 装完之后 Codex 首页大概长这样： 浅色和暗色是同一个主..."
+    },
+    {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
       "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
       "type": "blog",
@@ -2915,30 +2957,30 @@
       ],
       "priority": 0,
       "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
-    },
-    {
-      "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
-      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
-      "type": "blog",
-      "date": "2026-06-24",
-      "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "excerpt": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
-      "topic": "AI工具",
-      "topicSlug": "ai-tools",
-      "series": "",
-      "tags": [
-        "AI绘图",
-        "小红书",
-        "开源项目",
-        "Docker",
-        "Vue",
-        "Flask"
-      ],
-      "priority": 0,
-      "content": "如果你做过小红书图文，就知道最累的地方不是“写一句标题”，而是把一个想法拆成 6 到 12 页：封面怎么抓人，内容页怎么分层，每一页的字能不能放进图里，整组图片风格会不会跑偏，生成失败后怎么重来。 HisMax/RedInk 解决的正是这段流水线。它不是一个简单的图片生成壳子，而是把“小红书图文”拆成了几个明确步骤：先让文本模型生成大纲，再让用户编辑每页内容，随后调用图片模型批量生成封面和内容页，最后把历史记录和图片保留下来，方便重绘、下载和复用。 我看完 README、Dockerfile、前后端源码和配置模板后，最想强调一句：RedInk 的价值不在“AI 会不会画得更漂亮”，而在它把一个容易失控的内容生产过程做成了可配置、可回滚、可自部署的工具。 先看项目状态 几个可验证信息先放在前面： 仓库：HisMax/RedInk GitHub 描述：基于 Nano Banana Pro 的一站式小红书图文生成器，主打 “One Sentence, One Image” 主要语言：Python，后端是 Flask；前端是 Vue 3 + TypeScript + Vite + Pinia 本次 GitHub API 查询：约 5.3k+ stars、1.0k+ forks、16 个 open issues 最新浅克隆提交：7413ddb fix: outline auto save now works when recordId is missing (closes 47) License 文件写的是 CC BY NC SA 4.0，并额外声明商业使用需要联系作者授权 Docker 镜像：README 使用 histonemax/redink:latest 这几个点决定了它的适用边界：个人、学习、内部试验很合适；如果你要把它直接放进商业内容工厂，先处理授权问题。 它真正做了什么 普通图片生成工具回答的是：“给我一句提示词，我给你一张图。” RedInk 更像在回答：“给我一个选题，我帮你拆成一组能发布的小红书图文，并且每页都能编辑、重绘和保存。” 源码里的路径很清楚： 1. frontend/src/views/HomeView.vue 收集主题和最多 5 张参考图，调用 /api/outline。 2. backend/routes/outline routes.py 解析表单或 JSON，交给 backend/services/outline.py。 3. backend/prompts/outline prompt.txt 要求模型用 分割页面，并标注 [封面]、[内容]、[总结]。 4. frontend/src/views/OutlineView.vue 允许编辑、删除、插入、拖拽每一页，并自动保存。 5. backend/services/image.py 先生成封面图，再把封面作为后续页面的参考图，尽量保持整组风格一致。 6. /api/generate 通过 SSE 返回生成进度；失败的页面可以单独 retry 或 regenerate。 7. backend/services/history.py 把记录写入 history/index.json 和单条 JSON，图片也保存在 history/ / 下。 这就是它和“套个壳调用图片 API”的差别。RedInk 把“图文组”当成一个任务，而不是把每张图当成互不相关的请求。 源码里最值得借鉴的 4 个设计 1. 大纲先行，而不是直接出图 outline prompt.txt 很强硬：第一页必须是封面；内容控制在 6 到 12 页；每页用 分割；每页开头必须标注类型。OutlineService. parse outline() 再把模型返回解析成 pages 数组。 这个设计看似普通，其实很关键。因为小红书图文最容易翻车的地方是“每页各说各话”。先有页面级大纲，再出图，至少能让主题、页数和节奏先固定下来。 坏做法是：拿一个标题连发 9 次图片生成，让模型自己猜每页应该写什么。 好做法是：先把 9 页内容写清楚，再让图片模型只负责把每页变成视觉表达。 2. 封面作为风格锚点 在 backend/services/image.py 里，生成流程先处理封面页。成功后，它会读取封面图片并压缩到约 200KB，然后作为后续内容页的 reference image。完整 prompt 里也写明：如果当前页面不是封面，要参考封面样式，保持配色、排版、字体和装饰元素一致。 这比单纯在 prompt 里写“风格统一”更可靠。模型至少看到了一个具体视觉锚点。 3. 配置分成文本模型和图片模型 RedInk 没有假设所有模型来自同一个供应商。配置模板明确分成两份： text providers.yaml：用于大纲、标题、文案、标签，支持 openai compatible 和 google gemini。 image providers.yaml：用于图片生成，支持 google genai 和 image api。 前端设置页会读写 /api/config，后端 config routes.py 写入 YAML 时还会保留原有 API Key，并把返回给前端的 key 脱敏。..."
     }
   ],
   "latestArticles": [
+    {
+      "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "type": "blog",
+      "date": "2026-07-18",
+      "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "excerpt": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "Codex",
+        "开源工具",
+        "桌面美化",
+        "CDP",
+        "macOS",
+        "Windows"
+      ],
+      "priority": 0,
+      "content": "上周三我在 Codex 桌面端翻设置想给背景换个色调，翻完设置面板才想起来——官方只给了 Light / Dark 两个开关，连一个自定义强调色都没有。搜到有人在 Reddit 抱怨同一个问题，下面第一条回复贴了一个仓库地址：Fei Away/Codex Dream Skin。 点过去看时间戳，2026 07 15 才建的仓库，我打开那天已经 5.4k star；今天早上再看，8660 star / 921 fork / 3 天。Trending 榜上排第 4，中文技术圈的公众号还没怎么开始写。 我把源码翻了一遍，也在自己 Mac 上跑了一遍。这篇讲清楚三件事： 1. 它到底动了什么 — 一张壁纸怎么就能盖满整个 Codex 窗口，同时侧栏、输入框、项目选择还能正常点。答案是 CDP 注入 + CSS + 装饰 DOM ，一个字节的 app.asar 都没改。 2. 5 分钟安装完整命令 — macOS 双击 .command、Windows 一条 PowerShell，把 8 张官方预设 / 两套精选主题装到本机。 3. 踩坑清单和适用边界 — 什么场景装、什么场景别碰、和「AI 中转 / 换 API 供应商」有什么严格边界。 一、先给判断，节约你 5 分钟 先把可收藏的对照结论摆上： 你的诉求 是否推荐这个项目 想给 Codex 桌面端换背景/氛围图 强烈推荐 想自定义 Codex 强调色、深浅之外的主题 推荐 macOS/Windows 想要一键装、一键恢复 推荐（脚本齐全） 想同时改 Codex 的 API 供应商 / Base URL 别装（作者明确不做，需要单独配置中转） 想改 Codex 官方二进制或 app.asar 别用（作者拒绝这条路） 想给 VS Code / Cursor / Zed 换肤 别装（只针对 Codex Desktop） 一句话总结 ： 给 Codex 桌面端换脸 ，除此之外不做任何事。装了不会动你的 API Key，不改官方安装包，一键恢复。 二、Codex Dream Skin 是什么 Fei Away/Codex Dream Skin（GitHub 仓库）是一个针对 OpenAI Codex 桌面端 的换肤工具，用作者的原话说：「给 Codex 桌面端换一张会呼吸的脸」。 核心事实 （截至 2026 07 18）： Star：8660，Fork：921，Issue：83 open 首次提交：2026 07 15，最近推送：2026 07 17 License：MIT 平台：macOS（Apple Silicon / Intel） + Windows（Store 版官方 Codex） 语言：JavaScript / Shell / PowerShell 目录：macos/ + windows/ + docs/ 它做了这样一件事：让你选一张自己的 16:9 壁纸，铺满整个 Codex 窗口，同时让 Codex 的 原生侧栏、原生输入框、原生项目选择、原生建议卡片 继续可交互——它不是把整个窗口贴一张假截图。 上面这张是「哥特虚空远征 / Gothic Void Crusade」预设的实机截图。作者原话： 侧栏、建议卡、项目选择、输入框都是原生可点控件 ，你能看到的所有控件都是 Codex 官方渲染出来的，只是背景层和一部分 CSS 被换了。 三、为什么不改 app.asar：CDP 注入是什么 这块是这个项目最值得看的技术判断。 改 Electron 应用外观的常见做法有 3 条： 1. 改 app.asar ：解包 → 改文件 → 重新打包 → 覆盖原文件。粗暴，签名校验会挂，Codex 每次更新都要重来。 2. 写一个 Electron 扩展 ：Codex 官方没有扩展接口，走不通。 3. CDP 注入 ：启动 Codex 时打开 Chromium DevTools Protocol 端口，从外部注入 CSS 和 DOM 装饰层。 Codex Dream Skin 选了第 3 条。整个架构非常直白： 这条路径带来的好处 ： Codex 官方签名不变。macOS 上 App Bundle Team ID 校验、Windows 上 Store 包身份校验都能过。 Codex 官方更新以后，通常只需要重跑一次注入脚本，不需要重做 asar。 一键恢复真的就是「杀掉注入的 CDP 会话 + 重开 Codex」，没有残留。 CDP 只绑 127.0.0.1，不开局域网端口。 风险点也要说清楚 （这也是作者在 README 上明写的）： CDP 本身没有同用户认证。 在皮肤运行期间不要在同一台电脑上跑来路不明的本机程序 ——理论上任何本机进程都能连你的 CDP 端口发指令。 换肤和 API 中转（比如你用 Passion8、OpenRouter 之类的第三方 base url）是 两件严格分开的事 。作者在 README 里反复强调：换肤脚本 不会自动改写 你的 API Key / Base URL。 四、macOS 5 分钟安装 前提：Apple Silicon 或 Intel Mac，官方 Codex Desktop 已装。 装完之后 Codex 首页大概长这样： 浅色和暗色是同一个主..."
+    },
     {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
       "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
@@ -3024,26 +3066,6 @@
       ],
       "priority": 0,
       "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
-    },
-    {
-      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
-      "type": "blog",
-      "date": "2026-07-08",
-      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-      "topic": "AI Agent",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Claude Code",
-        "Cursor",
-        "Hermes",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
     }
   ],
   "tutorials": [
@@ -6069,6 +6091,27 @@
   ],
   "recentUpdates": [
     {
+      "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "type": "文章",
+      "date": "2026-07-18",
+      "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "excerpt": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
+      "topic": "开源工具",
+      "topicSlug": "open-source-tools",
+      "series": "",
+      "tags": [
+        "Codex",
+        "开源工具",
+        "桌面美化",
+        "CDP",
+        "macOS",
+        "Windows"
+      ],
+      "priority": 0,
+      "content": "上周三我在 Codex 桌面端翻设置想给背景换个色调，翻完设置面板才想起来——官方只给了 Light / Dark 两个开关，连一个自定义强调色都没有。搜到有人在 Reddit 抱怨同一个问题，下面第一条回复贴了一个仓库地址：Fei Away/Codex Dream Skin。 点过去看时间戳，2026 07 15 才建的仓库，我打开那天已经 5.4k star；今天早上再看，8660 star / 921 fork / 3 天。Trending 榜上排第 4，中文技术圈的公众号还没怎么开始写。 我把源码翻了一遍，也在自己 Mac 上跑了一遍。这篇讲清楚三件事： 1. 它到底动了什么 — 一张壁纸怎么就能盖满整个 Codex 窗口，同时侧栏、输入框、项目选择还能正常点。答案是 CDP 注入 + CSS + 装饰 DOM ，一个字节的 app.asar 都没改。 2. 5 分钟安装完整命令 — macOS 双击 .command、Windows 一条 PowerShell，把 8 张官方预设 / 两套精选主题装到本机。 3. 踩坑清单和适用边界 — 什么场景装、什么场景别碰、和「AI 中转 / 换 API 供应商」有什么严格边界。 一、先给判断，节约你 5 分钟 先把可收藏的对照结论摆上： 你的诉求 是否推荐这个项目 想给 Codex 桌面端换背景/氛围图 强烈推荐 想自定义 Codex 强调色、深浅之外的主题 推荐 macOS/Windows 想要一键装、一键恢复 推荐（脚本齐全） 想同时改 Codex 的 API 供应商 / Base URL 别装（作者明确不做，需要单独配置中转） 想改 Codex 官方二进制或 app.asar 别用（作者拒绝这条路） 想给 VS Code / Cursor / Zed 换肤 别装（只针对 Codex Desktop） 一句话总结 ： 给 Codex 桌面端换脸 ，除此之外不做任何事。装了不会动你的 API Key，不改官方安装包，一键恢复。 二、Codex Dream Skin 是什么 Fei Away/Codex Dream Skin（GitHub 仓库）是一个针对 OpenAI Codex 桌面端 的换肤工具，用作者的原话说：「给 Codex 桌面端换一张会呼吸的脸」。 核心事实 （截至 2026 07 18）： Star：8660，Fork：921，Issue：83 open 首次提交：2026 07 15，最近推送：2026 07 17 License：MIT 平台：macOS（Apple Silicon / Intel） + Windows（Store 版官方 Codex） 语言：JavaScript / Shell / PowerShell 目录：macos/ + windows/ + docs/ 它做了这样一件事：让你选一张自己的 16:9 壁纸，铺满整个 Codex 窗口，同时让 Codex 的 原生侧栏、原生输入框、原生项目选择、原生建议卡片 继续可交互——它不是把整个窗口贴一张假截图。 上面这张是「哥特虚空远征 / Gothic Void Crusade」预设的实机截图。作者原话： 侧栏、建议卡、项目选择、输入框都是原生可点控件 ，你能看到的所有控件都是 Codex 官方渲染出来的，只是背景层和一部分 CSS 被换了。 三、为什么不改 app.asar：CDP 注入是什么 这块是这个项目最值得看的技术判断。 改 Electron 应用外观的常见做法有 3 条： 1. 改 app.asar ：解包 → 改文件 → 重新打包 → 覆盖原文件。粗暴，签名校验会挂，Codex 每次更新都要重来。 2. 写一个 Electron 扩展 ：Codex 官方没有扩展接口，走不通。 3. CDP 注入 ：启动 Codex 时打开 Chromium DevTools Protocol 端口，从外部注入 CSS 和 DOM 装饰层。 Codex Dream Skin 选了第 3 条。整个架构非常直白： 这条路径带来的好处 ： Codex 官方签名不变。macOS 上 App Bundle Team ID 校验、Windows 上 Store 包身份校验都能过。 Codex 官方更新以后，通常只需要重跑一次注入脚本，不需要重做 asar。 一键恢复真的就是「杀掉注入的 CDP 会话 + 重开 Codex」，没有残留。 CDP 只绑 127.0.0.1，不开局域网端口。 风险点也要说清楚 （这也是作者在 README 上明写的）： CDP 本身没有同用户认证。 在皮肤运行期间不要在同一台电脑上跑来路不明的本机程序 ——理论上任何本机进程都能连你的 CDP 端口发指令。 换肤和 API 中转（比如你用 Passion8、OpenRouter 之类的第三方 base url）是 两件严格分开的事 。作者在 README 里反复强调：换肤脚本 不会自动改写 你的 API Key / Base URL。 四、macOS 5 分钟安装 前提：Apple Silicon 或 Intel Mac，官方 Codex Desktop 已装。 装完之后 Codex 首页大概长这样： 浅色和暗色是同一个主..."
+    },
+    {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
       "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
       "type": "文章",
@@ -6153,26 +6196,6 @@
       ],
       "priority": 0,
       "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
-    },
-    {
-      "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
-      "type": "文章",
-      "date": "2026-07-08",
-      "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-      "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-      "topic": "AI Agent",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Claude Code",
-        "Cursor",
-        "Hermes",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
     },
     {
       "title": "第01章：MySQL概述与安装",
