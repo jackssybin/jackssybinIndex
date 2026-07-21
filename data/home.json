@@ -1,6 +1,27 @@
 {
   "allArticles": [
     {
+      "title": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我",
+      "url": "/articles/2026/07/21/build-your-own-x-programming-by-doing.html",
+      "type": "blog",
+      "date": "2026-07-21",
+      "description": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "excerpt": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "topic": "技术方法论",
+      "topicSlug": "tech-methodology",
+      "series": "",
+      "tags": [
+        "编程学习",
+        "GitHub",
+        "开源",
+        "自学编程",
+        "费曼学习法",
+        "动手实践"
+      ],
+      "priority": 0,
+      "content": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我 \"What I cannot create, I do not understand.\" —— Richard Feynman 你有没有过这种体验： 跟着视频课刷完了 100 集，讲的知识点都听得懂，自己动手写项目还是卡壳？ 厚厚的编程大部头翻完了，合上书脑子里还是一团浆糊，问你「这个组件到底怎么工作的」说不清楚？ 简历上写「熟悉 XX 框架」，面试官追问一句「你能说说它底层是怎么实现的吗」直接哑口无言？ 我曾经也陷在这个怪圈里出不来。看了很多书，收藏了很多教程，真到上手写东西的时候，还是会被各种细节卡住。直到朋友甩给我这个 GitHub 仓库，才突然想通了问题出在哪。 为什么说「看书一百遍，不如动手造一遍」？ 传统的编程学习路径是这样的： 先学理论，再学概念，最后做项目 。但大部分人卡就在「最后」这一步。理论都懂，概念都背，真要把这些碎片拼成一个能跑的东西，瞬间就不知道从哪下手了。 这个仓库的核心逻辑非常简单： 反过来学 。 你想理解操作系统？别先啃 1000 页的《深入理解计算机系统》，动手写一个简单内核出来。你想理解编译器？别先背《编译原理》的龙书那套术语，从写一个简单的 Lisp 解释器开始。你想理解 React？别光看官方文档，自己写一个 160 行的 React 出来。 这其实就是费曼学习法的工程化落地： 不能创造，就不算真的理解 。 这个仓库到底有什么？500+ 教程覆盖了几乎所有领域 codecrafters io/build your own x 现在已经有 530,000+ stars ，收集了 500+ 份 step by step 的教程，教你从零开始构建各种各样的技术。 我大概整理了一下它覆盖的主要领域： 大类 代表内容 图形 / 游戏 3D 渲染器（光线追踪 / 光栅化）、游戏引擎、物理引擎、voxel engine AI / 神经网络 LLM 从零实现、扩散模型、RAG、神经网络、PyTorch 内核重写 系统 / 底层 操作系统内核、内存分配器、网络栈、处理器、RISC V 语言 / 编译器 编程语言、编译器、解释器、正则表达式引擎 数据 数据库（B+树 / Redis）、搜索引擎、哈希表 区块链 区块链、加密货币、PoW / PoS 共识 工具 / 应用 Git、Docker、文本编辑器、Shell、Web 服务器、模板引擎 Web / 前端 React、Redux、Virtual DOM、模块打包器、浏览器引擎 也就是说，无论你对哪个方向感兴趣，从最底层的硬件到最上层的前端框架，这里基本都能找到对应的教程。 而且这些教程不是那种「跟着我敲 1000 行代码然后啥也没学会」的水文， 每一篇都是社区筛选出来的高质量内容 ，很多教程本身就是作者公开的博客连载，讲得非常细。 这个学习方法真的有效吗？我用三个例子给你算笔账 我自己试过几个小项目，最大的感受是： 之前看书看不明白的地方，动手写一遍瞬间就通了 。 举三个最热门的例子： 例子一：写一个你自己的 Git 你天天用 Git，但你真的理解 Git 是怎么工作的吗？git add 到底干了什么？对象存储是什么结构？这个仓库里有好几个教程： Python 版 ：Write yourself a Git! — 不到 1000 行 Python 就能实现一个可工作的 Git，支持 init、add、commit、log 这些基础命令。 JavaScript 版 ：Gitlet — 浏览器里就能跑的 Git 实现。 跟着写完一遍，你再看 Git 的底层文档，那些「对象」「树」「提交」这些概念瞬间就活了。之前是死记硬背，现在是你自己写出来的，想忘都忘不了。 例子二：写一个你自己的 Redis Redis 为什么这么快？数据结构到底怎么实现的？这个仓库里也有教程： C 语言版 ：Build Your Own Redis from Scratch — 完整的系列教程，从网络编程到数据结构，一步步教你写一个 Redis 服务器。 Python 版 ：Write your own miniature Redis with Python — 更短的入门版，不到 500 行就能跑起来。 我见过很多人简历上写「熟练使用 Redis」，问他「跳表是什么结构」都说不清楚。要是你自己实现过一遍基本的 KV 存储，这个问题闭着眼都能答。 例子三：写一个你自己的 React 现在前端几乎人人用 React，但你真的理解 Virtual DOM 是什么吗？setState 为什么是异步的？这个仓库里有： Didact ：A DIY guide to build your own React — 非常经典的教程，一步步教你从零实现 React 的核心逻辑。 Gooact ：React in 160 lines of JavaScript — 更短的版本，真的只有 160 行。 看完源码不如写一遍 160 行的最小 React，写完你再去看 React 源码，脉络一下子就清晰了。 适合谁？不适合谁？给你一个清晰的判断标准 我觉得不是所有人都适合用这个方法，得看你处于什么阶段： ✅ 非常适合这些人 1. 已经入门，但想..."
+    },
+    {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
       "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
       "type": "blog",
@@ -2555,6 +2576,27 @@
   ],
   "articles": [
     {
+      "title": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我",
+      "url": "/articles/2026/07/21/build-your-own-x-programming-by-doing.html",
+      "type": "blog",
+      "date": "2026-07-21",
+      "description": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "excerpt": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "topic": "技术方法论",
+      "topicSlug": "tech-methodology",
+      "series": "",
+      "tags": [
+        "编程学习",
+        "GitHub",
+        "开源",
+        "自学编程",
+        "费曼学习法",
+        "动手实践"
+      ],
+      "priority": 0,
+      "content": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我 \"What I cannot create, I do not understand.\" —— Richard Feynman 你有没有过这种体验： 跟着视频课刷完了 100 集，讲的知识点都听得懂，自己动手写项目还是卡壳？ 厚厚的编程大部头翻完了，合上书脑子里还是一团浆糊，问你「这个组件到底怎么工作的」说不清楚？ 简历上写「熟悉 XX 框架」，面试官追问一句「你能说说它底层是怎么实现的吗」直接哑口无言？ 我曾经也陷在这个怪圈里出不来。看了很多书，收藏了很多教程，真到上手写东西的时候，还是会被各种细节卡住。直到朋友甩给我这个 GitHub 仓库，才突然想通了问题出在哪。 为什么说「看书一百遍，不如动手造一遍」？ 传统的编程学习路径是这样的： 先学理论，再学概念，最后做项目 。但大部分人卡就在「最后」这一步。理论都懂，概念都背，真要把这些碎片拼成一个能跑的东西，瞬间就不知道从哪下手了。 这个仓库的核心逻辑非常简单： 反过来学 。 你想理解操作系统？别先啃 1000 页的《深入理解计算机系统》，动手写一个简单内核出来。你想理解编译器？别先背《编译原理》的龙书那套术语，从写一个简单的 Lisp 解释器开始。你想理解 React？别光看官方文档，自己写一个 160 行的 React 出来。 这其实就是费曼学习法的工程化落地： 不能创造，就不算真的理解 。 这个仓库到底有什么？500+ 教程覆盖了几乎所有领域 codecrafters io/build your own x 现在已经有 530,000+ stars ，收集了 500+ 份 step by step 的教程，教你从零开始构建各种各样的技术。 我大概整理了一下它覆盖的主要领域： 大类 代表内容 图形 / 游戏 3D 渲染器（光线追踪 / 光栅化）、游戏引擎、物理引擎、voxel engine AI / 神经网络 LLM 从零实现、扩散模型、RAG、神经网络、PyTorch 内核重写 系统 / 底层 操作系统内核、内存分配器、网络栈、处理器、RISC V 语言 / 编译器 编程语言、编译器、解释器、正则表达式引擎 数据 数据库（B+树 / Redis）、搜索引擎、哈希表 区块链 区块链、加密货币、PoW / PoS 共识 工具 / 应用 Git、Docker、文本编辑器、Shell、Web 服务器、模板引擎 Web / 前端 React、Redux、Virtual DOM、模块打包器、浏览器引擎 也就是说，无论你对哪个方向感兴趣，从最底层的硬件到最上层的前端框架，这里基本都能找到对应的教程。 而且这些教程不是那种「跟着我敲 1000 行代码然后啥也没学会」的水文， 每一篇都是社区筛选出来的高质量内容 ，很多教程本身就是作者公开的博客连载，讲得非常细。 这个学习方法真的有效吗？我用三个例子给你算笔账 我自己试过几个小项目，最大的感受是： 之前看书看不明白的地方，动手写一遍瞬间就通了 。 举三个最热门的例子： 例子一：写一个你自己的 Git 你天天用 Git，但你真的理解 Git 是怎么工作的吗？git add 到底干了什么？对象存储是什么结构？这个仓库里有好几个教程： Python 版 ：Write yourself a Git! — 不到 1000 行 Python 就能实现一个可工作的 Git，支持 init、add、commit、log 这些基础命令。 JavaScript 版 ：Gitlet — 浏览器里就能跑的 Git 实现。 跟着写完一遍，你再看 Git 的底层文档，那些「对象」「树」「提交」这些概念瞬间就活了。之前是死记硬背，现在是你自己写出来的，想忘都忘不了。 例子二：写一个你自己的 Redis Redis 为什么这么快？数据结构到底怎么实现的？这个仓库里也有教程： C 语言版 ：Build Your Own Redis from Scratch — 完整的系列教程，从网络编程到数据结构，一步步教你写一个 Redis 服务器。 Python 版 ：Write your own miniature Redis with Python — 更短的入门版，不到 500 行就能跑起来。 我见过很多人简历上写「熟练使用 Redis」，问他「跳表是什么结构」都说不清楚。要是你自己实现过一遍基本的 KV 存储，这个问题闭着眼都能答。 例子三：写一个你自己的 React 现在前端几乎人人用 React，但你真的理解 Virtual DOM 是什么吗？setState 为什么是异步的？这个仓库里有： Didact ：A DIY guide to build your own React — 非常经典的教程，一步步教你从零实现 React 的核心逻辑。 Gooact ：React in 160 lines of JavaScript — 更短的版本，真的只有 160 行。 看完源码不如写一遍 160 行的最小 React，写完你再去看 React 源码，脉络一下子就清晰了。 适合谁？不适合谁？给你一个清晰的判断标准 我觉得不是所有人都适合用这个方法，得看你处于什么阶段： ✅ 非常适合这些人 1. 已经入门，但想..."
+    },
+    {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
       "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
       "type": "blog",
@@ -2937,29 +2979,30 @@
       ],
       "priority": 0,
       "content": "现在很多人说文章有“AI 味”。问题是，这句话通常没法执行。你让模型“写得像人一点”，它可能只是换几个词，删几个破折号，再把文章磨得更平，最后反而更像机器写的。 conorbronsdon/avoid ai writing 做的事更具体：它把“AI 味”拆成一组可审计的写作模式，再包装成一个可以放进 Claude Code、Hermes、OpenClaw、Cursor、Codex 等 Agent 工具里的 SKILL.md。它不是商业 AI 检测器，也不把结果当成判决；它更像一份写作质检清单，告诉 Agent 该看哪里、怎么改、什么时候只标记不改。 我看完 README、SKILL.md、detector/、Cursor 规则和插件脚本后，觉得这个项目最值得学的不是“列了多少禁词”，而是它把一个主观写作问题做成了工程化流程：规则有层级，输出有格式，检测器有测试，跨 Agent 分发也有同步脚本。 先看项目状态 几个可验证信息放在前面： 仓库：conorbronsdon/avoid ai writing GitHub 描述：用于审计和重写内容，移除 AI 写作模式，可配合 Claude Code、OpenClaw、Hermes 等 Agent 使用 License：MIT 当前浅克隆提交：6e1369d，提交信息是 Detector: cover inflected forms of single form verb patterns ( 38) SKILL.md frontmatter 版本：3.10.0 GitHub API 查询：约 1.9k+ stars、200+ forks，默认分支 main package.json 里检测器要求 Node =18，测试命令是 node detector/patterns.test.js && node detector/categories.test.js 我本地执行 npm test，检测器 fixtures 和 CATEGORIES.md 映射校验均通过 这里有一个容易误解的点：README 说它是 “Audit & rewrite content to remove AI writing patterns”，但 SKILL.md 第一段就把边界讲清楚了。它是写作质量工具，不是判定一个人是否使用 AI 的证据。规则会误伤非母语写作者、赶稿的人、技术文档和某些平台化写法，所以它更适合用来改稿，而不是审判作者。 它解决的不是“检测”，而是“可执行的改稿” 普通提示词通常长这样： 这句话的问题是没有验收标准。什么叫自然？哪些句子必须改？哪些只是风格选择？改完之后怎么确认没有把原意改坏？ avoid ai writing 的做法是把任务拆成三个模式。 1. rewrite 是默认模式。Agent 要先列出命中的 AI 写作痕迹，再给出重写版本，然后说明改了什么，最后做一次 second pass audit。 2. detect 只标记不改写。适合审稿、分析别人的文章，或者你不想让模型直接动原文的时候。 3. edit 面向文件。用户指向 draft.md 或 README，Agent 只做局部修改，保留已经自然的段落，并在最后报告改动和验证结果。 这个设计比一句“humanize”更可靠。因为它让 Agent 先解释问题，再动手改稿；如果你不同意某个判断，可以回到具体句子讨论，而不是和模型争论“有没有 AI 味”。 规则层级：先救命，再润色 SKILL.md 里不是把所有问题混在一起，而是给出了 P0、P1、P2 三层优先级。 P0 是可信度杀手，比如： “As of my last update” 这种模型截止声明； “Great question!”、“I hope this helps!” 这类聊天界面残留； “Experts believe” 但没有任何专家或研究来源； 把普通事件硬写成 “watershed moment” 或 “marking a pivotal moment”。 P1 是发布前应该修掉的明显 AI 味，比如 delve、leverage、robust 这类词表命中，模板句，let's explore 开头，过度同义词轮换，社交媒体里“this one is worth your time” 这种空推荐。 P2 更像风格润色：段落长度太整齐、结尾太泛、结构太像模板、偶发的 “serves as / features / boasts”。这些不一定毁稿，但会让文章看起来像流水线产物。 这个分层很实用。真实改稿时，不应该把所有规则当铁律。先清 P0，再处理 P1，最后看 P2 是否真的影响阅读。否则你会陷入另一种机器味：每个句子都“正确”，但没有人的呼吸。 它不是单纯禁词表 README 里提到 109 entry word replacement table across 3 tiers + 10 Tier 3 phrases，很容易让人以为这只是一个禁词清单。源码并不是这么简单。 SKILL.md 把规则分成几类： 词和短语：例如 delve、leverage、game changer、the future looks bright； 句式：例如 ..."
-    },
-    {
-      "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
-      "type": "blog",
-      "date": "2026-06-24",
-      "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
-      "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
-      "topic": "AI Agent",
-      "topicSlug": "ai-agent",
-      "series": "",
-      "tags": [
-        "AI Agent",
-        "Agent Skills",
-        "开源项目",
-        "信息检索",
-        "GitHub"
-      ],
-      "priority": 0,
-      "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
     }
   ],
   "latestArticles": [
+    {
+      "title": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我",
+      "url": "/articles/2026/07/21/build-your-own-x-programming-by-doing.html",
+      "type": "blog",
+      "date": "2026-07-21",
+      "description": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "excerpt": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "topic": "技术方法论",
+      "topicSlug": "tech-methodology",
+      "series": "",
+      "tags": [
+        "编程学习",
+        "GitHub",
+        "开源",
+        "自学编程",
+        "费曼学习法",
+        "动手实践"
+      ],
+      "priority": 0,
+      "content": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我 \"What I cannot create, I do not understand.\" —— Richard Feynman 你有没有过这种体验： 跟着视频课刷完了 100 集，讲的知识点都听得懂，自己动手写项目还是卡壳？ 厚厚的编程大部头翻完了，合上书脑子里还是一团浆糊，问你「这个组件到底怎么工作的」说不清楚？ 简历上写「熟悉 XX 框架」，面试官追问一句「你能说说它底层是怎么实现的吗」直接哑口无言？ 我曾经也陷在这个怪圈里出不来。看了很多书，收藏了很多教程，真到上手写东西的时候，还是会被各种细节卡住。直到朋友甩给我这个 GitHub 仓库，才突然想通了问题出在哪。 为什么说「看书一百遍，不如动手造一遍」？ 传统的编程学习路径是这样的： 先学理论，再学概念，最后做项目 。但大部分人卡就在「最后」这一步。理论都懂，概念都背，真要把这些碎片拼成一个能跑的东西，瞬间就不知道从哪下手了。 这个仓库的核心逻辑非常简单： 反过来学 。 你想理解操作系统？别先啃 1000 页的《深入理解计算机系统》，动手写一个简单内核出来。你想理解编译器？别先背《编译原理》的龙书那套术语，从写一个简单的 Lisp 解释器开始。你想理解 React？别光看官方文档，自己写一个 160 行的 React 出来。 这其实就是费曼学习法的工程化落地： 不能创造，就不算真的理解 。 这个仓库到底有什么？500+ 教程覆盖了几乎所有领域 codecrafters io/build your own x 现在已经有 530,000+ stars ，收集了 500+ 份 step by step 的教程，教你从零开始构建各种各样的技术。 我大概整理了一下它覆盖的主要领域： 大类 代表内容 图形 / 游戏 3D 渲染器（光线追踪 / 光栅化）、游戏引擎、物理引擎、voxel engine AI / 神经网络 LLM 从零实现、扩散模型、RAG、神经网络、PyTorch 内核重写 系统 / 底层 操作系统内核、内存分配器、网络栈、处理器、RISC V 语言 / 编译器 编程语言、编译器、解释器、正则表达式引擎 数据 数据库（B+树 / Redis）、搜索引擎、哈希表 区块链 区块链、加密货币、PoW / PoS 共识 工具 / 应用 Git、Docker、文本编辑器、Shell、Web 服务器、模板引擎 Web / 前端 React、Redux、Virtual DOM、模块打包器、浏览器引擎 也就是说，无论你对哪个方向感兴趣，从最底层的硬件到最上层的前端框架，这里基本都能找到对应的教程。 而且这些教程不是那种「跟着我敲 1000 行代码然后啥也没学会」的水文， 每一篇都是社区筛选出来的高质量内容 ，很多教程本身就是作者公开的博客连载，讲得非常细。 这个学习方法真的有效吗？我用三个例子给你算笔账 我自己试过几个小项目，最大的感受是： 之前看书看不明白的地方，动手写一遍瞬间就通了 。 举三个最热门的例子： 例子一：写一个你自己的 Git 你天天用 Git，但你真的理解 Git 是怎么工作的吗？git add 到底干了什么？对象存储是什么结构？这个仓库里有好几个教程： Python 版 ：Write yourself a Git! — 不到 1000 行 Python 就能实现一个可工作的 Git，支持 init、add、commit、log 这些基础命令。 JavaScript 版 ：Gitlet — 浏览器里就能跑的 Git 实现。 跟着写完一遍，你再看 Git 的底层文档，那些「对象」「树」「提交」这些概念瞬间就活了。之前是死记硬背，现在是你自己写出来的，想忘都忘不了。 例子二：写一个你自己的 Redis Redis 为什么这么快？数据结构到底怎么实现的？这个仓库里也有教程： C 语言版 ：Build Your Own Redis from Scratch — 完整的系列教程，从网络编程到数据结构，一步步教你写一个 Redis 服务器。 Python 版 ：Write your own miniature Redis with Python — 更短的入门版，不到 500 行就能跑起来。 我见过很多人简历上写「熟练使用 Redis」，问他「跳表是什么结构」都说不清楚。要是你自己实现过一遍基本的 KV 存储，这个问题闭着眼都能答。 例子三：写一个你自己的 React 现在前端几乎人人用 React，但你真的理解 Virtual DOM 是什么吗？setState 为什么是异步的？这个仓库里有： Didact ：A DIY guide to build your own React — 非常经典的教程，一步步教你从零实现 React 的核心逻辑。 Gooact ：React in 160 lines of JavaScript — 更短的版本，真的只有 160 行。 看完源码不如写一遍 160 行的最小 React，写完你再去看 React 源码，脉络一下子就清晰了。 适合谁？不适合谁？给你一个清晰的判断标准 我觉得不是所有人都适合用这个方法，得看你处于什么阶段： ✅ 非常适合这些人 1. 已经入门，但想..."
+    },
     {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
       "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
@@ -3046,26 +3089,6 @@
       ],
       "priority": 0,
       "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
-    },
-    {
-      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
-      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
-      "type": "blog",
-      "date": "2026-07-10",
-      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
-      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
-      "topic": "AI 工作流",
-      "topicSlug": "ai-workflow",
-      "series": "",
-      "tags": [
-        "Codex",
-        "tldraw",
-        "MCP",
-        "AI 画布",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
     }
   ],
   "tutorials": [
@@ -6091,6 +6114,27 @@
   ],
   "recentUpdates": [
     {
+      "title": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我",
+      "url": "/articles/2026/07/21/build-your-own-x-programming-by-doing.html",
+      "type": "文章",
+      "date": "2026-07-21",
+      "description": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "excerpt": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+      "topic": "技术方法论",
+      "topicSlug": "tech-methodology",
+      "series": "",
+      "tags": [
+        "编程学习",
+        "GitHub",
+        "开源",
+        "自学编程",
+        "费曼学习法",
+        "动手实践"
+      ],
+      "priority": 0,
+      "content": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我 \"What I cannot create, I do not understand.\" —— Richard Feynman 你有没有过这种体验： 跟着视频课刷完了 100 集，讲的知识点都听得懂，自己动手写项目还是卡壳？ 厚厚的编程大部头翻完了，合上书脑子里还是一团浆糊，问你「这个组件到底怎么工作的」说不清楚？ 简历上写「熟悉 XX 框架」，面试官追问一句「你能说说它底层是怎么实现的吗」直接哑口无言？ 我曾经也陷在这个怪圈里出不来。看了很多书，收藏了很多教程，真到上手写东西的时候，还是会被各种细节卡住。直到朋友甩给我这个 GitHub 仓库，才突然想通了问题出在哪。 为什么说「看书一百遍，不如动手造一遍」？ 传统的编程学习路径是这样的： 先学理论，再学概念，最后做项目 。但大部分人卡就在「最后」这一步。理论都懂，概念都背，真要把这些碎片拼成一个能跑的东西，瞬间就不知道从哪下手了。 这个仓库的核心逻辑非常简单： 反过来学 。 你想理解操作系统？别先啃 1000 页的《深入理解计算机系统》，动手写一个简单内核出来。你想理解编译器？别先背《编译原理》的龙书那套术语，从写一个简单的 Lisp 解释器开始。你想理解 React？别光看官方文档，自己写一个 160 行的 React 出来。 这其实就是费曼学习法的工程化落地： 不能创造，就不算真的理解 。 这个仓库到底有什么？500+ 教程覆盖了几乎所有领域 codecrafters io/build your own x 现在已经有 530,000+ stars ，收集了 500+ 份 step by step 的教程，教你从零开始构建各种各样的技术。 我大概整理了一下它覆盖的主要领域： 大类 代表内容 图形 / 游戏 3D 渲染器（光线追踪 / 光栅化）、游戏引擎、物理引擎、voxel engine AI / 神经网络 LLM 从零实现、扩散模型、RAG、神经网络、PyTorch 内核重写 系统 / 底层 操作系统内核、内存分配器、网络栈、处理器、RISC V 语言 / 编译器 编程语言、编译器、解释器、正则表达式引擎 数据 数据库（B+树 / Redis）、搜索引擎、哈希表 区块链 区块链、加密货币、PoW / PoS 共识 工具 / 应用 Git、Docker、文本编辑器、Shell、Web 服务器、模板引擎 Web / 前端 React、Redux、Virtual DOM、模块打包器、浏览器引擎 也就是说，无论你对哪个方向感兴趣，从最底层的硬件到最上层的前端框架，这里基本都能找到对应的教程。 而且这些教程不是那种「跟着我敲 1000 行代码然后啥也没学会」的水文， 每一篇都是社区筛选出来的高质量内容 ，很多教程本身就是作者公开的博客连载，讲得非常细。 这个学习方法真的有效吗？我用三个例子给你算笔账 我自己试过几个小项目，最大的感受是： 之前看书看不明白的地方，动手写一遍瞬间就通了 。 举三个最热门的例子： 例子一：写一个你自己的 Git 你天天用 Git，但你真的理解 Git 是怎么工作的吗？git add 到底干了什么？对象存储是什么结构？这个仓库里有好几个教程： Python 版 ：Write yourself a Git! — 不到 1000 行 Python 就能实现一个可工作的 Git，支持 init、add、commit、log 这些基础命令。 JavaScript 版 ：Gitlet — 浏览器里就能跑的 Git 实现。 跟着写完一遍，你再看 Git 的底层文档，那些「对象」「树」「提交」这些概念瞬间就活了。之前是死记硬背，现在是你自己写出来的，想忘都忘不了。 例子二：写一个你自己的 Redis Redis 为什么这么快？数据结构到底怎么实现的？这个仓库里也有教程： C 语言版 ：Build Your Own Redis from Scratch — 完整的系列教程，从网络编程到数据结构，一步步教你写一个 Redis 服务器。 Python 版 ：Write your own miniature Redis with Python — 更短的入门版，不到 500 行就能跑起来。 我见过很多人简历上写「熟练使用 Redis」，问他「跳表是什么结构」都说不清楚。要是你自己实现过一遍基本的 KV 存储，这个问题闭着眼都能答。 例子三：写一个你自己的 React 现在前端几乎人人用 React，但你真的理解 Virtual DOM 是什么吗？setState 为什么是异步的？这个仓库里有： Didact ：A DIY guide to build your own React — 非常经典的教程，一步步教你从零实现 React 的核心逻辑。 Gooact ：React in 160 lines of JavaScript — 更短的版本，真的只有 160 行。 看完源码不如写一遍 160 行的最小 React，写完你再去看 React 源码，脉络一下子就清晰了。 适合谁？不适合谁？给你一个清晰的判断标准 我觉得不是所有人都适合用这个方法，得看你处于什么阶段： ✅ 非常适合这些人 1. 已经入门，但想..."
+    },
+    {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
       "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
       "type": "文章",
@@ -6176,26 +6220,6 @@
       ],
       "priority": 0,
       "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
-    },
-    {
-      "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
-      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
-      "type": "文章",
-      "date": "2026-07-10",
-      "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
-      "excerpt": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
-      "topic": "AI 工作流",
-      "topicSlug": "ai-workflow",
-      "series": "",
-      "tags": [
-        "Codex",
-        "tldraw",
-        "MCP",
-        "AI 画布",
-        "开源项目"
-      ],
-      "priority": 0,
-      "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
     },
     {
       "title": "第01章：MySQL概述与安装",

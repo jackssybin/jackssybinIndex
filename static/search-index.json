@@ -789,6 +789,27 @@
     "content": "上周三我在 Codex 桌面端翻设置想给背景换个色调，翻完设置面板才想起来——官方只给了 Light / Dark 两个开关，连一个自定义强调色都没有。搜到有人在 Reddit 抱怨同一个问题，下面第一条回复贴了一个仓库地址：Fei Away/Codex Dream Skin。 点过去看时间戳，2026 07 15 才建的仓库，我打开那天已经 5.4k star；今天早上再看，8660 star / 921 fork / 3 天。Trending 榜上排第 4，中文技术圈的公众号还没怎么开始写。 我把源码翻了一遍，也在自己 Mac 上跑了一遍。这篇讲清楚三件事： 1. 它到底动了什么 — 一张壁纸怎么就能盖满整个 Codex 窗口，同时侧栏、输入框、项目选择还能正常点。答案是 CDP 注入 + CSS + 装饰 DOM ，一个字节的 app.asar 都没改。 2. 5 分钟安装完整命令 — macOS 双击 .command、Windows 一条 PowerShell，把 8 张官方预设 / 两套精选主题装到本机。 3. 踩坑清单和适用边界 — 什么场景装、什么场景别碰、和「AI 中转 / 换 API 供应商」有什么严格边界。 一、先给判断，节约你 5 分钟 先把可收藏的对照结论摆上： 你的诉求 是否推荐这个项目 想给 Codex 桌面端换背景/氛围图 强烈推荐 想自定义 Codex 强调色、深浅之外的主题 推荐 macOS/Windows 想要一键装、一键恢复 推荐（脚本齐全） 想同时改 Codex 的 API 供应商 / Base URL 别装（作者明确不做，需要单独配置中转） 想改 Codex 官方二进制或 app.asar 别用（作者拒绝这条路） 想给 VS Code / Cursor / Zed 换肤 别装（只针对 Codex Desktop） 一句话总结 ： 给 Codex 桌面端换脸 ，除此之外不做任何事。装了不会动你的 API Key，不改官方安装包，一键恢复。 二、Codex Dream Skin 是什么 Fei Away/Codex Dream Skin（GitHub 仓库）是一个针对 OpenAI Codex 桌面端 的换肤工具，用作者的原话说：「给 Codex 桌面端换一张会呼吸的脸」。 核心事实 （截至 2026 07 18）： Star：8660，Fork：921，Issue：83 open 首次提交：2026 07 15，最近推送：2026 07 17 License：MIT 平台：macOS（Apple Silicon / Intel） + Windows（Store 版官方 Codex） 语言：JavaScript / Shell / PowerShell 目录：macos/ + windows/ + docs/ 它做了这样一件事：让你选一张自己的 16:9 壁纸，铺满整个 Codex 窗口，同时让 Codex 的 原生侧栏、原生输入框、原生项目选择、原生建议卡片 继续可交互——它不是把整个窗口贴一张假截图。 上面这张是「哥特虚空远征 / Gothic Void Crusade」预设的实机截图。作者原话： 侧栏、建议卡、项目选择、输入框都是原生可点控件 ，你能看到的所有控件都是 Codex 官方渲染出来的，只是背景层和一部分 CSS 被换了。 三、为什么不改 app.asar：CDP 注入是什么 这块是这个项目最值得看的技术判断。 改 Electron 应用外观的常见做法有 3 条： 1. 改 app.asar ：解包 → 改文件 → 重新打包 → 覆盖原文件。粗暴，签名校验会挂，Codex 每次更新都要重来。 2. 写一个 Electron 扩展 ：Codex 官方没有扩展接口，走不通。 3. CDP 注入 ：启动 Codex 时打开 Chromium DevTools Protocol 端口，从外部注入 CSS 和 DOM 装饰层。 Codex Dream Skin 选了第 3 条。整个架构非常直白： 这条路径带来的好处 ： Codex 官方签名不变。macOS 上 App Bundle Team ID 校验、Windows 上 Store 包身份校验都能过。 Codex 官方更新以后，通常只需要重跑一次注入脚本，不需要重做 asar。 一键恢复真的就是「杀掉注入的 CDP 会话 + 重开 Codex」，没有残留。 CDP 只绑 127.0.0.1，不开局域网端口。 风险点也要说清楚 （这也是作者在 README 上明写的）： CDP 本身没有同用户认证。 在皮肤运行期间不要在同一台电脑上跑来路不明的本机程序 ——理论上任何本机进程都能连你的 CDP 端口发指令。 换肤和 API 中转（比如你用 Passion8、OpenRouter 之类的第三方 base url）是 两件严格分开的事 。作者在 README 里反复强调：换肤脚本 不会自动改写 你的 API Key / Base URL。 四、macOS 5 分钟安装 前提：Apple Silicon 或 Intel Mac，官方 Codex Desktop 已装。 装完之后 Codex 首页大概长这样： 浅色和暗色是同一个主..."
   },
   {
+    "title": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我",
+    "url": "/articles/2026/07/21/build-your-own-x-programming-by-doing.html",
+    "type": "blog",
+    "date": "2026-07-21",
+    "description": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+    "excerpt": "53 万星 GitHub 仓库 build-your-own-x 深度解析：为什么说「动手造轮子」是最快的编程学习方式？从操作系统到 LLM，500+ 从零构建教程覆盖了几乎所有热门技术领域。",
+    "topic": "技术方法论",
+    "topicSlug": "tech-methodology",
+    "series": "",
+    "tags": [
+      "编程学习",
+      "GitHub",
+      "开源",
+      "自学编程",
+      "费曼学习法",
+      "动手实践"
+    ],
+    "priority": 0,
+    "content": "看完 20 本编程书还是不会写项目，这个 53 万星仓库救了我 \"What I cannot create, I do not understand.\" —— Richard Feynman 你有没有过这种体验： 跟着视频课刷完了 100 集，讲的知识点都听得懂，自己动手写项目还是卡壳？ 厚厚的编程大部头翻完了，合上书脑子里还是一团浆糊，问你「这个组件到底怎么工作的」说不清楚？ 简历上写「熟悉 XX 框架」，面试官追问一句「你能说说它底层是怎么实现的吗」直接哑口无言？ 我曾经也陷在这个怪圈里出不来。看了很多书，收藏了很多教程，真到上手写东西的时候，还是会被各种细节卡住。直到朋友甩给我这个 GitHub 仓库，才突然想通了问题出在哪。 为什么说「看书一百遍，不如动手造一遍」？ 传统的编程学习路径是这样的： 先学理论，再学概念，最后做项目 。但大部分人卡就在「最后」这一步。理论都懂，概念都背，真要把这些碎片拼成一个能跑的东西，瞬间就不知道从哪下手了。 这个仓库的核心逻辑非常简单： 反过来学 。 你想理解操作系统？别先啃 1000 页的《深入理解计算机系统》，动手写一个简单内核出来。你想理解编译器？别先背《编译原理》的龙书那套术语，从写一个简单的 Lisp 解释器开始。你想理解 React？别光看官方文档，自己写一个 160 行的 React 出来。 这其实就是费曼学习法的工程化落地： 不能创造，就不算真的理解 。 这个仓库到底有什么？500+ 教程覆盖了几乎所有领域 codecrafters io/build your own x 现在已经有 530,000+ stars ，收集了 500+ 份 step by step 的教程，教你从零开始构建各种各样的技术。 我大概整理了一下它覆盖的主要领域： 大类 代表内容 图形 / 游戏 3D 渲染器（光线追踪 / 光栅化）、游戏引擎、物理引擎、voxel engine AI / 神经网络 LLM 从零实现、扩散模型、RAG、神经网络、PyTorch 内核重写 系统 / 底层 操作系统内核、内存分配器、网络栈、处理器、RISC V 语言 / 编译器 编程语言、编译器、解释器、正则表达式引擎 数据 数据库（B+树 / Redis）、搜索引擎、哈希表 区块链 区块链、加密货币、PoW / PoS 共识 工具 / 应用 Git、Docker、文本编辑器、Shell、Web 服务器、模板引擎 Web / 前端 React、Redux、Virtual DOM、模块打包器、浏览器引擎 也就是说，无论你对哪个方向感兴趣，从最底层的硬件到最上层的前端框架，这里基本都能找到对应的教程。 而且这些教程不是那种「跟着我敲 1000 行代码然后啥也没学会」的水文， 每一篇都是社区筛选出来的高质量内容 ，很多教程本身就是作者公开的博客连载，讲得非常细。 这个学习方法真的有效吗？我用三个例子给你算笔账 我自己试过几个小项目，最大的感受是： 之前看书看不明白的地方，动手写一遍瞬间就通了 。 举三个最热门的例子： 例子一：写一个你自己的 Git 你天天用 Git，但你真的理解 Git 是怎么工作的吗？git add 到底干了什么？对象存储是什么结构？这个仓库里有好几个教程： Python 版 ：Write yourself a Git! — 不到 1000 行 Python 就能实现一个可工作的 Git，支持 init、add、commit、log 这些基础命令。 JavaScript 版 ：Gitlet — 浏览器里就能跑的 Git 实现。 跟着写完一遍，你再看 Git 的底层文档，那些「对象」「树」「提交」这些概念瞬间就活了。之前是死记硬背，现在是你自己写出来的，想忘都忘不了。 例子二：写一个你自己的 Redis Redis 为什么这么快？数据结构到底怎么实现的？这个仓库里也有教程： C 语言版 ：Build Your Own Redis from Scratch — 完整的系列教程，从网络编程到数据结构，一步步教你写一个 Redis 服务器。 Python 版 ：Write your own miniature Redis with Python — 更短的入门版，不到 500 行就能跑起来。 我见过很多人简历上写「熟练使用 Redis」，问他「跳表是什么结构」都说不清楚。要是你自己实现过一遍基本的 KV 存储，这个问题闭着眼都能答。 例子三：写一个你自己的 React 现在前端几乎人人用 React，但你真的理解 Virtual DOM 是什么吗？setState 为什么是异步的？这个仓库里有： Didact ：A DIY guide to build your own React — 非常经典的教程，一步步教你从零实现 React 的核心逻辑。 Gooact ：React in 160 lines of JavaScript — 更短的版本，真的只有 160 行。 看完源码不如写一遍 160 行的最小 React，写完你再去看 React 源码，脉络一下子就清晰了。 适合谁？不适合谁？给你一个清晰的判断标准 我觉得不是所有人都适合用这个方法，得看你处于什么阶段： ✅ 非常适合这些人 1. 已经入门，但想..."
+  },
+  {
     "title": "关于本站",
     "url": "/about.html",
     "type": "page",
