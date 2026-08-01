@@ -1,15 +1,9 @@
 ---
 title: "Auto-Redbook-Skills：AI自动生成小红书笔记卡片，支持自动发布"
-url: "/articles/2026/08/01/auto-redbook-skills-xiaohongshu-ai.html"
 date: 2026-08-01T00:00:00+08:00
-lastmod: 2026-08-01T00:00:00+08:00
-description: "Markdown写好内容，一键生成符合小红书比例的精美卡片，支持8种主题风格，配置Cookie后可自动发布。"
-tags: ["AI", "开源", "小红书", "工具"]
-topic: "AI、Agent 与本地模型"
-topicSlug: "ai-agent"
-layout: article
-contentType: article
 draft: false
+tags: ["AI", "开源", "小红书", "工具"]
+categories: ["开源推荐"]
 ---
 
 # Auto-Redbook-Skills：AI自动生成小红书笔记卡片，支持自动发布
