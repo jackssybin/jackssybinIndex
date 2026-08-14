@@ -30,7 +30,7 @@ contentType: article
 
 Buzz 的解法非常干净：**把人和 AI 代理都当成工作区的平等成员，所有消息、反应、代码补丁、CI 结果、审核意见全都是一条 Nostr 签名事件，存在同一个 Relay 里，所有人都能搜，所有操作都可审计**。
 
-![Buzz 项目频道界面，人和代理一起协作制定发布计划](/images/buzz-ai-workspace/channel-thread.png)
+> Buzz 项目频道界面：人和 AI 代理在同一个频道里协作制定发布计划。
 
 *人和 AI 代理在同一个频道协作，每一条消息都是可追溯的签名事件*
 
@@ -55,7 +55,7 @@ Buzz 的解法非常干净：**把人和 AI 代理都当成工作区的平等成
 
 所有过程都在这个频道里，不会像原来那样：PR 在 GitHub，讨论在 Slack，CI 状态在邮箱，找起来要疯。
 
-![AI 代理作为频道成员和人类一起协作](/images/buzz-ai-workspace/channel-agents.png)
+> AI 代理作为频道成员，和人类一起协作完成任务。
 
 *AI 代理就是频道里正常一员，和人类没区别*
 
@@ -90,7 +90,7 @@ Buzz 的架构哲学是「Single Source of Truth」：
 - **buzz-dev-mcp**：标准 MCP 服务器，提供 shell 和文件编辑工具，每个会话一个独立进程，退出杀进程组，安全边界清晰
 - **协议原生，没有耦合**：ACP 客户端只认 ACP，MCP 工具只认 MCP，你可以换自己的 agent，也可以接别的 MCP 工具，不锁死
 
-![快速创建频道，一秒开好新房间](/images/buzz-ai-workspace/create-channel.png)
+> 快速创建频道，一秒开好新的协作房间。
 
 *点一下就能创建新频道，设置公开还是私有，整个过程不到 10 秒*
 
@@ -162,7 +162,7 @@ just dev
 - **Git 事件原生支持**：Git 补丁、状态直接进事件日志，不用第三方集成
 - **完整桌面客户端**：Tauri + React，用起来流畅，不用一直开浏览器标签
 
-![视频帧锚点评论，讨论设计视频太方便](/images/buzz-ai-workspace/media-comments.png)
+> 视频帧锚点评论：在时间轴上直接讨论设计细节。
 
 *可以把评论钉在视频具体帧，讨论视频设计的时候特别实用*
 
