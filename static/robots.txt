@@ -1,3 +1,10 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
+Disallow: /search.html
+Disallow: /search
+Disallow: /tags/
+Disallow: /page/
+Disallow: /admin/
+Disallow: /search-index.json
+
 Sitemap: https://jackssybin.cn/sitemap.xml
