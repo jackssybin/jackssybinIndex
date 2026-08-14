@@ -1,9 +1,9 @@
 ---
 title: "Pi: 一个极简可扩展的终端编码 Agent 框架"
-url: "/articles/2026/07/28/"pi-coding-agent".html"
+url: "/articles/2026/07/28/pi-coding-agent.html"
 date: "2026-07-28T00:00:00+08:00"
 lastmod: "2026-07-28T00:00:00+08:00"
-description: ""用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent。它不强迫你接受它的工作流，核心保持极简，你想要什么功能自己加。""
+description: "用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent。它不强迫你接受它的工作流，核心保持极简，你想要什么功能自己加。"
 tags: ["AI", "开源", "工具"]
 topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"

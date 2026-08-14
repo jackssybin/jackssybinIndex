@@ -1,9 +1,9 @@
 ---
 title: "微软 AI-For-Beginners：5万星的免费AI入门课程，真的值得学吗？"
-url: "/articles/2026/07/31/"microsoft-ai-for-beginners".html"
-date: "2026-07-31T12:00:00+08:00T00:00:00+08:00"
-lastmod: "2026-07-31T12:00:00+08:00T00:00:00+08:00"
-description: ""微软官方开源的 12 周完整 AI 入门课程，5.4 万 Star，自带中文翻译，完全免费。真的适合零基础入门吗？本文给你完整评测和学习建议。""
+url: "/articles/2026/07/31/microsoft-ai-for-beginners.html"
+date: "2026-07-31T12:00:00+08:00"
+lastmod: "2026-07-31T12:00:00+08:00"
+description: "微软官方开源的 12 周完整 AI 入门课程，5.4 万 Star，自带中文翻译，完全免费。真的适合零基础入门吗？本文给你完整评测和学习建议。"
 tags: ["AI", "开源", "工具"]
 topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"

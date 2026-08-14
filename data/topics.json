@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 21,
+    "count": 28,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1191,6 +1191,138 @@
         ],
         "priority": 0,
         "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
+      },
+      {
+        "title": "Buzz：Block 开源的人和 AI 平等协作工作区，一键自托管部署",
+        "url": "/articles/2026/08/08/buzz-ai-workspace.html",
+        "type": "blog",
+        "date": "2026-08-08",
+        "description": "Buzz 是 Block（原 Square）开源的一个自托管团队协作工作区，核心创新是让 AI 代理和人类成为平等的工作区成员，统一基于 Nostr 事件日志进行协作，解决了多工具分散和 AI 审计难题。本文带你快速部署体验。",
+        "excerpt": "Buzz 是 Block（原 Square）开源的一个自托管团队协作工作区，核心创新是让 AI 代理和人类成为平等的工作区成员，统一基于 Nostr 事件日志进行协作，解决了多工具分散和 AI 审计难题。本文带你快速部署体验。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "开源",
+          "AI 协作",
+          "AI Agent",
+          "Nostr",
+          "自托管",
+          "团队协作"
+        ],
+        "priority": 0,
+        "content": "Buzz：Block 开源的人和 AI 平等协作工作区，5 分钟一键自托管 上周我把测试环境的 AI 协作工作流从「Slack + Claude Code + GitHub 分散联动」换成了 Buzz，整个团队开发和代理协作都收敛到一个事件日志里，不用再在七八个标签页之间跳来跳去找上下文了。这篇讲清楚三件事： 1. Buzz 解决了什么痛点，为什么 Block 要重新做一个协作工具 2. 怎么一键部署到 Railway 或者本地 Docker 运行 3. 哪些团队适合用，哪些场景不适合着急上 为什么需要 Buzz？AI 协作的痛点你中了几个 如果你团队已经开始用 AI 代理帮忙做 code review、整理 issue、生成测试用例，你大概率遇到过这些问题： 分散在七个工具 ：聊天在 Slack/企微，代码在 GitHub，CI 在 GitHub Actions，代理在 Claude Code，复盘的时候要在四五个标签页跳着找上下文 AI 代理没有身份 ：大多用你的密钥跑，出了问题分不清哪步是人改的哪步是代理跑的，审计等于空谈 权限不好控制 ：给代理全权限不安全，不给权限干不了活，找不到一个刚刚好的粒度 搜索割裂 ：聊天记录搜不到代码提交，代码提交找不到讨论上下文，信息像碎片一样散在各处 Buzz 的解法非常干净： 把人和 AI 代理都当成工作区的平等成员，所有消息、反应、代码补丁、CI 结果、审核意见全都是一条 Nostr 签名事件，存在同一个 Relay 里，所有人都能搜，所有操作都可审计 。 人和 AI 代理在同一个频道协作，每一条消息都是可追溯的签名事件 Buzz 核心设计：为什么说它不一样？ 1. 所有人都是一等公民：人类 · AI · 工作流 · Git 在 Buzz 里，没有「人类发消息，AI 打辅助」这套区别对待： 人类用户用 Nostr 密钥签名消息进频道 AI 代理也用自己的密钥进频道 ，加入、发言、运行工具都是独立身份 Git 补丁、CI 结果、工作流触发也是签名事件 所有东西存在同一个日志，全站全文检索 比如你开了一个功能分支，Buzz 自动给你开一个频道： 1. 开发提交补丁 → 一条 NIP 34 事件 2. CI 跑测试 → CI 机器人发结果事件 3. AI 代理自动做第一遍 review → 代理发评论事件 4. 人类 teammate 看了之后点👍 → 反应事件 5. approve 合并 → 合并结果事件 所有过程都在这个频道里，不会像原来那样：PR 在 GitHub，讨论在 Slack，CI 状态在邮箱，找起来要疯。 AI 代理就是频道里正常一员，和人类没区别 2. 架构极简：一个 Relay 就是一切，没有繁杂微服务 Buzz 的架构哲学是「Single Source of Truth」： 所有读写都经过 Relay，所有事件存 Postgres，搜索用 Postgres 全文检索，推送用 Redis 发订阅。没有一大堆微服务，部署简单，运维也省心。 3. 代理设计可圈可点：ACP + MCP 双协议，可审计可替换 如果你深入看 Buzz 的 AI 部分，会发现设计很克制： buzz agent ：标准 ACP（Agent Client Protocol）实现，支持最多 8 个并发会话，每个会话上下文满了自动摘要继续 buzz dev mcp ：标准 MCP 服务器，提供 shell 和文件编辑工具，每个会话一个独立进程，退出杀进程组，安全边界清晰 协议原生，没有耦合 ：ACP 客户端只认 ACP，MCP 工具只认 MCP，你可以换自己的 agent，也可以接别的 MCP 工具，不锁死 点一下就能创建新频道，设置公开还是私有，整个过程不到 10 秒 5 分钟快速体验：两种方式 方式一：一键部署到 Railway（推荐体验） Buzz 官方提供了 Railway 一键部署模板，点下面按钮直接部署： 部署完之后： 1. Railway 会给你一个域名，比如 buzz xxx.up.railway.app 2. Relay 地址就是 wss://buzz xxx.up.railway.app 3. 下载桌面客户端 latest release，修改连接地址就能用了 方式二：本地 Docker 运行（开发自托管） 需要你本地装了 Docker 和 Docker Compose，一行命令启动： 启动之后： Relay 地址：ws://你的服务器IP:3000 如果要用 HTTPS，Buzz 官方配置了 Caddy 自动证书，跟着 deploy/compose/README.md 改域名就行 本地源码编译开发（需要 Rust 环境） 如果你想改代码玩，官方提供了 Hermi 一键工具链管理： 等待编译完成，桌面客户端会自动弹出来，连接本地 ws://localhost:3000 就能用了。 适用场景和不适用场景：我帮你分好了 ✅ 适合用 Buzz 的场景 1. 团队真的在大量用 AI 代理协作 ：每天都有 AI 帮忙做 review、整理 issue、生成测试，需要把代理的操作留下审计痕迹 2. 看重数据主权 ：不想把团队聊天和代码讨论放第三方 SaaS，想自己掌握所有数据 3. 喜欢..."
+      },
+      {
+        "title": "MonkeyCode：长亭科技开源的企业级 AI 开发平台，私有化部署真的香",
+        "url": "/articles/2026/08/08/monkeycode-ai-dev-platform.html",
+        "type": "blog",
+        "date": "2026-08-08",
+        "description": "MonkeyCode 是长亭科技开源的企业级 AI 开发平台，支持私有化内网部署、云端开发环境、团队协作、国产大模型适配，解决了企业团队使用 AI 编程的隐私和管理痛点。本文带你快速体验。",
+        "excerpt": "MonkeyCode 是长亭科技开源的企业级 AI 开发平台，支持私有化内网部署、云端开发环境、团队协作、国产大模型适配，解决了企业团队使用 AI 编程的隐私和管理痛点。本文带你快速体验。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "开源",
+          "AI 编程",
+          "企业级",
+          "私有化部署",
+          "AI 开发平台",
+          "长亭科技"
+        ],
+        "priority": 0,
+        "content": "MonkeyCode：长亭科技开源的企业级 AI 开发平台，私有化部署真的香 最近我们团队在找合适的企业级 AI 开发平台，试了一圈个人工具，要么不支持私有化，要么团队协作能力几乎为零，要么就是对国产模型适配很差。直到发现长亭科技开源的 MonkeyCode ，正好打中我们的所有痛点。这篇讲清楚： 1. MonkeyCode 解决了企业团队用 AI 编程的哪些核心痛点 2. 怎么在线体验，怎么一键私有化部署 3. 和 Cursor、Claude Code 比，它适合哪些场景 为什么企业需要专门的 AI 开发平台？ 如果你团队只有一两个人用 AI 编程，Cursor + Claude Code 足够用。但当你的团队到了十来人甚至更多，你会遇到这些问题： 数据隐私风险 ：代码传给第三方 SaaS，敏感代码没法保证安全 每个人环境不一样 ：有人本地配置全，有人新入职连环境都搭不出来 需求和任务管理割裂 ：需求在飞书，代码在 GitHub，AI 聊天在本地，找上下文要切好几个地方 没法统一管理模型 ：有的人用这个，有的人用那个，账单和用量对不上 移动端几乎不可用 ：下班走了，AI 任务没法继续，想看看进度也不方便 MonkeyCode 的解法非常直接： 做一个真正面向企业团队的 AI 开发平台，所有东西都可以部署在内网，需求→开发→测试→Review 全流程在一个平台搞定，云端开发环境不用你本地折腾，还支持移动端随时看随时改 。 AI 任务工作台，需求、对话、文件、终端都在这 核心功能一览 1. 真正的全流程管理，从需求到上线一个平台搞定 MonkeyCode 不是\"给 AI 加个聊天框\"，它把整个 AI 开发流程都串起来了： 需求管理 ：创建任务的时候把需求写清楚，所有讨论都跟任务走，不会丢 云端开发环境 ：每个任务都在云端运行，编译测试预览全在云上，你只用打开浏览器写需求看结果 AI 模型按需切换 ：GLM、Kimi、MiniMax、Qwen、DeepSeek 主流国产模型全接入，想换就换 文件管理 ：项目文件直接在平台里管理，不用切去本地 IDE PR 自动代码审查 ：AI 帮你做第一遍 review，节省团队时间 和个人工具比，最大的区别就是 它从一开始就是为团队协作设计的 ，不是把个人工具包装一下卖企业版。 2. 私有化部署，代码真的不出网 对于有安全要求的企业，这太重要了： 核心代码完全开源，可以部署在你自己的内网 数据都存在你自己服务器，不会传到第三方 满足合规要求，不用担心里程碑节点代码泄露 配置要求也不高： 控制台节点：最低 2C/4GB/40GB 开发环境宿主机：最低 8C/16GB/100GB 一般企业拿一台闲置的 8 核 16G 服务器就能跑起来。 3. 云端开发环境，不用折腾本地配置 这个功能真的解放了新同学： 不用在本地装一堆依赖，Java/Rust/Node.js 环境都不用配 打开浏览器就能开始写需求，AI 在云端帮你干活 新同学入职，不用花一天搭环境，账号一开直接干活 换电脑不用同步环境，浏览器打开一切照旧 云端终端直接用，所有环境都提前准备好了 4. 原生移动端支持，出门也不耽误干活 我觉得这个设计非常贴心： iOS 和 Android 都支持，数据和 PC 实时同步 你出门吃饭，AI 任务继续在云端跑 回到家想看看进度，掏出手机就能看，有问题直接改 路上想到什么点子，直接手机开任务让 AI 开始做 5. 全开原，真免费，不用猜 核心代码 100% 开源在 GitHub，你可以审计，可以二次开发 AGPL 3.0 许可证，商业使用只要保持开源就行 在线版直接用不用钱，私有化部署也不收许可证费用 对比维度 MonkeyCode Cursor Claude Code Codex : : : : : : : : 在线直接用 ✅ ✅ ✅ ✅ 私有化部署 ✅ ❌ ❌ ❌ 企业团队协作 ✅ ❌ ❌ ❌ 需求管理内置 ✅ ❌ ❌ ❌ 云端开发环境 ✅ ⚠️ ⚠️ ⚠️ 国产模型适配 ✅ ❌ ❌ ❌ 完全开源 ✅ ❌ ❌ ❌ 5 分钟快速体验 方式一：直接在线用（最快） 不用部署，打开网站注册就能用： https://monkeycode ai.com/ 特点： 官方提供云端环境，不用你有服务器 个人开发者免费够用 直接体验所有功能，觉得好再私有化部署 方式二：一键私有化部署（企业推荐） 有服务器的话，一条命令搞定： 按照提示一步步来，一般 10 分钟之内就能部署好。 详细部署文档：https://monkeycode.docs.baizhi.cloud/node/019eb0f3 9424 7c93 9489 4e584f989527 项目协作和移动端体验 团队协作 MonkeyCode 天生支持团队协作： 创建项目，把团队成员加进来 每个人都能创建 AI 任务，所有人都能看能评论 需求讨论和开发过程都留痕，新人来了直接看历史 管理员统一管理模型密钥和用量，方便对账 项目协作界面，文件管理和讨论都在一起 移动端体验 我体验了一下移动端，确实做得很舒服： 界面适配手机，操作不费劲 能看任务进度，能发消息给 AI 能浏览项目文件，能评论 出门在外，紧急问题掏出手机就能处理 移动端截图，体验相当完整 适合谁，不..."
+      },
+      {
+        "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+        "url": "/articles/2026/07/31/index.html",
+        "type": "blog",
+        "date": "2026-07-31",
+        "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+        "excerpt": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI",
+          "开源",
+          "工具"
+        ],
+        "priority": 0,
+        "content": "TL;DR ：AI COMIC 是一个国人开源的全流程AI漫画生成工作台，使用 DeepSeek 生成分镜剧本，通义千问 Qwen Image 生成逐格画面，浏览器内编辑对白、排版、导出长图。完全本地运行，API Key 不会泄露。适合想自己创作AI漫画又不想折腾多个工具的同学。 项目简介 最近AI绘画火了，但想做一整篇完整漫画，你得： 1. 自己写剧本分镜 2. 用Midjourney逐张生成 3. 用Photoshop排版加对白 4. 错了还要重来 整个流程折腾下来，大半天就没了。 这个刚发布三天的国产开源项目 AI COMIC 直接把全流程自动化了： 你只需要输入故事idea，它自动帮你生成结构化分镜，然后逐格生成画面，最后在浏览器里编辑导出PNG长图 。 项目地址：https://github.com/nfzwycwmxz/AI COMIC Star 虽然只有 1 个，但功能已经完整可用，思路非常清晰，解决了真实痛点。 核心工作流程 整个流程就是四步，全部在本地完成： 关键优势 1. 全流程一站式 — 不用来回切换ChatGPT、Midjourney、PS，一个工具搞定从idea到导出 2. 完全本地运行 — API Key 只在本地Node服务读取，不会上传到第三方，安全放心 3. 可编辑 — 生成分镜后可以随时修改对白、重绘单格，不是生成完就不能改 4. 保存项目 — 可以保存当前进度，之后继续编辑，不用从头再来 5. 配置灵活 — 支持自定义API地址、模型、图片尺寸，适配不同账号区域 配置要求 要跑起来，你需要准备这三样： 依赖 说明 Node.js 20+ 运行本地服务 DeepSeek API Key 用来生成分镜剧本 阿里云百炼 DashScope API Key 开通 qwen image 2.0 pro 用来生成画面 如果你没有DashScope，但有OpenAI兼容的图片生成API，也可以用——服务端会根据URL自动选择请求格式，改成OpenAI图片接口地址就行。 五分钟快速启动 1. 克隆安装 2. 配置API Key .env 关键配置： 3. 启动 浏览器打开 http://127.0.0.1:4173 就能用了。 开发调试用 npm run dev。 使用体验 我体验了一下整个流程，说下实际感受： 优势 思路清晰 — 把大语言模型的分镜能力和图像模型的绘画能力串起来，解决了真实痛点 界面简洁 — 三步操作：输入 → 生成 → 导出，没有花里胡哨的功能 隐私安全 — API Key 只在本地，不会泄露，项目文件存在本地，不用担心内容被上传 导出方便 — 直接导出 PNG 长图，拿到就能用 局限性 依赖 Qwen Image 2.0 Pro — 这个模型目前只有阿里云百炼有，需要开通相应服务 不能训练风格 — 就是直接调用API生成，没有LoRA风格训练，如果想要特定画风需要提示词控制 国产项目刚发布 — Star 少，可能有bug，遇到问题可以去GitHub提issue 适合谁，不适合谁 ✅ 适合这些同学 ： 想创作自己的AI漫画，不想折腾多个工具 有故事idea，但不会画画也不会排版 看重隐私，不想把故事内容传给第三方平台 本地折腾党，喜欢自己搭工具玩 ❌ 不适合这些同学 ： 没有API Key又不想申请 想要现成的模型离线跑，不想调用API 想要商业级印刷质量，这个还是AI生成，达不到专业画师水平 我的使用建议 1. 故事idea给得越具体越好 — 给AI的prompt越详细，分镜生成越符合预期，比如\"一个少年在森林里捡到一只会说话的狐狸\"比\"奇幻故事\"好。 2. 不用一次生成全部 — 先生成分镜，检查一下对白对不对，不满意可以改，没问题再批量生成全部画面，省API调用次数。 3. 单格不满意直接重绘 — 哪一格生成效果不好，直接点那一格的\"重新绘制\"，不用重来。 4. 导出前先预览 — 在\"成页\"视图看好排版和对白位置，不对再调，然后导出。 总结 这是一个非常棒的小工具，思路清晰，解决了真实痛点—— 想要做AI漫画的创作者，最烦的就是来回切工具，这个项目直接把全流程串起来了 。 虽然刚发布三天Star不多，但功能完整，代码也干净，作为国人开源项目值得支持一下。 如果你也想玩AI漫画，又不想折腾，不妨试试这个一键全流程的工具。 🔗 项目地址 ：https://github.com/nfzwycwmxz/AI COMIC 觉得有用点个Star支持作者 😉"
+      },
+      {
+        "title": "微软 AI-For-Beginners：5万星的免费AI入门课程，真的值得学吗？",
+        "url": "/articles/2026/07/31/microsoft-ai-for-beginners.html",
+        "type": "blog",
+        "date": "2026-07-31",
+        "description": "微软官方开源的 12 周完整 AI 入门课程，5.4 万 Star，自带中文翻译，完全免费。真的适合零基础入门吗？本文给你完整评测和学习建议。",
+        "excerpt": "微软官方开源的 12 周完整 AI 入门课程，5.4 万 Star，自带中文翻译，完全免费。真的适合零基础入门吗？本文给你完整评测和学习建议。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI",
+          "开源",
+          "工具"
+        ],
+        "priority": 0,
+        "content": "TL;DR ：如果你是AI零基础想入门，这套课程完全免费、内容体系完整，从符号AI到Transformer/GAN全覆盖，支持40+种语言（含简体中文），配套Jupyter Notebook可直接运行。 适合 ：真正想从零开始系统学习AI的零基础同学； 不适合 ：想快速上手工程化开发大模型应用的开发者。 为什么这个项目值得你花时间？ 现在打开 GitHub，搜索「AI入门」，你会看到成百上千个仓库。但能把一个课程做到 5.4万 Star、1.1万 Fork，而且内容一直更新到最近几天，微软官方出品，这本身就说明了质量。 我梳理了一下，这个项目和市面上其他AI入门资源比，最大的优势在这几点： 1. 真正完整的体系，不是零散知识点堆砌 这不是一个随便凑出来的教程合集，而是一个 12周、共24节课 的完整课程体系： 模块 内容 第一周 AI发展史入门，建立对AI的整体认知 第二周 符号AI — 知识表示与专家系统（传统AI，帮你理解AI的思想源头） 第三周 神经网络基础 — 从感知机到手写MLP框架，再到PyTorch/TensorFlow入门 第四周 计算机 Vision 全流程 — CNN/迁移学习/自编码器/GAN/目标检测/图像分割 第五周 NLP全路线 — 词表示/Word2Vec/Transformer/BERT/LLM提示工程 第六周 进阶专题 — 遗传算法/深度强化学习/多智能体系统 第七周 AI伦理与负责任AI 额外内容 多模态网络/CLIP/VQGAN 每节课都有： 理论讲解（中英文都有） 可运行的Jupyter Notebook代码（同时提供PyTorch和TensorFlow两个版本） 课后测验（在线可做） 部分课程有配套实验 AI 入门知识体系速览（手绘笔记 by @girlie mac 2. 它解决了AI入门最大的痛点：不知道该从哪开始 很多同学想学AI，最大的问题不是难，而是 不知道该学什么顺序 。从Python入门？直接看论文？上来就调大模型API？网上信息太乱了。 这个课程给了你清晰的学习路径： 阶段一：先理解AI的基本思想——从传统符号AI开始，理解什么是知识表示和推理，建立AI到底要解决什么问题。 阶段二：然后进入神经网络——从最简单的感知机开始，自己动手写一个简单神经网络框架，理解反向传播到底怎么工作，再转到工业级框架。 阶段三：分方向深入——分别学习计算机视觉和NLP两大核心领域，从基础到前沿。 阶段四：拓展专题——了解遗传算法、强化学习这些不那么主流但依然重要的方向，最后落脚到AI伦理。 这个顺序和很多「上来就教你调OpenAI API的速成课不一样，它帮你建立 完整知识体系，而不是只教你怎么调用API。 3. 真·可上手，不是只看不动手 很多AI教程都有个问题：看了觉得懂了，真上手写代码就懵了。 这个项目几乎每个知识点都配了 可直接运行的Notebook ： 你想理解感知机，直接打开Perceptron.ipynb点运行，一步一步看怎么训练，怎么分类手写数字。 你想学习CNN，直接跑一遍卷积的PyTorch版本，换张图片试试效果。 甚至还提供了环境配置文件environment.yml，用conda一键创建环境，不用自己一个个装依赖。 如果不想本地装环境，直接点README上的Binder按钮，在浏览器里就能跑： 5分钟就能跑通第一个Notebook，真正动手学，而不是看视频记笔记。 4. 完全免费，还带中文翻译 这个项目微软官方已经翻译到简体中文，每个页面都有翻译版本： 主README中文：translations/zh CN/README.md 每节课都有对应中文翻译，不用啃英文 而且所有内容在GitHub上完全开放，不需要关注公众号，不需要加群，不需要付费，直接克隆下来就能学。 五分钟快速开始 方式一：在线直接学（推荐零基础） 最简单不需要安装，直接用GitHub Codespaces： 1. 打开项目主页：https://github.com/microsoft/AI For Beginners 2. 点击「Code」→ 「Codespaces」→ 「Create codespace on main」 3. 等待环境创建完成，直接在浏览器里打开Notebook运行 或者用Binder在线运行：点击README里的Binder badge，直接在浏览器打开。 方式二：本地运行 如果你想把课程存在本地慢慢学： 然后从 lessons/1 Intro/ 开始按顺序学就好。 方式三：只看不想跑 如果你不想跑代码，只想看内容，直接在线看网页版： https://microsoft.github.io/AI For Beginners/ 用Docsify直接渲染，不需要下载就能看。 适合谁，不适合谁 ✅ 适合这些同学： 零基础想系统学AI — 真正从零开始，建立完整的知识体系，而不是只会调用API 有Python基础，想转AI方向 — 已经会写Python，想系统补AI基础，了解各个方向 学生党预算有限 — 不想花几万块报培训班，又想要官方出品的高质量免费课程 ❌ 不适合这些同学： 想快速上手做AI应用开发 — 这个课程偏基础理论，不是教你怎么调OpenAI API做ChatGPT应..."
+      },
+      {
+        "title": "Pi: 一个极简可扩展的终端编码 Agent 框架",
+        "url": "/articles/2026/07/28/pi-coding-agent.html",
+        "type": "blog",
+        "date": "2026-07-28",
+        "description": "用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent。它不强迫你接受它的工作流，核心保持极简，你想要什么功能自己加。",
+        "excerpt": "用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent。它不强迫你接受它的工作流，核心保持极简，你想要什么功能自己加。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI",
+          "开源",
+          "工具"
+        ],
+        "priority": 0,
+        "content": "Pi: 一个极简可扩展的终端编码 Agent 框架 用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent。它不强迫你接受它的工作流，核心保持极简，你想要什么功能自己加——这可能是开源世界对闭源编码工具最有力的回应。 什么是 Pi？ Pi 是由 badlogicgames（Mario Zechner，libGDX 作者）发起的一个开源项目，它是一个 可扩展的终端编码 Agent 框架 。核心设计哲学非常直接： Pi 不告诉你该怎么工作。你适配 Pi，Pi 也适配你。 对比市面上那些大而全的闭源编码 Agent： Claude Code：功能全但闭源，你不能改核心逻辑，定价按 token 算长期用不便宜 Cursor：编辑器绑定，想要完全控制权就得接受它的编辑器 其他开源项目：要么功能残缺，要么架构笨重难以扩展 Pi 的思路不一样： 核心极简 ：只提供基础的工具调用（read/write/bash）、会话管理、多 LLM 提供商支持 完全可扩展 ：通过扩展、技能、提示词模板、Pi 包来满足不同工作流 不绑定编辑器 ：就是个终端程序，你用什么编辑器都能搭着用 支持几乎所有 LLM ：OpenAI、Anthropic、Google、DeepSeek、Groq、xAI、OpenRouter...30+ 提供商一键切换，连本地 llama.cpp 都支持 5 分钟快速上手 安装非常简单，一条命令搞定： 如果你不想用 npm，也可以用官方安装脚本： 认证方式两种：环境变量或者交互式登录。我习惯用环境变量： 或者直接运行 pi 然后 /login 交互式选择提供商，支持 Anthropic/OpenAI/GitHub Copilot 等订阅账号登录。 启动后你会看到这样的界面： 默认就给了四个工具： read：读取文件 write：写入文件 edit：编辑文件片段 bash：运行 shell 命令 你直接和它聊就好了，比如\"帮我看看这个项目的结构，给README提几个改进建议\"，它会自己调用工具完成任务。 核心功能亮点 1. 会话树：随时分支，不用重来 这是我觉得 Pi 最惊艳的设计之一。所有会话存在一个 JSONL 文件里，本身就是一棵树： 你可以： 随时用 /fork 从历史某一点分支开新会话 用 /tree 可视化浏览整个会话树，任意点跳转继续 自动保存，支持压缩，上下文满了自动总结不丢历史 换句话说，你不用因为试错走错方向就重头再来。在当前分支试错，试完回到分叉点换个思路继续就行，这才是正确的工作流。 2. 极致可扩展性：从极简到全功能 Pi 核心很小，但你可以把它堆成你想要的样子： 提示词模板 ：把常用提示存成 Markdown，敲个名字就展开。比如代码评审模板： 用的时候直接打 /review 就展开了。 技能 ：遵循 Agent Skills 标准，放对目录就能用，想加什么能力就加什么。比如果项目有 AGENTS.md 规则，Pi 会自动加载。Hermes Agent 本身就支持把工作流存成技能，直接能用。 扩展 ：TypeScript 模块，你可以加自定义工具、命令、快捷键，甚至能把 Doom 跑进去： 是的，你没看错，等 LLM 思考的时候能在 Pi 里玩 Doom。这就是可扩展性的威力——作者做了个示例，告诉你什么都能加。 Pi 包 ：把扩展、技能、提示词、主题打包成 npm 或 git 包，别人一条命令就能装： 3. 所有 LLM 通吃，随时切换 Pi 维护了统一的多提供商 API，支持 30+ LLM 提供商，包括： 订阅制：Anthropic Claude Pro/Max、OpenAI ChatGPT Plus、GitHub Copilot API Key：Anthropic、OpenAI、Azure OpenAI、DeepSeek、Groq、Google Gemini、Mistral、xAI、OpenRouter... 本地：llama.cpp，自己下载模型跑本地私域 想切换模型？按 Ctrl+L 弹出选择器，点一下就切了，不用重启。 4. 安全设计：信任你自己控制 Pi 默认不带权限系统，它用你的用户权限跑，这点好坏看你怎么用。但它给了你隔离方案： Gondolin：API Key 放主机，工具调用跑在微 VM 里隔离 Plain Docker：整个 Pi 跑在容器里 OpenShell：策略控制的沙箱 怕危险？自己容器化跑就好了，Pi 不拦着你。 设计哲学：为什么说\"不 MCP\"？ 作者写了篇博客What if you don't need MCP?，观点很有意思： MCP 把简单问题复杂化了。如果一个工具需要给 LLM 用，直接写个 CLI 带 README 说明怎么用就行了，LLM 自己会看会用。搞一层复杂的协议标准，最后还是要有人实现所有工具，收益在哪？ Pi 坚持： 简单就是最好的 。 不需要复杂的协议层 不需要标准化所有工具 你要什么，写个脚本就行，LLM 看得懂 README 这个观点我挺认同——很多时候，我们不是缺标准，是把简单问题搞复杂了。 谁该用 Pi？ ✅ 适合用 Pi 的人： 你讨厌闭源工具强迫你按它的方式工作 你喜欢折腾，想要定制自己的编码 Agent..."
+      },
+      {
+        "title": "告别 $120/月 订阅：OpenSEO — 原生支持 AI Agent 的开源全功能 SEO 工具",
+        "url": "/articles/2026/07/27/open-seo-open-source-alternative-semrush.html",
+        "type": "blog",
+        "date": "2026-07-27",
+        "description": "开源替代 Semrush/Ahrefs 的全功能 SEO 工具，自带 MCP 支持 AI Agent，按调用付费没有订阅费，个人站长一年省一万。",
+        "excerpt": "开源替代 Semrush/Ahrefs 的全功能 SEO 工具，自带 MCP 支持 AI Agent，按调用付费没有订阅费，个人站长一年省一万。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI",
+          "开源",
+          "工具"
+        ],
+        "priority": 0,
+        "content": "告别 $120/月 订阅：OpenSEO — 原生支持 AI Agent 的开源全功能 SEO 工具 做独立站、博客的朋友肯定都懂：做 SEO 离不开工具，但 Semrush 和 Ahrefs 真的太贵了。 对于个人站长和小团队来说，每个月掏一百多刀，大部分功能还用不上，实在肉疼。 最近发现了一个不错的开源项目 OpenSEO ，直接对标 Semrush/Ahrefs，开源免费可自托管，还原生支持 MCP 协议，可以直接让 Claude Code、Hermes 等 AI Agent 帮你做 SEO 分析。 这篇文章讲清楚：它解决了什么问题，核心功能有哪些，怎么5分钟Docker部署起来，以及什么样的人值得换。 痛点：传统SEO工具太贵了 我接触过很多个人博主和小团队，做 SEO 都卡在工具这一步： Semrush ：$129/月 起，大部分功能个人站长用不上 Ahrefs ：$99/月 起，同样贵得离谱 免费工具：功能碎片化，数据不全，导出麻烦 关键问题：你得常年订阅，即使你只偶尔查几次关键词 OpenSEO 的思路很有意思： 你自带 DataForSEO API 密钥，按实际使用付费，没有订阅费 。整体算下来，比直接订阅传统工具便宜不少。 核心功能一览 OpenSEO 是一个全功能的 SEO 工具，覆盖了你做SEO的核心流程： 功能 说明 🔍 关键词研究 搜索量、难度、相关关键词、用户意图分析 📈 排名跟踪 监控关键词在搜索引擎的排名变化 👀 竞争对手分析 看看竞品在做什么关键词，有哪些外链 🔗 外链分析 查看网站的外链概况、锚文本分布 🩺 网站审计 检查常见SEO问题：死链、标题、描述、结构化数据 🤖 AI 可见性 分析网站对AI大模型爬虫的友好度 最大亮点：原生支持 MCP + AI Agent 这一点我觉得是 OpenSEO 最领先的地方： 它直接暴露了 MCP 服务器 ，AI Agent 可以直接读取你的SEO数据，帮你完成分析。 比如你用 Claude Code，可以直接让它： \"帮我分析一下我博客关键词排名下降的原因，给我几个优化建议\" Claude 会直接通过 MCP 调用 OpenSEO 获取数据，然后分析给出结论，整个过程不需要你到处导出复制粘贴。 对于 Hermes 这样的Agent框架，也可以直接接入使用，项目本身还提供了预设的 Agent Skills 模板。 5分钟 Docker 本地部署 OpenSEO 部署非常简单，推荐用 Docker 一键启动： 启动完成后访问 http://localhost:3000 就能看到界面了。 如果你想部署到 Cloudflare 公网访问，官方也提供了免费计划的部署文档，支持免费托管。 成本对比：到底能省多少钱 很多人会问：DataForSEO API 也需要花钱，到底比直接订阅省多少？ 给你一个简单的估算： 关键词研究： $0.05 / 次 排名检查： $0.01 / 词 网站审计：按页面数量计费 如果你是个人站长，每周查几次，一个月下来可能也就几美元到十几美元，比 $100+ 的订阅省太多了。 如果你只需要偶尔做一次关键词调研，那成本可能就是几毛钱。 适合谁，不适合谁 适合用 OpenSEO 的人： ✅ 个人站长、独立博客作者 ✅ 小团队创业项目，预算有限 ✅ AI Agent 用户，想用Agent自动做SEO分析 ✅ 喜欢自己掌控数据，不想把数据都交给第三方 不适合用 OpenSEO 的人： ❌ 企业级SEO团队，需要完整的协作功能 ❌ 愿意付高价买官方支持和稳定性 ❌ 没有DataForSEO账号，不想额外注册 体验总结 OpenSEO 不是完美的，但它切中了一个非常精准的痛点： 传统SEO工具太贵，个人站长用不起 。 它的思路很清晰： 1. 核心数据用 DataForSEO（专业数据供应商，质量有保证） 2. 开源提供界面和工作流，你不用订阅，按调用付费 3. 原生支持 MCP，跟上 AI Agent 时代的步伐 对于个人开发者和小团队来说，这确实是一个更经济的选择。如果你正在被高额SEO订阅费折磨，可以试试这个项目。 相关链接 GitHub: https://github.com/every app/open seo 官方网站（可在线试用）: https://openseo.so 部署文档: https://github.com/every app/open seo/tree/main/docs 如果你对SEO工具选型有疑问，或者想知道具体的成本估算，可以在评论区留言交流。"
+      },
+      {
+        "title": "Timeline Studio：浏览器里跑的开源AI视频编辑器",
+        "url": "/articles/2026/07/25/timeline-studio-ai-video-editor.html",
+        "type": "blog",
+        "date": "2026-07-25",
+        "description": "完全本地运行的开源AI视频编辑器，不用上传视频，支持AI配音、自动字幕、智能裁切，还能让Claude Code帮你自动化剪辑。MIT协议免费商用。",
+        "excerpt": "完全本地运行的开源AI视频编辑器，不用上传视频，支持AI配音、自动字幕、智能裁切，还能让Claude Code帮你自动化剪辑。MIT协议免费商用。",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "AI",
+          "开源",
+          "工具"
+        ],
+        "priority": 0,
+        "content": "Timeline Studio：浏览器里跑的开源AI视频编辑器 上周我需要剪辑一条带配音和字幕的产品介绍视频，打开剪映才发现又开始弹窗提示我开通会员，而且原片超过1分钟还要强制水印。 这次我没充值，直接打开了 Timeline Studio — 一个完全运行在浏览器里的开源AI视频编辑器，不用上传视频，AI配音自动字幕都有，剪完直接导出MP4，一分钱没花。 这篇文章讲清楚三件事：1）它到底能做什么，什么场景值得用；2）5分钟本地部署或直接在线体验的完整步骤；3）我实测下来发现的优势和坑。 它解决了什么痛点？ 你肯定也遇到过： 剪辑简单视频还要下载安装好几个G的客户端 把原片上传到云端剪辑，担心素材隐私泄露 想试用AI自动字幕配音，结果要么限时长要么收月费 商业项目想用还得担心版权授权问题 Timeline Studio 给出了完全不同的解决方案 — 把整个视频编辑器放到浏览器里，AI模型全部本地运行，你的视频永远不需要离开你的电脑 。 核心能力：不仅仅是剪辑，AI功能全齐了 这个项目厉害的地方在于，它把剪映最常用的AI能力都搬到了浏览器端，而且完全本地化： 1. AI 配音：多语言支持，模型全部本地运行 支持中文 Piper/VITS ONNX 模型，英文有 Kokoro 82M，还覆盖了德语、西班牙语、法语等多种语言。模型是懒加载的，第一次用才下载，存在浏览器缓存里下次直接用。 不需要调用第三方API，不按字数收费，想用多少用多少。 2. 自动字幕：Whisper 跑在浏览器里 用的是 Whisper small q8 ONNX 量化模型，对中文识别结果还做了置信度修正，准确率比我想象的好。生成的字幕可以直接在时间线上拖动调整，支持拆分合并。 3. 智能画面处理 内置 YOLOS 主体检测和 MODNet 人像抠图，可以做： 智能裁切：自动识别主体保证不被裁掉 字幕避让：自动留出底部字幕区域 背景移除：把人像从图片里抠出来 4. AI 人声分离 直接在浏览器里把伴奏从背景音乐里分离出来，放到独立音轨调整音量，不用导到别的软件里处理。 5. 数字人驱动 支持 JoyVASA 音频驱动动作 + LivePortrait 神经渲染，有 WebGPU 加速，256px 快速预览和 512px 高质量输出。做口播视频非常方便。 6. 剪辑体验接近剪映 多轨道时间线：主视频轨 + 字幕、配音、背景音乐独立轨道 支持画中画、遮罩、滤镜、关键帧动画、调速 磁吸对齐、右键切分/复制/删除、撤销重做 导出用 WebCodecs 直接生成 MP4，确定性离线渲染 7. 最牛的一点：AI Agent 可以帮你剪 这个项目最有意思的创新是，它内置了给 Claude Code / Codex 用的 Agent Skill，AI 可以直接读取你的项目文件，自动执行剪辑操作，最后保存可编辑的 .timeline 项目文件。 简单说就是：你告诉 AI 「把这个视频开头剪掉10秒，添加一句配音在第5秒，自动生成字幕」，AI 就能帮你做完，还能保留项目文件让你后续调整。 这应该是我见过第一个把「AI 自动化剪辑」做到可复用层面的开源项目。 适合谁用？不适合谁用？ 适合用： 在意视频隐私，不想把素材上传到云端 想省掉剪映会员费用，商业项目需要免费授权 经常做简单短视频，不想开笨重的客户端 AI Agent 玩家，想让 Claude Code 帮你自动化剪辑 开发者想二次开发定制自己的剪辑工具 不建议用： 需要复杂剪辑、多镜头切换、专业色校的长视频 电脑性能一般，又想跑数字人渲染（需要 WebGPU） 完全不会代码，只想点点点就能用（在线版其实也可以，但功能不如客户端成熟） 5 分钟快速上手 两种方式：直接用在线版，或者本地部署。 方式一：直接在线体验（推荐尝鲜） 项目作者已经部署了在线版本，直接打开就能用： https://video editor.ai creator.top/ 第一次使用 AI 功能时会自动下载模型，等待几分钟就能用，模型存在你的浏览器缓存里。 方式二：本地部署 要求 Node.js 20+，现代 Chromium 浏览器。 打开终端输出的本地地址（一般是 http://localhost:5173）就可以用了。 构建生产版本 我实测下来发现的坑 1. 第一次加载 AI 模型比较慢 — 毕竟几个模型加起来几百MB，耐心等一会，缓存之后就快了 2. 导出大视频需要耐心 — 全浏览器渲染，性能肯定不如原生客户端，10分钟以内视频没问题 3. WebGPU 不是必须但推荐开 — 数字人功能没有 WebGPU 会比较卡，其他功能正常用 4. 复杂剪辑功能还不全 — 毕竟是开源项目，不要和剪映比功能丰富度，简单剪辑够用 总结 Timeline Studio 最让人兴奋的不是它替代了剪映，而是它证明了 —— 完整的AI视频编辑器完全可以跑在浏览器里，完全本地化，完全免费开源 。 对于在意隐私、讨厌会员、喜欢折腾的开发者来说，这已经足够吸引人了。而且 AI Agent 自动化剪辑这个方向，确实打开了很多想象空间 — 以后会不会我们只需要描述需求，AI 就自动帮我们剪好视频？ 如果你最近也在找开源视频编辑方案，可以去 GitHub 点个 Star 试试..."
       }
     ],
     "articleTitles": [
@@ -1214,7 +1346,14 @@
       "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
       "Skill Zoo：统一管理所有 AI 编程工具的技能库",
       "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
-      "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes"
+      "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+      "Buzz：Block 开源的人和 AI 平等协作工作区，一键自托管部署",
+      "MonkeyCode：长亭科技开源的企业级 AI 开发平台，私有化部署真的香",
+      "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+      "微软 AI-For-Beginners：5万星的免费AI入门课程，真的值得学吗？",
+      "Pi: 一个极简可扩展的终端编码 Agent 框架",
+      "告别 $120/月 订阅：OpenSEO — 原生支持 AI Agent 的开源全功能 SEO 工具",
+      "Timeline Studio：浏览器里跑的开源AI视频编辑器"
     ]
   },
   {
