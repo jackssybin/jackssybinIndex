@@ -12,6 +12,7 @@
 //   BAIDU_PUSH_DRY    设为 1 时只打印不推送
 
 import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 
 const args = process.argv.slice(2)
 const opts = {
@@ -28,7 +29,8 @@ for (const raw of args) {
   else if (!raw.startsWith('--')) opts.sitemap = raw
 }
 
-const site = process.env.BAIDU_PUSH_SITE || 'http://jackssybin.cn'
+const apiSite = process.env.BAIDU_PUSH_SITE || 'http://jackssybin.cn'
+const canonicalOrigin = (process.env.BAIDU_PUSH_ORIGIN || apiSite).replace(/\/$/, '')
 const token = process.env.BAIDU_PUSH_TOKEN
 const dryRun = process.env.BAIDU_PUSH_DRY === '1'
 
@@ -84,9 +86,21 @@ function filterBySince(entries, days) {
   })
 }
 
+function frontmatterUrl(file) {
+  const raw = readFileSync(file, 'utf8')
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  if (!match) return ''
+  const url = match[1].match(/^url:\s*(?:"([^"]+)"|'([^']+)'|([^\s#]+))/m)
+  return url?.[1] || url?.[2] || url?.[3] || ''
+}
+
+function absoluteUrl(path) {
+  return new URL(path, canonicalOrigin).toString()
+}
+
 function urlsFromGit() {
-  // diff 范围可由 CI 环境变量 BAIDU_PUSH_DIFF_BASE 指定，
-  // 默认为 HEAD~5（本地开发覆盖最近若干次改动）
+  // CI may override the diff range; local default is HEAD~5.
+
   const base = process.env.BAIDU_PUSH_DIFF_BASE || 'HEAD~5'
   const head = process.env.BAIDU_PUSH_DIFF_HEAD || 'HEAD'
   const raw = execSync(`git diff --name-only ${base} ${head} -- "content/**/*.md"`, {
@@ -97,24 +111,24 @@ function urlsFromGit() {
   if (!raw) return []
   const files = raw.split(/\r?\n/).filter(Boolean)
   const urls = []
-  for (const f of files) {
-    // content/articles/2026/06/05/foo.md -> https://<site>/articles/2026/06/05/foo/
-    // content/tutorials/xxx/yyy.md -> https://<site>/xxx/yyy.html
-    const rel = f.replace(/^content\//, '').replace(/\.md$/, '')
-    if (rel.startsWith('articles/')) {
-      urls.push('https://' + site + '/' + rel + '/')
-    } else if (rel.startsWith('tutorials/')) {
-      urls.push('https://' + site + '/' + rel.replace(/^tutorials\//, '') + '.html')
+  for (const file of files) {
+    const rel = file.replace(/^content\//, '').replace(/\.md$/, '')
+    const explicitUrl = frontmatterUrl(file)
+    if (explicitUrl) {
+      urls.push(absoluteUrl(explicitUrl))
+    } else if (rel.startsWith('articles/')) {
+      urls.push(absoluteUrl('/' + rel + '/'))
+    } else {
+      urls.push(absoluteUrl('/' + rel + '.html'))
     }
   }
   return urls
 }
-
 async function pushBatch(urls) {
-  const api = 'http://data.zz.baidu.com/urls?site=' + site + '&token=' + token
+  const api = 'http://data.zz.baidu.com/urls?site=' + encodeURIComponent(apiSite) + '&token=' + token
   const body = urls.join('\n')
   if (dryRun) {
-    console.log('[dry-run] would POST', urls.length, 'urls to', api)
+    console.log('[dry-run] would POST', urls.length, 'urls for', apiSite)
     urls.forEach((u) => console.log('  ' + u))
     return { success: urls.length, remain: 'N/A' }
   }
