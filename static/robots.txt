@@ -3,8 +3,14 @@ Allow: /
 Disallow: /search.html
 Disallow: /search
 Disallow: /tags/
+Disallow: /tags.html
 Disallow: /page/
 Disallow: /admin/
 Disallow: /search-index.json
+Disallow: /news.html
+Disallow: /weekly.html
+Disallow: /topics.html
+Disallow: /nav.html
+Disallow: /ai-nav/
 
 Sitemap: https://jackssybin.cn/sitemap.xml

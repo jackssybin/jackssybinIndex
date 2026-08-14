@@ -8,6 +8,7 @@
       "/archives/"
       "/page/"
       "/generated/"
+      "/ai-nav/"
       "/articles/2026/06/05/imgs-cognitive-process/"
   }}
   {{- $skipExact := slice
@@ -18,6 +19,10 @@
       "/search.html"
       "/news.html"
       "/weekly.html"
+      "/tags.html"
+      "/about.html"
+      "/links.html"
+      "/my-github-repos/"
       "/articles/"
       "/tutorials/"
   }}
