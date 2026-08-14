@@ -84,6 +84,14 @@ function inferType(file, params) {
   return params.contentType || "page";
 }
 
+function inferUrl(file, params, type) {
+  if (params.url || params.permalink) return String(params.url || params.permalink);
+  if (type !== "blog") return "";
+  const relative = path.relative(contentDir, file).replace(/\\/g, "/").replace(/\.md$/i, "");
+  if (!relative.startsWith("articles/")) return "";
+  return "/" + relative.replace(/\/+$/, "") + "/";
+}
+
 async function copyHotNews() {
   const hotNews = path.join(staticDir, "hot-news.json");
   if (!await exists(hotNews)) return;
@@ -96,10 +104,11 @@ async function readContentEntries() {
   for (const file of markdownFiles) {
     const source = await fs.readFile(file, "utf8");
     const { data, body } = parseFrontmatter(source);
-    const url = data.url || data.permalink;
+    if (data.draft === true) continue;
     const title = data.title;
-    if (!url || !title) continue;
     const type = inferType(file, data);
+    const url = inferUrl(file, data, type);
+    if (!url || !title) continue;
     entries.push({
       title: String(title),
       url: String(url),
