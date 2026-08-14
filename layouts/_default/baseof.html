@@ -101,14 +101,18 @@
   })();
   </script>
 
+  {{ with .Site.Params.seo.google_analytics }}
+  {{ if not (in . "YOUR_GA_ID") }}
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.seo.google_analytics }}"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '{{ .Site.Params.seo.google_analytics }}');
+  gtag('config', '{{ . }}');
   </script>
+  {{ end }}
+  {{ end }}
   {{ end }}
   {{ end }}
 </body>

@@ -87,3 +87,16 @@ jobs:
           export BAIDU_PUSH_DIFF_BASE="$BEFORE"
           export BAIDU_PUSH_DIFF_HEAD="HEAD"
           node scripts/baidu-push.mjs --changed
+
+      - name: Verify robots.txt contains sitemap
+        run: |
+          sleep 5
+          ROBOTS=$(curl -fsSL https://jackssybin.cn/robots.txt || true)
+          echo "Live robots.txt:"
+          echo "$ROBOTS"
+          if echo "$ROBOTS" | grep -q "Sitemap:"; then
+            echo "robots.txt contains Sitemap directive"
+          else
+            echo "ERROR: robots.txt is missing Sitemap directive!"
+            exit 1
+          fi
