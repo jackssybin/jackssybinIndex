@@ -70,6 +70,7 @@ jobs:
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
       - name: Submit changed URLs to Baidu
+        if: github.event_name == 'push'
         continue-on-error: true
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
