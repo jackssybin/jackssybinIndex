@@ -69,6 +69,38 @@ jobs:
           SOURCE: public/
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
+      - name: Sync nginx config and reload
+        if: github.event_name == 'push'
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT || 22 }}
+        shell: bash
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "$REMOTE_PORT" -H "$REMOTE_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          scp -P "$REMOTE_PORT" deploy/nginx-jackssybin.conf "$REMOTE_USER@$REMOTE_HOST:/tmp/jackssybin.conf"
+          # Best effort: try common nginx config locations. The deploy user must
+          # have passwordless sudo for nginx/cp/ln, otherwise this step is skipped
+          # without failing the deploy (continue-on-error).
+          ssh -p "$REMOTE_PORT" "$REMOTE_USER@$REMOTE_HOST" '
+            set -e
+            for D in /etc/nginx/conf.d /etc/nginx/sites-available; do
+              if [ -d "$D" ]; then
+                sudo cp /tmp/jackssybin.conf "$D/jackssybin.conf"
+              fi
+            done
+            if [ -d /etc/nginx/sites-enabled ]; then
+              sudo ln -sf /etc/nginx/sites-available/jackssybin.conf /etc/nginx/sites-enabled/jackssybin.conf
+            fi
+            sudo nginx -t
+            sudo nginx -s reload
+          '
       - name: Submit changed URLs to Baidu
         if: github.event_name == 'push'
         continue-on-error: true
@@ -101,3 +133,6 @@ jobs:
             echo "ERROR: robots.txt is missing Sitemap directive!"
             exit 1
           fi
+
+
+
