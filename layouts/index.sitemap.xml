@@ -1,4 +1,4 @@
-﻿{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{- $skipPrefixes := slice
@@ -21,7 +21,6 @@
       "/articles/"
       "/tutorials/"
   }}
-  {{- $now := now }}
   {{- range .Site.Pages }}
     {{- $rel := .RelPermalink }}
     {{- $skip := false }}
@@ -34,10 +33,8 @@
   <url>
     <loc>{{ .Permalink }}</loc>
     {{- $last := .Lastmod }}
-    {{- if not $last.IsZero }}
-    <lastmod>{{ $last.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
-    {{- else }}
-    <lastmod>{{ $now.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
+    {{- if and $last (not $last.IsZero) }}
+    <lastmod>{{ $last.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
     {{- end }}
     <changefreq>weekly</changefreq>
     <priority>{{ if .IsPage }}0.8{{ else }}0.5{{ end }}</priority>
