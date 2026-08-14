@@ -1,138 +1,109 @@
 ---
-date: "2026-08-14T10:00:00+08:00"
-lastmod: "2026-08-14T10:00:00+08:00"
-title: "DeepSeek Harness：深度读评 — 一切皆插件的开源 AI Agent 框架"
-url: "/articles/2026/08/14/deepseek-harness-intro.html"
-description: "DeepSeek 官方开源的 AI Agent 框架 Harness，采用“一切皆插件”的架构设计，从模型适配器到 Agent 循环本身都是可替换的插件。本文深入解读其架构思想、核心设计，并给出上手体验和适用场景判断。"
-tags: ["AI", "开源", "Agent框架", "DeepSeek", "插件化"]
-pageClass: solo-page
-sidebar: false
-breadcrumb: false
-pageInfo: false
-contributors: false
-lastUpdated: false
-comment: false
+date: 2026-08-14
+slug: deepseek-harness-intro
+title: 用了各种 AI Agent 框架后，我等到了这个「一切皆插件」的开源项目
+description: DeepSeek 开源的 Harness 框架采用彻底的「一切皆插件」架构，任何组件都可以替换。适合需要深度定制 AI Agent 底座的二次开发者，不适合追求开箱即用快速搭 Demo 的初学者。本文拆解核心设计，分析适用场景，给出一键运行命令。
+categories: ["开源项目", "AI 智能体"]
+contenttype: article
+draft: false
+cover: "/images/deepseek-harness-intro/cover-wechat.jpg"
 ---
 
-# DeepSeek Harness：深度读评 — 一切皆插件的开源 AI Agent 框架
+# 用了各种 AI Agent 框架后，我等到了这个「一切皆插件」的开源项目
 
-![DeepSeek Harness 封面](/images/deepseek-harness-intro/cover-wechat.jpg)
+最近 AI Agent 框架一个接一个出来，我试用了大半年，总觉得差点意思：
 
-上周 DeepSeek AI 开源了自己的内部 Agent 框架 **DeepSeek Harness**，我第一时间clone下来读了源码。这不是那种"又一个Agent脚手架"，它提出了一套非常彻底的插件化思想——**everything is a plugin**，从 LLM 适配器、工具注册表到 Agent 循环本身，全都是插件。
+- Claude Code 好用，但闭源，你想改个核心逻辑根本动不了
+- OpenAI Agents SDK 概念太多，写个简单Demo要看好几篇文档，门槛太高
+- 其他开源框架多多少少都有点耦合 —— 你想换个模型后端，要改好几个地方
 
-这篇文章讲清楚三个问题：
-1. 它解决了什么现有框架解决不好的痛点？
-2. "一切皆插件"到底是什么意思，架构上是怎么做的？
-3. 什么人应该用它，什么场景下不适合？
+直到 DeepSeek 开源了 [**Harness**](https://github.com/deepseek-ai/deepseek-harness)，我才觉得：哦，原来 AI Agent 框架就该这么设计。
 
----
+## 核心设计：「一切皆插件」到底是什么意思？
 
-## 痛点：为什么我们需要另一个 AI Agent 框架？
+DeepSeek Harness 的核心一句话就能说清楚：**Everything is a plugin.**
 
-你肯定见过这样的场景：
+翻译成人话就是：
 
-- 想用 OpenAI 之外的模型，发现框架把模型调用写死在核心里，改起来要动三处
-- 想加个自定义沙箱规则，发现入口被私有API包着，只能fork改源码
-- 想换个持久化存储，翻了半天文档才找到哪里改配置
-- 项目跑了半年，想加个新能力，结果牵一发动全身，核心逻辑改完一堆测试炸了
+- 模型调用是插件 → 你想换 DeepSeek / OpenAI / Claude，随便换
+- 工具调用是插件 → 自带文件系统、shell、subprocess、LSP，你再加个浏览器也没问题
+- 授权策略是插件 → 本地用全放开，给别人用可以加审批
+- 会话持久化是插件 → SQLite 存在本地，你想迁去 PostgreSQL 也可以
+- 甚至连 Agent 循环本身，也是插件 → 你对思考流程不满意，整个换掉都没问题
 
-现有的不少 Agent 框架，说是"可扩展"，但本质还是"框架核心 + 第三方插件"——核心是特权的，插件只能在预留的沙盒里玩。DeepSeek Harness 走了另一个极端：**没有特权核心**。
+这种设计带来的好处太实在了：
 
-![架构对比：传统框架 vs Harness 一切皆插件](https://i.imgur.com/placeholder.png)
+**不存在「不可扩展的核心」。** 你不需要去改框架源码，只要写个新插件，挂载上去就能用。框架只负责把插件拼起来，运行流程给你串好。
 
-> 传统框架：不可变的核心 + 可扩展的插件边界 → 加新能力经常要改核心  
-> Harness：启动空上下文，所有能力都是一层一层插件堆上去 → 任何一层都能换
+## 架构拆解：插件到底怎么拼起来？
 
-举个例子：如果你想把默认的 Agent 循环从"单步思考 → 工具调用 → 结果返回"改成"多智能体辩论 → 投票决议"，不需要改框架源码——只需要写个新的 Agent Loop 插件替换掉原来的就行。整个过程不影响其他插件的工作。
+理解 Harness 架构，记住三个关键词就够了：
 
-## 核心设计："一切皆插件"到底是什么？
+### 1. Cordis 内核
 
-Harness 基于 Cordis 框架开发，Cordis 本身就是一个"一切皆插件"的应用框架。Harness 在这个基础上，定义了 AI Agent 领域的能力分层：
+Harness 基于 Cordis 框架开发， Cordis 的设计就是「插件都贡献服务、事件、可回收副作用到共享上下文」。
 
-### 核心插件包概览
+简单说：每个插件注册自己能提供什么能力，别人用的时候直接从上下文拿就行。插件卸载，整个副作用自动回收。
 
-看一眼 packages 目录结构你就能感受到这个设计的彻底性：
+所以你加新能力，不会动到别人的奶酪；换组件，也不用牵一发动全身。
 
-**核心能力层**：
-- `core/session`：会话事件日志和内存存储（**所有对模型可见的内容都必须来自日志**）
-- `core/system-prompt`：System Prompt 片段组装机制（插件可以贡献自己的片段）
-- `core/tools`：带守卫执行管道的作用域工具注册表
-- `core/agent`：Agent 接口定义和 live 注册
-- `core/agent-loop`：默认的 Agent 驱动实现
-- `llm/llm`：LLM 能力适配层（定义接口，各个模型提供商做实现）
+### 2. 分层配置：Profile + Bundle + Patch
 
-**能力插件层**（各种开箱即用的能力）：
-- `shell`：Bash 命令执行能力
-- `fs`：文件系统访问 + 策略控制
-- `lsp`：语言服务器协议能力
-- `skill`：技能/插件注册表
-- `web`：Web 搜索和获取能力
-- `subagent`：子代理能力委托
-- `e2b`：E2B 沙箱支持
-- `compaction`：上下文压缩能力
+启动一个 Harness 实例，其实是按层拼配置：
 
-每一个能力都是标准的 Cordis 插件，遵循同样的注册和生命周期规则。**没有哪个比哪个更核心**。
+1. **Bundle**：打包好的一组配置和代码，比如 `dsh-base` 就是基础层，包含所有默认工具和模型适配
+2. **Profile**：一个命名的组合，比如 `web` 带 UI，`headless` 命令行跑任务
+3. **Patch**：你的个人定制，覆盖掉默认配置就行
 
-### 组合方式：Profile 和 Bundle
+比如你想把默认模型从 DeepSeek 改成 OpenAI，不用重新编译，写个 patch 替换模型提供商那一行配置就行。
 
-Harness 把启动配置抽象成两个概念：
+### 3. 能力 seam 设计
 
-- **Bundle**：是一组 Cordis 配置行和代码的分发格式——它插入的任何内容都可以被上层补丁修改
-- **Profile**：是存储在用户目录的命名组合，列出它堆叠的 bundles、用户安装的第三方插件、以及自定义补丁
+Harness 把每个能力都做成「接口-实现-使用者」三层：
 
-比如说，`web` profile 默认就是：
-```
-dsh-base （基础层：模型适配器、工具、持久化...）
-→ dsh-web-app （加上浏览器应用）
-→ 用户自定义补丁
-```
+- **Service Definition**：定义好接口长什么样
+- **Service Provider**：具体实现（本地/远程/沙箱）
+- **Consumer**：Agent 或工具用这个能力
 
-你想换个默认模型？只需要打个补丁替换掉模型提供商配置就行，不需要改任何代码。想加个自定义工具？把它作为第三方插件安装到 profile 里，下次启动就生效了。
+所以你换个实现，接口不变，上层代码不用改。比如把本地 shell 换成 E2B 沙箱，对上层 Agent 来说完全无感。
 
-想看你机器实际启动的插件树？运行这个命令：
+## 谁适合用？谁不适合用？
 
-```bash
-dsh --profile web --dump-config
-```
+用一句话总结：
 
-输出里每一行都能被你自己的补丁替换掉——这才是真·可定制。
+> **适合二次开发定制自己 Agent 底座的开发者，不适合想要开箱即用跑 Demo 的初学者。**
 
-### 事件驱动：扩展点无处不在
+我帮你分的更清楚点：
 
-Harness 把执行流程拆成了一系列事件，你的插件可以在任何点拦截、修改、甚至拒绝执行：
+### ✅ 你应该用 Harness，如果：
 
-```
-turn/start
-  claim next-step input
-  assemble prompt sections + tool schemas
-  -> agent/pre-step    在这里你可以修改请求，甚至直接拒绝
-     拒绝 → close turn
-     通过 → step/start
-     append messages
-     derive model history
-     agent/request -> llm/stream -> assistant/chunk* -> assistant/message
-     tool/call* -> tools/pre-execute -> tools/execute -> tools/post-execute -> tool/result*
-     step/end
-     tools have more requests -> repeat
-  -> agent/turn-stopping
-turn/end
-```
+1. **你想做自己的 AI Agent 产品** —— 需要一个稳定灵活的底座，各个组件都能替换，不想被框架锁死
+2. **你对现有 Agent 框架某部分不满意** —— 比如不想用默认的模型，想换个工具调用实现，Harness 让你无痛替换
+3. **你需要集成特定工具** —— 比如内部系统、私有API，插件机制让你干净集成进去
 
-每个扩展点都是标准的 Cordis 事件监听，你想加什么行为就加什么——比如想加个计费统计，只需要监听 `llm/stream` 事件统计 token 就行。想加风险控制，就在 `tools/pre-execute` 检查命令，危险的直接拒绝。
+### ❌ 你不该用 Harness，如果：
 
-这种设计带来一个好处：**生态可以生长，不需要框架升级**。社区出了新的安全沙箱，直接替换掉原来的安全插件就行，不需要等 Harness 合并 PR。
+1. **你就是想跑个 Demo 玩玩** —— 安装 pnpm 依赖、build 都要时间，npx 一键启动虽然有，但定制起来还是要写配置
+2. **你想要完整的聊天客户端** —— Harness 是框架，不是成品 App，UI 只有基础的 Web UI
+3. **你不懂 Node.js/TypeScript** —— 二次开发需要懂点 TS，不然看不懂插件怎么写
 
-## 五分钟上手体验
+## 五分钟上手：怎么跑起来？
 
-DeepSeek Harness 提供了非常友好的上手方式——不需要 clone 源码，一行命令就能启动 Web UI：
+Harness 提供了 npx 一键启动，你本地只要装了 Node.js 22+，直接跑：
 
 ```bash
 npx @deepseek-ai/dsh web
 ```
 
-默认监听 `http://127.0.0.1:3080`，打开就能用。前提是你要有 `DEEPSEEK_API_KEY` 环境变量。
+这条命令会：
 
-如果你想从源码运行：
+1. 拉取最新版本
+2. 启动 Web UI，默认地址 `http://127.0.0.1:3080`
+3. 用你环境变量里的 `DEEPSEEK_API_KEY` 调用模型
+
+打开浏览器就能用，自带 Web 界面可以聊天、看会话历史。
+
+如果想从源码运行改点东西：
 
 ```bash
 git clone https://github.com/deepseek-ai/deepseek-harness.git
@@ -142,55 +113,39 @@ pnpm run build
 pnpm dsh web
 ```
 
-项目目前处于开发者预览阶段，**未来会有不兼容的变更**，但核心架构已经清晰可见。
+## MCP 集成：直接能用
 
-## 适用场景判断：谁该用，谁不该用？
+如果你在用 Claude Code 或者 Hermes Agent，Harness 本身就支持 MCP 协议，自带 ACP 服务器：
 
-读完源码我给一个直白的判断：
+```json
+{
+  "mcpServers": {
+    "deepseek-harness": {
+      "command": "pnpm",
+      "args": ["dsh", "--profile", "headless", "start-mcp"]
+    }
+  }
+}
+```
 
-> **TL;DR**：DeepSeek Harness 适合需要深度定制化二次开发的场景，不适合追求开箱即用快速搭应用。
-
-| 适合 | 不适合 |
-|---|---|
-| 你正在搭建自己的 Agent 开发底座 | 你想找个"一键运行 DeepSeek RAG" |
-| 你需要频繁替换组件（模型、沙箱、存储） | 你只需要简单调用 API 做个聊天机器人 |
-| 你的团队有多人协作开发不同的 Agent 能力 | 你是初学者只想跑个 Demo 体验 |
-| 你需要按场景灵活组合不同能力集合 | 你不需要定制化，只想快速出产品 |
-
-### 为什么说这是 DeepSeek 给社区的一份厚礼？
-
-DeepSeek 自己做 Agent 肯定需要一个灵活的底座，现在开源出来，相当于把他们内部的工程设计开放给社区。对于那些想自己折腾 Agent 架构、尝试不同设计思路的人来说，这真的是宝藏。
-
-它不是为普通终端用户准备的开箱产品，它是**给框架作者和二次开发者准备的地基**。如果你满足：
-1. 对现有 Agent 框架的耦合程度不满意
-2. 需要高度定制化你的 Agent 工作流
-3. 相信"组合优于继承"、"开放优于封闭"的设计思想
-
-那这个项目值得你花一个下午读读源码。
-
-## 可收藏清单：核心扩展点速查
-
-如果你准备基于 Harness 做二次开发，这些是你最可能需要修改或扩展的地方：
-
-| 目标 | 机制 | 位置 |
-|---|---|---|
-| 添加一个新的 LLM 提供商 | 在 `ctx.llm` 注册适配器 | `packages/llm/` |
-| 添加一个新的工具 | 在 `ctx.tools` 注册 | 遵循 `cookbook/adding-a-tool.md` |
-| 修改 Agent 循环逻辑 | 替换默认的 Agent 驱动 | `packages/core/agent-loop/` |
-| 添加自定义能力 | 实现 Service Definition + Provider | 遵循 `capability-seams.md` |
-| 拦截请求做检查 | 监听对应的扩展事件 | 看 `Turn flow` 事件列表 |
+把这段加到你的 MCP 配置里，就能在 Claude Code 里用 Harness 调度任务了。
 
 ## 总结
 
-DeepSeek Harness 的核心贡献不是"又写了一个 Agent 框架"，而是**把"一切皆插件"这个设计思想在 AI Agent 领域贯彻到底**——没有特权核心，所有能力都是可替换的，扩展点无处不在。
+DeepSeek Harness 是我最近看到最对我胃口的开源 AI Agent 框架：
 
-这种设计的优点是灵活性拉满，缺点是门槛也高——你需要理解插件化思想，愿意花时间理解这套架构，才能用好它。但对于那些真正需要深度定制的场景，这种彻底的插件化反而能减少很多痛苦。
+- **理念清晰**：一切皆插件，彻底解耦，谁用谁知道
+- **工程干净**：全 TypeScript，模块化清晰，100% 测试覆盖率要求，代码读着舒服
+- **灵活够了**：想换什么换什么，不需要你去改框架核心
 
-项目地址：https://github.com/deepseek-ai/deepseek-harness  
-欢迎感兴趣的朋友去试玩，有什么发现欢迎留言讨论。
+如果你也折腾过好几个 Agent 框架，总觉得「怎么都不顺手」，可以去试试 Harness。说不定你也会有「终于等到了」的感觉。
+
+项目地址：[https://github.com/deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)
+
+**一句话行动：** 如果你最近在攒自己的 Agent 底座，不妨 clone 下来跑一遍，十分钟就能感觉到这个设计到底好在哪。
 
 ---
 
-*如果你觉得这篇解读有帮助，欢迎转发给正在折腾 Agent 框架的朋友*
+*关注我的专栏，持续拆解好用的开源 AI 工具，告诉你谁适合用、怎么上手最快。*
 
-#AI #开源 #DeepSeek #Agent框架 #插件化
+#开源 #AI #智能体 #DeepSeek #开源项目 #AI编程 #Agent
