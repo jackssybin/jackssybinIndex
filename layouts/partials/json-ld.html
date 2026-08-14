@@ -17,8 +17,10 @@
       "url": {{ (print .Site.BaseURL "favicon.svg") | jsonify | safeJS }}
     }
   },
+  {{- if and .Date (gt .Date.Year 1) }}
   "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
   "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | jsonify | safeJS }},
+  {{- end }}
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": {{ .Permalink | jsonify | safeJS }}
