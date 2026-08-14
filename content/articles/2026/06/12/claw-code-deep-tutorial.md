@@ -1,4 +1,4 @@
-﻿---
+---
 title: "我拆了一遍 Claw Code：AI 编程助手真正难的不是聊天，而是可控执行"
 url: "/articles/2026/06/12/claw-code-agent-harness-deep-dive.html"
 date: "2026-06-12T00:00:00+08:00"

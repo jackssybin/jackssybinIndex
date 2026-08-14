@@ -1,4 +1,4 @@
-﻿---
+---
 title: "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台"
 url: "/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html"
 date: "2026-07-08T13:00:00+08:00"

@@ -1,4 +1,4 @@
-﻿---
+---
 url: "/articles/2026/07/12/lingtistudio-ai-video-production-pipeline.html"
 title: "试过 Sora 和剪映 AI 之后，我用这个开源项目把「AI 视频」跑成了真流水线"
 date: 2026-07-12T22:40:00+08:00

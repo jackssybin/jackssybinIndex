@@ -1,4 +1,4 @@
-﻿---
+---
 title: "AI 视频制作智能体：输入一句话，自动生成完整视频"
 url: "/articles/2026/06/28/ai-video-agent-auto-generate-video.html"
 date: "2026-06-28T15:00:00+08:00"

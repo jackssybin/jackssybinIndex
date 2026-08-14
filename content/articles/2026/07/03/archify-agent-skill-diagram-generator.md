@@ -1,4 +1,4 @@
-﻿---
+---
 title: "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill"
 url: "/articles/2026/07/03/archify-agent-skill-diagram-generator.html"
 date: "2026-07-03T14:00:00+08:00"

@@ -77,6 +77,7 @@ function normalizeDate(value = "") {
 
 function inferType(file, params) {
   if (params.contentType === "article") return "blog";
+  if (file.includes(`${path.sep}articles${path.sep}`)) return "blog";
   if (file.includes(`${path.sep}tutorials${path.sep}`)) return "tutorial";
   if (file.includes(`${path.sep}generated${path.sep}nav${path.sep}`)) return "nav";
   if (file.includes(`${path.sep}generated${path.sep}topics${path.sep}`)) return "topic";

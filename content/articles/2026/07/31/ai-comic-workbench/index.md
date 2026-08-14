@@ -1,4 +1,4 @@
-﻿---
+---
 title: "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画"
 url: "/articles/2026/07/31/ai-comic-workbench.html"
 date: "2026-07-31T15:30:00+08:00"

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器"
 url: "/articles/2026/06/19/browseract-skills-tutorial.html"
 date: "2026-06-19T18:00:00+08:00"

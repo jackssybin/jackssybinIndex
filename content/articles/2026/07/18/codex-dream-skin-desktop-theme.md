@@ -1,4 +1,4 @@
-﻿---
+---
 title: "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸"
 url: "/articles/2026/07/18/codex-dream-skin-desktop-theme.html"
 date: "2026-07-18T07:00:00+08:00"

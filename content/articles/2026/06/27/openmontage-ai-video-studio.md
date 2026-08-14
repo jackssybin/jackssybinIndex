@@ -1,4 +1,4 @@
-﻿---
+---
 title: "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室"
 url: "/articles/2026/06/27/openmontage-ai-video-studio.html"
 date: "2026-06-27T17:00:00+08:00"

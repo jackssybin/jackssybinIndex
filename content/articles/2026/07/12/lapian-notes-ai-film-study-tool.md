@@ -1,4 +1,4 @@
-﻿---
+---
 url: "/articles/2026/07/12/lapian-notes-ai-film-study-tool.html"
 title: "折腾了两晚 Excel 和逐帧截图后，我用这个开源工具把一部电影拉片做完了"
 date: 2026-07-12T10:30:00+08:00

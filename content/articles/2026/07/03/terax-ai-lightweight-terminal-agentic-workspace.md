@@ -1,4 +1,4 @@
-﻿---
+---
 title: "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端"
 url: "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html"
 date: "2026-07-03T09:30:00+08:00"

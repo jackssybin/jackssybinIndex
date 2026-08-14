@@ -1,4 +1,4 @@
-﻿---
+---
 title: "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器"
 url: "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html"
 date: "2026-07-05T15:40:00+08:00"

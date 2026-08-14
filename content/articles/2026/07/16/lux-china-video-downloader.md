@@ -1,4 +1,4 @@
-﻿---
+---
 title: "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了"
 url: "/articles/2026/07/16/lux-china-video-downloader.html"
 date: "2026-07-16T22:00:00+08:00"

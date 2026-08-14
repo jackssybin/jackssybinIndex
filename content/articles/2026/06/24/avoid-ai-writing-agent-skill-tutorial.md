@@ -1,4 +1,4 @@
-﻿---
+---
 title: "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill"
 url: "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html"
 date: "2026-06-24T00:00:00+08:00"

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes"
 url: "/articles/2026/07/08/agency-agents-238-specialist-installer.html"
 date: "2026-07-08T10:00:00+08:00"

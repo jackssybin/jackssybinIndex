@@ -1,4 +1,4 @@
-﻿---
+---
 title: "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的"
 url: "/articles/2026/07/02/last30days-trending-1-github-research-radar.html"
 date: "2026-07-02T13:35:00+08:00"

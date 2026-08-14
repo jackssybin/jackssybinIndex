@@ -1,4 +1,4 @@
-﻿---
+---
 url: "/articles/2026/07/10/omnivoice-studio-local-elevenlabs-alternative.html"
 title: "OmniVoice Studio：把 ElevenLabs 焊回你自己的机器"
 date: 2026-07-10T10:20:00+08:00

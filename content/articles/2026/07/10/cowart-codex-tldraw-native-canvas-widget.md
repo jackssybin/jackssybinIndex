@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件"
 url: "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html"
 date: "2026-07-10T10:00:00+08:00"

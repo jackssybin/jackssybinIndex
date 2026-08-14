@@ -1,4 +1,4 @@
-﻿---
+---
 title: "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线"
 url: "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator.html"
 date: "2026-06-24T00:00:00+08:00"

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台"
 url: "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html"
 date: "2026-07-05T14:00:00+08:00"

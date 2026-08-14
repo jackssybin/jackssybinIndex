@@ -1,4 +1,4 @@
-﻿---
+---
 title: "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流"
 url: "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial.html"
 date: "2026-07-01T16:20:00+08:00"
