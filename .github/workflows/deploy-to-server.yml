@@ -62,21 +62,6 @@ jobs:
       - name: Build Hugo static site
         run: hugo --destination public --minify --cleanDestinationDir --enableGitInfo
 
-      - name: Debug sitemap lastmod
-        if: always()
-        run: |
-          echo "=== Git version ==="
-          git --version
-          echo "=== core.quotepath ==="
-          git config core.quotepath
-          echo "=== Git log for Chinese filename ==="
-          git log -1 --format="%ai %s" -- "content/tutorials/linux/快速开始.md" || echo "FAILED to find Chinese file"
-          echo "=== Git ls-files for Chinese file ==="
-          git ls-files "content/tutorials/linux/" | head -5
-          echo "=== Sitemap lastmod count ==="
-          grep -c '<lastmod>' public/sitemap.xml || true
-          echo "=== Tutorial lastmod check ==="
-          grep 'linux/quick-start' public/sitemap.xml | head -1
 
       - name: Deploy dist to server
         uses: easingthemes/ssh-deploy@v5.1.0
