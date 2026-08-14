@@ -3,7 +3,7 @@ title: 附录A：Spring Boot 3 vs 4 完整对比表
 description: 附录A：Spring Boot 3 vs 4 完整对比表 核心特性对比 基础要求 项目 Spring Boot 3.x Spring
   Boot 4.0 最低 JDK 版本 Java 17 Java 21 Spring Framework 6.x 7.0 Jakarta EE
   9.x/10.x 10.x Servlet API 5.0/6.0 6.0 Mave...
-url: /springboot4/E9_99_84_E5_BD_95/a-boot3vs4.html
+url: /springboot4/appendix/a-boot3vs4.html
 layout: tutorial
 contentType: tutorial
 series: springboot4

@@ -3,7 +3,7 @@ title: 第2章：Spring Framework 7.0 新特性
 description: "第2章：Spring Framework 7.0 新特性 本章概述 Spring Boot 4 基于 Spring
   Framework 7.0 构建，后者带来了许多重要的新特性和改进。本章将详细介绍这些新特性，并通过实际案例展示如何使用它们。 本章重点 : ✅ Java
   21+ 支持与要求 ✅ Virtual Threads（虚拟线程）深度集成 ✅ Reco..."
-url: /springboot4/E7_AC_AC_E4_BA_8C_E9_83_A8_E5_88_86-_E6_A0_B8_E5_BF_83_E6_A1_86_E6_9E_B6/2-springframework7.html
+url: /springboot4/part2-core/2-springframework7.html
 layout: tutorial
 contentType: tutorial
 series: springboot4

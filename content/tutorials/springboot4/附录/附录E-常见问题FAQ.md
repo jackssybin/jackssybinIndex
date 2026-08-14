@@ -3,7 +3,7 @@ title: 附录E：常见问题 FAQ
 description: "附录E：常见问题 FAQ 概述 本附录收集了 Spring Boot 4 升级和使用过程中的常见问题及解决方案。 E.1 升级相关
   Q1: 必须升级到 Java 21 吗？ A : 是的，Spring Boot 4 要求最低 Java 21。 原因 : 虚拟线程是 Java 21
   的核心特性 Record 模式匹配需要 Java 21 性能优化依赖 Java..."
-url: /springboot4/E9_99_84_E5_BD_95/e-faq.html
+url: /springboot4/appendix/e-faq.html
 layout: tutorial
 contentType: tutorial
 series: springboot4
@@ -408,5 +408,5 @@ management:
 
 **相关章节**:
 - [第17章：从 Spring Boot 3 迁移](/springboot4/E7_AC_AC_E5_8D_81_E4_B8_80_E9_83_A8_E5_88_86-_E8_BF_81_E7_A7_BB/17-boot3.html)
-- [附录A：完整对比表](/springboot4/E9_99_84_E5_BD_95/a-boot3vs4.html)
-- [附录B：虚拟线程最佳实践](/springboot4/E9_99_84_E5_BD_95/b.html)
+- [附录A：完整对比表](/springboot4/appendix/a-boot3vs4.html)
+- [附录B：虚拟线程最佳实践](/springboot4/appendix/b.html)

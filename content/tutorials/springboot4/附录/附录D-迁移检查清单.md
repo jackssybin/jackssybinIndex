@@ -3,7 +3,7 @@ title: 附录D：迁移检查清单
 description: 附录D：迁移检查清单 概述 本附录提供完整的 Spring Boot 3 到 4 迁移检查清单，确保迁移过程顺利进行。 D.1
   迁移前检查 D.1.1 环境检查 [ ] JDK 版本 [ ] 已安装 JDK 21 或更高版本 [ ] 验证 java version 输出正确 [ ]
   IDE 配置了 JDK 21 [ ] CI/CD 环境已更新 [ ] 构建工...
-url: /springboot4/E9_99_84_E5_BD_95/d.html
+url: /springboot4/appendix/d.html
 layout: tutorial
 contentType: tutorial
 series: springboot4
@@ -379,5 +379,5 @@ draft: false
 
 **相关章节**:
 - [第17章：从 Spring Boot 3 迁移](/springboot4/E7_AC_AC_E5_8D_81_E4_B8_80_E9_83_A8_E5_88_86-_E8_BF_81_E7_A7_BB/17-boot3.html)
-- [附录A：完整对比表](/springboot4/E9_99_84_E5_BD_95/a-boot3vs4.html)
-- [附录E：常见问题 FAQ](/springboot4/E9_99_84_E5_BD_95/e-faq.html)
+- [附录A：完整对比表](/springboot4/appendix/a-boot3vs4.html)
+- [附录E：常见问题 FAQ](/springboot4/appendix/e-faq.html)

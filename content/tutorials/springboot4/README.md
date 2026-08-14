@@ -89,11 +89,11 @@ draft: false
 - [第20章：响应式全栈应用](./第十二部分-实战案例/第20章-响应式全栈应用.md)
 
 ### **附录**
-- [附录A：Spring Boot 3 vs 4 完整对比表](/springboot4/E9_99_84_E5_BD_95/a-boot3vs4.html)
-- [附录B：虚拟线程最佳实践](/springboot4/E9_99_84_E5_BD_95/b.html)
-- [附录C：GraalVM Native Image 指南](/springboot4/E9_99_84_E5_BD_95/c-graalvm.html)
-- [附录D：迁移检查清单](/springboot4/E9_99_84_E5_BD_95/d.html)
-- [附录E：常见问题 FAQ](/springboot4/E9_99_84_E5_BD_95/e-faq.html)
+- [附录A：Spring Boot 3 vs 4 完整对比表](/springboot4/appendix/a-boot3vs4.html)
+- [附录B：虚拟线程最佳实践](/springboot4/appendix/b.html)
+- [附录C：GraalVM Native Image 指南](/springboot4/appendix/c-graalvm.html)
+- [附录D：迁移检查清单](/springboot4/appendix/d.html)
+- [附录E：常见问题 FAQ](/springboot4/appendix/e-faq.html)
 
 ## 🚀 快速开始
 

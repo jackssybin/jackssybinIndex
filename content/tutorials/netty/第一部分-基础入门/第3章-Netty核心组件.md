@@ -3,7 +3,7 @@ title: 第3章：Netty 核心组件
 description: 第3章：Netty 核心组件 本章导读 Netty 的强大之处在于其优雅的组件设计。本章将深入讲解 Netty
   的五大核心组件：Channel、EventLoop、ChannelFuture、ChannelHandler 和
   ChannelPipeline，理解这些组件是掌握 Netty 的关键。 3.1 Channel（通道） 3.1.1 Channel ...
-url: /netty/E7_AC_AC_E4_B8_80_E9_83_A8_E5_88_86-_E5_9F_BA_E7_A1_80_E5_85_A5_E9_97_A8/3-netty.html
+url: /netty/part1-basics/3-netty.html
 layout: tutorial
 contentType: tutorial
 series: netty

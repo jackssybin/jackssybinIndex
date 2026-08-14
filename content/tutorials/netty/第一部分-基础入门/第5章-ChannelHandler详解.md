@@ -3,7 +3,7 @@ title: 第5章：ChannelHandler 详解
 description: 第5章：ChannelHandler 详解 本章导读 ChannelHandler 是 Netty 处理 I/O
   事件和业务逻辑的核心接口。本章将深入讲解 Handler 的生命周期、入站和出站处理器的区别、Handler 的添加和移除，以及异常处理机制。 5.1
   ChannelInboundHandler（入站处理器） 5.1.1 入站处理器概述 定义 ：...
-url: /netty/E7_AC_AC_E4_B8_80_E9_83_A8_E5_88_86-_E5_9F_BA_E7_A1_80_E5_85_A5_E9_97_A8/5-channelhandler.html
+url: /netty/part1-basics/5-channelhandler.html
 layout: tutorial
 contentType: tutorial
 series: netty

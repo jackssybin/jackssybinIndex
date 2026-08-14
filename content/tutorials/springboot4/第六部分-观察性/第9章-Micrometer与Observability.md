@@ -3,7 +3,7 @@ title: 第9章：Micrometer 与 Observability
 description: "第9章：Micrometer 与 Observability 本章概述 Spring Boot 4
   大幅增强了可观察性（Observability）支持，通过 Micrometer 提供统一的指标、追踪和日志记录能力。 本章重点 : ✅ 统一的观察性
   API ✅ 分布式追踪改进 ✅ 新的 Actuator 端点 ✅ 虚拟线程的监控 ✅ 与 OpenTelem..."
-url: /springboot4/E7_AC_AC_E5_85_AD_E9_83_A8_E5_88_86-_E8_A7_82_E5_AF_9F_E6_80_A7/9-micrometer-observability.html
+url: /springboot4/part6-observability/9-micrometer-observability.html
 layout: tutorial
 contentType: tutorial
 series: springboot4

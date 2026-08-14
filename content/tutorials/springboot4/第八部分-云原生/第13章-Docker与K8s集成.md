@@ -3,7 +3,7 @@ title: 第13章：Docker 与 Kubernetes 集成
 description: "第13章：Docker 与 Kubernetes 集成 本章概述 Spring Boot 4 改进了容器化支持，提供更好的
   Docker 和 Kubernetes 集成。 本章重点 : ✅ 容器镜像构建改进 ✅ Kubernetes 原生支持 ✅ 健康检查与就绪探针 ✅
   ConfigMap 和 Secret 集成 13.1 Docker 镜像构建 13.1...."
-url: /springboot4/E7_AC_AC_E5_85_AB_E9_83_A8_E5_88_86-_E4_BA_91_E5_8E_9F_E7_94_9F/13-docker-k8s.html
+url: /springboot4/part8-cloud/13-docker-k8s.html
 layout: tutorial
 contentType: tutorial
 series: springboot4

@@ -3,7 +3,7 @@ title: 附录C：GraalVM Native Image 指南
 description: "附录C：GraalVM Native Image 指南 概述 本附录提供 GraalVM Native Image
   的完整使用指南，帮助您构建高性能的原生应用。 C.1 环境准备 C.1.1 安装 GraalVM 使用 SDKMAN (推荐) : 手动安装 : C.1.2
   安装 Native Image C.2 项目配置 C.2.1 Maven 配置 pom..."
-url: /springboot4/E9_99_84_E5_BD_95/c-graalvm.html
+url: /springboot4/appendix/c-graalvm.html
 layout: tutorial
 contentType: tutorial
 series: springboot4

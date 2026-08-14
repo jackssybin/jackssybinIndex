@@ -3,7 +3,7 @@ title: 第8章：Spring Security 7.0 新特性
 description: "第8章：Spring Security 7.0 新特性 本章概述 Spring Security 7.0 是 Spring Boot
   4 的重要组成部分，带来了更简洁的配置、改进的 OAuth2 支持、增强的方法安全性等。 本章重点 : ✅ 配置 DSL 简化 ✅ OAuth2 客户端改进
   ✅ 方法安全性增强 ✅ 密码编码器更新 ✅ 与 Spring Boo..."
-url: /springboot4/E7_AC_AC_E4_BA_94_E9_83_A8_E5_88_86-_E5_AE_89_E5_85_A8_E6_80_A7/8-springsecurity7.html
+url: /springboot4/part5-security/8-springsecurity7.html
 layout: tutorial
 contentType: tutorial
 series: springboot4
