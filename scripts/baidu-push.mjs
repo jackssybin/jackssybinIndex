@@ -29,8 +29,9 @@ for (const raw of args) {
   else if (!raw.startsWith('--')) opts.sitemap = raw
 }
 
-const apiSite = process.env.BAIDU_PUSH_SITE || 'http://jackssybin.cn'
-const canonicalOrigin = (process.env.BAIDU_PUSH_ORIGIN || apiSite).replace(/\/$/, '')
+const configuredSite = process.env.BAIDU_PUSH_SITE || 'jackssybin.cn'
+const apiSite = configuredSite.replace(/^https?:\/\//, '').replace(/\/$/, '')
+const canonicalOrigin = (process.env.BAIDU_PUSH_ORIGIN || 'https://jackssybin.cn').replace(/\/$/, '')
 const token = process.env.BAIDU_PUSH_TOKEN
 const dryRun = process.env.BAIDU_PUSH_DRY === '1'
 
