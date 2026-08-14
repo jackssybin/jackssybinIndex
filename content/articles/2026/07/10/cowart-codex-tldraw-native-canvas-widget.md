@@ -1,6 +1,6 @@
----
+﻿---
 title: "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件"
-url: "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/"
+url: "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html"
 date: "2026-07-10T10:00:00+08:00"
 lastmod: "2026-07-10T10:00:00+08:00"
 description: "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。"

@@ -1,6 +1,6 @@
----
+﻿---
 title: "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill"
-url: "/articles/2026/07/03/archify-agent-skill-diagram-generator/"
+url: "/articles/2026/07/03/archify-agent-skill-diagram-generator.html"
 date: "2026-07-03T14:00:00+08:00"
 lastmod: "2026-07-03T14:00:00+08:00"
 description: "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。"

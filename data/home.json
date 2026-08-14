@@ -67,7 +67,7 @@
     },
     {
       "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-      "url": "/articles/2026/07/31/index.html",
+      "url": "/articles/2026/07/31/ai-comic-workbench.html",
       "type": "blog",
       "date": "2026-07-31",
       "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
@@ -198,7 +198,7 @@
     },
     {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
-      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme.html",
       "type": "blog",
       "date": "2026-07-18",
       "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
@@ -219,7 +219,7 @@
     },
     {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
-      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative.html",
       "type": "blog",
       "date": "2026-07-16",
       "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
@@ -240,7 +240,7 @@
     },
     {
       "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
-      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "url": "/articles/2026/07/16/lux-china-video-downloader.html",
       "type": "blog",
       "date": "2026-07-16",
       "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
@@ -285,7 +285,7 @@
     },
     {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
-      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html",
       "type": "blog",
       "date": "2026-07-10",
       "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
@@ -305,7 +305,7 @@
     },
     {
       "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer.html",
       "type": "blog",
       "date": "2026-07-08",
       "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
@@ -325,7 +325,7 @@
     },
     {
       "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
-      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html",
       "type": "blog",
       "date": "2026-07-08",
       "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
@@ -345,7 +345,7 @@
     },
     {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
-      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
+      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html",
       "type": "blog",
       "date": "2026-07-05",
       "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
@@ -365,7 +365,7 @@
     },
     {
       "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
-      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
+      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html",
       "type": "blog",
       "date": "2026-07-05",
       "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
@@ -385,7 +385,7 @@
     },
     {
       "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
-      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
+      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html",
       "type": "blog",
       "date": "2026-07-03",
       "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
@@ -405,7 +405,7 @@
     },
     {
       "title": "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill",
-      "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator/",
+      "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator.html",
       "type": "blog",
       "date": "2026-07-03",
       "description": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
@@ -425,7 +425,7 @@
     },
     {
       "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-      "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
+      "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar.html",
       "type": "blog",
       "date": "2026-07-02",
       "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
@@ -445,7 +445,7 @@
     },
     {
       "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
-      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+      "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial.html",
       "type": "blog",
       "date": "2026-07-01",
       "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
@@ -466,7 +466,7 @@
     },
     {
       "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
-      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+      "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video.html",
       "type": "blog",
       "date": "2026-06-28",
       "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
@@ -485,7 +485,7 @@
     },
     {
       "title": "RTK：帮你省下 80% LLM Token 的 CLI 代理工具",
-      "url": "/articles/2026/06/28/rtk-reduce-llm-tokens/",
+      "url": "/articles/2026/06/28/rtk-reduce-llm-tokens.html",
       "type": "blog",
       "date": "2026-06-28",
       "description": "一款用 Rust 写的高性能 CLI 代理，可以将 LLM 日常开发中的 Token 消耗降低 60-90%。单一二进制文件，零依赖， overhead 不到 10ms。支持 Claude Code、Copilot、Cursor 等所有主流 AI 编程工具。",
@@ -505,7 +505,7 @@
     },
     {
       "title": "MediaCrawler 教程：一键爬取小红书/抖音/B站/知乎等多平台自媒体数据",
-      "url": "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial/",
+      "url": "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial.html",
       "type": "blog",
       "date": "2026-06-27",
       "description": "MediaCrawler 是一个基于 Playwright 的强大自媒体爬虫工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大平台，无需逆向 JS 加密，CDP 模式复用浏览器登录态，大幅降低风控概率。本文带你完整上手，从环境配置到实际爬取。",
@@ -524,7 +524,7 @@
     },
     {
       "title": "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室",
-      "url": "/articles/2026/06/27/openmontage-ai-video-studio/",
+      "url": "/articles/2026/06/27/openmontage-ai-video-studio.html",
       "type": "blog",
       "date": "2026-06-27",
       "description": "OpenMontage 是首个开源的智能体化视频制作系统，它能把 Claude Code/Cursor 变成全自动视频工作室，从创意到成品视频一条龙，全程智能体自动完成研究、脚本、素材、剪辑、合成。",
@@ -543,7 +543,7 @@
     },
     {
       "title": "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-      "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager/",
+      "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager.html",
       "type": "blog",
       "date": "2026-06-25",
       "description": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
@@ -561,7 +561,7 @@
     },
     {
       "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
-      "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
+      "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html",
       "type": "blog",
       "date": "2026-06-24",
       "description": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
@@ -582,7 +582,7 @@
     },
     {
       "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+      "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial.html",
       "type": "blog",
       "date": "2026-06-24",
       "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
@@ -602,7 +602,7 @@
     },
     {
       "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
-      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+      "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator.html",
       "type": "blog",
       "date": "2026-06-24",
       "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
@@ -768,7 +768,7 @@
     },
     {
       "title": "AIUsage：一站式管理所有 AI 订阅的 macOS 原生看板",
-      "url": "/articles/2026/06/19/aiusage-dashboard-tutorial/",
+      "url": "/articles/2026/06/19/aiusage-dashboard-tutorial.html",
       "type": "blog",
       "date": "2026-06-19",
       "description": "AIUsage 是一个开源的 macOS 原生 SwiftUI 应用，把 Claude Code、Codex、OpenCode 等 12 个 AI 编程工具的账号、额度、成本聚合到一个仪表盘，还内置三个代理，让这些工具能一键切换到任何 OpenAI 兼容模型。",
@@ -788,7 +788,7 @@
     },
     {
       "title": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
-      "url": "/articles/2026/06/19/browseract-skills-tutorial/",
+      "url": "/articles/2026/06/19/browseract-skills-tutorial.html",
       "type": "blog",
       "date": "2026-06-19",
       "description": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
@@ -2817,7 +2817,7 @@
     },
     {
       "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-      "url": "/articles/2026/07/31/index.html",
+      "url": "/articles/2026/07/31/ai-comic-workbench.html",
       "type": "blog",
       "date": "2026-07-31",
       "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
@@ -2948,7 +2948,7 @@
     },
     {
       "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
-      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+      "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme.html",
       "type": "blog",
       "date": "2026-07-18",
       "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
@@ -2969,7 +2969,7 @@
     },
     {
       "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
-      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+      "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative.html",
       "type": "blog",
       "date": "2026-07-16",
       "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
@@ -2990,7 +2990,7 @@
     },
     {
       "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
-      "url": "/articles/2026/07/16/lux-china-video-downloader/",
+      "url": "/articles/2026/07/16/lux-china-video-downloader.html",
       "type": "blog",
       "date": "2026-07-16",
       "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
@@ -3035,7 +3035,7 @@
     },
     {
       "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
-      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+      "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html",
       "type": "blog",
       "date": "2026-07-10",
       "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
@@ -3055,7 +3055,7 @@
     },
     {
       "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+      "url": "/articles/2026/07/08/agency-agents-238-specialist-installer.html",
       "type": "blog",
       "date": "2026-07-08",
       "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
@@ -3075,7 +3075,7 @@
     },
     {
       "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
-      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+      "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html",
       "type": "blog",
       "date": "2026-07-08",
       "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
@@ -3095,7 +3095,7 @@
     },
     {
       "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
-      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
+      "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html",
       "type": "blog",
       "date": "2026-07-05",
       "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
@@ -3115,7 +3115,7 @@
     },
     {
       "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
-      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
+      "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html",
       "type": "blog",
       "date": "2026-07-05",
       "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
@@ -3135,7 +3135,7 @@
     },
     {
       "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
-      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
+      "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html",
       "type": "blog",
       "date": "2026-07-03",
       "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
@@ -3222,7 +3222,7 @@
     },
     {
       "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-      "url": "/articles/2026/07/31/index.html",
+      "url": "/articles/2026/07/31/ai-comic-workbench.html",
       "type": "blog",
       "date": "2026-07-31",
       "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
@@ -4543,145 +4543,6 @@
           "content": "Browser Use：让 AI 真的打开网页、点击按钮、填写表单 很多人第一次做网页自动化，都会先想到 Playwright、Selenium，或者直接让大模型“读取网页内容”。这两条路都没错，但它们各有一个硬伤。 传统自动化很稳定，却要求你提前写好选择器、等待条件和异常分支。网页一改版，脚本就断。让大模型读网页更灵活，但它如果只能看文本，遇到登录、弹窗、分页、动态表单和上传文件，很快就变成“嘴上会，手不会”。 Browser Use 做的是中间那层：给 AI Agent 一个真正的浏览器，让它能观察页面状态、点击按钮、输入文本、滚动、上传文件、提取内容，并把每一步留在执行历史里。它不是“再写一段爬虫”，而是把网页变成 Agent 可以操作的环境。 我本地调研的是 browser use/browser use 的 main 分支提交 48c3c88，最近一次提交信息是 add qa skill ( 5074)。GitHub API 显示项目约 100k stars、11.1k forks，MIT License，主语言 Python。pyproject.toml 中当前版本为 0.13.2，要求 Python =3.11,<4.0，并提供 browser use、bu、browser 等 CLI 入口。 下面不是 README 翻译，而是按“它解决什么问题、怎么上手、上线前要补哪些护栏”来拆。 1. 它解决的不是爬网页，而是让 Agent 能操作网页 Browser Use 的一句话描述是：Make websites accessible for AI agents。 这句话很关键。它的目标不是替代所有 Playwright 脚本，也不是把网页内容转成 Markdown 后丢给模型。它更像一个“浏览器操作层”：每一步把页面状态交给模型，模型选择工具，工具再去点击、输入、滚动、提取，直到任务完成。 这个循环在源码和文档里对应得很清楚： Agent.run() 返回的是 AgentHistoryList，你可以拿到访问过的 URL、截图路径、执行过的动作、错误、最终结果和结构化输出。这一点比“让模型浏览一下网页然后给结论”可靠得多，因为失败时你能复盘它到底点了哪里、卡在哪一步。 差的用法是： 更好的用法是： 浏览器 Agent 的成败，很多时候不取决于模型有多聪明，而取决于任务有没有边界。 2. 三种上手路径：CLI、Python、生产部署 Browser Use 的文档里有两条主线：一条是给人快速操作浏览器的 CLI，一条是给工程项目集成的 Python API。再往后，是 Browser Use Cloud 和 @sandbox 这种生产部署方式。 5 分钟体验：先用 CLI 看清页面状态 README 和 CLI 文档都给了很短的命令： browser use state 会返回当前页面可点击元素及其索引。这个设计很适合调试：你先看页面上有哪些元素，再决定点击哪个索引，而不是一上来就写脆弱的 CSS selector。 如果你在做登录态任务，CLI 文档还提供了几种浏览器模式： 这里要注意：使用真实 Chrome profile 意味着能带上登录态，也意味着更高的权限风险。不要在没有边界的任务里直接交出常用账号环境。 半天接入：Python Agent + 浏览器边界 Python API 的最小例子很短： 如果你想用其他模型，文档也给了 ChatOpenAI、ChatAnthropic、ChatGoogle 等示例。项目的 pyproject.toml 里也能看到 OpenAI、Anthropic、Google、Groq、Ollama、MCP 等依赖或集成痕迹。 但我不建议一开始就追求“模型全兼容”。先把浏览器边界补上： allowed domains 是非常实用的参数。它能把 Agent 限制在指定域名内，避免任务跑偏后继续点击未知网站。 生产部署：不要忽略 Cloud / sandbox 的现实价值 很多开源项目一碰生产就尴尬：本地能跑，服务器上浏览器、代理、验证码、登录态、视频记录、并发和资源回收全是坑。 Browser Use README 把这个问题摆得很直接：开源 Agent 适合自定义工具、代码级集成和自托管；Cloud Agent 更适合复杂任务、扩容、代理轮换、验证码处理、持久文件系统和账号环境。 生产示例大概长这样： 这不是说你必须用它的云服务。更准确的判断是：如果你的任务需要登录态、代理、反爬绕过、远程可视化和稳定运行，浏览器基础设施会变成主要成本。你要么自己搭，要么买现成的。 3. 真正有工程味的部分：Custom Tools、敏感数据、历史记录 Browser Use 最值得看的，不是“模型能点网页”这件事本身，而是它给 Agent 留了工程接口。 比如自定义工具： 文档里有一个容易踩坑的细节：参数名必须叫 browser session: BrowserSession，因为注入是按名字匹配的。写成 browser 可能会静默失败。这种细节说明它不是纯概念项目，而是真的把工具注入、浏览器会话、文件系统和动作结果当成一套 Agent runtime 在设计。 它的默认工具覆盖也比较完整：..."
         },
         {
-          "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-          "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
-          "type": "blog",
-          "date": "2026-06-24",
-          "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
-          "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI Agent",
-            "Agent Skills",
-            "开源项目",
-            "信息检索",
-            "GitHub"
-          ],
-          "priority": 0,
-          "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
-        },
-        {
-          "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
-          "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
-          "type": "blog",
-          "date": "2026-06-24",
-          "description": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
-          "excerpt": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI写作",
-            "Agent Skills",
-            "Claude Code",
-            "Hermes",
-            "Cursor",
-            "开源项目"
-          ],
-          "priority": 0,
-          "content": "现在很多人说文章有“AI 味”。问题是，这句话通常没法执行。你让模型“写得像人一点”，它可能只是换几个词，删几个破折号，再把文章磨得更平，最后反而更像机器写的。 conorbronsdon/avoid ai writing 做的事更具体：它把“AI 味”拆成一组可审计的写作模式，再包装成一个可以放进 Claude Code、Hermes、OpenClaw、Cursor、Codex 等 Agent 工具里的 SKILL.md。它不是商业 AI 检测器，也不把结果当成判决；它更像一份写作质检清单，告诉 Agent 该看哪里、怎么改、什么时候只标记不改。 我看完 README、SKILL.md、detector/、Cursor 规则和插件脚本后，觉得这个项目最值得学的不是“列了多少禁词”，而是它把一个主观写作问题做成了工程化流程：规则有层级，输出有格式，检测器有测试，跨 Agent 分发也有同步脚本。 先看项目状态 几个可验证信息放在前面： 仓库：conorbronsdon/avoid ai writing GitHub 描述：用于审计和重写内容，移除 AI 写作模式，可配合 Claude Code、OpenClaw、Hermes 等 Agent 使用 License：MIT 当前浅克隆提交：6e1369d，提交信息是 Detector: cover inflected forms of single form verb patterns ( 38) SKILL.md frontmatter 版本：3.10.0 GitHub API 查询：约 1.9k+ stars、200+ forks，默认分支 main package.json 里检测器要求 Node =18，测试命令是 node detector/patterns.test.js && node detector/categories.test.js 我本地执行 npm test，检测器 fixtures 和 CATEGORIES.md 映射校验均通过 这里有一个容易误解的点：README 说它是 “Audit & rewrite content to remove AI writing patterns”，但 SKILL.md 第一段就把边界讲清楚了。它是写作质量工具，不是判定一个人是否使用 AI 的证据。规则会误伤非母语写作者、赶稿的人、技术文档和某些平台化写法，所以它更适合用来改稿，而不是审判作者。 它解决的不是“检测”，而是“可执行的改稿” 普通提示词通常长这样： 这句话的问题是没有验收标准。什么叫自然？哪些句子必须改？哪些只是风格选择？改完之后怎么确认没有把原意改坏？ avoid ai writing 的做法是把任务拆成三个模式。 1. rewrite 是默认模式。Agent 要先列出命中的 AI 写作痕迹，再给出重写版本，然后说明改了什么，最后做一次 second pass audit。 2. detect 只标记不改写。适合审稿、分析别人的文章，或者你不想让模型直接动原文的时候。 3. edit 面向文件。用户指向 draft.md 或 README，Agent 只做局部修改，保留已经自然的段落，并在最后报告改动和验证结果。 这个设计比一句“humanize”更可靠。因为它让 Agent 先解释问题，再动手改稿；如果你不同意某个判断，可以回到具体句子讨论，而不是和模型争论“有没有 AI 味”。 规则层级：先救命，再润色 SKILL.md 里不是把所有问题混在一起，而是给出了 P0、P1、P2 三层优先级。 P0 是可信度杀手，比如： “As of my last update” 这种模型截止声明； “Great question!”、“I hope this helps!” 这类聊天界面残留； “Experts believe” 但没有任何专家或研究来源； 把普通事件硬写成 “watershed moment” 或 “marking a pivotal moment”。 P1 是发布前应该修掉的明显 AI 味，比如 delve、leverage、robust 这类词表命中，模板句，let's explore 开头，过度同义词轮换，社交媒体里“this one is worth your time” 这种空推荐。 P2 更像风格润色：段落长度太整齐、结尾太泛、结构太像模板、偶发的 “serves as / features / boasts”。这些不一定毁稿，但会让文章看起来像流水线产物。 这个分层很实用。真实改稿时，不应该把所有规则当铁律。先清 P0，再处理 P1，最后看 P2 是否真的影响阅读。否则你会陷入另一种机器味：每个句子都“正确”，但没有人的呼吸。 它不是单纯禁词表 README 里提到 109 entry word replacement table across 3 tiers + 10 Tier 3 phrases，很容易让人以为这只是一个禁词清单。源码并不是这么简单。 SKILL.md 把规则分成几类： 词和短语：例如 delve、leverage、game changer、the future looks bright； 句式：例如 ..."
-        },
-        {
-          "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
-          "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
-          "type": "blog",
-          "date": "2026-07-01",
-          "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
-          "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI投研",
-            "Agent Skills",
-            "Claude Code",
-            "Codex",
-            "价值投资",
-            "开源项目"
-          ],
-          "priority": 0,
-          "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
-        },
-        {
-          "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-          "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
-          "type": "blog",
-          "date": "2026-07-02",
-          "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-          "excerpt": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI Agent",
-            "Agent Skills",
-            "开源项目",
-            "情报聚合",
-            "GitHub Trending"
-          ],
-          "priority": 0,
-          "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
-        },
-        {
-          "title": "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-          "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager/",
-          "type": "blog",
-          "date": "2026-06-25",
-          "description": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
-          "excerpt": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI Agent",
-            "技能管理",
-            "开源项目"
-          ],
-          "priority": 0,
-          "content": "你是否也遇到过这个问题：同时使用 Claude Code、Cursor、Codex、Gemini、OpenCode、Hermes 等多个 AI 编程工具，每个工具都把技能存在不同的目录里。想要安装一个新技能，需要手动复制粘贴到对应的路径；同一个技能安装到多个工具后，各自修改慢慢产生差异；想看看社区里有什么好用的技能，得挨个仓库去翻找。 如果你也被这些问题困扰，今天介绍的这个开源项目 Skill Zoo 就是你的解药。 问题：技能为什么会混乱？ AI 编程工具越来越流行，\"技能\"（Skill / GPTs / Agent）的生态也越来越丰富。一个技能就是一份预设好的提示词、工作流或者指令集，能让 AI 更好地帮你完成特定任务。 但现状是： 每个 AI 编程工具技能的存储位置都不一样 没有统一的社区发现渠道，好技能容易被埋 多工具重复安装，难以同步更新 手动管理容易出错，出现冲突找不到问题所在 以前你需要这样做： 1. 在 GitHub 找到一个感兴趣的技能 2. 打开自己电脑上 Claude Code 的技能目录 3. 手动克隆/复制进去 4. 再打开 Cursor 的技能目录，重复一遍 5. 过了半个月，忘记这个技能装到哪里了 6. 更新的时候，不知道哪个是最新版本 现在有了 Skill Zoo，你只需要： 1. 打开 Skill Zoo 搜索技能 2. 点击安装，选择要安装到哪些 AI 编程工具 3. 完成 — 就是这么简单 什么是 Skill Zoo？ Skill Zoo 是一个 本地优先 的 AI 技能管理工具，基于 Tauri v2 构建，提供美观的桌面客户端，同时也支持 CLI 和 Web UI。它支持目前主流的几乎所有 AI 编程工具： Claude Code Codex Gemini CLI OpenCode Cursor Rules Trae Hermes Agent OpenClaw 更多工具持续添加中 核心设计哲学 Skill Zoo 的设计思路非常清晰： 1. 本地优先 ：所有数据都存在你自己电脑上，不依赖云端服务 2. 无厂商锁定 ：技能仍然以标准格式保存在各个工具原来的位置，Skill Zoo 只是帮你管理它们 3. 安全透明 ：所有操作都需要你确认，不会偷偷修改你的文件 4. 开源可审计 ：完整代码开源，构建过程公开，任何人都可以审计代码 主要功能 1. 探索发现：一键安装社区技能 Skill Zoo 内置了技能仓库发现功能，你可以直接在界面中搜索 GitHub 上共享的技能，浏览描述，一键安装到你选中的所有 AI 编程工具中。 不需要再手动 git clone 或者复制粘贴，点一下鼠标就搞定。 2. 自动更新：保持所有技能最新 安装的技能有更新了怎么办？Skill Zoo 会帮你检测，并一键更新到 GitHub 仓库的最新版本。不用你自己去挨个拉取。 3. 批量操作解决重复技能 如果你像我一样，同一个技能不小心装了好几次，分散在多个位置，可以用 批量删除/合并 功能一键整理。 Skill Zoo 会检查内容哈希，只有内容完全一致才允许合并，保证不会出错。 4. 安全审计：帮你把关技能质量 Skill Zoo 集成了 skills.sh 社区的安全评分，会展示每个技能的审计结果，帮你判断是否安全。 5. 主动检测不一致问题 Skill Zoo 会主动帮你检测三种常见问题： 技能文件损坏 链接不一致 重复冲突 并且提供一键修复功能。 6. 技能创作：内置 Markdown 编辑器 想要写一个自己用的技能？不需要打开外部编辑器，Skill Zoo 内置了基于 CodeMirror 6 的 Markdown 编辑器，你可以直接在里面创作，实时预览。 7. 技能归档：让常用列表保持清爽 有些技能不常用但又舍不得删？可以转到归档区，降低主界面的上下文负担，想用的时候再恢复。 8. CLI + WUI：编程也能管理 如果你更喜欢在终端里工作，Skill Zoo 也提供了 npm 包的 CLI 版本： 支持哪些 AI 编程工具？ 目前开箱即用支持这些工具： 工具 支持状态 Claude Code 完整支持 OpenAI Codex 完整支持 Gemini CLI 完整支持 OpenCode 完整支持 Cursor (Rules) 完整支持 Trae 完整支持 Hermes Agent 完整支持 OpenClaw 完整支持 Qoder CN 默认隐藏（可开启） WorkBuddy 默认隐藏（可开启） 如果你的工具不在列表里，也可以手动添加自定义路径，Skill Zoo 一样可以管理。 安装使用 桌面客户端安装 最简单的方式是直接从 GitHub Releases 下载安装包： macOS ： 1. 下载 .dmg 文件 2. 打开后将 skill zoo.app 拖入 Applications 文件夹 Windows ： 1. 下载 .exe 安装包 2. 运行安装包，自动创建快捷方式并支持自动更新 3. 如果 SmartScreen 弹出警告，点击\"更多信息\" → \"仍要运行\" Linux ： 下载与你 CPU 架构匹配的 AppImage 或 .deb 包： 体验流程 安装完成后，第一次打开： 1. 添..."
-        },
-        {
-          "title": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
-          "url": "/articles/2026/06/19/browseract-skills-tutorial/",
-          "type": "blog",
-          "date": "2026-06-19",
-          "description": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
-          "excerpt": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI Agent",
-            "浏览器",
-            "自动化",
-            "开源项目"
-          ],
-          "priority": 0,
-          "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
-        },
-        {
-          "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-          "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
-          "type": "blog",
-          "date": "2026-07-08",
-          "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-          "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
-          "topic": "AI Agent",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI Agent",
-            "Claude Code",
-            "Cursor",
-            "Hermes",
-            "开源项目"
-          ],
-          "priority": 0,
-          "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
-        },
-        {
           "title": "Buzz：Block 开源的人和 AI 平等协作工作区，一键自托管部署",
           "url": "/articles/2026/08/08/buzz-ai-workspace.html",
           "type": "blog",
@@ -4722,24 +4583,6 @@
           ],
           "priority": 0,
           "content": "MonkeyCode：长亭科技开源的企业级 AI 开发平台，私有化部署真的香 最近我们团队在找合适的企业级 AI 开发平台，试了一圈个人工具，要么不支持私有化，要么团队协作能力几乎为零，要么就是对国产模型适配很差。直到发现长亭科技开源的 MonkeyCode ，正好打中我们的所有痛点。这篇讲清楚： 1. MonkeyCode 解决了企业团队用 AI 编程的哪些核心痛点 2. 怎么在线体验，怎么一键私有化部署 3. 和 Cursor、Claude Code 比，它适合哪些场景 为什么企业需要专门的 AI 开发平台？ 如果你团队只有一两个人用 AI 编程，Cursor + Claude Code 足够用。但当你的团队到了十来人甚至更多，你会遇到这些问题： 数据隐私风险 ：代码传给第三方 SaaS，敏感代码没法保证安全 每个人环境不一样 ：有人本地配置全，有人新入职连环境都搭不出来 需求和任务管理割裂 ：需求在飞书，代码在 GitHub，AI 聊天在本地，找上下文要切好几个地方 没法统一管理模型 ：有的人用这个，有的人用那个，账单和用量对不上 移动端几乎不可用 ：下班走了，AI 任务没法继续，想看看进度也不方便 MonkeyCode 的解法非常直接： 做一个真正面向企业团队的 AI 开发平台，所有东西都可以部署在内网，需求→开发→测试→Review 全流程在一个平台搞定，云端开发环境不用你本地折腾，还支持移动端随时看随时改 。 AI 任务工作台，需求、对话、文件、终端都在这 核心功能一览 1. 真正的全流程管理，从需求到上线一个平台搞定 MonkeyCode 不是\"给 AI 加个聊天框\"，它把整个 AI 开发流程都串起来了： 需求管理 ：创建任务的时候把需求写清楚，所有讨论都跟任务走，不会丢 云端开发环境 ：每个任务都在云端运行，编译测试预览全在云上，你只用打开浏览器写需求看结果 AI 模型按需切换 ：GLM、Kimi、MiniMax、Qwen、DeepSeek 主流国产模型全接入，想换就换 文件管理 ：项目文件直接在平台里管理，不用切去本地 IDE PR 自动代码审查 ：AI 帮你做第一遍 review，节省团队时间 和个人工具比，最大的区别就是 它从一开始就是为团队协作设计的 ，不是把个人工具包装一下卖企业版。 2. 私有化部署，代码真的不出网 对于有安全要求的企业，这太重要了： 核心代码完全开源，可以部署在你自己的内网 数据都存在你自己服务器，不会传到第三方 满足合规要求，不用担心里程碑节点代码泄露 配置要求也不高： 控制台节点：最低 2C/4GB/40GB 开发环境宿主机：最低 8C/16GB/100GB 一般企业拿一台闲置的 8 核 16G 服务器就能跑起来。 3. 云端开发环境，不用折腾本地配置 这个功能真的解放了新同学： 不用在本地装一堆依赖，Java/Rust/Node.js 环境都不用配 打开浏览器就能开始写需求，AI 在云端帮你干活 新同学入职，不用花一天搭环境，账号一开直接干活 换电脑不用同步环境，浏览器打开一切照旧 云端终端直接用，所有环境都提前准备好了 4. 原生移动端支持，出门也不耽误干活 我觉得这个设计非常贴心： iOS 和 Android 都支持，数据和 PC 实时同步 你出门吃饭，AI 任务继续在云端跑 回到家想看看进度，掏出手机就能看，有问题直接改 路上想到什么点子，直接手机开任务让 AI 开始做 5. 全开原，真免费，不用猜 核心代码 100% 开源在 GitHub，你可以审计，可以二次开发 AGPL 3.0 许可证，商业使用只要保持开源就行 在线版直接用不用钱，私有化部署也不收许可证费用 对比维度 MonkeyCode Cursor Claude Code Codex : : : : : : : : 在线直接用 ✅ ✅ ✅ ✅ 私有化部署 ✅ ❌ ❌ ❌ 企业团队协作 ✅ ❌ ❌ ❌ 需求管理内置 ✅ ❌ ❌ ❌ 云端开发环境 ✅ ⚠️ ⚠️ ⚠️ 国产模型适配 ✅ ❌ ❌ ❌ 完全开源 ✅ ❌ ❌ ❌ 5 分钟快速体验 方式一：直接在线用（最快） 不用部署，打开网站注册就能用： https://monkeycode ai.com/ 特点： 官方提供云端环境，不用你有服务器 个人开发者免费够用 直接体验所有功能，觉得好再私有化部署 方式二：一键私有化部署（企业推荐） 有服务器的话，一条命令搞定： 按照提示一步步来，一般 10 分钟之内就能部署好。 详细部署文档：https://monkeycode.docs.baizhi.cloud/node/019eb0f3 9424 7c93 9489 4e584f989527 项目协作和移动端体验 团队协作 MonkeyCode 天生支持团队协作： 创建项目，把团队成员加进来 每个人都能创建 AI 任务，所有人都能看能评论 需求讨论和开发过程都留痕，新人来了直接看历史 管理员统一管理模型密钥和用量，方便对账 项目协作界面，文件管理和讨论都在一起 移动端体验 我体验了一下移动端，确实做得很舒服： 界面适配手机，操作不费劲 能看任务进度，能发消息给 AI 能浏览项目文件，能评论 出门在外，紧急问题掏出手机就能处理 移动端截图，体验相当完整 适合谁，不..."
-        },
-        {
-          "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-          "url": "/articles/2026/07/31/index.html",
-          "type": "blog",
-          "date": "2026-07-31",
-          "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-          "excerpt": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-          "topic": "AI、Agent 与本地模型",
-          "topicSlug": "ai-agent",
-          "series": "",
-          "tags": [
-            "AI",
-            "开源",
-            "工具"
-          ],
-          "priority": 0,
-          "content": "TL;DR ：AI COMIC 是一个国人开源的全流程AI漫画生成工作台，使用 DeepSeek 生成分镜剧本，通义千问 Qwen Image 生成逐格画面，浏览器内编辑对白、排版、导出长图。完全本地运行，API Key 不会泄露。适合想自己创作AI漫画又不想折腾多个工具的同学。 项目简介 最近AI绘画火了，但想做一整篇完整漫画，你得： 1. 自己写剧本分镜 2. 用Midjourney逐张生成 3. 用Photoshop排版加对白 4. 错了还要重来 整个流程折腾下来，大半天就没了。 这个刚发布三天的国产开源项目 AI COMIC 直接把全流程自动化了： 你只需要输入故事idea，它自动帮你生成结构化分镜，然后逐格生成画面，最后在浏览器里编辑导出PNG长图 。 项目地址：https://github.com/nfzwycwmxz/AI COMIC Star 虽然只有 1 个，但功能已经完整可用，思路非常清晰，解决了真实痛点。 核心工作流程 整个流程就是四步，全部在本地完成： 关键优势 1. 全流程一站式 — 不用来回切换ChatGPT、Midjourney、PS，一个工具搞定从idea到导出 2. 完全本地运行 — API Key 只在本地Node服务读取，不会上传到第三方，安全放心 3. 可编辑 — 生成分镜后可以随时修改对白、重绘单格，不是生成完就不能改 4. 保存项目 — 可以保存当前进度，之后继续编辑，不用从头再来 5. 配置灵活 — 支持自定义API地址、模型、图片尺寸，适配不同账号区域 配置要求 要跑起来，你需要准备这三样： 依赖 说明 Node.js 20+ 运行本地服务 DeepSeek API Key 用来生成分镜剧本 阿里云百炼 DashScope API Key 开通 qwen image 2.0 pro 用来生成画面 如果你没有DashScope，但有OpenAI兼容的图片生成API，也可以用——服务端会根据URL自动选择请求格式，改成OpenAI图片接口地址就行。 五分钟快速启动 1. 克隆安装 2. 配置API Key .env 关键配置： 3. 启动 浏览器打开 http://127.0.0.1:4173 就能用了。 开发调试用 npm run dev。 使用体验 我体验了一下整个流程，说下实际感受： 优势 思路清晰 — 把大语言模型的分镜能力和图像模型的绘画能力串起来，解决了真实痛点 界面简洁 — 三步操作：输入 → 生成 → 导出，没有花里胡哨的功能 隐私安全 — API Key 只在本地，不会泄露，项目文件存在本地，不用担心内容被上传 导出方便 — 直接导出 PNG 长图，拿到就能用 局限性 依赖 Qwen Image 2.0 Pro — 这个模型目前只有阿里云百炼有，需要开通相应服务 不能训练风格 — 就是直接调用API生成，没有LoRA风格训练，如果想要特定画风需要提示词控制 国产项目刚发布 — Star 少，可能有bug，遇到问题可以去GitHub提issue 适合谁，不适合谁 ✅ 适合这些同学 ： 想创作自己的AI漫画，不想折腾多个工具 有故事idea，但不会画画也不会排版 看重隐私，不想把故事内容传给第三方平台 本地折腾党，喜欢自己搭工具玩 ❌ 不适合这些同学 ： 没有API Key又不想申请 想要现成的模型离线跑，不想调用API 想要商业级印刷质量，这个还是AI生成，达不到专业画师水平 我的使用建议 1. 故事idea给得越具体越好 — 给AI的prompt越详细，分镜生成越符合预期，比如\"一个少年在森林里捡到一只会说话的狐狸\"比\"奇幻故事\"好。 2. 不用一次生成全部 — 先生成分镜，检查一下对白对不对，不满意可以改，没问题再批量生成全部画面，省API调用次数。 3. 单格不满意直接重绘 — 哪一格生成效果不好，直接点那一格的\"重新绘制\"，不用重来。 4. 导出前先预览 — 在\"成页\"视图看好排版和对白位置，不对再调，然后导出。 总结 这是一个非常棒的小工具，思路清晰，解决了真实痛点—— 想要做AI漫画的创作者，最烦的就是来回切工具，这个项目直接把全流程串起来了 。 虽然刚发布三天Star不多，但功能完整，代码也干净，作为国人开源项目值得支持一下。 如果你也想玩AI漫画，又不想折腾，不妨试试这个一键全流程的工具。 🔗 项目地址 ：https://github.com/nfzwycwmxz/AI COMIC 觉得有用点个Star支持作者 😉"
         },
         {
           "title": "微软 AI-For-Beginners：5万星的免费AI入门课程，真的值得学吗？",
@@ -4812,6 +4655,163 @@
           ],
           "priority": 0,
           "content": "Timeline Studio：浏览器里跑的开源AI视频编辑器 上周我需要剪辑一条带配音和字幕的产品介绍视频，打开剪映才发现又开始弹窗提示我开通会员，而且原片超过1分钟还要强制水印。 这次我没充值，直接打开了 Timeline Studio — 一个完全运行在浏览器里的开源AI视频编辑器，不用上传视频，AI配音自动字幕都有，剪完直接导出MP4，一分钱没花。 这篇文章讲清楚三件事：1）它到底能做什么，什么场景值得用；2）5分钟本地部署或直接在线体验的完整步骤；3）我实测下来发现的优势和坑。 它解决了什么痛点？ 你肯定也遇到过： 剪辑简单视频还要下载安装好几个G的客户端 把原片上传到云端剪辑，担心素材隐私泄露 想试用AI自动字幕配音，结果要么限时长要么收月费 商业项目想用还得担心版权授权问题 Timeline Studio 给出了完全不同的解决方案 — 把整个视频编辑器放到浏览器里，AI模型全部本地运行，你的视频永远不需要离开你的电脑 。 核心能力：不仅仅是剪辑，AI功能全齐了 这个项目厉害的地方在于，它把剪映最常用的AI能力都搬到了浏览器端，而且完全本地化： 1. AI 配音：多语言支持，模型全部本地运行 支持中文 Piper/VITS ONNX 模型，英文有 Kokoro 82M，还覆盖了德语、西班牙语、法语等多种语言。模型是懒加载的，第一次用才下载，存在浏览器缓存里下次直接用。 不需要调用第三方API，不按字数收费，想用多少用多少。 2. 自动字幕：Whisper 跑在浏览器里 用的是 Whisper small q8 ONNX 量化模型，对中文识别结果还做了置信度修正，准确率比我想象的好。生成的字幕可以直接在时间线上拖动调整，支持拆分合并。 3. 智能画面处理 内置 YOLOS 主体检测和 MODNet 人像抠图，可以做： 智能裁切：自动识别主体保证不被裁掉 字幕避让：自动留出底部字幕区域 背景移除：把人像从图片里抠出来 4. AI 人声分离 直接在浏览器里把伴奏从背景音乐里分离出来，放到独立音轨调整音量，不用导到别的软件里处理。 5. 数字人驱动 支持 JoyVASA 音频驱动动作 + LivePortrait 神经渲染，有 WebGPU 加速，256px 快速预览和 512px 高质量输出。做口播视频非常方便。 6. 剪辑体验接近剪映 多轨道时间线：主视频轨 + 字幕、配音、背景音乐独立轨道 支持画中画、遮罩、滤镜、关键帧动画、调速 磁吸对齐、右键切分/复制/删除、撤销重做 导出用 WebCodecs 直接生成 MP4，确定性离线渲染 7. 最牛的一点：AI Agent 可以帮你剪 这个项目最有意思的创新是，它内置了给 Claude Code / Codex 用的 Agent Skill，AI 可以直接读取你的项目文件，自动执行剪辑操作，最后保存可编辑的 .timeline 项目文件。 简单说就是：你告诉 AI 「把这个视频开头剪掉10秒，添加一句配音在第5秒，自动生成字幕」，AI 就能帮你做完，还能保留项目文件让你后续调整。 这应该是我见过第一个把「AI 自动化剪辑」做到可复用层面的开源项目。 适合谁用？不适合谁用？ 适合用： 在意视频隐私，不想把素材上传到云端 想省掉剪映会员费用，商业项目需要免费授权 经常做简单短视频，不想开笨重的客户端 AI Agent 玩家，想让 Claude Code 帮你自动化剪辑 开发者想二次开发定制自己的剪辑工具 不建议用： 需要复杂剪辑、多镜头切换、专业色校的长视频 电脑性能一般，又想跑数字人渲染（需要 WebGPU） 完全不会代码，只想点点点就能用（在线版其实也可以，但功能不如客户端成熟） 5 分钟快速上手 两种方式：直接用在线版，或者本地部署。 方式一：直接在线体验（推荐尝鲜） 项目作者已经部署了在线版本，直接打开就能用： https://video editor.ai creator.top/ 第一次使用 AI 功能时会自动下载模型，等待几分钟就能用，模型存在你的浏览器缓存里。 方式二：本地部署 要求 Node.js 20+，现代 Chromium 浏览器。 打开终端输出的本地地址（一般是 http://localhost:5173）就可以用了。 构建生产版本 我实测下来发现的坑 1. 第一次加载 AI 模型比较慢 — 毕竟几个模型加起来几百MB，耐心等一会，缓存之后就快了 2. 导出大视频需要耐心 — 全浏览器渲染，性能肯定不如原生客户端，10分钟以内视频没问题 3. WebGPU 不是必须但推荐开 — 数字人功能没有 WebGPU 会比较卡，其他功能正常用 4. 复杂剪辑功能还不全 — 毕竟是开源项目，不要和剪映比功能丰富度，简单剪辑够用 总结 Timeline Studio 最让人兴奋的不是它替代了剪映，而是它证明了 —— 完整的AI视频编辑器完全可以跑在浏览器里，完全本地化，完全免费开源 。 对于在意隐私、讨厌会员、喜欢折腾的开发者来说，这已经足够吸引人了。而且 AI Agent 自动化剪辑这个方向，确实打开了很多想象空间 — 以后会不会我们只需要描述需求，AI 就自动帮我们剪好视频？ 如果你最近也在找开源视频编辑方案，可以去 GitHub 点个 Star 试试..."
+        },
+        {
+          "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+          "url": "/articles/2026/07/31/ai-comic-workbench.html",
+          "type": "blog",
+          "date": "2026-07-31",
+          "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+          "excerpt": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+          "topic": "AI、Agent 与本地模型",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI",
+            "开源",
+            "工具"
+          ],
+          "priority": 0,
+          "content": "TL;DR ：AI COMIC 是一个国人开源的全流程AI漫画生成工作台，使用 DeepSeek 生成分镜剧本，通义千问 Qwen Image 生成逐格画面，浏览器内编辑对白、排版、导出长图。完全本地运行，API Key 不会泄露。适合想自己创作AI漫画又不想折腾多个工具的同学。 项目简介 最近AI绘画火了，但想做一整篇完整漫画，你得： 1. 自己写剧本分镜 2. 用Midjourney逐张生成 3. 用Photoshop排版加对白 4. 错了还要重来 整个流程折腾下来，大半天就没了。 这个刚发布三天的国产开源项目 AI COMIC 直接把全流程自动化了： 你只需要输入故事idea，它自动帮你生成结构化分镜，然后逐格生成画面，最后在浏览器里编辑导出PNG长图 。 项目地址：https://github.com/nfzwycwmxz/AI COMIC Star 虽然只有 1 个，但功能已经完整可用，思路非常清晰，解决了真实痛点。 核心工作流程 整个流程就是四步，全部在本地完成： 关键优势 1. 全流程一站式 — 不用来回切换ChatGPT、Midjourney、PS，一个工具搞定从idea到导出 2. 完全本地运行 — API Key 只在本地Node服务读取，不会上传到第三方，安全放心 3. 可编辑 — 生成分镜后可以随时修改对白、重绘单格，不是生成完就不能改 4. 保存项目 — 可以保存当前进度，之后继续编辑，不用从头再来 5. 配置灵活 — 支持自定义API地址、模型、图片尺寸，适配不同账号区域 配置要求 要跑起来，你需要准备这三样： 依赖 说明 Node.js 20+ 运行本地服务 DeepSeek API Key 用来生成分镜剧本 阿里云百炼 DashScope API Key 开通 qwen image 2.0 pro 用来生成画面 如果你没有DashScope，但有OpenAI兼容的图片生成API，也可以用——服务端会根据URL自动选择请求格式，改成OpenAI图片接口地址就行。 五分钟快速启动 1. 克隆安装 2. 配置API Key .env 关键配置： 3. 启动 浏览器打开 http://127.0.0.1:4173 就能用了。 开发调试用 npm run dev。 使用体验 我体验了一下整个流程，说下实际感受： 优势 思路清晰 — 把大语言模型的分镜能力和图像模型的绘画能力串起来，解决了真实痛点 界面简洁 — 三步操作：输入 → 生成 → 导出，没有花里胡哨的功能 隐私安全 — API Key 只在本地，不会泄露，项目文件存在本地，不用担心内容被上传 导出方便 — 直接导出 PNG 长图，拿到就能用 局限性 依赖 Qwen Image 2.0 Pro — 这个模型目前只有阿里云百炼有，需要开通相应服务 不能训练风格 — 就是直接调用API生成，没有LoRA风格训练，如果想要特定画风需要提示词控制 国产项目刚发布 — Star 少，可能有bug，遇到问题可以去GitHub提issue 适合谁，不适合谁 ✅ 适合这些同学 ： 想创作自己的AI漫画，不想折腾多个工具 有故事idea，但不会画画也不会排版 看重隐私，不想把故事内容传给第三方平台 本地折腾党，喜欢自己搭工具玩 ❌ 不适合这些同学 ： 没有API Key又不想申请 想要现成的模型离线跑，不想调用API 想要商业级印刷质量，这个还是AI生成，达不到专业画师水平 我的使用建议 1. 故事idea给得越具体越好 — 给AI的prompt越详细，分镜生成越符合预期，比如\"一个少年在森林里捡到一只会说话的狐狸\"比\"奇幻故事\"好。 2. 不用一次生成全部 — 先生成分镜，检查一下对白对不对，不满意可以改，没问题再批量生成全部画面，省API调用次数。 3. 单格不满意直接重绘 — 哪一格生成效果不好，直接点那一格的\"重新绘制\"，不用重来。 4. 导出前先预览 — 在\"成页\"视图看好排版和对白位置，不对再调，然后导出。 总结 这是一个非常棒的小工具，思路清晰，解决了真实痛点—— 想要做AI漫画的创作者，最烦的就是来回切工具，这个项目直接把全流程串起来了 。 虽然刚发布三天Star不多，但功能完整，代码也干净，作为国人开源项目值得支持一下。 如果你也想玩AI漫画，又不想折腾，不妨试试这个一键全流程的工具。 🔗 项目地址 ：https://github.com/nfzwycwmxz/AI COMIC 觉得有用点个Star支持作者 😉"
+        },
+        {
+          "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+          "url": "/articles/2026/07/08/agency-agents-238-specialist-installer.html",
+          "type": "blog",
+          "date": "2026-07-08",
+          "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+          "excerpt": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Claude Code",
+            "Cursor",
+            "Hermes",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes 我最近想搞清楚一件事：如果我手上有 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Hermes 六七种 agentic 工具，每个工具都想装一批「专家角色」——Frontend Developer、Backend Architect、UX Researcher、SRE、Solidity 工程师、PPC Campaign Strategist——我该怎么管？ 一开始我以为答案是：每个工具单独写一套 prompt 模板，然后手动搬运。写到第 30 个 agent 的时候，我知道这条路走不通。每个工具的目录不同、frontmatter 不同、有的要 .mdc 有的要 .toml 有的要 SKILL.md，改一次要在七八个位置同步。 后来我在 GitHub 上看到 msitarzewski/agency agents——这是我目前看到把「多工具、多角色、多分工」这件事解决得最彻底的开源仓库。整个仓库 238 个 agent，17 个 division（工程、设计、市场、销售、财务、游戏开发、GIS、医疗、安全、支持……），只用两个 shell 脚本（convert.sh + install.sh）就能一键铺到 15 个工具里。 这篇文章不是搬 README，我会拆三件事： 1. 这个仓库到底解决了什么问题，它跟「一堆 prompt 模板打包」有什么本质区别。 2. convert.sh / install.sh 双脚本到底怎么工作，为什么 Hermes 这一路要走「懒加载 router 插件」而不是「批量 skill」。 3. NEXUS Micro / Sprint / Full 三种编队模式怎么在真实项目里落地，配上可以直接拿走的三段激活 prompt。 一、这不是又一个 prompt 合集 先看规模。agency agents 目录下 17 个 division，每个 division 是一个顶层文件夹，里面是若干带 YAML frontmatter 的 .md 文件，每个 .md 就是一个「专家人格 + 使命 + 工作流 + 交付物 + 沟通风格」的完整定义。 各 division 的 agent 数（截至本文写作时，仓库当前状态）： Division 数量 代表角色 specialized 53 Agents Orchestrator、CFO、Reality Checker、Persona Walkthrough engineering 36 Frontend / Backend Architect / SRE / Solidity / Voice AI / Prompt Engineer marketing 36 Growth Hacker、SEO Specialist、Newsletter Strategist gis 13 GIS Analyst、Cartographer、Remote Sensing security 10 AppSec、Cloud Security、Incident Responder design 9 UI / UX Researcher / Brand Guardian / Whimsy Injector sales 9 Outbound Strategist、Deal Strategist、MEDDPICC Coach testing 9 API Tester、Evidence Collector、Load Tester paid media 7 PPC Strategist、Tracking Specialist project management 7 Sprint Prioritizer、Project Shepherd spatial computing 6 XR Interface Architect support 6 Support Responder、Community Manager academic / finance / game dev / product 5 each 略 healthcare 2 Clinical Ops、Health Data 计数用 find academic design engineering finance game development gis healthcare marketing paid media product project management sales security spatial computing specialized support testing name \" .md\" type f wc l。仓库还会继续加，README 里给的最大出货口径是 232+，我 clone 时数出来 238。 每个 agent 长这样（截取自 engineering/engineering multi agent systems architect.md）： 关键差别在这里：不是 \"帮我扮演前端工程师\"，而是把「你是谁」「你..."
+        },
+        {
+          "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
+          "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar.html",
+          "type": "blog",
+          "date": "2026-07-02",
+          "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
+          "excerpt": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Agent Skills",
+            "开源项目",
+            "情报聚合",
+            "GitHub Trending"
+          ],
+          "priority": 0,
+          "content": "先说结论，再展开。 mvanhorn/last30days skill 最近拿到 GitHub Trending 当日 1，还上了 Trendshift 榜。但真正值得看的不是 star 曲线，而是它把「近期情报」当成 Agent Skill 来做的这个思路。 我看完 v3.8.3 的源码，最大的感受是：这不是又一个搜索工具，也不是「更强的 Prompt」。它是给 Agent 加了一层专门盯着过去 30 天的情报输入——Reddit 评论、X 热帖、YouTube 转录、TikTok 互动、HN 讨论、Polymarket 赔率、GitHub 提交，一次并行拉齐，再交给 LLM 做带来源的综合判断。 一个具体场景：明天要见一个 CEO 你明天要跟某家 AI 公司创始人聊合作。传统流程是： 1. Google 一下他名字。回来一堆 2023 年的 LinkedIn 简介、旧采访。 2. 手工翻 X，看看最近发了什么。 3. 打开 GitHub 看提交历史。 4. 也许再刷一下 Reddit 有没有人聊他。 5. 拼凑出一份「大概这个人在忙什么」的判断。 一个下午没了。而且到了会议现场，还是会漏一两条关键动态。 换成 last30days，一条命令： 十分钟后你拿到的是：他这个月加入 OpenAI 的 Codex 团队，和 Anthropic 就第三方 Agent 封禁问题公开吵架，GitHub 合并了 22 个 PR、通过率 85%，正在自研跨设备 Agent 控制系统「LobsterOS」，r/ClaudeCode 上有一条 569 赞的帖子在讨论他，还引用了一句用户原话。这些证据分别来自 X、GitHub、Reddit、YouTube 转录，每一条都能点回原始出处。 这不是「更全的搜索结果」。这是把「过去 30 天真实讨论」当成一份带证据的情报稿交到你手上。 它和普通搜索的差别，用一张图说清楚 普通搜索大多回答一个问题： \"有哪些网页提到了这个词？\" last30days 换了个问题： \"过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据可以互相印证？哪些来源太薄，需要提醒用户？\" 这个差别不是 Prompt 层面的差别，是管线层面的差别。v3 版本的核心流程在 skills/last30days/scripts/lib/pipeline.py，我按代码结构拆一下： 1. plan query()——先识别主题，判断是人、公司、还是\"X vs Y\"比较，生成子问题和来源权重。这是 v3 相比 v2 最大的升级，v2 只会搜关键词，v3 会先想清楚\"该搜谁\"。 2. available sources()——按当前机器上的工具、Cookie、API Key，判定哪些来源可用。缺 Key 就跳过，不会硬碰壁。 3. ThreadPoolExecutor——12+ 来源并发拉取。Reddit、X、YouTube、TikTok、HN、Polymarket、GitHub、Digg、Perplexity……不是串行 12 次，是一次并发。 4. normalize() + dedupe——不同平台的字段完全不同，这一步把结果统一成 SourceItem，打上本地相关性、时间新鲜度、互动强度的分数。 5. weighted rrf()——用带权重的 RRF 融合排序。互相印证的证据会被加权：一条新闻同时在 Reddit 和 HN 被讨论，比只在一处出现的更靠前。 6. cluster candidates()——同一事件的跨源合流。同一场活动，X 讨论、Reddit 讨论、YouTube 反应视频，合并成一个聚类，而不是三条独立结果。 7. 最后交给 LLM 做综合判断，可选输出成暗色主题的 HTML 简报（ emit=html），能直接丢进 Slack 或 Notion。 这个管线设计比\"接更多 API\"重要得多。任何一路挂掉，其它路仍然有可用证据；每一条结论都能追溯到具体来源。 它把研究工程化了，而不是把 Prompt 更神秘化了。 13+ 来源，按 Key 分成三档 这里最容易被忽略的点是：v3.8.3 版本把 Reddit 做到了\"完全免费也能用\"的状态。 以前拿 Reddit 评分需要 ScrapeCreators（付费）或者官方 API（限速严）。这版加了 arctic shift 归档补分和 shreddit 列表页拉分，头条 + 顶评 + 分数三件套零 Key 就能跑。这个细节我在源码 lib/reddit arctic.py 里看到实现，作者做了批量、限速、缓存和优雅降级——不是随手糊的一层。 三档配置的意思是： 免费即用 ：Reddit 含评论、Hacker News、Polymarket、GitHub、arXiv。装完就能跑。 浏览器 Cookie ：X（从 Chrome/Firefox 读登录态）、YouTube 转录（yt dlp）、Bluesky、TruthSocial。都是你日常就有的东西，不用再申请 API。 API Key 加持 ：ScrapeCreators 一把钥匙开三扇门（TikTok、Instagram、Threads），加 Perplexity 的 Sonar/Sear..."
+        },
+        {
+          "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+          "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial.html",
+          "type": "blog",
+          "date": "2026-07-01",
+          "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+          "excerpt": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI投研",
+            "Agent Skills",
+            "Claude Code",
+            "Codex",
+            "价值投资",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "很多 AI 投研项目的问题，不是答案写得不够像研报，而是太像研报了：结构完整，措辞稳重，最后你却不知道哪些数字查过，哪些假设只是模型顺嘴补上，哪些风险被漂亮地盖过去了。 xbtlin/ai berkshire 有意思的地方在这里。它没有把自己包装成“AI 自动选股神器”，而是把价值投资研究拆成一套可执行的 Agent 工作流：四大师方法论、18 个 canonical skills、Claude Code 和 Codex 双入口、多 Agent 分工、金融严谨性工具、报告抽检准出。看完源码后，我更愿意把它理解成一个“投研操作系统雏形”，不是一个提示词合集。 先看可验证事实 本次调研基于仓库 README、skills/、codex skills/、codex prompts/、tools/、scripts/ 和 GitHub API。GitHub API 返回的信息是：仓库 xbtlin/ai berkshire，MIT License，默认分支 main；截至本次查询，约 7.8k stars、990 forks，open issues 为 26。仓库描述写得很直白：AI 时代的伯克希尔，基于 Claude Code / Codex 的价值投资研究框架，四大师方法论加多 Agent 并行研究。 仓库规模也能说明它不是单文件玩具。本地浅克隆后，Git 跟踪文件超过 2200 个，其中报告 Markdown 很多；核心工作流集中在 18 个 skills/ .md，并同步到 Codex 侧的 skills 和 prompts。执行同步检查时，sync codex skills.py check 和 sync codex prompts.py check 均通过。 它真正解决的问题：把“投研习惯”变成可执行流程 价值投资方法论最容易被 AI 写成鸡汤：好公司、好价格、长期主义、护城河、管理层。每个词都对，但放进日常研究里经常没法执行。 ai berkshire 的做法是把这些概念拆成 Agent 可以执行的步骤。比如 investment research.md 不是让模型泛泛分析公司，而是要求按巴菲特、芒格、段永平、李录四个视角组织研究：商业模式是否简单可懂，护城河是否能被证伪，管理层是否值得托付，估值是否有安全边际，反方证据在哪里。 更关键的是，它显式要求 AI 承认“研究可得性偏差”。资料多的公司不等于确定性高，资料少的公司也不等于没价值。项目里会把研究对象按信息丰富度分级，提醒使用者：有些结论只是因为数据更容易拿到，而不是因为事实更强。 18 个 skills：投研不是一条命令 这个仓库的核心不是某个神奇 prompt，而是 18 个 canonical skills。它们覆盖从筛选到深研、从财报到组合、从新闻归因到公众号成稿的不同阶段。 几个入口尤其值得看： quality screen 用 7 条指标做去劣筛选，比如长期 ROE、自由现金流、利息覆盖倍数、OCF/NI、净利率、股本稀释等。它的目标不是找出牛股，而是先减少明显不适合深入研究的对象。 investment team 把研究拆给多个角色：商业分析、财务估值、行业研究、风险评估，再由 team lead 收口。这个设计比单 Agent 长篇输出更接近真实投研团队。 financial data 和 financial rigor.py 负责把数据校验拉回现实，包括市值验算、估值验算、多源交叉验证、Benford 检查、三情景估值。 report audit.py 提供报告抽检流程：先从报告里提取数据点，再抽样核验，最后给出准出或打回结论。 wechat article 很有意思，它把研究报告再交给作者、编辑、读者三个 Agent 协作，说明作者不只想“研究”，也想把研究变成可读内容。 这套结构的好处是边界清楚。你想看一家公司，走 investment research；想让多个 Agent 并行，走 investment team；想先扫行业，走 industry funnel；想复盘持仓，走 portfolio review；想追踪买入后的 thesis，走 thesis tracker。 金融严谨性：别让 AI 用漂亮话糊弄数字 我最看重的是 tools/financial rigor.py 和 tools/report audit.py。很多 AI 投研工具止步于“生成报告”，但报告的危险恰恰在于它看起来完整。 financial rigor.py help 里能看到几个实用子命令：verify market cap、verify valuation、cross validate、benford、calc、three scenario。这些命令不保证你做出正确投资决策，但它们能把“请再严谨一点”变成具体动作：市值口径怎么算，估值假设是否一致，不同数据源有没有冲突，乐观/基准/悲观三种情景下结论是否变化。 report audit.py 则是另一个关键补丁。它默认按比例抽检报告中的关键数据点，再根据核验结果决定准出或打回。这比让 Agent 自己说“我已经检查过了”可靠得多。真正的工作流应该允许报告被退回，而不是每次都顺利产出一篇漂亮 Markdo..."
+        },
+        {
+          "title": "Skill Zoo：统一管理所有 AI 编程工具的技能库",
+          "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager.html",
+          "type": "blog",
+          "date": "2026-06-25",
+          "description": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
+          "excerpt": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "技能管理",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "你是否也遇到过这个问题：同时使用 Claude Code、Cursor、Codex、Gemini、OpenCode、Hermes 等多个 AI 编程工具，每个工具都把技能存在不同的目录里。想要安装一个新技能，需要手动复制粘贴到对应的路径；同一个技能安装到多个工具后，各自修改慢慢产生差异；想看看社区里有什么好用的技能，得挨个仓库去翻找。 如果你也被这些问题困扰，今天介绍的这个开源项目 Skill Zoo 就是你的解药。 问题：技能为什么会混乱？ AI 编程工具越来越流行，\"技能\"（Skill / GPTs / Agent）的生态也越来越丰富。一个技能就是一份预设好的提示词、工作流或者指令集，能让 AI 更好地帮你完成特定任务。 但现状是： 每个 AI 编程工具技能的存储位置都不一样 没有统一的社区发现渠道，好技能容易被埋 多工具重复安装，难以同步更新 手动管理容易出错，出现冲突找不到问题所在 以前你需要这样做： 1. 在 GitHub 找到一个感兴趣的技能 2. 打开自己电脑上 Claude Code 的技能目录 3. 手动克隆/复制进去 4. 再打开 Cursor 的技能目录，重复一遍 5. 过了半个月，忘记这个技能装到哪里了 6. 更新的时候，不知道哪个是最新版本 现在有了 Skill Zoo，你只需要： 1. 打开 Skill Zoo 搜索技能 2. 点击安装，选择要安装到哪些 AI 编程工具 3. 完成 — 就是这么简单 什么是 Skill Zoo？ Skill Zoo 是一个 本地优先 的 AI 技能管理工具，基于 Tauri v2 构建，提供美观的桌面客户端，同时也支持 CLI 和 Web UI。它支持目前主流的几乎所有 AI 编程工具： Claude Code Codex Gemini CLI OpenCode Cursor Rules Trae Hermes Agent OpenClaw 更多工具持续添加中 核心设计哲学 Skill Zoo 的设计思路非常清晰： 1. 本地优先 ：所有数据都存在你自己电脑上，不依赖云端服务 2. 无厂商锁定 ：技能仍然以标准格式保存在各个工具原来的位置，Skill Zoo 只是帮你管理它们 3. 安全透明 ：所有操作都需要你确认，不会偷偷修改你的文件 4. 开源可审计 ：完整代码开源，构建过程公开，任何人都可以审计代码 主要功能 1. 探索发现：一键安装社区技能 Skill Zoo 内置了技能仓库发现功能，你可以直接在界面中搜索 GitHub 上共享的技能，浏览描述，一键安装到你选中的所有 AI 编程工具中。 不需要再手动 git clone 或者复制粘贴，点一下鼠标就搞定。 2. 自动更新：保持所有技能最新 安装的技能有更新了怎么办？Skill Zoo 会帮你检测，并一键更新到 GitHub 仓库的最新版本。不用你自己去挨个拉取。 3. 批量操作解决重复技能 如果你像我一样，同一个技能不小心装了好几次，分散在多个位置，可以用 批量删除/合并 功能一键整理。 Skill Zoo 会检查内容哈希，只有内容完全一致才允许合并，保证不会出错。 4. 安全审计：帮你把关技能质量 Skill Zoo 集成了 skills.sh 社区的安全评分，会展示每个技能的审计结果，帮你判断是否安全。 5. 主动检测不一致问题 Skill Zoo 会主动帮你检测三种常见问题： 技能文件损坏 链接不一致 重复冲突 并且提供一键修复功能。 6. 技能创作：内置 Markdown 编辑器 想要写一个自己用的技能？不需要打开外部编辑器，Skill Zoo 内置了基于 CodeMirror 6 的 Markdown 编辑器，你可以直接在里面创作，实时预览。 7. 技能归档：让常用列表保持清爽 有些技能不常用但又舍不得删？可以转到归档区，降低主界面的上下文负担，想用的时候再恢复。 8. CLI + WUI：编程也能管理 如果你更喜欢在终端里工作，Skill Zoo 也提供了 npm 包的 CLI 版本： 支持哪些 AI 编程工具？ 目前开箱即用支持这些工具： 工具 支持状态 Claude Code 完整支持 OpenAI Codex 完整支持 Gemini CLI 完整支持 OpenCode 完整支持 Cursor (Rules) 完整支持 Trae 完整支持 Hermes Agent 完整支持 OpenClaw 完整支持 Qoder CN 默认隐藏（可开启） WorkBuddy 默认隐藏（可开启） 如果你的工具不在列表里，也可以手动添加自定义路径，Skill Zoo 一样可以管理。 安装使用 桌面客户端安装 最简单的方式是直接从 GitHub Releases 下载安装包： macOS ： 1. 下载 .dmg 文件 2. 打开后将 skill zoo.app 拖入 Applications 文件夹 Windows ： 1. 下载 .exe 安装包 2. 运行安装包，自动创建快捷方式并支持自动更新 3. 如果 SmartScreen 弹出警告，点击\"更多信息\" → \"仍要运行\" Linux ： 下载与你 CPU 架构匹配的 AppImage 或 .deb 包： 体验流程 安装完成后，第一次打开： 1. 添..."
+        },
+        {
+          "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
+          "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html",
+          "type": "blog",
+          "date": "2026-06-24",
+          "description": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
+          "excerpt": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI写作",
+            "Agent Skills",
+            "Claude Code",
+            "Hermes",
+            "Cursor",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "现在很多人说文章有“AI 味”。问题是，这句话通常没法执行。你让模型“写得像人一点”，它可能只是换几个词，删几个破折号，再把文章磨得更平，最后反而更像机器写的。 conorbronsdon/avoid ai writing 做的事更具体：它把“AI 味”拆成一组可审计的写作模式，再包装成一个可以放进 Claude Code、Hermes、OpenClaw、Cursor、Codex 等 Agent 工具里的 SKILL.md。它不是商业 AI 检测器，也不把结果当成判决；它更像一份写作质检清单，告诉 Agent 该看哪里、怎么改、什么时候只标记不改。 我看完 README、SKILL.md、detector/、Cursor 规则和插件脚本后，觉得这个项目最值得学的不是“列了多少禁词”，而是它把一个主观写作问题做成了工程化流程：规则有层级，输出有格式，检测器有测试，跨 Agent 分发也有同步脚本。 先看项目状态 几个可验证信息放在前面： 仓库：conorbronsdon/avoid ai writing GitHub 描述：用于审计和重写内容，移除 AI 写作模式，可配合 Claude Code、OpenClaw、Hermes 等 Agent 使用 License：MIT 当前浅克隆提交：6e1369d，提交信息是 Detector: cover inflected forms of single form verb patterns ( 38) SKILL.md frontmatter 版本：3.10.0 GitHub API 查询：约 1.9k+ stars、200+ forks，默认分支 main package.json 里检测器要求 Node =18，测试命令是 node detector/patterns.test.js && node detector/categories.test.js 我本地执行 npm test，检测器 fixtures 和 CATEGORIES.md 映射校验均通过 这里有一个容易误解的点：README 说它是 “Audit & rewrite content to remove AI writing patterns”，但 SKILL.md 第一段就把边界讲清楚了。它是写作质量工具，不是判定一个人是否使用 AI 的证据。规则会误伤非母语写作者、赶稿的人、技术文档和某些平台化写法，所以它更适合用来改稿，而不是审判作者。 它解决的不是“检测”，而是“可执行的改稿” 普通提示词通常长这样： 这句话的问题是没有验收标准。什么叫自然？哪些句子必须改？哪些只是风格选择？改完之后怎么确认没有把原意改坏？ avoid ai writing 的做法是把任务拆成三个模式。 1. rewrite 是默认模式。Agent 要先列出命中的 AI 写作痕迹，再给出重写版本，然后说明改了什么，最后做一次 second pass audit。 2. detect 只标记不改写。适合审稿、分析别人的文章，或者你不想让模型直接动原文的时候。 3. edit 面向文件。用户指向 draft.md 或 README，Agent 只做局部修改，保留已经自然的段落，并在最后报告改动和验证结果。 这个设计比一句“humanize”更可靠。因为它让 Agent 先解释问题，再动手改稿；如果你不同意某个判断，可以回到具体句子讨论，而不是和模型争论“有没有 AI 味”。 规则层级：先救命，再润色 SKILL.md 里不是把所有问题混在一起，而是给出了 P0、P1、P2 三层优先级。 P0 是可信度杀手，比如： “As of my last update” 这种模型截止声明； “Great question!”、“I hope this helps!” 这类聊天界面残留； “Experts believe” 但没有任何专家或研究来源； 把普通事件硬写成 “watershed moment” 或 “marking a pivotal moment”。 P1 是发布前应该修掉的明显 AI 味，比如 delve、leverage、robust 这类词表命中，模板句，let's explore 开头，过度同义词轮换，社交媒体里“this one is worth your time” 这种空推荐。 P2 更像风格润色：段落长度太整齐、结尾太泛、结构太像模板、偶发的 “serves as / features / boasts”。这些不一定毁稿，但会让文章看起来像流水线产物。 这个分层很实用。真实改稿时，不应该把所有规则当铁律。先清 P0，再处理 P1，最后看 P2 是否真的影响阅读。否则你会陷入另一种机器味：每个句子都“正确”，但没有人的呼吸。 它不是单纯禁词表 README 里提到 109 entry word replacement table across 3 tiers + 10 Tier 3 phrases，很容易让人以为这只是一个禁词清单。源码并不是这么简单。 SKILL.md 把规则分成几类： 词和短语：例如 delve、leverage、game changer、the future looks bright； 句式：例如 ..."
+        },
+        {
+          "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+          "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial.html",
+          "type": "blog",
+          "date": "2026-06-24",
+          "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+          "excerpt": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "Agent Skills",
+            "开源项目",
+            "信息检索",
+            "GitHub"
+          ],
+          "priority": 0,
+          "content": "如果你经常让 AI Agent 做调研，大概率遇到过这个尴尬：模型会写一份很顺的总结，但证据常常停在网页搜索和旧材料上。真正影响判断的内容，可能在 Reddit 评论、X 热帖、YouTube 转录、Hacker News 讨论、GitHub issue，甚至 Polymarket 赔率里。 mvanhorn/last30days skill 解决的就是这个缝隙。它不是再做一个搜索框，而是给 Agent 加一层“近期公开信号雷达”：把过去 30 天分散在不同平台的讨论、互动量、源码活动和市场赔率拉到同一条管线里，再交给模型做带证据的综合判断。 我看完源码后，觉得它最值得学习的不是“支持很多来源”，而是它把研究任务拆成了一个工程化流程：计划、检索、标准化、打分、去重、融合、聚类、渲染。这个设计比单纯堆 API 更有参考价值。 这个项目现在是什么状态 先放几个可验证信息，避免把文章写成项目广告。 仓库：mvanhorn/last30days skill 主要语言：Python License：MIT 当前 pyproject.toml 版本：3.8.1 Python 要求： =3.12 GitHub API 查询到的项目描述：跨 Reddit、X、YouTube、HN、Polymarket 和 Web 研究任意主题，并综合成 grounded summary 本次查询时 GitHub 数据：约 46k+ stars、3.8k+ forks、73 个 open issues，仓库最近仍有 push README 的一句定位很直接：它要做的是“由 AI agent 主导的搜索引擎”，评分依据不是编辑排序，而是 upvotes、likes、真实资金和社区互动。这个说法有营销味，但源码里的管线确实在围绕“近期信号”而不是“网页排名”构建。 它和普通搜索的差别 普通搜索大多回答：“有哪些网页提到了这个词？” last30days skill 更像在问：“过去 30 天，人们在哪些地方真正讨论了它？哪些讨论有互动？哪些证据互相印证？哪些来源太薄，需要提醒用户？” 源码里，主流程集中在 skills/last30days/scripts/lib/pipeline.py： 1. available sources() 先根据本机工具、API key、Cookie 与配置判断哪些来源可用。 2. planner.plan query() 为主题生成 query plan，包括 intent、freshness mode、cluster mode、subqueries 和 source weights。 3. ThreadPoolExecutor 并发跑各个来源的检索。 4. normalize score dedupe() 把不同平台结果统一成 SourceItem，再做本地相关性、时间新鲜度、互动信号、去重和片段提取。 5. weighted rrf() 做跨来源融合排序。 6. rerank.rerank candidates() 让模型或 fallback 逻辑重排候选。 7. cluster candidates() 把相关候选合并成证据簇。 8. render.py / html render.py 输出 compact、Markdown、JSON、HTML 或 brief。 这套流程的好处是：每个来源可以很脏，但进入报告前必须先被归一化。Reddit、HN、YouTube、GitHub 的字段完全不同，最后都要落到 schema.SourceItem 和 schema.Candidate 这些结构里。 支持哪些来源，哪些真的开箱可用 README 写得很热闹，源码和配置文档会更冷静一点。CONFIGURATION.md 里把来源分得很清楚：有些不用 key，有些需要本机工具，有些要 Cookie 或付费 API。 可以按这个顺序理解： 层级 来源 代价 开箱可用 Reddit public、Hacker News、Polymarket、GitHub 匿名层 不需要 key，适合先跑通 装工具启用 YouTube 需要 yt dlp，Digg 需要 digg pp cli 适合补视频与高信号聚合 带 Cookie / Key X、TikTok、Instagram、Threads、Pinterest、小红书等 覆盖更广，但要管理账号和额度 付费增强 Brave、Exa、Serper、Parallel、Perplexity 适合团队情报或高价值调研 源码细节也印证了这一点。pipeline.py 的 available sources() 默认加入 Reddit、HN、Polymarket、GitHub；检测到 yt dlp 才加入 YouTube；检测到 X 后端才加入 X；检测到 Web backend 或 keyless 条件才加入 grounding。 这也是我建议新手不要一上来配置所有 key 的原因。先用无凭据来源跑出第一份报告，再逐个加来源。否则你很难判断问题来自 API、Cookie、额度、网络，还是主题本身证据太薄。 最小可用安装路径 如果你用 Claude Code，README 推荐走 marketplace： ..."
+        },
+        {
+          "title": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
+          "url": "/articles/2026/06/19/browseract-skills-tutorial.html",
+          "type": "blog",
+          "date": "2026-06-19",
+          "description": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
+          "excerpt": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
+          "topic": "AI Agent",
+          "topicSlug": "ai-agent",
+          "series": "",
+          "tags": [
+            "AI Agent",
+            "浏览器",
+            "自动化",
+            "开源项目"
+          ],
+          "priority": 0,
+          "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
         }
       ],
       "articleTitles": [
@@ -4829,20 +4829,20 @@
         "AiToEarn：不是自动发帖脚本，而是一套 AI 内容变现工作台",
         "Harness：用一句话生成 Claude Code 的 Agent 团队",
         "Browser Use：让 AI 真的打开网页、点击按钮、填写表单",
-        "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-        "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
-        "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
-        "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-        "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-        "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
-        "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
         "Buzz：Block 开源的人和 AI 平等协作工作区，一键自托管部署",
         "MonkeyCode：长亭科技开源的企业级 AI 开发平台，私有化部署真的香",
-        "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
         "微软 AI-For-Beginners：5万星的免费AI入门课程，真的值得学吗？",
         "Pi: 一个极简可扩展的终端编码 Agent 框架",
         "告别 $120/月 订阅：OpenSEO — 原生支持 AI Agent 的开源全功能 SEO 工具",
-        "Timeline Studio：浏览器里跑的开源AI视频编辑器"
+        "Timeline Studio：浏览器里跑的开源AI视频编辑器",
+        "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
+        "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
+        "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
+        "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
+        "Skill Zoo：统一管理所有 AI 编程工具的技能库",
+        "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
+        "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
+        "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器"
       ]
     },
     {
@@ -6485,7 +6485,7 @@
     },
     {
       "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-      "url": "/articles/2026/07/31/index.html",
+      "url": "/articles/2026/07/31/ai-comic-workbench.html",
       "type": "文章",
       "date": "2026-07-31",
       "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",

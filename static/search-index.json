@@ -3,7 +3,7 @@
     "title": "怎样提高自己的认知流程？",
     "url": "/articles/2026/06/05/improve-cognitive-process.html",
     "type": "page",
-    "date": "",
+    "date": "2026-06-05",
     "description": "回答知乎问题：怎样提高自己的认知流程？文章结合达尔文、富兰克林、芒格等真人事迹，给出一个可执行的认知改进流程：写清问题、区分事实和观点、寻找反证、小实验、复盘判断过程。",
     "excerpt": "回答知乎问题：怎样提高自己的认知流程？文章结合达尔文、富兰克林、芒格等真人事迹，给出一个可执行的认知改进流程：写清问题、区分事实和观点、寻找反证、小实验、复盘判断过程。",
     "topic": "",
@@ -22,7 +22,7 @@
     "title": "为什么有的人完全不懂技术，却可以做到管理层",
     "url": "/articles/2026/06/05/manager-not-me.html",
     "type": "page",
-    "date": "",
+    "date": "2026-06-05",
     "description": "为什么有的人不懂技术却能做到管理层？这篇文章从业务、组织协同、决策语言和技术人职业发展几个角度，聊聊技术人与管理层之间真正的差异。",
     "excerpt": "为什么有的人不懂技术却能做到管理层？这篇文章从业务、组织协同、决策语言和技术人职业发展几个角度，聊聊技术人与管理层之间真正的差异。",
     "topic": "",
@@ -149,7 +149,7 @@
     "title": "CodeGraph：给 AI 编程助手装一个本地代码大脑",
     "url": "/articles/2026/06/16/codegraph-ai-code-intelligence.html",
     "type": "page",
-    "date": "",
+    "date": "2026-06-16",
     "description": "CodeGraph 是一个本地优先的代码知识图谱、CLI 和 MCP Server。本文从源码和文档出发，讲清它怎样让 AI 编程助手少 grep、多理解代码结构。",
     "excerpt": "CodeGraph 是一个本地优先的代码知识图谱、CLI 和 MCP Server。本文从源码和文档出发，讲清它怎样让 AI 编程助手少 grep、多理解代码结构。",
     "topic": "",
@@ -167,7 +167,7 @@
   },
   {
     "title": "AIUsage：一站式管理所有 AI 订阅的 macOS 原生看板",
-    "url": "/articles/2026/06/19/aiusage-dashboard-tutorial/",
+    "url": "/articles/2026/06/19/aiusage-dashboard-tutorial.html",
     "type": "blog",
     "date": "2026-06-19",
     "description": "AIUsage 是一个开源的 macOS 原生 SwiftUI 应用，把 Claude Code、Codex、OpenCode 等 12 个 AI 编程工具的账号、额度、成本聚合到一个仪表盘，还内置三个代理，让这些工具能一键切换到任何 OpenAI 兼容模型。",
@@ -187,7 +187,7 @@
   },
   {
     "title": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
-    "url": "/articles/2026/06/19/browseract-skills-tutorial/",
+    "url": "/articles/2026/06/19/browseract-skills-tutorial.html",
     "type": "blog",
     "date": "2026-06-19",
     "description": "BrowserAct 是一套开源的 AI Agent 浏览器技能库，提供反反爬、多模式浏览器切换（Puppeteer/Playwright/Chrome-CDP）和 Skill Forge 工作流，让 AI Agent 具备真正稳定的网页操作能力。",
@@ -351,7 +351,7 @@
   },
   {
     "title": "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
-    "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/",
+    "url": "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html",
     "type": "blog",
     "date": "2026-06-24",
     "description": "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。",
@@ -372,7 +372,7 @@
   },
   {
     "title": "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-    "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial/",
+    "url": "/articles/2026/06/24/last30days-skill-agent-research-tutorial.html",
     "type": "blog",
     "date": "2026-06-24",
     "description": "基于 mvanhorn/last30days-skill 源码、README、配置文档与 GitHub 元数据，拆解它如何跨 Reddit、X、YouTube、HN、Polymarket、GitHub 与 Web 收集近期信号，并生成可复核研究简报。",
@@ -392,7 +392,7 @@
   },
   {
     "title": "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线",
-    "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/",
+    "url": "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator.html",
     "type": "blog",
     "date": "2026-06-24",
     "description": "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。",
@@ -413,7 +413,7 @@
   },
   {
     "title": "Skill Zoo：统一管理所有 AI 编程工具的技能库",
-    "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager/",
+    "url": "/articles/2026/06/25/skill-zoo-ai-skills-manager.html",
     "type": "blog",
     "date": "2026-06-25",
     "description": "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。",
@@ -431,7 +431,7 @@
   },
   {
     "title": "MediaCrawler 教程：一键爬取小红书/抖音/B站/知乎等多平台自媒体数据",
-    "url": "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial/",
+    "url": "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial.html",
     "type": "blog",
     "date": "2026-06-27",
     "description": "MediaCrawler 是一个基于 Playwright 的强大自媒体爬虫工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大平台，无需逆向 JS 加密，CDP 模式复用浏览器登录态，大幅降低风控概率。本文带你完整上手，从环境配置到实际爬取。",
@@ -450,7 +450,7 @@
   },
   {
     "title": "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室",
-    "url": "/articles/2026/06/27/openmontage-ai-video-studio/",
+    "url": "/articles/2026/06/27/openmontage-ai-video-studio.html",
     "type": "blog",
     "date": "2026-06-27",
     "description": "OpenMontage 是首个开源的智能体化视频制作系统，它能把 Claude Code/Cursor 变成全自动视频工作室，从创意到成品视频一条龙，全程智能体自动完成研究、脚本、素材、剪辑、合成。",
@@ -469,7 +469,7 @@
   },
   {
     "title": "AI 视频制作智能体：输入一句话，自动生成完整视频",
-    "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video/",
+    "url": "/articles/2026/06/28/ai-video-agent-auto-generate-video.html",
     "type": "blog",
     "date": "2026-06-28",
     "description": "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。",
@@ -488,7 +488,7 @@
   },
   {
     "title": "RTK：帮你省下 80% LLM Token 的 CLI 代理工具",
-    "url": "/articles/2026/06/28/rtk-reduce-llm-tokens/",
+    "url": "/articles/2026/06/28/rtk-reduce-llm-tokens.html",
     "type": "blog",
     "date": "2026-06-28",
     "description": "一款用 Rust 写的高性能 CLI 代理，可以将 LLM 日常开发中的 Token 消耗降低 60-90%。单一二进制文件，零依赖， overhead 不到 10ms。支持 Claude Code、Copilot、Cursor 等所有主流 AI 编程工具。",
@@ -508,7 +508,7 @@
   },
   {
     "title": "ai-berkshire 教程：把巴菲特、芒格、段永平、李录的方法论做成 Agent 工作流",
-    "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial/",
+    "url": "/articles/2026/07/01/ai-berkshire-investment-agent-tutorial.html",
     "type": "blog",
     "date": "2026-07-01",
     "description": "基于 xbtlin/ai-berkshire 的 README、skills、Codex adapter、financial_rigor.py 和 report_audit.py，拆解它如何把价值投资研究从提示词变成可安装、可复核、可迁移的 Agent 工作流。",
@@ -529,7 +529,7 @@
   },
   {
     "title": "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的",
-    "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar/",
+    "url": "/articles/2026/07/02/last30days-trending-1-github-research-radar.html",
     "type": "blog",
     "date": "2026-07-02",
     "description": "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。",
@@ -549,7 +549,7 @@
   },
   {
     "title": "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill",
-    "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator/",
+    "url": "/articles/2026/07/03/archify-agent-skill-diagram-generator.html",
     "type": "blog",
     "date": "2026-07-03",
     "description": "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。",
@@ -569,7 +569,7 @@
   },
   {
     "title": "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端",
-    "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/",
+    "url": "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html",
     "type": "blog",
     "date": "2026-07-03",
     "description": "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。",
@@ -589,7 +589,7 @@
   },
   {
     "title": "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台",
-    "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/",
+    "url": "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html",
     "type": "blog",
     "date": "2026-07-05",
     "description": "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。",
@@ -609,7 +609,7 @@
   },
   {
     "title": "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器",
-    "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/",
+    "url": "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html",
     "type": "blog",
     "date": "2026-07-05",
     "description": "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。",
@@ -629,7 +629,7 @@
   },
   {
     "title": "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes",
-    "url": "/articles/2026/07/08/agency-agents-238-specialist-installer/",
+    "url": "/articles/2026/07/08/agency-agents-238-specialist-installer.html",
     "type": "blog",
     "date": "2026-07-08",
     "description": "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。",
@@ -649,7 +649,7 @@
   },
   {
     "title": "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台",
-    "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/",
+    "url": "/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html",
     "type": "blog",
     "date": "2026-07-08",
     "description": "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。",
@@ -669,7 +669,7 @@
   },
   {
     "title": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件",
-    "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget/",
+    "url": "/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html",
     "type": "blog",
     "date": "2026-07-10",
     "description": "zhongerxin/Cowart 用一个 Codex plugin + 8 个 MCP 工具 + 3 个 skill，把 tldraw 无限画布焊进 Codex 原生 widget：画布数据落在用户项目目录，AI 图片框成为「尺寸契约」，标注截图直接进入返修循环。本文拆插件骨架、拆 frame holder 的三个坐标属性、拆 canvas/pages/<id> 的存储布局，附五分钟上手清单和三条改造思路。",
@@ -686,6 +686,85 @@
     ],
     "priority": 0,
     "content": "Cowart 教程：把 tldraw 无限画布焊进 Codex 的原生 widget 插件 我用 Codex 已经有一阵子，最烦的一件事一直没解决： 画图这一步永远断在别处 。想让 AI 顺着一张草图改，就得先把草图从别处贴过来；想让 AI 沿着我的箭头改图，就得先把带箭头的截图放到某个云盘，再把链接甩回对话；想让 AI 在同一块画布里连续迭代十几张图，就得在 Codex、Figma、tldraw 网页版、 /Downloads 之间反复穿梭。AI 会画画，但不会跟我坐在同一块桌子上。 前几天翻到 zhongerxin/Cowart —— 一个 Codex 原生插件，直接把 tldraw 的无限画布做成 Codex 内置 widget。画完读源码，我意识到它值得单独写一篇：它不只是「Codex + 画布」，而是 把画布提炼成一份可协商的尺寸契约 ，让 AI 生成图能直接对齐我在画布上圈出来的框；它也不只是「支持标注」，而是 把标注截图当成一份完整的返修 brief ，让 AI 在原图旁边生成干净的新图，原图和标注一根不动。 这两个设计一旦搭在一起，Codex 会从「聊天里出图片」变成「桌面上出图片」。这篇文章把它拆成三层： 1. 插件骨架：.codex plugin/plugin.json + 3 个 skill + 8 个 MCP 工具，画布怎么就成了原生 widget； 2. 尺寸契约：AI 图片 frame holder 的 props.w/h/x/y/rotation 如何变成一份对生成模型的强约束； 3. 返修循环：get cowart selection + 标注截图如何构成「同一块画布上的对照实验」。 最后附一份 5 分钟上手清单、一份存储/环境变量速查表，以及三条我最想改造它的方向。 一、插件骨架：一份 plugin.json + 3 个 skill + 8 个 MCP 工具 Cowart 的仓库不大，34 个源码文件，但结构非常规整。全部对齐到 Codex plugin 的目录约定。 先看 .codex plugin/plugin.json。它把插件注册成 Codex marketplace 里的一个条目，声明 skill 目录、MCP 服务、品牌色、logo、能力标签和三条默认 prompt： 三条 defaultPrompt 就是插件全部对外接口的 用户视角 ：开画布、按截图返修、把生成图放进选中的 AI 图片框。这一层写得像给用户看的说明书，而不是给 CI 看的元数据 —— 值得抄。 再往里看 skills/： 每个 skill 一份 SKILL.md，明确写出「什么时候用、按什么顺序调用哪些 MCP 工具、失败时怎么退化」。三份加起来才 300 多行，但对 Codex 来说是可执行剧本；随手翻 cowart image gen/SKILL.md 就能看到这种「操作型 skill」的样子——比如它规定： 如果选中的形状带 meta.cowartAiImageHolder: true，就把它的 props.w/h、x/y、rotation 当作生成图的尺寸契约；生成完调 insert cowart image 时把 holder 的 id 传成 anchorShapeId，MCP 层会把旧 holder 干掉、把新图钉在同一个位置。 这句话就是这个插件全部性价比的来源，后面会展开。 MCP 服务在 mcp/server.mjs，一共暴露 8 个工具，全部走 stdio： Tool 用途 render cowart canvas widget 把画布作为原生 widget 打开，返回 ui://widget/cowart/canvas.html get cowart canvas state 读取当前项目的 tldraw 快照 save cowart canvas state 写回整份快照（少用，只在必须重写整块画布时） save cowart selection state 同步选中集合 save cowart view state 同步视口位置 get cowart selection 读取当前选中的形状及其元数据 insert cowart image 把生成好的 PNG 插入画布，可选替换 AI 图片框 save cowart reference image / read cowart page asset 参考图的写入 / 读取 值得单挑出来夸的是 insert cowart image。SKILL 明确要求「不要手写 tldraw 的 asset/shape 记录，也不要自己算 fractional index」，一律交给这个工具。tldraw 内部形状用 fractional indexing 决定叠放次序，手动生成极容易踩到重复 key —— 把这个坑封装在 MCP 一次，三种 skill 都能白嫖。 二、尺寸契约：把 AI 图片 框做成一份可协商的规格 多数「AI 画布」产品在这一步是含糊的：你说画一张、它就画一张，尺寸多大、放哪里、要不要覆盖原图，都得你二次交代。Cowart 换了个思路 —— 把画布上的 frame 当尺寸契约来用 。 在 src/App.jsx 里，AI 图片..."
+  },
+  {
+    "title": "OmniVoice Studio：把 ElevenLabs 焊回你自己的机器",
+    "url": "/articles/2026/07/10/omnivoice-studio-local-elevenlabs-alternative.html",
+    "type": "page",
+    "date": "2026-07-10",
+    "description": "从 CHANGELOG 到 CUDA / MPS 路由：一份把 14 TTS × 10 ASR × OpenAI 兼容 API × MCP Server 落到本地的工程视角拆解。646 语言、零 key、AGPL-3.0，跑在你自己的机器上。",
+    "excerpt": "从 CHANGELOG 到 CUDA / MPS 路由：一份把 14 TTS × 10 ASR × OpenAI 兼容 API × MCP Server 落到本地的工程视角拆解。646 语言、零 key、AGPL-3.0，跑在你自己的机器上。",
+    "topic": "",
+    "topicSlug": "",
+    "series": "",
+    "tags": [
+      "语音AI",
+      "开源",
+      "本地部署",
+      "TTS"
+    ],
+    "priority": 0,
+    "content": "OmniVoice Studio：把 ElevenLabs 焊回你自己的机器 昨天有个朋友问我，他要给一个五十条 YouTube 教程做中文配音，试了半天 ElevenLabs，账单预估 300 美元/月，还得先把视频音轨上传到别人服务器。 我把 debpalash/OmniVoice Studio 甩过去。 一小时后他回消息： 跑起来了，一个 python 都没有再装，MP4 拖进去出 SRT 出配音，喉音也克隆到了 。 这不是一个\"我又发现了一个宝藏项目\"的故事。这是一个当\"云语音\"变成必需品之后，本地端能做到什么程度的现场检查。 一、这个项目要解决的具体矛盾 它自己在 README 顶部写得很直： Your voice is the most personal data you have. So why rent it back from a cloud? 翻译过来更直接：你的语音是你最私人的数据，你为什么要按月租回来。 ElevenLabs 是\"按 character 收费 + 音频上传到云端\"的路径；OmniVoice Studio 走的是\"按你自己的显卡跑 + 全部数据不出网\"。这不是 zero sum：ElevenLabs 的调度、后处理、企业合规确实有它的市场；但 如果你只是想做几十条视频配音、几本有声书、把一台 Mac 变成随时能听写的口述工具 ，本地路径不再是\"技术玩票\"，而是可以做完整活。 关键区别我抄一段官方对照表（数据以仓库 README 为准）： ElevenLabs OmniVoice Studio 定价 $5–$330/mo，按字符 免费开源（AGPL 3.0） 克隆 3 秒片段 3 秒片段，zero shot 语言 32 646 视频配音 云端 完全本地 API key 必需 不需要 GPU 云端 CUDA · Apple Silicon MPS · ROCm · CPU TTS 引擎 1 14 ASR 引擎 1 10 MCP server 无 有 数量不重要，工程重要。下面按\"它到底怎么把这些做出来\"拆。 二、它的心智模型：一份 picker + 一份 OpenAI 兼容 API 第一次装完 OmniVoice Studio，Launchpad 长这样： 上面挂了六块工作台：Studio（生成 + 克隆一体）、Voice Design（造音色）、Voice Gallery（音色库）、Video Dubbing（视频配音）、Stories/Audiobook（长音频）、Dictation（听写）。每一块共享同一件东西—— 当前激活的 TTS / ASR / LLM 引擎 。 它没有为每个工作台各自选一次引擎。它把这三个族全放在 Settings → Engines 一张表里，全局切换： 这个决定比看起来重要。多数开源语音项目要么每次任务里下拉选一个引擎（生成/配音/听写各选一次，一致性直接崩），要么用环境变量指定（改一次要重启）。OmniVoice Studio 允许 UI 切但 同时保留环境变量兜底 ：OMNIVOICE TTS BACKEND / OMNIVOICE ASR BACKEND 一旦设了，就锁定，UI 不再能改——这是给部署方留的一根钉子，防止运行时被误改。 14 TTS × 10 ASR 的矩阵 TTS 侧的完整名单（从 README 抄，删除了不必要的表情）： 默认 OmniVoice （600+ 语言）永远可用 自动检测的 opt in：CosyVoice 3、GPT SoVITS、VoxCPM2、MOSS TTS Nano、KittenTTS、MLX Audio、Sherpa ONNX 惰性安装的重量级（首次用到才装）：IndexTTS 2、OmniVoice GGUF、Supertonic 3、MOSS TTS v1.5（8B）、dots.tts（2B）、Confucius4 TTS ASR 侧同样是分层的：WhisperX 是跨平台默认（word level timing），此外还有 Faster Whisper / Faster Whisper Isolated（子进程隔离）/ MLX Whisper / PyTorch Whisper / Parakeet TDT / Moonshine / FunASR / sherpa onnx（实时听写）/ OpenAI compatible（可以指向 Qwen3 ASR）。 \"隔离子进程\"这一条值得单独讲 ：Faster Whisper (isolated) 是把 ASR 跑在独立进程里，一次崩溃不再拖垮整个 app——这不是所有项目会做的选择，是从生产事故里长出来的模式。 一份 OpenAI 兼容 API：localhost:3900/v1 我最欣赏的设计是它把上面这一堆全部套了一层 OpenAI 兼容协议： 三个接口： 意思是： 你所有已经写好、指向 OpenAI 的脚本、agent、workflow，把 base url 从 api.openai.com/v1 换成 localhost:3900/v1，一行代码都不用改 。voice 参数吃你本地的克隆音色 ID，model=tts 1 自动映射到当前激活的..."
+  },
+  {
+    "title": "如何让 Claude Code / Cursor 用克隆的声音说话？OmniVoice Studio 的 MCP 方案实测",
+    "url": "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html",
+    "type": "page",
+    "date": "2026-07-11",
+    "description": "3 秒克隆你的声音，然后通过一段 MCP 配置让 Claude Code / Cursor 用它开口说话。全本地、零 API key、成本 0 元。这篇讲清楚接线全流程和踩坑。",
+    "excerpt": "3 秒克隆你的声音，然后通过一段 MCP 配置让 Claude Code / Cursor 用它开口说话。全本地、零 API key、成本 0 元。这篇讲清楚接线全流程和踩坑。",
+    "topic": "",
+    "topicSlug": "",
+    "series": "",
+    "tags": [
+      "AI Agent",
+      "MCP",
+      "声音克隆",
+      "Claude Code",
+      "Cursor"
+    ],
+    "priority": 0,
+    "content": "如何让 Claude Code / Cursor 用克隆的声音说话？OmniVoice Studio 的 MCP 方案实测 TL;DR ：适合正在用 Claude Code、Cursor、Codex 跑长任务、经常需要\"任务跑完但我在干别的\"的人。核心方案是本地跑一份 OmniVoice Studio（8.2k star / AGPL 3.0），用它挂在 localhost:3900/mcp 的 MCP server，让每个 Agent 绑定一个克隆声音，成本 0 元、无 API key、音频不出机器。核心限制是需要一张有点显存的显卡（或 Apple Silicon）——纯 CPU 也能跑但延迟不好。 上周三我让 Claude Code 跑了一个 40 分钟的重构，结束后终端\"叮\"了一下，我没注意。半小时后回来一看，第二个失败任务已经卡了 20 分钟。当天我做了一个决定： 给它装一副嗓子——用我自己克隆的声音——事情做完了它得开口告诉我 。 这篇讲清楚三件事：为什么 ElevenLabs / 系统 TTS 都不好用；OmniVoice Studio 的 MCP 方案怎么接；我踩过的两个坑和判断适不适合你。 一、为什么\"给 Agent 一副嗓子\"这件事以前没成？ 三条常见路径，我都跑过： 系统 TTS（macOS say / Windows SAPI） ：免费、离线、能用。缺点是听起来像 2005 年的地铁报站，长句子还会把标点符号读出来。同事路过听见会以为你在调试无障碍功能。 ElevenLabs API ：音质确实是天花板。缺点是每一条播报都在按 character 计费，一整天长任务下来一顿早饭钱没了；而且你得把\"任务完成了\"这种明显含调用上下文的文本发到别人服务器。 OpenAI TTS ：便宜一点，但只有 6 个预设音色。你没法让 Cursor 用一个声音、Claude Code 用另一个声音——多 Agent 场景下根本分不清是谁在说话。 真正想要的是： 本地跑 + 音质够用 + 每个 Agent 有自己的声音 + 一次配置永久生效 。 三个月前这件事还得自己接。现在有个更省事的方案，就是 OmniVoice Studio 内建的 MCP server。 二、OmniVoice Studio 的 MCP server 是什么 先明确一件事：这个项目本身是一个 桌面语音工作站 ——支持克隆、配音、听写、造音色，我之前写过一篇通用拆解，感兴趣的翻回去看。 但它里面最容易被忽略的一件事，是 后端启动之后自动挂了一个 MCP 服务器 在 http://localhost:3900/mcp。你只要打开 App，这个端点就活着。 MCP server 提供的工具很小一组，恰好对准 Agent 场景： 工具 干什么 generate speech 文本 → WAV（base64）。用当前 Agent 绑定的声音，除非显式传 profile id。 transcribe base64 音频 → 文本，646 语言。 list voices / list personalities / list languages 列出可用资源。 check health 检查后端状态和当前 GPU 设备。 关键设计点是 per agent voice binding 。每个 Agent 在调用时带一个 X OmniVoice Client Id 请求头（比如 claude code），OmniVoice 就能根据你事先绑定好的关系挑出对应的声音配置。这样多个 Agent 共存时，你一听就知道是谁在说话——不用看屏幕。 三、5 分钟完整接线：让 Claude Code 用你的声音说话 假设 OmniVoice Studio 已经装好并且能跑通任何一个 TTS 引擎（我用的是 IndexTTS，Apple Silicon 上跑 MPS）。下面是把它接进 Claude Code 的完整步骤。 第 1 步：录一段 3 秒的自己 打开 Studio 页，切到 Voice Clone 面板，上传或直接录制一段 3–10 秒的清晰人声。别念数字或字母表——念一句你平时会说的话，效果更自然。系统会给你一个 profile id，先记下来。 建议 ：录音时手机 / 电脑内置麦已经够用，但避开风扇声和键盘声——3 秒的 zero shot 克隆对底噪比较敏感。 第 2 步：把这个声音绑定给 claude code 这个 client id 在终端跑一条 curl，用第 1 步记下来的 profile id 替换 ： 顺手也可以给 Cursor 绑另一个声音（用 Voice Gallery 里的一个预设就行）： 这样以后 Claude Code 说话是\"我\"的声音，Cursor 说话是另一个声音——你不用看屏幕就能分辨。 第 3 步：在 Claude Code 里注册这个 MCP server Claude Code 支持两种 MCP 传输方式：Streamable HTTP 和 stdio。 推荐 HTTP ——OmniVoice 直接原生支持，不需要额外进程。 在 /.config/claude code/mcp.json（或你的 Claude Code M..."
+  },
+  {
+    "title": "折腾了两晚 Excel 和逐帧截图后，我用这个开源工具把一部电影拉片做完了",
+    "url": "/articles/2026/07/12/lapian-notes-ai-film-study-tool.html",
+    "type": "page",
+    "date": "2026-07-12",
+    "description": "拉片笔记（lapian-notes）是一个 270 star 的开源工具：本地抽帧、自动配字幕、把电影打包成 ZIP 发给任意 AI（ChatGPT/Claude/Gemini 都行），AI 返回的 JSON 一键导回，自动生成剧情泳道时间轴、结构树和观众情绪曲线。全程本地运行，影片不上传，零 API Key。这篇讲清楚它的机制、使用流程和适合谁。",
+    "excerpt": "拉片笔记（lapian-notes）是一个 270 star 的开源工具：本地抽帧、自动配字幕、把电影打包成 ZIP 发给任意 AI（ChatGPT/Claude/Gemini 都行），AI 返回的 JSON 一键导回，自动生成剧情泳道时间轴、结构树和观众情绪曲线。全程本地运行，影片不上传，零 API Key。这篇讲清楚它的机制、使用流程和适合谁。",
+    "topic": "",
+    "topicSlug": "",
+    "series": "",
+    "tags": [
+      "AI 项目拆解",
+      "影视创作",
+      "开源工具",
+      "电影叙事",
+      "AI 工作流"
+    ],
+    "priority": 0,
+    "content": "上周三我给自己布置了个作业：把《寄生虫》的三段落结构拆到\"场与镜头\"级，写进 Notion 当创作模板。真开始做才发现，光是\"逐秒截图 + 手抄字幕 + 对齐时间码\"就耗掉了两个晚上，Excel 拉到第 40 分钟我就想放弃。第三天早上翻到 GitHub trending 华语板块，发现一个叫 lapian notes 的项目——3 天前刚发布、270 star，作者是 Discord 影视社区 BKinGfilm 的负责人。当天下午我把它跑起来试了两部电影。这篇讲清楚三件事： 它到底解决了什么、5 分钟怎么跑通、什么样的人应该用 。 拉片这件事到底难在哪 先说清楚\"拉片\"是什么，因为它和\"剪辑\"、\"影评\"完全不是一回事。 拉片是把一部电影当成教材去拆： 每个段落在整片里承担什么功能、编剧用了哪些手法把观众留在椅子上、导演怎么通过画面语言暗示信息 。想系统学电影叙事的创作者（编剧、导演系学生、B 站解说号、短剧编剧、想拍长片的短视频作者）都要过这一关。 传统流程有三个卡点： 1. 抽帧和对齐字幕 ：一部 90 分钟的电影要截 5000+ 张关键帧，还要把字幕时间码对上去。Excel 打开就是几百行，眼睛一花就漏一段。 2. 段落划分 ：靠脑子记\"这部分是引入还是转折\"很难扛住 2 小时的注意力衰减。 3. 结构可视化 ：主线/支线/情感线交织的地方，光靠文字笔记根本描述不清楚。想画时间轴？先做 3 小时 Excel 条形图。 有人问：\"让 AI 直接看电影不行吗？\" 现阶段不行—— 主流大模型不接受视频输入，且几乎所有拉片相关的商业 SaaS 都要么按订阅收费、要么把你的影片素材上传到云端 ，两者对个人创作者都是障碍。 lapian notes 的核心工程学决策 看到项目 README 我先怀疑是又一个\"套壳 GPT 的 wrapper\"。真读了源码才发现它做了一个非常聪明的架构决策—— 把\"上下文构造\"和\"AI 推理\"完全解耦 。 具体来说：整个前端是纯 React + Vite，跑在浏览器里。所有和视频相关的重活（抽帧、转码、找字幕）通过两个自定义 Vite 中间件在 dev server 里跑（subtitle server plugin.ts 258 行、transcode server plugin.ts 280 行）。而 AI 分析这一步—— 它根本不调 AI ，只是把上下文打包成一个 ZIP，让你自己拖给 ChatGPT / Claude / Gemini / Kimi。 看一眼 src/lib/framePackage.ts 里 exportAiAnalysisPackage() 的实现就明白了。这个 ZIP 里装了： 文件 作用 prompt.md 拉片任务书。指定 AI 的角色、必须返回的字段、事实纪律（\"字幕和画面证据为准，宁可留空不要脑补\"） schema.json AI 必须返回的 JSON 结构，前端拿这个反序列化 project.json 影片元信息：时长、抽帧数、学习目标 subtitles.srt 广告清洗后的字幕文本（源码里的 AD PATTERN 会过滤掉\"字幕由...压制\"、\"仅供学习\"这类干扰） frames/ .jpg 每秒一张的抽帧图，文件名带时间码（00 00 15.jpg） 剧情资料.md 可选。你自己写的背景资料（人物关系、原著梗概） 这个决策的价值远比看起来大 ——它意味着这个工具永远不会因为 OpenAI 涨价、Claude 换模型、Gemini 改 API 而失效。你的 AI 会员权益是你自己的，你换 AI 只是换个上传的窗口。这在 2026 年 AI 收费越来越贵、免费额度越来越紧的环境下是个巨大的杠杆。 5 分钟跑通：完整命令 & 踩坑 不懂编程的用户 1. 到 release 页面 下载 ZIP，解压。 2. Windows 双击 run.bat，Mac 双击 run.command（第一次 Mac 会弹\"无法打开\"，右键 → 打开 → 打开就好）。 3. 首次启动会自动下载便携版 Node.js（约 30 40MB，走 npmmirror 国内镜像）和 npm 依赖，两三分钟。之后每次秒开。 黑色终端窗口会打印 http://localhost:5173，浏览器自动打开。用完关掉那个黑色窗口就是退出。 开发者 坑 1：必须用 npm run dev，不能只用 npm run build。 因为自动转码和字幕搜索都是 dev server 的中间件，静态部署会降级为手动操作。 坑 2：ffmpeg 可选但强推荐。 项目本身不带 ffmpeg，但 H.264 MP4 之外的格式（RMVB / AVI / HEVC / MKV）浏览器 元素放不了，抽帧会失败。装了 ffmpeg 之后 transcode server plugin.ts 会自动把它们转成浏览器能吃的 MP4，产物按\"文件名+大小\"做缓存（md5(filename size) 前 16 位），同一部电影重选秒完成。 坑 3：网络字幕搜索限中文影片较友好。 subtitle server plugin.ts 里默认走的是 secure.assrt.net（伪射手），支持 srt/ass/ssa/v..."
+  },
+  {
+    "title": "试过 Sora 和剪映 AI 之后，我用这个开源项目把「AI 视频」跑成了真流水线",
+    "url": "/articles/2026/07/12/lingtistudio-ai-video-production-pipeline.html",
+    "type": "page",
+    "date": "2026-07-12",
+    "description": "LingtiStudio 是一个 166 star 的开源 AI 视频生产系统：脚本→审核→资产确认→关键帧→配音→片段→组装→剪映草稿。它的价值不在生成质量，而在 8 个可暂停的审核关卡 + 单分镜重跑 + 剪映草稿闭环。这篇讲清楚它跟 Sora / 剪映 AI 一键的差别、5 分钟部署命令，以及适合谁不适合谁。",
+    "excerpt": "LingtiStudio 是一个 166 star 的开源 AI 视频生产系统：脚本→审核→资产确认→关键帧→配音→片段→组装→剪映草稿。它的价值不在生成质量，而在 8 个可暂停的审核关卡 + 单分镜重跑 + 剪映草稿闭环。这篇讲清楚它跟 Sora / 剪映 AI 一键的差别、5 分钟部署命令，以及适合谁不适合谁。",
+    "topic": "",
+    "topicSlug": "",
+    "series": "",
+    "tags": [
+      "AI 项目拆解",
+      "AI 视频",
+      "开源工具",
+      "内容工作流",
+      "剪映"
+    ],
+    "priority": 0,
+    "content": "一句话结论 ：LingtiStudio 值得内容创作者关注。它对标的不是\"AI 一键出片\"这类黑盒产品，而是\"你能不能把 AI 视频做成流水线\"。8 个审核关卡 + 单分镜重跑 + 原生剪映草稿导出，是它区别于 Sora / 剪映 AI 的三条硬骨架。 一、为什么写这篇：AI 视频这件事的两条路 上周我给一个客户做一支 60 秒的讲解视频，试了三种方式： 路径 A：Sora 直生成。 输入一段中英混杂的 prompt，等 2 分钟出结果。开头旁白语气不对，重来。第二版画面漂移，重来。第三版价格差不多够订《华尔街日报》一年了。 路径 B：剪映 AI 一键成片。 上传选题脚本，选模板。产出确实快，但只是\"套模板 + 换素材\"。想调分镜结构，得整段重来。 路径 C：自己拼。 让 GPT 5 写脚本，MidJourney 生关键帧，MiniMax 配音，Kling 图生视频，最后拖回剪映拼。每一步都能控制，但每一步都是独立工具，接口不匹配、时长对不齐、风格串味。 上周三我在 GitHub 上看到 ruilisi/LingtiStudio（166 star，MIT 协议，中文文档齐全）——它做的不是路径 A 也不是路径 B，是把路径 C 那种\"拼装\"变成一个整合起来的产品。 这篇讲清楚三件事： 它的核心机制、5 分钟怎么跑起来、什么样的人应该关注 。 二、机制：8 步生产链路，2 个人工关卡 LingtiStudio 把\"从主题到成片\"拆成 8 个可暂停的步骤： 1. 脚本生成 — LLM 直出 + Reflection 双轮审核（借鉴 Agent S 的 Reflection Agent 结构） 2. 分镜审核 — 人工暂停，改文案 / 时长 / 顺序 [GATE] 3. 资产生成 — 角色、场景、道具的参考图，统一风格 4. 资产确认 — 审核通过后再进入关键帧全量生成 [GATE] 5. 关键帧生成 — MiniMax Image / Nano Banana / Gemini 3 Pro Image，并行 6. TTS 配音 — MiniMax Speech，精确时长测量 7. 视频片段生成 — Kling v3 / Seedance / MiniMax Video，智能路由 8. FFmpeg 组装 — 字幕 + 转场 + 剪映草稿导出 两个关卡的存在，是这个项目和\"一键生成\"的根本差别。 modules/llm.py 里的 Reflection 结构直接可以读出来： 这一段之所以重要，是因为它承认了一个事实： LLM 一轮直出的脚本，往往会主题跑偏、结构断裂、开头无钩子 。加一轮温度更低的审阅（0.3 vs 0.7）能显著改善。你可以在 Cursor / Claude Code 里手动做，也可以让脚本自动做——LingtiStudio 选了后者。 三、为什么\"审核关卡\"值钱 用一个具体成本例子：60 秒短视频，8 个分镜。 没有审核关卡的一键流程： 脚本 LLM 直出（可能主题跑偏），$0 8 张关键帧全部生成，$0.4 8 段配音全部生成 8 段图生视频，$3.2 成片看完发现开头不对 代价：全流程重跑，再花 $3.6 有审核关卡的分阶段流程： 脚本看完再确认，$0 资产先小图预审，$0.1 关键帧确认后全量，$0.4 配音确认关键帧后并行 视频错了只重跑单段，$0.4 成片剪映草稿可微调，$0 重跑 假设首轮通过率 60%（这是我实测的乐观值），一键流程的期望成本 = $3.6 × (1 + 0.4) ≈ $5.0；分阶段流程的期望成本约 $0.9 $1.5。 对于个人创作者，一个月做 10 条视频，就是几十美金的差距。 更重要的是心理成本：一键流程失败要重看一遍成片才发现问题，人工分辨\"哪一步坏了\"的负担全部落在你身上；分阶段流程每一步交付物具体，出错立刻能定位。 四、剪映草稿导出：AI 做 90%，人做最后 10% 这是我读源码时最惊讶的一段。modules/jianying draft.py 直接调用 pyJianYingDraft，把每个分镜作为独立片段导入剪映草稿工程， 视频 / 配音 / 字幕分离到独立轨道 。 这句话是产品价值观。 它不假设 AI 出的东西一次可用 ——只承诺\"帮你到 90%，剩下 10% 你在剪映里改会比重跑更快\"。 对比之下： 方案 交付物 想改一个分镜要做什么 Sora / Runway 单条 MP4 换 prompt 重生成整段 剪映 AI 一键 剪映工程 但结构已固化，改一个分镜要重跑整个模板 手工拼 一堆散文件 你自己拖到剪映，字幕自己对齐 LingtiStudio MP4 + SRT + 剪映草稿（独立轨） 在剪映里直接替换单个分镜的视频/配音/字幕 对做讲解号、知识科普、多分镜故事视频的创作者，这个差别不是量的差，是质的差。 五、四种方案的横向对比 维度拉齐后的结论： Sora / Runway ：适合尝鲜 / 单条创意 / 商业素材。不适合内容账号做批量。 剪映 AI 一键 ：适合完全不懂 AI 的普通人做套模板视频。不适合想控制结构的创作者。 手工 ComfyUI + 各家 API ：适合极客。学习曲线高，出错定位难。 LingtiStudio ：适合有一定 AI ..."
   },
   {
     "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
@@ -713,7 +792,7 @@
   },
   {
     "title": "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了",
-    "url": "/articles/2026/07/16/lux-china-video-downloader/",
+    "url": "/articles/2026/07/16/lux-china-video-downloader.html",
     "type": "blog",
     "date": "2026-07-16",
     "description": "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。",
@@ -734,7 +813,7 @@
   },
   {
     "title": "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支",
-    "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/",
+    "url": "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative.html",
     "type": "blog",
     "date": "2026-07-16",
     "description": "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。",
@@ -755,7 +834,7 @@
   },
   {
     "title": "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸",
-    "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme/",
+    "url": "/articles/2026/07/18/codex-dream-skin-desktop-theme.html",
     "type": "blog",
     "date": "2026-07-18",
     "description": "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。",
@@ -871,7 +950,7 @@
   },
   {
     "title": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
-    "url": "/articles/2026/07/31/index.html",
+    "url": "/articles/2026/07/31/ai-comic-workbench.html",
     "type": "blog",
     "date": "2026-07-31",
     "description": "国产开源AI漫画工作台：输入故事，一键生成完整分镜漫画",
@@ -904,6 +983,25 @@
     ],
     "priority": 0,
     "content": "TL;DR ：如果你是AI零基础想入门，这套课程完全免费、内容体系完整，从符号AI到Transformer/GAN全覆盖，支持40+种语言（含简体中文），配套Jupyter Notebook可直接运行。 适合 ：真正想从零开始系统学习AI的零基础同学； 不适合 ：想快速上手工程化开发大模型应用的开发者。 为什么这个项目值得你花时间？ 现在打开 GitHub，搜索「AI入门」，你会看到成百上千个仓库。但能把一个课程做到 5.4万 Star、1.1万 Fork，而且内容一直更新到最近几天，微软官方出品，这本身就说明了质量。 我梳理了一下，这个项目和市面上其他AI入门资源比，最大的优势在这几点： 1. 真正完整的体系，不是零散知识点堆砌 这不是一个随便凑出来的教程合集，而是一个 12周、共24节课 的完整课程体系： 模块 内容 第一周 AI发展史入门，建立对AI的整体认知 第二周 符号AI — 知识表示与专家系统（传统AI，帮你理解AI的思想源头） 第三周 神经网络基础 — 从感知机到手写MLP框架，再到PyTorch/TensorFlow入门 第四周 计算机 Vision 全流程 — CNN/迁移学习/自编码器/GAN/目标检测/图像分割 第五周 NLP全路线 — 词表示/Word2Vec/Transformer/BERT/LLM提示工程 第六周 进阶专题 — 遗传算法/深度强化学习/多智能体系统 第七周 AI伦理与负责任AI 额外内容 多模态网络/CLIP/VQGAN 每节课都有： 理论讲解（中英文都有） 可运行的Jupyter Notebook代码（同时提供PyTorch和TensorFlow两个版本） 课后测验（在线可做） 部分课程有配套实验 AI 入门知识体系速览（手绘笔记 by @girlie mac 2. 它解决了AI入门最大的痛点：不知道该从哪开始 很多同学想学AI，最大的问题不是难，而是 不知道该学什么顺序 。从Python入门？直接看论文？上来就调大模型API？网上信息太乱了。 这个课程给了你清晰的学习路径： 阶段一：先理解AI的基本思想——从传统符号AI开始，理解什么是知识表示和推理，建立AI到底要解决什么问题。 阶段二：然后进入神经网络——从最简单的感知机开始，自己动手写一个简单神经网络框架，理解反向传播到底怎么工作，再转到工业级框架。 阶段三：分方向深入——分别学习计算机视觉和NLP两大核心领域，从基础到前沿。 阶段四：拓展专题——了解遗传算法、强化学习这些不那么主流但依然重要的方向，最后落脚到AI伦理。 这个顺序和很多「上来就教你调OpenAI API的速成课不一样，它帮你建立 完整知识体系，而不是只教你怎么调用API。 3. 真·可上手，不是只看不动手 很多AI教程都有个问题：看了觉得懂了，真上手写代码就懵了。 这个项目几乎每个知识点都配了 可直接运行的Notebook ： 你想理解感知机，直接打开Perceptron.ipynb点运行，一步一步看怎么训练，怎么分类手写数字。 你想学习CNN，直接跑一遍卷积的PyTorch版本，换张图片试试效果。 甚至还提供了环境配置文件environment.yml，用conda一键创建环境，不用自己一个个装依赖。 如果不想本地装环境，直接点README上的Binder按钮，在浏览器里就能跑： 5分钟就能跑通第一个Notebook，真正动手学，而不是看视频记笔记。 4. 完全免费，还带中文翻译 这个项目微软官方已经翻译到简体中文，每个页面都有翻译版本： 主README中文：translations/zh CN/README.md 每节课都有对应中文翻译，不用啃英文 而且所有内容在GitHub上完全开放，不需要关注公众号，不需要加群，不需要付费，直接克隆下来就能学。 五分钟快速开始 方式一：在线直接学（推荐零基础） 最简单不需要安装，直接用GitHub Codespaces： 1. 打开项目主页：https://github.com/microsoft/AI For Beginners 2. 点击「Code」→ 「Codespaces」→ 「Create codespace on main」 3. 等待环境创建完成，直接在浏览器里打开Notebook运行 或者用Binder在线运行：点击README里的Binder badge，直接在浏览器打开。 方式二：本地运行 如果你想把课程存在本地慢慢学： 然后从 lessons/1 Intro/ 开始按顺序学就好。 方式三：只看不想跑 如果你不想跑代码，只想看内容，直接在线看网页版： https://microsoft.github.io/AI For Beginners/ 用Docsify直接渲染，不需要下载就能看。 适合谁，不适合谁 ✅ 适合这些同学： 零基础想系统学AI — 真正从零开始，建立完整的知识体系，而不是只会调用API 有Python基础，想转AI方向 — 已经会写Python，想系统补AI基础，了解各个方向 学生党预算有限 — 不想花几万块报培训班，又想要官方出品的高质量免费课程 ❌ 不适合这些同学： 想快速上手做AI应用开发 — 这个课程偏基础理论，不是教你怎么调OpenAI API做ChatGPT应..."
+  },
+  {
+    "title": "Auto-Redbook-Skills：AI自动生成小红书笔记卡片，支持自动发布",
+    "url": "/articles/2026/08/01/auto-redbook-skills-xiaohongshu-ai.html",
+    "type": "page",
+    "date": "2026-08-01",
+    "description": "Auto Redbook Skills：AI自动生成小红书笔记卡片，支持自动发布 做小红书内容创作的朋友一定有这个痛点：AI把文案写好了，但是排版做图太折腾。找模板、调尺寸、改配色，一篇文章内容五分钟，作图两小时。 今天给大家推荐一个刚重构完的开源工具 Auto Redbook Skills ，正好解决这个痛点： Markdown 写好内容，一键生成符合小红...",
+    "excerpt": "Auto Redbook Skills：AI自动生成小红书笔记卡片，支持自动发布 做小红书内容创作的朋友一定有这个痛点：AI把文案写好了，但是排版做图太折腾。找模板、调尺寸、改配色，一篇文章内容五分钟，作图两小时。 今天给大家推荐一个刚重构完的开源工具 Auto Redbook Skills ，正好解决这个痛点： Markdown 写好内容，一键生成符合小红...",
+    "topic": "",
+    "topicSlug": "",
+    "series": "",
+    "tags": [
+      "AI",
+      "开源",
+      "小红书",
+      "工具"
+    ],
+    "priority": 0,
+    "content": "Auto Redbook Skills：AI自动生成小红书笔记卡片，支持自动发布 做小红书内容创作的朋友一定有这个痛点：AI把文案写好了，但是排版做图太折腾。找模板、调尺寸、改配色，一篇文章内容五分钟，作图两小时。 今天给大家推荐一个刚重构完的开源工具 Auto Redbook Skills ，正好解决这个痛点： Markdown 写好内容，一键生成符合小红书比例的精美卡片，支持 8 种主题风格，还能自动发布 。 核心功能 8 套主题皮肤 ：默认简约、几何风、新粗野主义、植物风、商务风、复古风、终端风、手绘风，覆盖各种场景 4 种分页模式 ：手动分页、自动缩放、自动分页、动态高度，解决内容溢出/留白问题 Python/Node.js 双版本 ：看你习惯用哪个 支持自动发布 ：配置 Cookie 后一键发布到小红书 Claude Code 插件支持 ：一键安装，Agent 直接帮你搞定 快速开始 Claude Code 插件安装（推荐） 安装完成后 /reload plugins 即可使用。 手动安装 生成卡片 输出：cover.png + card 1.png card 2.png ... 直接拿去发布就行。 自动发布 项目结构 注意事项 ⚠️ 使用前请知悉小红书官方关于打击AI托管运营账号的公告，请遵守平台规则。 Cookie 注意保密，不要提交到 Git 避免高频发布，防止触发风控 默认尺寸 1080×1440 就是小红书推荐比例 总结 这个工具把\"AI写内容 → 生成卡片 → 发布\"整个流程打通了，对于经常产出小红书内容的朋友来说确实能节省不少时间。项目完全开源免费，MIT 许可证，定制主题也很方便。 GitHub地址： comeonzhj/Auto Redbook Skills 如果你也在做小红书，不妨试试。"
   },
   {
     "title": "VoxCPM2：国产开源语音合成新标杆，支持音色设计与可控声音克隆",
@@ -974,7 +1072,7 @@
     "title": "DeepSeek Harness：深度读评 — 一切皆插件的开源 AI Agent 框架",
     "url": "/articles/2026/08/14/deepseek-harness-intro.html",
     "type": "page",
-    "date": "",
+    "date": "2026-08-14",
     "description": "DeepSeek 官方开源的 AI Agent 框架 Harness，采用“一切皆插件”的架构设计，从模型适配器到 Agent 循环本身都是可替换的插件。本文深入解读其架构思想、核心设计，并给出上手体验和适用场景判断。",
     "excerpt": "DeepSeek 官方开源的 AI Agent 框架 Harness，采用“一切皆插件”的架构设计，从模型适配器到 Agent 循环本身都是可替换的插件。本文深入解读其架构思想、核心设计，并给出上手体验和适用场景判断。",
     "topic": "",

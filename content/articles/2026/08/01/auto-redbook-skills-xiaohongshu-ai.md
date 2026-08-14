@@ -1,4 +1,5 @@
----
+﻿---
+url: "/articles/2026/08/01/auto-redbook-skills-xiaohongshu-ai.html"
 title: "Auto-Redbook-Skills：AI自动生成小红书笔记卡片，支持自动发布"
 date: 2026-08-01T00:00:00+08:00
 draft: false

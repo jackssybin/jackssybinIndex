@@ -1,4 +1,5 @@
----
+﻿---
+url: "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html"
 title: "如何让 Claude Code / Cursor 用克隆的声音说话？OmniVoice Studio 的 MCP 方案实测"
 date: 2026-07-11T14:30:00+08:00
 lastmod: 2026-07-11T14:30:00+08:00

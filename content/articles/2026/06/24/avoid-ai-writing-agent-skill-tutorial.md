@@ -1,6 +1,6 @@
----
+﻿---
 title: "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill"
-url: "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial/"
+url: "/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html"
 date: "2026-06-24T00:00:00+08:00"
 lastmod: "2026-06-24T00:00:00+08:00"
 description: "基于 conorbronsdon/avoid-ai-writing 的 README、SKILL.md、detector、Cursor 规则和插件脚本，拆解它如何把 AI 写作痕迹从模糊感觉变成可复用、可测试、可移植的写作质检流程。"

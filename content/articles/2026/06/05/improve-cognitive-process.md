@@ -1,6 +1,8 @@
----
+﻿---
+date: "2026-06-05T10:00:00+08:00"
+lastmod: "2026-06-05T10:00:00+08:00"
 title: "怎样提高自己的认知流程？"
-permalink: "/articles/2026/06/05/improve-cognitive-process.html"
+url: "/articles/2026/06/05/improve-cognitive-process.html"
 description: "回答知乎问题：怎样提高自己的认知流程？文章结合达尔文、富兰克林、芒格等真人事迹，给出一个可执行的认知改进流程：写清问题、区分事实和观点、寻找反证、小实验、复盘判断过程。"
 tags: ["认知", "成长", "思维方式", "知乎"]
 pageClass: solo-page

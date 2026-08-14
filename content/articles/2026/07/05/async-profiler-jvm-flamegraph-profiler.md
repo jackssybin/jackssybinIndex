@@ -1,6 +1,6 @@
----
+﻿---
 title: "十年之后再看 async-profiler：一个不用改 JVM 就能看清 CPU / 分配 / 锁的采样式性能剖析器"
-url: "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler/"
+url: "/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html"
 date: "2026-07-05T15:40:00+08:00"
 lastmod: "2026-07-05T15:40:00+08:00"
 description: "async-profiler 是 Java 生态里被引用最多、最保命的一个采样式性能剖析器。它不用 -XX:+PreserveFramePointer、不吃 safepoint bias、能同时把 Java 方法、JVM 内部、内核栈画进同一张火焰图。这一篇从 4.4 版本源码/文档级拆解：三种 CPU 采样引擎、三种栈行走模式、Wall / Alloc / Lock / Nativemem / 多事件、Differential Flame Graph、Heatmap、JFR 输出、asprof + jfrconv 完整跑通路径，以及和 JFR / Perf / VisualVM 的真实边界。"

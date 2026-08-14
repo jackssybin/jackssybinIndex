@@ -1,6 +1,6 @@
----
+﻿---
 title: "OpenMontage：把你的 AI 编程助手变成全自动视频制作工作室"
-url: "/articles/2026/06/27/openmontage-ai-video-studio/"
+url: "/articles/2026/06/27/openmontage-ai-video-studio.html"
 date: "2026-06-27T17:00:00+08:00"
 lastmod: "2026-06-27T17:00:00+08:00"
 description: "OpenMontage 是首个开源的智能体化视频制作系统，它能把 Claude Code/Cursor 变成全自动视频工作室，从创意到成品视频一条龙，全程智能体自动完成研究、脚本、素材、剪辑、合成。"

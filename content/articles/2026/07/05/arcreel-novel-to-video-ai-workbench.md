@@ -1,6 +1,6 @@
----
+﻿---
 title: "把一本小说做成短视频：拆开 ArcReel 这个 AGPL 开源 AI 视频工作台"
-url: "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench/"
+url: "/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html"
 date: "2026-07-05T14:00:00+08:00"
 lastmod: "2026-07-05T14:00:00+08:00"
 description: "ArcReel 是一个 AGPL-3.0 的开源项目，把「小说 → 短视频」做成了一条 AI Agent 编排的全流水线：Claude Agent SDK 做智能体，接入 Gemini / 火山方舟 / Grok / OpenAI / Vidu / 阿里百炼 / MiniMax / 可灵 八家供应商，Docker 一条命令跑起来。这一篇拆到源码级：三层架构、异步任务队列、编排 Skill + 聚焦 Subagent、多供应商抽象层，以及一条最短跑通路径。"

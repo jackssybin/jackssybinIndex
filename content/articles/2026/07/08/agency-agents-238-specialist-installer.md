@@ -1,6 +1,6 @@
----
+﻿---
 title: "Agency Agents 教程：一个仓库把 238 个 AI 专家装进 Claude Code / Cursor / Codex / Hermes"
-url: "/articles/2026/07/08/agency-agents-238-specialist-installer/"
+url: "/articles/2026/07/08/agency-agents-238-specialist-installer.html"
 date: "2026-07-08T10:00:00+08:00"
 lastmod: "2026-07-08T10:00:00+08:00"
 description: "msitarzewski/agency-agents 是一套 238 个带人格与工作流的 AI 专家（覆盖 17 个 division），配一份 install.sh 就能把它们同时铺到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode、Windsurf、Hermes 等 15 个工具里。本文拆解仓库结构、install/convert 双脚本、Hermes 懒加载 router 的设计，以及 NEXUS-Micro / Sprint / Full 三种编队模式的实战套路。"

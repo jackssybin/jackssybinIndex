@@ -1,6 +1,6 @@
----
+﻿---
 title: "折腾 yt-dlp 装了半小时 Python 还报错，我换了这个 31.5k 星的 Go 单文件后终于安稳了"
-url: "/articles/2026/07/16/lux-china-video-downloader/"
+url: "/articles/2026/07/16/lux-china-video-downloader.html"
 date: "2026-07-16T22:00:00+08:00"
 lastmod: "2026-07-16T22:00:00+08:00"
 description: "iawia002/lux 是 GitHub 31.5k star 的 Go 视频下载器，支持 B 站/知乎/微博/小红书/爱奇艺/优酷/QQ 等 49 个站点。这篇讲清楚：单文件为什么比 yt-dlp 好用、release 停在 v0.24.1 但 master 还在活跃提交的坑、5 分钟上手完整命令、以及什么场景应该切回 yt-dlp。"

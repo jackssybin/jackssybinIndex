@@ -1,6 +1,6 @@
----
+﻿---
 title: "MediaCrawler 教程：一键爬取小红书/抖音/B站/知乎等多平台自媒体数据"
-url: "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial/"
+url: "/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial.html"
 date: "2026-06-27T16:00:00+08:00"
 lastmod: "2026-06-27T16:00:00+08:00"
 description: "MediaCrawler 是一个基于 Playwright 的强大自媒体爬虫工具，支持小红书、抖音、快手、B站、微博、贴吧、知乎七大平台，无需逆向 JS 加密，CDP 模式复用浏览器登录态，大幅降低风控概率。本文带你完整上手，从环境配置到实际爬取。"

@@ -1,6 +1,6 @@
----
+﻿---
 title: "GitHub Trending #1 的 last30days-skill：AI Agent 的近期情报层是怎么做出来的"
-url: "/articles/2026/07/02/last30days-trending-1-github-research-radar/"
+url: "/articles/2026/07/02/last30days-trending-1-github-research-radar.html"
 date: "2026-07-02T13:35:00+08:00"
 lastmod: "2026-07-02T13:35:00+08:00"
 description: "拆 mvanhorn/last30days-skill v3.8.3 源码：v3 智能预研引擎、13+ 来源并发、竞品自动比较、arctic-shift 免费 Reddit 评分。给 Agent 一个能读懂过去 30 天的情报层，而不是又一个搜索接口。"

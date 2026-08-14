@@ -1,6 +1,6 @@
----
+﻿---
 title: "RedInk 源码拆解：把小红书图文生成做成一条可自部署流水线"
-url: "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator/"
+url: "/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator.html"
 date: "2026-06-24T00:00:00+08:00"
 lastmod: "2026-06-24T00:00:00+08:00"
 description: "基于 HisMax/RedInk 的 README、Dockerfile、Flask/Vue 源码、提示词和配置模板，拆解它如何把小红书图文生产从一句主题变成大纲、封面、批量内容页、历史记录和重绘下载的完整流程。"

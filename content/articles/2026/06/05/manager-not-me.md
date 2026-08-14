@@ -1,6 +1,8 @@
----
+﻿---
+date: "2026-06-05T10:00:00+08:00"
+lastmod: "2026-06-05T10:00:00+08:00"
 title: "为什么有的人完全不懂技术，却可以做到管理层"
-permalink: "/articles/2026/06/05/manager-not-me.html"
+url: "/articles/2026/06/05/manager-not-me.html"
 description: "为什么有的人不懂技术却能做到管理层？这篇文章从业务、组织协同、决策语言和技术人职业发展几个角度，聊聊技术人与管理层之间真正的差异。"
 tags: ["职场", "管理", "技术人", "知乎"]
 pageClass: solo-page

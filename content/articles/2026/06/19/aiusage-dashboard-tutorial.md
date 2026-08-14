@@ -1,6 +1,6 @@
----
+﻿---
 title: "AIUsage：一站式管理所有 AI 订阅的 macOS 原生看板"
-url: "/articles/2026/06/19/aiusage-dashboard-tutorial/"
+url: "/articles/2026/06/19/aiusage-dashboard-tutorial.html"
 date: "2026-06-19T10:11:00+08:00"
 lastmod: "2026-06-19T10:11:00+08:00"
 description: "AIUsage 是一个开源的 macOS 原生 SwiftUI 应用，把 Claude Code、Codex、OpenCode 等 12 个 AI 编程工具的账号、额度、成本聚合到一个仪表盘，还内置三个代理，让这些工具能一键切换到任何 OpenAI 兼容模型。"

@@ -1,6 +1,6 @@
----
+﻿---
 title: "把 AI 装进终端的正确方式：拆 crynta/terax-ai 的 7 MB 开发终端"
-url: "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace/"
+url: "/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html"
 date: "2026-07-03T09:30:00+08:00"
 lastmod: "2026-07-03T09:30:00+08:00"
 description: "读完 Terax 的 20k 字 TERAX.md，我改变了对「AI 终端」这四个字的理解。7-8 MB 的 Tauri 2 产物，Rust 后端把 OS 层全接了下来，AI 是一等原语，密钥进钥匙串，无账户无遥测。这一篇拆到源码级：架构、模块、AI 工作流、和它和 Warp/Wave/Cursor 的边界。"

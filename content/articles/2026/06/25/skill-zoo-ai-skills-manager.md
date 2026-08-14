@@ -1,6 +1,6 @@
----
+﻿---
 title: "Skill Zoo：统一管理所有 AI 编程工具的技能库"
-url: "/articles/2026/06/25/skill-zoo-ai-skills-manager/"
+url: "/articles/2026/06/25/skill-zoo-ai-skills-manager.html"
 date: "2026-06-25T16:43:00+08:00"
 lastmod: "2026-06-25T16:43:00+08:00"
 description: "你是否也在 Claude Code、Cursor、Codex 等多个 AI 编程工具之间切换，每个工具都有自己的技能目录，技能分散在各处难以管理？Skill Zoo 是一个开源本地工具，让你在一个图形界面中发现、安装、更新和管理所有 AI 编程技能。"

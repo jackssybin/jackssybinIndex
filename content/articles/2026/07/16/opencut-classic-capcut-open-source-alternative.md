@@ -1,6 +1,6 @@
----
+﻿---
 title: "71.9k star 的 CapCut 开源替代被推倒重写：你现在还能用的，只有那个 archived 分支"
-url: "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative/"
+url: "/articles/2026/07/16/opencut-classic-capcut-open-source-alternative.html"
 date: "2026-07-16T10:00:00+08:00"
 lastmod: "2026-07-16T10:00:00+08:00"
 description: "opencut-app/opencut 是 GitHub 上 71.9k star 的 CapCut 开源替代，2026 年被作者从头重写，主仓库当前是空 scaffold。这篇讲清楚：能用的版本在 opencut-classic（已 archived），怎么本地跑通，rewrite 到底动了哪些结构，以及什么时候应该切到新版。"

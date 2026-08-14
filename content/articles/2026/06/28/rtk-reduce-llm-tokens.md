@@ -1,6 +1,6 @@
----
+﻿---
 title: "RTK：帮你省下 80% LLM Token 的 CLI 代理工具"
-url: "/articles/2026/06/28/rtk-reduce-llm-tokens/"
+url: "/articles/2026/06/28/rtk-reduce-llm-tokens.html"
 date: "2026-06-28T12:00:00+08:00"
 lastmod: "2026-06-28T12:00:00+08:00"
 description: "一款用 Rust 写的高性能 CLI 代理，可以将 LLM 日常开发中的 Token 消耗降低 60-90%。单一二进制文件，零依赖， overhead 不到 10ms。支持 Claude Code、Copilot、Cursor 等所有主流 AI 编程工具。"

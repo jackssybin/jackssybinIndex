@@ -1,6 +1,8 @@
----
+﻿---
+date: "2026-08-14T10:00:00+08:00"
+lastmod: "2026-08-14T10:00:00+08:00"
 title: "DeepSeek Harness：深度读评 — 一切皆插件的开源 AI Agent 框架"
-permalink: "/articles/2026/08/14/deepseek-harness-intro.html"
+url: "/articles/2026/08/14/deepseek-harness-intro.html"
 description: "DeepSeek 官方开源的 AI Agent 框架 Harness，采用“一切皆插件”的架构设计，从模型适配器到 Agent 循环本身都是可替换的插件。本文深入解读其架构思想、核心设计，并给出上手体验和适用场景判断。"
 tags: ["AI", "开源", "Agent框架", "DeepSeek", "插件化"]
 pageClass: solo-page

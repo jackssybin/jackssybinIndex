@@ -1,6 +1,6 @@
----
+﻿---
 title: "AI Job Search 教程：把 Claude Code 变成 drafter-reviewer 求职工作台"
-url: "/articles/2026/07/08/ai-job-search-claude-code-career-workbench/"
+url: "/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html"
 date: "2026-07-08T13:00:00+08:00"
 lastmod: "2026-07-08T13:00:00+08:00"
 description: "MadsLorentzen/ai-job-search 用 9 个 slash 命令 + 两个 agent 把「找工作」拆成一条流水线：/setup 建档、/scrape 扫岗位、/rank 打分、/apply 起草-审稿-编译 PDF-过 ATS，最后 /outcome 归档。本文拆流水线、拆 drafter/reviewer 双 agent 结构、拆 PDF 视觉 + ATS 文本层双重验证循环，附 5 分钟接入指南和替换本地招聘门户的清单。"

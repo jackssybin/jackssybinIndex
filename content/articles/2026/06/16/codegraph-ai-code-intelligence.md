@@ -1,6 +1,8 @@
----
+﻿---
+date: "2026-06-16T10:00:00+08:00"
+lastmod: "2026-06-16T10:00:00+08:00"
 title: "CodeGraph：给 AI 编程助手装一个本地代码大脑"
-permalink: "/articles/2026/06/16/codegraph-ai-code-intelligence.html"
+url: "/articles/2026/06/16/codegraph-ai-code-intelligence.html"
 description: "CodeGraph 是一个本地优先的代码知识图谱、CLI 和 MCP Server。本文从源码和文档出发，讲清它怎样让 AI 编程助手少 grep、多理解代码结构。"
 tags: ["AI Agent", "代码智能", "MCP", "CodeGraph", "工具教程"]
 pageClass: solo-page

@@ -1,6 +1,6 @@
----
+﻿---
 title: "AI 视频制作智能体：输入一句话，自动生成完整视频"
-url: "/articles/2026/06/28/ai-video-agent-auto-generate-video/"
+url: "/articles/2026/06/28/ai-video-agent-auto-generate-video.html"
 date: "2026-06-28T15:00:00+08:00"
 lastmod: "2026-06-28T15:00:00+08:00"
 description: "一个开源的 AI 视频创作工作台，输入一句话需求，自动完成大纲生成、分镜、配音、字幕，最后导出 MP4。支持图片轮播和 HTML 动画两种模式，三种内置风格。"

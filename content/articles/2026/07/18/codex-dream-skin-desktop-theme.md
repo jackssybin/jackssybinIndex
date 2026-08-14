@@ -1,6 +1,6 @@
----
+﻿---
 title: "3 天涨 8660 star：这个开源项目只用一张壁纸，把 Codex 桌面端换了张脸"
-url: "/articles/2026/07/18/codex-dream-skin-desktop-theme/"
+url: "/articles/2026/07/18/codex-dream-skin-desktop-theme.html"
 date: "2026-07-18T07:00:00+08:00"
 lastmod: "2026-07-18T07:00:00+08:00"
 description: "Fei-Away/Codex-Dream-Skin 是 GitHub 2026-07-15 才创建的开源项目，3 天时间涨到 8660 star / 921 fork。它不改 app.asar、不动 WindowsApps，只通过本机 CDP 注入 CSS 就能让 Codex 桌面端铺满一整张自选壁纸。这篇讲清楚：它到底动了什么、macOS / Windows 5 分钟怎么装、原生控件为什么还能点、以及什么场景别装。"
