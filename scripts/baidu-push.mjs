@@ -1,4 +1,4 @@
-﻿// 百度链接主动推送脚本
+// 百度链接主动推送脚本
 // 使用方式：
 //   node scripts/baidu-push.mjs                    # 从 sitemap 读取，推送全部“正文”页
 //   node scripts/baidu-push.mjs --since=7          # 只推最近 7 天有 <lastmod> 的页面
@@ -28,7 +28,7 @@ for (const raw of args) {
   else if (!raw.startsWith('--')) opts.sitemap = raw
 }
 
-const site = process.env.BAIDU_PUSH_SITE || 'jackssybin.cn'
+const site = process.env.BAIDU_PUSH_SITE || 'http://jackssybin.cn'
 const token = process.env.BAIDU_PUSH_TOKEN
 const dryRun = process.env.BAIDU_PUSH_DRY === '1'
 
