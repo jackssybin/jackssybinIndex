@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN" data-solo-theme="dark">
 <head>
   <meta charset="utf-8">
@@ -24,6 +24,10 @@
   {{ end }}
 
   <link rel="canonical" href="{{ .Permalink }}">
+  {{- $path := .RelPermalink -}}
+  {{- if or (hasPrefix $path "/tags/") (eq $path "/search.html") (eq $path "/search/") (hasPrefix $path "/page/") (hasPrefix $path "/archives/") -}}
+  <meta name="robots" content="noindex, follow">
+  {{- end -}}
   {{ with .Site.Params.seo.google_verify }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
   {{ with .Site.Params.seo.baidu_verify }}<meta name="baidu-site-verification" content="{{ . }}">{{ end }}
 
