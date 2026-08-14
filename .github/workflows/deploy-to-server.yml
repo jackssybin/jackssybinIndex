@@ -57,7 +57,7 @@ jobs:
         run: pnpm sync:hugo
 
       - name: Build Hugo static site
-        run: hugo --destination public --minify --cleanDestinationDir
+        run: hugo --destination public --minify --cleanDestinationDir --enableGitInfo
 
       - name: Deploy dist to server
         uses: easingthemes/ssh-deploy@v5.1.0
