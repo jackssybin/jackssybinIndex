@@ -1,3 +1,8 @@
+---
+title: "Cognitive workflow illustration notes"
+draft: true
+---
+
 # analysis
 
 - Content type: 知乎回答 / 方法论文章

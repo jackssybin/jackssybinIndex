@@ -2,7 +2,7 @@
 date: 2026-06-17
 slug: ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿
 title: AI 圈又为“蒸馏”吵起来：大模型真正怕的不是被模仿
-description: ![蒸馏争议示意](/images/ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿/01-framework-distillation.png)
+description: "从 DeepSeek 蒸馏争议切入，分析大模型厂商真正担心的不是输出被模仿，而是数据、成本与护城河被重新定义；文章梳理知识蒸馏的边界、合规争议与模型竞争逻辑。"
 categories: ['AI', '工具测评']
 contenttype: article
 draft: false
