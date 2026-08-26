@@ -6,6 +6,8 @@ description: OpenStory 解决了AI短视频创作的痛点：你只需要输入�
 
 做AI短视频还要逐帧写Prompt？这个开源项目一次脚本输入自动生成全序列
 
+![](/root/jackssybinIndex/content-ops/openstory/media/openstory-logo.png)
+
 我最近跟几个做AI内容创作的朋友聊天，发现大家都有同一个困惑。
 
 写好脚本，还要手动拆成一个个场景，每个场景都要重新写Prompt，反复强调角色长什么样、场景色调是什么样。
@@ -21,6 +23,8 @@ description: OpenStory 解决了AI短视频创作的痛点：你只需要输入�
 ## 它解决了什么痛点？
 
 我给你梳理一下传统AI做短视频的流程：
+
+![](/root/jackssybinIndex/content-ops/openstory/media/01-workflow-comparison.png)
 
 1. **写脚本** → 自己手动拆成一个个场景
 2. **写Prompt** → 每个场景都要重复描述角色、场景、风格
@@ -119,6 +123,8 @@ bun setup
 转场：程序员打开OpenStory网站，输入同样的脚本。
 收尾：生成的序列帧整齐排列，风格统一，程序员露出微笑。
 ```
+
+![](/root/jackssybinIndex/content-ops/openstory/media/test-image.jpg)
 
 **第二步**：点生成，AI自动拆解成4个场景
 

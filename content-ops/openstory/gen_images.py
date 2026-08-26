@@ -109,14 +109,14 @@ def safe_text(draw, xy, text, font, fill, anchor="lm"):
 
     Common anchor values:
       'lm' = left-middle (left-aligned, v-centered) — ✅ DEFAULT, safe for
-             titles, card labels, lists, most text. x is the left edge.
+               titles, card labels, lists, most text. x is the left edge.
       'mm' = middle-center (centered both axes) — good for badges, tags,
-             centered headings where you know the exact center position.
-             ⚠️ x is TEXT CENTER, not left edge — use with caution.
+               centered headings where you know the exact center position.
+               ⚠️ x is TEXT CENTER, not left edge — use with caution.
       'rm' = right-middle (right-aligned, v-centered) — good for metadata,
-             dates, numbers. x is the right edge.
+               dates, numbers. x is the right edge.
       'mt' = middle-top (centered, top-aligned) — good for headings above
-             content blocks.
+               content blocks.
     """
     draw.text(xy, text, font=font, fill=fill, anchor=anchor)
 
@@ -133,7 +133,6 @@ def save(img, name):
 # ═══════════════════════════════════════════════════════════════════
 def rounded_rect(draw, xy, radius, fill, outline=None, width=0):
     x1, y1, x2, y2 = xy
-    d = radius * 2
     draw.rounded_rectangle(xy, radius=radius, fill=fill, outline=outline, width=width)
 
 # ═══════════════════════════════════════════════════════════════════
@@ -195,23 +194,23 @@ def draw_cover_wechat():
     d = ImageDraw.Draw(img)
 
     # Top tag
-    tag_font = resolve_font_bold(28)
-    d.rounded_rectangle([70, 80, 320, 130], radius=25, outline=(60, 120, 220), width=2)
-    safe_text(d, (195, 105), "开源 · AI工具 · 视频生成", tag_font, (60, 120, 220), anchor="mm")
+    tag_font = resolve_font_bold(24)
+    d.rounded_rectangle([80, 60, 300, 110], radius=25, outline=(60, 120, 220), width=2)
+    safe_text(d, (190, 85), "开源 · AI工具 · 视频生成", tag_font, (60, 120, 220), anchor="mm")
 
-    # Main title — split into 2 lines for visual rhythm
-    title_font = resolve_font_bold(62)
-    sub_font = resolve_font_bold(38)
+    # Main title — split into 3 lines for visual rhythm
+    title_font = resolve_font_bold(48)
+    sub_font = resolve_font_bold(32)
 
-    safe_text(d, (70, 220), "做AI短视频还要逐帧写Prompt？", title_font, (20, 20, 20))
-    safe_text(d, (70, 310), "这个开源项目一次脚本输入", title_font, (20, 20, 20))
-    safe_text(d, (70, 390), "自动生成全序列", sub_font, (60, 80, 120))
+    safe_text(d, (60, 180), "做AI短视频还要逐帧写Prompt？", title_font, (20, 20, 20))
+    safe_text(d, (60, 250), "这个开源项目一次脚本输入", title_font, (20, 20, 20))
+    safe_text(d, (60, 320), "自动生成全序列", sub_font, (60, 80, 120))
 
     # Bottom-right meta
-    meta_font = resolve_font(24)
-    small = resolve_font(20)
-    safe_text(d, (W - 70, H - 110), "OpenStory", meta_font, (80, 100, 140), anchor="rm")
-    safe_text(d, (W - 70, H - 70), "MIT License · 全栈开源", small, (100, 120, 150), anchor="rm")
+    meta_font = resolve_font(22)
+    small = resolve_font(18)
+    safe_text(d, (W - 60, H - 90), "OpenStory", meta_font, (80, 100, 140), anchor="rm")
+    safe_text(d, (W - 60, H - 50), "MIT License · 全栈开源", small, (100, 120, 150), anchor="rm")
     return img
 
 def draw_cover_zhihu():
@@ -275,6 +274,67 @@ def draw_cover_zhihu():
     safe_text(d, (W - 70, H - 40), "MIT License", meta_font, (120, 130, 160), anchor="rm")
     return img
 
+def draw_workflow_comparison():
+    """1200×750 传统流程 vs OpenStory 对比图"""
+    W, H = 1200, 750
+    img = Image.new("RGB", (W, H), (247, 248, 251))
+    d = ImageDraw.Draw(img)
+
+    # Title
+    title_font = resolve_font_bold(36)
+    safe_text(d, (W//2, 50), "传统AI短视频创作 vs OpenStory 自动流程", title_font, (20, 30, 60), anchor="mm")
+
+    # Two columns
+    card_w = 520
+    card_h = 580
+    gap = 40
+    left_x = (W - card_w * 2 - gap) // 2
+    y0 = 100
+
+    # Left column: 传统流程
+    d.rounded_rectangle([left_x, y0, left_x + card_w, y0 + card_h], radius=12, fill=(255, 255, 255), outline=(240, 100, 100), width=3)
+    header_font = resolve_font_bold(28)
+    safe_text(d, (left_x + card_w//2, y0 + 35), "传统流程", header_font, (240, 100, 100), anchor="mm")
+
+    step_font = resolve_font_bold(22)
+    desc_font = resolve_font(18)
+    steps = [
+        ("1. 手动拆分场景", "写完脚本逐段拆分\n每个场景都要手动操作"),
+        ("2. 逐帧写Prompt", "每个场景重复描述\n角色/场景/风格\n容易遗漏信息"),
+        ("3. 逐个生成", "一个一个点击生成\n等待时间长\n容易出错"),
+        ("4. 保持风格一致性", "反复提醒AI同一个角色\n一次次重绘\n还是经常脸崩"),
+        ("5. 导出拼接", "全部下载后\n导入剪辑软件\n手动拼接"),
+    ]
+    step_y = y0 + 70
+    step_gap = 92
+    for i, (title, desc) in enumerate(steps):
+        safe_text(d, (left_x + 30, step_y + i * step_gap), title, step_font, (20, 30, 60))
+        for j, line in enumerate(desc.split("\n")):
+            safe_text(d, (left_x + 35, step_y + i * step_gap + 28 + j * 22), line, desc_font, (80, 80, 80))
+
+    # Right column: OpenStory
+    right_x = left_x + card_w + gap
+    d.rounded_rectangle([right_x, y0, right_x + card_w, y0 + card_h], radius=12, fill=(255, 255, 255), outline=(60, 180, 120), width=3)
+    safe_text(d, (right_x + card_w//2, y0 + 35), "OpenStory", header_font, (60, 180, 120), anchor="mm")
+
+    steps = [
+        ("1. 输入完整脚本", "复制粘贴整个脚本\n一次提交完事"),
+        ("2. AI自动拆解", "LLM自动拆分场景\n推荐机位/情绪/运镜"),
+        ("3. 批量生成", "一键生成所有场景\n自动保持风格"),
+        ("4. 自动连续性", "角色/场景/色调自动传递\n保证从头到尾一致\n不用反复提醒AI"),
+        ("5. 一键导出成片", "浏览器直接导出MP4\n不用下载再剪辑"),
+    ]
+    for i, (title, desc) in enumerate(steps):
+        safe_text(d, (right_x + 30, step_y + i * step_gap), title, step_font, (20, 30, 60))
+        for j, line in enumerate(desc.split("\n")):
+            safe_text(d, (right_x + 35, step_y + i * step_gap + 28 + j * 22), line, desc_font, (80, 80, 80))
+
+    # Footer
+    footer_font = resolve_font(20)
+    safe_text(d, (W//2, H - 30), "痛点解决：减少80%重复劳动，保证风格一致性", footer_font, (60, 60, 60), anchor="mm")
+
+    return img
+
 # ── Image specs registry ────────────────────────────────────────────
 IMAGE_SPECS = [
     # (filename, width, height, draw_fn)
@@ -284,7 +344,7 @@ IMAGE_SPECS = [
     ("cover-wechat.jpg", 1280, 544, draw_cover_wechat),
     ("cover-zhihu.png", 1600, 900, draw_cover_zhihu),
     # Add body diagrams below:
-    # ("01-architecture.png", 1200, 780, draw_architecture),
+    ("01-workflow-comparison.png", 1200, 600, draw_workflow_comparison),
 ]
 
 # ═══════════════════════════════════════════════════════════════════
