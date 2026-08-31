@@ -8,7 +8,6 @@ cover: "/images/geolook-geo-optimization-platform/overview.png"
 draft: false
 ---
 
-{{% raw %}}
 <div align="center">
 
 # GeoLook：开源自托管的全流程 GEO 实施平台
@@ -26,7 +25,6 @@ draft: false
 > GEO = 生成式引擎优化（Generative Engine Optimization）：让 DeepSeek、豆包、ChatGPT、Perplexity 这些 AI 引擎在回答用户问题时，**主动提到并引用你的品牌**。不是地理信息，也不是传统 SEO。
 
 </div>
-{{% /raw %}}
 
 越来越多的用户现在不搜搜索引擎，直接问 AI："有哪些好用的 XX 工具"，"XX 和 YY 哪个好"。如果你的品牌不在 AI 的回答里，那你就等于在 AI 时代消失了。
 
