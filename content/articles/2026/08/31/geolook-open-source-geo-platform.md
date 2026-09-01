@@ -1,10 +1,17 @@
 ---
 title: "GeoLook：开源自托管的全流程 GEO 实施平台"
 slug: "geolook-open-source-geo-platform"
-date: 2026-09-01
+url: "/articles/2026/08/31/geolook-open-source-geo-platform.html"
+date: "2026-08-31T00:00:00+08:00"
+lastmod: "2026-08-31T00:00:00+08:00"
+description: 市面上绝大多数 GEO 工具都是监测型 SaaS：按月收费，数据存在厂商云端，只告诉你排名和提及率，不给你落地路径，更不帮你验收效果。GeoLook 完全不一样——它是一个开源自托管的全流程 GEO 实施平台，从现状分析→诊断→方案→实施工单→执行落地→效果验收，给你完整闭环，全部数据都在你本地，免费开源。
 categories: ["开源工具", "AI营销"]
 tags: ["GEO", "生成式引擎优化", "开源"]
+topic: "AI工具"
+topicSlug: "ai-tools"
 cover: "/images/geolook-geo-optimization-platform/overview.png"
+layout: article
+contentType: article
 draft: false
 ---
 
