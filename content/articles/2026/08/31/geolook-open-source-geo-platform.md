@@ -1,7 +1,7 @@
 ---
 title: "GeoLook：开源自托管的全流程 GEO 实施平台"
 slug: "geolook-open-source-geo-platform"
-date: $(date +%Y-%m-%d)
+date: 2026-09-01
 categories: ["开源工具", "AI营销"]
 tags: ["GEO", "生成式引擎优化", "开源"]
 cover: "/images/geolook-geo-optimization-platform/overview.png"
