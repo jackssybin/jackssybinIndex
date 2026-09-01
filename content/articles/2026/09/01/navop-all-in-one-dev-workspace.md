@@ -59,6 +59,8 @@ Navop 对数据库的支持相当完整，几乎覆盖了你能碰到的所有�
 | 商业数据库 | SQL Server、Oracle |
 | 国产数据库 | 达梦 DM、金仓 KingbaseES、OceanBase、openGauss、GBase 8s、Apache IoTDB、神通 Oscar |
 
+![Navop 数据库界面](https://jackssybin.cn/images/navop-all-in-one-dev-workspace/database.png)
+
 功能点：
 - 浏览数据库对象（表、视图、存储过程）
 - 编辑数据、执行 SQL、查看执行计划
@@ -79,9 +81,11 @@ Navop 对数据库的支持相当完整，几乎覆盖了你能碰到的所有�
 - **RDP/VNC 远程桌面**：Windows 上原生集成 MSTSC，跨平台用纯 Rust IronRDP 渲染
 - **支持导入 SecureCRT 会话**，不用重新配置
 
+![SSH 终端界面](https://jackssybin.cn/images/navop-all-in-one-dev-workspace/ssh.png)
+
 ### 三、AI 与扩展：原生支持 MCP，能给 Claude Code 当工具端
 
-这是 Navop 比较有意思的一点 —— 它本身就支持**公开 MCP 服务**，可以把自己的能力暴露给外部 Agent：
+这是 Navop 比较有意思的一点 —— 它本身就支持**公开 MCP 服务**，可以把自己的能力开放给外部 AI Agent：
 
 1. 在 Navop 里开启设置 → 通用 → MCP → MCP Server
 2. 选择权限配置（安全/确认/自动）
@@ -94,14 +98,16 @@ npm install -g @navop/cli@latest
 navop skill install --target codex --scope user
 ```
 
-这样你的 Agent 就能直接操作你本地的数据库连接了，不用你把连接信息复制过去，更安全。
+这样你的 Agent 就能直接操作你本地配置好的数据库连接，不用你把连接信息复制给 AI，更安全。
 
 ### 四、原生体验：GPU 加速，多语言，加密同步
 
 - 基于 GPUI 框架，GPU 加速渲染，界面响应非常流畅
-- 支持亮色/深色/跟随系统，可自定义主题、强调色、窗口透明度
-- 完整中文化界面，国人开发者做的，就是对中文用户友好
+- 支持亮色/深色/跟随系统三种主题，可自定义强调色、窗口透明度
+- 完整中文化界面，国人开发者做的，对中文用户友好
 - 连接信息、凭据加密同步，多设备可以同步配置
+
+![Navop 工作台总览](https://jackssybin.cn/images/navop-all-in-one-dev-workspace/app1.png)
 
 ## 和传统工具对比，Navop 的优劣势
 
