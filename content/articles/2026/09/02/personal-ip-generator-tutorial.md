@@ -52,6 +52,23 @@ personal-ip-generator 是一个专为 OpenAI Codex 设计的技能插件，它�
 
 完整的风格约束和参考素材请见项目仓库的 [references/style-presets.md](https://github.com/Gayaya999/personal-ip-generator/blob/main/references/style-presets.md)。
 
+以下是每种风格的参考示例：
+
+### 彩绘风 (caihui-feng)
+![彩绘风示例](/images/personal-ip-generator-tutorial/caihui-feng-preview.png)
+
+### 线条风 (xian-tiao-feng)
+![线条风示例](/images/personal-ip-generator-tutorial/xian-tiao-feng-preview.png)
+
+### 3D 风 (3d-feng)
+![3D风示例](/images/personal-ip-generator-tutorial/3d-feng-preview.png)
+
+### 插画风 (illustration-feng)
+![插画风示例](/images/personal-ip-generator-tutorial/illustration-feng-preview.png)
+
+### 手办风 (figure-feng)
+![手办风示例](/images/personal-ip-generator-tutorial/figure-feng-preview.png)
+
 ## 工作流
 
 ```text
