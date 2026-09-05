@@ -16,7 +16,7 @@ cover: "/images/voicestudio-audio-local-platform/cover-wechat.jpg"
 
 如果你用过ElevenLabs、OpenAI TTS这类付费语音API，肯定会对订阅收费、数据隐私问题感到头疼。今天给大家介绍一个完全开源免费、本地运行的全能语音AI平台 —— **VoiceStudio**。
 
-![VoiceStudio Logo]({{< static ref=images/voicestudio-audio-local-platform/logo.png >}})
+![VoiceStudio Logo](/images/voicestudio-audio-local-platform/logo.png)
 
 ## 什么是VoiceStudio？
 
@@ -30,7 +30,7 @@ VoiceStudio（之前叫OmniVoice-Studio）是一个整合了多种TTS（文本�
 - 自带**MCP Server**，可以直接集成到Claude Code、Cursor等AI编辑器
 - 支持**语音克隆、视频配音、字幕生成、有声书生成**等全功能工作流
 
-![快速切换TTS引擎]({{< static ref=images/voicestudio-audio-local-platform/quick-switch.gif >}})
+![快速切换TTS引擎](/images/voicestudio-audio-local-platform/quick-switch.gif)
 
 ## 为什么需要本地语音AI？
 
