@@ -10,7 +10,7 @@
 
 Navop 是一个原生的一体化开发工作台，把开发者日常用到的几乎所有工具都整合在了一个应用里，你不需要再同时打开七八个不同的软件，一个 Navop 就能搞定绝大多数开发和运维工作。它由国内开发者独立维护，持续更新，目前已经达到可用的生产级别。
 
-<img class="content_image" src="file:///root/jackssybinIndex/static/images/navop-native-all-in-one-workspace/01-navop-overview.png">
+![Navop 概览](/root/jackssybinIndex/static/images/navop-native-all-in-one-workspace/01-navop-overview.png)
 
 ## 核心功能解析
 
@@ -20,7 +20,7 @@ Navop 内置支持几乎所有主流关系型数据库：MySQL、PostgreSQL、SQ
 
 除了基础的 SQL 编辑执行，还支持：浏览数据库对象，查看执行计划；数据导入导出，Schema 和数据对比；ER 关系图可视化；Redis 和 MongoDB 专用界面；支持代理和 SSH 隧道连接；持久化 SQL 执行历史。
 
-<img class="content_image" src="file:///root/jackssybinIndex/static/images/navop-native-all-in-one-workspace/03-navop-database.png">
+![Navop 数据库界面](/root/jackssybinIndex/static/images/navop-native-all-in-one-workspace/03-navop-database.png)
 
 ### 2. 强大的远程连接与运维能力
 
