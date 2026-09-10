@@ -32,7 +32,8 @@
 - wechat-upload.md：正文 2212 中文字，3 图；**无正文 H1**（frontmatter title 即标题，避免标题在正文重复，2026-09-10 新规则）。
 - 封面 cover-wechat.jpg 1080×864 JPG；validate-payload.mjs 通过，0 建议；相关阅读为纯文本（规避 45166）；转化三件套齐全。
 - Media ID：snS2bupQYF7HgHImnpl8sd2WQpAV-meMEI5y1diGcQAp06a166O6ZNgVqAAqkzdX
-- 独立 digest（104 字，与标题不同、铺搜索词；复用 /root/.config/wenyan-md/token.json 缓存 token 调 draft/update，errcode 0 并 get 复核）：
+- 首次回写 digest 时把封面清空（draft/get 返回 thumb_media_id 恒为空，原样 update 覆盖），已用 material/add_material 重新上传 cover-wechat.jpg 回填，复核 thumb_media_id=64 位非空，封面恢复正常。
+- 独立 digest（104 字，与标题不同、铺搜索词）：
   「开源浏览器扩展 PostBot 源码实测：公众号/微博/小红书/知乎/抖音/B站等十几个平台一键同步分发，复用本地登录态自动填表，不上传账号密码、默认零AI Token。附37个发布器与多标签自动化实现拆解。」
 - 后台：https://mp.weixin.qq.com/ 草稿箱
 
