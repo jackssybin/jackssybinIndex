@@ -31,7 +31,10 @@
 - 封面：media/cover-wechat.jpg，1080×864 JPG（实拍爆炸矩阵 + 中文标题叠加，vision QA 无乱码）
 - validate-payload.mjs：通过，0 建议项（阅读原文/星标/在看/相关阅读三件套齐全；相关阅读为纯文本，规避 45166）
 - publish.js 结果：发布成功
-- Media ID：snS2bupQYF7HgHImnpl8saGYj2tLwTKI0gCb2sRnwVsWn657R0tQwoYBe_V-AGtN
+- Media ID：snS2bupQYF7HgHImnpl8sWo2bKIixv8OwSLBEXMUyxFjxUzn3yMU1uBvOXXbis5u（重发版，含独立 digest；旧草稿 Media ID …2tLwTKI0gCb2sRnwVsWn657R0tQwoYBe_V-AGtN 已被取代，可在后台删除）
+- 独立摘要 digest（110 字，与标题不同、铺搜索词；draft/update 回写，errcode 0 并已 get 复核）：
+  「开源项目实测：React + Three.js/WebGL 把特斯拉 Model X 的 334 个 glTF 网格零件做成可交互 3D 爆炸视图，零后端部署 Vercel。拆解装箱布局算法、渲染性能与数字孪生前端实现。」
+- 注：publish.js/wenyan-core 不支持 digest（frontmatter 的 description 只渲染为正文引用块）；不传 digest 时微信从正文 H1 自动截取导致摘要=标题。已用 scripts/set-digest.js 建稿后回写（技能规则见 references/wechat-digest-subtitle.md）。
 - 主题：newsroom（github）
 - 后台：https://mp.weixin.qq.com/ 草稿箱
 
