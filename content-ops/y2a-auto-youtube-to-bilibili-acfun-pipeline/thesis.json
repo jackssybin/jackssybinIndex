@@ -1,0 +1,25 @@
+{
+  "pain": "把YouTube视频搬到AcFun/B站是一条手工流水线：下载、听写字幕、翻译、校字幕、改标题简介分区、压制、再分别登录两个平台上传，一条半小时；还隔着YouTube反爬、登录Cookie墙和语言墙。",
+  "why_not_enough": "yt-dlp+翻译插件+剪映+手动上传是缝合：没有任务状态，中途失败从头再来；ASR幻觉字幕直接上屏没人把关；多平台重复劳动；监控更新靠人盯。",
+  "mechanism": "Y2A-Auto不是脚本集合，而是一个Flask Web后台+SQLite任务表+8阶段checkpoint状态机的自动化系统：fetch_info→translate_content→generate_tags→recommend_partition→moderate_content→download_video→translate_subtitle→upload_to_acfun/bilibili，支持人工审核插桩与无人值守两种模式。",
+  "evidence": [
+    "50,849行Python/109文件；task_manager.py单文件8497行；PIPELINE_STAGE_ORDER定义8阶段，checkpoint存tasks表pipeline_checkpoint字段（downloads被清空也不丢断点），重启把卡在处理中的任务回收为pending自动续跑。",
+    "字幕QC分层：规则先硬拦截署名行/噪声提示/界面词/模板重复句，只有边界样本送AI抽样复核（阈值0.60，上限80条/9000字符）；QC失败跳过烧录但保留字幕继续传，任务标字幕异常而非整体崩。",
+    "合规默认开：UPLOAD_APPEND_REPOST_NOTICE默认True，简介自动追加'本视频转载自YouTube，原始上传时间…UP主…'(acfun_uploader.py:84)。",
+    "监控按太平洋时间做YouTube Data API每日配额预算，配额耗尽只跳过本轮且不推进时间游标，恢复后不漏视频(tzdata DST-aware)。",
+    "AI客户端兼容Chat Completions与Responses两种协议，按端点报错逐级降级并缓存能力；转码HEVC硬编(nvenc/qsv/amf/vaapi)失败自动回退libx264。",
+    "3256 star/549 fork/15 open issues，2025-05-10立项，2026-09-11仍在push，GPL v3；Python3.11+，Docker Hub fqscfqj/y2a-auto。",
+    "三张真实后台截图：dashboard任务列表/monitor频道关键词监控/settings分组设置。"
+  ],
+  "install_path": "docker compose up -d → http://localhost:5000 → 放三份Cookie(yt/ac/bili)→提交YouTube链接；扫码登录AcFun/B站；云服务器用SSH -L 5000转发勿裸开公网。",
+  "verdict": {
+    "who_should": "做海外内容译介/搬运频道、要中文字幕本地化、希望无人值守+人工审核可插拔的人；有多平台分发需求且能自己管Cookie和服务器的运营。",
+    "who_wait": "纯原创UP主；不愿碰账号Cookie/担心平台风控与版权的人；无GPU又要大量压制1080p长视频的人。",
+    "verify": "平台服务条款与版权授权、转载声明合规、账号Cookie泄露与封号风险、各AI/ASR API的Token成本、阿里云审核额外费用。"
+  },
+  "titles": [
+    "搬视频到B站最难的从来不是下载：我读了这个3000星开源项目的5万行代码",
+    "丢个YouTube链接，AcFun和B站自动发：这个开源项目把搬运做成了流水线",
+    "3000星开源搬运工具实测：字幕翻译、质检、上传全自动，但有几个坑得先想清楚"
+  ]
+}
