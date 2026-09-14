@@ -4,8 +4,6 @@ cover: /root/jackssybinIndex/content-ops/niwo-render-everything-agent-skill-shor
 source_url: https://github.com/MontageAI/niwo-render-everything
 ---
 
-# 把 PDF 丢给 Agent 就出短视频素材包？我读完这个 130 star 开源 Skill 的全部定义文件
-
 你大概率也对 AI 说过这句话：「帮我把这篇论文做成一条 90 秒科普短视频」。
 
 普通对话框的套路你很熟：甩给你一段口播稿，再附一串素材链接，然后——就没有然后了。图不会下载，镜头不会裁，没有任何东西能直接拖进剪辑软件。
@@ -102,3 +100,5 @@ source_url: https://github.com/MontageAI/niwo-render-everything
 相关阅读：
 - [剪映逼我开会员后，我找到了这个免费工具](https://mp.weixin.qq.com/s/bkYGzCKGOoT9AEtq1fnqMQ)
 - [受够了 AI 画的"圆角方块垃圾图"？这个 3.1 万 star 的 Skill](https://mp.weixin.qq.com/s/zrdPmMWlXDrhVmPbWByLXQ)
+
+项目 GitHub 地址：https://github.com/MontageAI/niwo-render-everything

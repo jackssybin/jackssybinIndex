@@ -4,8 +4,6 @@ cover: /root/jackssybinIndex/content-ops/vimax-agentic-video-generation-source-d
 source_url: https://github.com/HKUDS/ViMax
 ---
 
-# 一句话变出分钟级长视频？我读完这个 12.4k star 开源项目的 1.37 万行代码
-
 可灵、即梦、Veo 随手就能出一段 5 秒、10 秒的惊艳画面。可一旦片子要几十个镜头、横跨几场戏、同一批角色反复出场，崩溃就开始了：第 3 镜的男主和第 40 镜长得像两个人，A 明明在画面左边，下一秒跑到了右边。
 
 这不是再换个更强模型能解决的，它是个编排问题。这周我通读的开源项目 ViMax，专门啃这块硬骨头。
@@ -85,3 +83,5 @@ ViMax 的 `agents/` 目录里有 13 个职责单一的模块，像一张制片�
 相关阅读：
 - [剪映逼我开会员后，我找到了这个免费工具](https://mp.weixin.qq.com/s/bkYGzCKGOoT9AEtq1fnqMQ)
 - [受够了 AI 画的"圆角方块垃圾图"？这个 3.1 万 star 的 Skill](https://mp.weixin.qq.com/s/zrdPmMWlXDrhVmPbWByLXQ)
+
+项目 GitHub 地址：https://github.com/HKUDS/ViMax

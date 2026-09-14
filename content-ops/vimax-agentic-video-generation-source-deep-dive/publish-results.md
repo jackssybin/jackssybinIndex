@@ -43,3 +43,10 @@
 
 ## 临时克隆
 - /tmp/vimax-research 已清理。
+
+
+## 2026-09-14 微信稿修复（用户反馈）
+- 同 niwo：--no-footnote 根治链接点不动、删除正文重复 H1、文末加 GitHub 裸链（建稿通过无 45166）。
+- 修复版 Media ID：`snS2bupQYF7HgHImnpl8sU3BoR1ILOmptp1HCOhOHrBtMczw6chDvioYxBQOLd6m`，digest（精简至≤120字）/封面/原文已回补；服务端核验 H1=0、footnote=0、相关阅读真链接、文末 GitHub。
+- 旧草稿 …ppPxCw0HHnTzIMiXjYejBdM1cEuO 已删除（用户确认）。
+- 排障插曲：临时核验脚本用普通 token 接口顶掉 wenyan 缓存 token 致 40001；改用 cgi-bin/stable_token（force_refresh=false）写回 /root/.config/wenyan-md/token.json 后恢复。

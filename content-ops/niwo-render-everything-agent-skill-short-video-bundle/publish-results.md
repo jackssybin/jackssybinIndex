@@ -40,3 +40,11 @@
 
 ## 临时克隆清理
 - /tmp/niwo-research（外部仓库克隆）可在收尾后删除。
+
+
+## 2026-09-14 微信稿修复（用户反馈）
+- 问题①「相关阅读」点不动：根因 wenyan 默认 --footnote，正文链接被转为 [n] 脚注角标、真链移到文末「引用链接」。已在 wechat-toolkit theme_catalog.js buildPublishArgs 加 `--no-footnote` 根治。
+- 问题②标题重复：wechat-upload.md frontmatter title 已是微信标题，正文首行 `# H1` 又被当正文渲染。已删除正文 H1。
+- 按用户要求文末新增 GitHub 裸链（微信建稿通过，未触发 45166；服务端正文为裸文本，可复制/长按识别，「阅读原文」仍为正式跳转）。
+- 修复版 Media ID：`snS2bupQYF7HgHImnpl8sZXNcjWXMksO3rPgWoJ-uDj_lCKeH6wZZHYtHu-dGtxQ`，digest/封面/原文已回补；服务端核验 H1=0、footnote=0、相关阅读为真 a 链接、文末有 GitHub。
+- 旧草稿 …WmG6dxVe8jQ…UBSU 已删除（用户确认）。
