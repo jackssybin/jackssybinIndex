@@ -102,26 +102,6 @@ jobs:
             sudo nginx -t
             sudo nginx -s reload
           '
-      - name: Submit changed URLs to Baidu
-        if: github.event_name == 'push'
-        continue-on-error: true
-        env:
-          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-        run: |
-          # 只推送本次部署里改动的正文，避免耗尽百度当日配额（新站每天 10 条）
-          if [ -z "$BAIDU_PUSH_TOKEN" ]; then
-            echo "BAIDU_PUSH_TOKEN 未配置，跳过百度推送"
-            exit 0
-          fi
-          BEFORE="${{ github.event.before }}"
-          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            BEFORE="HEAD~1"
-          fi
-          echo "Diff range: $BEFORE..HEAD"
-          export BAIDU_PUSH_DIFF_BASE="$BEFORE"
-          export BAIDU_PUSH_DIFF_HEAD="HEAD"
-          node scripts/baidu-push.mjs --changed
-
       - name: Verify robots.txt contains sitemap
         run: |
           sleep 5
@@ -134,6 +114,93 @@ jobs:
             echo "ERROR: robots.txt is missing Sitemap directive!"
             exit 1
           fi
+
+  # 百度主动推送单独成一个 job，而不是挂在部署 job 里的一个 continue-on-error 步骤。
+  #
+  # 原因：旧写法把「推送成功」和「token 失效」渲染成一模一样的绿色日志，
+  # 结果推送链路断了几个月都没人发现（详见 SEO-百度收录丢失诊断报告 8.4）。
+  # 拆成独立 job 后：部署状态照旧只看 build-and-deploy，
+  # 而推送的成败在 Actions 列表里是一行独立的状态，失效会立刻显红。
+  baidu-push:
+    name: Push URLs to Baidu
+    needs: build-and-deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Submit changed URLs to Baidu
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+          BAIDU_PUSH_MAX: '50'
+          BAIDU_PUSH_SUMMARY: baidu-push-summary.json
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          if [ -z "${BAIDU_PUSH_TOKEN:-}" ]; then
+            {
+              echo "## ❌ 百度主动推送未执行"
+              echo ""
+              echo "仓库 Secret \`BAIDU_PUSH_TOKEN\` 未配置，整条主动推送链路是断的。"
+              echo "到 https://ziyuan.baidu.com/ 「链接提交 → API 提交」取 token，"
+              echo "加到 Settings → Secrets and variables → Actions。"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::BAIDU_PUSH_TOKEN 未配置，百度主动推送未执行"
+            exit 1
+          fi
+
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE="HEAD~1"
+          fi
+          echo "Diff range: $BEFORE..HEAD"
+          export BAIDU_PUSH_DIFF_BASE="$BEFORE"
+          export BAIDU_PUSH_DIFF_HEAD="HEAD"
+
+          # --changed           只推本次改动过的正文，避免耗尽当日配额
+          # --fallback-since=2  改动里没有正文时，退回推最近 2 天更新的页面
+          # --probe-if-empty    仍然为空时推 1 条最新页面，用来验证链路本身
+          # --max=50            新站配额有限，宁可分几天推完
+          node scripts/baidu-push.mjs \
+            --changed --fallback-since=2 --probe-if-empty \
+            --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY"
+          CODE=$?
+          echo "baidu-push exit code: $CODE"
+
+          if [ -f "$BAIDU_PUSH_SUMMARY" ]; then
+            {
+              echo "## 百度主动推送结果"
+              echo ""
+              echo '```json'
+              cat "$BAIDU_PUSH_SUMMARY"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          # 退出码语义见 scripts/baidu-push.mjs 头部注释
+          case "$CODE" in
+            0) echo "✅ 推送成功或被正常跳过" ;;
+            3)
+              echo "::warning::当日推送配额已用尽，属于正常限流，剩余 URL 明日自动继续"
+              ;;
+            2)
+              echo "::error::推送配置有问题：token 失效或站点未通过归属验证，需要人工到站长平台处理"
+              exit 1
+              ;;
+            *)
+              echo "::error::推送出现运行时错误，见上方日志"
+              exit 1
+              ;;
+          esac
 
 
 

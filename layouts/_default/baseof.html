@@ -129,20 +129,16 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-  <!-- Baidu auto-push: submit current URL on every page view -->
-  <script>
-  (function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    } else {
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(bp, s);
-  })();
-  </script>
+  <!--
+    百度「自动推送」(push.js) 已于此处移除，2026-09-18。
+    实测依据：两个官方域名仍在返回 200，但内容只剩一个 1x1 统计 gif——
+      zz.bdstatic.com/linksubmit/push.js      -> sp0.baidu.com/.../s.gif?r=<referrer>&l=<url>
+      push.zhanzhang.baidu.com/push.js        -> api.share.baidu.com/s.gif?r=...&l=...
+    也就是说它现在只做访问上报，不再包含任何「链接提交」调用，
+    与 hm.js（百度统计）职责重复，却给每个页面多带一次跨域请求。
+    链接提交改由 CI 里的主动推送 API 承担（scripts/baidu-push.mjs）。
+    如需回滚：恢复 git 历史里本段被删掉的 <script> 块即可。
+  -->
   {{ with .Site.Params.seo.google_analytics }}
   {{ if not (in . "YOUR_GA_ID") }}
   <!-- Google Analytics -->

@@ -237,20 +237,19 @@ location ~ /$ {
 
 ### P1 — 两周内处理
 
-**5. 重新设计 robots.txt**
+**5. 重新设计 robots.txt** —— ✅ **已于 2026-09-18 随 P0 一并完成**。
+移除 `/tags/` `/tags.html` `/page/` `/news.html` `/weekly.html` `/topics.html` `/nav.html`
+`/ai-nav/` 的 Disallow（这些页面已带 noindex，Disallow 会让爬虫读不到 noindex），
+只保留 `/search*` `/search-index.json` `/admin/`。线上已验收。
 
-原则：**只屏蔽真正无价值且永远不会被收录的页面，不要屏蔽有历史收录的路径**。建议把 `/tags/` 从 Disallow 里移除（配合第 1 条的方案 A），保留 `/search`、`/admin/`、`/search-index.json` 的屏蔽。
+**6. 处理 `/?p=N` 参数** —— ✅ **已于 2026-09-18 完成**。
+nginx 对该参数直接返回 **410 Gone**（不是 301、不是首页副本）。
+线上实测 `/?p=2`、`/?p=6` 均为 410。
 
-**6. 处理 `/?p=N` 参数**
-
-三种做法，选一：
-- nginx 里对 `?p=` 参数返回 301 到对应的 `/page/N/`（如果分页内容真实存在）
-- 或返回 410
-- 最差也要加 `canonical` 指向首页（现状是完全相同的副本，最糟）
-
-**7. 用 API 主动推送替代 JS 自动推送**
-
-现在的 `push.js` 依赖真实用户访问才触发。建议在 GitHub Actions 部署完成后，用百度「普通收录 API」把新增/变更 URL 主动推送一遍（每天配额通常 10~100 条，够用）。
+**7. 用 API 主动推送替代 JS 自动推送** —— ✅ **2026-09-18 完成，详见 8.8**。
+- 移除页面上早已失效的 push.js（实测它只剩一个统计 gif，不含任何链接提交调用）
+- CI 里的推送从「部署 job 内一个 `continue-on-error` 的静默步骤」拆成**独立 job**，
+  失败会显红；并补齐配额感知、退出码语义、探针与 job summary
 
 ### P2 — 一个月内处理
 
@@ -319,8 +318,10 @@ IP: 47.94.12.12（阿里云北京）  Server: nginx
 
 ## 八、修复执行记录（2026-09-18）
 
-代码改动已全部完成并本地验证通过，**尚未推送到 main**（推送会触发 GitHub Actions
-自动部署，同时会把 nginx 配置 scp 到服务器并 reload，属于生产变更）。
+本节 8.1~8.7 记录 P0 那轮，**代码已于当日 17:25 推送到 main 并完成线上验收**
+（推送会触发 GitHub Actions 自动部署，同时把 nginx 配置 scp 到服务器并 reload，
+属于生产变更，因此执行前经过了本地三重验证）。
+8.8 是当晚追加的 P1 轮次。
 
 ### 8.1 改动清单
 
@@ -399,6 +400,8 @@ python scripts/seo-check/simulate-nginx.py public   # nginx 路由行为预测�
    token 失效不会让部署失败，所以它可能已经静默失败很久了。
    **站点验证修复后，这一项的优先级上升**——验证失效时推送 API 一定不生效，
    现在需要区分「token 过期」还是「之前单纯因未验证而推不动」。
+   → **已由 8.8 处理**：该步骤重做为独立 job，token 失效会显红并写明是哪一类问题。
+   剩下的是你拿到有效 token 填进 Secret。
 
 3. **89 条中文 URL**（P2，未做）—— 详见第九节。
 
@@ -489,6 +492,102 @@ python scripts/seo-check/gen-nginx-test.py deploy/nginx-jackssybin.conf public _
 cd _ngxtest/nginx-1.28.0 && ./nginx.exe -t -c conf/prod-test.conf && ./nginx.exe -c conf/prod-test.conf
 # 注意：本机探测要走 --noproxy "*"（环境里有 HTTP_PROXY，否则得到代理的 502）
 ```
+
+### 8.8 P1 执行记录（2026-09-18 晚）
+
+用户指示「先只做 P1」。P1 三项里，第 5、6 项已在 P0 那轮顺带做完并线上验收，
+本轮实际工作量集中在**第 7 项：让百度主动推送真正可靠**。
+
+#### 8.8.1 先核实状态，不重复劳动
+
+| P1 项 | 核实方式 | 结论 |
+|---|---|---|
+| 5. robots.txt 重设计 | `curl -A Baiduspider https://jackssybin.cn/robots.txt` | ✅ 已上线：只 Disallow `/search*` `/search-index.json` `/admin/` |
+| 6. `/?p=N` | `curl -A Baiduspider "https://jackssybin.cn/?p=2"` | ✅ 已上线：**410** |
+| 7. API 主动推送 | 读 workflow + 脚本 + 实测 push.js | ❌ 链路存在但不可靠，本轮重做 |
+
+#### 8.8.2 实测：页面上的 push.js 早就不是「推送」了
+
+两个官方域名都还返回 200，所以只看状态码会误判为「正常」。看正文才知道真相：
+
+```js
+// https://zz.bdstatic.com/linksubmit/push.js   (308 字节，全文一行)
+!function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,t=document.referrer;if(!e.test(r)){var o="https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif";t?(o+="?r="+encodeURIComponent(document.referrer),r&&(o+="&l="+r)):r&&(o+="?l="+r);var i=new Image;i.src=o}}(window);
+
+// http://push.zhanzhang.baidu.com/push.js      (281 字节，全文一行)
+!function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+```
+
+**已验证**：这段代码只做一件事——往一个 1×1 gif 上挂 `?r=<referrer>&l=<当前URL>`，
+没有任何涉及 `data.zz.baidu.com` 或链接提交接口的调用。
+**推断**（依据充分但未获百度官方文档确认）：百度「自动推送」功能已在 2020 年前后下线，
+这段 JS 只剩访问上报作用。
+**不确定**：百度是否把这批 gif 上报间接用于发现新链接。可能性低，且百度统计（hm.js）
+本身已在收集同样的信息。
+
+结论：移除 push.js 不损失链接提交能力，反而每页少一次跨域请求。
+产物已确认彻底移除（`grep -rl "linksubmit\|zhanzhang"` = 0 文件），
+hm.js 百度统计在 622 个页面正常保留。
+**如需回滚**：恢复 `layouts/_default/baseof.html` 里本段被删的 `<script>` 块即可。
+
+#### 8.8.3 重做 CI 推送链路
+
+旧的写法有一个隐蔽的致命问题：**推送成功和 token 失效在日志里长得一模一样**。
+
+```yaml
+# 旧：部署 job 内，continue-on-error: true
+- name: Submit changed URLs to Baidu
+  continue-on-error: true
+  run: |
+    if [ -z "$BAIDU_PUSH_TOKEN" ]; then
+      echo "BAIDU_PUSH_TOKEN 未配置，跳过百度推送"
+      exit 0        # ← 没配 token 也是绿色 ✓
+    fi
+    node scripts/baidu-push.mjs --changed
+```
+
+于是「token 早就过期」可以连续几个月不被人发现——这正是报告 8.4 第 2 条存疑的那件事。
+
+改动：
+
+| 位置 | 改动 |
+|---|---|
+| workflow | 推送从 `build-and-deploy` 内的步骤拆成**独立 job `baidu-push`**（`needs: build-and-deploy`）。部署是否成功只看主 job，推送成败在 Actions 列表里是独立一行，失效立刻显红 |
+| workflow | 去掉 `continue-on-error`；token 缺失直接 `::error::` 并 exit 1，同时写 job summary 说明怎么配 |
+| workflow | 推送结果写进 `$GITHUB_STEP_SUMMARY`（JSON 全文），不用翻日志 |
+| workflow | 参数：`--changed --fallback-since=2 --probe-if-empty --max=50` |
+| `scripts/baidu-push.mjs` | 新增 `--max=N` 配额上限、`--fallback-since=N` 空变更回退、`--probe-if-empty` 探针、`--verify` 单条验证、`--summary=<file>` 结果落盘、支持本地 sitemap 文件路径 |
+| `scripts/baidu-push.mjs` | **退出码语义**：0 成功/无需推送，1 运行时错误，2 配置问题（token 失效/站点未验证），3 当日配额用尽。workflow 按码区分：2 报错，3 只 warning |
+| `scripts/baidu-push.mjs` | 错误分类按 `message` 关键字匹配（`quota` / `token` / `verif` / `unauthor`），不硬编码百度错误码——码表没有稳定文档，关键字更抗变 |
+
+为什么加「探针」：只在有正文变更时才推送，意味着 token 失效只会在「刚好改了文章」
+的那次部署暴露。探针让每次部署都至少推 1 条，链路状态**每次都被验证**。
+
+#### 8.8.4 本地验证记录
+
+推送脚本无法在本地做端到端成功验证（没有有效 token），所以用**退出码 + 真实 API 响应**做验证：
+
+| 用例 | 命令要点 | 结果 |
+|---|---|---|
+| 无 token | 不设 `BAIDU_PUSH_TOKEN` 跑 `--verify` | **exit 2**，summary 记录 `BAIDU_PUSH_TOKEN 未设置` ✅ |
+| 变更回退 | `--changed --fallback-since=2`（HEAD~3 无正文变更） | 回退取到最近 2 天 5 条，`--max=5` 截断，dry-run 正常 ✅ |
+| 探针 | `--changed --fallback-since=0 --probe-if-empty` | 候选 0 → 探针启用 → 推 1 条最新页，`mode: probe` ✅ |
+| **配置错误分类** | **假 token 打真实百度 API** | 百度返回 `{"error":400,"message":"token invalid"}` → **exit 2** ✅ |
+| YAML 语法 | `yaml.parse` 解析 workflow | 2 个 job，`baidu-push` 依赖关系与步骤数正确 ✅ |
+| 构建产物 | `hugo --destination _ngxtest/public-p1` | 626 个 html（与线上产物一致），push.js 0 处，hm.js 622 处 ✅ |
+| 回归 | `check-build.py` + `simulate-nginx.py` | **全部通过**，无回归 ✅ |
+
+那条「假 token 打真实 API」的用例价值最高：它证明**退出码分类对百度的真实响应有效**，
+而不只是对我编造的响应有效。同时也证明 `data.zz.baidu.com` 接口本身可达。
+
+#### 8.8.5 本轮未做 / 需你确认
+
+1. **`BAIDU_PUSH_TOKEN` 是否有效仍未知**。这次改动只保证「失效会被看见」，
+   不能让它变有效。需要你去 https://ziyuan.baidu.com/ 「链接提交 → API 提交」
+   取 token 填进 GitHub Secret。**验证方法**：推送本轮改动后看 `baidu-push` 这个 job——
+   绿色=链路通，红色=token/验证有问题，日志会直接说明是哪一类。
+2. 89 条中文 URL 迁移（P2）未动。
+3. push.js 的移除是**推断性决策**，不是实测结论。若你更保守，可以只回滚这一处，其余照旧。
 
 ---
 
