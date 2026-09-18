@@ -414,6 +414,82 @@ curl -sS -o /dev/null -w "%{http_code}\n" -A "Baiduspider" "https://jackssybin.c
 curl -sS -A "Baiduspider" https://jackssybin.cn/robots.txt             # 确认不再有 /tags/ 的 Disallow
 ```
 
+### 8.6 部署时间线与线上验收（2026-09-18）
+
+| 时间 | 事件 |
+|---|---|
+| 17:25 | 用户确认推送 |
+| 17:25 | push `1f59b50`（含 `d6d9c49` nginx+模板、`1f59b50` 验证串），Actions 启动 |
+| 17:29 | **部署成功**（全部 22 个步骤 OK） |
+| 17:30 | 自动验收：**发现首页 404**，其余项通过 |
+| 17:31–17:43 | 定位根因 → 搭真实 nginx 环境做对照实验 → 确定修复方案 |
+| 17:44 | push `fc114a6`（首页修复） |
+| 17:48 | **部署成功 + 线上验收全部通过** |
+
+最终线上实测（Baiduspider UA，不跟随重定向）：
+
+- 首页 `/` → **200**，无 noindex
+- `/archives/` `/tags/` `/nav/` `/topics/` `/mysql/` `/netty/` `/linux/` `/springboot4/` → **301 到真实 .html**；`/page/` → 404。**无一条 403**
+- `/tags/Linux.html` → 404（不再 301 到 robots 禁抓的 `/search.html`）；`/tags/centos7.html` → 200
+- `/?p=2`、`/?p=6` → **410**
+- robots.txt：含 `Sitemap:`，不再 Disallow `/tags/`
+- 首页含 `<meta name=baidu-site-verification content="YVM1HE4ka9smKP0m">`
+- `/articles/` `/tutorials/` `/generated/` → 200 且带 noindex
+- 文章页、about、links → 200 且无 noindex
+- sitemap 380 条，含补回的 `/about.html` `/links.html` `/archives.html` `/my-github-repos/`
+
+### 8.7 ⚠️ 过程中的一次生产事故：首页 404（已修复）
+
+这一节必须留在报告里，因为它暴露的是**验证方法本身的缺陷**，而不只是一个笔误。
+
+**事故**：`d6d9c49` 把 `location /` 的 try_files 从 `$uri $uri/ $uri.html =404`
+改成 `$uri $uri.html =404`（当时判断 `$uri/` 会引发目录 403）。
+部署后**首页直接 404**，返回 404.html 的内容（Content-Length 2859 与其吻合），
+而 `/index.html` 仍是 200。首页 404 对 SEO 的伤害比目录 403 高一个量级。
+
+**根因 —— nginx try_files 的目录语义**：
+try_files 只在参数**文本以 `/` 结尾**时才把目录视为命中。
+`$uri` 这个参数名末字符是 `i` 而非 `/`，所以它**只匹配普通文件，遇到目录一律跳到下一项**。
+于是 `/` 匹配不到 `$uri`，`$uri.html` 得到 `/.html`，直接落到 `=404`。
+`$uri/` 才是让 `/` 交给 index 模块、进而命中 `index.html` 的那一项。
+
+**为什么上一轮没拦住**：
+`scripts/seo-check/simulate-nginx.py` 的仿真实现把 `$uri` 当成能匹配目录，
+把 `/` 预测为 200 —— **与真实行为相反**。仿真算错比不算更危险，它给了虚假的通过信号。
+
+**修复**：`try_files $uri $uri.html $uri/ =404;`
+把 `$uri.html` 放在 `$uri/` 之前，保证 `/tags` 这种「同名 .html 存在」的无斜杠请求
+优先命中文件（仍 200），目录请求才走 index 模块。
+
+**验证手段升级 —— 不再只靠推理**：
+
+1. 本机跑**真实 nginx**（官方 Windows 构建 1.28.0），实测而非推算。
+2. 新增 `scripts/seo-check/gen-nginx-test.py`：从生产配置提取「location 最多的那个
+   server 块」（配置里有 :80 跳转、www 跳转、主站共 3 个 server，只认 `listen 443`
+   会误选 www 跳转块 —— 那块一条 location 都没有），剥掉 SSL/日志/server_name，
+   替换 root 指向本地产物，生成可直接运行的本机配置。
+3. 三方案对照实验（同一份产物、三个端口）：
+
+   | 路径 | A `$uri $uri.html $uri/` | B 线上现状 | C `$uri $uri/ $uri.html` |
+   |---|---|---|---|
+   | `/` | **200** | **404** | 200 |
+   | `/tags` | **200** | 200 | **301→/tags/** |
+   | 其余 | 三者一致 | | |
+
+   B 复现了线上事故，证明这套本机验证是保真的；A 是本次采用的方案。
+4. `simulate-nginx.py` 修正目录语义，并新增**静态护栏** `check_conf_guards()`：
+   直接读配置原文，若 `location /` 的 try_files 缺目录匹配项则 FAIL 退出。
+   反向验证：把配置改回错误版本 → 护栏退出码 1 ✅；同时仿真仍显示 200，
+   恰好说明分工 —— **护栏验「配置写法」，仿真验「路由行为」**，两者互补。
+
+**留下的本地验证环境**：`_ngxtest/`（已加入 `.gitignore`，约 7.7 MB）。
+以后改 nginx 配置可以零成本先在本机实测：
+```bash
+python scripts/seo-check/gen-nginx-test.py deploy/nginx-jackssybin.conf public _ngxtest/nginx-1.28.0/conf/prod-test.conf 8890
+cd _ngxtest/nginx-1.28.0 && ./nginx.exe -t -c conf/prod-test.conf && ./nginx.exe -c conf/prod-test.conf
+# 注意：本机探测要走 --noproxy "*"（环境里有 HTTP_PROXY，否则得到代理的 502）
+```
+
 ---
 
 ## 九、待决策：89 条中文 URL 要不要迁移
