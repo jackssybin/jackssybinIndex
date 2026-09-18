@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site": "jackssybin.cn",
+  "note": "百度主动推送的记账本，由 scripts/baidu-push.mjs 读写，CI 每次推送后提交回仓库。urls 记录「哪个 URL 在哪个 lastmod 版本上推过」（lastmod 变了才重推）；daily 记录当日已推条数，用来和百度给本站的 8 条/天配额对账。手改这个文件会让去重与配额账目失真。",
+  "lastRunAt": null,
+  "daily": {
+    "date": "",
+    "pushed": 0
+  },
+  "urls": {},
+  "history": []
+}

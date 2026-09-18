@@ -5,6 +5,12 @@ on:
     branches:
       - main
   schedule:
+    # 01:00 UTC = 09:00 北京时间：每日「百度推送轮转」。
+    # 站点可推 URL 约 378 条，而百度给的当日配额实测只有 8 条，
+    # 一次推不完，所以每天推 8 条，按 lastmod 倒序、推过的不再推。
+    # 详见 scripts/baidu-push.mjs 头部「--daily」一节。
+    - cron: "0 1 * * *"
+    # 08:00 / 20:00 UTC：内容刷新（热点、AI 导航），不做推送。
     - cron: "0 8,20 * * *"
   workflow_dispatch:
 
@@ -115,6 +121,18 @@ jobs:
             exit 1
           fi
 
+      - name: Verify legacy slug redirects (sample)
+        shell: bash
+        run: |
+          # 为什么这一步必须在部署后跑：
+          # 89 篇中文 slug 迁移把产物里的 /articles/.../<中文>/ 目录删掉了，
+          # 那些 URL 全靠 nginx 的 301 映射表接住。而「同步 nginx 配置」这一步
+          # 是 continue-on-error —— 一旦 scp/ssh/sudo 失败，nginx 会继续用
+          # 没有新映射的旧配置，结果是 89 个 URL **静默变 404**，
+          # 而 404 正是百度判定站点质量下降的信号。
+          # 这里抽查 12 条（等间距取，不取前 12），失败就让 job 变红。
+          python scripts/seo-check/check-slug-redirects.py --sample=12
+
   # 百度主动推送单独成一个 job，而不是挂在部署 job 里的一个 continue-on-error 步骤。
   #
   # 原因：旧写法把「推送成功」和「token 失效」渲染成一模一样的绿色日志，
@@ -124,8 +142,20 @@ jobs:
   baidu-push:
     name: Push URLs to Baidu
     needs: build-and-deploy
-    if: github.event_name == 'push'
+    # push           -> 只推本次改动的正文（快，抢时间）
+    # 01:00 的定时    -> 每日轮转，推 8 条未推过的
+    # 手动触发        -> 临时补推，走轮转逻辑
+    # 08/20 的定时    -> 只刷内容，不推送（避免一天推三次撞配额）
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 1 * * *')
     runs-on: ubuntu-latest
+    # 状态文件要提交回仓库，默认的 GITHUB_TOKEN 只有只读权限，必须显式声明。
+    # 提交回去的用途：记录「哪些 URL 在哪个 lastmod 版本上推过」+「今天推了几条」，
+    # 少了它整个去重和配额账本都会失效（详见 scripts/baidu-push.mjs 头部注释）。
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -137,15 +167,18 @@ jobs:
         with:
           node-version: 22
 
-      - name: Submit changed URLs to Baidu
+      - name: Submit URLs to Baidu
+        id: push
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-          # 2026-09-18 首次成功推送时的实测数据：{"remain":4,"success":4}
-          # 也就是百度给这个站的当日配额只有个位数。原来设 50 会让整批撞上
-          # over quota（百度对超配额的处理是拒绝整批，不是接受前 N 条），
-          # 所以这里必须贴近真实配额，宁可分几天推完。
-          BAIDU_PUSH_MAX: '10'
+          # 实测（2026-09-18 首次成功推送）：{"remain":4,"success":4}，
+          # 两次各推 4 条后 remain 归零 —— 也就是当日配额只有 8 条。
+          # 原来设 50 会让整批撞上 over quota，而百度对超配额是**拒绝整批**，
+          # 不是接受前 N 条，所以这个数字必须贴近真实配额。
+          BAIDU_PUSH_QUOTA: '8'
+          BAIDU_PUSH_STATE: seo-state/baidu-pushed.json
           BAIDU_PUSH_SUMMARY: baidu-push-summary.json
+          EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           # ⚠️ GitHub Actions 对 `shell: bash` 会强制注入 -e（errexit）。
@@ -167,27 +200,27 @@ jobs:
             exit 1
           fi
 
-          BEFORE="${{ github.event.before }}"
-          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            BEFORE="HEAD~1"
+          MODE_ARGS=()
+          if [ "$EVENT_NAME" = "push" ]; then
+            BEFORE="${{ github.event.before }}"
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+              BEFORE="HEAD~1"
+            fi
+            echo "Diff range: $BEFORE..HEAD"
+            export BAIDU_PUSH_DIFF_BASE="$BEFORE"
+            export BAIDU_PUSH_DIFF_HEAD="HEAD"
+            # 部署触发：只推本次改动过的正文。
+            # 不加 --probe-if-empty —— 每日轮转本身就是链路探针，
+            # 再补一条探针等于白烧掉 1/8 的当日配额。
+            MODE_ARGS=(--changed)
+          else
+            # 定时 / 手动：每日轮转，按 lastmod 倒序推未推过的
+            MODE_ARGS=(--daily)
           fi
-          echo "Diff range: $BEFORE..HEAD"
-          export BAIDU_PUSH_DIFF_BASE="$BEFORE"
-          export BAIDU_PUSH_DIFF_HEAD="HEAD"
 
-          # 参数取舍（2026-09-18 实测后定的）：
-          #   --changed          只推本次改动过的正文
-          #   --probe-if-empty   没有正文变更时推 1 条最新页，验证链路是否通
-          #   --max=10           配额只有个位数（实测 remain=4 -> 0），贴近真实值
-          #
-          # 曾经用过 --fallback-since=2（无变更时推最近 2 天更新的页面），实测后去掉：
-          # 连续两次部署推的是**完全相同**的 4 条 URL，百度照样返回 {"success":4}
-          # 并把配额从 4 扣到 0 —— 重复推送同一 URL 会照常消耗配额。
-          # 每天配额就 8 条左右，这种「顺便补推」等于白烧配额。
+          echo "模式: ${MODE_ARGS[*]}"
           CODE=0
-          node scripts/baidu-push.mjs \
-            --changed --probe-if-empty \
-            --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY" || CODE=$?
+          node scripts/baidu-push.mjs "${MODE_ARGS[@]}" --summary="$BAIDU_PUSH_SUMMARY" || CODE=$?
           echo "baidu-push exit code: $CODE"
 
           if [ -f "$BAIDU_PUSH_SUMMARY" ]; then
@@ -215,6 +248,42 @@ jobs:
               exit 1
               ;;
           esac
+
+      - name: Persist push state
+        # 用 always()：即便上面因为 exit 2/1 失败了，只要状态文件被改过也要落盘，
+        # 否则「已经推成功的那部分」不被记账，明天会重复推、白烧配额。
+        if: always()
+        shell: bash
+        run: |
+          set -uo pipefail
+          STATE=seo-state/baidu-pushed.json
+          if [ ! -f "$STATE" ]; then
+            echo "没有状态文件（本次没推任何 URL），跳过"
+            exit 0
+          fi
+          git add "$STATE"
+          if git diff --cached --quiet; then
+            echo "推送状态无变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # [skip ci]：这个提交不含任何站点内容，不该再触发一次部署。
+          # （用 GITHUB_TOKEN 推的提交本来也不会触发 workflow，这里是双保险。）
+          git commit -q -m "chore(seo): 记录百度推送状态 [skip ci]"
+          for i in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "✅ 推送状态已写回 main"
+              exit 0
+            fi
+            echo "第 $i 次 push 失败，拉取远端后重试..."
+            git fetch -q origin main
+            git rebase -q origin/main || { git rebase --abort || true; exit 1; }
+            sleep 5
+          done
+          echo "::error::百度推送状态无法写回仓库，去重账本已失效"
+          echo "::error::后果：下次会重复推送已推过的 URL，把当日 8 条配额烧光"
+          exit 1
 
 
 

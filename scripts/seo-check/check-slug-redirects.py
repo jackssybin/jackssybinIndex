@@ -6,9 +6,10 @@
 百度判定站点质量下降的信号 —— 所以必须逐条核对，不能抽样。
 
 用法：
-    python scripts/seo-check/check-slug-redirects.py                        # 默认打线上
+    python scripts/seo-check/check-slug-redirects.py                        # 默认打线上（全部 89 条）
     python scripts/seo-check/check-slug-redirects.py http://127.0.0.1:8890  # 打本机真实 nginx
     python scripts/seo-check/check-slug-redirects.py --ua=Mozilla/5.0       # 换 UA
+    python scripts/seo-check/check-slug-redirects.py --sample=12            # 只抽查 12 条（CI 用）
 
 退出码 0 = 全部符合预期（旧 URL 301 到新 URL，新 URL 200）。
 
@@ -57,6 +58,7 @@ def parse_args(argv):
     base = "https://jackssybin.cn"
     ua = BAIDU_UA
     timeout = 15
+    sample = 0
     for a in argv:
         if a.startswith("--base="):
             base = a[7:]
@@ -64,9 +66,24 @@ def parse_args(argv):
             ua = a[5:]
         elif a.startswith("--timeout="):
             timeout = float(a[10:])
+        elif a.startswith("--sample="):
+            sample = int(a[9:])
         elif a.startswith("http"):
             base = a
-    return base.rstrip("/"), ua, timeout
+    return base.rstrip("/"), ua, timeout, sample
+
+
+def spread(items, n):
+    """从列表里等间距抽取 n 条。
+
+    不能取「前 n 条」：映射是批量生成的，出错往往也是成批的，
+    按顺序取样反而更容易整段跳过问题区间。等间距 + 首尾必取，
+    覆盖到映射表的各个段落。
+    """
+    if n <= 0 or n >= len(items):
+        return items
+    idx = sorted({round(i * (len(items) - 1) / (n - 1)) for i in range(n)})
+    return [items[i] for i in idx]
 
 
 def encode(path):
@@ -101,7 +118,7 @@ def probe(base, url_path, ua, timeout, want_status, want_location=None):
 
 
 def main():
-    base, ua, timeout = parse_args(sys.argv[1:])
+    base, ua, timeout, sample = parse_args(sys.argv[1:])
 
     if not os.path.isfile(MAPPING):
         print("找不到映射清单: %s" % MAPPING)
@@ -112,9 +129,11 @@ def main():
         mapping = json.load(fh)
 
     entries = mapping["entries"]
+    total_entries = len(entries)
+    entries = spread(entries, sample)
     print("目标: %s" % base)
     print("UA:   %s" % ua[:60])
-    print("映射条目: %d" % len(entries))
+    print("映射条目: %d（本次核对 %d 条）" % (total_entries, len(entries)))
     print("=" * 90)
 
     failures = []
