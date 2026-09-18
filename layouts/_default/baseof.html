@@ -25,9 +25,34 @@
 
   <link rel="canonical" href="{{ .Permalink }}">
   {{- $path := .RelPermalink -}}
-  {{- if or (hasPrefix $path "/tags/") (eq $path "/search.html") (eq $path "/search/") (hasPrefix $path "/page/") (hasPrefix $path "/archives/") (eq $path "/news.html") (eq $path "/weekly.html") (eq $path "/topics.html") (eq $path "/nav.html") (eq $path "/tags.html") (eq $path "/ai-nav/") (hasPrefix $path "/ai-nav/") -}}
-  <meta name="robots" content="noindex, follow">
+  {{- /* ── 薄页面统一 noindex ─────────────────────────────────────────────
+       两类页面需要 noindex：
+
+       1) Hugo 自动生成的空 section 页：/articles/ /tutorials/ /generated/
+          它们的正文只有标题（Articles / Tutorials / Generateds），
+          是彻底的空壳，被收录只会拉低整站质量分。
+
+       2) 聚合列表页：标签页 / 分页 / 归档 / 新闻 / 周报 / 导航。
+          这些页面没有独有内容，靠 noindex 把它们挡在索引外。
+
+       ⚠️ 与 robots.txt 的配合铁律：
+       这些路径绝对不能在 robots.txt 里 Disallow。一旦 Disallow，爬虫取不到
+       页面，也就读不到下面这行 noindex，页面反而会长期滞留在索引中，
+       在百度/Google 结果里显示成「由于 robots.txt 限制，无法提供描述」。
+       想让页面消失：保持可抓取 + noindex。
+  */ -}}
+  {{- $noindexPrefixes := slice "/tags/" "/page/" "/archives/" "/ai-nav/" "/generated/" -}}
+  {{- $noindexExact := slice "/search.html" "/search/" "/news.html" "/weekly.html" "/topics.html" "/nav.html" "/tags.html" "/ai-nav/" "/articles/" "/tutorials/" -}}
+  {{- $isThin := false -}}
+  {{- range $noindexPrefixes -}}
+    {{- if hasPrefix $path . }}{{ $isThin = true }}{{ end -}}
   {{- end -}}
+  {{- range $noindexExact -}}
+    {{- if eq $path . }}{{ $isThin = true }}{{ end -}}
+  {{- end -}}
+  {{- if $isThin }}
+  <meta name="robots" content="noindex, follow">
+  {{- end }}
   {{ with .Site.Params.seo.google_verify }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
   {{ with .Site.Params.seo.baidu_verify }}<meta name="baidu-site-verification" content="{{ . }}">{{ end }}
 

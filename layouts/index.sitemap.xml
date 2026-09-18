@@ -11,18 +11,22 @@
       "/ai-nav/"
       "/articles/2026/06/05/imgs-cognitive-process/"
   }}
+  {{- /* $skipExact 只放「已经带 noindex、不需要被收录」的页面。
+       判断口径必须与 layouts/_default/baseof.html 的 noindex 列表一致：
+       索引里有的页面要进 sitemap，noindex 的页面要出 sitemap，
+       两边不一致会让爬虫收到矛盾信号。
+
+       2026-09-18 调整：移出 /archives.html /about.html /links.html /
+       /my-github-repos/ —— 这四个页面是正常内容页、没有 noindex，
+       此前却被排除在 sitemap 之外，属于漏报。
+  */}}
   {{- $skipExact := slice
       "/tags.html"
       "/nav.html"
       "/topics.html"
-      "/archives.html"
       "/search.html"
       "/news.html"
       "/weekly.html"
-      "/tags.html"
-      "/about.html"
-      "/links.html"
-      "/my-github-repos/"
       "/articles/"
       "/tutorials/"
   }}

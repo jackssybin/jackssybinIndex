@@ -44,7 +44,18 @@ region = "CN"
 placename = "China"
 
 [params.seo]
+# Google Search Console 验证串。
+#   在 https://search.google.com/search-console 拿「HTML 标记」里的 content 值填这里。
+#   也可以直接把 Google 给的 html 文件丢进 static/（现已有 googlec0a585e59e234aed.html）。
 google_verify = ""
+
+# 百度搜索资源平台验证串。⚠️ 当前为空 —— 线上首页没有 baidu-site-verification meta，
+# 说明站点在百度站长平台很可能处于「未验证」状态，而百度推送 API（CI 里的
+# baidu-push 步骤）依赖站长平台的站点归属验证。
+#   取值方法：https://ziyuan.baidu.com/site → 添加站点 → 选择「HTML标签验证」，
+#   把那行 meta 里 content="..." 的内容原样填到这里，形如 "codeva-XXXXXXXXXXXXXXXX"。
+#   另一种做法（不用改这个文件）：把百度给的验证 html 文件放进 static/ 根目录。
 baidu_verify = ""
+
 baidu_tongji = "10d1cd6a3ceba53d97fa13e1b96ce44d"
 google_analytics = ""

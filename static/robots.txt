@@ -1,16 +1,28 @@
+# jackssybin.cn robots.txt
+#
+# !! 本文件与 layouts/robots.txt 内容必须逐字一致 !!
+#    Hugo 在 static/ 与 layouts/ 产出同一路径时的优先级随版本变化，
+#    两份保持一致才能保证线上结果正确。修改时请同步改另一个文件。
+#
+# 修改记录 2026-09-18：移除 /tags/ /tags.html /page/ /news.html /weekly.html
+# /topics.html /nav.html /ai-nav/ 的 Disallow。
+
 User-agent: *
 Allow: /
-Disallow: /search.html
+
+# ── 只屏蔽「永远不需要被抓取」的路径 ──────────────────────────────
+# 判定原则：想让一个页面从索引里消失，要让它可抓取 + 页面自带 noindex。
+# 如果这里 Disallow，爬虫取不到页面，也就读不到 noindex 标签，
+# 页面反而会长期滞留在索引中，在百度/Google 里显示成
+# 「由于 robots.txt 限制，无法提供描述」——比不收录更难看。
+#
+# 下列页面已全部输出 <meta name="robots" content="noindex, follow">，
+# 因此不再在这里 Disallow：
+#   /tags/*  /tags.html   /page/*  /news.html  /weekly.html
+#   /topics.html  /nav.html  /ai-nav/*
 Disallow: /search
-Disallow: /tags/
-Disallow: /tags.html
-Disallow: /page/
-Disallow: /admin/
+Disallow: /search.html
 Disallow: /search-index.json
-Disallow: /news.html
-Disallow: /weekly.html
-Disallow: /topics.html
-Disallow: /nav.html
-Disallow: /ai-nav/
+Disallow: /admin/
 
 Sitemap: https://jackssybin.cn/sitemap.xml
