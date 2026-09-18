@@ -140,7 +140,11 @@ jobs:
       - name: Submit changed URLs to Baidu
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-          BAIDU_PUSH_MAX: '50'
+          # 2026-09-18 首次成功推送时的实测数据：{"remain":4,"success":4}
+          # 也就是百度给这个站的当日配额只有个位数。原来设 50 会让整批撞上
+          # over quota（百度对超配额的处理是拒绝整批，不是接受前 N 条），
+          # 所以这里必须贴近真实配额，宁可分几天推完。
+          BAIDU_PUSH_MAX: '10'
           BAIDU_PUSH_SUMMARY: baidu-push-summary.json
         shell: bash
         run: |
@@ -169,7 +173,7 @@ jobs:
           # --changed           只推本次改动过的正文，避免耗尽当日配额
           # --fallback-since=2  改动里没有正文时，退回推最近 2 天更新的页面
           # --probe-if-empty    仍然为空时推 1 条最新页面，用来验证链路本身
-          # --max=50            新站配额有限，宁可分几天推完
+          # --max=10            配额只有个位数（实测 remain=4），贴近真实值才不会撞 over quota
           node scripts/baidu-push.mjs \
             --changed --fallback-since=2 --probe-if-empty \
             --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY"
