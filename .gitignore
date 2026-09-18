@@ -32,3 +32,7 @@ yarn-error.log*
 Thumbs.db
 .idea/
 .vscode/
+
+# 本地 nginx 验证环境（含 nginx 二进制，用于改配置前实测）
+_ngxtest/
+_*.log
