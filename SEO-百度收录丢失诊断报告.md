@@ -173,11 +173,17 @@ $ cmp 两个文件                            → 完全相同
    - 爱站网显示「未找到信息或未备案」，但页脚写着「京ICP备17039180号」，两者矛盾。第三方查询接口未取到数据，但用户确认备案正常，以官方为准。
    - 结论：备案不是本次收录丢失的原因，P0 优化可以正常推进。
 
-2. **百度站长平台是否还能登录、站点验证是否有效**
-   - `hugo.toml` 里 `baidu_verify = ""` 为空，线上首页**没有** `baidu-site-verification` meta 标签
-   - `public/` 里只有 Google 的验证文件（`googlec0a585e59e234aed.html`），没有百度的
-   - 历史 commit 显示曾用 `http://jackssybin.cn` 注册推送站点
-   - 如果验证失效，你就无法提交 sitemap、无法用普通收录 API、看不到索引量曲线
+2. ~~**百度站长平台是否还能登录、站点验证是否有效**~~ **→ 已于 2026-09-18 修复。**
+   - 原状：`hugo.toml` 里 `baidu_verify = ""` 为空，线上首页**没有** `baidu-site-verification` meta 标签
+   - 现已填入 `baidu_verify = "YVM1HE4ka9smKP0m"`，构建产物首页输出：
+     `<meta name=baidu-site-verification content="YVM1HE4ka9smKP0m">`
+     （全站 623/626 个页面输出；未输出的 3 个是 `/404.html`、`/ai-nav/index.html`、
+     `googlec0a585e59e234aed.html`，前两个本就是 noindex 页、第三个是 Google 验证文件，均无需输出）
+   - **待用户动作**：提交后在站长平台点「验证」。若显示失败，说明平台给的是「文件验证」
+     方式，需另放 `static/baidu_verify_YVM1HE4ka9smKP0m.html`（此串为 16 位无前缀格式，
+     与老版 `codeva-` 前缀格式不同，两种方式的区分要以平台提示为准）
+   - 另外需确认 CI 里的 `BAIDU_PUSH_TOKEN` secret 是否有效——该步骤是
+     `continue-on-error: true`，token 失效不会报错，只会静默不推送
 
 3. **站长平台「索引量」曲线的形状**
    - 是断崖式下跌（说明触发了某个明确规则），还是缓慢下滑（说明是综合质量下降）
@@ -325,7 +331,7 @@ IP: 47.94.12.12（阿里云北京）  Server: nginx
 | `deploy/nginx-jackssybin.conf` | ① 新增 9 条精确 location，把 `/archives` `/tags/` `/topics/` `/nav/` `/mysql/` `/netty/` `/linux/` `/springboot4/` 301 到真实存在的 `.html`；② 标签页规则由「301 到 `/search.html`」改为 `try_files /tags/$tag.html =404`；③ 新增通用目录 location，无 index.html 的目录返回 404 而不是 403；④ `location /` 去掉 `$uri/`；⑤ `?p=N` 返回 410；⑥ 增加 `error_page 403 =404` 兜底 |
 | `layouts/_default/baseof.html` | noindex 判定改为「前缀 + 精确」两个列表，新增 `/articles/` `/tutorials/` `/generated/`（这三个是 Hugo 自动生成的 section 页，正文只有标题和脚本，是彻底的空壳） |
 | `layouts/index.sitemap.xml` | 把 `/archives.html` `/about.html` `/links.html` `/my-github-repos/` 加回 sitemap。这四个是正常内容页且没有 noindex，此前却被排除，属于漏报 |
-| `hugo.toml` | `baidu_verify` 补充取数说明。**取值仍需你提供** |
+| `hugo.toml` | `baidu_verify` 填入 `YVM1HE4ka9smKP0m`（2026-09-18 由用户提供），首页产物确认输出 `baidu-site-verification` meta |
 | `scripts/seo-check/` | 新增两个回归检查脚本（见 8.3） |
 | `deploy/nginx-p0-fixes.conf`、`deploy/robots.txt.fixed` | 已删除——内容已合并进正式配置，避免两份来源互相矛盾 |
 
@@ -381,15 +387,18 @@ python scripts/seo-check/simulate-nginx.py public   # nginx 路由行为预测�
 
 ### 8.4 还需你处理的事项
 
-1. **百度站长平台验证码（`baidu_verify`）** —— 这是目前唯一还挡着的 P0 项。
-   取法：https://ziyuan.baidu.com/site → 添加站点 → 「HTML标签验证」→
-   把 meta 的 `content="..."` 原样填入 `hugo.toml` 的 `baidu_verify`。
-   或者把百度给的验证 html 文件直接放进 `static/` 根目录（不用改 hugo.toml）。
-   验证通过后：提交 `sitemap.xml`、开通「普通收录 API」。
+1. ~~**百度站长平台验证码（`baidu_verify`）**~~ **→ 已于 2026-09-18 完成。**
+   值 `YVM1HE4ka9smKP0m` 已写入 `hugo.toml`，构建产物首页确认输出
+   `<meta name=baidu-site-verification content="YVM1HE4ka9smKP0m">`。
+   **剩余动作（需登录后台）**：站长平台点「验证」→ 通过后提交 `sitemap.xml`
+   → 开通「普通收录 API」。若验证失败，说明平台选的是文件验证方式，
+   需补 `static/baidu_verify_YVM1HE4ka9smKP0m.html`。
 
 2. **确认 `BAIDU_PUSH_TOKEN` 这个 GitHub Secret 还在有效期内**。
    CI 里的「Submit changed URLs to Baidu」步骤设了 `continue-on-error: true`，
    token 失效不会让部署失败，所以它可能已经静默失败很久了。
+   **站点验证修复后，这一项的优先级上升**——验证失效时推送 API 一定不生效，
+   现在需要区分「token 过期」还是「之前单纯因未验证而推不动」。
 
 3. **89 条中文 URL**（P2，未做）—— 详见第九节。
 
