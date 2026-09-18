@@ -170,12 +170,17 @@ jobs:
           export BAIDU_PUSH_DIFF_BASE="$BEFORE"
           export BAIDU_PUSH_DIFF_HEAD="HEAD"
 
-          # --changed           只推本次改动过的正文，避免耗尽当日配额
-          # --fallback-since=2  改动里没有正文时，退回推最近 2 天更新的页面
-          # --probe-if-empty    仍然为空时推 1 条最新页面，用来验证链路本身
-          # --max=10            配额只有个位数（实测 remain=4），贴近真实值才不会撞 over quota
+          # 参数取舍（2026-09-18 实测后定的）：
+          #   --changed          只推本次改动过的正文
+          #   --probe-if-empty   没有正文变更时推 1 条最新页，验证链路是否通
+          #   --max=10           配额只有个位数（实测 remain=4 -> 0），贴近真实值
+          #
+          # 曾经用过 --fallback-since=2（无变更时推最近 2 天更新的页面），实测后去掉：
+          # 连续两次部署推的是**完全相同**的 4 条 URL，百度照样返回 {"success":4}
+          # 并把配额从 4 扣到 0 —— 重复推送同一 URL 会照常消耗配额。
+          # 每天配额就 8 条左右，这种「顺便补推」等于白烧配额。
           node scripts/baidu-push.mjs \
-            --changed --fallback-since=2 --probe-if-empty \
+            --changed --probe-if-empty \
             --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY"
           CODE=$?
           echo "baidu-push exit code: $CODE"
