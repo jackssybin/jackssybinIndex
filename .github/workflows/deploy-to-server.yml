@@ -148,6 +148,11 @@ jobs:
           BAIDU_PUSH_SUMMARY: baidu-push-summary.json
         shell: bash
         run: |
+          # ⚠️ GitHub Actions 对 `shell: bash` 会强制注入 -e（errexit）。
+          # 实测后果：node 返回非零时整个步骤立刻终止，下面的 case 分流永远执行不到 ——
+          # 「当日配额用尽(exit 3)」被当成 job 失败，而不是预期的黄色 warning。
+          # 所以取退出码必须写在条件上下文里（`|| CODE=$?`），
+          # 不能写成 `node ...; CODE=$?`，也不能只靠 `set +e` 去赌它和注入参数的顺序。
           set -uo pipefail
 
           if [ -z "${BAIDU_PUSH_TOKEN:-}" ]; then
@@ -179,10 +184,10 @@ jobs:
           # 连续两次部署推的是**完全相同**的 4 条 URL，百度照样返回 {"success":4}
           # 并把配额从 4 扣到 0 —— 重复推送同一 URL 会照常消耗配额。
           # 每天配额就 8 条左右，这种「顺便补推」等于白烧配额。
+          CODE=0
           node scripts/baidu-push.mjs \
             --changed --probe-if-empty \
-            --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY"
-          CODE=$?
+            --max="$BAIDU_PUSH_MAX" --summary="$BAIDU_PUSH_SUMMARY" || CODE=$?
           echo "baidu-push exit code: $CODE"
 
           if [ -f "$BAIDU_PUSH_SUMMARY" ]; then

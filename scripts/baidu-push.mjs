@@ -197,13 +197,19 @@ function urlsFromGit() {
   return urls
 }
 
-// 百度错误字段 -> 退出码。只按 message 里的关键字分类：错误码表官方没有稳定文档，
-// 硬编码码值会随百度改版失效，关键字反而更抗变。
-function classifyError(message, errorCode) {
+// 百度错误字段 -> 退出码。
+//
+// **只按 message 关键字分类，绝不看 error 码。**
+// 实测（2026-09-18）两个语义完全相反的错误共用 error=400：
+//   {"error":400,"message":"token invalid"}   → 配置问题，必须人工处理
+//   {"error":400,"message":"over quota"}      → 配额用尽，明天自愈
+// 所以任何「按码表分类」的写法都必然把其中一个判错。
+// 关键字反而更抗变：百度改码值不改英文短语。
+function classifyError(message) {
   const m = String(message || '').toLowerCase()
-  if (m.includes('quota') || m.includes('remain') || errorCode === 403) return EXIT_QUOTA
+  if (m.includes('quota') || m.includes('remain')) return EXIT_QUOTA
   if (m.includes('token') || m.includes('site error') || m.includes('verif') ||
-      m.includes('unauthor') || errorCode === 401 || errorCode === 400) {
+      m.includes('unauthor')) {
     return EXIT_CONFIG
   }
   return EXIT_RUNTIME
@@ -325,7 +331,7 @@ async function main() {
       summary.remain = r.remain
     }
     if (r.error) {
-      const code = classifyError(r.message, r.error)
+      const code = classifyError(r.message)
       console.error('  ❌ error=' + r.error + ' message=' + (r.message || ''))
       if (code === EXIT_CONFIG) {
         console.error('  → 这是配置问题：token 失效或站点未通过归属验证。')
