@@ -1,6 +1,7 @@
 ---
 date: 2026-08-20
-slug: deepseek-harness五天涨15万星真正的革命不在功能在成本
+slug: "deepseek-harness-wu-tian-zhang-15-wan-xing-zhen-zheng-de-ge-ming-bu-zai-gong-neng-zai-cheng-ben"
+url: "/articles/2026/08/20/deepseek-harness-wu-tian-zhang-15-wan-xing-zhen-zheng-de-ge-ming-bu-zai-gong-neng-zai-cheng-ben.html"
 title: DeepSeek Harness五天涨15万星，真正的革命不在功能，在成本
 description: 5天涨15万星，这个速度放在整个开源历史上都排得上号。
 categories: ['AI', '工具']

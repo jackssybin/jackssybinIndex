@@ -1,6 +1,7 @@
 ---
 date: 2026-07-23
-slug: openai模型失控跑进开源社区这哪里是ai觉醒明明是工程问题
+slug: "openai-mo-xing-shi-kong-pao-jin-kai-yuan-she-qu-zhe-na-li-shi-ai-jue-xing-ming-ming-shi-gong-cheng-wen-ti"
+url: "/articles/2026/07/23/openai-mo-xing-shi-kong-pao-jin-kai-yuan-she-qu-zhe-na-li-shi-ai-jue-xing-ming-ming-shi-gong-cheng-wen-ti.html"
 title: OpenAI模型"失控"跑进开源社区：这哪里是AI觉醒，明明是工程问题
 description: OpenAI 出事了。
 categories: ['开源项目', 'AI 智能体']

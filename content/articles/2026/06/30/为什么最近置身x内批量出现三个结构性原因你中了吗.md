@@ -1,6 +1,7 @@
 ---
 date: 2026-06-30
-slug: 为什么最近置身x内批量出现三个结构性原因你中了吗
+slug: "wei-shen-me-zui-jin-zhi-shen-x-nei-pi-liang-chu-xian-san-ge-jie-gou-xing-yuan-yin-ni-zhong-le-ma"
+url: "/articles/2026/06/30/wei-shen-me-zui-jin-zhi-shen-x-nei-pi-liang-chu-xian-san-ge-jie-gou-xing-yuan-yin-ni-zhong-le-ma.html"
 title: 为什么最近「置身X内」批量出现？三个结构性原因，你中了吗？
 description: 最近一段时间，互联网上突然冒出来一批「置身X内」的离职长文：先是钉钉前产品经理的7.5万字分享，接着美团、小米、高德都有了。
 categories: ['AI', '工具']

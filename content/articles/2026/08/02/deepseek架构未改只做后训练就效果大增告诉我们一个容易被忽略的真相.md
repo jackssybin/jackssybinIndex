@@ -1,6 +1,7 @@
 ---
 date: 2026-08-02
-slug: deepseek架构未改只做后训练就效果大增告诉我们一个容易被忽略的真相
+slug: "deepseek-jia-gou-wei-gai-zhi-zuo-hou-xun-lian-jiu-xiao-guo-da-zeng-gao-su-wo-men-yi-ge-rong-yi-bei-hu-lve-de-zhen-xiang"
+url: "/articles/2026/08/02/deepseek-jia-gou-wei-gai-zhi-zuo-hou-xun-lian-jiu-xiao-guo-da-zeng-gao-su-wo-men-yi-ge-rong-yi-bei-hu-lve-de-zhen-xiang.html"
 title: DeepSeek架构未改只做后训练就效果大增，告诉我们一个容易被忽略的真相
 description: DeepSeek最近更新V4-Flash版本，说了句很有意思的话：架构没变，就是后训练做了优化，效果提升却非常明显。
 categories: ['AI', '工具']

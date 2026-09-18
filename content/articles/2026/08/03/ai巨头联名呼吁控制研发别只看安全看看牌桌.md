@@ -1,6 +1,7 @@
 ---
 date: 2026-08-03
-slug: ai巨头联名呼吁控制研发别只看安全看看牌桌
+slug: "ai-ju-tou-lian-ming-hu-yu-kong-zhi-yan-fa-bie-zhi-kan-an-quan-kan-kan-pai-zhuo"
+url: "/articles/2026/08/03/ai-ju-tou-lian-ming-hu-yu-kong-zhi-yan-fa-bie-zhi-kan-an-quan-kan-kan-pai-zhuo.html"
 title: AI巨头联名呼吁控制研发，别只看安全，看看牌桌
 description: 五大AI巨头联名呼吁控制前沿AI研发。
 categories: ['AI', '工具测评']

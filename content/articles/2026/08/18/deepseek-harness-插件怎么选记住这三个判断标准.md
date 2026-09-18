@@ -1,6 +1,7 @@
 ---
 date: 2026-08-18
-slug: deepseek-harness-插件怎么选记住这三个判断标准
+slug: "deepseek-harness-cha-jian-zen-me-xuan-ji-zhu-zhe-san-ge-pan-duan-biao-zhun"
+url: "/articles/2026/08/18/deepseek-harness-cha-jian-zen-me-xuan-ji-zhu-zhe-san-ge-pan-duan-biao-zhun.html"
 title: DeepSeek Harness 插件怎么选？记住这三个判断标准
 description: DeepSeek Harness 发布没多久，社区已经涌出上百个插件。
 categories: ['AI', '工具']

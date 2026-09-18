@@ -1,6 +1,7 @@
 ---
 date: 2026-08-13
-slug: deepseek突然爆火国产大模型的竞争逻辑变了
+slug: "deepseek-tu-ran-bao-huo-guo-chan-da-mo-xing-de-jing-zheng-luo-ji-bian-le"
+url: "/articles/2026/08/13/deepseek-tu-ran-bao-huo-guo-chan-da-mo-xing-de-jing-zheng-luo-ji-bian-le.html"
 title: DeepSeek突然爆火：国产大模型的竞争逻辑变了
 description: 我关注 DeepSeek 挺久了，这次 V4 Pro 正式发布，给我的感觉不是「又发了一个大模型」，而是国产大模型的竞争逻辑，真的变了。
 categories: ['AI', '工具']

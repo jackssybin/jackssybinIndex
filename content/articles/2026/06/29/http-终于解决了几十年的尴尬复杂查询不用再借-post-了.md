@@ -1,6 +1,7 @@
 ---
 date: 2026-06-29
-slug: http-终于解决了几十年的尴尬复杂查询不用再借-post-了
+slug: "http-zhong-yu-jie-jue-le-ji-shi-nian-de-gan-ga-fu-za-cha-xun-bu-yong-zai-jie-post-liao"
+url: "/articles/2026/06/29/http-zhong-yu-jie-jue-le-ji-shi-nian-de-gan-ga-fu-za-cha-xun-bu-yong-zai-jie-post-liao.html"
 title: HTTP 终于解决了几十年的尴尬：复杂查询不用再借 POST 了
 description: 做后端开发的朋友，多半都遇到过这个尴尬：
 categories: ['AI', '工具']

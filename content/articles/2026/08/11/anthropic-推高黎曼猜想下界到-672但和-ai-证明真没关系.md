@@ -1,6 +1,7 @@
 ---
 date: 2026-08-11
-slug: anthropic-推高黎曼猜想下界到-672但和-ai-证明真没关系
+slug: "anthropic-tui-gao-li-man-cai-xiang-xia-jie-dao-672-dan-he-ai-zheng-ming-zhen-mei-guan-xi"
+url: "/articles/2026/08/11/anthropic-tui-gao-li-man-cai-xiang-xia-jie-dao-672-dan-he-ai-zheng-ming-zhen-mei-guan-xi.html"
 title: Anthropic 推高黎曼猜想下界到 67.2%，但和 AI 证明真没关系
 description: 别被标题党骗了：这不是 AI 解决了黎曼猜想，这是 35 年来人类自己最大的一次突破。
 categories: ['AI', '工具测评']

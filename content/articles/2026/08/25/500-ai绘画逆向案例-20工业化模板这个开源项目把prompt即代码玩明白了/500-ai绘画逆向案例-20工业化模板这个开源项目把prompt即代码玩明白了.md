@@ -1,6 +1,6 @@
 ---
 title: "500+ AI绘画逆向案例 + 20+工业化模板：这个开源项目把「Prompt即代码」玩明白了"
-url: "/articles/2026/08/25/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了.html"
+url: "/articles/2026/08/25/500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le.html"
 date: "2026-08-25T00:00:00+08:00"
 lastmod: "2026-08-25T00:00:00+08:00"
 description: 做 AI 绘画你是不是也遇到过这个问题：

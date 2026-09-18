@@ -1,6 +1,7 @@
 ---
 date: 2026-06-26
-slug: gemini-跌到行业第四根本不是技术问题
+slug: "gemini-die-dao-hang-ye-di-si-gen-ben-bu-shi-ji-shu-wen-ti"
+url: "/articles/2026/06/26/gemini-die-dao-hang-ye-di-si-gen-ben-bu-shi-ji-shu-wen-ti.html"
 title: Gemini 跌到行业第四，根本不是技术问题
 description: Google Gemini 被爆在内部已经跌到 AI 模型竞争力第四，很多人第一反应是：Google 技术不行了？
 categories: ['AI', '工具']

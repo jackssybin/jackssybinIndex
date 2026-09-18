@@ -1,6 +1,7 @@
 ---
 date: 2026-08-02
-slug: gcc-全面拒绝-ai-代码我却觉得这步走得特别聪明
+slug: "gcc-quan-mian-ju-jue-ai-dai-ma-wo-que-jue-de-zhe-bu-zou-de-te-bie-cong-ming"
+url: "/articles/2026/08/02/gcc-quan-mian-ju-jue-ai-dai-ma-wo-que-jue-de-zhe-bu-zou-de-te-bie-cong-ming.html"
 title: GCC 全面拒绝 AI 代码，我却觉得这步走得特别聪明
 description: 我自己写代码天天用AI补全，但看到GCC拒绝所有AI代码的规则，第一反应不是"太保守了"，而是"这才是活了三十五年的项目该有的清醒"。
 categories: ['AI 编程', '工具测评']

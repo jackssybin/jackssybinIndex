@@ -1,6 +1,7 @@
 ---
 date: 2026-08-23
-slug: deepseek周末降价背后我看到了ai行业最危险的变化
+slug: "deepseek-zhou-mo-jiang-jia-bei-hou-wo-kan-dao-le-ai-hang-ye-zui-wei-xian-de-bian-hua"
+url: "/articles/2026/08/23/deepseek-zhou-mo-jiang-jia-bei-hou-wo-kan-dao-le-ai-hang-ye-zui-wei-xian-de-bian-hua.html"
 title: DeepSeek周末降价背后，我看到了AI行业最危险的变化
 description: DeepSeek一周之内连调两次定价：上周刚涨完价，这周又宣布周末全天统一按低谷价收费。很多人看不懂，说这是战略摇摆，或者抢用户打价格战。
 categories: ['AI', '工具测评']

@@ -1,6 +1,7 @@
 ---
 date: 2026-07-26
-slug: kimi砍了一半上下文我反而觉得这是进步
+slug: "kimi-kan-le-yi-ban-shang-xia-wen-wo-fan-er-jue-de-zhe-shi-jin-bu"
+url: "/articles/2026/07/26/kimi-kan-le-yi-ban-shang-xia-wen-wo-fan-er-jue-de-zhe-shi-jin-bu.html"
 title: Kimi砍了一半上下文，我反而觉得这是进步
 description: 最近月之暗面发了个新品：K3-256K。
 categories: ['AI', '工具']

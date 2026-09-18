@@ -1,6 +1,7 @@
 ---
 date: 2026-07-19
-slug: 小米oppovivo荣耀统一标准这件事真被大家想大了
+slug: "xiao-mi-oppovivo-rong-yao-tong-yi-biao-zhun-zhe-jian-shi-zhen-bei-da-jia-xiang-da-le"
+url: "/articles/2026/07/19/xiao-mi-oppovivo-rong-yao-tong-yi-biao-zhun-zhe-jian-shi-zhen-bei-da-jia-xiang-da-le.html"
 title: 小米OPPOvivo荣耀统一标准这件事，真被大家想大了
 description: 7 月 16 日金标联盟开发者沙龙上，小米、OPPO、vivo、荣耀四家宣布：跨品牌"碰一碰"、一镜到底动画、运存管理三项标准统一，7 月 30 日上线。
 categories: ['AI', '工具']

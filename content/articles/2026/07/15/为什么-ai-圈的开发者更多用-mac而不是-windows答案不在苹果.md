@@ -1,6 +1,7 @@
 ---
 date: 2026-07-15
-slug: 为什么-ai-圈的开发者更多用-mac而不是-windows答案不在苹果
+slug: "wei-shen-me-ai-quan-de-kai-fa-zhe-geng-duo-yong-mac-er-bu-shi-windows-da-an-bu-zai-ping-guo"
+url: "/articles/2026/07/15/wei-shen-me-ai-quan-de-kai-fa-zhe-geng-duo-yong-mac-er-bu-shi-windows-da-an-bu-zai-ping-guo.html"
 title: 为什么 AI 圈的开发者更多用 Mac，而不是 Windows？答案不在苹果
 description: 一个反直觉的答案先摆在这里：真正在训模型的人，用啥笔记本都行。
 categories: ['AI', '工具测评']

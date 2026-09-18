@@ -1,6 +1,7 @@
 ---
 date: 2026-08-20
-slug: ai都能解决数学猜想了数学家真的要失业吗
+slug: "ai-dou-neng-jie-jue-shu-xue-cai-xiang-le-shu-xue-jia-zhen-de-yao-shi-ye-ma"
+url: "/articles/2026/08/20/ai-dou-neng-jie-jue-shu-xue-cai-xiang-le-shu-xue-jia-zhen-de-yao-shi-ye-ma.html"
 title: AI都能解决数学猜想了，数学家真的要失业吗？
 description: 我最近刷到好多「AI解决百年数学猜想」的新闻，点进去一看，差点被标题忽悠了。
 categories: ['AI', '工具测评']

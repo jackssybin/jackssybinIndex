@@ -1,6 +1,7 @@
 ---
 date: 2026-08-17
-slug: deepseek砍了94的调用配额这件事没你想的那么简单
+slug: "deepseek-kan-le-94-de-diao-yong-pei-e-zhe-jian-shi-mei-ni-xiang-de-na-me-jian-dan"
+url: "/articles/2026/08/17/deepseek-kan-le-94-de-diao-yong-pei-e-zhe-jian-shi-mei-ni-xiang-de-na-me-jian-dan.html"
 title: Deepseek砍了94%的调用配额，这件事没你想的那么简单
 description: 我前几天刚买了Deepseek的月套餐，看到调价通知的时候，其实一点都不意外。
 categories: ['AI', '工具']

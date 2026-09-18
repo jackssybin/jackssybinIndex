@@ -1,6 +1,7 @@
 ---
 date: 2026-08-12
-slug: gpt-6-炸出-10-万亿参数参数越大ai-就越强吗
+slug: "gpt-6-zha-chu-10-wan-yi-can-shu-can-shu-yue-da-ai-jiu-yue-qiang-ma"
+url: "/articles/2026/08/12/gpt-6-zha-chu-10-wan-yi-can-shu-can-shu-yue-da-ai-jiu-yue-qiang-ma.html"
 title: GPT-6 炸出 10 万亿参数：参数越大，AI 就越强吗？
 description: 这两天 AI 圈炸出一个大新闻：OpenAI 要发 GPT-6 了，参数规模直接干到 **10 万亿**。
 categories: ['AI', '工具测评']

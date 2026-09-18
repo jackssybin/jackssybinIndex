@@ -1,6 +1,7 @@
 ---
 date: 2026-07-31
-slug: 支付宝拆分体验技术部ai不是来裁员的是来拆组织的
+slug: "zhi-fu-bao-chai-fen-ti-yan-ji-shu-bu-ai-bu-shi-lai-cai-yuan-de-shi-lai-chai-zu-zhi-de"
+url: "/articles/2026/07/31/zhi-fu-bao-chai-fen-ti-yan-ji-shu-bu-ai-bu-shi-lai-cai-yuan-de-shi-lai-chai-zu-zhi-de.html"
 title: 支付宝拆分体验技术部：AI不是来裁员的，是来拆组织的
 description: 大家最近应该都看到网传消息了：
 categories: ['AI', '工具测评']

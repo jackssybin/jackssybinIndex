@@ -1,6 +1,7 @@
 ---
 date: 2026-06-30
-slug: http-尴尬了几十年的坑终于填上了
+slug: "http-gan-ga-le-ji-shi-nian-de-keng-zhong-yu-tian-shang-le"
+url: "/articles/2026/06/30/http-gan-ga-le-ji-shi-nian-de-keng-zhong-yu-tian-shang-le.html"
 title: HTTP 尴尬了几十年的坑，终于填上了
 description: 做过接口开发的人，多半都懂这个尴尬：
 categories: ['AI', '工具']

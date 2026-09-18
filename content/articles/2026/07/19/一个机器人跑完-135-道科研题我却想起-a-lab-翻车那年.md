@@ -1,6 +1,7 @@
 ---
 date: 2026-07-19
-slug: 一个机器人跑完-135-道科研题我却想起-a-lab-翻车那年
+slug: "yi-ge-ji-qi-ren-pao-wan-135-dao-ke-yan-ti-wo-que-xiang-qi-a-lab-fan-che-na-nian"
+url: "/articles/2026/07/19/yi-ge-ji-qi-ren-pao-wan-135-dao-ke-yan-ti-wo-que-xiang-qi-a-lab-fan-che-na-nian.html"
 title: 一个机器人跑完 135 道科研题，我却想起 A-Lab 翻车那年
 description: 一台自动化平台"无人干预跑完 135 道科研题"这种新闻，我看到的第一反应不是激动，是想起 2023 年 A-Lab 翻车那年。
 categories: ['AI', '工具']

@@ -1,6 +1,7 @@
 ---
 date: 2026-08-10
-slug: 为什么程序员欢迎ai音乐人却拼命抵制真相根本不是你想的那样
+slug: "wei-shen-me-cheng-xu-yuan-huan-ying-ai-yin-yue-ren-que-pin-ming-di-zhi-zhen-xiang-gen-ben-bu-shi-ni-xiang-de-na-yang"
+url: "/articles/2026/08/10/wei-shen-me-cheng-xu-yuan-huan-ying-ai-yin-yue-ren-que-pin-ming-di-zhi-zhen-xiang-gen-ben-bu-shi-ni-xiang-de-na-yang.html"
 title: 为什么程序员欢迎AI，音乐人却拼命抵制？真相根本不是你想的那样
 description: 前阵子帮朋友改一段AI生成的代码，他看完说："没想到AI写代码还真能用，以后我是不是可以少写点了？"
 categories: ['AI', '工具测评']

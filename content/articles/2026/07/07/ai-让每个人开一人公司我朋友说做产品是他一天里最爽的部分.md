@@ -1,6 +1,7 @@
 ---
 date: 2026-07-07
-slug: ai-让每个人开一人公司我朋友说做产品是他一天里最爽的部分
+slug: "ai-rang-mei-ge-ren-kai-yi-ren-gong-si-wo-peng-you-shuo-zuo-chan-pin-shi-ta-yi-tian-li-zui-shuang-de-bu-fen"
+url: "/articles/2026/07/07/ai-rang-mei-ge-ren-kai-yi-ren-gong-si-wo-peng-you-shuo-zuo-chan-pin-shi-ta-yi-tian-li-zui-shuang-de-bu-fen.html"
 title: AI 让每个人开一人公司？我朋友说，做产品是他一天里最爽的部分
 description: 前几天跟一个做独立开发的朋友通电话。
 categories: ['AI', '工具测评']

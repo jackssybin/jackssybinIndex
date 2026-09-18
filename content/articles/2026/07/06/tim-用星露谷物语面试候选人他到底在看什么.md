@@ -1,6 +1,7 @@
 ---
 date: 2026-07-06
-slug: tim-用星露谷物语面试候选人他到底在看什么
+slug: "tim-yong-xing-lu-gu-wu-yu-mian-shi-hou-xuan-ren-ta-dao-di-zai-kan-shen-me"
+url: "/articles/2026/07/06/tim-yong-xing-lu-gu-wu-yu-mian-shi-hou-xuan-ren-ta-dao-di-zai-kan-shen-me.html"
 title: Tim 用《星露谷物语》面试候选人，他到底在看什么？
 description: 影视飓风的老板 Tim 前段时间在直播里说，他有时候会送候选人一台 Switch，让他们玩一段《星露谷物语》。不管有没有录取，Switch 都不用还。
 categories: ['AI', '工具']

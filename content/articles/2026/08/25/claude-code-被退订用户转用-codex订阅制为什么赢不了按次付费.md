@@ -1,6 +1,7 @@
 ---
 date: 2026-08-25
-slug: claude-code-被退订用户转用-codex订阅制为什么赢不了按次付费
+slug: "claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei"
+url: "/articles/2026/08/25/claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei.html"
 title: Claude Code 被退订，用户转用 Codex：订阅制为什么赢不了按次付费？
 description: 最近身边好几个朋友都退订了 Claude Code，转回去用 OpenAI Codex。
 categories: ['AI 编程', '工具测评']

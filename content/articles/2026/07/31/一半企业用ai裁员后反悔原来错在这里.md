@@ -1,6 +1,7 @@
 ---
 date: 2026-07-31
-slug: 一半企业用ai裁员后反悔原来错在这里
+slug: "yi-ban-qi-ye-yong-ai-cai-yuan-hou-fan-hui-yuan-lai-cuo-zai-zhe-li"
+url: "/articles/2026/07/31/yi-ban-qi-ye-yong-ai-cai-yuan-hou-fan-hui-yuan-lai-cuo-zai-zhe-li.html"
 title: 一半企业用AI裁员后反悔，原来错在这里
 description: 去年还在喊"AI来了，赶紧裁员降本"，今年一半企业都反悔了，开始把裁掉的人请回来。
 categories: ['AI', '工具测评']

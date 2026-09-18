@@ -732,7 +732,7 @@
     "topicSlug": "",
     "tags": [],
     "type": "topic",
-    "count": 28,
+    "count": 29,
     "slug": "ai-agent",
     "core": false,
     "priority": 77,
@@ -1323,6 +1323,26 @@
         ],
         "priority": 0,
         "content": "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器 很多 Agent 的网页能力其实卡在同一个地方：它能“看网页”，但不一定能稳定地“使用网页”。 curl 拿不到 JS 渲染后的内容，普通浏览器自动化一碰到反爬和验证码就停住；登录态、多账号、并发任务又很容易互相污染。BrowserAct Skills 这个项目解决的不是某一个网页抓取脚本，而是把浏览器抽象成 AI Agent 可以理解、可以接管、可以隔离的执行环境。 项目地址： 本文基于仓库 README、docs 和本地代码结构整理。我的判断是：如果你正在做 AI Agent、信息采集、竞品监控、网页工作流自动化，BrowserAct 值得认真看一遍。但它也不是“万能爬虫”。它更像一套给 Agent 用的浏览器操作底座，适合把复杂网页任务拆成可复用、可并发、可接管的工作流。 这个项目到底是什么 BrowserAct Skills 仓库包含两部分： 1. browser act：入口 Skill，告诉 Agent 什么时候应该调用 BrowserAct，以及第一次应该运行什么命令。 2. browser act skill forge 和 solutions/：把浏览器探索过程沉淀成可复用 Skill 的工具与示例目录。 它背后的 CLI 是 browser act cli。官方安装命令是： 安装后先验证： 如果你要让 Agent 自动安装入口 Skill，README 给出的提示是： 这句话的意思不是“把 README 复制给 Agent”。真正关键的是安装 browser act/SKILL.md，让 Agent 在遇到网页提取、登录态网页、验证码、表单点击、多浏览器并发时知道：这里应该先调用 BrowserAct，而不是继续用普通 WebFetch 硬试。 为什么普通网页工具不够用 普通网页工具常见问题有四类： 页面靠 JS 渲染，静态抓取只拿到空壳。 站点有反爬、验证码、地区限制，普通 headless 很容易暴露。 登录态难复用，尤其是企业 SSO、浏览器插件、证书依赖这类环境。 多个 Agent 并发操作时共用浏览器状态，Cookie、指纹和任务上下文可能串线。 BrowserAct 的文档把解决思路拆成三层： 环境层：指纹伪装、TLS 轮换、代理、隐私模式，尽量让验证不要触发。 执行层：stealth extract 和 solve captcha，触发后自动处理一部分验证。 人类层：remote assist 生成接管链接，让人从任何设备接手，处理完再交回 Agent。 这套设计比较现实。它没有假装所有验证都能自动化解决，而是承认自动化会遇到边界，并把“人类接管”做成流程的一部分。 快速上手：两条路径 路径 A：只想读取页面内容 如果你只是想读取一个网页，尤其是 JS 渲染或有反爬的页面，文档推荐从 stealth extract 开始： 保存成文件： 需要 HTML： 需要指定地区代理： 这个命令的好处是没有浏览器会话管理。URL 进去，Markdown 或 HTML 出来，浏览器上下文自动创建和清理。适合信息检索、批量读页面、替代普通 WebFetch。 注意：stealth 相关能力需要 API Key；Chrome 和 chrome direct 类型不需要认证。 路径 B：需要点击、输入、登录和表单 如果任务需要互动，就用 session： BrowserAct 的交互模型很适合 Agent：state 返回索引化的元素树，Agent 不需要解析复杂 DOM，只要看到 [4] 是按钮，就可以 click 4。这比让模型在 HTML 里猜 CSS selector 稳定得多。 三种浏览器模式怎么选 BrowserAct 文档把浏览器分成几个场景： 1. chrome：复用本地 Chrome 登录态 适合已经登录的网站，例如 GitHub、Gmail、Jira、后台系统。它支持从本地 Chrome 导入 Profile，复制 Cookie、localStorage、IndexedDB、session storage 等登录相关状态。 示例： 这个模式适合长期任务。导入是一次性快照，后续本地 Chrome 的变化不会自动同步。导入 Profile 也可能触发一些网站的重新验证，所以需要提前告知用户。 2. chrome direct：直接接管本地 Chrome 适合企业 SSO、证书、插件依赖很强的系统： 优点是零配置，继承你本地 Chrome 的扩展、书签、证书和 SSO。缺点也很直接：它会占用你的真实 Chrome，不适合长时间后台跑。 3. stealth：给反爬和多账号准备 stealth 有两种常见用法。 隐私模式适合一次性采集： 每次 session 都是新指纹、空资料、无残留。它适合公开页面采集、价格监控、避免指纹积累，但不能保留登录态。 固定身份适合长期多账号： 每个浏览器有稳定指纹、固定 IP 和独立 Cookie。你可以把它理解成“一个账号一台浏览器”。这类模式更适合多店铺、多账号运营，但需要 API Key，托管静态代理也属于付费能力。 并发：浏览器是身份，session 是工作区 Br..."
+      },
+      {
+        "title": "21 Star 的 Agnes-AI-Platform，凭什么把图片生成、视频生成、无限画布、MCP Server 塞进一个 Vue+FastAPI 全栈里",
+        "url": "/articles/2026/09/17/agnes-ai-platform/",
+        "type": "blog",
+        "date": "2026-09-17",
+        "description": "开源自建的 AI 图片视频生成平台",
+        "excerpt": "开源自建的 AI 图片视频生成平台",
+        "topic": "AI、Agent 与本地模型",
+        "topicSlug": "ai-agent",
+        "series": "",
+        "tags": [
+          "开源",
+          "AI",
+          "图片视频生成",
+          "自托管",
+          "教程"
+        ],
+        "priority": 0,
+        "content": "21 Star 的 Agnes AI Platform，凭什么把图片生成、视频生成、无限画布、MCP Server 塞进一个 Vue+FastAPI 全栈里 项目地址： 仓库全名： WingkySky/Agnes AI Platform 版本： 0.0.1 ｜ 创建： 2026 06 08 ｜ 最近推送： 2026 09 15 技术栈： Vue 3 + FastAPI 0.115 + SQLAlchemy 2.0 + Pinia + Element Plus 先说结论：它不是一个 Demo，是\"能用\"的东西 21 Star，6 Fork，475 个文件，6440 KB。体量不大，但东西很实。后端 162 个接口，前端覆盖文生图、图生图、文生视频、图生视频、关键帧动画、无限画布（节点连线蒙版）、MCP Server、SSE 流式对话、预设中心、社区广场，外加一个 mobile 端和 OpenAI 兼容接口。五阶段演进（v1→v5），每一步都有提交的哈希和时间戳能对上。 最近一次提交 2026 09 15 120b8dca，修复的是\"刷新按钮裸绑定 @click=\\\"loadList\\\" 把 PointerEvent 当 page 实参污染 filters.page\"这种真实场景的 bug——这种提交出现在 21 Star 的项目里，说明有人在用，有人在修。 一、技术栈全貌（按目录说话） 后端：backend/ 三件套：FastAPI 0.115 + httpx + SQLAlchemy 2.0。数据库默认 SQLite（一键启动不需要额外依赖），可选 PostgreSQL。 关键文件路径： 能力 路径 MCP Server 实现 backend/app/models/mcp server.py、backend/app/models/mcp market.py、backend/app/routes/mcp.py 迁移历史 backend/alembic/versions/20260913 add mcp servers.py Agent 会话测试 backend/tests/test agent sessions.py、backend/tests/test episode isolation.py 配置/健康检查 GET /health、GET /api/config 前端：frontend/ Vue 3 + Vite + Element Plus + Pinia + Vue Router，TypeScript 占 31.0%（1517758 bytes）。 核心画布组件 CanvasCameraPanel.vue、图片上传 ImageUploader.vue、摄像头预设选择 CameraPresetSelector.vue——文件名和功能边界对得上 README 里写的\"无限画布（节点、连线、蒙版编辑）\"。 移动端：mobile/ mobile 命中 28 处，属于独立子项目，不是 web 的响应式适配。 二、五阶段演进（从 v1 到 v5 都做了什么） 全部来自 README zh.md「项目演进」表格，一字不差： 阶段 功能 v1 文生图、图生图、文生视频、图生视频 v2 数据库驱动的多 Provider 系统 v3 AI 对话 + 工具调用 + SSE 流式输出 v4 无限画布（节点、连线、蒙版编辑） v5 画布 Agent、预设中心、社区广场 一个项目干完了\"生成→接入→对话→创作→生态\"五个阶段，而且每个阶段都有对应的提交。最近几个提交按时间倒序列出来： 2026 09 15 120b8dca — fix：统一审核列表整页 400 空数据 2026 09 14 02f50ec6 — fix：安全收尾——验证码随机源换 CSPRNG + 依赖漏洞升级清零 2026 09 14 6c22c2be — fix：providers 管理路由补 admin 鉴权（ 14 个端点此前零鉴权 ） 2026 09 13 5ed1aac0 — feat：管理员日志查看（后端日志 + 前端错误上报） 2026 09 13 736fea16 — feat：统一生图/生视频比例分辨率 UI 注意第二条：02f50ec6 把验证码随机源从普通 random 换成了 CSPRNG——这是真实的安全修复，不是装饰性的。再看第三条：6c22c2be 给 providers 管理的 14 个端点补上鉴权，说明之前这些接口任何人都不登录就能操作。这两个提交放在一起看，能看出维护者的安全意识是在迭代的。 三、源码级观察：MCP Server 是怎么接进去的 backend/app/routes/mcp.py 和 backend/app/models/mcp server.py 是两个核心入口，迁移文件 20260913 add mcp servers.py 说明 MCP Server 这个能力是 9 月 13 日才加进去的——距离最近推送（9 月 15 日）只有两天。也就是说这个项目还在快速追加功能。 MCP（Model Context Protocol）在 AI 圈是 2025 年下半年才热起来的标准，这个项目直接在后端 models 和 rou..."
       }
     ],
     "articleTitles": [
@@ -1353,7 +1373,8 @@
       "Skill Zoo：统一管理所有 AI 编程工具的技能库",
       "avoid-ai-writing 源码拆解：把“去掉 AI 味”做成一套可审计的 Agent Skill",
       "last30days-skill 源码拆解：给 AI Agent 装一个“过去 30 天”的研究雷达",
-      "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器"
+      "BrowserAct Skills 教程：给 AI Agent 配一只真正能干活的浏览器",
+      "21 Star 的 Agnes-AI-Platform，凭什么把图片生成、视频生成、无限画布、MCP Server 塞进一个 Vue+FastAPI 全栈里"
     ]
   },
   {

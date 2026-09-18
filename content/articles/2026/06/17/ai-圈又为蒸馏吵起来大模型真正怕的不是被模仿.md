@@ -1,6 +1,7 @@
 ---
 date: 2026-06-17
-slug: ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿
+slug: "ai-quan-you-wei-zheng-liu-chao-qi-lai-da-mo-xing-zhen-zheng-pa-de-bu-shi-bei-mo-fang"
+url: "/articles/2026/06/17/ai-quan-you-wei-zheng-liu-chao-qi-lai-da-mo-xing-zhen-zheng-pa-de-bu-shi-bei-mo-fang.html"
 title: AI 圈又为“蒸馏”吵起来：大模型真正怕的不是被模仿
 description: "从 DeepSeek 蒸馏争议切入，分析大模型厂商真正担心的不是输出被模仿，而是数据、成本与护城河被重新定义；文章梳理知识蒸馏的边界、合规争议与模型竞争逻辑。"
 categories: ['AI', '工具测评']

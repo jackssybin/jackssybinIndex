@@ -1,6 +1,7 @@
 ---
 date: 2026-07-29
-slug: anthropic这句话戳破了ai行业三年来的假象
+slug: "anthropic-zhe-ju-hua-chuo-po-le-ai-hang-ye-san-nian-lai-de-jia-xiang"
+url: "/articles/2026/07/29/anthropic-zhe-ju-hua-chuo-po-le-ai-hang-ye-san-nian-lai-de-jia-xiang.html"
 title: Anthropic这句话，戳破了AI行业三年来的假象
 description: 我对Anthropic这句话的第一反应是：
 categories: ['AI', '工具测评']

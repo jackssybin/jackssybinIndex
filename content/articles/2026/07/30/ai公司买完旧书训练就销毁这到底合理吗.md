@@ -1,6 +1,7 @@
 ---
 date: 2026-07-30
-slug: ai公司买完旧书训练就销毁这到底合理吗
+slug: "ai-gong-si-mai-wan-jiu-shu-xun-lian-jiu-xiao-hui-zhe-dao-di-he-li-ma"
+url: "/articles/2026/07/30/ai-gong-si-mai-wan-jiu-shu-xun-lian-jiu-xiao-hui-zhe-dao-di-he-li-ma.html"
 title: AI公司买完旧书训练就销毁，这到底合理吗？
 description: 最近看到一条新闻：多家AI公司在偷偷大量收购旧书，扫描训练完模型就直接销毁。
 categories: ['AI', '工具测评']

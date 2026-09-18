@@ -1,6 +1,7 @@
 ---
 date: 2026-07-15
-slug: codex-换上-gpt-56-之后我删掉了-9-个-skills
+slug: "codex-huan-shang-gpt-56-zhi-hou-wo-shan-diao-le-9-ge-skills"
+url: "/articles/2026/07/15/codex-huan-shang-gpt-56-zhi-hou-wo-shan-diao-le-9-ge-skills.html"
 title: Codex 换上 GPT-5.6 之后，我删掉了 9 个 Skills
 description: 上周我把 Codex 里常驻的 skills 从 12 个砍到 3 个。
 categories: ['AI 编程', '工具测评']

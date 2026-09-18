@@ -1,6 +1,7 @@
 ---
 date: 2026-06-23
-slug: 真会用-ai-写作的人先让它当坏人
+slug: "zhen-hui-yong-ai-xie-zuo-de-ren-xian-rang-ta-dang-huai-ren"
+url: "/articles/2026/06/23/zhen-hui-yong-ai-xie-zuo-de-ren-xian-rang-ta-dang-huai-ren.html"
 title: 真会用 AI 写作的人，先让它当坏人
 description: 很多人一谈 AI 写作，问题就变成：它能不能替人写出灵魂？
 categories: ['AI', '工具测评']

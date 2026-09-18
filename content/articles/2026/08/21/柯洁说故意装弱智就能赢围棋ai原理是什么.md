@@ -1,6 +1,7 @@
 ---
 date: 2026-08-21
-slug: 柯洁说故意装弱智就能赢围棋ai原理是什么
+slug: "ke-jie-shuo-gu-yi-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-yuan-li-shi-shen-me"
+url: "/articles/2026/08/21/ke-jie-shuo-gu-yi-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-yuan-li-shi-shen-me.html"
 title: 柯洁说故意装弱智就能赢围棋AI，原理是什么？
 description: 柯洁说，他找到破解围棋AI的方法：故意下"弱智"招，哪怕让AI九子，AI也赢不了。
 categories: ['AI', '工具测评']

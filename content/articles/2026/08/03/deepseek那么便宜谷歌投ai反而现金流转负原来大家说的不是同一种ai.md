@@ -1,6 +1,7 @@
 ---
 date: 2026-08-03
-slug: deepseek那么便宜谷歌投ai反而现金流转负原来大家说的不是同一种ai
+slug: "deepseek-na-me-pian-yi-gu-ge-tou-ai-fan-er-xian-jin-liu-zhuan-fu-yuan-lai-da-jia-shuo-de-bu-shi-tong-yi-zhong-ai"
+url: "/articles/2026/08/03/deepseek-na-me-pian-yi-gu-ge-tou-ai-fan-er-xian-jin-liu-zhuan-fu-yuan-lai-da-jia-shuo-de-bu-shi-tong-yi-zhong-ai.html"
 title: DeepSeek那么便宜，谷歌投AI反而现金流转负？原来大家说的不是同一种AI
 description: 这个问题问到了点子上：
 categories: ['AI', '工具测评']

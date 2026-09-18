@@ -1,6 +1,7 @@
 ---
 date: 2026-08-22
-slug: 柯洁说装弱智就能赢围棋ai是吹牛吗原理其实很简单
+slug: "ke-jie-shuo-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-shi-chui-niu-ma-yuan-li-qi-shi-hen-jian-dan"
+url: "/articles/2026/08/22/ke-jie-shuo-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-shi-chui-niu-ma-yuan-li-qi-shi-hen-jian-dan.html"
 title: 柯洁说"装弱智就能赢围棋AI"，是吹牛吗？原理其实很简单
 description: 柯洁说，他找到方法破解围棋AI了：哪怕让九子，只要你故意"装弱智"乱下，就能赢。
 categories: ['AI', '工具测评']

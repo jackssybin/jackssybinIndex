@@ -1,6 +1,7 @@
 ---
 date: 2026-07-20
-slug: kimi-暂停会员开放真正卡住的从来不是显卡
+slug: "kimi-zan-ting-hui-yuan-kai-fang-zhen-zheng-ka-zhu-de-cong-lai-bu-shi-xian-ka"
+url: "/articles/2026/07/20/kimi-zan-ting-hui-yuan-kai-fang-zhen-zheng-ka-zhu-de-cong-lai-bu-shi-xian-ka.html"
 title: Kimi 暂停会员开放，真正卡住的从来不是显卡
 description: 7 月 19 日，月之暗面挂出一份公告，说 K3 发布后 48 小时用户请求量大幅超预估，暂停会员开放。
 categories: ['AI', '工具']

@@ -1,6 +1,7 @@
 ---
 date: 2026-08-19
-slug: 互联网大厂真的后悔搞ai了吗
+slug: "hu-lian-wang-da-chang-zhen-de-hou-hui-gao-ai-liao-ma"
+url: "/articles/2026/08/19/hu-lian-wang-da-chang-zhen-de-hou-hui-gao-ai-liao-ma.html"
 title: 互联网大厂真的后悔搞AI了吗？
 description: 我前阵子跟几个大厂的技术负责人吃饭，聊起AI投入，其中一位说的话印象很深：
 categories: ['AI', '工具测评']

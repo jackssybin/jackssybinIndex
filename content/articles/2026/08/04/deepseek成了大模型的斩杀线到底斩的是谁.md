@@ -1,6 +1,7 @@
 ---
 date: 2026-08-04
-slug: deepseek成了大模型的斩杀线到底斩的是谁
+slug: "deepseek-cheng-le-da-mo-xing-de-zhan-sha-xian-dao-di-zhan-de-shi-shui"
+url: "/articles/2026/08/04/deepseek-cheng-le-da-mo-xing-de-zhan-sha-xian-dao-di-zhan-de-shi-shui.html"
 title: DeepSeek成了大模型的"斩杀线"，到底斩的是谁？
 description: 最近AI圈最火的一个词，就是DeepSeek的「斩杀线」。
 categories: ['AI', '工具']

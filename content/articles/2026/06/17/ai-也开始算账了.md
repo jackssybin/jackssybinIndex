@@ -1,6 +1,7 @@
 ---
 date: 2026-06-17
-slug: ai-也开始算账了
+slug: "ai-ye-kai-shi-suan-zhang-le"
+url: "/articles/2026/06/17/ai-ye-kai-shi-suan-zhang-le.html"
 title: AI 也开始算账了
 description: 一个很有意思的变化正在发生：公司以前鼓励大家多用 AI，现在开始问“你到底用了多少”。
 categories: ['AI', '工具测评']

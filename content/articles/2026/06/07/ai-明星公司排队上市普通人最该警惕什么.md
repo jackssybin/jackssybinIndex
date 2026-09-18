@@ -1,6 +1,7 @@
 ---
 date: 2026-06-07
-slug: ai-明星公司排队上市普通人最该警惕什么
+slug: "ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me"
+url: "/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html"
 title: AI 明星公司排队上市，普通人最该警惕什么？
 description: 这两年，科技圈最容易让人心跳加速的名字，大概就是 SpaceX、OpenAI、Anthropic。
 categories: ['AI', '工具测评']

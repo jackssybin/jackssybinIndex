@@ -1,6 +1,7 @@
 ---
 date: 2026-07-04
-slug: 阿里禁用-claude-这件事很多人第一反应就搞错了
+slug: "a-li-jin-yong-claude-zhe-jian-shi-hen-duo-ren-di-yi-fan-ying-jiu-gao-cuo-le"
+url: "/articles/2026/07/04/a-li-jin-yong-claude-zhe-jian-shi-hen-duo-ren-di-yi-fan-ying-jiu-gao-cuo-le.html"
 title: 阿里禁用 Claude 这件事，很多人第一反应就搞错了
 description: 7 月 3 日，阿里内部通知全员卸载 Anthropic 全线产品，Sonnet、Opus、Fable、Claude Code、Agent 类工具，一个不留。
 categories: ['AI 编程', '工具测评']

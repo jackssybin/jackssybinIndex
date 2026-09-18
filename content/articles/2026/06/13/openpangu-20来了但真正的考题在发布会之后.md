@@ -1,6 +1,7 @@
 ---
 date: 2026-06-13
-slug: openpangu-20来了但真正的考题在发布会之后
+slug: "openpangu-20-lai-le-dan-zhen-zheng-de-kao-ti-zai-fa-bu-hui-zhi-hou"
+url: "/articles/2026/06/13/openpangu-20-lai-le-dan-zhen-zheng-de-kao-ti-zai-fa-bu-hui-zhi-hou.html"
 title: openPangu 2.0来了，但真正的考题在发布会之后
 description: 一个大模型宣布开源时，网上通常会很快分成两边。
 categories: ['AI', '工具']

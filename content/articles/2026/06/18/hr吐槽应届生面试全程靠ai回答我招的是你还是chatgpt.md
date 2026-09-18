@@ -1,6 +1,7 @@
 ---
 date: 2026-06-18
-slug: hr吐槽应届生面试全程靠ai回答我招的是你还是chatgpt
+slug: "hr-tu-cao-ying-jie-sheng-mian-shi-quan-cheng-kao-ai-hui-da-wo-zhao-de-shi-ni-hai-shi-chatgpt"
+url: "/articles/2026/06/18/hr-tu-cao-ying-jie-sheng-mian-shi-quan-cheng-kao-ai-hui-da-wo-zhao-de-shi-ni-hai-shi-chatgpt.html"
 title: HR吐槽应届生面试全程靠AI回答：我招的是你，还是ChatGPT？
 description: 最近看到一条热搜：HR吐槽现在有些应届生面试，把手机放边上，全程让豆包帮忙作答，回答全是标准AI套话，一点个人内容都没有。
 categories: ['AI', '工具测评']

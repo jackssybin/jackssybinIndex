@@ -1,0 +1,719 @@
+{
+  "generatedAt": "2026-09-18T14:33:54.328Z",
+  "note": "中文 slug -> 拼音 ASCII slug 迁移映射。nginx 301 与线上验收脚本都以本文件为准。",
+  "count": 89,
+  "entries": [
+    {
+      "source": "content/articles/2026/06/07/ai-明星公司排队上市普通人最该警惕什么.md",
+      "oldPath": "/articles/2026/06/07/ai-明星公司排队上市普通人最该警惕什么/",
+      "newPath": "/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html",
+      "oldPathEncoded": "/articles/2026/06/07/ai-%E6%98%8E%E6%98%9F%E5%85%AC%E5%8F%B8%E6%8E%92%E9%98%9F%E4%B8%8A%E5%B8%82%E6%99%AE%E9%80%9A%E4%BA%BA%E6%9C%80%E8%AF%A5%E8%AD%A6%E6%83%95%E4%BB%80%E4%B9%88/",
+      "slugBefore": "ai-明星公司排队上市普通人最该警惕什么",
+      "slugAfter": "ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me"
+    },
+    {
+      "source": "content/articles/2026/06/07/下班后还在精神加班的人先做这件事.md",
+      "oldPath": "/articles/2026/06/07/下班后还在精神加班的人先做这件事/",
+      "newPath": "/articles/2026/06/07/xia-ban-hou-hai-zai-jing-shen-jia-ban-de-ren-xian-zuo-zhe-jian-shi.html",
+      "oldPathEncoded": "/articles/2026/06/07/%E4%B8%8B%E7%8F%AD%E5%90%8E%E8%BF%98%E5%9C%A8%E7%B2%BE%E7%A5%9E%E5%8A%A0%E7%8F%AD%E7%9A%84%E4%BA%BA%E5%85%88%E5%81%9A%E8%BF%99%E4%BB%B6%E4%BA%8B/",
+      "slugBefore": "下班后还在精神加班的人先做这件事",
+      "slugAfter": "xia-ban-hou-hai-zai-jing-shen-jia-ban-de-ren-xian-zuo-zhe-jian-shi"
+    },
+    {
+      "source": "content/articles/2026/06/07/效率快了钱为什么没多.md",
+      "oldPath": "/articles/2026/06/07/效率快了钱为什么没多/",
+      "newPath": "/articles/2026/06/07/xiao-lv-kuai-le-qian-wei-shen-me-mei-duo.html",
+      "oldPathEncoded": "/articles/2026/06/07/%E6%95%88%E7%8E%87%E5%BF%AB%E4%BA%86%E9%92%B1%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E5%A4%9A/",
+      "slugBefore": "效率快了钱为什么没多",
+      "slugAfter": "xiao-lv-kuai-le-qian-wei-shen-me-mei-duo"
+    },
+    {
+      "source": "content/articles/2026/06/11/loop-工程火了但-agent-真正缺的不是多想几步.md",
+      "oldPath": "/articles/2026/06/11/loop-工程火了但-agent-真正缺的不是多想几步/",
+      "newPath": "/articles/2026/06/11/loop-gong-cheng-huo-le-dan-agent-zhen-zheng-que-de-bu-shi-duo-xiang-ji-bu.html",
+      "oldPathEncoded": "/articles/2026/06/11/loop-%E5%B7%A5%E7%A8%8B%E7%81%AB%E4%BA%86%E4%BD%86-agent-%E7%9C%9F%E6%AD%A3%E7%BC%BA%E7%9A%84%E4%B8%8D%E6%98%AF%E5%A4%9A%E6%83%B3%E5%87%A0%E6%AD%A5/",
+      "slugBefore": "loop-工程火了但-agent-真正缺的不是多想几步",
+      "slugAfter": "loop-gong-cheng-huo-le-dan-agent-zhen-zheng-que-de-bu-shi-duo-xiang-ji-bu"
+    },
+    {
+      "source": "content/articles/2026/06/11/电吸门夹伤之后智能汽车该补上的不是一句提醒.md",
+      "oldPath": "/articles/2026/06/11/电吸门夹伤之后智能汽车该补上的不是一句提醒/",
+      "newPath": "/articles/2026/06/11/dian-xi-men-jia-shang-zhi-hou-zhi-neng-qi-che-gai-bu-shang-de-bu-shi-yi-ju-ti-xing.html",
+      "oldPathEncoded": "/articles/2026/06/11/%E7%94%B5%E5%90%B8%E9%97%A8%E5%A4%B9%E4%BC%A4%E4%B9%8B%E5%90%8E%E6%99%BA%E8%83%BD%E6%B1%BD%E8%BD%A6%E8%AF%A5%E8%A1%A5%E4%B8%8A%E7%9A%84%E4%B8%8D%E6%98%AF%E4%B8%80%E5%8F%A5%E6%8F%90%E9%86%92/",
+      "slugBefore": "电吸门夹伤之后智能汽车该补上的不是一句提醒",
+      "slugAfter": "dian-xi-men-jia-shang-zhi-hou-zhi-neng-qi-che-gai-bu-shang-de-bu-shi-yi-ju-ti-xing"
+    },
+    {
+      "source": "content/articles/2026/06/13/openpangu-20来了但真正的考题在发布会之后.md",
+      "oldPath": "/articles/2026/06/13/openpangu-20来了但真正的考题在发布会之后/",
+      "newPath": "/articles/2026/06/13/openpangu-20-lai-le-dan-zhen-zheng-de-kao-ti-zai-fa-bu-hui-zhi-hou.html",
+      "oldPathEncoded": "/articles/2026/06/13/openpangu-20%E6%9D%A5%E4%BA%86%E4%BD%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E8%80%83%E9%A2%98%E5%9C%A8%E5%8F%91%E5%B8%83%E4%BC%9A%E4%B9%8B%E5%90%8E/",
+      "slugBefore": "openpangu-20来了但真正的考题在发布会之后",
+      "slugAfter": "openpangu-20-lai-le-dan-zhen-zheng-de-kao-ti-zai-fa-bu-hui-zhi-hou"
+    },
+    {
+      "source": "content/articles/2026/06/15/增程车还香吗先看你在为什么麻烦买单.md",
+      "oldPath": "/articles/2026/06/15/增程车还香吗先看你在为什么麻烦买单/",
+      "newPath": "/articles/2026/06/15/zeng-cheng-che-hai-xiang-ma-xian-kan-ni-zai-wei-shen-me-ma-fan-mai-dan.html",
+      "oldPathEncoded": "/articles/2026/06/15/%E5%A2%9E%E7%A8%8B%E8%BD%A6%E8%BF%98%E9%A6%99%E5%90%97%E5%85%88%E7%9C%8B%E4%BD%A0%E5%9C%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E9%BA%BB%E7%83%A6%E4%B9%B0%E5%8D%95/",
+      "slugBefore": "增程车还香吗先看你在为什么麻烦买单",
+      "slugAfter": "zeng-cheng-che-hai-xiang-ma-xian-kan-ni-zai-wei-shen-me-ma-fan-mai-dan"
+    },
+    {
+      "source": "content/articles/2026/06/15/机器人伴侣真有大市场吗先看一周后还开不开机.md",
+      "oldPath": "/articles/2026/06/15/机器人伴侣真有大市场吗先看一周后还开不开机/",
+      "newPath": "/articles/2026/06/15/ji-qi-ren-ban-lv-zhen-you-da-shi-chang-ma-xian-kan-yi-zhou-hou-hai-kai-bu-kai-ji.html",
+      "oldPathEncoded": "/articles/2026/06/15/%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BC%B4%E4%BE%A3%E7%9C%9F%E6%9C%89%E5%A4%A7%E5%B8%82%E5%9C%BA%E5%90%97%E5%85%88%E7%9C%8B%E4%B8%80%E5%91%A8%E5%90%8E%E8%BF%98%E5%BC%80%E4%B8%8D%E5%BC%80%E6%9C%BA/",
+      "slugBefore": "机器人伴侣真有大市场吗先看一周后还开不开机",
+      "slugAfter": "ji-qi-ren-ban-lv-zhen-you-da-shi-chang-ma-xian-kan-yi-zhou-hou-hai-kai-bu-kai-ji"
+    },
+    {
+      "source": "content/articles/2026/06/17/ai-也开始算账了.md",
+      "oldPath": "/articles/2026/06/17/ai-也开始算账了/",
+      "newPath": "/articles/2026/06/17/ai-ye-kai-shi-suan-zhang-le.html",
+      "oldPathEncoded": "/articles/2026/06/17/ai-%E4%B9%9F%E5%BC%80%E5%A7%8B%E7%AE%97%E8%B4%A6%E4%BA%86/",
+      "slugBefore": "ai-也开始算账了",
+      "slugAfter": "ai-ye-kai-shi-suan-zhang-le"
+    },
+    {
+      "source": "content/articles/2026/06/17/ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿.md",
+      "oldPath": "/articles/2026/06/17/ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿/",
+      "newPath": "/articles/2026/06/17/ai-quan-you-wei-zheng-liu-chao-qi-lai-da-mo-xing-zhen-zheng-pa-de-bu-shi-bei-mo-fang.html",
+      "oldPathEncoded": "/articles/2026/06/17/ai-%E5%9C%88%E5%8F%88%E4%B8%BA%E8%92%B8%E9%A6%8F%E5%90%B5%E8%B5%B7%E6%9D%A5%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9C%9F%E6%AD%A3%E6%80%95%E7%9A%84%E4%B8%8D%E6%98%AF%E8%A2%AB%E6%A8%A1%E4%BB%BF/",
+      "slugBefore": "ai-圈又为蒸馏吵起来大模型真正怕的不是被模仿",
+      "slugAfter": "ai-quan-you-wei-zheng-liu-chao-qi-lai-da-mo-xing-zhen-zheng-pa-de-bu-shi-bei-mo-fang"
+    },
+    {
+      "source": "content/articles/2026/06/18/hr吐槽应届生面试全程靠ai回答我招的是你还是chatgpt.md",
+      "oldPath": "/articles/2026/06/18/hr吐槽应届生面试全程靠ai回答我招的是你还是chatgpt/",
+      "newPath": "/articles/2026/06/18/hr-tu-cao-ying-jie-sheng-mian-shi-quan-cheng-kao-ai-hui-da-wo-zhao-de-shi-ni-hai-shi-chatgpt.html",
+      "oldPathEncoded": "/articles/2026/06/18/hr%E5%90%90%E6%A7%BD%E5%BA%94%E5%B1%8A%E7%94%9F%E9%9D%A2%E8%AF%95%E5%85%A8%E7%A8%8B%E9%9D%A0ai%E5%9B%9E%E7%AD%94%E6%88%91%E6%8B%9B%E7%9A%84%E6%98%AF%E4%BD%A0%E8%BF%98%E6%98%AFchatgpt/",
+      "slugBefore": "hr吐槽应届生面试全程靠ai回答我招的是你还是chatgpt",
+      "slugAfter": "hr-tu-cao-ying-jie-sheng-mian-shi-quan-cheng-kao-ai-hui-da-wo-zhao-de-shi-ni-hai-shi-chatgpt"
+    },
+    {
+      "source": "content/articles/2026/06/18/为什么ai写代码看不出ai味儿写文章一眼就能认出来.md",
+      "oldPath": "/articles/2026/06/18/为什么ai写代码看不出ai味儿写文章一眼就能认出来/",
+      "newPath": "/articles/2026/06/18/wei-shen-me-ai-xie-dai-ma-kan-bu-chu-ai-wei-er-xie-wen-zhang-yi-yan-jiu-neng-ren-chu-lai.html",
+      "oldPathEncoded": "/articles/2026/06/18/%E4%B8%BA%E4%BB%80%E4%B9%88ai%E5%86%99%E4%BB%A3%E7%A0%81%E7%9C%8B%E4%B8%8D%E5%87%BAai%E5%91%B3%E5%84%BF%E5%86%99%E6%96%87%E7%AB%A0%E4%B8%80%E7%9C%BC%E5%B0%B1%E8%83%BD%E8%AE%A4%E5%87%BA%E6%9D%A5/",
+      "slugBefore": "为什么ai写代码看不出ai味儿写文章一眼就能认出来",
+      "slugAfter": "wei-shen-me-ai-xie-dai-ma-kan-bu-chu-ai-wei-er-xie-wen-zhang-yi-yan-jiu-neng-ren-chu-lai"
+    },
+    {
+      "source": "content/articles/2026/06/23/真会用-ai-写作的人先让它当坏人.md",
+      "oldPath": "/articles/2026/06/23/真会用-ai-写作的人先让它当坏人/",
+      "newPath": "/articles/2026/06/23/zhen-hui-yong-ai-xie-zuo-de-ren-xian-rang-ta-dang-huai-ren.html",
+      "oldPathEncoded": "/articles/2026/06/23/%E7%9C%9F%E4%BC%9A%E7%94%A8-ai-%E5%86%99%E4%BD%9C%E7%9A%84%E4%BA%BA%E5%85%88%E8%AE%A9%E5%AE%83%E5%BD%93%E5%9D%8F%E4%BA%BA/",
+      "slugBefore": "真会用-ai-写作的人先让它当坏人",
+      "slugAfter": "zhen-hui-yong-ai-xie-zuo-de-ren-xian-rang-ta-dang-huai-ren"
+    },
+    {
+      "source": "content/articles/2026/06/23/雷军后悔十亿赌约小米做空调真是被逼出来的吗.md",
+      "oldPath": "/articles/2026/06/23/雷军后悔十亿赌约小米做空调真是被逼出来的吗/",
+      "newPath": "/articles/2026/06/23/lei-jun-hou-hui-shi-yi-du-yue-xiao-mi-zuo-kong-tiao-zhen-shi-bei-bi-chu-lai-de-ma.html",
+      "oldPathEncoded": "/articles/2026/06/23/%E9%9B%B7%E5%86%9B%E5%90%8E%E6%82%94%E5%8D%81%E4%BA%BF%E8%B5%8C%E7%BA%A6%E5%B0%8F%E7%B1%B3%E5%81%9A%E7%A9%BA%E8%B0%83%E7%9C%9F%E6%98%AF%E8%A2%AB%E9%80%BC%E5%87%BA%E6%9D%A5%E7%9A%84%E5%90%97/",
+      "slugBefore": "雷军后悔十亿赌约小米做空调真是被逼出来的吗",
+      "slugAfter": "lei-jun-hou-hui-shi-yi-du-yue-xiao-mi-zuo-kong-tiao-zhen-shi-bei-bi-chu-lai-de-ma"
+    },
+    {
+      "source": "content/articles/2026/06/26/gemini-跌到行业第四根本不是技术问题.md",
+      "oldPath": "/articles/2026/06/26/gemini-跌到行业第四根本不是技术问题/",
+      "newPath": "/articles/2026/06/26/gemini-die-dao-hang-ye-di-si-gen-ben-bu-shi-ji-shu-wen-ti.html",
+      "oldPathEncoded": "/articles/2026/06/26/gemini-%E8%B7%8C%E5%88%B0%E8%A1%8C%E4%B8%9A%E7%AC%AC%E5%9B%9B%E6%A0%B9%E6%9C%AC%E4%B8%8D%E6%98%AF%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98/",
+      "slugBefore": "gemini-跌到行业第四根本不是技术问题",
+      "slugAfter": "gemini-die-dao-hang-ye-di-si-gen-ben-bu-shi-ji-shu-wen-ti"
+    },
+    {
+      "source": "content/articles/2026/06/26/苹果突然涨价20钱被ai赚走了.md",
+      "oldPath": "/articles/2026/06/26/苹果突然涨价20钱被ai赚走了/",
+      "newPath": "/articles/2026/06/26/ping-guo-tu-ran-zhang-jia-20-qian-bei-ai-zhuan-zou-le.html",
+      "oldPathEncoded": "/articles/2026/06/26/%E8%8B%B9%E6%9E%9C%E7%AA%81%E7%84%B6%E6%B6%A8%E4%BB%B720%E9%92%B1%E8%A2%ABai%E8%B5%9A%E8%B5%B0%E4%BA%86/",
+      "slugBefore": "苹果突然涨价20钱被ai赚走了",
+      "slugAfter": "ping-guo-tu-ran-zhang-jia-20-qian-bei-ai-zhuan-zou-le"
+    },
+    {
+      "source": "content/articles/2026/06/29/http-终于解决了几十年的尴尬复杂查询不用再借-post-了.md",
+      "oldPath": "/articles/2026/06/29/http-终于解决了几十年的尴尬复杂查询不用再借-post-了/",
+      "newPath": "/articles/2026/06/29/http-zhong-yu-jie-jue-le-ji-shi-nian-de-gan-ga-fu-za-cha-xun-bu-yong-zai-jie-post-liao.html",
+      "oldPathEncoded": "/articles/2026/06/29/http-%E7%BB%88%E4%BA%8E%E8%A7%A3%E5%86%B3%E4%BA%86%E5%87%A0%E5%8D%81%E5%B9%B4%E7%9A%84%E5%B0%B4%E5%B0%AC%E5%A4%8D%E6%9D%82%E6%9F%A5%E8%AF%A2%E4%B8%8D%E7%94%A8%E5%86%8D%E5%80%9F-post-%E4%BA%86/",
+      "slugBefore": "http-终于解决了几十年的尴尬复杂查询不用再借-post-了",
+      "slugAfter": "http-zhong-yu-jie-jue-le-ji-shi-nian-de-gan-ga-fu-za-cha-xun-bu-yong-zai-jie-post-liao"
+    },
+    {
+      "source": "content/articles/2026/06/29/为什么很多公司搞完扁平化效率反而更低了.md",
+      "oldPath": "/articles/2026/06/29/为什么很多公司搞完扁平化效率反而更低了/",
+      "newPath": "/articles/2026/06/29/wei-shen-me-hen-duo-gong-si-gao-wan-bian-ping-hua-xiao-lv-fan-er-geng-di-le.html",
+      "oldPathEncoded": "/articles/2026/06/29/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%A4%9A%E5%85%AC%E5%8F%B8%E6%90%9E%E5%AE%8C%E6%89%81%E5%B9%B3%E5%8C%96%E6%95%88%E7%8E%87%E5%8F%8D%E8%80%8C%E6%9B%B4%E4%BD%8E%E4%BA%86/",
+      "slugBefore": "为什么很多公司搞完扁平化效率反而更低了",
+      "slugAfter": "wei-shen-me-hen-duo-gong-si-gao-wan-bian-ping-hua-xiao-lv-fan-er-geng-di-le"
+    },
+    {
+      "source": "content/articles/2026/06/30/http-尴尬了几十年的坑终于填上了.md",
+      "oldPath": "/articles/2026/06/30/http-尴尬了几十年的坑终于填上了/",
+      "newPath": "/articles/2026/06/30/http-gan-ga-le-ji-shi-nian-de-keng-zhong-yu-tian-shang-le.html",
+      "oldPathEncoded": "/articles/2026/06/30/http-%E5%B0%B4%E5%B0%AC%E4%BA%86%E5%87%A0%E5%8D%81%E5%B9%B4%E7%9A%84%E5%9D%91%E7%BB%88%E4%BA%8E%E5%A1%AB%E4%B8%8A%E4%BA%86/",
+      "slugBefore": "http-尴尬了几十年的坑终于填上了",
+      "slugAfter": "http-gan-ga-le-ji-shi-nian-de-keng-zhong-yu-tian-shang-le"
+    },
+    {
+      "source": "content/articles/2026/06/30/为什么最近置身x内批量出现三个结构性原因你中了吗.md",
+      "oldPath": "/articles/2026/06/30/为什么最近置身x内批量出现三个结构性原因你中了吗/",
+      "newPath": "/articles/2026/06/30/wei-shen-me-zui-jin-zhi-shen-x-nei-pi-liang-chu-xian-san-ge-jie-gou-xing-yuan-yin-ni-zhong-le-ma.html",
+      "oldPathEncoded": "/articles/2026/06/30/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%80%E8%BF%91%E7%BD%AE%E8%BA%ABx%E5%86%85%E6%89%B9%E9%87%8F%E5%87%BA%E7%8E%B0%E4%B8%89%E4%B8%AA%E7%BB%93%E6%9E%84%E6%80%A7%E5%8E%9F%E5%9B%A0%E4%BD%A0%E4%B8%AD%E4%BA%86%E5%90%97/",
+      "slugBefore": "为什么最近置身x内批量出现三个结构性原因你中了吗",
+      "slugAfter": "wei-shen-me-zui-jin-zhi-shen-x-nei-pi-liang-chu-xian-san-ge-jie-gou-xing-yuan-yin-ni-zhong-le-ma"
+    },
+    {
+      "source": "content/articles/2026/07/04/博士-3-年改-4-年真不是变严了.md",
+      "oldPath": "/articles/2026/07/04/博士-3-年改-4-年真不是变严了/",
+      "newPath": "/articles/2026/07/04/bo-shi-3-nian-gai-4-nian-zhen-bu-shi-bian-yan-le.html",
+      "oldPathEncoded": "/articles/2026/07/04/%E5%8D%9A%E5%A3%AB-3-%E5%B9%B4%E6%94%B9-4-%E5%B9%B4%E7%9C%9F%E4%B8%8D%E6%98%AF%E5%8F%98%E4%B8%A5%E4%BA%86/",
+      "slugBefore": "博士-3-年改-4-年真不是变严了",
+      "slugAfter": "bo-shi-3-nian-gai-4-nian-zhen-bu-shi-bian-yan-le"
+    },
+    {
+      "source": "content/articles/2026/07/04/阿里禁用-claude-这件事很多人第一反应就搞错了.md",
+      "oldPath": "/articles/2026/07/04/阿里禁用-claude-这件事很多人第一反应就搞错了/",
+      "newPath": "/articles/2026/07/04/a-li-jin-yong-claude-zhe-jian-shi-hen-duo-ren-di-yi-fan-ying-jiu-gao-cuo-le.html",
+      "oldPathEncoded": "/articles/2026/07/04/%E9%98%BF%E9%87%8C%E7%A6%81%E7%94%A8-claude-%E8%BF%99%E4%BB%B6%E4%BA%8B%E5%BE%88%E5%A4%9A%E4%BA%BA%E7%AC%AC%E4%B8%80%E5%8F%8D%E5%BA%94%E5%B0%B1%E6%90%9E%E9%94%99%E4%BA%86/",
+      "slugBefore": "阿里禁用-claude-这件事很多人第一反应就搞错了",
+      "slugAfter": "a-li-jin-yong-claude-zhe-jian-shi-hen-duo-ren-di-yi-fan-ying-jiu-gao-cuo-le"
+    },
+    {
+      "source": "content/articles/2026/07/06/tim-用星露谷物语面试候选人他到底在看什么.md",
+      "oldPath": "/articles/2026/07/06/tim-用星露谷物语面试候选人他到底在看什么/",
+      "newPath": "/articles/2026/07/06/tim-yong-xing-lu-gu-wu-yu-mian-shi-hou-xuan-ren-ta-dao-di-zai-kan-shen-me.html",
+      "oldPathEncoded": "/articles/2026/07/06/tim-%E7%94%A8%E6%98%9F%E9%9C%B2%E8%B0%B7%E7%89%A9%E8%AF%AD%E9%9D%A2%E8%AF%95%E5%80%99%E9%80%89%E4%BA%BA%E4%BB%96%E5%88%B0%E5%BA%95%E5%9C%A8%E7%9C%8B%E4%BB%80%E4%B9%88/",
+      "slugBefore": "tim-用星露谷物语面试候选人他到底在看什么",
+      "slugAfter": "tim-yong-xing-lu-gu-wu-yu-mian-shi-hou-xuan-ren-ta-dao-di-zai-kan-shen-me"
+    },
+    {
+      "source": "content/articles/2026/07/06/前公司回头找你先别急着感动.md",
+      "oldPath": "/articles/2026/07/06/前公司回头找你先别急着感动/",
+      "newPath": "/articles/2026/07/06/qian-gong-si-hui-tou-zhao-ni-xian-bie-ji-zhe-gan-dong.html",
+      "oldPathEncoded": "/articles/2026/07/06/%E5%89%8D%E5%85%AC%E5%8F%B8%E5%9B%9E%E5%A4%B4%E6%89%BE%E4%BD%A0%E5%85%88%E5%88%AB%E6%80%A5%E7%9D%80%E6%84%9F%E5%8A%A8/",
+      "slugBefore": "前公司回头找你先别急着感动",
+      "slugAfter": "qian-gong-si-hui-tou-zhao-ni-xian-bie-ji-zhe-gan-dong"
+    },
+    {
+      "source": "content/articles/2026/07/07/99-万的机器人只能陪你-2-小时别怪电池.md",
+      "oldPath": "/articles/2026/07/07/99-万的机器人只能陪你-2-小时别怪电池/",
+      "newPath": "/articles/2026/07/07/99-wan-de-ji-qi-ren-zhi-neng-pei-ni-2-xiao-shi-bie-guai-dian-chi.html",
+      "oldPathEncoded": "/articles/2026/07/07/99-%E4%B8%87%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%AA%E8%83%BD%E9%99%AA%E4%BD%A0-2-%E5%B0%8F%E6%97%B6%E5%88%AB%E6%80%AA%E7%94%B5%E6%B1%A0/",
+      "slugBefore": "99-万的机器人只能陪你-2-小时别怪电池",
+      "slugAfter": "99-wan-de-ji-qi-ren-zhi-neng-pei-ni-2-xiao-shi-bie-guai-dian-chi"
+    },
+    {
+      "source": "content/articles/2026/07/07/ai-让每个人开一人公司我朋友说做产品是他一天里最爽的部分.md",
+      "oldPath": "/articles/2026/07/07/ai-让每个人开一人公司我朋友说做产品是他一天里最爽的部分/",
+      "newPath": "/articles/2026/07/07/ai-rang-mei-ge-ren-kai-yi-ren-gong-si-wo-peng-you-shuo-zuo-chan-pin-shi-ta-yi-tian-li-zui-shuang-de-bu-fen.html",
+      "oldPathEncoded": "/articles/2026/07/07/ai-%E8%AE%A9%E6%AF%8F%E4%B8%AA%E4%BA%BA%E5%BC%80%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8%E6%88%91%E6%9C%8B%E5%8F%8B%E8%AF%B4%E5%81%9A%E4%BA%A7%E5%93%81%E6%98%AF%E4%BB%96%E4%B8%80%E5%A4%A9%E9%87%8C%E6%9C%80%E7%88%BD%E7%9A%84%E9%83%A8%E5%88%86/",
+      "slugBefore": "ai-让每个人开一人公司我朋友说做产品是他一天里最爽的部分",
+      "slugAfter": "ai-rang-mei-ge-ren-kai-yi-ren-gong-si-wo-peng-you-shuo-zuo-chan-pin-shi-ta-yi-tian-li-zui-shuang-de-bu-fen"
+    },
+    {
+      "source": "content/articles/2026/07/09/12306-悄悄改了一句话把一个用户必然踩坑的责任接了回来.md",
+      "oldPath": "/articles/2026/07/09/12306-悄悄改了一句话把一个用户必然踩坑的责任接了回来/",
+      "newPath": "/articles/2026/07/09/12306-qiao-qiao-gai-le-yi-ju-hua-ba-yi-ge-yong-hu-bi-ran-cai-keng-de-ze-ren-jie-le-hui-lai.html",
+      "oldPathEncoded": "/articles/2026/07/09/12306-%E6%82%84%E6%82%84%E6%94%B9%E4%BA%86%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8A%8A%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7%E5%BF%85%E7%84%B6%E8%B8%A9%E5%9D%91%E7%9A%84%E8%B4%A3%E4%BB%BB%E6%8E%A5%E4%BA%86%E5%9B%9E%E6%9D%A5/",
+      "slugBefore": "12306-悄悄改了一句话把一个用户必然踩坑的责任接了回来",
+      "slugAfter": "12306-qiao-qiao-gai-le-yi-ju-hua-ba-yi-ge-yong-hu-bi-ran-cai-keng-de-ze-ren-jie-le-hui-lai"
+    },
+    {
+      "source": "content/articles/2026/07/09/苹果这次追查iphone-18-pro泄密是走过场吗.md",
+      "oldPath": "/articles/2026/07/09/苹果这次追查iphone-18-pro泄密是走过场吗/",
+      "newPath": "/articles/2026/07/09/ping-guo-zhe-ci-zhui-cha-iphone-18-pro-xie-mi-shi-zou-guo-chang-ma.html",
+      "oldPathEncoded": "/articles/2026/07/09/%E8%8B%B9%E6%9E%9C%E8%BF%99%E6%AC%A1%E8%BF%BD%E6%9F%A5iphone-18-pro%E6%B3%84%E5%AF%86%E6%98%AF%E8%B5%B0%E8%BF%87%E5%9C%BA%E5%90%97/",
+      "slugBefore": "苹果这次追查iphone-18-pro泄密是走过场吗",
+      "slugAfter": "ping-guo-zhe-ci-zhui-cha-iphone-18-pro-xie-mi-shi-zou-guo-chang-ma"
+    },
+    {
+      "source": "content/articles/2026/07/13/8000-学费学修手机我劝你先问老板这四件事.md",
+      "oldPath": "/articles/2026/07/13/8000-学费学修手机我劝你先问老板这四件事/",
+      "newPath": "/articles/2026/07/13/8000-xue-fei-xue-xiu-shou-ji-wo-quan-ni-xian-wen-lao-ban-zhe-si-jian-shi.html",
+      "oldPathEncoded": "/articles/2026/07/13/8000-%E5%AD%A6%E8%B4%B9%E5%AD%A6%E4%BF%AE%E6%89%8B%E6%9C%BA%E6%88%91%E5%8A%9D%E4%BD%A0%E5%85%88%E9%97%AE%E8%80%81%E6%9D%BF%E8%BF%99%E5%9B%9B%E4%BB%B6%E4%BA%8B/",
+      "slugBefore": "8000-学费学修手机我劝你先问老板这四件事",
+      "slugAfter": "8000-xue-fei-xue-xiu-shou-ji-wo-quan-ni-xian-wen-lao-ban-zhe-si-jian-shi"
+    },
+    {
+      "source": "content/articles/2026/07/13/字节玩不转付费网文不是钱的问题.md",
+      "oldPath": "/articles/2026/07/13/字节玩不转付费网文不是钱的问题/",
+      "newPath": "/articles/2026/07/13/zi-jie-wan-bu-zhuan-fu-fei-wang-wen-bu-shi-qian-de-wen-ti.html",
+      "oldPathEncoded": "/articles/2026/07/13/%E5%AD%97%E8%8A%82%E7%8E%A9%E4%B8%8D%E8%BD%AC%E4%BB%98%E8%B4%B9%E7%BD%91%E6%96%87%E4%B8%8D%E6%98%AF%E9%92%B1%E7%9A%84%E9%97%AE%E9%A2%98/",
+      "slugBefore": "字节玩不转付费网文不是钱的问题",
+      "slugAfter": "zi-jie-wan-bu-zhuan-fu-fei-wang-wen-bu-shi-qian-de-wen-ti"
+    },
+    {
+      "source": "content/articles/2026/07/15/codex-换上-gpt-56-之后我删掉了-9-个-skills.md",
+      "oldPath": "/articles/2026/07/15/codex-换上-gpt-56-之后我删掉了-9-个-skills/",
+      "newPath": "/articles/2026/07/15/codex-huan-shang-gpt-56-zhi-hou-wo-shan-diao-le-9-ge-skills.html",
+      "oldPathEncoded": "/articles/2026/07/15/codex-%E6%8D%A2%E4%B8%8A-gpt-56-%E4%B9%8B%E5%90%8E%E6%88%91%E5%88%A0%E6%8E%89%E4%BA%86-9-%E4%B8%AA-skills/",
+      "slugBefore": "codex-换上-gpt-56-之后我删掉了-9-个-skills",
+      "slugAfter": "codex-huan-shang-gpt-56-zhi-hou-wo-shan-diao-le-9-ge-skills"
+    },
+    {
+      "source": "content/articles/2026/07/15/为什么-ai-圈的开发者更多用-mac而不是-windows答案不在苹果.md",
+      "oldPath": "/articles/2026/07/15/为什么-ai-圈的开发者更多用-mac而不是-windows答案不在苹果/",
+      "newPath": "/articles/2026/07/15/wei-shen-me-ai-quan-de-kai-fa-zhe-geng-duo-yong-mac-er-bu-shi-windows-da-an-bu-zai-ping-guo.html",
+      "oldPathEncoded": "/articles/2026/07/15/%E4%B8%BA%E4%BB%80%E4%B9%88-ai-%E5%9C%88%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E6%9B%B4%E5%A4%9A%E7%94%A8-mac%E8%80%8C%E4%B8%8D%E6%98%AF-windows%E7%AD%94%E6%A1%88%E4%B8%8D%E5%9C%A8%E8%8B%B9%E6%9E%9C/",
+      "slugBefore": "为什么-ai-圈的开发者更多用-mac而不是-windows答案不在苹果",
+      "slugAfter": "wei-shen-me-ai-quan-de-kai-fa-zhe-geng-duo-yong-mac-er-bu-shi-windows-da-an-bu-zai-ping-guo"
+    },
+    {
+      "source": "content/articles/2026/07/17/realme-退出中国不是败退是母公司算完账后的资源回收.md",
+      "oldPath": "/articles/2026/07/17/realme-退出中国不是败退是母公司算完账后的资源回收/",
+      "newPath": "/articles/2026/07/17/realme-tui-chu-zhong-guo-bu-shi-bai-tui-shi-mu-gong-si-suan-wan-zhang-hou-de-zi-yuan-hui-shou.html",
+      "oldPathEncoded": "/articles/2026/07/17/realme-%E9%80%80%E5%87%BA%E4%B8%AD%E5%9B%BD%E4%B8%8D%E6%98%AF%E8%B4%A5%E9%80%80%E6%98%AF%E6%AF%8D%E5%85%AC%E5%8F%B8%E7%AE%97%E5%AE%8C%E8%B4%A6%E5%90%8E%E7%9A%84%E8%B5%84%E6%BA%90%E5%9B%9E%E6%94%B6/",
+      "slugBefore": "realme-退出中国不是败退是母公司算完账后的资源回收",
+      "slugAfter": "realme-tui-chu-zhong-guo-bu-shi-bai-tui-shi-mu-gong-si-suan-wan-zhang-hou-de-zi-yuan-hui-shou"
+    },
+    {
+      "source": "content/articles/2026/07/17/读博还是不读博先别看博士过剩看你手里凑的是哪一套组合.md",
+      "oldPath": "/articles/2026/07/17/读博还是不读博先别看博士过剩看你手里凑的是哪一套组合/",
+      "newPath": "/articles/2026/07/17/du-bo-hai-shi-bu-du-bo-xian-bie-kan-bo-shi-guo-sheng-kan-ni-shou-li-cou-de-shi-na-yi-tao-zu-he.html",
+      "oldPathEncoded": "/articles/2026/07/17/%E8%AF%BB%E5%8D%9A%E8%BF%98%E6%98%AF%E4%B8%8D%E8%AF%BB%E5%8D%9A%E5%85%88%E5%88%AB%E7%9C%8B%E5%8D%9A%E5%A3%AB%E8%BF%87%E5%89%A9%E7%9C%8B%E4%BD%A0%E6%89%8B%E9%87%8C%E5%87%91%E7%9A%84%E6%98%AF%E5%93%AA%E4%B8%80%E5%A5%97%E7%BB%84%E5%90%88/",
+      "slugBefore": "读博还是不读博先别看博士过剩看你手里凑的是哪一套组合",
+      "slugAfter": "du-bo-hai-shi-bu-du-bo-xian-bie-kan-bo-shi-guo-sheng-kan-ni-shou-li-cou-de-shi-na-yi-tao-zu-he"
+    },
+    {
+      "source": "content/articles/2026/07/19/一个机器人跑完-135-道科研题我却想起-a-lab-翻车那年.md",
+      "oldPath": "/articles/2026/07/19/一个机器人跑完-135-道科研题我却想起-a-lab-翻车那年/",
+      "newPath": "/articles/2026/07/19/yi-ge-ji-qi-ren-pao-wan-135-dao-ke-yan-ti-wo-que-xiang-qi-a-lab-fan-che-na-nian.html",
+      "oldPathEncoded": "/articles/2026/07/19/%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%91%E5%AE%8C-135-%E9%81%93%E7%A7%91%E7%A0%94%E9%A2%98%E6%88%91%E5%8D%B4%E6%83%B3%E8%B5%B7-a-lab-%E7%BF%BB%E8%BD%A6%E9%82%A3%E5%B9%B4/",
+      "slugBefore": "一个机器人跑完-135-道科研题我却想起-a-lab-翻车那年",
+      "slugAfter": "yi-ge-ji-qi-ren-pao-wan-135-dao-ke-yan-ti-wo-que-xiang-qi-a-lab-fan-che-na-nian"
+    },
+    {
+      "source": "content/articles/2026/07/19/小米oppovivo荣耀统一标准这件事真被大家想大了.md",
+      "oldPath": "/articles/2026/07/19/小米oppovivo荣耀统一标准这件事真被大家想大了/",
+      "newPath": "/articles/2026/07/19/xiao-mi-oppovivo-rong-yao-tong-yi-biao-zhun-zhe-jian-shi-zhen-bei-da-jia-xiang-da-le.html",
+      "oldPathEncoded": "/articles/2026/07/19/%E5%B0%8F%E7%B1%B3oppovivo%E8%8D%A3%E8%80%80%E7%BB%9F%E4%B8%80%E6%A0%87%E5%87%86%E8%BF%99%E4%BB%B6%E4%BA%8B%E7%9C%9F%E8%A2%AB%E5%A4%A7%E5%AE%B6%E6%83%B3%E5%A4%A7%E4%BA%86/",
+      "slugBefore": "小米oppovivo荣耀统一标准这件事真被大家想大了",
+      "slugAfter": "xiao-mi-oppovivo-rong-yao-tong-yi-biao-zhun-zhe-jian-shi-zhen-bei-da-jia-xiang-da-le"
+    },
+    {
+      "source": "content/articles/2026/07/20/kimi-暂停会员开放真正卡住的从来不是显卡.md",
+      "oldPath": "/articles/2026/07/20/kimi-暂停会员开放真正卡住的从来不是显卡/",
+      "newPath": "/articles/2026/07/20/kimi-zan-ting-hui-yuan-kai-fang-zhen-zheng-ka-zhu-de-cong-lai-bu-shi-xian-ka.html",
+      "oldPathEncoded": "/articles/2026/07/20/kimi-%E6%9A%82%E5%81%9C%E4%BC%9A%E5%91%98%E5%BC%80%E6%94%BE%E7%9C%9F%E6%AD%A3%E5%8D%A1%E4%BD%8F%E7%9A%84%E4%BB%8E%E6%9D%A5%E4%B8%8D%E6%98%AF%E6%98%BE%E5%8D%A1/",
+      "slugBefore": "kimi-暂停会员开放真正卡住的从来不是显卡",
+      "slugAfter": "kimi-zan-ting-hui-yuan-kai-fang-zhen-zheng-ka-zhu-de-cong-lai-bu-shi-xian-ka"
+    },
+    {
+      "source": "content/articles/2026/07/20/被大领导追问到答不上多数人搞错了一件事.md",
+      "oldPath": "/articles/2026/07/20/被大领导追问到答不上多数人搞错了一件事/",
+      "newPath": "/articles/2026/07/20/bei-da-ling-dao-zhui-wen-dao-da-bu-shang-duo-shu-ren-gao-cuo-le-yi-jian-shi.html",
+      "oldPathEncoded": "/articles/2026/07/20/%E8%A2%AB%E5%A4%A7%E9%A2%86%E5%AF%BC%E8%BF%BD%E9%97%AE%E5%88%B0%E7%AD%94%E4%B8%8D%E4%B8%8A%E5%A4%9A%E6%95%B0%E4%BA%BA%E6%90%9E%E9%94%99%E4%BA%86%E4%B8%80%E4%BB%B6%E4%BA%8B/",
+      "slugBefore": "被大领导追问到答不上多数人搞错了一件事",
+      "slugAfter": "bei-da-ling-dao-zhui-wen-dao-da-bu-shang-duo-shu-ren-gao-cuo-le-yi-jian-shi"
+    },
+    {
+      "source": "content/articles/2026/07/22/kimi-跑分超过-claude大模型格局真的变了吗.md",
+      "oldPath": "/articles/2026/07/22/kimi-跑分超过-claude大模型格局真的变了吗/",
+      "newPath": "/articles/2026/07/22/kimi-pao-fen-chao-guo-claude-da-mo-xing-ge-ju-zhen-de-bian-le-ma.html",
+      "oldPathEncoded": "/articles/2026/07/22/kimi-%E8%B7%91%E5%88%86%E8%B6%85%E8%BF%87-claude%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A0%BC%E5%B1%80%E7%9C%9F%E7%9A%84%E5%8F%98%E4%BA%86%E5%90%97/",
+      "slugBefore": "kimi-跑分超过-claude大模型格局真的变了吗",
+      "slugAfter": "kimi-pao-fen-chao-guo-claude-da-mo-xing-ge-ju-zhen-de-bian-le-ma"
+    },
+    {
+      "source": "content/articles/2026/07/22/实习生偷同事履历入职网友这是大厂自己的福报.md",
+      "oldPath": "/articles/2026/07/22/实习生偷同事履历入职网友这是大厂自己的福报/",
+      "newPath": "/articles/2026/07/22/shi-xi-sheng-tou-tong-shi-lv-li-ru-zhi-wang-you-zhe-shi-da-chang-zi-ji-de-fu-bao.html",
+      "oldPathEncoded": "/articles/2026/07/22/%E5%AE%9E%E4%B9%A0%E7%94%9F%E5%81%B7%E5%90%8C%E4%BA%8B%E5%B1%A5%E5%8E%86%E5%85%A5%E8%81%8C%E7%BD%91%E5%8F%8B%E8%BF%99%E6%98%AF%E5%A4%A7%E5%8E%82%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%8F%E6%8A%A5/",
+      "slugBefore": "实习生偷同事履历入职网友这是大厂自己的福报",
+      "slugAfter": "shi-xi-sheng-tou-tong-shi-lv-li-ru-zhi-wang-you-zhe-shi-da-chang-zi-ji-de-fu-bao"
+    },
+    {
+      "source": "content/articles/2026/07/23/gpt模型为了跑分作弊自己突破沙盒逃逸了这给我们提了四个醒.md",
+      "oldPath": "/articles/2026/07/23/gpt模型为了跑分作弊自己突破沙盒逃逸了这给我们提了四个醒/",
+      "newPath": "/articles/2026/07/23/gpt-mo-xing-wei-le-pao-fen-zuo-bi-zi-ji-tu-po-sha-he-tao-yi-le-zhe-gei-wo-men-ti-le-si-ge-xing.html",
+      "oldPathEncoded": "/articles/2026/07/23/gpt%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BA%86%E8%B7%91%E5%88%86%E4%BD%9C%E5%BC%8A%E8%87%AA%E5%B7%B1%E7%AA%81%E7%A0%B4%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8%E4%BA%86%E8%BF%99%E7%BB%99%E6%88%91%E4%BB%AC%E6%8F%90%E4%BA%86%E5%9B%9B%E4%B8%AA%E9%86%92/",
+      "slugBefore": "gpt模型为了跑分作弊自己突破沙盒逃逸了这给我们提了四个醒",
+      "slugAfter": "gpt-mo-xing-wei-le-pao-fen-zuo-bi-zi-ji-tu-po-sha-he-tao-yi-le-zhe-gei-wo-men-ti-le-si-ge-xing"
+    },
+    {
+      "source": "content/articles/2026/07/23/openai模型失控跑进开源社区这哪里是ai觉醒明明是工程问题.md",
+      "oldPath": "/articles/2026/07/23/openai模型失控跑进开源社区这哪里是ai觉醒明明是工程问题/",
+      "newPath": "/articles/2026/07/23/openai-mo-xing-shi-kong-pao-jin-kai-yuan-she-qu-zhe-na-li-shi-ai-jue-xing-ming-ming-shi-gong-cheng-wen-ti.html",
+      "oldPathEncoded": "/articles/2026/07/23/openai%E6%A8%A1%E5%9E%8B%E5%A4%B1%E6%8E%A7%E8%B7%91%E8%BF%9B%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BA%E8%BF%99%E5%93%AA%E9%87%8C%E6%98%AFai%E8%A7%89%E9%86%92%E6%98%8E%E6%98%8E%E6%98%AF%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/",
+      "slugBefore": "openai模型失控跑进开源社区这哪里是ai觉醒明明是工程问题",
+      "slugAfter": "openai-mo-xing-shi-kong-pao-jin-kai-yuan-she-qu-zhe-na-li-shi-ai-jue-xing-ming-ming-shi-gong-cheng-wen-ti"
+    },
+    {
+      "source": "content/articles/2026/07/26/5000亿美元ai互换买卖我看到了半导体行业正在悄悄改变的游戏规则.md",
+      "oldPath": "/articles/2026/07/26/5000亿美元ai互换买卖我看到了半导体行业正在悄悄改变的游戏规则/",
+      "newPath": "/articles/2026/07/26/5000-yi-mei-yuan-ai-hu-huan-mai-mai-wo-kan-dao-le-ban-dao-ti-hang-ye-zheng-zai-qiao-qiao-gai-bian-de-you-xi-gui-ze.html",
+      "oldPathEncoded": "/articles/2026/07/26/5000%E4%BA%BF%E7%BE%8E%E5%85%83ai%E4%BA%92%E6%8D%A2%E4%B9%B0%E5%8D%96%E6%88%91%E7%9C%8B%E5%88%B0%E4%BA%86%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%A1%8C%E4%B8%9A%E6%AD%A3%E5%9C%A8%E6%82%84%E6%82%84%E6%94%B9%E5%8F%98%E7%9A%84%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99/",
+      "slugBefore": "5000亿美元ai互换买卖我看到了半导体行业正在悄悄改变的游戏规则",
+      "slugAfter": "5000-yi-mei-yuan-ai-hu-huan-mai-mai-wo-kan-dao-le-ban-dao-ti-hang-ye-zheng-zai-qiao-qiao-gai-bian-de-you-xi-gui-ze"
+    },
+    {
+      "source": "content/articles/2026/07/26/kimi砍了一半上下文我反而觉得这是进步.md",
+      "oldPath": "/articles/2026/07/26/kimi砍了一半上下文我反而觉得这是进步/",
+      "newPath": "/articles/2026/07/26/kimi-kan-le-yi-ban-shang-xia-wen-wo-fan-er-jue-de-zhe-shi-jin-bu.html",
+      "oldPathEncoded": "/articles/2026/07/26/kimi%E7%A0%8D%E4%BA%86%E4%B8%80%E5%8D%8A%E4%B8%8A%E4%B8%8B%E6%96%87%E6%88%91%E5%8F%8D%E8%80%8C%E8%A7%89%E5%BE%97%E8%BF%99%E6%98%AF%E8%BF%9B%E6%AD%A5/",
+      "slugBefore": "kimi砍了一半上下文我反而觉得这是进步",
+      "slugAfter": "kimi-kan-le-yi-ban-shang-xia-wen-wo-fan-er-jue-de-zhe-shi-jin-bu"
+    },
+    {
+      "source": "content/articles/2026/07/29/anthropic这句话戳破了ai行业三年来的假象.md",
+      "oldPath": "/articles/2026/07/29/anthropic这句话戳破了ai行业三年来的假象/",
+      "newPath": "/articles/2026/07/29/anthropic-zhe-ju-hua-chuo-po-le-ai-hang-ye-san-nian-lai-de-jia-xiang.html",
+      "oldPathEncoded": "/articles/2026/07/29/anthropic%E8%BF%99%E5%8F%A5%E8%AF%9D%E6%88%B3%E7%A0%B4%E4%BA%86ai%E8%A1%8C%E4%B8%9A%E4%B8%89%E5%B9%B4%E6%9D%A5%E7%9A%84%E5%81%87%E8%B1%A1/",
+      "slugBefore": "anthropic这句话戳破了ai行业三年来的假象",
+      "slugAfter": "anthropic-zhe-ju-hua-chuo-po-le-ai-hang-ye-san-nian-lai-de-jia-xiang"
+    },
+    {
+      "source": "content/articles/2026/07/29/顶尖学者偏爱粉笔黑板真的只是念旧吗.md",
+      "oldPath": "/articles/2026/07/29/顶尖学者偏爱粉笔黑板真的只是念旧吗/",
+      "newPath": "/articles/2026/07/29/ding-jian-xue-zhe-pian-ai-fen-bi-hei-ban-zhen-de-zhi-shi-nian-jiu-ma.html",
+      "oldPathEncoded": "/articles/2026/07/29/%E9%A1%B6%E5%B0%96%E5%AD%A6%E8%80%85%E5%81%8F%E7%88%B1%E7%B2%89%E7%AC%94%E9%BB%91%E6%9D%BF%E7%9C%9F%E7%9A%84%E5%8F%AA%E6%98%AF%E5%BF%B5%E6%97%A7%E5%90%97/",
+      "slugBefore": "顶尖学者偏爱粉笔黑板真的只是念旧吗",
+      "slugAfter": "ding-jian-xue-zhe-pian-ai-fen-bi-hei-ban-zhen-de-zhi-shi-nian-jiu-ma"
+    },
+    {
+      "source": "content/articles/2026/07/30/ai公司买完旧书训练就销毁这到底合理吗.md",
+      "oldPath": "/articles/2026/07/30/ai公司买完旧书训练就销毁这到底合理吗/",
+      "newPath": "/articles/2026/07/30/ai-gong-si-mai-wan-jiu-shu-xun-lian-jiu-xiao-hui-zhe-dao-di-he-li-ma.html",
+      "oldPathEncoded": "/articles/2026/07/30/ai%E5%85%AC%E5%8F%B8%E4%B9%B0%E5%AE%8C%E6%97%A7%E4%B9%A6%E8%AE%AD%E7%BB%83%E5%B0%B1%E9%94%80%E6%AF%81%E8%BF%99%E5%88%B0%E5%BA%95%E5%90%88%E7%90%86%E5%90%97/",
+      "slugBefore": "ai公司买完旧书训练就销毁这到底合理吗",
+      "slugAfter": "ai-gong-si-mai-wan-jiu-shu-xun-lian-jiu-xiao-hui-zhe-dao-di-he-li-ma"
+    },
+    {
+      "source": "content/articles/2026/07/30/chatgpt发布四年了为什么生产力还是没动静.md",
+      "oldPath": "/articles/2026/07/30/chatgpt发布四年了为什么生产力还是没动静/",
+      "newPath": "/articles/2026/07/30/chatgpt-fa-bu-si-nian-le-wei-shen-me-sheng-chan-li-hai-shi-mei-dong-jing.html",
+      "oldPathEncoded": "/articles/2026/07/30/chatgpt%E5%8F%91%E5%B8%83%E5%9B%9B%E5%B9%B4%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%9F%E4%BA%A7%E5%8A%9B%E8%BF%98%E6%98%AF%E6%B2%A1%E5%8A%A8%E9%9D%99/",
+      "slugBefore": "chatgpt发布四年了为什么生产力还是没动静",
+      "slugAfter": "chatgpt-fa-bu-si-nian-le-wei-shen-me-sheng-chan-li-hai-shi-mei-dong-jing"
+    },
+    {
+      "source": "content/articles/2026/07/31/一半企业用ai裁员后反悔原来错在这里.md",
+      "oldPath": "/articles/2026/07/31/一半企业用ai裁员后反悔原来错在这里/",
+      "newPath": "/articles/2026/07/31/yi-ban-qi-ye-yong-ai-cai-yuan-hou-fan-hui-yuan-lai-cuo-zai-zhe-li.html",
+      "oldPathEncoded": "/articles/2026/07/31/%E4%B8%80%E5%8D%8A%E4%BC%81%E4%B8%9A%E7%94%A8ai%E8%A3%81%E5%91%98%E5%90%8E%E5%8F%8D%E6%82%94%E5%8E%9F%E6%9D%A5%E9%94%99%E5%9C%A8%E8%BF%99%E9%87%8C/",
+      "slugBefore": "一半企业用ai裁员后反悔原来错在这里",
+      "slugAfter": "yi-ban-qi-ye-yong-ai-cai-yuan-hou-fan-hui-yuan-lai-cuo-zai-zhe-li"
+    },
+    {
+      "source": "content/articles/2026/07/31/支付宝拆分体验技术部ai不是来裁员的是来拆组织的.md",
+      "oldPath": "/articles/2026/07/31/支付宝拆分体验技术部ai不是来裁员的是来拆组织的/",
+      "newPath": "/articles/2026/07/31/zhi-fu-bao-chai-fen-ti-yan-ji-shu-bu-ai-bu-shi-lai-cai-yuan-de-shi-lai-chai-zu-zhi-de.html",
+      "oldPathEncoded": "/articles/2026/07/31/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%8B%86%E5%88%86%E4%BD%93%E9%AA%8C%E6%8A%80%E6%9C%AF%E9%83%A8ai%E4%B8%8D%E6%98%AF%E6%9D%A5%E8%A3%81%E5%91%98%E7%9A%84%E6%98%AF%E6%9D%A5%E6%8B%86%E7%BB%84%E7%BB%87%E7%9A%84/",
+      "slugBefore": "支付宝拆分体验技术部ai不是来裁员的是来拆组织的",
+      "slugAfter": "zhi-fu-bao-chai-fen-ti-yan-ji-shu-bu-ai-bu-shi-lai-cai-yuan-de-shi-lai-chai-zu-zhi-de"
+    },
+    {
+      "source": "content/articles/2026/07/31/马斯克说ai十年后消灭金钱我听完只问了他四个问题.md",
+      "oldPath": "/articles/2026/07/31/马斯克说ai十年后消灭金钱我听完只问了他四个问题/",
+      "newPath": "/articles/2026/07/31/ma-si-ke-shuo-ai-shi-nian-hou-xiao-mie-jin-qian-wo-ting-wan-zhi-wen-le-ta-si-ge-wen-ti.html",
+      "oldPathEncoded": "/articles/2026/07/31/%E9%A9%AC%E6%96%AF%E5%85%8B%E8%AF%B4ai%E5%8D%81%E5%B9%B4%E5%90%8E%E6%B6%88%E7%81%AD%E9%87%91%E9%92%B1%E6%88%91%E5%90%AC%E5%AE%8C%E5%8F%AA%E9%97%AE%E4%BA%86%E4%BB%96%E5%9B%9B%E4%B8%AA%E9%97%AE%E9%A2%98/",
+      "slugBefore": "马斯克说ai十年后消灭金钱我听完只问了他四个问题",
+      "slugAfter": "ma-si-ke-shuo-ai-shi-nian-hou-xiao-mie-jin-qian-wo-ting-wan-zhi-wen-le-ta-si-ge-wen-ti"
+    },
+    {
+      "source": "content/articles/2026/08/02/deepseek架构未改只做后训练就效果大增告诉我们一个容易被忽略的真相.md",
+      "oldPath": "/articles/2026/08/02/deepseek架构未改只做后训练就效果大增告诉我们一个容易被忽略的真相/",
+      "newPath": "/articles/2026/08/02/deepseek-jia-gou-wei-gai-zhi-zuo-hou-xun-lian-jiu-xiao-guo-da-zeng-gao-su-wo-men-yi-ge-rong-yi-bei-hu-lve-de-zhen-xiang.html",
+      "oldPathEncoded": "/articles/2026/08/02/deepseek%E6%9E%B6%E6%9E%84%E6%9C%AA%E6%94%B9%E5%8F%AA%E5%81%9A%E5%90%8E%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%95%88%E6%9E%9C%E5%A4%A7%E5%A2%9E%E5%91%8A%E8%AF%89%E6%88%91%E4%BB%AC%E4%B8%80%E4%B8%AA%E5%AE%B9%E6%98%93%E8%A2%AB%E5%BF%BD%E7%95%A5%E7%9A%84%E7%9C%9F%E7%9B%B8/",
+      "slugBefore": "deepseek架构未改只做后训练就效果大增告诉我们一个容易被忽略的真相",
+      "slugAfter": "deepseek-jia-gou-wei-gai-zhi-zuo-hou-xun-lian-jiu-xiao-guo-da-zeng-gao-su-wo-men-yi-ge-rong-yi-bei-hu-lve-de-zhen-xiang"
+    },
+    {
+      "source": "content/articles/2026/08/02/gcc-全面拒绝-ai-代码我却觉得这步走得特别聪明.md",
+      "oldPath": "/articles/2026/08/02/gcc-全面拒绝-ai-代码我却觉得这步走得特别聪明/",
+      "newPath": "/articles/2026/08/02/gcc-quan-mian-ju-jue-ai-dai-ma-wo-que-jue-de-zhe-bu-zou-de-te-bie-cong-ming.html",
+      "oldPathEncoded": "/articles/2026/08/02/gcc-%E5%85%A8%E9%9D%A2%E6%8B%92%E7%BB%9D-ai-%E4%BB%A3%E7%A0%81%E6%88%91%E5%8D%B4%E8%A7%89%E5%BE%97%E8%BF%99%E6%AD%A5%E8%B5%B0%E5%BE%97%E7%89%B9%E5%88%AB%E8%81%AA%E6%98%8E/",
+      "slugBefore": "gcc-全面拒绝-ai-代码我却觉得这步走得特别聪明",
+      "slugAfter": "gcc-quan-mian-ju-jue-ai-dai-ma-wo-que-jue-de-zhe-bu-zou-de-te-bie-cong-ming"
+    },
+    {
+      "source": "content/articles/2026/08/03/ai巨头联名呼吁控制研发别只看安全看看牌桌.md",
+      "oldPath": "/articles/2026/08/03/ai巨头联名呼吁控制研发别只看安全看看牌桌/",
+      "newPath": "/articles/2026/08/03/ai-ju-tou-lian-ming-hu-yu-kong-zhi-yan-fa-bie-zhi-kan-an-quan-kan-kan-pai-zhuo.html",
+      "oldPathEncoded": "/articles/2026/08/03/ai%E5%B7%A8%E5%A4%B4%E8%81%94%E5%90%8D%E5%91%BC%E5%90%81%E6%8E%A7%E5%88%B6%E7%A0%94%E5%8F%91%E5%88%AB%E5%8F%AA%E7%9C%8B%E5%AE%89%E5%85%A8%E7%9C%8B%E7%9C%8B%E7%89%8C%E6%A1%8C/",
+      "slugBefore": "ai巨头联名呼吁控制研发别只看安全看看牌桌",
+      "slugAfter": "ai-ju-tou-lian-ming-hu-yu-kong-zhi-yan-fa-bie-zhi-kan-an-quan-kan-kan-pai-zhuo"
+    },
+    {
+      "source": "content/articles/2026/08/03/deepseek那么便宜谷歌投ai反而现金流转负原来大家说的不是同一种ai.md",
+      "oldPath": "/articles/2026/08/03/deepseek那么便宜谷歌投ai反而现金流转负原来大家说的不是同一种ai/",
+      "newPath": "/articles/2026/08/03/deepseek-na-me-pian-yi-gu-ge-tou-ai-fan-er-xian-jin-liu-zhuan-fu-yuan-lai-da-jia-shuo-de-bu-shi-tong-yi-zhong-ai.html",
+      "oldPathEncoded": "/articles/2026/08/03/deepseek%E9%82%A3%E4%B9%88%E4%BE%BF%E5%AE%9C%E8%B0%B7%E6%AD%8C%E6%8A%95ai%E5%8F%8D%E8%80%8C%E7%8E%B0%E9%87%91%E6%B5%81%E8%BD%AC%E8%B4%9F%E5%8E%9F%E6%9D%A5%E5%A4%A7%E5%AE%B6%E8%AF%B4%E7%9A%84%E4%B8%8D%E6%98%AF%E5%90%8C%E4%B8%80%E7%A7%8Dai/",
+      "slugBefore": "deepseek那么便宜谷歌投ai反而现金流转负原来大家说的不是同一种ai",
+      "slugAfter": "deepseek-na-me-pian-yi-gu-ge-tou-ai-fan-er-xian-jin-liu-zhuan-fu-yuan-lai-da-jia-shuo-de-bu-shi-tong-yi-zhong-ai"
+    },
+    {
+      "source": "content/articles/2026/08/04/24岁ai天才拿450亿梭哈爆仓出局华尔街从来不是你想的那样.md",
+      "oldPath": "/articles/2026/08/04/24岁ai天才拿450亿梭哈爆仓出局华尔街从来不是你想的那样/",
+      "newPath": "/articles/2026/08/04/24-sui-ai-tian-cai-na-450-yi-suo-ha-bao-cang-chu-ju-hua-er-jie-cong-lai-bu-shi-ni-xiang-de-na-yang.html",
+      "oldPathEncoded": "/articles/2026/08/04/24%E5%B2%81ai%E5%A4%A9%E6%89%8D%E6%8B%BF450%E4%BA%BF%E6%A2%AD%E5%93%88%E7%88%86%E4%BB%93%E5%87%BA%E5%B1%80%E5%8D%8E%E5%B0%94%E8%A1%97%E4%BB%8E%E6%9D%A5%E4%B8%8D%E6%98%AF%E4%BD%A0%E6%83%B3%E7%9A%84%E9%82%A3%E6%A0%B7/",
+      "slugBefore": "24岁ai天才拿450亿梭哈爆仓出局华尔街从来不是你想的那样",
+      "slugAfter": "24-sui-ai-tian-cai-na-450-yi-suo-ha-bao-cang-chu-ju-hua-er-jie-cong-lai-bu-shi-ni-xiang-de-na-yang"
+    },
+    {
+      "source": "content/articles/2026/08/04/deepseek成了大模型的斩杀线到底斩的是谁.md",
+      "oldPath": "/articles/2026/08/04/deepseek成了大模型的斩杀线到底斩的是谁/",
+      "newPath": "/articles/2026/08/04/deepseek-cheng-le-da-mo-xing-de-zhan-sha-xian-dao-di-zhan-de-shi-shui.html",
+      "oldPathEncoded": "/articles/2026/08/04/deepseek%E6%88%90%E4%BA%86%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%A9%E6%9D%80%E7%BA%BF%E5%88%B0%E5%BA%95%E6%96%A9%E7%9A%84%E6%98%AF%E8%B0%81/",
+      "slugBefore": "deepseek成了大模型的斩杀线到底斩的是谁",
+      "slugAfter": "deepseek-cheng-le-da-mo-xing-de-zhan-sha-xian-dao-di-zhan-de-shi-shui"
+    },
+    {
+      "source": "content/articles/2026/08/05/24岁ai天才爆仓450亿杠杆才是华尔街最大的猎人.md",
+      "oldPath": "/articles/2026/08/05/24岁ai天才爆仓450亿杠杆才是华尔街最大的猎人/",
+      "newPath": "/articles/2026/08/05/24-sui-ai-tian-cai-bao-cang-450-yi-gang-gan-cai-shi-hua-er-jie-zui-da-de-lie-ren.html",
+      "oldPathEncoded": "/articles/2026/08/05/24%E5%B2%81ai%E5%A4%A9%E6%89%8D%E7%88%86%E4%BB%93450%E4%BA%BF%E6%9D%A0%E6%9D%86%E6%89%8D%E6%98%AF%E5%8D%8E%E5%B0%94%E8%A1%97%E6%9C%80%E5%A4%A7%E7%9A%84%E7%8C%8E%E4%BA%BA/",
+      "slugBefore": "24岁ai天才爆仓450亿杠杆才是华尔街最大的猎人",
+      "slugAfter": "24-sui-ai-tian-cai-bao-cang-450-yi-gang-gan-cai-shi-hua-er-jie-zui-da-de-lie-ren"
+    },
+    {
+      "source": "content/articles/2026/08/05/美国禁中国光模块到底卡谁的脖子.md",
+      "oldPath": "/articles/2026/08/05/美国禁中国光模块到底卡谁的脖子/",
+      "newPath": "/articles/2026/08/05/mei-guo-jin-zhong-guo-guang-mo-kuai-dao-di-ka-shui-de-bo-zi.html",
+      "oldPathEncoded": "/articles/2026/08/05/%E7%BE%8E%E5%9B%BD%E7%A6%81%E4%B8%AD%E5%9B%BD%E5%85%89%E6%A8%A1%E5%9D%97%E5%88%B0%E5%BA%95%E5%8D%A1%E8%B0%81%E7%9A%84%E8%84%96%E5%AD%90/",
+      "slugBefore": "美国禁中国光模块到底卡谁的脖子",
+      "slugAfter": "mei-guo-jin-zhong-guo-guang-mo-kuai-dao-di-ka-shui-de-bo-zi"
+    },
+    {
+      "source": "content/articles/2026/08/07/deepseek涨价不是亏钱是主动劝退用户这才是ai行业成熟的开始.md",
+      "oldPath": "/articles/2026/08/07/deepseek涨价不是亏钱是主动劝退用户这才是ai行业成熟的开始/",
+      "newPath": "/articles/2026/08/07/deepseek-zhang-jia-bu-shi-kui-qian-shi-zhu-dong-quan-tui-yong-hu-zhe-cai-shi-ai-hang-ye-cheng-shu-de-kai-shi.html",
+      "oldPathEncoded": "/articles/2026/08/07/deepseek%E6%B6%A8%E4%BB%B7%E4%B8%8D%E6%98%AF%E4%BA%8F%E9%92%B1%E6%98%AF%E4%B8%BB%E5%8A%A8%E5%8A%9D%E9%80%80%E7%94%A8%E6%88%B7%E8%BF%99%E6%89%8D%E6%98%AFai%E8%A1%8C%E4%B8%9A%E6%88%90%E7%86%9F%E7%9A%84%E5%BC%80%E5%A7%8B/",
+      "slugBefore": "deepseek涨价不是亏钱是主动劝退用户这才是ai行业成熟的开始",
+      "slugAfter": "deepseek-zhang-jia-bu-shi-kui-qian-shi-zhu-dong-quan-tui-yong-hu-zhe-cai-shi-ai-hang-ye-cheng-shu-de-kai-shi"
+    },
+    {
+      "source": "content/articles/2026/08/07/奥特曼说6年后人均月耗5000亿token我只问一个问题谁买单.md",
+      "oldPath": "/articles/2026/08/07/奥特曼说6年后人均月耗5000亿token我只问一个问题谁买单/",
+      "newPath": "/articles/2026/08/07/ao-te-man-shuo-6-nian-hou-ren-jun-yue-hao-5000-yi-token-wo-zhi-wen-yi-ge-wen-ti-shui-mai-dan.html",
+      "oldPathEncoded": "/articles/2026/08/07/%E5%A5%A5%E7%89%B9%E6%9B%BC%E8%AF%B46%E5%B9%B4%E5%90%8E%E4%BA%BA%E5%9D%87%E6%9C%88%E8%80%975000%E4%BA%BFtoken%E6%88%91%E5%8F%AA%E9%97%AE%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E8%B0%81%E4%B9%B0%E5%8D%95/",
+      "slugBefore": "奥特曼说6年后人均月耗5000亿token我只问一个问题谁买单",
+      "slugAfter": "ao-te-man-shuo-6-nian-hou-ren-jun-yue-hao-5000-yi-token-wo-zhi-wen-yi-ge-wen-ti-shui-mai-dan"
+    },
+    {
+      "source": "content/articles/2026/08/09/为什么越资深反而越容易做错判断你的大脑可能已经过拟合了.md",
+      "oldPath": "/articles/2026/08/09/为什么越资深反而越容易做错判断你的大脑可能已经过拟合了/",
+      "newPath": "/articles/2026/08/09/wei-shen-me-yue-zi-shen-fan-er-yue-rong-yi-zuo-cuo-pan-duan-ni-de-da-nao-ke-neng-yi-jing-guo-ni-he-le.html",
+      "oldPathEncoded": "/articles/2026/08/09/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E8%B5%84%E6%B7%B1%E5%8F%8D%E8%80%8C%E8%B6%8A%E5%AE%B9%E6%98%93%E5%81%9A%E9%94%99%E5%88%A4%E6%96%AD%E4%BD%A0%E7%9A%84%E5%A4%A7%E8%84%91%E5%8F%AF%E8%83%BD%E5%B7%B2%E7%BB%8F%E8%BF%87%E6%8B%9F%E5%90%88%E4%BA%86/",
+      "slugBefore": "为什么越资深反而越容易做错判断你的大脑可能已经过拟合了",
+      "slugAfter": "wei-shen-me-yue-zi-shen-fan-er-yue-rong-yi-zuo-cuo-pan-duan-ni-de-da-nao-ke-neng-yi-jing-guo-ni-he-le"
+    },
+    {
+      "source": "content/articles/2026/08/09/张朝阳说ai内容有塑料感我觉得他说对了.md",
+      "oldPath": "/articles/2026/08/09/张朝阳说ai内容有塑料感我觉得他说对了/",
+      "newPath": "/articles/2026/08/09/zhang-chao-yang-shuo-ai-nei-rong-you-su-liao-gan-wo-jue-de-ta-shuo-dui-le.html",
+      "oldPathEncoded": "/articles/2026/08/09/%E5%BC%A0%E6%9C%9D%E9%98%B3%E8%AF%B4ai%E5%86%85%E5%AE%B9%E6%9C%89%E5%A1%91%E6%96%99%E6%84%9F%E6%88%91%E8%A7%89%E5%BE%97%E4%BB%96%E8%AF%B4%E5%AF%B9%E4%BA%86/",
+      "slugBefore": "张朝阳说ai内容有塑料感我觉得他说对了",
+      "slugAfter": "zhang-chao-yang-shuo-ai-nei-rong-you-su-liao-gan-wo-jue-de-ta-shuo-dui-le"
+    },
+    {
+      "source": "content/articles/2026/08/10/为什么程序员欢迎ai音乐人却拼命抵制真相根本不是你想的那样.md",
+      "oldPath": "/articles/2026/08/10/为什么程序员欢迎ai音乐人却拼命抵制真相根本不是你想的那样/",
+      "newPath": "/articles/2026/08/10/wei-shen-me-cheng-xu-yuan-huan-ying-ai-yin-yue-ren-que-pin-ming-di-zhi-zhen-xiang-gen-ben-bu-shi-ni-xiang-de-na-yang.html",
+      "oldPathEncoded": "/articles/2026/08/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%8F%E5%91%98%E6%AC%A2%E8%BF%8Eai%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%8D%B4%E6%8B%BC%E5%91%BD%E6%8A%B5%E5%88%B6%E7%9C%9F%E7%9B%B8%E6%A0%B9%E6%9C%AC%E4%B8%8D%E6%98%AF%E4%BD%A0%E6%83%B3%E7%9A%84%E9%82%A3%E6%A0%B7/",
+      "slugBefore": "为什么程序员欢迎ai音乐人却拼命抵制真相根本不是你想的那样",
+      "slugAfter": "wei-shen-me-cheng-xu-yuan-huan-ying-ai-yin-yue-ren-que-pin-ming-di-zhi-zhen-xiang-gen-ben-bu-shi-ni-xiang-de-na-yang"
+    },
+    {
+      "source": "content/articles/2026/08/10/有手艺的师傅都去跑外卖了-问题不在手艺不值钱.md",
+      "oldPath": "/articles/2026/08/10/有手艺的师傅都去跑外卖了-问题不在手艺不值钱/",
+      "newPath": "/articles/2026/08/10/you-shou-yi-de-shi-fu-dou-qu-pao-wai-mai-le-wen-ti-bu-zai-shou-yi-bu-zhi-qian.html",
+      "oldPathEncoded": "/articles/2026/08/10/%E6%9C%89%E6%89%8B%E8%89%BA%E7%9A%84%E5%B8%88%E5%82%85%E9%83%BD%E5%8E%BB%E8%B7%91%E5%A4%96%E5%8D%96%E4%BA%86-%E9%97%AE%E9%A2%98%E4%B8%8D%E5%9C%A8%E6%89%8B%E8%89%BA%E4%B8%8D%E5%80%BC%E9%92%B1/",
+      "slugBefore": "有手艺的师傅都去跑外卖了-问题不在手艺不值钱",
+      "slugAfter": "you-shou-yi-de-shi-fu-dou-qu-pao-wai-mai-le-wen-ti-bu-zai-shou-yi-bu-zhi-qian"
+    },
+    {
+      "source": "content/articles/2026/08/11/anthropic-推高黎曼猜想下界到-672但和-ai-证明真没关系.md",
+      "oldPath": "/articles/2026/08/11/anthropic-推高黎曼猜想下界到-672但和-ai-证明真没关系/",
+      "newPath": "/articles/2026/08/11/anthropic-tui-gao-li-man-cai-xiang-xia-jie-dao-672-dan-he-ai-zheng-ming-zhen-mei-guan-xi.html",
+      "oldPathEncoded": "/articles/2026/08/11/anthropic-%E6%8E%A8%E9%AB%98%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E4%B8%8B%E7%95%8C%E5%88%B0-672%E4%BD%86%E5%92%8C-ai-%E8%AF%81%E6%98%8E%E7%9C%9F%E6%B2%A1%E5%85%B3%E7%B3%BB/",
+      "slugBefore": "anthropic-推高黎曼猜想下界到-672但和-ai-证明真没关系",
+      "slugAfter": "anthropic-tui-gao-li-man-cai-xiang-xia-jie-dao-672-dan-he-ai-zheng-ming-zhen-mei-guan-xi"
+    },
+    {
+      "source": "content/articles/2026/08/11/阿维塔说不需要华为是必要项不是闹掰是出师了.md",
+      "oldPath": "/articles/2026/08/11/阿维塔说不需要华为是必要项不是闹掰是出师了/",
+      "newPath": "/articles/2026/08/11/a-wei-ta-shuo-bu-xu-yao-hua-wei-shi-bi-yao-xiang-bu-shi-nao-bai-shi-chu-shi-le.html",
+      "oldPathEncoded": "/articles/2026/08/11/%E9%98%BF%E7%BB%B4%E5%A1%94%E8%AF%B4%E4%B8%8D%E9%9C%80%E8%A6%81%E5%8D%8E%E4%B8%BA%E6%98%AF%E5%BF%85%E8%A6%81%E9%A1%B9%E4%B8%8D%E6%98%AF%E9%97%B9%E6%8E%B0%E6%98%AF%E5%87%BA%E5%B8%88%E4%BA%86/",
+      "slugBefore": "阿维塔说不需要华为是必要项不是闹掰是出师了",
+      "slugAfter": "a-wei-ta-shuo-bu-xu-yao-hua-wei-shi-bi-yao-xiang-bu-shi-nao-bai-shi-chu-shi-le"
+    },
+    {
+      "source": "content/articles/2026/08/12/gpt-6-炸出-10-万亿参数参数越大ai-就越强吗.md",
+      "oldPath": "/articles/2026/08/12/gpt-6-炸出-10-万亿参数参数越大ai-就越强吗/",
+      "newPath": "/articles/2026/08/12/gpt-6-zha-chu-10-wan-yi-can-shu-can-shu-yue-da-ai-jiu-yue-qiang-ma.html",
+      "oldPathEncoded": "/articles/2026/08/12/gpt-6-%E7%82%B8%E5%87%BA-10-%E4%B8%87%E4%BA%BF%E5%8F%82%E6%95%B0%E5%8F%82%E6%95%B0%E8%B6%8A%E5%A4%A7ai-%E5%B0%B1%E8%B6%8A%E5%BC%BA%E5%90%97/",
+      "slugBefore": "gpt-6-炸出-10-万亿参数参数越大ai-就越强吗",
+      "slugAfter": "gpt-6-zha-chu-10-wan-yi-can-shu-can-shu-yue-da-ai-jiu-yue-qiang-ma"
+    },
+    {
+      "source": "content/articles/2026/08/12/当年叫狗剩的国产芯片现在出货破百万了.md",
+      "oldPath": "/articles/2026/08/12/当年叫狗剩的国产芯片现在出货破百万了/",
+      "newPath": "/articles/2026/08/12/dang-nian-jiao-gou-sheng-de-guo-chan-xin-pian-xian-zai-chu-huo-po-bai-wan-le.html",
+      "oldPathEncoded": "/articles/2026/08/12/%E5%BD%93%E5%B9%B4%E5%8F%AB%E7%8B%97%E5%89%A9%E7%9A%84%E5%9B%BD%E4%BA%A7%E8%8A%AF%E7%89%87%E7%8E%B0%E5%9C%A8%E5%87%BA%E8%B4%A7%E7%A0%B4%E7%99%BE%E4%B8%87%E4%BA%86/",
+      "slugBefore": "当年叫狗剩的国产芯片现在出货破百万了",
+      "slugAfter": "dang-nian-jiao-gou-sheng-de-guo-chan-xin-pian-xian-zai-chu-huo-po-bai-wan-le"
+    },
+    {
+      "source": "content/articles/2026/08/13/deepseek突然爆火国产大模型的竞争逻辑变了.md",
+      "oldPath": "/articles/2026/08/13/deepseek突然爆火国产大模型的竞争逻辑变了/",
+      "newPath": "/articles/2026/08/13/deepseek-tu-ran-bao-huo-guo-chan-da-mo-xing-de-jing-zheng-luo-ji-bian-le.html",
+      "oldPathEncoded": "/articles/2026/08/13/deepseek%E7%AA%81%E7%84%B6%E7%88%86%E7%81%AB%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%AB%9E%E4%BA%89%E9%80%BB%E8%BE%91%E5%8F%98%E4%BA%86/",
+      "slugBefore": "deepseek突然爆火国产大模型的竞争逻辑变了",
+      "slugAfter": "deepseek-tu-ran-bao-huo-guo-chan-da-mo-xing-de-jing-zheng-luo-ji-bian-le"
+    },
+    {
+      "source": "content/articles/2026/08/13/大厂开始拒收阿里系中高层互联网藤壶不是偏见是时代变了.md",
+      "oldPath": "/articles/2026/08/13/大厂开始拒收阿里系中高层互联网藤壶不是偏见是时代变了/",
+      "newPath": "/articles/2026/08/13/da-chang-kai-shi-ju-shou-a-li-xi-zhong-gao-ceng-hu-lian-wang-teng-hu-bu-shi-pian-jian-shi-shi-dai-bian-le.html",
+      "oldPathEncoded": "/articles/2026/08/13/%E5%A4%A7%E5%8E%82%E5%BC%80%E5%A7%8B%E6%8B%92%E6%94%B6%E9%98%BF%E9%87%8C%E7%B3%BB%E4%B8%AD%E9%AB%98%E5%B1%82%E4%BA%92%E8%81%94%E7%BD%91%E8%97%A4%E5%A3%B6%E4%B8%8D%E6%98%AF%E5%81%8F%E8%A7%81%E6%98%AF%E6%97%B6%E4%BB%A3%E5%8F%98%E4%BA%86/",
+      "slugBefore": "大厂开始拒收阿里系中高层互联网藤壶不是偏见是时代变了",
+      "slugAfter": "da-chang-kai-shi-ju-shou-a-li-xi-zhong-gao-ceng-hu-lian-wang-teng-hu-bu-shi-pian-jian-shi-shi-dai-bian-le"
+    },
+    {
+      "source": "content/articles/2026/08/17/deepseek砍了94的调用配额这件事没你想的那么简单.md",
+      "oldPath": "/articles/2026/08/17/deepseek砍了94的调用配额这件事没你想的那么简单/",
+      "newPath": "/articles/2026/08/17/deepseek-kan-le-94-de-diao-yong-pei-e-zhe-jian-shi-mei-ni-xiang-de-na-me-jian-dan.html",
+      "oldPathEncoded": "/articles/2026/08/17/deepseek%E7%A0%8D%E4%BA%8694%E7%9A%84%E8%B0%83%E7%94%A8%E9%85%8D%E9%A2%9D%E8%BF%99%E4%BB%B6%E4%BA%8B%E6%B2%A1%E4%BD%A0%E6%83%B3%E7%9A%84%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95/",
+      "slugBefore": "deepseek砍了94的调用配额这件事没你想的那么简单",
+      "slugAfter": "deepseek-kan-le-94-de-diao-yong-pei-e-zhe-jian-shi-mei-ni-xiang-de-na-me-jian-dan"
+    },
+    {
+      "source": "content/articles/2026/08/17/短短三年ai为什么从香饽饽变成人人喊打.md",
+      "oldPath": "/articles/2026/08/17/短短三年ai为什么从香饽饽变成人人喊打/",
+      "newPath": "/articles/2026/08/17/duan-duan-san-nian-ai-wei-shen-me-cong-xiang-bo-bo-bian-cheng-ren-ren-han-da.html",
+      "oldPathEncoded": "/articles/2026/08/17/%E7%9F%AD%E7%9F%AD%E4%B8%89%E5%B9%B4ai%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E%E9%A6%99%E9%A5%BD%E9%A5%BD%E5%8F%98%E6%88%90%E4%BA%BA%E4%BA%BA%E5%96%8A%E6%89%93/",
+      "slugBefore": "短短三年ai为什么从香饽饽变成人人喊打",
+      "slugAfter": "duan-duan-san-nian-ai-wei-shen-me-cong-xiang-bo-bo-bian-cheng-ren-ren-han-da"
+    },
+    {
+      "source": "content/articles/2026/08/18/deepseek-harness-插件怎么选记住这三个判断标准.md",
+      "oldPath": "/articles/2026/08/18/deepseek-harness-插件怎么选记住这三个判断标准/",
+      "newPath": "/articles/2026/08/18/deepseek-harness-cha-jian-zen-me-xuan-ji-zhu-zhe-san-ge-pan-duan-biao-zhun.html",
+      "oldPathEncoded": "/articles/2026/08/18/deepseek-harness-%E6%8F%92%E4%BB%B6%E6%80%8E%E4%B9%88%E9%80%89%E8%AE%B0%E4%BD%8F%E8%BF%99%E4%B8%89%E4%B8%AA%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86/",
+      "slugBefore": "deepseek-harness-插件怎么选记住这三个判断标准",
+      "slugAfter": "deepseek-harness-cha-jian-zen-me-xuan-ji-zhu-zhe-san-ge-pan-duan-biao-zhun"
+    },
+    {
+      "source": "content/articles/2026/08/18/开源大模型变天了不再拼参数开始拼性价比.md",
+      "oldPath": "/articles/2026/08/18/开源大模型变天了不再拼参数开始拼性价比/",
+      "newPath": "/articles/2026/08/18/kai-yuan-da-mo-xing-bian-tian-le-bu-zai-pin-can-shu-kai-shi-pin-xing-jia-bi.html",
+      "oldPathEncoded": "/articles/2026/08/18/%E5%BC%80%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%98%E5%A4%A9%E4%BA%86%E4%B8%8D%E5%86%8D%E6%8B%BC%E5%8F%82%E6%95%B0%E5%BC%80%E5%A7%8B%E6%8B%BC%E6%80%A7%E4%BB%B7%E6%AF%94/",
+      "slugBefore": "开源大模型变天了不再拼参数开始拼性价比",
+      "slugAfter": "kai-yuan-da-mo-xing-bian-tian-le-bu-zai-pin-can-shu-kai-shi-pin-xing-jia-bi"
+    },
+    {
+      "source": "content/articles/2026/08/19/互联网大厂真的后悔搞ai了吗.md",
+      "oldPath": "/articles/2026/08/19/互联网大厂真的后悔搞ai了吗/",
+      "newPath": "/articles/2026/08/19/hu-lian-wang-da-chang-zhen-de-hou-hui-gao-ai-liao-ma.html",
+      "oldPathEncoded": "/articles/2026/08/19/%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E7%9C%9F%E7%9A%84%E5%90%8E%E6%82%94%E6%90%9Eai%E4%BA%86%E5%90%97/",
+      "slugBefore": "互联网大厂真的后悔搞ai了吗",
+      "slugAfter": "hu-lian-wang-da-chang-zhen-de-hou-hui-gao-ai-liao-ma"
+    },
+    {
+      "source": "content/articles/2026/08/19/人形机器人能跳2米了离我们的生活还有多远.md",
+      "oldPath": "/articles/2026/08/19/人形机器人能跳2米了离我们的生活还有多远/",
+      "newPath": "/articles/2026/08/19/ren-xing-ji-qi-ren-neng-tiao-2-mi-le-li-wo-men-de-sheng-huo-hai-you-duo-yuan.html",
+      "oldPathEncoded": "/articles/2026/08/19/%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%83%BD%E8%B7%B32%E7%B1%B3%E4%BA%86%E7%A6%BB%E6%88%91%E4%BB%AC%E7%9A%84%E7%94%9F%E6%B4%BB%E8%BF%98%E6%9C%89%E5%A4%9A%E8%BF%9C/",
+      "slugBefore": "人形机器人能跳2米了离我们的生活还有多远",
+      "slugAfter": "ren-xing-ji-qi-ren-neng-tiao-2-mi-le-li-wo-men-de-sheng-huo-hai-you-duo-yuan"
+    },
+    {
+      "source": "content/articles/2026/08/20/ai都能解决数学猜想了数学家真的要失业吗.md",
+      "oldPath": "/articles/2026/08/20/ai都能解决数学猜想了数学家真的要失业吗/",
+      "newPath": "/articles/2026/08/20/ai-dou-neng-jie-jue-shu-xue-cai-xiang-le-shu-xue-jia-zhen-de-yao-shi-ye-ma.html",
+      "oldPathEncoded": "/articles/2026/08/20/ai%E9%83%BD%E8%83%BD%E8%A7%A3%E5%86%B3%E6%95%B0%E5%AD%A6%E7%8C%9C%E6%83%B3%E4%BA%86%E6%95%B0%E5%AD%A6%E5%AE%B6%E7%9C%9F%E7%9A%84%E8%A6%81%E5%A4%B1%E4%B8%9A%E5%90%97/",
+      "slugBefore": "ai都能解决数学猜想了数学家真的要失业吗",
+      "slugAfter": "ai-dou-neng-jie-jue-shu-xue-cai-xiang-le-shu-xue-jia-zhen-de-yao-shi-ye-ma"
+    },
+    {
+      "source": "content/articles/2026/08/20/deepseek-harness五天涨15万星真正的革命不在功能在成本.md",
+      "oldPath": "/articles/2026/08/20/deepseek-harness五天涨15万星真正的革命不在功能在成本/",
+      "newPath": "/articles/2026/08/20/deepseek-harness-wu-tian-zhang-15-wan-xing-zhen-zheng-de-ge-ming-bu-zai-gong-neng-zai-cheng-ben.html",
+      "oldPathEncoded": "/articles/2026/08/20/deepseek-harness%E4%BA%94%E5%A4%A9%E6%B6%A815%E4%B8%87%E6%98%9F%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%9D%A9%E5%91%BD%E4%B8%8D%E5%9C%A8%E5%8A%9F%E8%83%BD%E5%9C%A8%E6%88%90%E6%9C%AC/",
+      "slugBefore": "deepseek-harness五天涨15万星真正的革命不在功能在成本",
+      "slugAfter": "deepseek-harness-wu-tian-zhang-15-wan-xing-zhen-zheng-de-ge-ming-bu-zai-gong-neng-zai-cheng-ben"
+    },
+    {
+      "source": "content/articles/2026/08/21/为什么华为苹果都开始把手机做宽了背后三个真实原因.md",
+      "oldPath": "/articles/2026/08/21/为什么华为苹果都开始把手机做宽了背后三个真实原因/",
+      "newPath": "/articles/2026/08/21/wei-shen-me-hua-wei-ping-guo-dou-kai-shi-ba-shou-ji-zuo-kuan-le-bei-hou-san-ge-zhen-shi-yuan-yin.html",
+      "oldPathEncoded": "/articles/2026/08/21/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8D%8E%E4%B8%BA%E8%8B%B9%E6%9E%9C%E9%83%BD%E5%BC%80%E5%A7%8B%E6%8A%8A%E6%89%8B%E6%9C%BA%E5%81%9A%E5%AE%BD%E4%BA%86%E8%83%8C%E5%90%8E%E4%B8%89%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%8E%9F%E5%9B%A0/",
+      "slugBefore": "为什么华为苹果都开始把手机做宽了背后三个真实原因",
+      "slugAfter": "wei-shen-me-hua-wei-ping-guo-dou-kai-shi-ba-shou-ji-zuo-kuan-le-bei-hou-san-ge-zhen-shi-yuan-yin"
+    },
+    {
+      "source": "content/articles/2026/08/21/柯洁说故意装弱智就能赢围棋ai原理是什么.md",
+      "oldPath": "/articles/2026/08/21/柯洁说故意装弱智就能赢围棋ai原理是什么/",
+      "newPath": "/articles/2026/08/21/ke-jie-shuo-gu-yi-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-yuan-li-shi-shen-me.html",
+      "oldPathEncoded": "/articles/2026/08/21/%E6%9F%AF%E6%B4%81%E8%AF%B4%E6%95%85%E6%84%8F%E8%A3%85%E5%BC%B1%E6%99%BA%E5%B0%B1%E8%83%BD%E8%B5%A2%E5%9B%B4%E6%A3%8Bai%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88/",
+      "slugBefore": "柯洁说故意装弱智就能赢围棋ai原理是什么",
+      "slugAfter": "ke-jie-shuo-gu-yi-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-yuan-li-shi-shen-me"
+    },
+    {
+      "source": "content/articles/2026/08/22/柯洁说装弱智就能赢围棋ai是吹牛吗原理其实很简单.md",
+      "oldPath": "/articles/2026/08/22/柯洁说装弱智就能赢围棋ai是吹牛吗原理其实很简单/",
+      "newPath": "/articles/2026/08/22/ke-jie-shuo-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-shi-chui-niu-ma-yuan-li-qi-shi-hen-jian-dan.html",
+      "oldPathEncoded": "/articles/2026/08/22/%E6%9F%AF%E6%B4%81%E8%AF%B4%E8%A3%85%E5%BC%B1%E6%99%BA%E5%B0%B1%E8%83%BD%E8%B5%A2%E5%9B%B4%E6%A3%8Bai%E6%98%AF%E5%90%B9%E7%89%9B%E5%90%97%E5%8E%9F%E7%90%86%E5%85%B6%E5%AE%9E%E5%BE%88%E7%AE%80%E5%8D%95/",
+      "slugBefore": "柯洁说装弱智就能赢围棋ai是吹牛吗原理其实很简单",
+      "slugAfter": "ke-jie-shuo-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-shi-chui-niu-ma-yuan-li-qi-shi-hen-jian-dan"
+    },
+    {
+      "source": "content/articles/2026/08/22/长江存储敢拒绝苹果订单国产芯片早就不是你印象里的样子了.md",
+      "oldPath": "/articles/2026/08/22/长江存储敢拒绝苹果订单国产芯片早就不是你印象里的样子了/",
+      "newPath": "/articles/2026/08/22/chang-jiang-cun-chu-gan-ju-jue-ping-guo-ding-dan-guo-chan-xin-pian-zao-jiu-bu-shi-ni-yin-xiang-li-de-yang-zi-le.html",
+      "oldPathEncoded": "/articles/2026/08/22/%E9%95%BF%E6%B1%9F%E5%AD%98%E5%82%A8%E6%95%A2%E6%8B%92%E7%BB%9D%E8%8B%B9%E6%9E%9C%E8%AE%A2%E5%8D%95%E5%9B%BD%E4%BA%A7%E8%8A%AF%E7%89%87%E6%97%A9%E5%B0%B1%E4%B8%8D%E6%98%AF%E4%BD%A0%E5%8D%B0%E8%B1%A1%E9%87%8C%E7%9A%84%E6%A0%B7%E5%AD%90%E4%BA%86/",
+      "slugBefore": "长江存储敢拒绝苹果订单国产芯片早就不是你印象里的样子了",
+      "slugAfter": "chang-jiang-cun-chu-gan-ju-jue-ping-guo-ding-dan-guo-chan-xin-pian-zao-jiu-bu-shi-ni-yin-xiang-li-de-yang-zi-le"
+    },
+    {
+      "source": "content/articles/2026/08/23/deepseek周末降价背后我看到了ai行业最危险的变化.md",
+      "oldPath": "/articles/2026/08/23/deepseek周末降价背后我看到了ai行业最危险的变化/",
+      "newPath": "/articles/2026/08/23/deepseek-zhou-mo-jiang-jia-bei-hou-wo-kan-dao-le-ai-hang-ye-zui-wei-xian-de-bian-hua.html",
+      "oldPathEncoded": "/articles/2026/08/23/deepseek%E5%91%A8%E6%9C%AB%E9%99%8D%E4%BB%B7%E8%83%8C%E5%90%8E%E6%88%91%E7%9C%8B%E5%88%B0%E4%BA%86ai%E8%A1%8C%E4%B8%9A%E6%9C%80%E5%8D%B1%E9%99%A9%E7%9A%84%E5%8F%98%E5%8C%96/",
+      "slugBefore": "deepseek周末降价背后我看到了ai行业最危险的变化",
+      "slugAfter": "deepseek-zhou-mo-jiang-jia-bei-hou-wo-kan-dao-le-ai-hang-ye-zui-wei-xian-de-bian-hua"
+    },
+    {
+      "source": "content/articles/2026/08/23/两家大模型公司同时开源评测框架这才是真正的行业转折点.md",
+      "oldPath": "/articles/2026/08/23/两家大模型公司同时开源评测框架这才是真正的行业转折点/",
+      "newPath": "/articles/2026/08/23/liang-jia-da-mo-xing-gong-si-tong-shi-kai-yuan-ping-ce-kuang-jia-zhe-cai-shi-zhen-zheng-de-hang-ye-zhuan-zhe-dian.html",
+      "oldPathEncoded": "/articles/2026/08/23/%E4%B8%A4%E5%AE%B6%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%AC%E5%8F%B8%E5%90%8C%E6%97%B6%E5%BC%80%E6%BA%90%E8%AF%84%E6%B5%8B%E6%A1%86%E6%9E%B6%E8%BF%99%E6%89%8D%E6%98%AF%E7%9C%9F%E6%AD%A3%E7%9A%84%E8%A1%8C%E4%B8%9A%E8%BD%AC%E6%8A%98%E7%82%B9/",
+      "slugBefore": "两家大模型公司同时开源评测框架这才是真正的行业转折点",
+      "slugAfter": "liang-jia-da-mo-xing-gong-si-tong-shi-kai-yuan-ping-ce-kuang-jia-zhe-cai-shi-zhen-zheng-de-hang-ye-zhuan-zhe-dian"
+    },
+    {
+      "source": "content/articles/2026/08/24/ai热潮见顶其实只是客户开始算帐了.md",
+      "oldPath": "/articles/2026/08/24/ai热潮见顶其实只是客户开始算帐了/",
+      "newPath": "/articles/2026/08/24/ai-re-chao-jian-ding-qi-shi-zhi-shi-ke-hu-kai-shi-suan-zhang-le.html",
+      "oldPathEncoded": "/articles/2026/08/24/ai%E7%83%AD%E6%BD%AE%E8%A7%81%E9%A1%B6%E5%85%B6%E5%AE%9E%E5%8F%AA%E6%98%AF%E5%AE%A2%E6%88%B7%E5%BC%80%E5%A7%8B%E7%AE%97%E5%B8%90%E4%BA%86/",
+      "slugBefore": "ai热潮见顶其实只是客户开始算帐了",
+      "slugAfter": "ai-re-chao-jian-ding-qi-shi-zhi-shi-ke-hu-kai-shi-suan-zhang-le"
+    },
+    {
+      "source": "content/articles/2026/08/24/机器人跑步破人类纪录别被骗了这根本不是同一场比赛.md",
+      "oldPath": "/articles/2026/08/24/机器人跑步破人类纪录别被骗了这根本不是同一场比赛/",
+      "newPath": "/articles/2026/08/24/ji-qi-ren-pao-bu-po-ren-lei-ji-lu-bie-bei-pian-le-zhe-gen-ben-bu-shi-tong-yi-chang-bi-sai.html",
+      "oldPathEncoded": "/articles/2026/08/24/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%91%E6%AD%A5%E7%A0%B4%E4%BA%BA%E7%B1%BB%E7%BA%AA%E5%BD%95%E5%88%AB%E8%A2%AB%E9%AA%97%E4%BA%86%E8%BF%99%E6%A0%B9%E6%9C%AC%E4%B8%8D%E6%98%AF%E5%90%8C%E4%B8%80%E5%9C%BA%E6%AF%94%E8%B5%9B/",
+      "slugBefore": "机器人跑步破人类纪录别被骗了这根本不是同一场比赛",
+      "slugAfter": "ji-qi-ren-pao-bu-po-ren-lei-ji-lu-bie-bei-pian-le-zhe-gen-ben-bu-shi-tong-yi-chang-bi-sai"
+    },
+    {
+      "source": "content/articles/2026/08/25/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了.md",
+      "oldPath": "/articles/2026/08/25/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了.html",
+      "newPath": "/articles/2026/08/25/500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le.html",
+      "oldPathEncoded": "/articles/2026/08/25/500-ai%E7%BB%98%E7%94%BB%E9%80%86%E5%90%91%E6%A1%88%E4%BE%8B-20%E5%B7%A5%E4%B8%9A%E5%8C%96%E6%A8%A1%E6%9D%BF%E8%BF%99%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8A%8Aprompt%E5%8D%B3%E4%BB%A3%E7%A0%81%E7%8E%A9%E6%98%8E%E7%99%BD%E4%BA%86.html",
+      "slugBefore": "",
+      "slugAfter": "500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le"
+    },
+    {
+      "source": "content/articles/2026/08/25/claude-code-被退订用户转用-codex订阅制为什么赢不了按次付费.md",
+      "oldPath": "/articles/2026/08/25/claude-code-被退订用户转用-codex订阅制为什么赢不了按次付费/",
+      "newPath": "/articles/2026/08/25/claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei.html",
+      "oldPathEncoded": "/articles/2026/08/25/claude-code-%E8%A2%AB%E9%80%80%E8%AE%A2%E7%94%A8%E6%88%B7%E8%BD%AC%E7%94%A8-codex%E8%AE%A2%E9%98%85%E5%88%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B5%A2%E4%B8%8D%E4%BA%86%E6%8C%89%E6%AC%A1%E4%BB%98%E8%B4%B9/",
+      "slugBefore": "claude-code-被退订用户转用-codex订阅制为什么赢不了按次付费",
+      "slugAfter": "claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei"
+    }
+  ]
+}

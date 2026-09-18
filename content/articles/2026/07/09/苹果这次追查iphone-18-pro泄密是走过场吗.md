@@ -1,6 +1,7 @@
 ---
 date: 2026-07-09
-slug: 苹果这次追查iphone-18-pro泄密是走过场吗
+slug: "ping-guo-zhe-ci-zhui-cha-iphone-18-pro-xie-mi-shi-zou-guo-chang-ma"
+url: "/articles/2026/07/09/ping-guo-zhe-ci-zhui-cha-iphone-18-pro-xie-mi-shi-zou-guo-chang-ma.html"
 title: 苹果这次追查iPhone 18 Pro泄密，是走过场吗？
 description: 苹果这几天在做两件事。
 categories: ['AI', '工具']

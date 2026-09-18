@@ -1,6 +1,7 @@
 ---
 date: 2026-07-17
-slug: realme-退出中国不是败退是母公司算完账后的资源回收
+slug: "realme-tui-chu-zhong-guo-bu-shi-bai-tui-shi-mu-gong-si-suan-wan-zhang-hou-de-zi-yuan-hui-shou"
+url: "/articles/2026/07/17/realme-tui-chu-zhong-guo-bu-shi-bai-tui-shi-mu-gong-si-suan-wan-zhang-hou-de-zi-yuan-hui-shou.html"
 title: realme 退出中国，不是败退，是母公司算完账后的资源回收
 description: 7 月 16 日晚上，realme 副总裁徐起发了一封公开信，宣布 realme 暂停中国市场运营，售后由 OPPO 接手。
 categories: ['AI', '工具']

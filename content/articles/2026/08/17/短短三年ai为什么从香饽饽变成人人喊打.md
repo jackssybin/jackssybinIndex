@@ -1,6 +1,7 @@
 ---
 date: 2026-08-17
-slug: 短短三年ai为什么从香饽饽变成人人喊打
+slug: "duan-duan-san-nian-ai-wei-shen-me-cong-xiang-bo-bo-bian-cheng-ren-ren-han-da"
+url: "/articles/2026/08/17/duan-duan-san-nian-ai-wei-shen-me-cong-xiang-bo-bo-bian-cheng-ren-ren-han-da.html"
 title: 短短三年，AI为什么从香饽饽变成人人喊打？
 description: 我上个月帮朋友看简历，发现一个很有意思的变化：
 categories: ['AI', '工具测评']

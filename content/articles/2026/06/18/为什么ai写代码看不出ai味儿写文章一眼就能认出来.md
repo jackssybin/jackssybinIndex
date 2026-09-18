@@ -1,6 +1,7 @@
 ---
 date: 2026-06-18
-slug: 为什么ai写代码看不出ai味儿写文章一眼就能认出来
+slug: "wei-shen-me-ai-xie-dai-ma-kan-bu-chu-ai-wei-er-xie-wen-zhang-yi-yan-jiu-neng-ren-chu-lai"
+url: "/articles/2026/06/18/wei-shen-me-ai-xie-dai-ma-kan-bu-chu-ai-wei-er-xie-wen-zhang-yi-yan-jiu-neng-ren-chu-lai.html"
 title: 为什么AI写代码看不出AI味儿，写文章一眼就能认出来？
 description: 你有没有发现一个奇怪的现象：
 categories: ['AI 编程', '工具测评']

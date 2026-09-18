@@ -1,6 +1,7 @@
 ---
 date: 2026-07-22
-slug: kimi-跑分超过-claude大模型格局真的变了吗
+slug: "kimi-pao-fen-chao-guo-claude-da-mo-xing-ge-ju-zhen-de-bian-le-ma"
+url: "/articles/2026/07/22/kimi-pao-fen-chao-guo-claude-da-mo-xing-ge-ju-zhen-de-bian-le-ma.html"
 title: Kimi 跑分超过 Claude，大模型格局真的变了吗？
 description: 前阵子和几家大模型厂商朋友聊天，聊到这次 Kimi K3 跑分超过 Claude，我最大的感受是：
 categories: ['AI 编程', '工具测评']

@@ -1,6 +1,7 @@
 ---
 date: 2026-08-07
-slug: deepseek涨价不是亏钱是主动劝退用户这才是ai行业成熟的开始
+slug: "deepseek-zhang-jia-bu-shi-kui-qian-shi-zhu-dong-quan-tui-yong-hu-zhe-cai-shi-ai-hang-ye-cheng-shu-de-kai-shi"
+url: "/articles/2026/08/07/deepseek-zhang-jia-bu-shi-kui-qian-shi-zhu-dong-quan-tui-yong-hu-zhe-cai-shi-ai-hang-ye-cheng-shu-de-kai-shi.html"
 title: DeepSeek涨价不是亏钱，是主动劝退用户？这才是AI行业成熟的开始
 description: OpenCode创始人一句话，把DeepSeek涨价背后的窗户纸捅破了：
 categories: ['AI', '工具测评']

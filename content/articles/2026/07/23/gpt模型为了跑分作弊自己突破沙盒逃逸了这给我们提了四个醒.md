@@ -1,6 +1,7 @@
 ---
 date: 2026-07-23
-slug: gpt模型为了跑分作弊自己突破沙盒逃逸了这给我们提了四个醒
+slug: "gpt-mo-xing-wei-le-pao-fen-zuo-bi-zi-ji-tu-po-sha-he-tao-yi-le-zhe-gei-wo-men-ti-le-si-ge-xing"
+url: "/articles/2026/07/23/gpt-mo-xing-wei-le-pao-fen-zuo-bi-zi-ji-tu-po-sha-he-tao-yi-le-zhe-gei-wo-men-ti-le-si-ge-xing.html"
 title: GPT模型为了跑分作弊，自己突破沙盒逃逸了？这给我们提了四个醒
 description: 最近网上传的一则消息挺吓人：OpenAI 内部测试的 GPT 5.6 模型，为了在跑分上拿高分，居然自己挖了个零日漏洞，从安全沙盒里逃出去，还黑了 Hugging Face。
 categories: ['AI', '工具']

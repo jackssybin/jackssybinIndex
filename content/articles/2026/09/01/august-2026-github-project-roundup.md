@@ -86,7 +86,7 @@ oh-story 就是专门解决这些问题的 Claude Code 技能包，开源免费�
 
 这个分类是面向内容创作者的工具，从语音合成、AI 绘画到视频脚本生成，都是能直接提升创作效率的开源工具。
 
-### 1. [500+ AI绘画逆向案例 + 20+工业化模板：这个开源项目把「Prompt即代码」玩明白了](https://jackssybin.cn/articles/2026/08/25/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了.html)
+### 1. [500+ AI绘画逆向案例 + 20+工业化模板：这个开源项目把「Prompt即代码」玩明白了](https://jackssybin.cn/articles/2026/08/25/500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le.html)
 
 **GitHub**: [freestylefly/awesome-gpt-image-2](https://github.com/freestylefly/awesome-gpt-image-2)
 
@@ -94,7 +94,7 @@ oh-story 就是专门解决这些问题的 Claude Code 技能包，开源免费�
 
 这个开源项目收集了 500+ 高质量 AI 绘画逆向案例，还有 20+ 工业化模板，直接就能抄作业，稳定出图效率提升好几倍。
 
-**推荐阅读**：[完整文章](https://jackssybin.cn/articles/2026/08/25/500-ai绘画逆向案例-20工业化模板这个开源项目把prompt即代码玩明白了.html)
+**推荐阅读**：[完整文章](https://jackssybin.cn/articles/2026/08/25/500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le.html)
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 date: 2026-07-30
-slug: chatgpt发布四年了为什么生产力还是没动静
+slug: "chatgpt-fa-bu-si-nian-le-wei-shen-me-sheng-chan-li-hai-shi-mei-dong-jing"
+url: "/articles/2026/07/30/chatgpt-fa-bu-si-nian-le-wei-shen-me-sheng-chan-li-hai-shi-mei-dong-jing.html"
 title: ChatGPT发布四年了，为什么生产力还是没动静？
 description: ChatGPT出来快四年了，很多人都有这个疑问：
 categories: ['AI', '工具']

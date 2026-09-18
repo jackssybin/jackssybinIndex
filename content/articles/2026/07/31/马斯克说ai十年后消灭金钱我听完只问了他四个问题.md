@@ -1,6 +1,7 @@
 ---
 date: 2026-07-31
-slug: 马斯克说ai十年后消灭金钱我听完只问了他四个问题
+slug: "ma-si-ke-shuo-ai-shi-nian-hou-xiao-mie-jin-qian-wo-ting-wan-zhi-wen-le-ta-si-ge-wen-ti"
+url: "/articles/2026/07/31/ma-si-ke-shuo-ai-shi-nian-hou-xiao-mie-jin-qian-wo-ting-wan-zhi-wen-le-ta-si-ge-wen-ti.html"
 title: 马斯克说AI十年后消灭金钱，我听完只问了他四个问题
 description: 最近马斯克又上热搜了。
 categories: ['AI', '工具测评']

@@ -1,6 +1,7 @@
 ---
 date: 2026-06-11
-slug: loop-工程火了但-agent-真正缺的不是多想几步
+slug: "loop-gong-cheng-huo-le-dan-agent-zhen-zheng-que-de-bu-shi-duo-xiang-ji-bu"
+url: "/articles/2026/06/11/loop-gong-cheng-huo-le-dan-agent-zhen-zheng-que-de-bu-shi-duo-xiang-ji-bu.html"
 title: Loop 工程火了，但 Agent 真正缺的不是“多想几步”
 description: 晚上让一个 AI Agent 帮你改代码。它读文件，改 patch，跑测试，失败后继续修。看起来很像一个不知疲倦的实习生。
 categories: ['AI', '工具']

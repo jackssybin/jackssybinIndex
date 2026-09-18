@@ -21,7 +21,12 @@ SEO 不变量校验：构建产物检查。
      /my-github-repos/ /archives.html /mysql.html 等。
   5. sitemap 收录口径要与 noindex 口径一致：
      正常内容页在 sitemap 里，noindex 页面不在 sitemap 里。
+  6. 老 URL 的 301 映射，目标必须在产物里真实存在。
+     映射写错一条，那个 URL 就从 301 变成 404 —— 而 404 是百度判定
+     站点质量下降的信号，比 403 好不了多少。这条最容易在「批量改 URL」
+     时被打破：改了 slug 却忘了同步 nginx 映射，或映射指向了错的日期目录。
 """
+import json
 import os
 import re
 import sys
@@ -163,6 +168,37 @@ else:
     for pref in ["/tags/", "/page/", "/archives/", "/generated/", "/ai-nav/"]:
         n = sum(1 for p in paths if p.startswith(pref))
         check("sitemap 不应有 %s 前缀" % pref, n, 0)
+
+print()
+print("=" * 96)
+print("⑤ 老 URL 301 映射的目标必须存在（写错一条 = 那个 URL 变 404）")
+print("=" * 96)
+_repo = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+mapping_path = os.path.join(_repo, "seo-state", "slug-migration.json")
+if not os.path.isfile(mapping_path):
+    print("  [SKIP] 找不到 %s" % os.path.relpath(mapping_path, _repo))
+    print("         （还没有做过中文 slug 迁移时属正常；做过就必须存在）")
+else:
+    with open(mapping_path, encoding="utf-8") as fh:
+        entries = json.load(fh).get("entries", [])
+    print("  迁移映射条目: %d" % len(entries))
+
+    missing = []
+    stale = []
+    for e in entries:
+        new_rel = e["newPath"].lstrip("/")
+        if not os.path.isfile(os.path.join(ROOT, new_rel)):
+            missing.append(e["newPath"])
+        old_rel = e["oldPath"].lstrip("/").rstrip("/")
+        if old_rel and os.path.exists(os.path.join(ROOT, old_rel)):
+            stale.append(e["oldPath"])
+
+    check("每条 301 的目标页在产物里存在", len(missing), 0)
+    if missing:
+        print("      缺失样本:", missing[:5])
+    check("旧 URL 已从产物移除（否则映射是多余的）", len(stale), 0)
+    if stale:
+        print("      残留样本:", stale[:5])
 
 print()
 print("=" * 96)

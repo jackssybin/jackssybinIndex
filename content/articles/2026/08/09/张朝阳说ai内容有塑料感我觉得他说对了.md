@@ -1,6 +1,7 @@
 ---
 date: 2026-08-09
-slug: 张朝阳说ai内容有塑料感我觉得他说对了
+slug: "zhang-chao-yang-shuo-ai-nei-rong-you-su-liao-gan-wo-jue-de-ta-shuo-dui-le"
+url: "/articles/2026/08/09/zhang-chao-yang-shuo-ai-nei-rong-you-su-liao-gan-wo-jue-de-ta-shuo-dui-le.html"
 title: 张朝阳说AI内容有"塑料感"，我觉得他说对了
 description: 张朝阳最近说，AI让内容产生了"塑料感"，就像化肥催出来的西红柿：看着光鲜，吃着没味。
 categories: ['AI', '工具测评']

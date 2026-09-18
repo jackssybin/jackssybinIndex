@@ -1,6 +1,7 @@
 ---
 date: 2026-08-24
-slug: ai热潮见顶其实只是客户开始算帐了
+slug: "ai-re-chao-jian-ding-qi-shi-zhi-shi-ke-hu-kai-shi-suan-zhang-le"
+url: "/articles/2026/08/24/ai-re-chao-jian-ding-qi-shi-zhi-shi-ke-hu-kai-shi-suan-zhang-le.html"
 title: AI热潮见顶？其实只是客户开始算帐了
 description: 我去年和一家做企业AI采购的朋友吃饭，他说的一句话印象很深：
 categories: ['AI', '工具测评']
