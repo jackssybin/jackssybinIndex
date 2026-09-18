@@ -80,7 +80,12 @@ jobs:
           TARGET: ${{ secrets.SERVER_PATH }}
           ARGS: -rlgoDzvc --delete --exclude=admin/**
       - name: Sync nginx config and reload
-        if: github.event_name == 'push'
+        # 必须所有事件都跑，不能只限 push（2026-09-18 因此出过线上事故）。
+        # 产物和 nginx 映射是同生共死的一对：89 篇中文 slug 迁移把产物里的
+        # /articles/.../<中文>/ 目录删掉，那些 URL 全靠 nginx 的 301 映射接住。
+        # 一旦「部署了产物但没同步配置」，89 个 URL 立刻静默变 404。
+        # 更关键的是：workflow_dispatch 是应急补部署手段，
+        # 它要是不同步配置，就没法用它从「配置没上线」的状态里恢复。
         continue-on-error: true
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
