@@ -1,12 +1,58 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "note": "百度主动推送的记账本，由 scripts/baidu-push.mjs 读写，CI 每次推送后提交回仓库。urls 记录「哪个 URL 在哪个 lastmod 版本上推过」（lastmod 变了才重推）；daily 记录当日已推条数，用来和百度给本站的 8 条/天配额对账。手改这个文件会让去重与配额账目失真。",
-  "lastRunAt": null,
+  "lastRunAt": "2026-09-19T05:19:42.971Z",
   "daily": {
-    "date": "",
-    "pushed": 0
+    "date": "2026-09-19",
+    "pushed": 8
   },
-  "urls": {},
-  "history": []
+  "urls": {
+    "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/07/xia-ban-hou-hai-zai-jing-shen-jia-ban-de-ren-xian-zuo-zhe-jian-shi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/07/xiao-lv-kuai-le-qian-wei-shen-me-mei-duo.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/11/dian-xi-men-jia-shang-zhi-hou-zhi-neng-qi-che-gai-bu-shang-de-bu-shi-yi-ju-ti-xing.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/11/loop-gong-cheng-huo-le-dan-agent-zhen-zheng-que-de-bu-shi-duo-xiang-ji-bu.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/13/openpangu-20-lai-le-dan-zhen-zheng-de-kao-ti-zai-fa-bu-hui-zhi-hou.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/15/ji-qi-ren-ban-lv-zhen-you-da-shi-chang-ma-xian-kan-yi-zhou-hou-hai-kai-bu-kai-ji.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/15/zeng-cheng-che-hai-xiang-ma-xian-kan-ni-zai-wei-shen-me-ma-fan-mai-dan.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-19T05:19:42.971Z"
+    }
+  },
+  "history": [
+    {
+      "date": "2026-09-19",
+      "pushed": 8,
+      "source": "daily"
+    }
+  ]
 }
