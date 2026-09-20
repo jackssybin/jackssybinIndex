@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-19T05:19:42.971Z",
+  "lastRunAt": "2026-09-20T05:36:22.195Z",
   "daily": {
-    "date": "2026-09-19",
+    "date": "2026-09-20",
     "pushed": 8
   },
   "urls": {
@@ -46,11 +46,56 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-19T05:19:42.971Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/17/ai-quan-you-wei-zheng-liu-chao-qi-lai-da-mo-xing-zhen-zheng-pa-de-bu-shi-bei-mo-fang.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/17/ai-ye-kai-shi-suan-zhang-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/18/hr-tu-cao-ying-jie-sheng-mian-shi-quan-cheng-kao-ai-hui-da-wo-zhao-de-shi-ni-hai-shi-chatgpt.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/18/wei-shen-me-ai-xie-dai-ma-kan-bu-chu-ai-wei-er-xie-wen-zhang-yi-yan-jiu-neng-ren-chu-lai.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/23/lei-jun-hou-hui-shi-yi-du-yue-xiao-mi-zuo-kong-tiao-zhen-shi-bei-bi-chu-lai-de-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/23/zhen-hui-yong-ai-xie-zuo-de-ren-xian-rang-ta-dang-huai-ren.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/26/gemini-die-dao-hang-ye-di-si-gen-ben-bu-shi-ji-shu-wen-ti.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/26/ping-guo-tu-ran-zhang-jia-20-qian-bei-ai-zhuan-zou-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-20T05:36:22.195Z"
     }
   },
   "history": [
     {
       "date": "2026-09-19",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-20",
       "pushed": 8,
       "source": "daily"
     }
