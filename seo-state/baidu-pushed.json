@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-22T02:21:55.939Z",
+  "lastRunAt": "2026-09-22T05:39:44.162Z",
   "daily": {
     "date": "2026-09-22",
-    "pushed": 2
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -136,6 +136,36 @@
       "pushes": 1,
       "lastmod": "2026-09-22T10:16:55+08:00",
       "pushedAt": "2026-09-22T02:21:55.939Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/06/tim-yong-xing-lu-gu-wu-yu-mian-shi-hou-xuan-ren-ta-dao-di-zai-kan-shen-me.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/07/99-wan-de-ji-qi-ren-zhi-neng-pei-ni-2-xiao-shi-bie-guai-dian-chi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/07/ai-rang-mei-ge-ren-kai-yi-ren-gong-si-wo-peng-you-shuo-zuo-chan-pin-shi-ta-yi-tian-li-zui-shuang-de-bu-fen.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/09/12306-qiao-qiao-gai-le-yi-ju-hua-ba-yi-ge-yong-hu-bi-ran-cai-keng-de-ze-ren-jie-le-hui-lai.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/09/ping-guo-zhe-ci-zhui-cha-iphone-18-pro-xie-mi-shi-zou-guo-chang-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/13/8000-xue-fei-xue-xiu-shou-ji-wo-quan-ni-xian-wen-lao-ban-zhe-si-jian-shi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-22T05:39:44.162Z"
     }
   },
   "history": [
@@ -163,6 +193,11 @@
       "date": "2026-09-22",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-09-22",
+      "pushed": 6,
+      "source": "daily"
     }
   ]
 }
