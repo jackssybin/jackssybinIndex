@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-21T05:42:31.694Z",
+  "lastRunAt": "2026-09-22T00:39:39.036Z",
   "daily": {
-    "date": "2026-09-21",
-    "pushed": 8
+    "date": "2026-09-22",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -126,6 +126,11 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-21T05:42:31.694Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/22/jev-ultrafast-browser-agent-7-seconds-deep-dive/": {
+      "pushes": 1,
+      "lastmod": "2026-09-22T08:33:50+08:00",
+      "pushedAt": "2026-09-22T00:39:39.036Z"
     }
   },
   "history": [
@@ -143,6 +148,11 @@
       "date": "2026-09-21",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-09-22",
+      "pushed": 1,
+      "source": "changed"
     }
   ]
 }
