@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-22T00:39:39.036Z",
+  "lastRunAt": "2026-09-22T02:21:55.939Z",
   "daily": {
     "date": "2026-09-22",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -131,6 +131,11 @@
       "pushes": 1,
       "lastmod": "2026-09-22T08:33:50+08:00",
       "pushedAt": "2026-09-22T00:39:39.036Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/22/helpwriting-local-ai-content-workbench-deep-dive/": {
+      "pushes": 1,
+      "lastmod": "2026-09-22T10:16:55+08:00",
+      "pushedAt": "2026-09-22T02:21:55.939Z"
     }
   },
   "history": [
@@ -148,6 +153,11 @@
       "date": "2026-09-21",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-09-22",
+      "pushed": 1,
+      "source": "changed"
     },
     {
       "date": "2026-09-22",
