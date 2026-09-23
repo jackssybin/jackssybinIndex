@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-22T05:39:44.162Z",
+  "lastRunAt": "2026-09-23T05:26:26.160Z",
   "daily": {
-    "date": "2026-09-22",
+    "date": "2026-09-23",
     "pushed": 8
   },
   "urls": {
@@ -166,6 +166,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-22T05:39:44.162Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/13/zi-jie-wan-bu-zhuan-fu-fei-wang-wen-bu-shi-qian-de-wen-ti.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/15/codex-huan-shang-gpt-56-zhi-hou-wo-shan-diao-le-9-ge-skills.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/15/wei-shen-me-ai-quan-de-kai-fa-zhe-geng-duo-yong-mac-er-bu-shi-windows-da-an-bu-zai-ping-guo.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/17/du-bo-hai-shi-bu-du-bo-xian-bie-kan-bo-shi-guo-sheng-kan-ni-shou-li-cou-de-shi-na-yi-tao-zu-he.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/17/realme-tui-chu-zhong-guo-bu-shi-bai-tui-shi-mu-gong-si-suan-wan-zhang-hou-de-zi-yuan-hui-shou.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/19/xiao-mi-oppovivo-rong-yao-tong-yi-biao-zhun-zhe-jian-shi-zhen-bei-da-jia-xiang-da-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/19/yi-ge-ji-qi-ren-pao-wan-135-dao-ke-yan-ti-wo-que-xiang-qi-a-lab-fan-che-na-nian.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/20/bei-da-ling-dao-zhui-wen-dao-da-bu-shang-duo-shu-ren-gao-cuo-le-yi-jian-shi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-23T05:26:26.160Z"
     }
   },
   "history": [
@@ -197,6 +237,11 @@
     {
       "date": "2026-09-22",
       "pushed": 6,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-23",
+      "pushed": 8,
       "source": "daily"
     }
   ]
