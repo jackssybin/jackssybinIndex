@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-23T05:26:26.160Z",
+  "lastRunAt": "2026-09-24T05:42:26.840Z",
   "daily": {
-    "date": "2026-09-23",
+    "date": "2026-09-24",
     "pushed": 8
   },
   "urls": {
@@ -206,6 +206,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-23T05:26:26.160Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/20/kimi-zan-ting-hui-yuan-kai-fang-zhen-zheng-ka-zhu-de-cong-lai-bu-shi-xian-ka.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/22/kimi-pao-fen-chao-guo-claude-da-mo-xing-ge-ju-zhen-de-bian-le-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/22/shi-xi-sheng-tou-tong-shi-lv-li-ru-zhi-wang-you-zhe-shi-da-chang-zi-ji-de-fu-bao.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/23/gpt-mo-xing-wei-le-pao-fen-zuo-bi-zi-ji-tu-po-sha-he-tao-yi-le-zhe-gei-wo-men-ti-le-si-ge-xing.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/23/openai-mo-xing-shi-kong-pao-jin-kai-yuan-she-qu-zhe-na-li-shi-ai-jue-xing-ming-ming-shi-gong-cheng-wen-ti.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/26/5000-yi-mei-yuan-ai-hu-huan-mai-mai-wo-kan-dao-le-ban-dao-ti-hang-ye-zheng-zai-qiao-qiao-gai-bian-de-you-xi-gui-ze.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/26/kimi-kan-le-yi-ban-shang-xia-wen-wo-fan-er-jue-de-zhe-shi-jin-bu.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/29/anthropic-zhe-ju-hua-chuo-po-le-ai-hang-ye-san-nian-lai-de-jia-xiang.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-24T05:42:26.840Z"
     }
   },
   "history": [
@@ -241,6 +281,11 @@
     },
     {
       "date": "2026-09-23",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-24",
       "pushed": 8,
       "source": "daily"
     }
