@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-24T05:42:26.840Z",
+  "lastRunAt": "2026-09-25T05:38:13.621Z",
   "daily": {
-    "date": "2026-09-24",
+    "date": "2026-09-25",
     "pushed": 8
   },
   "urls": {
@@ -246,6 +246,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-24T05:42:26.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/29/ding-jian-xue-zhe-pian-ai-fen-bi-hei-ban-zhen-de-zhi-shi-nian-jiu-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/30/ai-gong-si-mai-wan-jiu-shu-xun-lian-jiu-xiao-hui-zhe-dao-di-he-li-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/30/chatgpt-fa-bu-si-nian-le-wei-shen-me-sheng-chan-li-hai-shi-mei-dong-jing.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/31/ma-si-ke-shuo-ai-shi-nian-hou-xiao-mie-jin-qian-wo-ting-wan-zhi-wen-le-ta-si-ge-wen-ti.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/31/yi-ban-qi-ye-yong-ai-cai-yuan-hou-fan-hui-yuan-lai-cuo-zai-zhe-li.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/31/zhi-fu-bao-chai-fen-ti-yan-ji-shu-bu-ai-bu-shi-lai-cai-yuan-de-shi-lai-chai-zu-zhi-de.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/02/deepseek-jia-gou-wei-gai-zhi-zuo-hou-xun-lian-jiu-xiao-guo-da-zeng-gao-su-wo-men-yi-ge-rong-yi-bei-hu-lve-de-zhen-xiang.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/02/gcc-quan-mian-ju-jue-ai-dai-ma-wo-que-jue-de-zhe-bu-zou-de-te-bie-cong-ming.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-25T05:38:13.621Z"
     }
   },
   "history": [
@@ -286,6 +326,11 @@
     },
     {
       "date": "2026-09-24",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-25",
       "pushed": 8,
       "source": "daily"
     }
