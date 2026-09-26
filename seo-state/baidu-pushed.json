@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-25T05:38:13.621Z",
+  "lastRunAt": "2026-09-26T05:45:40.113Z",
   "daily": {
-    "date": "2026-09-25",
+    "date": "2026-09-26",
     "pushed": 8
   },
   "urls": {
@@ -286,6 +286,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-25T05:38:13.621Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/03/ai-ju-tou-lian-ming-hu-yu-kong-zhi-yan-fa-bie-zhi-kan-an-quan-kan-kan-pai-zhuo.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/03/deepseek-na-me-pian-yi-gu-ge-tou-ai-fan-er-xian-jin-liu-zhuan-fu-yuan-lai-da-jia-shuo-de-bu-shi-tong-yi-zhong-ai.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/04/24-sui-ai-tian-cai-na-450-yi-suo-ha-bao-cang-chu-ju-hua-er-jie-cong-lai-bu-shi-ni-xiang-de-na-yang.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/04/deepseek-cheng-le-da-mo-xing-de-zhan-sha-xian-dao-di-zhan-de-shi-shui.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/05/24-sui-ai-tian-cai-bao-cang-450-yi-gang-gan-cai-shi-hua-er-jie-zui-da-de-lie-ren.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/05/mei-guo-jin-zhong-guo-guang-mo-kuai-dao-di-ka-shui-de-bo-zi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/07/ao-te-man-shuo-6-nian-hou-ren-jun-yue-hao-5000-yi-token-wo-zhi-wen-yi-ge-wen-ti-shui-mai-dan.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/07/deepseek-zhang-jia-bu-shi-kui-qian-shi-zhu-dong-quan-tui-yong-hu-zhe-cai-shi-ai-hang-ye-cheng-shu-de-kai-shi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-26T05:45:40.113Z"
     }
   },
   "history": [
@@ -331,6 +371,11 @@
     },
     {
       "date": "2026-09-25",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-26",
       "pushed": 8,
       "source": "daily"
     }
