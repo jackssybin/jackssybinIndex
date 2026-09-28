@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-27T06:02:12.580Z",
+  "lastRunAt": "2026-09-28T06:09:31.422Z",
   "daily": {
-    "date": "2026-09-27",
+    "date": "2026-09-28",
     "pushed": 8
   },
   "urls": {
@@ -366,6 +366,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-27T06:02:12.580Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/13/da-chang-kai-shi-ju-shou-a-li-xi-zhong-gao-ceng-hu-lian-wang-teng-hu-bu-shi-pian-jian-shi-shi-dai-bian-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/13/deepseek-tu-ran-bao-huo-guo-chan-da-mo-xing-de-jing-zheng-luo-ji-bian-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/17/deepseek-kan-le-94-de-diao-yong-pei-e-zhe-jian-shi-mei-ni-xiang-de-na-me-jian-dan.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/17/duan-duan-san-nian-ai-wei-shen-me-cong-xiang-bo-bo-bian-cheng-ren-ren-han-da.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/18/deepseek-harness-cha-jian-zen-me-xuan-ji-zhu-zhe-san-ge-pan-duan-biao-zhun.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/18/kai-yuan-da-mo-xing-bian-tian-le-bu-zai-pin-can-shu-kai-shi-pin-xing-jia-bi.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/19/hu-lian-wang-da-chang-zhen-de-hou-hui-gao-ai-liao-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/19/ren-xing-ji-qi-ren-neng-tiao-2-mi-le-li-wo-men-de-sheng-huo-hai-you-duo-yuan.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-28T06:09:31.422Z"
     }
   },
   "history": [
@@ -421,6 +461,11 @@
     },
     {
       "date": "2026-09-27",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-28",
       "pushed": 8,
       "source": "daily"
     }
