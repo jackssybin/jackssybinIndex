@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-28T06:09:31.422Z",
+  "lastRunAt": "2026-09-29T06:27:35.946Z",
   "daily": {
-    "date": "2026-09-28",
+    "date": "2026-09-29",
     "pushed": 8
   },
   "urls": {
@@ -406,6 +406,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-28T06:09:31.422Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/28/anything2explainer/": {
+      "pushes": 1,
+      "lastmod": "2026-09-28T21:33:07+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/28/easel-social-media-agent/": {
+      "pushes": 1,
+      "lastmod": "2026-09-28T15:15:02+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/20/ai-dou-neng-jie-jue-shu-xue-cai-xiang-le-shu-xue-jia-zhen-de-yao-shi-ye-ma.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/20/deepseek-harness-wu-tian-zhang-15-wan-xing-zhen-zheng-de-ge-ming-bu-zai-gong-neng-zai-cheng-ben.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/21/ke-jie-shuo-gu-yi-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-yuan-li-shi-shen-me.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/21/wei-shen-me-hua-wei-ping-guo-dou-kai-shi-ba-shou-ji-zuo-kuan-le-bei-hou-san-ge-zhen-shi-yuan-yin.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/22/chang-jiang-cun-chu-gan-ju-jue-ping-guo-ding-dan-guo-chan-xin-pian-zao-jiu-bu-shi-ni-yin-xiang-li-de-yang-zi-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/22/ke-jie-shuo-zhuang-ruo-zhi-jiu-neng-ying-wei-qi-ai-shi-chui-niu-ma-yuan-li-qi-shi-hen-jian-dan.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-29T06:27:35.946Z"
     }
   },
   "history": [
@@ -466,6 +506,11 @@
     },
     {
       "date": "2026-09-28",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-29",
       "pushed": 8,
       "source": "daily"
     }
