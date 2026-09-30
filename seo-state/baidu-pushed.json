@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-09-29T06:27:35.946Z",
+  "lastRunAt": "2026-09-30T06:12:33.005Z",
   "daily": {
-    "date": "2026-09-29",
+    "date": "2026-09-30",
     "pushed": 8
   },
   "urls": {
@@ -446,6 +446,46 @@
       "pushes": 1,
       "lastmod": "2026-09-18T22:38:30+08:00",
       "pushedAt": "2026-09-29T06:27:35.946Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/23/deepseek-zhou-mo-jiang-jia-bei-hou-wo-kan-dao-le-ai-hang-ye-zui-wei-xian-de-bian-hua.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/23/liang-jia-da-mo-xing-gong-si-tong-shi-kai-yuan-ping-ce-kuang-jia-zhe-cai-shi-zhen-zheng-de-hang-ye-zhuan-zhe-dian.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/24/ai-re-chao-jian-ding-qi-shi-zhi-shi-ke-hu-kai-shi-suan-zhang-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/24/ji-qi-ren-pao-bu-po-ren-lei-ji-lu-bie-bei-pian-le-zhe-gen-ben-bu-shi-tong-yi-chang-bi-sai.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/25/500-ai-hui-hua-ni-xiang-an-li-20-gong-ye-hua-mu-ban-zhe-ge-kai-yuan-xiang-mu-ba-prompt-ji-dai-ma-wan-ming-bai-le.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/25/claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/01/august-2026-github-project-roundup.html": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T22:38:30+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/18/agnes-image-tool-gradio-studio-source-deep-dive/": {
+      "pushes": 1,
+      "lastmod": "2026-09-18T13:12:29+08:00",
+      "pushedAt": "2026-09-30T06:12:33.005Z"
     }
   },
   "history": [
@@ -511,6 +551,11 @@
     },
     {
       "date": "2026-09-29",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-09-30",
       "pushed": 8,
       "source": "daily"
     }
