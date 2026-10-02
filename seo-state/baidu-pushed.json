@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-01T06:44:49.692Z",
+  "lastRunAt": "2026-10-02T06:28:57.891Z",
   "daily": {
-    "date": "2026-10-01",
+    "date": "2026-10-02",
     "pushed": 8
   },
   "urls": {
@@ -526,6 +526,46 @@
       "pushes": 1,
       "lastmod": "2026-09-14T09:44:58+08:00",
       "pushedAt": "2026-10-01T06:44:49.692Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/12/jellyfish-ai-short-drama-studio-source-deep-dive/": {
+      "pushes": 1,
+      "lastmod": "2026-09-12T21:18:19+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/11/y2a-auto-youtube-to-bilibili-acfun-pipeline/": {
+      "pushes": 1,
+      "lastmod": "2026-09-11T21:44:22+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/10/postbot-multi-platform-content-sync/": {
+      "pushes": 1,
+      "lastmod": "2026-09-11T00:45:34+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/10/model-x-studio-exploded-view/": {
+      "pushes": 1,
+      "lastmod": "2026-09-10T19:39:27+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/09/book-to-skill-agent-skill/book-to-skill-agent-skill/": {
+      "pushes": 1,
+      "lastmod": "2026-09-09T23:03:58+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/08/openmontage-agentic-video-production/": {
+      "pushes": 1,
+      "lastmod": "2026-09-08T16:01:46+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser/dsh-ego-browser-deepseek-harness-visual-agent-browser/": {
+      "pushes": 1,
+      "lastmod": "2026-09-07T19:38:08+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
+    },
+    "https://jackssybin.cn/articles/2026/09/07/navop-native-all-in-one-workspace/navop-native-all-in-one-workspace/": {
+      "pushes": 1,
+      "lastmod": "2026-09-07T11:57:17+08:00",
+      "pushedAt": "2026-10-02T06:28:57.891Z"
     }
   },
   "history": [
@@ -601,6 +641,11 @@
     },
     {
       "date": "2026-10-01",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-02",
       "pushed": 8,
       "source": "daily"
     }
