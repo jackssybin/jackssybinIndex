@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-04T06:35:14.555Z",
+  "lastRunAt": "2026-10-05T06:28:21.261Z",
   "daily": {
-    "date": "2026-10-04",
+    "date": "2026-10-05",
     "pushed": 8
   },
   "urls": {
@@ -646,6 +646,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T13:26:30+08:00",
       "pushedAt": "2026-10-04T06:35:14.555Z"
+    },
+    "https://jackssybin.cn/articles/2026/10/04/res-downloader-proxy-sniffer/": {
+      "pushes": 1,
+      "lastmod": "2026-10-04T23:36:20+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/05/manager-not-me.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/12/claw-code-agent-harness-deep-dive.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/16/codegraph-ai-code-intelligence.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/19/aiusage-dashboard-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/19/browseract-skills-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/24/avoid-ai-writing-agent-skill-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-05T06:28:21.261Z"
     }
   },
   "history": [
@@ -736,6 +776,11 @@
     },
     {
       "date": "2026-10-04",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-05",
       "pushed": 8,
       "source": "daily"
     }
