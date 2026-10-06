@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-05T06:28:21.261Z",
+  "lastRunAt": "2026-10-06T07:04:24.194Z",
   "daily": {
-    "date": "2026-10-05",
+    "date": "2026-10-06",
     "pushed": 8
   },
   "urls": {
@@ -686,6 +686,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T13:26:30+08:00",
       "pushedAt": "2026-10-05T06:28:21.261Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/24/last30days-skill-agent-research-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/24/redink-xiaohongshu-ai-image-text-generator.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/25/skill-zoo-ai-skills-manager.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/27/mediacrawler-multi-platform-crawler-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/27/openmontage-ai-video-studio.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/28/ai-video-agent-auto-generate-video.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/28/rtk-reduce-llm-tokens.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/01/ai-berkshire-investment-agent-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-06T07:04:24.194Z"
     }
   },
   "history": [
@@ -781,6 +821,11 @@
     },
     {
       "date": "2026-10-05",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-06",
       "pushed": 8,
       "source": "daily"
     }
