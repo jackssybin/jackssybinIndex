@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-06T07:04:24.194Z",
+  "lastRunAt": "2026-10-07T06:45:02.194Z",
   "daily": {
-    "date": "2026-10-06",
+    "date": "2026-10-07",
     "pushed": 8
   },
   "urls": {
@@ -726,6 +726,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T13:26:30+08:00",
       "pushedAt": "2026-10-06T07:04:24.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/02/last30days-trending-1-github-research-radar.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/03/archify-agent-skill-diagram-generator.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/05/arcreel-novel-to-video-ai-workbench.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/05/async-profiler-jvm-flamegraph-profiler.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/08/agency-agents-238-specialist-installer.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/08/ai-job-search-claude-code-career-workbench.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/10/cowart-codex-tldraw-native-canvas-widget.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-07T06:45:02.194Z"
     }
   },
   "history": [
@@ -826,6 +866,11 @@
     },
     {
       "date": "2026-10-06",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-07",
       "pushed": 8,
       "source": "daily"
     }
