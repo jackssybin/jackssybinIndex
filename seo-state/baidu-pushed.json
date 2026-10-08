@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-07T06:45:02.194Z",
+  "lastRunAt": "2026-10-08T06:52:30.069Z",
   "daily": {
-    "date": "2026-10-07",
+    "date": "2026-10-08",
     "pushed": 8
   },
   "urls": {
@@ -766,6 +766,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T13:26:30+08:00",
       "pushedAt": "2026-10-07T06:45:02.194Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/10/omnivoice-studio-local-elevenlabs-alternative.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/12/lapian-notes-ai-film-study-tool.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/12/lingtistudio-ai-video-production-pipeline.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/16/lux-china-video-downloader.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/16/opencut-classic-capcut-open-source-alternative.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/18/codex-dream-skin-desktop-theme.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/31/ai-comic-workbench.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-08T06:52:30.069Z"
     }
   },
   "history": [
@@ -871,6 +911,11 @@
     },
     {
       "date": "2026-10-07",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-08",
       "pushed": 8,
       "source": "daily"
     }
