@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-08T06:52:30.069Z",
+  "lastRunAt": "2026-10-09T07:01:34.202Z",
   "daily": {
-    "date": "2026-10-08",
+    "date": "2026-10-09",
     "pushed": 8
   },
   "urls": {
@@ -806,6 +806,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T13:26:30+08:00",
       "pushedAt": "2026-10-08T06:52:30.069Z"
+    },
+    "https://jackssybin.cn/articles/2026/08/01/auto-redbook-skills-xiaohongshu-ai.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T13:26:30+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part1-basics/1-netty.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part1-basics/2.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part1-basics/3-netty.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part1-basics/4-bootstrap.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part1-basics/5-channelhandler.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part2-core/10-eventloop.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
+    },
+    "https://jackssybin.cn/netty/part2-core/6-bytebuf.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-09T07:01:34.202Z"
     }
   },
   "history": [
@@ -916,6 +956,11 @@
     },
     {
       "date": "2026-10-08",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-09",
       "pushed": 8,
       "source": "daily"
     }
