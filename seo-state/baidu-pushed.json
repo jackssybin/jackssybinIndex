@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-10T06:35:34.074Z",
+  "lastRunAt": "2026-10-11T06:41:36.078Z",
   "daily": {
-    "date": "2026-10-10",
+    "date": "2026-10-11",
     "pushed": 8
   },
   "urls": {
@@ -886,6 +886,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T12:47:42+08:00",
       "pushedAt": "2026-10-10T06:35:34.074Z"
+    },
+    "https://jackssybin.cn/springboot4.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/appendix/a-boot3vs4.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/appendix/b.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/appendix/c-graalvm.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/appendix/d.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/appendix/e-faq.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/part1-overview/1-springboot4.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/springboot4/part10-performance/15.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-11T06:41:36.078Z"
     }
   },
   "history": [
@@ -1006,6 +1046,11 @@
     },
     {
       "date": "2026-10-10",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-11",
       "pushed": 8,
       "source": "daily"
     }
