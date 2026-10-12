@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-11T06:41:36.078Z",
+  "lastRunAt": "2026-10-12T06:48:17.262Z",
   "daily": {
-    "date": "2026-10-11",
+    "date": "2026-10-12",
     "pushed": 8
   },
   "urls": {
@@ -926,6 +926,46 @@
       "pushes": 1,
       "lastmod": "2026-08-14T12:47:42+08:00",
       "pushedAt": "2026-10-11T06:41:36.078Z"
+    },
+    "https://jackssybin.cn/articles/2026/10/11/rea-agent-reverse-engineering-mcp/": {
+      "pushes": 1,
+      "lastmod": "2026-10-11T17:56:58+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part11-migration/16-api.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part11-migration/17-boot3.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part2-core/2-springframework7.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part2-core/3.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part4-data/6-springdata4.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part4-data/7.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
+    },
+    "https://jackssybin.cn/springboot4/part5-security/8-springsecurity7.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-12T06:48:17.262Z"
     }
   },
   "history": [
@@ -1051,6 +1091,11 @@
     },
     {
       "date": "2026-10-11",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-12",
       "pushed": 8,
       "source": "daily"
     }
