@@ -22,13 +22,16 @@
 - validate-payload.mjs：0 建议项
 - 正文无任何外链（GitHub 仅走 frontmatter，规避 45166）
 
-## 知乎专栏草稿（阻塞：cookie 过期）
-- 计划标题：不用视频生成模型做电影：拆解 2.1k Star 的 Lemo-Opuscar，43 种画风全靠代码逐帧渲染
-- 正文：zhihu.md，1605+ 中文字，冷静分析风，无公众号 CTA，结尾话题标签
-- 封面：media/cover-zhihu.jpg 1600×900（与微信封面不同，人工验收通过）
-- 失败点：图片上传接口 HTTP 401「无法解析的登录令牌」
-- 原因：/root/.hermes/secrets/zhihu_cookie.txt 为 2026-08-31 的旧 cookie，登录态已失效（草稿是否创建未知，图片上传在建稿后失败）
-- 重试：更新 cookie 后运行 `bash /root/.cache/tct/zhihu_step1.sh`（markdown+--upload-images），再按记忆流程取 payload CDN URL → 生成 zhihu-compact.html → --html-file 重提
+## 知乎专栏草稿（成功，2026-10-13 傍晚更新 cookie 后续跑）
+- 当前有效草稿 ID：2093393072805646819
+- 编辑：https://zhuanlan.zhihu.com/p/2093393072805646819/edit
+- 标题：不用视频生成模型做电影：拆解 2.1k Star 的 Lemo-Opuscar，43 种画风全靠代码逐帧渲染
+- 上传方式：step1 markdown --upload-images（4 图传 CDN）→ 手工 zhihu-compact.html（补回被渲染器丢弃的 2 个代码块、图片去 <p> 包裹、话题标签去 h1）→ step2 --html-file
+- 落库校验：4 张 content_image（zhimg CDN）、2 个 <pre> 保留、0 个 <p><img>/<h1>/<ol>/<ul>/<table>、content 4126 字
+- 封面：专栏无独立题图字段，首图 pipeline.png 作缩略图；cover-zhihu.jpg（1600×900，与微信封面不同）留作备用
+- ⚠️ 多余草稿需后台手动删：2093392159370109332（step1 markdown 版，代码块缺失、话题被渲染成 h1，作废）
+  https://zhuanlan.zhihu.com/p/2093392159370109332/edit
+- 续跑脚本：/root/.cache/tct/zhihu_step1.sh（传图）、zhihu_step2.sh（compact html）
 
 ## 素材来源（证据）
 - 官方帧 docs/frames/*.jpg（MIT，代码渲染真实成片帧）

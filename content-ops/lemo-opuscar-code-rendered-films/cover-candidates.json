@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "cand1",
+    "giant": "43",
+    "pose": "委屈",
+    "accent": "#07C160",
+    "kicker": "GitHub 开源 · 源码实测",
+    "theme": "black",
+    "title": [
+      "AI 写代码拍电影",
+      "不用视频模型"
+    ],
+    "subtitle": "Lemo-Opuscar · 43 种画风 · 逐帧纯代码渲染",
+    "hook": "6 分钟复刻 98 部奥斯卡，我扒完了全部源码"
+  },
+  {
+    "slug": "cand2",
+    "giant": "43",
+    "pose": "喜爱",
+    "accent": "#07C160",
+    "kicker": "GitHub 开源 · 源码实测",
+    "theme": "amber",
+    "title": [
+      "AI 写代码拍电影",
+      "不用视频模型"
+    ],
+    "subtitle": "Lemo-Opuscar · 43 种画风 · 逐帧纯代码渲染",
+    "hook": "6 分钟复刻 98 部奥斯卡，我扒完了全部源码"
+  },
+  {
+    "slug": "cand3",
+    "giant": "43",
+    "pose": "疲惫",
+    "accent": "#07C160",
+    "kicker": "GitHub 开源 · 源码实测",
+    "theme": "ink",
+    "title": [
+      "AI 写代码拍电影",
+      "不用视频模型"
+    ],
+    "subtitle": "Lemo-Opuscar · 43 种画风 · 逐帧纯代码渲染",
+    "hook": "6 分钟复刻 98 部奥斯卡，我扒完了全部源码"
+  }
+]
