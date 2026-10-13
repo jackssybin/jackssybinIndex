@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-13T06:39:42.666Z",
+  "lastRunAt": "2026-10-13T07:16:50.110Z",
   "daily": {
     "date": "2026-10-13",
-    "pushed": 1
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -971,6 +971,41 @@
       "pushes": 1,
       "lastmod": "2026-10-13T14:35:15+08:00",
       "pushedAt": "2026-10-13T06:39:42.666Z"
+    },
+    "https://jackssybin.cn/springboot4/part6-observability/9-micrometer-observability.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/springboot4/part7-messaging/10-kafka.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/springboot4/part7-messaging/11-springintegration.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/springboot4/part8-cloud/12-graalvm.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/springboot4/part8-cloud/13-docker-k8s.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T12:47:42+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/28/pi-coding-agent.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T11:38:15+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
+    },
+    "https://jackssybin.cn/articles/2026/07/31/microsoft-ai-for-beginners.html": {
+      "pushes": 1,
+      "lastmod": "2026-08-14T11:38:15+08:00",
+      "pushedAt": "2026-10-13T07:16:50.110Z"
     }
   },
   "history": [
@@ -1108,6 +1143,11 @@
       "date": "2026-10-13",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-10-13",
+      "pushed": 7,
+      "source": "daily"
     }
   ]
 }
