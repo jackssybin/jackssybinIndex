@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-14T05:40:43.609Z",
+  "lastRunAt": "2026-10-15T05:27:35.471Z",
   "daily": {
-    "date": "2026-10-14",
+    "date": "2026-10-15",
     "pushed": 8
   },
   "urls": {
@@ -1046,6 +1046,46 @@
       "pushes": 1,
       "lastmod": "2026-06-22T23:38:46+08:00",
       "pushedAt": "2026-10-14T05:40:43.609Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/22/revfactory-harness-agent-team-factory.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-22T20:26:23+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/22/aitoearn-ai-content-marketing-agent.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-22T16:23:58+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/21/jellyfish-ai-short-drama-studio.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-22T00:34:55+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/20/openmontage-agentic-video-production.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-20T22:44:01+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/20/harness-anything-ai-control-hub.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-20T09:43:42+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/20/headroom-ai-context-compression.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-20T08:49:18+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/12/video-use-ai-video-editing-tutorial.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-13T00:13:36+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/09/zero-to-one-zh.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-09T20:24:07+08:00",
+      "pushedAt": "2026-10-15T05:27:35.471Z"
     }
   },
   "history": [
@@ -1191,6 +1231,11 @@
     },
     {
       "date": "2026-10-14",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-15",
       "pushed": 8,
       "source": "daily"
     }
