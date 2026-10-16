@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-16T04:08:57.086Z",
+  "lastRunAt": "2026-10-16T05:20:15.691Z",
   "daily": {
     "date": "2026-10-16",
-    "pushed": 1
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1091,6 +1091,41 @@
       "pushes": 1,
       "lastmod": "2026-10-16T12:04:28+08:00",
       "pushedAt": "2026-10-16T04:08:57.086Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/08/odysseus-user-manual.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-08T13:25:37+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/01/01-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/02/02-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/03/03-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/04/04-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/05/05-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-16T05:20:15.691Z"
     }
   },
   "history": [
@@ -1248,6 +1283,11 @@
       "date": "2026-10-16",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-10-16",
+      "pushed": 7,
+      "source": "daily"
     }
   ]
 }
