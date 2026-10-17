@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-16T05:20:15.691Z",
+  "lastRunAt": "2026-10-17T05:15:15.651Z",
   "daily": {
-    "date": "2026-10-16",
+    "date": "2026-10-17",
     "pushed": 8
   },
   "urls": {
@@ -1126,6 +1126,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T23:22:57+08:00",
       "pushedAt": "2026-10-16T05:20:15.691Z"
+    },
+    "https://jackssybin.cn/linux/06/06-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/07/07-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/08/08-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/09/09-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/10/10-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/11/11-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/12/12-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/13/13-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-17T05:15:15.651Z"
     }
   },
   "history": [
@@ -1287,6 +1327,11 @@
     {
       "date": "2026-10-16",
       "pushed": 7,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-17",
+      "pushed": 8,
       "source": "daily"
     }
   ]
