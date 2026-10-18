@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-17T05:15:15.651Z",
+  "lastRunAt": "2026-10-18T05:19:55.964Z",
   "daily": {
-    "date": "2026-10-17",
+    "date": "2026-10-18",
     "pushed": 8
   },
   "urls": {
@@ -1166,6 +1166,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T23:22:57+08:00",
       "pushedAt": "2026-10-17T05:15:15.651Z"
+    },
+    "https://jackssybin.cn/linux/14/14-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/linux/15/15-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/linux/16/16-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/linux/17/17-linux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/linux/quick-start.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/tutorials.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T23:22:57+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/articles/2021/06/08/1623116860957.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T22:57:25+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/03/odysseus-zhihu.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T22:57:25+08:00",
+      "pushedAt": "2026-10-18T05:19:55.964Z"
     }
   },
   "history": [
@@ -1331,6 +1371,11 @@
     },
     {
       "date": "2026-10-17",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-18",
       "pushed": 8,
       "source": "daily"
     }
