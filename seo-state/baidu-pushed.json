@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-18T05:19:55.964Z",
+  "lastRunAt": "2026-10-19T05:31:54.078Z",
   "daily": {
-    "date": "2026-10-18",
+    "date": "2026-10-19",
     "pushed": 8
   },
   "urls": {
@@ -1206,6 +1206,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T22:57:25+08:00",
       "pushedAt": "2026-10-18T05:19:55.964Z"
+    },
+    "https://jackssybin.cn/articles/2026/06/04/codex-oss-zhihu.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T22:57:25+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/about.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/07/31/1564568923421.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/08/04/1564886769156.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/08/04/1564893581000.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/08/05/1564939108185.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/08/13/1565634499211.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
+    },
+    "https://jackssybin.cn/articles/2019/08/15/1565804778217.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-19T05:31:54.078Z"
     }
   },
   "history": [
@@ -1376,6 +1416,11 @@
     },
     {
       "date": "2026-10-18",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-19",
       "pushed": 8,
       "source": "daily"
     }
