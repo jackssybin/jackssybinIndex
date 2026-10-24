@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-23T05:37:33.152Z",
+  "lastRunAt": "2026-10-24T05:16:20.817Z",
   "daily": {
-    "date": "2026-10-23",
+    "date": "2026-10-24",
     "pushed": 8
   },
   "urls": {
@@ -1406,6 +1406,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-10-23T05:37:33.152Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/07/1573120127531.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/11/1573460631525.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/13/1573657642163.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/14/1573728964758.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/19/1574134321234.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/19/1574146757419.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/20/1574217206931.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
+    },
+    "https://jackssybin.cn/articles/2019/11/20/1574259720908.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-24T05:16:20.817Z"
     }
   },
   "history": [
@@ -1601,6 +1641,11 @@
     },
     {
       "date": "2026-10-23",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-24",
       "pushed": 8,
       "source": "daily"
     }
