@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-27T05:51:59.709Z",
+  "lastRunAt": "2026-10-28T06:30:07.920Z",
   "daily": {
-    "date": "2026-10-27",
+    "date": "2026-10-28",
     "pushed": 8
   },
   "urls": {
@@ -1566,6 +1566,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-10-27T05:51:59.709Z"
+    },
+    "https://jackssybin.cn/articles/2026/10/27/openbot-local-multiagent-workspace/": {
+      "pushes": 1,
+      "lastmod": "2026-10-27T19:36:15+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/04/13/1586772814684.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/04/20/1587389853090.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/05/11/1589167695782.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/05/13/1589349920439.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/05/28/1590637980592.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/05/28/1590653407979.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
+    },
+    "https://jackssybin.cn/articles/2020/05/28/1590656168798.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-28T06:30:07.920Z"
     }
   },
   "history": [
@@ -1781,6 +1821,11 @@
     },
     {
       "date": "2026-10-27",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-10-28",
       "pushed": 8,
       "source": "daily"
     }
