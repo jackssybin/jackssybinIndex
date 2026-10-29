@@ -17,9 +17,13 @@
 ## 2. 微信公众号草稿
 
 - 标题：《8 个月 10.8 万 Star，这个开源项目想让你像开公司一样管 AI 员工》
-- 主题 newsroom；draft media_id：`snS2bupQYF7HgHImnpl8sUEsn82Lro1eRvosqn8Da-JDIarUm2wayfhjKYrfisQa`
-- 封面 cover.png（1080×864）+ 正文图 3 张
-- 独立 digest 已设置（110 字，首次 45004 超长，缩短后 errcode 0）
+- 主题 newsroom
+- **当前有效 draft media_id：`snS2bupQYF7HgHImnpl8sdBiMWpGYonnET9Dyf_xXpyOLIkJqn16Td7eq20V3wdi`（修订版）**
+- 早期草稿 media_id（已被修订版取代，后台可删）：`snS2bupQYF7HgHImnpl8sUEsn82Lro1eRvosqn8Da-JDIarUm2wayfhjKYrfisQa`
+- 封面：**cover-ip.jpg（1280×544 个人 IP 双翼版式，黑底 + 喜爱表情 + 暖橙，过 verify_wings.py 像素验收 + vision）**；combo-history 已记录
+- 正文图 **5 张**（≥3 达标）：flow / pillars / architecture-v2 / roster / compare
+- 独立 digest 已设置（errcode 0）；content_source_url（阅读原文）→ GitHub
+- **文末含作者引流 + 相关阅读 2 条**（开源终端编码 Agent、DeepSeek 22 份接入指南）
 - 状态：草稿，未群发
 
 ## 3. 知乎专栏草稿
