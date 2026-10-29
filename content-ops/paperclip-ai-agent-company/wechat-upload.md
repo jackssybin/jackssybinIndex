@@ -1,6 +1,6 @@
 ---
 title: "8 个月 10.8 万 Star，这个开源项目想让你像开公司一样管 AI 员工"
-cover: /root/jackssybinIndex/content-ops/paperclip-ai-agent-company/media/cover.png
+cover: /root/jackssybinIndex/content-ops/paperclip-ai-agent-company/media/cover-ip.jpg
 source_url: https://github.com/paperclipai/paperclip
 ---
 
@@ -27,6 +27,8 @@ Paperclip 的使用流程只有三步：
 **第二步，招人。** CEO、CTO、工程师、设计师、市场——想用哪个 bot、哪个模型都行。
 
 **第三步，审批、开跑、看仪表盘。** 你定好预算，剩下的交给团队。
+
+![用 Paperclip 开一家 AI 公司只要三步](/root/jackssybinIndex/content-ops/paperclip-ai-agent-company/media/flow.png)
 
 界面长得像 Trello、Linear 那种任务看板，但底层全是公司管理的东西：组织架构、预算、治理、目标对齐、Agent 协调。
 
@@ -73,6 +75,8 @@ Paperclip 的使用流程只有三步：
 Claude Code、Codex、Cursor、Gemini、OpenCode、Grok、Kimi、Pi、OpenClaw、Hermes……都在适配名单里。还支持自定义进程、HTTP 接口和外部适配器。
 
 每个 Agent 可以单独选模型，但任务、技能、权限、历史全汇总在一处。GitHub、Notion、Railway 甚至你自己的 MCP 服务器都能接进来，Slack、Discord、Telegram 也能对话。
+
+![Paperclip 的招聘名单：编码 CLI、Agent 平台与扩展方式](/root/jackssybinIndex/content-ops/paperclip-ai-agent-company/media/roster.png)
 
 ## 五分钟跑起来，真·自托管
 
@@ -122,3 +126,15 @@ Paperclip 做的，就是把整套公司管理制度软件化。Agent 时代的 
 项目地址：**github.com/paperclipai/paperclip**，官网 paperclip.ing，MIT 协议。
 
 建议装之前先去文档读一遍审批和预算配置。
+
+---
+
+我是 jk，一个只信「自己跑过」的开源/AI 工具实测派。
+每次帮你筛一个能真正省钱、省时间的开源项目，坑我先替你踩。
+
+觉得有用，点个「在看」并**星标**公众号，下次更新不迷路。
+项目地址和完整安装命令我放在了「**阅读原文**」。
+
+相关阅读：
+- [用了 Claude Code 半年后，我换成了这个完全开源的终端编码 Agent](https://mp.weixin.qq.com/s/_2gkNg1fECDEM62GNbTy9w)
+- [DeepSeek 官方出了 22 份接入指南，覆盖 Claude Code 到 Copilot](https://mp.weixin.qq.com/s/4lZbySSLYj2aj-y-DIV7ZA)

@@ -27,6 +27,8 @@ description: "paperclipai/paperclip 是 2026 年 3 月建仓、八个月涨到 1
 2. **招聘团队**——CEO、CTO、工程师、设计师、市场，任何 bot、任何模型供应商都可以；
 3. **审批并运行**——审阅策略、设定预算、点击开始，在仪表盘上监督。
 
+![用 Paperclip 开一家 AI 公司只要三步](/images/paperclip-ai-agent-company/flow.png)
+
 界面看起来像一个任务管理器（Trello/Linear 那一挂），但底层是组织架构、预算、治理、目标对齐和 Agent 协调。它反复强调一句话：**Manage business goals, not pull requests（管理经营目标，而不是合并请求）。**
 
 ![Paperclip 的四大支柱：智能体任务管理、组织架构、员工培训、智能体操作系统](/images/paperclip-ai-agent-company/pillars.png)
@@ -78,6 +80,8 @@ Paperclip 最实用的一点是不挑 Agent。README 原话是「If it can recei
 - **扩展方式**：自定义进程、HTTP 端点、外部适配器包。
 
 每个 Agent 可以单独选模型和 harness，但任务、技能、权限、历史全部汇聚在同一处。多模型多 harness 团队、共享 Agent 但走个人账号这类组合都支持。
+
+![Paperclip 的招聘名单：编码 CLI、Agent 平台与扩展方式](/images/paperclip-ai-agent-company/roster.png)
 
 连接的应用层面，可以接入 GitHub、Notion、Railway 或你自己的 MCP 服务器；实验性的 Agent Chat 还支持通过 Slack、Discord、Telegram、AgentMail 和 Agent 对话。云沙箱也已接入 e2b、Cloudflare、Daytona、Modal、Novita、boxd 和自建 Kubernetes。
 

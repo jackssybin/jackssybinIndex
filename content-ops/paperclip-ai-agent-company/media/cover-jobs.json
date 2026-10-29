@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "paperclip-agent-company-c1",
+    "pose": "大笑",
+    "accent": "#3B82F6",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI员工",
+      "开一家公司"
+    ],
+    "subtitle": "paperclipai/paperclip · MIT · 源码实测",
+    "hook": "我克隆1.2万文件，实装跑了一遍",
+    "giant": "10万+"
+  },
+  {
+    "slug": "paperclip-agent-company-c2",
+    "pose": "喜爱",
+    "accent": "#F97316",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI员工",
+      "开一家公司"
+    ],
+    "subtitle": "paperclipai/paperclip · MIT · 源码实测",
+    "hook": "我克隆1.2万文件，实装跑了一遍",
+    "giant": "10万+"
+  },
+  {
+    "slug": "paperclip-agent-company-c3",
+    "pose": "开心",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI员工",
+      "开一家公司"
+    ],
+    "subtitle": "paperclipai/paperclip · MIT · 源码实测",
+    "hook": "我克隆1.2万文件，实装跑了一遍",
+    "giant": "10万+"
+  }
+]
