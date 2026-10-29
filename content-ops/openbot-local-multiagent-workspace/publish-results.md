@@ -18,10 +18,12 @@
 
 - 标题：《我在一台电脑上开了 7 个 AI 程序员，还让它们学会了互相派活》
 - 主题：newsroom / 报刊室
-- draft media_id：`snS2bupQYF7HgHImnpl8scD54es2ep4szO9lV2VaVvI7UEAuO9ud3QMpD99tIjce`
-- 封面：media/cover.png（1080×864，自动作为 thumb_media_id）
-- 正文图 3 张：providers / architecture / safety-v2
-- 独立 digest：已通过 draft/batchget + draft/update 设置（errcode 0），与标题不同
+- **当前有效 draft media_id：`snS2bupQYF7HgHImnpl8sUp1rJilLeiLC_uvqLn7h2jKw7R2QYl6a_z2yU-bZU6B`（2026-10-29 修订版，符合三必查）**
+- 早期草稿（3图、1080信息图封面、无文末引流，后台可删）：`snS2bupQYF7HgHImnpl8scD54es2ep4szO9lV2VaVvI7UEAuO9ud3QMpD99tIjce`
+- 封面：**cover-ip.jpg（1280×544 IP 双翼，暖橙底 + 困惑表情 + 绿强调，verify_wings rc=0 + vision）**；combo-history 已记录
+- 正文图 **5 张**：pain / providers / architecture / deploy / safety-v2
+- 文末含 jk 自述 + 在看/星标 + 阅读原文(content_source_url→GitHub) + 相关阅读 2 条
+- 独立 digest：draft/batchget + draft/update 设置（errcode 0）
 - 状态：草稿箱待人工审核，未群发
 - 上传文件：wechat-upload.md
 

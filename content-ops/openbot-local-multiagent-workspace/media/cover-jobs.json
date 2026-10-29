@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "openbot-multiagent-c1",
+    "pose": "困惑",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "七个AI",
+      "一张桌"
+    ],
+    "subtitle": "nightly-labs/openbot · 本地优先 · v0.51",
+    "hook": "我克隆源码通读，又实装跑了一遍",
+    "giant": "7个"
+  },
+  {
+    "slug": "openbot-multiagent-c2",
+    "pose": "惊讶",
+    "accent": "#07C160",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "七个AI",
+      "一张桌"
+    ],
+    "subtitle": "nightly-labs/openbot · 本地优先 · v0.51",
+    "hook": "我克隆源码通读，又实装跑了一遍",
+    "giant": "7个"
+  },
+  {
+    "slug": "openbot-multiagent-c3",
+    "pose": "委屈",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "七个AI",
+      "一张桌"
+    ],
+    "subtitle": "nightly-labs/openbot · 本地优先 · v0.51",
+    "hook": "我克隆源码通读，又实装跑了一遍",
+    "giant": "7个"
+  }
+]

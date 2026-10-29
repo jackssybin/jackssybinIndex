@@ -1,6 +1,6 @@
 ---
 title: "我在一台电脑上开了 7 个 AI 程序员，还让它们学会了互相派活"
-cover: /root/jackssybinIndex/content-ops/openbot-local-multiagent-workspace/media/cover.png
+cover: /root/jackssybinIndex/content-ops/openbot-local-multiagent-workspace/media/cover-ip.jpg
 source_url: https://github.com/nightly-labs/openbot
 ---
 
@@ -15,6 +15,8 @@ source_url: https://github.com/nightly-labs/openbot
 今年 8 月 12 日才建仓，两个多月，**1837 个 Star**。它干的事一句话讲得清：把 7 个 Coding Agent 收进同一张办公桌，每个都有独立工位，还能互相发消息、传文件、排队干活。
 
 我把整个仓库（6000 多个文件）拉下来通读了一遍，这篇讲讲它到底怎么做到的，以及为什么我用的时候后背有点发凉。
+
+![裸开多个 CLI 终端 vs OpenBot 一张办公桌](/root/jackssybinIndex/content-ops/openbot-local-multiagent-workspace/media/pain.png)
 
 ## 它不是又一个 AI，是给 AI 发工位的
 
@@ -72,6 +74,8 @@ sudo openbot login
 
 相当于你在云上养了一支不下班的 AI 工程队，出门吃饭用手机就能加需求。
 
+![把 AI 团队丢在 VPS 上 7×24，手机随时派活](/root/jackssybinIndex/content-ops/openbot-local-multiagent-workspace/media/deploy.png)
+
 ## 但是，两盆冷水必须泼
 
 用之前有两件事，官方 README 用警告标红了，我也必须说清楚。
@@ -109,3 +113,15 @@ sudo openbot login
 **github.com/nightly-labs/openbot**
 
 官网：openbot.run ｜ 当前版本 v0.51.1
+
+---
+
+我是 jk，一个只信「自己跑过」的开源/AI 工具实测派。
+每次帮你筛一个能真正省钱、省时间的开源项目，坑我先替你踩。
+
+觉得有用，点个「在看」并**星标**公众号，下次更新不迷路。
+项目地址和完整安装命令我放在了「**阅读原文**」。
+
+相关阅读：
+- [DeepSeek 官方出了 22 份接入指南，覆盖 Claude Code 到 Copilot，配置只要 3 分钟](https://mp.weixin.qq.com/s/4lZbySSLYj2aj-y-DIV7ZA)
+- [用了三个月 Claude Code，我终于装上了 ADHD 输出模式](https://mp.weixin.qq.com/s/pvpTovUEWocgSWsRlcXHbA)

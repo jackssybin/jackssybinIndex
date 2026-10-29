@@ -17,6 +17,8 @@ description: "nightly-labs/openbot 是 2026 年 8 月才建仓、两个多月涨
 
 ## 一、先定位：OpenBot 不是又一个 Agent，而是 Agent 的「工位」
 
+![裸开多个 CLI 终端 vs OpenBot 一张办公桌](/images/openbot-local-multiagent-workspace/pain.png)
+
 理解 OpenBot 最快的方式，是看它**自己不提供模型**。仓库里没有任何模型推理代码，它做的全部事情是编排你已经在用的官方 CLI：
 
 | Agent | 接入方式 | 认证 |
@@ -81,7 +83,11 @@ curl -fsSL https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/i
 sudo openbot login
 ```
 
-之后你可以用桌面应用、iPhone app 或 `openbot.run/app` 网页端连上去指挥。容器化也很干脆，官方镜像 `ghcr.io/nightly-labs/openbot:latest` 支持 amd64/arm64，并且特意提供 seccomp profile 让 Electron 沙箱在容器里依然保持开启：
+之后你可以用桌面应用、iPhone app 或 `openbot.run/app` 网页端连上去指挥。
+
+![把 AI 团队丢在 VPS 上 7×24，手机随时派活](/images/openbot-local-multiagent-workspace/deploy.png)
+
+容器化也很干脆，官方镜像 `ghcr.io/nightly-labs/openbot:latest` 支持 amd64/arm64，并且特意提供 seccomp profile 让 Electron 沙箱在容器里依然保持开启：
 
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/seccomp.json
