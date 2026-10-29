@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-29T01:46:59.467Z",
+  "lastRunAt": "2026-10-29T02:24:58.635Z",
   "daily": {
     "date": "2026-10-29",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1608,9 +1608,9 @@
       "pushedAt": "2026-10-28T06:30:07.920Z"
     },
     "https://jackssybin.cn/articles/2026/10/29/paperclip-ai-agent-company/": {
-      "pushes": 1,
-      "lastmod": "2026-10-29T09:42:24+08:00",
-      "pushedAt": "2026-10-29T01:46:59.467Z"
+      "pushes": 2,
+      "lastmod": "2026-10-29T10:20:36+08:00",
+      "pushedAt": "2026-10-29T02:24:58.635Z"
     }
   },
   "history": [
@@ -1833,6 +1833,11 @@
       "date": "2026-10-28",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-10-29",
+      "pushed": 1,
+      "source": "changed"
     },
     {
       "date": "2026-10-29",
