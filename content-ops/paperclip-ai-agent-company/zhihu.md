@@ -1,0 +1,92 @@
+# Paperclip：当一个人能管几十个 AI Agent，缺的其实是一家「公司」
+
+多 Agent 工具正在经历一个有意思的分化。过去一年的主流叙事是「如何构建 Agent」——框架、协议、互相调用的工具链；但当很多开发者机器上真的同时跑着十几个 Claude Code、Codex、OpenClaw 之后，暴露出来的问题其实不在「构建」，而在「管理」：任务互相覆盖、会话重启即失、上下文靠人肉搬运、token 失控燃烧、没有人对结果负责。
+
+Paperclip（paperclipai/paperclip）是这个问题上比较激进的一个回答。它的定位一句话就能讲清：**自己不提供模型，也不教你写 Agent，而是把任意来源的 Agent 编排成一个有组织架构的经营实体。** 官方那句类比流传很广——如果 OpenClaw 是一名员工，Paperclip 就是公司本身。
+
+这个项目 2026 年 3 月建仓，约八个月时间做到 10.8 万 Star、1.8 万 Fork，合并了超过 2700 个 PR，MIT 许可。我克隆了整个仓库（约 1.26 万个文件的 pnpm monorepo，Node.js 服务端 + React UI + TypeScript），通读了 README、DESIGN、ROADMAP 并实际执行了安装。下面按「抽象模型、四大支柱、控制平面、部署、边界与风险」展开。
+
+## 一、核心抽象：从「会话/PR」上移到「公司目标」
+
+Paperclip 最值得注意的是它选择的管理粒度。任务系统（Work & Tasks）里的工单携带 company / project / goal / parent 多重链接，官方称之为目标血缘（goal ancestry）：一个 Agent 被唤醒执行任务时，拿到的不是孤立的标题，而是从任务向上追溯到项目和公司目标的完整上下文。
+
+主流程被刻意设计成经营动作而不是工程动作：定义目标（例如「做出一百万美元 MRR 的笔记产品」）→ 招聘团队（CEO/CTO/工程师/市场，不限 bot 和供应商）→ 审批策略与预算后运行，在仪表盘监督。它对自身的描述是「看起来像任务管理器，底层是组织架构、预算、治理、目标对齐和 Agent 协调」。
+
+这个抽象解决的对应痛点很具体：没有 Paperclip 时，人需要在多个终端和文档之间手动汇集上下文，反复提醒每个 Agent 全局目标是什么；工单化之后，上下文随任务流动。
+
+![Paperclip 的四大支柱](PILLARS)
+
+## 二、四大支柱：任务、组织、培训、基础设施
+
+官方把产品拆成四根支柱，对应组织运转的四个职能面。
+
+**任务管理器**面向日常使用：工单、审批与评审关卡、可审计的例行流程；产出验收支持从 diff、截图和测试结果三个角度进行，即「Agent 执行、人验证输出」。
+
+**组织架构**面向管理：人类与 Agent 混编在同一张 org chart 里，Agent 有角色、头衔、汇报线、预算和权限边界。三个权限概念值得区分——人的访问权、Agent 的资格、网关动作权限是分开控制的；在受管 GitHub 操作中，动作可以归属为下达指令的真人（responsible-user identity），这让自治执行仍然能审计到责任人。密钥按作用域注入运行环境，而不是复制进 Agent 配置。
+
+**员工培训**面向能力沉淀：Skill Studio 编写全组织共享技能，evals 配合保存的测试输入做评测，支持质量指标、绩效评审、技能版本历史与回滚，以及可复用团队模板。
+
+**Agentic OS**面向平台：跨供应商运行时（任意模型、任意 harness）、沙箱、集成与 MCP 服务器、SSO、GRC、RBAC、成本控制、数据隐私和可选 trace。
+
+## 三、控制平面：把难的编排细节做对
+
+Paperclip 反复强调自己是 control plane 而不是 wrapper。从源码目录（packages 下的 adapters、db、mcp-server、paperclip-runner、paperclip-eval-kernel 等）和文档看，它确实实现了一套完整的服务端子系统。
+
+![Paperclip 的十二个核心子系统](ARCH)
+
+几个工程上比较关键的设计：
+
+**原子任务认领。** 单一负责人加执行锁，保证并发运行不会重复领取同一个任务——这是所有多 worker 任务系统的第一道正确性边界。
+
+**心跳执行。** Agent 不是常驻空转的进程，而是由数据库支持的唤醒队列（带事件合并）在有分派工作、跟进消息或 cron 计划时唤醒；执行链路包含预算检查、工作区解析、密钥注入、技能加载、适配器调用，产出日志、用量记录和会话状态，失败走有界恢复（bounded recovery），超出能力的情况才升级给人。
+
+**持久上下文与会话恢复。** 任务、评论、文档都落在服务端，支持的适配器可以跨多次运行恢复会话；工作区侧支持 git worktree 和 operator 分支这类隔离执行空间，沙箱还可以扩展到 e2b、Cloudflare、Daytona、Modal、Novita、boxd 或自建 Kubernetes。
+
+**治理与回滚。** 审批关卡是强制的，配置变更版本化，错误改动可以回滚；通过工具网关的每次外部调用都可以设为允许、每次询问或关闭，既可以一次性批准，也能存成可撤销规则。
+
+**预算控制。** token 与成本按公司、Agent、项目、目标、工单、供应商、模型七个维度记录；预算策略提供告警阈值和硬停止。文档也诚实地标注了一个实现边界：停止动作依据的是已记录花费，用量上报和在途工作可能让实际停止略有延迟。
+
+此外还有：cron/webhook/API 三种触发的例行任务（带并发与补跑策略）、进程外 worker 形态的插件系统（无需 fork 项目即可扩展）、加密凭据存储、不可变活动审计，以及带密钥脱敏的整组织导出/导入。
+
+## 四、Bring Your Own Agent：适配面与集成
+
+它的招聘标准被写成一句口号：「只要能接收心跳，就录用」。官方适配覆盖 Claude Code、Codex、Cursor 及 Cursor Cloud、Gemini CLI、OpenCode、Grok Build、Kimi Code、Pi，以及 OpenClaw、Hermes/Hermes Gateway 这类 Agent 平台；自定义进程、HTTP 端点和外部适配器包可以继续扩充名单。应用连接层支持 GitHub、Notion、Railway 和自建 MCP 服务器；Agent Chat 及 Slack/Discord/Telegram/AgentMail 连接器目前是实验特性。
+
+部署方面，它是真自托管、无需 Paperclip 账号。最快路径是一行 npx（要求 Node.js 24.11+）：
+
+```bash
+npx paperclipai@latest onboard --yes
+```
+
+想隔离体验可以用 test-drive，它预置一个 CEO Agent、前台运行、不装系统服务：
+
+```bash
+ANTHROPIC_API_KEY=... npx paperclipai test-drive
+OPENROUTER_API_KEY=... npx paperclipai test-drive \
+  --harness opencode \
+  --model openrouter/anthropic/claude-sonnet-4.5
+```
+
+从源码运行则是标准 pnpm 流程，UI/API 在本地 3100 端口，内置嵌入式 PostgreSQL 自动初始化；生产部署指向独立 Postgres，远程访问建议用认证模式绑定 Tailscale 这类私网，或使用官方 Docker 镜像。一个值得记下的环境坑：全局配置了私有 npm registry 时，需要用 `--registry https://registry.npmjs.org` 避免 npx 解析到私有源报 E404。
+
+## 五、边界：它不是什么，以及风险
+
+为了避免「星标即正确」的误读，有几个点需要单独说。
+
+第一是**品类边界**。它不是聊天机器人（对话始终附着在任务、计划、决策和产出上），不是 Agent 框架（不规定如何构建 Agent），不是通用工作流引擎（routines 运行在组织、角色、预算、治理之内），也不是提示词管理器（模型、harness、提示词都由 Agent 自带）。与 OpenBot 这类本地桌面工作台相比，Paperclip 是服务端控制平面：前者解决单机上每个 Agent 的工位与浏览器问题，后者解决多用户、7×24 自治、预算和合规问题。
+
+![裸开终端、桌面工作台与控制平面三种用法的差异](COMPARE)
+
+第二是**成熟度**。八个月 10.8 万 Star 的增速非常惊人，但仓库同时有约 6766 个 open issues；ROADMAP 上记忆/知识库、Agent Chat、云部署仍是进行中（🟡），MAXIMIZER MODE、工作队列、自组织、桌面 App、自带工单系统（Asana/Linear/Jira）尚未开始（⚪）。社区活跃度（2700+ 合并 PR）和生产就绪度需要分开评估。
+
+第三是**数据与安全**。遥测默认开启，官方声明不采集个人信息、任务内容、提示词、文件路径或密钥，私有仓库引用会用每实例盐值哈希；可用 `PAPERCLIP_TELEMETRY_DISABLED=1`、`DO_NOT_TRACK=1` 或配置关闭，CI 中自动关闭。OpenTelemetry 与 Sentry 则是明确的 opt-in。安全模型上，本地回环模式默认受信任，自治 Agent 具备真实执行能力，预算和审批是约束而非沙箱本身——生产使用应切到认证模式、采用最小权限密钥，并把人保留在评审关卡上。
+
+第四是**协议，这一点反而是加分项**：MIT 许可，允许商业使用，和一些 source-available、禁止商用的同类产品形成明显差异。企业试点不需要先过非商用许可的合规坎。
+
+## 六、适合谁
+
+如果你的状态已经是「并行使用多个编码 Agent、终端标签失控、反复丢上下文」，Paperclip 把工单化、持久会话、预算约束做成了开箱即用，`test-drive` 提供了几乎零成本的验证路径。如果目标是让 Agent 在无人值守下承担周期性业务，心跳 + routines + 审计的组合自己造一遍成本很高。对有多用户、SSO/RBAC 和多组织隔离需求的团队，MIT 许可是它最实际的优势。反过来，如果诉求是稳定的生产系统，保守做法是先在非核心流程验证，重点观察 issue 积压的消化速度和实验特性毕业节奏。
+
+我的整体判断：这个项目的价值主张不在模型能力，而在把「管理者」这个角色制度化——目标拆解、招聘授权、预算约束、过程审计、结果验收。当 AI 员工的边际成本持续下降，稀缺的确实不再是劳动力，而是组织能力。Paperclip 押注的，就是「Agent 时代的 ERP」这个位置。它是否成立可以争论，但这个问题本身值得认真对待。
+
+项目地址：https://github.com/paperclipai/paperclip ，文档：https://docs.paperclip.ing 。安装前建议先读审批、预算和部署模式三章。
