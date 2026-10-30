@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "filmcraft-rust-nle-c1",
+    "pose": "生气",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "纯Rust",
+      "剪片子"
+    ],
+    "subtitle": "storytold/filmcraft · MIT/Apache · alpha",
+    "hook": "我读完42万行源码，还让AI剪了条片",
+    "giant": "42万行"
+  },
+  {
+    "slug": "filmcraft-rust-nle-c2",
+    "pose": "惊讶",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "纯Rust",
+      "剪片子"
+    ],
+    "subtitle": "storytold/filmcraft · MIT/Apache · alpha",
+    "hook": "我读完42万行源码，还让AI剪了条片",
+    "giant": "42万行"
+  },
+  {
+    "slug": "filmcraft-rust-nle-c3",
+    "pose": "委屈",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "纯Rust",
+      "剪片子"
+    ],
+    "subtitle": "storytold/filmcraft · MIT/Apache · alpha",
+    "hook": "我读完42万行源码，还让AI剪了条片",
+    "giant": "42万行"
+  }
+]
