@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-10-31T04:34:20.795Z",
+  "lastRunAt": "2026-10-31T06:29:56.419Z",
   "daily": {
     "date": "2026-10-31",
-    "pushed": 1
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1681,6 +1681,41 @@
       "pushes": 1,
       "lastmod": "2026-10-31T12:30:08+08:00",
       "pushedAt": "2026-10-31T04:34:20.795Z"
+    },
+    "https://jackssybin.cn/articles/2026/10/30/filmcraft-rust-nle/": {
+      "pushes": 1,
+      "lastmod": "2026-10-30T21:38:39+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2020/12/25/1608882277320.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2020/12/29/1609203099106.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2021/03/16/1615897840354.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2021/03/25/1616636082398.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2021/03/25/1616638627630.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
+    },
+    "https://jackssybin.cn/articles/2021/03/25/1616640074000.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-10-31T06:29:56.419Z"
     }
   },
   "history": [
@@ -1933,6 +1968,11 @@
       "date": "2026-10-31",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-10-31",
+      "pushed": 7,
+      "source": "daily"
     }
   ]
 }
