@@ -9,6 +9,11 @@ topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"
 layout: article
 contentType: article
+toolsResource:
+  title: "AI For Beginners：12 周课程中文学习导览"
+  description: "将本文介绍的课程整理为先修准备、12 周学习顺序、原课链接和作品验收清单。"
+  url: "https://tools.jackssybin.cn/topics/ai-for-beginners-guide/?from=blog&channel=article_ms_ai_beginners"
+  cta: "查看配套中文导览"
 ---
 
 

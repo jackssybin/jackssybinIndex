@@ -4,6 +4,7 @@
   <div class="main-wrap">
     <main class="other">
       {{ .Content }}
+      {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
     </main>
   </div>
 </div>

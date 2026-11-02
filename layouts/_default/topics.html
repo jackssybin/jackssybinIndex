@@ -4,6 +4,7 @@
   <div class="main-wrap">
     <main class="other">
       <div class="title"><h2><i class="icon-list"></i>&nbsp;专题系列</h2></div>
+      {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
       <div class="topic-grid">
         {{ range site.Data.topics }}
           <section class="topic-card">

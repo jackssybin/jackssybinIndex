@@ -17,6 +17,7 @@
             {{ end }}
           </ol>
         </section>
+        {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
         <div class="topic-article-list">
           {{ range $topic.articles }}
             <article class="post post--summary">
