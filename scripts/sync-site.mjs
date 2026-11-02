@@ -92,12 +92,6 @@ function inferUrl(file, params, type) {
   return "/" + relative.replace(/\/+$/, "") + "/";
 }
 
-async function copyHotNews() {
-  const hotNews = path.join(staticDir, "hot-news.json");
-  if (!await exists(hotNews)) return;
-  await fs.copyFile(hotNews, path.join(dataDir, "hot-news.json"));
-}
-
 async function readContentEntries() {
   const markdownFiles = await listFiles(contentDir, (file) => file.endsWith(".md"));
   const entries = [];
@@ -190,7 +184,6 @@ async function syncData() {
   }, null, 2));
   await write(path.join(dataDir, "topics.json"), JSON.stringify(refreshedTopics, null, 2));
   await write(path.join(staticDir, "search-index.json"), JSON.stringify(entries, null, 2));
-  await copyHotNews();
   console.log(`Synced Hugo data: ${articles.length} articles, ${tutorials.length} tutorials, ${entries.length} searchable entries.`);
 }
 

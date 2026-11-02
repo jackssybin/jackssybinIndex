@@ -4,7 +4,7 @@
 #    Hugo 在 static/ 与 layouts/ 产出同一路径时的优先级随版本变化，
 #    两份保持一致才能保证线上结果正确。修改时请同步改另一个文件。
 #
-# 修改记录 2026-09-18：移除 /tags/ /tags.html /page/ /news.html /weekly.html
+# 修改记录 2026-09-18：移除 /tags/ /tags.html /page/ /weekly.html
 # /topics.html /nav.html /ai-nav/ 的 Disallow。
 
 User-agent: *
@@ -18,7 +18,7 @@ Allow: /
 #
 # 下列页面已全部输出 <meta name="robots" content="noindex, follow">，
 # 因此不再在这里 Disallow：
-#   /tags/*  /tags.html   /page/*  /news.html  /weekly.html
+#   /tags/*  /tags.html   /page/*  /weekly.html
 #   /topics.html  /nav.html  /ai-nav/*
 Disallow: /search
 Disallow: /search.html

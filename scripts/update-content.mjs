@@ -11,7 +11,6 @@ function run(command, args) {
 }
 
 console.log("1/3 Fetch hot news...");
-await run("pnpm", ["fetch-hot-news"]);
 
 console.log("2/3 Sync Hugo data, hot news and search index...");
 await run("pnpm", ["sync:hugo"]);

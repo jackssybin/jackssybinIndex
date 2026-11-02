@@ -1,6 +1,6 @@
 ---
 title: 每周精选
-description: jackssybin 每周精选，汇总实时热点、核心文章和教程路线，帮助读者按周回看技术趋势与站内重点内容。
+description: jackssybin 每周精选，汇总核心文章和教程路线，帮助读者按周回看站内重点内容。
 url: /weekly.html
 layout: content-page
 contentType: page
@@ -11,8 +11,8 @@ contentType: page
 <section class="weekly-page">
   <div class="weekly-hero">
     <h2>每周精选</h2>
-    <p>把实时热点、站内核心文章和系统教程放在一起，方便每周快速回看技术趋势，也给读者一个更稳定的学习入口。</p>
-    <span>新闻数据由实时新闻模块按小时更新，本页重点保留站内长期值得读的内容。</span>
+    <p>把站内核心文章和系统教程放在一起，方便每周快速回看，也给读者一个更稳定的学习入口。</p>
+    <span>本页重点保留站内长期值得读的内容。</span>
   </div>
 
   <div class="weekly-grid">

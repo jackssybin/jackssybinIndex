@@ -32,7 +32,7 @@
           它们的正文只有标题（Articles / Tutorials / Generateds），
           是彻底的空壳，被收录只会拉低整站质量分。
 
-       2) 聚合列表页：标签页 / 分页 / 归档 / 新闻 / 周报 / 导航。
+       2) 聚合列表页：标签页 / 分页 / 归档 / 周报 / 导航。
           这些页面没有独有内容，靠 noindex 把它们挡在索引外。
 
        ⚠️ 与 robots.txt 的配合铁律：
@@ -42,7 +42,7 @@
        想让页面消失：保持可抓取 + noindex。
   */ -}}
   {{- $noindexPrefixes := slice "/tags/" "/page/" "/archives/" "/ai-nav/" "/generated/" -}}
-  {{- $noindexExact := slice "/search.html" "/search/" "/news.html" "/weekly.html" "/topics.html" "/nav.html" "/tags.html" "/ai-nav/" "/articles/" "/tutorials/" -}}
+  {{- $noindexExact := slice "/search.html" "/search/" "/weekly.html" "/topics.html" "/nav.html" "/tags.html" "/ai-nav/" "/articles/" "/tutorials/" -}}
   {{- $isThin := false -}}
   {{- range $noindexPrefixes -}}
     {{- if hasPrefix $path . }}{{ $isThin = true }}{{ end -}}

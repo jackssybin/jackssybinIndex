@@ -226,7 +226,7 @@ CASES = [
     ("/tags.html", ""), ("/tags/AI.html", ""), ("/tags/Linux.html", ""),
     ("/tags/Java.html", ""), ("/page/", ""), ("/page/2/", ""), ("/page/2.html", ""),
     ("/nav/", ""), ("/nav.html", ""), ("/topics/", ""), ("/topics.html", ""),
-    ("/news.html", ""), ("/weekly.html", ""), ("/ai-nav/", ""), ("/generated/", ""),
+    ("/weekly.html", ""), ("/ai-nav/", ""), ("/generated/", ""),
     ("/generated/tags/", ""), ("/articles/", ""), ("/articles/2019/07/", ""),
     ("/tutorials/", ""), ("/mysql/", ""), ("/mysql/01/01-mysql.html", ""),
     ("/netty/", ""), ("/linux/", ""), ("/springboot4/", ""), ("/my-github-repos/", ""),
@@ -239,7 +239,7 @@ CASES = [
 # 正常情况下必须返回 200 的路径（回归护栏）
 MUST_BE_200 = [
     "/", "/archives.html", "/tags.html", "/tags/AI.html", "/archives/2026/06/",
-    "/nav.html", "/topics.html", "/news.html", "/weekly.html", "/ai-nav/",
+    "/nav.html", "/topics.html", "/weekly.html", "/ai-nav/",
     "/generated/", "/articles/", "/tutorials/", "/my-github-repos/",
     "/about.html", "/links.html", "/search.html", "/robots.txt", "/sitemap.xml",
 ]

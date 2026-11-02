@@ -184,8 +184,7 @@
 }
 
 .solo-static .home-portal,
-.solo-static .weekly-page,
-.solo-static .hot-news-page {
+.solo-static .weekly-page {
   margin-bottom: 20px;
 }
 
@@ -193,9 +192,6 @@
 .solo-static .home-portal-grid section,
 .solo-static .home-learning-path,
 .solo-static .home-recent-updates,
-.solo-static .home-hot-news,
-.solo-static .hot-news-hero,
-.solo-static .hot-news-source,
 .solo-static .weekly-hero,
 .solo-static .weekly-grid > section,
 .solo-static .tutorial-route,
@@ -215,9 +211,6 @@
 .solo-static .home-portal-grid section,
 .solo-static .home-learning-path,
 .solo-static .home-recent-updates,
-.solo-static .home-hot-news,
-.solo-static .hot-news-hero,
-.solo-static .hot-news-source,
 .solo-static .weekly-hero,
 .solo-static .weekly-grid > section,
 .solo-static .tutorial-route,
@@ -238,7 +231,6 @@
 
 .solo-static .home-portal-hero h2,
 .solo-static .mysql-hero h2,
-.solo-static .hot-news-hero h2,
 .solo-static .weekly-hero h2 {
   color: #333;
   font-size: 26px;
@@ -249,7 +241,6 @@
 
 .solo-static .home-portal-hero p,
 .solo-static .mysql-hero p,
-.solo-static .hot-news-hero p,
 .solo-static .weekly-hero p,
 .solo-static .tutorial-route p {
   color: #666;
@@ -277,7 +268,6 @@
 }
 
 .solo-static .home-portal-grid,
-.solo-static .hot-news-grid,
 .solo-static .weekly-grid,
 .solo-static .tutorial-route-grid,
 .solo-static .tutorial-route-focus,
@@ -438,9 +428,7 @@
 }
 
 .solo-static .home-portal h3,
-.solo-static .home-hot-news h3,
 .solo-static .tutorial-route h3,
-.solo-static .hot-news-source h3,
 .solo-static .weekly-grid h3 {
   color: #333;
   font-size: 18px;
@@ -494,170 +482,26 @@
 }
 
 .solo-static .home-learning-path,
-.solo-static .home-recent-updates,
-.solo-static .home-hot-news {
+.solo-static .home-recent-updates {
   margin-top: 14px;
 }
 
-.solo-static .home-learning-path ol,
-.solo-static .home-hot-news-list,
-.solo-static .hot-news-source ol {
+.solo-static .home-learning-path ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.solo-static .home-learning-path ol,
-.solo-static .home-hot-news-list {
+.solo-static .home-learning-path ol {
   display: grid;
   gap: 8px 18px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .solo-static .home-learning-path li,
-.solo-static .home-hot-news-list li,
-.solo-static .hot-news-source li,
 .solo-static .weekly-grid article {
   border-top: 1px solid #eee;
   padding-top: 10px;
-}
-
-.solo-static .home-hot-news > div:first-child {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-  justify-content: space-between;
-}
-
-.solo-static .home-hot-news-list li {
-  align-items: baseline;
-  display: grid;
-  gap: 8px;
-  grid-template-columns: 92px minmax(0, 1fr);
-  min-width: 0;
-}
-
-.solo-static .home-hot-news-list span {
-  color: #ff4d3a;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.solo-static .home-hot-news-list a {
-  color: #333;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.solo-static .hot-news-page {
-  margin-bottom: 20px;
-}
-
-.solo-static .hot-news-hero {
-  margin-bottom: 18px;
-  padding: 22px 24px;
-}
-
-.solo-static .hot-news-hero h2,
-.solo-static .hot-news-source h3 {
-  border-bottom: 1px solid #ededed;
-  color: #333;
-  font-size: 19px;
-  font-weight: 500;
-  line-height: 1.35;
-  margin: 0 0 12px;
-  padding-bottom: 10px;
-}
-
-.solo-static .hot-news-hero h2 {
-  font-size: 22px;
-}
-
-.solo-static .hot-news-hero p {
-  color: #5f6877;
-  font-size: 15px;
-  line-height: 1.75;
-  margin: 0 0 8px;
-}
-
-.solo-static .hot-news-hero span {
-  color: #9098a6;
-  font-size: 13px;
-}
-
-.solo-static .hot-news-grid {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.solo-static .hot-news-grid--page {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (min-width: 901px) {
-  .solo-static .hot-news-grid.hot-news-grid--page {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.solo-static .hot-news-source {
-  padding: 22px 24px;
-}
-
-.solo-static .hot-news-source ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.solo-static .hot-news-source li {
-  border-top: 1px solid #ededed;
-  padding: 10px 0;
-}
-
-.solo-static .hot-news-source li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.solo-static .hot-news-source a {
-  align-items: flex-start;
-  color: #333;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 28px minmax(0, 1fr);
-  text-decoration: none;
-}
-
-.solo-static .hot-news-source a > span {
-  background: #ff4d3a;
-  color: #fff;
-  font-size: 13px;
-  line-height: 24px;
-  text-align: center;
-}
-
-.solo-static .hot-news-source strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.55;
-}
-
-.solo-static .hot-news-source p {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  color: #5f6877;
-  display: -webkit-box;
-  font-size: 14px;
-  line-height: 1.65;
-  margin: 8px 0 0 38px;
-  overflow: hidden;
 }
 
 .solo-static .mysql-course {
@@ -909,16 +753,11 @@ html[data-solo-theme="dark"] .solo-static .topic-card h3 a,
 html[data-solo-theme="dark"] .solo-static .topic-roadmap a,
 html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel h3,
 html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel a,
-html[data-solo-theme="dark"] .solo-static .home-hot-news h3,
 html[data-solo-theme="dark"] .solo-static .home-portal-grid strong,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates strong,
 html[data-solo-theme="dark"] .solo-static .home-learning-path a,
 html[data-solo-theme="dark"] .solo-static .module header h2,
 html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card strong,
-html[data-solo-theme="dark"] .solo-static .hot-news-hero h2,
-html[data-solo-theme="dark"] .solo-static .hot-news-source h3,
-html[data-solo-theme="dark"] .solo-static .hot-news-source a,
-html[data-solo-theme="dark"] .solo-static .hot-news-source strong,
 html[data-solo-theme="dark"] .solo-static .weekly-hero h2,
 html[data-solo-theme="dark"] .solo-static .weekly-grid h3,
 html[data-solo-theme="dark"] .solo-static .mysql-hero h2,
@@ -942,9 +781,6 @@ html[data-solo-theme="dark"] .solo-static .home-recent-updates span,
 html[data-solo-theme="dark"] .solo-static .home-learning-path span,
 html[data-solo-theme="dark"] .solo-static .tutorial-sidebar-card span,
 html[data-solo-theme="dark"] .solo-static .mysql-hero p,
-html[data-solo-theme="dark"] .solo-static .hot-news-hero p,
-html[data-solo-theme="dark"] .solo-static .hot-news-hero span,
-html[data-solo-theme="dark"] .solo-static .hot-news-source p,
 html[data-solo-theme="dark"] .solo-static .weekly-hero p,
 html[data-solo-theme="dark"] .solo-static .tutorial-route p,
 html[data-solo-theme="dark"] .solo-static .post--summary .post__excerpt,
@@ -967,7 +803,6 @@ html[data-solo-theme="dark"] .solo-static .navbar {
 
 html[data-solo-theme="dark"] .solo-static .navbar nav a,
 html[data-solo-theme="dark"] .solo-static .list a,
-html[data-solo-theme="dark"] .solo-static .home-hot-news-list a,
 html[data-solo-theme="dark"] .solo-static .home-portal-grid a,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates a,
 html[data-solo-theme="dark"] .solo-static .home-learning-path a,
@@ -988,11 +823,8 @@ html[data-solo-theme="dark"] .solo-static .home-portal-hero,
 html[data-solo-theme="dark"] .solo-static .home-portal-grid section,
 html[data-solo-theme="dark"] .solo-static .home-learning-path,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates,
-html[data-solo-theme="dark"] .solo-static .home-hot-news,
 html[data-solo-theme="dark"] .solo-static .topic-card,
 html[data-solo-theme="dark"] .solo-static .topic-roadmap-panel,
-html[data-solo-theme="dark"] .solo-static .hot-news-hero,
-html[data-solo-theme="dark"] .solo-static .hot-news-source,
 html[data-solo-theme="dark"] .solo-static .weekly-hero,
 html[data-solo-theme="dark"] .solo-static .weekly-grid > section,
 html[data-solo-theme="dark"] .solo-static .tutorial-route,
@@ -1020,8 +852,6 @@ html[data-solo-theme="dark"] .solo-static .nav-section h3,
 html[data-solo-theme="dark"] .solo-static .home-portal-grid a,
 html[data-solo-theme="dark"] .solo-static .home-recent-updates a,
 html[data-solo-theme="dark"] .solo-static .home-learning-path li,
-html[data-solo-theme="dark"] .solo-static .home-hot-news-list li,
-html[data-solo-theme="dark"] .solo-static .hot-news-source li,
 html[data-solo-theme="dark"] .solo-static .weekly-grid article,
 html[data-solo-theme="dark"] .solo-static .weekly-tutorial-card,
 html[data-solo-theme="dark"] .solo-static .list li,
@@ -1226,8 +1056,6 @@ html[data-solo-theme="light"] body {
 
   .solo-static .home-portal-grid,
   .solo-static .home-learning-path ol,
-  .solo-static .home-hot-news-list,
-  .solo-static .hot-news-grid,
   .solo-static .weekly-grid,
   .solo-static .tutorial-route-grid,
   .solo-static .tutorial-route-focus,

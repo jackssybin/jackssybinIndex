@@ -6,9 +6,9 @@
 
 - `content`：文章、教程、专题页、导航页等 Markdown 内容。
 - `layouts`：Hugo 模板。
-- `static`：图片、样式、导航图标、搜索索引、实时新闻 JSON 等静态资源。
-- `data`：首页、专题、实时新闻等模板数据。
-- `scripts`：新文章、实时新闻、教程导入、Hugo 数据同步脚本。
+- `static`：图片、样式、导航图标、搜索索引等静态资源。
+- `data`：首页、专题等模板数据。
+- `scripts`：新文章、教程导入、Hugo 数据同步脚本。
 - `deploy`：服务器部署相关配置示例。
 - `public`：Hugo 构建产物，本地生成，不提交仓库。
 - `node_modules`：本地依赖目录，可随时删除，通过 `pnpm install` 恢复。
@@ -65,37 +65,15 @@ content/tutorials/
 
 当前包含 `mysql`、`springboot4`、`netty`。
 
-## 实时新闻
-
-抓取实时新闻：
-
-```bash
-pnpm fetch-hot-news
-```
-
-生成位置：
-
-```text
-static/hot-news.json
-data/hot-news.json
-```
-
-完整更新流程：
-
-```bash
-pnpm update-content
-```
-
 ## 部署
 
 GitHub Actions 使用 `.github/workflows/deploy-to-server.yml` 构建并部署：
 
 1. 安装 Node、pnpm、Hugo Extended。
 2. 执行 `pnpm install --frozen-lockfile`。
-3. 抓取实时新闻。
-4. 执行 `pnpm sync:hugo`。
-5. 执行 `hugo --destination public --minify --cleanDestinationDir`。
-6. 将 `public/` 同步到服务器站点目录。
+3. 执行 `pnpm sync:hugo`。
+4. 执行 `hugo --destination public --minify --cleanDestinationDir`。
+5. 将 `public/` 同步到服务器站点目录。
 
 服务器 Nginx 配置示例在 `deploy/nginx-jackssybin.conf`。
 

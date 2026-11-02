@@ -159,7 +159,7 @@ const SKIP_PREFIXES = ['/tags/', '/nav/', '/topics/', '/archives/', '/page/', '/
 const SKIP_EXACT = new Set([
   '/', '/index.html',
   '/tags.html', '/nav.html', '/topics.html', '/archives.html',
-  '/search.html', '/news.html', '/weekly.html',
+  '/search.html', '/weekly.html',
 ])
 
 function isContentUrl(u) {

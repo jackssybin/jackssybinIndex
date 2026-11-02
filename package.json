@@ -8,7 +8,6 @@
   },
   "scripts": {
     "new-post": "node scripts/new-post.mjs",
-    "fetch-hot-news": "node scripts/fetch-hot-news.mjs",
     "update-content": "node scripts/update-content.mjs",
     "import:hugo-tutorials": "node scripts/import-hugo-tutorials.mjs",
     "sync:hugo": "node scripts/sync-site.mjs",

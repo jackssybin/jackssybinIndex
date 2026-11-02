@@ -10,7 +10,7 @@ on:
     # 一次推不完，所以每天推 8 条，按 lastmod 倒序、推过的不再推。
     # 详见 scripts/baidu-push.mjs 头部「--daily」一节。
     - cron: "0 1 * * *"
-    # 08:00 / 20:00 UTC：内容刷新（热点、AI 导航），不做推送。
+    # 08:00 / 20:00 UTC：内容刷新（AI 导航），不做推送。
     - cron: "0 8,20 * * *"
   workflow_dispatch:
 
@@ -45,9 +45,6 @@ jobs:
         with:
           hugo-version: latest
           extended: true
-
-      - name: Fetch hourly hot news
-        run: pnpm fetch-hot-news
 
       - name: Setup Python
         uses: actions/setup-python@v5

@@ -105,25 +105,16 @@ pnpm sync:hugo
 
 该命令会扫描 `content/**/*.md`，生成首页数据、专题数据和 `static/search-index.json`。
 
-## 6. 实时新闻
-
-```bash
-pnpm fetch-hot-news
-pnpm update-content
-```
-
-`update-content` 会抓取新闻、同步数据并构建站点。
-
-## 7. 本地验证
+## 6. 本地验证
 
 ```bash
 pnpm dev
 pnpm build
 ```
 
-重点检查：首页、教程中心、专题页、标签墙、归档页、实时新闻页和新文章 URL。
+重点检查：首页、教程中心、专题页、标签墙、归档页和新文章 URL。
 
-## 8. 提交与部署
+## 7. 提交与部署
 
 ```bash
 git status
@@ -134,7 +125,7 @@ git push
 
 推送后 GitHub Actions 会构建 Hugo，并将 `public/` 同步到服务器。
 
-## 9. 常见问题
+## 8. 常见问题
 
 新文章没有出现在首页：
 
@@ -151,7 +142,7 @@ git push
 - 检查 `static/search-index.json` 是否包含文章标题。
 - 重新执行 `pnpm sync:hugo`。
 
-## 10. 一稿三发热点选题、草稿审核与发布流程
+## 9. 一稿三发热点选题、草稿审核与发布流程
 
 热点选题、飞书审核队列、一稿三发草稿生成规则和复盘模板统一维护在：
 
