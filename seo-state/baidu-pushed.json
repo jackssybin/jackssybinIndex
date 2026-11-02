@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-02T03:01:01.332Z",
+  "lastRunAt": "2026-11-02T07:02:29.517Z",
   "daily": {
     "date": "2026-11-02",
-    "pushed": 1
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1761,6 +1761,41 @@
       "pushes": 1,
       "lastmod": "2026-11-02T10:56:48+08:00",
       "pushedAt": "2026-11-02T03:01:01.332Z"
+    },
+    "https://jackssybin.cn/mysql/01/01-mysql.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/01/02-sql-ddl.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/01/03-sql-dml.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/01/04-sql-dql.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/01/05-sql.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/02/06.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/02/07.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-02T07:02:29.517Z"
     }
   },
   "history": [
@@ -2028,6 +2063,11 @@
       "date": "2026-11-02",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-11-02",
+      "pushed": 7,
+      "source": "daily"
     }
   ]
 }
