@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-01T07:02:42.939Z",
+  "lastRunAt": "2026-11-02T03:01:01.332Z",
   "daily": {
-    "date": "2026-11-01",
-    "pushed": 8
+    "date": "2026-11-02",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1756,6 +1756,11 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-01T07:02:42.939Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/01/impeccable-ai-design-anti-slop/": {
+      "pushes": 1,
+      "lastmod": "2026-11-02T10:56:48+08:00",
+      "pushedAt": "2026-11-02T03:01:01.332Z"
     }
   },
   "history": [
@@ -2018,6 +2023,11 @@
       "date": "2026-11-01",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-02",
+      "pushed": 1,
+      "source": "changed"
     }
   ]
 }
