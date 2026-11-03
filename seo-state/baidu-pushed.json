@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-02T07:02:29.517Z",
+  "lastRunAt": "2026-11-03T05:32:56.137Z",
   "daily": {
-    "date": "2026-11-02",
+    "date": "2026-11-03",
     "pushed": 8
   },
   "urls": {
@@ -1003,9 +1003,9 @@
       "pushedAt": "2026-10-13T07:16:50.110Z"
     },
     "https://jackssybin.cn/articles/2026/07/31/microsoft-ai-for-beginners.html": {
-      "pushes": 1,
-      "lastmod": "2026-08-14T11:38:15+08:00",
-      "pushedAt": "2026-10-13T07:16:50.110Z"
+      "pushes": 2,
+      "lastmod": "2026-11-02T15:44:22+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
     },
     "https://jackssybin.cn/articles/2026/08/08/monkeycode-ai-dev-platform.html": {
       "pushes": 1,
@@ -1098,9 +1098,9 @@
       "pushedAt": "2026-10-16T05:20:15.691Z"
     },
     "https://jackssybin.cn/linux.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T23:22:57+08:00",
-      "pushedAt": "2026-10-16T05:20:15.691Z"
+      "pushes": 2,
+      "lastmod": "2026-11-02T15:44:22+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
     },
     "https://jackssybin.cn/linux/01/01-linux.html": {
       "pushes": 1,
@@ -1193,9 +1193,9 @@
       "pushedAt": "2026-10-18T05:19:55.964Z"
     },
     "https://jackssybin.cn/tutorials.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T23:22:57+08:00",
-      "pushedAt": "2026-10-18T05:19:55.964Z"
+      "pushes": 2,
+      "lastmod": "2026-11-02T15:44:22+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
     },
     "https://jackssybin.cn/articles/2021/06/08/1623116860957.html": {
       "pushes": 1,
@@ -1796,6 +1796,31 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-02T07:02:29.517Z"
+    },
+    "https://jackssybin.cn/mysql/02/08.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
+    },
+    "https://jackssybin.cn/mysql/02/09.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
+    },
+    "https://jackssybin.cn/mysql/02/10-mysql.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
+    },
+    "https://jackssybin.cn/mysql/02/11.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
+    },
+    "https://jackssybin.cn/mysql/03/12.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-03T05:32:56.137Z"
     }
   },
   "history": [
@@ -2067,6 +2092,11 @@
     {
       "date": "2026-11-02",
       "pushed": 7,
+      "source": "daily"
+    },
+    {
+      "date": "2026-11-03",
+      "pushed": 8,
       "source": "daily"
     }
   ]
