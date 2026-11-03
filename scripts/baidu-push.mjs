@@ -225,7 +225,7 @@ function absoluteUrl(p) {
 function urlsFromGit() {
   const base = process.env.BAIDU_PUSH_DIFF_BASE || 'HEAD~5'
   const head = process.env.BAIDU_PUSH_DIFF_HEAD || 'HEAD'
-  const raw = execSync(`git diff --name-only ${base} ${head} -- "content/**/*.md"`, {
+  const raw = execSync(`git diff --name-only --diff-filter=ACMR ${base} ${head} -- "content/**/*.md"`, {
     stdio: ['ignore', 'pipe', 'ignore'],
   })
     .toString()
