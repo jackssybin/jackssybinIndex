@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-04T07:08:13.438Z",
+  "lastRunAt": "2026-11-05T05:54:00.687Z",
   "daily": {
-    "date": "2026-11-04",
-    "pushed": 8
+    "date": "2026-11-05",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1861,6 +1861,11 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-04T07:08:13.438Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/05/agent-desktop-computer-use/": {
+      "pushes": 1,
+      "lastmod": "2026-11-05T13:49:40+08:00",
+      "pushedAt": "2026-11-05T05:54:00.687Z"
     }
   },
   "history": [
@@ -2148,6 +2153,11 @@
       "date": "2026-11-04",
       "pushed": 7,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-05",
+      "pushed": 1,
+      "source": "changed"
     }
   ]
 }
