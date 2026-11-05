@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "agent-desktop-cua-c1",
+    "pose": "大笑",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "AI不用截图",
+      "也能操作电脑"
+    ],
+    "subtitle": "vercel-labs/agent-desktop · Apache-2.0",
+    "hook": "读无障碍树，ref句柄点桌面，无头不抢鼠标",
+    "giant": "1.5万★"
+  },
+  {
+    "slug": "agent-desktop-cua-c2",
+    "pose": "惊讶",
+    "accent": "#F97316",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "AI不用截图",
+      "也能操作电脑"
+    ],
+    "subtitle": "vercel-labs/agent-desktop · Apache-2.0",
+    "hook": "读无障碍树，ref句柄点桌面，无头不抢鼠标",
+    "giant": "1.5万★"
+  },
+  {
+    "slug": "agent-desktop-cua-c3",
+    "pose": "开心",
+    "accent": "#07C160",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "AI不用截图",
+      "也能操作电脑"
+    ],
+    "subtitle": "vercel-labs/agent-desktop · Apache-2.0",
+    "hook": "读无障碍树，ref句柄点桌面，无头不抢鼠标",
+    "giant": "1.5万★"
+  }
+]
