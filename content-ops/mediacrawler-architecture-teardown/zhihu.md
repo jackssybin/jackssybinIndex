@@ -1,0 +1,125 @@
+# 7 万 Star 的 MediaCrawler 架构拆解：值得学的工程模式，与它刻意低调的合规边界
+
+今年 6 月我写过一篇 MediaCrawler 入门教程，当时它 1.3 万 Star；截至本文（2026-11-05）已经是 70,232 Star、13,308 Fork。入门稿讲怎么安装运行，这篇做两件入门材料通常回避的事：通读约 3.3 万行 Python 拆架构，以及把许可证和法律边界讲透。需要先声明：这是一份架构学习笔记，不构成任何采集行动建议。
+
+## 一、先纠正一个常见说法：它不是 OSI 意义上的开源软件
+
+GitHub API 对这个仓库返回的 license 字段是 `NOASSERTION`，因为根目录 LICENSE 不是任何 OSI 认证协议，而是作者自撰的 **NON-COMMERCIAL LEARNING LICENSE 1.1（非商业学习使用许可证）**，中英双语。核心条款三条：
+
+1. 授权范围仅限**非商业的学习与研究**，允许复制、修改、合并；
+2. 明确禁止大规模爬取和任何干扰平台运营的行为；
+3. 未经版权所有者书面同意，不得商用，不得对第三方造成不当影响。
+
+每个 `.py` 文件头部都重复印着五条使用原则（遵守平台条款与 robots、控制频率、不得非法用途）。这意味着把它接进公司数据产品、竞品系统或任何商业化流程，哪怕只是内部使用，都落在协议禁止区。讨论技术之前先明确这一点，是因为很多中文介绍直接称它"开源爬虫"，在协议语义上是不准确的。
+
+## 二、核心技术取舍：用浏览器环境替代 JS 逆向
+
+七个平台（小红书 xhs、抖音 douyin、快手 kuaishou、B 站 bilibili、微博 weibo、贴吧 tieba、知乎 zhihu）的传统爬虫路线是逆向签名算法（如 x-s、a_bogus），成本高且随平台改版失效。MediaCrawler 的设计是：
+
+```text
+Playwright 启动/接管真实浏览器 → 用户本人扫码登录 → 保留登录态的浏览器上下文
+   → 在页面环境内执行 JS 表达式获取已生成的签名参数 → httpx 带着签名发业务请求
+```
+
+浏览器自身的页面 JS 会正常计算签名，程序只读取计算结果，因此不需要复现任何加密算法。代价是依赖完整浏览器环境、资源开销高于纯接口客户端，且能力边界被锁死在"登录账号本来就能看到的数据"内。
+
+![Playwright 与 CDP 两种浏览器模式对比](CDP)
+
+## 三、代码架构：模板方法 + 同构分层 + 存储工厂
+
+![分层架构与七平台同构实现](ARCH)
+
+### 3.1 AbstractCrawler 模板方法
+
+`base/base_crawler.py` 定义抽象基类，钉死每个平台实现的生命周期：
+
+```python
+class AbstractCrawler(ABC):
+    @abstractmethod
+    async def start(self): ...
+    @abstractmethod
+    async def search(self): ...
+    @abstractmethod
+    async def launch_browser(self, chromium, playwright_proxy,
+                             user_agent, headless=True) -> BrowserContext: ...
+
+    async def launch_browser_with_cdp(self, playwright, playwright_proxy,
+                                      user_agent, headless=True):
+        # 默认实现：回退到标准 launch_browser
+        return await self.launch_browser(playwright.chromium,
+                                         playwright_proxy, user_agent, headless)
+```
+
+配套的 `AbstractLogin` 把登录拆成 `begin`、`login_by_qrcode`、`login_by_mobile`。基类控制流程骨架、平台类填充差异，是典型模板方法模式；七套实现因此保持目录与调用结构同构，学习者只需吃透一个平台即可平移。
+
+### 3.2 平台五件套
+
+以 `media_platform/xhs/` 为例，每个平台目录的内部分层一致：
+
+| 模块 | 职责 |
+|---|---|
+| `core.py` | 主流程编排，搜索/指定 ID/创作者主页三种爬取类型的异步状态机 |
+| `client.py` | 平台 HTTP 接口封装，统一注入签名与重试 |
+| `login.py` / `playwright_sign.py` | 登录态缓存、浏览器内 JS 取签名 |
+| `extractor.py` / `field.py` | 平台响应 JSON 到统一数据模型的字段映射、枚举（如排序类型） |
+| `exception.py` | 平台错误码到语义异常的映射：`IPBlockError`、`NoteNotFoundError`、`PlatformAccessError`、`DataFetchError` |
+
+异常语义化是这个仓库里最值得抄的实践之一：调用方按异常类型决策（换 IP、重试、放弃），而不是在业务层散落魔法数字判断。
+
+### 3.3 存储工厂与八种后端
+
+`store/<platform>/` 下每个平台都有工厂，靠配置 `SAVE_DATA_OPTION` 选择实现：
+
+```python
+class XhsStoreFactory:
+    STORES = {
+        "csv": XhsCsvStoreImplement, "db": XhsDbStoreImplement,
+        "postgres": XhsDbStoreImplement, "json": XhsJsonStoreImplement,
+        "jsonl": XhsJsonlStoreImplement, "sqlite": XhsSqliteStoreImplement,
+        "mongodb": XhsMongoStoreImplement, "excel": XhsExcelStoreImplement,
+    }
+```
+
+爬取逻辑面向 `AbstractStore` 编程，持久化介质成为可替换策略；SQL 系走 `database/` 的 SQLAlchemy 会话，Mongo 有独立 base 类，媒体下载则隔离在 `media_downloader/`，结构化数据与二进制资源互不耦合。
+
+### 3.4 横切能力
+
+- `proxy/`：IP 代理池抽象，`ENABLE_IP_PROXY` 开关控制，文档目录里同时留了商业代理接入说明；
+- 重试：HTTP 基于 httpx 异步客户端 + tenacity 装饰器，`RetryError` 在 core 层捕获降级；
+- `tools/async_file_writer.py`：异步落盘避免阻塞事件循环；
+- `tools/user_hash.py`：`anonymize_user_id` 与 `mask_nickname`，在存储工厂写入前对用户标识做匿名化、昵称打码。这一点在个人信息保护语境下值得专门指出——它不能替代合规义务，但至少表明作者没有把"原样存用户数据"当成默认行为。
+
+## 四、CDP 模式：反检测思路的升级
+
+当前默认配置 `ENABLE_CDP_MODE = True`，实现在 `tools/cdp_browser.py` 的 `CDPBrowserManager`。普通 Playwright 自启浏览器携带 `navigator.webdriver=true` 等自动化指纹；CDP（Chrome DevTools Protocol）模式改为连接用户本机已有的 Chrome（要求 144+，在 `chrome://inspect/#remote-debugging` 开启 9222 端口），继承真实扩展、Cookie、历史与设备指纹。
+
+两个安全设计值得注意：首次连接时 Chrome 弹出确认对话框、默认 60 秒等待人工接受，不存在静默接管；前述基类方法提供了回退路径，CDP 不可用时降级标准 Playwright，上层 core 代码无感知。这种"新能力以可选增强接入、失败安全降级"的演进方式，比直接替换主路径稳健得多。仓库另外提供 Vite+React+Radix 构建的 `webui/`，通过后端 API 驱动同一内核，服务不想记命令行参数的用户。
+
+## 五、产品现实：开源版与 MediaCrawlerPro 的边界
+
+README 折叠区推广的 MediaCrawlerPro 属于独立 GitHub 组织，是闭源付费产品。开源版明确缺失的能力包括：断点续爬、多账号调度、去除 Playwright 依赖的轻量运行、完整 Linux 环境支持。`docs/` 下还有知识付费、代理服务商导流文档。
+
+客观评价这种结构：它没有违反自己的许可证（作者拥有完整版权，当然可以双轨发布），但使用者应当清楚——开源仓库同时承担技术作品与商业漏斗两种角色，生产环境最痛的能力（续爬、多账号）被刻意留在付费侧。评估"开源版能不能上生产"时，这比 Star 数重要得多。
+
+## 六、法律边界：技术机制与法律评价是两件事
+
+![合规三层：许可证、产品边界、法律红线](COMP)
+
+国内爬虫相关刑事案件的入罪逻辑，近年主要落在四类行为：破解或绕过平台反爬技术措施（常涉及计算机信息系统安全类罪名）、抓取登录后方可见的非公开数据、采集并扩散公民个人信息、高频请求导致平台服务异常。仓库 README 顶部直接挂了爬虫违法案例合集链接，免责声明不是装饰。
+
+从技术机制看，MediaCrawler 操作的是用户本人登录后有权访问的内容，没有伪造登录凭证、没有破解加密算法，签名由页面自身 JS 正常生成——它处在"自动化操作本人账号"的区间，与撞库、接口破解有本质区别。但需要强调三点：
+
+1. **技术上不破解，不等于行为合法。** 请求频率、数据用途、是否二次分发、是否涉及他人个人信息，任何一项越界都会改变行为性质；
+2. 平台用户协议通常禁止自动化访问，违约责任与行政/刑事责任是不同层面的风险，民事违约同样真实存在；
+3. 内置的匿名化工具只降低敏感度，不消除"处理个人信息"本身的法律定性；研究场景也应遵循最小必要、数据不出本机、不对外提供的原则。
+
+真正的商业数据需求，正路是平台开放平台 API、授权数据服务商，或法务前置的合规采购，而不是给非商业许可的工具套上代理池。
+
+## 结语
+
+把两件事分开评价，结论会清晰很多：
+
+- **作为工程学习材料**，MediaCrawler 在 3.3 万行里展示了模板方法、策略工厂、异常语义化、存储抽象、浏览器接管与安全降级等一整套可迁移的 Python 异步架构，七个同构平台实现本身就是很好的对照教材，7 万 Star 里这部分含金量经得起读；
+- **作为可直接使用的生产工具**，非商业许可、缺失续爬等生产特性、持续收紧的平台风控与法律环境，决定了它的合理位置是个人学习与技术研究，而不是商业数据管线。
+
+项目地址：https://github.com/NanmiCoder/MediaCrawler ，协议 NON-COMMERCIAL LEARNING LICENSE 1.1（非 OSI 开源），数据基准 2026-11-05。本文仅为架构与协议层面的学习分析，请在法律允许、平台授权、非商业研究的前提下对待任何采集技术。
