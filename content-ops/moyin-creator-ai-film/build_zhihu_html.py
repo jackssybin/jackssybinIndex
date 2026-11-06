@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import re, html, pathlib
+base=pathlib.Path("/root/jackssybinIndex/content-ops/moyin-creator-ai-film")
+md=(base/"zhihu.md").read_text(encoding="utf-8")
+IMG={"PIPELINE":"https://picx.zhimg.com/v2-3fae9094f86f045b13d12058b295153e.png",
+     "GROUP":"https://pic1.zhimg.com/v2-e26ff4bf0c8ec8d85e5c033ce30de3bf.png",
+     "BATCH":"https://picx.zhimg.com/v2-ac619ff0e081e65a62f2a18c3403f662.png"}
+md=re.sub(r'^#\s+.+\n','',md,count=1)
+def inline(s):
+    codes=[]
+    def st(m): codes.append(html.escape(m.group(1))); return f"\x00{len(codes)-1}\x00"
+    s=re.sub(r'`([^`]+)`',st,s)
+    s=re.sub(r'\*\*(.+?)\*\*',r'<b>\1</b>',s)
+    s=re.sub(r'\[([^\]]+)\]\(([^)]+)\)',r'<a href="\2">\1</a>',s)
+    for i,c in enumerate(codes): s=s.replace(f"\x00{i}\x00",f"<code>{c}</code>")
+    return s
+out=[];L=md.split("\n");i=0
+while i<len(L):
+    ln=L[i]
+    if ln.startswith("```"):
+        lang=ln[3:].strip() or "bash";buf=[];i+=1
+        while i<len(L) and not L[i].startswith("```"): buf.append(L[i]);i+=1
+        out.append(f'<pre lang="{html.escape(lang)}"><code>{html.escape(chr(10).join(buf))}</code></pre>');i+=1;continue
+    m=re.match(r'^!\[[^\]]*\]\(([^)]+)\)\s*$',ln)
+    if m:
+        out.append(f'<img class="content_image" src="{IMG.get(m.group(1),m.group(1))}">');i+=1;continue
+    if ln.startswith("## "): out.append(f"<h2>{inline(ln[3:].strip())}</h2>");i+=1;continue
+    if re.match(r'^[-*] ',ln):
+        it=[]
+        while i<len(L) and re.match(r'^[-*] ',L[i]): it.append(f"<li>{inline(L[i][2:].strip())}</li>");i+=1
+        out.append("<ul>"+"".join(it)+"</ul>");continue
+    if re.match(r'^\d+\. ',ln):
+        it=[]
+        while i<len(L) and re.match(r'^\d+\. ',L[i]): it.append(f"<li>{inline(re.sub(r'^\\d+\\.\\s*','',L[i]).strip())}</li>");i+=1
+        out.append("<ol>"+"".join(it)+"</ol>");continue
+    if not ln.strip(): i+=1;continue
+    p=[ln.strip()];i+=1
+    while i<len(L) and L[i].strip() and not re.match(r'^(#{1,3} |[-*] |\d+\. |```|!\[)',L[i]): p.append(L[i].strip());i+=1
+    out.append("<p>"+inline(" ".join(p))+"</p>")
+body="\n".join(out)
+(base/"zhihu-compact.html").write_text(body,encoding="utf-8")
+print("bytes",len(body.encode()),"imgs",body.count("content_image"),"pre",body.count("<pre"),
+      "ul",body.count("<ul>"),body.count("</ul>"),"ol",body.count("<ol>"),body.count("</ol>"),
+      "unresolved",any(k+")" in body for k in IMG))

@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "moyin-ai-film-c1",
+    "pose": "开心",
+    "accent": "#07C160",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "剧本到成片",
+      "AI影视工厂"
+    ],
+    "subtitle": "MemeCalculate/moyin-creator · AGPL-3.0",
+    "hook": "Seedance2.0批量生产，角色不换脸",
+    "giant": "4.8千★"
+  },
+  {
+    "slug": "moyin-ai-film-c2",
+    "pose": "困惑",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "剧本到成片",
+      "AI影视工厂"
+    ],
+    "subtitle": "MemeCalculate/moyin-creator · AGPL-3.0",
+    "hook": "Seedance2.0批量生产，角色不换脸",
+    "giant": "4.8千★"
+  },
+  {
+    "slug": "moyin-ai-film-c3",
+    "pose": "喜爱",
+    "accent": "#3B82F6",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "剧本到成片",
+      "AI影视工厂"
+    ],
+    "subtitle": "MemeCalculate/moyin-creator · AGPL-3.0",
+    "hook": "Seedance2.0批量生产，角色不换脸",
+    "giant": "4.8千★"
+  }
+]
