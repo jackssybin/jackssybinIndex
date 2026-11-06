@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-06T07:33:04.840Z",
+  "lastRunAt": "2026-11-06T23:08:18.499Z",
   "daily": {
-    "date": "2026-11-06",
-    "pushed": 8
+    "date": "2026-11-07",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1941,6 +1941,11 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/05/moyin-creator-ai-film/": {
+      "pushes": 1,
+      "lastmod": "2026-11-07T07:04:04+08:00",
+      "pushedAt": "2026-11-06T23:08:18.499Z"
     }
   },
   "history": [
@@ -2243,6 +2248,11 @@
       "date": "2026-11-06",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-07",
+      "pushed": 1,
+      "source": "changed"
     }
   ]
 }
