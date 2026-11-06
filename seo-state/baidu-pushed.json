@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-05T07:34:53.479Z",
+  "lastRunAt": "2026-11-06T07:33:04.840Z",
   "daily": {
-    "date": "2026-11-05",
+    "date": "2026-11-06",
     "pushed": 8
   },
   "urls": {
@@ -1901,6 +1901,46 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-05T07:34:53.479Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/05/mediacrawler-architecture-teardown/": {
+      "pushes": 1,
+      "lastmod": "2026-11-05T18:57:23+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/07/27.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/07/28.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/08/29.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/08/30.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/09/31.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/09/32.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
+    },
+    "https://jackssybin.cn/mysql/09/33.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-06T07:33:04.840Z"
     }
   },
   "history": [
@@ -2197,6 +2237,11 @@
     {
       "date": "2026-11-05",
       "pushed": 7,
+      "source": "daily"
+    },
+    {
+      "date": "2026-11-06",
+      "pushed": 8,
       "source": "daily"
     }
   ]
