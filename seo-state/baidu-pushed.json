@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-06T23:08:18.499Z",
+  "lastRunAt": "2026-11-07T06:46:08.957Z",
   "daily": {
     "date": "2026-11-07",
-    "pushed": 1
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1946,6 +1946,41 @@
       "pushes": 1,
       "lastmod": "2026-11-07T07:04:04+08:00",
       "pushedAt": "2026-11-06T23:08:18.499Z"
+    },
+    "https://jackssybin.cn/mysql/mysql.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/mysql/progress-checklist.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/mysql/quick-start.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/netty.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/netty/readme.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/springboot4/quick-navigation.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/springboot4/web/4-springmvc-webflux.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-07T06:46:08.957Z"
     }
   },
   "history": [
@@ -2253,6 +2288,11 @@
       "date": "2026-11-07",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-11-07",
+      "pushed": 7,
+      "source": "daily"
     }
   ]
 }
