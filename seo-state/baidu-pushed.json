@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-08T06:52:13.735Z",
+  "lastRunAt": "2026-11-08T13:37:01.159Z",
   "daily": {
     "date": "2026-11-08",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1986,6 +1986,11 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-08T06:52:13.735Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/08/reveric-ai-native-studio/": {
+      "pushes": 1,
+      "lastmod": "2026-11-08T21:32:43+08:00",
+      "pushedAt": "2026-11-08T13:37:01.159Z"
     }
   },
   "history": [
@@ -2303,6 +2308,11 @@
       "date": "2026-11-08",
       "pushed": 1,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-08",
+      "pushed": 1,
+      "source": "changed"
     }
   ]
 }
