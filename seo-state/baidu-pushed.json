@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-07T06:46:08.957Z",
+  "lastRunAt": "2026-11-08T06:52:13.735Z",
   "daily": {
-    "date": "2026-11-07",
-    "pushed": 8
+    "date": "2026-11-08",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1981,6 +1981,11 @@
       "pushes": 1,
       "lastmod": "2026-06-07T09:42:45+08:00",
       "pushedAt": "2026-11-07T06:46:08.957Z"
+    },
+    "https://jackssybin.cn/springboot4/web/5-websocket-sse.html": {
+      "pushes": 1,
+      "lastmod": "2026-06-07T09:42:45+08:00",
+      "pushedAt": "2026-11-08T06:52:13.735Z"
     }
   },
   "history": [
@@ -2292,6 +2297,11 @@
     {
       "date": "2026-11-07",
       "pushed": 7,
+      "source": "daily"
+    },
+    {
+      "date": "2026-11-08",
+      "pushed": 1,
       "source": "daily"
     }
   ]
