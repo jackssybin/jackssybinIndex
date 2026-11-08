@@ -1,0 +1,24 @@
+<p>多数 AI 写作产品的架构瓶颈不在模型，而在上下文边界：对话框只能看到你临时粘贴的内容，人物小传、伏笔、世界观散落在外部文档里，项目一长，模型就成了没读过全稿的临时工。looplj/reveric（幻界）给出的答案是 Agent Native——把整部作品变成智能体可按需检索、可直接操作的本地工作区。这个仓库 2026-10-22 才建仓，半个月 724 Star、178 Fork，但已有 2064 个 Dart 文件、约 75 万行代码，发布到 v0.8.1，覆盖 Windows/macOS/Android。我克隆仓库通读了 PRODUCT/DESIGN/CONTEXT/AGENTS 文档、agent 目录与插件系统，这篇做工程向拆解。</p>
+<h2>一、产品边界：本地优先的全链路创作，而不是聊天写作</h2>
+<p>Reveric 的定位是覆盖长篇小说、剧本改编、短剧/漫剧制片的桌面工作台，技术栈是 Flutter + Dart，桌面端用 window_manager/tray_manager，本地持久化用 drift（SQLite），视频处理用 ffmpeg_kit 与 fvp，3D 用 flutter_scene 加自定义 shader。它和云端写作工具的根本区别有两点。</p>
+<img class="content_image" src="https://picx.zhimg.com/v2-816dc5cb2684f48e41e8274ae617205a.png">
+<p>第一是 <b>Local-First</b>：整部作品保存在设备本地的 SQLite 数据库与工程文件夹，升级覆盖安装即可保留数据；应用不托管用户作品。第二是 <b>BYOK（Bring Your Own Key）</b>：模型层完全由用户配置，直连 OpenAI、Anthropic、Gemini、DeepSeek、智谱、通义、Kimi、MiniMax，以及字节 Seedance/Seedream，或任何 OpenAI/Anthropic 兼容的自建网关（Ollama、LocalAI、OneAPI、NewAPI）。官方在 README 顶部放置 API 聚合商赞助位，但产品本身不绑定供应商。这两个选择把数据主权和模型自由同时交给用户，也意味着生成成本与通道稳定性由用户自负。</p>
+<h2>二、五大工作台：一条数据贯通的生产线</h2>
+<p>产品按创作阶段拆成五个工作台，对应 <code>lib/desktop/features/</code> 下的功能模块，数据在同一个作品工作区内关联，而不是五个独立工具。</p>
+<img class="content_image" src="https://picx.zhimg.com/v2-d24087dd0367274547f523294abd8f88.png">
+<ol><li>1. <b>小说创作（reading/novel 相关 feature）</b>：树状大纲、章节编辑、自动保存、历史版本快照、专业排版；故事资产包括人物、势力、技能、伏笔、地点、地图、图鉴。值得注意的是 <code>lib/shared/entity_graph/</code> 实现的实体关系图谱，CONTEXT.md 为关系定义了严格的领域词汇：当前关系状态、关系转变（transition）、关系恢复（resumption）、已结束关系、记录纠正等，区分"故事内的真实变化"和"对错误记录的修正"，避免把编辑审计轨迹误当成剧情事件。</li><li>2. <b>剧本改编（screenplay）</b>：只在创建剧本时提供改编入口（小说改编成小说不是受支持流程），编辑器按影视行业标准建模场次、动作、角色、括号、对话、转场、字幕，支持左原著右剧本的跨作品对照。</li><li>3. <b>无限画布（canvas/storyboard）</b>：角色定妆、场次节拍、分镜段落与生成的图/音/视频以节点铺展，镜头上下游引用与生图提示词显式可见。</li><li>4. <b>3D 导演台（theater/production）</b>：三维布景、角色站位、机位（特写/全景/正反打）、推拉摇移运镜与时间轴预演，导出构图参考帧作为视频生成模型的输入，解决纯文本提示词无法控制镜头语言的问题。</li><li>5. <b>多轨剪辑（editing）</b>：6 轨时间线（视频、叠加、对白、音效、音乐、字幕），剪刃分割、波纹删除、多段吸附，应用内直接渲染导出成片。</li></ol>
+<p>智能体在每个工作台都能执行实际操作而非仅输出建议：写改章节、维护人物与关系、拆分镜、写提示词、批量生成素材、布机位、自动上轨剪辑。人类作者保留节奏、取舍与定稿权。</p>
+<h2>三、Agent 工程：Orchestrator 模式与安全约束</h2>
+<p><code>lib/shared/agent/</code> 展示了一套完整的智能体运行时，这是它区别于"套壳聊天"的核心。</p>
+<ul><li><b>编排架构</b>：CONTEXT.md 明确 Chat Orchestrator 是聊天入口背后唯一的不可见主编排器，用户不可选择；它协调直接回复、工具调用，并向可用户管理或内置的 Chat Subagents 委派专门任务。可选择的 planner/writer/artist 等主智能体已被退役，子智能体成为唯一的专业化扩展层。</li><li><b>工具与审批</b>：<code>agent_tool_dispatcher.dart</code> 负责工具分发，工具定义集中在 services/ai/tools.dart 供 LLM tool_choice 使用；<code>tool_approval.dart</code> 对敏感操作实施人工审批，智能体不能无条件改写作品。</li><li><b>健壮性</b>：<code>loop_detector.dart</code> 检测重复工具调用死循环并打断；hooks 目录下有 logging、trace、verification、todo_continuation 四类钩子；<code>token_estimator.dart</code> 与 <code>agent_context_manager.dart</code> 管理长作品下的上下文预算，<code>round_assembler.dart</code> 组装多轮结果，<code>surrogate_carry.dart</code> 处理跨轮携带。</li><li><b>工程契约制度化</b>：根目录 AGENTS.md 是给 AI 编程助手的硬约束，包括先读后写、冲突只读检查后等待人工确认、业务数据默认软删除（任何 hardDelete/SQL DELETE 需明确授权）、desktop/mobile 双端影响必须同步检查、find-docs 不自动触发等。这说明团队用 agent 开发 agent 产品，并把安全边界写成了仓库级规则。</li></ul>
+<h2>四、插件系统：双许可下的生态设计</h2>
+<p>主仓库采用 AGPL-3.0，但 <code>plugins/sdk</code> 中的 reveric-plugin-sdk 单独以 MIT 发布，这是一个刻意的生态决策：第三方插件作者不会被 AGPL 传染性波及。</p>
+<img class="content_image" src="https://picx.zhimg.com/v2-c3063a8235cfe1e127f926b197742866.png">
+<p>插件用 TypeScript 编写，经 esbuild 打包为 IIFE 并挂到全局 <code>__revericPlugin</code>，所有业务插件共享一个 JS 运行时但各自持有独立 context。Dart 宿主侧职责清晰：prelude 提供 JS 上下文、host.dart 做 API 分发与权限检查、runtime.dart 控制调用时限、package_archive.dart 校验 ZIP 导入。内置插件（memory、web、deepseek）与第三方插件走同一套 buildPlugin 管线，输出到 assets/plugins。契约维护上有个值得借鉴的设计：ui.schema.json 是 TSX 组件的唯一定义，由 generate_ui.mjs 一次性生成 TS、Dart、Rust、JS 四处类型，避免跨语言契约漂移；sqlite_runtime 同样由代码生成复制到 Dart 和 Rust。此外 skills-lock.json 表明应用支持从 GitHub 安装技能并记录 computedHash 做完整性校验。</p>
+<h2>五、设计纪律：反 AI 味的明确立场</h2>
+<p>PRODUCT.md 与 DESIGN.md 的品牌人格是"平静、文学、从容，像作家的书房"，并给出了显式反面对照：不做通用 SaaS 仪表盘、不做霓虹聊天玩具、拒绝紫蓝渐变、玻璃拟态、超大 hero、装饰性指标卡片和与手稿争夺注意力的 UI；AI 不能当主角，手稿、故事结构和作者才是中心。可访问性对齐 WCAG AA 对比度，要求键盘可用、reduced-motion 安全、非颜色单一反馈，中英文 i18n 是一等公民（用户可见文案走 easy_localization 而非硬编码）。在大量 AI 产品靠视觉炫技竞争的阶段，这种克制本身就是产品判断。</p>
+<h2>六、风险与局限</h2>
+<ol><li>1. <b>AGPL-3.0 的网络传染性</b>：个人学习与自用自由，但基于主程序提供 SaaS 即触发源码开放义务；闭源集成或商业分发需联系作者取得商业授权。只有插件 SDK 是 MIT，不要混淆两者边界。</li><li>2. <b>编排层而非模型层</b>：应用不含自有模型，断网或 Key 失效时不产生任何生成内容；视频/图像的质量、价格、审核都取决于外部供应商，README 的 API 赞助位也提示了其商业化对通道生态的依赖。</li><li>3. <b>极早期成熟度</b>：建仓仅半个月、版本 0.8.x、4 个 open issues，虽然 drift migration 体系在应对 schema 演进，但数据结构与 API 仍可能破坏性变动；75 万行里包含大量生成代码与多端脚手架，不能简单等同于同等手写体量。严肃长篇项目应先小规模验证并坚持备份。</li><li>4. <b>平台覆盖尚未全平台</b>：官方支持 Windows、macOS、Android，Linux 仅有 zip 产物，iOS 未在发布矩阵内。</li></ol>
+<h2>结语</h2>
+<p>Reveric 的参考价值在于它演示了 Agent Native 创作工具的一种完整形态：用本地数据库把"整部作品"变成智能体的可检索上下文，用 orchestrator/subagent、工具审批、循环检测把智能体约束成可协作而非失控的执行者，再用五大工作台把文字到影像的链路收进一个数据贯通的应用，同时以 Local-First 和 BYOK 守住用户的数据与模型主权。它能否从半个月的高速迭代走向长期稳定仍需观察，但对于研究 Flutter 大型桌面应用、agent 运行时设计或 AI 创作产品形态的人，这个仓库现在就值得一读。</p>
+<p>项目地址：https://github.com/looplj/reveric ，官网 reveric.app，AGPL-3.0（插件 SDK 为 MIT），数据基准 2026-11-08。文中功能以仓库源码与官方文档为准。</p>
