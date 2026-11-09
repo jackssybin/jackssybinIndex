@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-09T12:01:30.097Z",
+  "lastRunAt": "2026-11-09T12:22:34.821Z",
   "daily": {
     "date": "2026-11-09",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1996,6 +1996,11 @@
       "pushes": 1,
       "lastmod": "2026-11-09T19:57:25+08:00",
       "pushedAt": "2026-11-09T12:01:30.097Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/09/postbot-architecture-v141/": {
+      "pushes": 1,
+      "lastmod": "2026-11-09T20:18:29+08:00",
+      "pushedAt": "2026-11-09T12:22:34.821Z"
     }
   },
   "history": [
@@ -2316,6 +2321,11 @@
     },
     {
       "date": "2026-11-08",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-09",
       "pushed": 1,
       "source": "changed"
     },
