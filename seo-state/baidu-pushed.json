@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-10T06:02:08.566Z",
+  "lastRunAt": "2026-11-10T09:58:27.321Z",
   "daily": {
     "date": "2026-11-10",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -2006,6 +2006,11 @@
       "pushes": 1,
       "lastmod": "2026-11-10T13:58:06+08:00",
       "pushedAt": "2026-11-10T06:02:08.566Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/10/yingce-ai-film-canvas/": {
+      "pushes": 1,
+      "lastmod": "2026-11-10T17:54:41+08:00",
+      "pushedAt": "2026-11-10T09:58:27.321Z"
     }
   },
   "history": [
@@ -2336,6 +2341,11 @@
     },
     {
       "date": "2026-11-09",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-10",
       "pushed": 1,
       "source": "changed"
     },
