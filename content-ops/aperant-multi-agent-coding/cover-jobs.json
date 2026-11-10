@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "aperant-c1",
+    "pose": "喜爱",
+    "accent": "#07C160",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "12个AI",
+      "并行写代码"
+    ],
+    "subtitle": "Aperant 多智能体编码 · 1.46万 Star",
+    "hook": "翻完31万行源码，讲清它的强和当前阶段",
+    "giant": "12"
+  },
+  {
+    "slug": "aperant-c2",
+    "pose": "委屈",
+    "accent": "#07C160",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "12个AI",
+      "并行写代码"
+    ],
+    "subtitle": "Aperant 多智能体编码 · 1.46万 Star",
+    "hook": "翻完31万行源码，讲清它的强和当前阶段",
+    "giant": "12"
+  },
+  {
+    "slug": "aperant-c3",
+    "pose": "生气",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "12个AI",
+      "并行写代码"
+    ],
+    "subtitle": "Aperant 多智能体编码 · 1.46万 Star",
+    "hook": "翻完31万行源码，讲清它的强和当前阶段",
+    "giant": "12"
+  }
+]
