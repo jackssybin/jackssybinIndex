@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "yingce-c1",
+    "pose": "委屈",
+    "accent": "#07C160",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说自动",
+      "做成短剧"
+    ],
+    "subtitle": "影策 AI 影视工作台 · 1747 Star",
+    "hook": "翻完58万行源码，拆它的插件合同和部署门槛",
+    "giant": "112"
+  },
+  {
+    "slug": "yingce-c2",
+    "pose": "得意",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说自动",
+      "做成短剧"
+    ],
+    "subtitle": "影策 AI 影视工作台 · 1747 Star",
+    "hook": "翻完58万行源码，拆它的插件合同和部署门槛",
+    "giant": "112"
+  },
+  {
+    "slug": "yingce-c3",
+    "pose": "惊讶",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说自动",
+      "做成短剧"
+    ],
+    "subtitle": "影策 AI 影视工作台 · 1747 Star",
+    "hook": "翻完58万行源码，拆它的插件合同和部署门槛",
+    "giant": "112"
+  }
+]
