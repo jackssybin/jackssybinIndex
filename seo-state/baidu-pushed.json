@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-10T09:58:27.321Z",
+  "lastRunAt": "2026-11-11T15:05:08.247Z",
   "daily": {
-    "date": "2026-11-10",
-    "pushed": 2
+    "date": "2026-11-11",
+    "pushed": 1
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -2011,6 +2011,11 @@
       "pushes": 1,
       "lastmod": "2026-11-10T17:54:41+08:00",
       "pushedAt": "2026-11-10T09:58:27.321Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/11/novel-to-game-skills/": {
+      "pushes": 1,
+      "lastmod": "2026-11-11T23:01:01+08:00",
+      "pushedAt": "2026-11-11T15:05:08.247Z"
     }
   },
   "history": [
@@ -2351,6 +2356,11 @@
     },
     {
       "date": "2026-11-10",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-11",
       "pushed": 1,
       "source": "changed"
     }
