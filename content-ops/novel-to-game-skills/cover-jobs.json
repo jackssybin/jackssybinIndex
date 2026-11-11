@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "noveltogame-c1",
+    "pose": "得意",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说做成",
+      "能玩的游戏"
+    ],
+    "subtitle": "NovelToGame · Agent Skill · 1003 Star",
+    "hook": "翻完7个skill和两款实机游戏，拆它的方法论",
+    "giant": "7"
+  },
+  {
+    "slug": "noveltogame-c2",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说做成",
+      "能玩的游戏"
+    ],
+    "subtitle": "NovelToGame · Agent Skill · 1003 Star",
+    "hook": "翻完7个skill和两款实机游戏，拆它的方法论",
+    "giant": "7"
+  },
+  {
+    "slug": "noveltogame-c3",
+    "pose": "大笑",
+    "accent": "#F97316",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "小说做成",
+      "能玩的游戏"
+    ],
+    "subtitle": "NovelToGame · Agent Skill · 1003 Star",
+    "hook": "翻完7个skill和两款实机游戏，拆它的方法论",
+    "giant": "7"
+  }
+]
