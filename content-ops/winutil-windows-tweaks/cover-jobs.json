@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "winutil-c1",
+    "pose": "委屈",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Windows",
+      "装机瑞士军刀"
+    ],
+    "subtitle": "WinUtil 开源调优 · 6.6万 Star",
+    "hook": "扒完近3万行源码，讲清它的能与风险",
+    "giant": "6.6"
+  },
+  {
+    "slug": "winutil-c2",
+    "pose": "生气",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Windows",
+      "装机瑞士军刀"
+    ],
+    "subtitle": "WinUtil 开源调优 · 6.6万 Star",
+    "hook": "扒完近3万行源码，讲清它的能与风险",
+    "giant": "6.6"
+  },
+  {
+    "slug": "winutil-c3",
+    "pose": "惊讶",
+    "accent": "#07C160",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Windows",
+      "装机瑞士军刀"
+    ],
+    "subtitle": "WinUtil 开源调优 · 6.6万 Star",
+    "hook": "扒完近3万行源码，讲清它的能与风险",
+    "giant": "6.6"
+  }
+]
