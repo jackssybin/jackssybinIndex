@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-11T15:05:08.247Z",
+  "lastRunAt": "2026-11-13T00:22:35.064Z",
   "daily": {
-    "date": "2026-11-11",
+    "date": "2026-11-13",
     "pushed": 1
   },
   "urls": {
@@ -2016,6 +2016,11 @@
       "pushes": 1,
       "lastmod": "2026-11-11T23:01:01+08:00",
       "pushedAt": "2026-11-11T15:05:08.247Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/13/posewear-ai-tryon/": {
+      "pushes": 1,
+      "lastmod": "2026-11-13T08:18:12+08:00",
+      "pushedAt": "2026-11-13T00:22:35.064Z"
     }
   },
   "history": [
@@ -2361,6 +2366,11 @@
     },
     {
       "date": "2026-11-11",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-13",
       "pushed": 1,
       "source": "changed"
     }
