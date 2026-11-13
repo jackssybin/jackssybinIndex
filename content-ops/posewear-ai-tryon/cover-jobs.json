@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "posewear-c1",
+    "pose": "疲惫",
+    "accent": "#3B82F6",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "浏览器里的",
+      "AI试衣间"
+    ],
+    "subtitle": "衣姿 PoseWear · 参考图库 · 108 Star",
+    "hook": "逐行读完源码，讲讲它的隐私设计和版权坑",
+    "giant": "4"
+  },
+  {
+    "slug": "posewear-c2",
+    "pose": "开心",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "浏览器里的",
+      "AI试衣间"
+    ],
+    "subtitle": "衣姿 PoseWear · 参考图库 · 108 Star",
+    "hook": "逐行读完源码，讲讲它的隐私设计和版权坑",
+    "giant": "4"
+  },
+  {
+    "slug": "posewear-c3",
+    "pose": "得意",
+    "accent": "#3B82F6",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "浏览器里的",
+      "AI试衣间"
+    ],
+    "subtitle": "衣姿 PoseWear · 参考图库 · 108 Star",
+    "hook": "逐行读完源码，讲讲它的隐私设计和版权坑",
+    "giant": "4"
+  }
+]
