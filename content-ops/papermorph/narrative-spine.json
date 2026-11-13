@@ -1,0 +1,71 @@
+{
+  "project": "DozenTwelve/Papermorph",
+  "date": "2026-11-13",
+  "channels": ["website", "wechat", "zhihu"],
+  "thesis": "Papermorph 的价值不是一键出片，而是把章节规划、旁白、动画、互动、检查和静态交付串成一套可维护的内容生产流程。",
+  "pain": "同一份教材或故事要变成课程、绘本、视频和互动页面时，文案、配音、动画、题目与交付往往散在不同工具里，版本难以保持一致。",
+  "mechanism": [
+    "先规划章节、旁白与分镜，再用 beats 同步声音和画面动作",
+    "用 style.json 保存风格与模型选择，让后续章节复用已确认决定",
+    "以静态 site 目录交付，每本书保留自己的引擎副本",
+    "网页保留答题与点击交互，MP4 用于不需要操作的视频分发"
+  ],
+  "cases": [
+    {
+      "slug": "linear-algebra",
+      "scenario": "教师或课程作者把抽象数学知识做成可演示、可练习的互动课",
+      "evidence": "官方第 12 章 14 分钟、21 步，含快速检查、章节练习和 Playground",
+      "url": "https://papermorph.diamonddoge.org/linear-algebra/ch12/"
+    },
+    {
+      "slug": "little-horse",
+      "scenario": "儿童内容作者把故事做成有角色、声音和画面互动的纸偶绘本",
+      "evidence": "官方第 1 集约 4 分钟、9 个场景；官方文档列出听找互动",
+      "url": "https://papermorph.diamonddoge.org/little-horse/ch01/"
+    },
+    {
+      "slug": "madness",
+      "scenario": "知识类创作者围绕一本书制作长纪录片，再拆成手机端竖屏短片",
+      "evidence": "官方系列页列出 10 分钟纪录片和 4 集各 2 分钟短片，并附素材许可",
+      "url": "https://papermorph.diamonddoge.org/madness/"
+    },
+    {
+      "slug": "time-of-the-magicians",
+      "scenario": "历史或人文内容作者把年份、人物、地点组织成可探索地图",
+      "evidence": "官方页面覆盖 1919—1929，可切换年份并点击四位哲学家；本次验证切换到 1920",
+      "url": "https://papermorph.diamonddoge.org/time-of-the-magicians/"
+    }
+  ],
+  "titleCandidates": [
+    {
+      "type": "结果与清单",
+      "title": "教材、绘本、纪录片、历史地图：Papermorph 的 4 个真实案例"
+    },
+    {
+      "type": "反常识",
+      "title": "别只把 AI 当视频生成器：这个开源技能还能做互动课"
+    },
+    {
+      "type": "人群点名",
+      "title": "做课程和知识内容的人可以看看：一份资料如何变成互动书"
+    }
+  ],
+  "selectedTitles": {
+    "website": "教材、绘本、纪录片、历史地图：Papermorph 的 4 个真实案例",
+    "wechat": "教材变动画课，故事变纸偶片：Papermorph 的 4 个真实案例",
+    "zhihu": "Papermorph 值得试吗？从 4 个官方案例看互动内容的另一种做法"
+  },
+  "smallestCrediblePath": [
+    "安装技能并准备 uv、FFmpeg 与 Playwright 浏览器",
+    "提供一份有权使用的材料和明确的受众",
+    "只做一个章节或一个场景，先确认 style.json 与试样",
+    "检查内容、字幕、画面与交互，再决定是否批量制作"
+  ],
+  "boundaries": [
+    "适合需要多章节、统一风格、旁白同步和网页互动的内容作者",
+    "只想快速套模板出一条视频的人，不必承担这套流程的复杂度",
+    "原稿只是初剪，事实、公式、版权、配音与动画仍需人工复核",
+    "代码采用 MIT 许可证不等于素材可随意发布，模型与部分语音、绘画、视频服务可能收费"
+  ],
+  "status": "drafts_ready_for_user_review"
+}
