@@ -11,10 +11,10 @@ md = (base / "zhihu.md").read_text(encoding="utf-8")
 
 # 成功上传后，把本地相对路径 -> 知乎 CDN 的映射填这里
 IMG = {
-    "media/pipeline.png": "",
-    "media/contract.png": "",
-    "media/examples.png": "",
-    "media/limits.png": "",
+    "media/pipeline.png": "https://pic1.zhimg.com/v2-221b73b7f32a3a6ff77173f26edc00ec.png",
+    "media/contract.png": "https://pic1.zhimg.com/v2-e5497035c59421a602e722e193648677.png",
+    "media/examples.png": "https://pic1.zhimg.com/v2-74a2414f1b6c403bec01534eee6cb4a2.png",
+    "media/limits.png": "https://pic1.zhimg.com/v2-526e54be7245bed9f9b24530f1c91839.png",
 }
 missing = [k for k, v in IMG.items() if not v]
 if missing:

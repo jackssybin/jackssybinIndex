@@ -8,10 +8,10 @@ base = pathlib.Path("/root/jackssybinIndex/content-ops/winutil-windows-tweaks")
 md = (base / "zhihu.md").read_text(encoding="utf-8")
 
 IMG = {
-    "media/modules.png": "",
-    "media/compile-flow.png": "",
-    "media/safety.png": "",
-    "media/presets.png": "",
+    "media/modules.png": "https://picx.zhimg.com/v2-1af28791bf7bffc3548228b896474897.png",
+    "media/compile-flow.png": "https://picx.zhimg.com/v2-6b7815bec79b6e6103403703ac87bdd9.png",
+    "media/safety.png": "https://pica.zhimg.com/v2-44efe034c9d38c5b87e8ad01a54c2f6e.png",
+    "media/presets.png": "https://pic1.zhimg.com/v2-dbfc70e3712d8710c8e7c9fff8657c7f.png",
 }
 missing = [k for k, v in IMG.items() if not v]
 if missing:

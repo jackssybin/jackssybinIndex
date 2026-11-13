@@ -31,7 +31,14 @@
 - 独立 digest 66 字、content_source_url=GitHub，draft/update errcode 0（getcallbackip 验证 token 有效）
 - 引流模块 + 2 条真实内链（Cowart 画桌、Claude Code ADHD）
 
-## 三、知乎专栏（仅草稿）❌ 失败：登录令牌过期
+## 三、知乎专栏（仅草稿）✅ 2026-11-13 cookie 更新后补发成功
+- 正式稿（compact HTML，采用）：https://zhuanlan.zhihu.com/p/2104664563278930059
+  - id 2104664563278930059，4 图传 CDN 裸 img，7 个 h2，无紧凑性违规
+- ⚠️ 多余草稿待手动删（首次 markdown 传图产生）：id 2104664398778450064
+- 封面发布时手动选 cover-zhihu.png（1600×900）
+
+### 历史（cookie 过期阶段，已解决）
+~~## 三、知乎专栏（仅草稿）❌ 失败：登录令牌过期~~
 - 失败现象：图片上传 HTTP 401「无法解析的登录令牌」
 - 根因：/root/.hermes/secrets/zhihu_cookie.txt 的 z_c0 过期（文件停在 2026-10-13，近一个月未更新）；/api/v3/me 已返回登录页 HTML 而非 JSON
 - 处理：未静默标成功，未产出任何知乎草稿；微信走独立认证不受影响

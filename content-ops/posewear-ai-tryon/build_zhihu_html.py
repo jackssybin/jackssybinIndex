@@ -8,10 +8,10 @@ base = pathlib.Path("/root/jackssybinIndex/content-ops/posewear-ai-tryon")
 md = (base / "zhihu.md").read_text(encoding="utf-8")
 
 IMG = {
-    "media/flow.png": "",
-    "media/security.png": "",
-    "media/neutral.png": "",
-    "media/limits.png": "",
+    "media/flow.png": "https://picx.zhimg.com/v2-616825837a2fe2eddcb128d12defad1b.png",
+    "media/security.png": "https://picx.zhimg.com/v2-d00164ce1583bc42fff17e9c67271ba7.png",
+    "media/neutral.png": "https://picx.zhimg.com/v2-96b4a9629cbdd26c2687438356a4265e.png",
+    "media/limits.png": "https://picx.zhimg.com/v2-9a2551b44f6f8cfc1b59483b45488c06.png",
 }
 missing = [k for k, v in IMG.items() if not v]
 if missing:

@@ -34,7 +34,14 @@
 - 独立 digest 63 字、content_source_url=GitHub，draft/update errcode 0
 - 引流模块 + 2 条真实内链（AI 出图 Skill、DeepSeek 接入指南）
 
-## 三、知乎专栏（仅草稿）❌ 仍失败：cookie 过期未恢复
+## 三、知乎专栏（仅草稿）✅ 2026-11-13 cookie 更新后补发成功
+- 正式稿（compact HTML，采用）：https://zhuanlan.zhihu.com/p/2104665328680694808
+  - id 2104665328680694808，4 图传 CDN 裸 img，6 个 h2，无紧凑性违规
+- ⚠️ 多余草稿待手动删（首次 markdown 传图产生）：id 2104664482157016223
+- 封面发布时手动选 cover-zhihu.png（1600×900）
+
+### 历史（cookie 过期阶段，已解决）
+~~## 三、知乎专栏（仅草稿）❌ 仍失败：cookie 过期未恢复~~
 - 现象：/api/v3/me 仍返回登录页 HTML；cookie 文件停在 2026-10-13（与上一篇 novel-to-game 同一问题，用户尚未更新）
 - 处理：未静默标成功，未产出知乎草稿；微信走独立认证不受影响
 - 已备补发物料：zhihu.md（终稿）、build_zhihu_html.py（IMG 待 CDN 回填）、zhihu-compact.html（本地占位备份）、zhihu-retry.sh（一键补发）
