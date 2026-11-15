@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "anidoodle-c1",
+    "pose": "得意",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "把画画",
+      "写成代码"
+    ],
+    "subtitle": "anidoodle 代码手绘 · 1703 Star",
+    "hook": "读完8万行引擎和确定性契约，讲它凭什么分毫不差",
+    "giant": "32"
+  },
+  {
+    "slug": "anidoodle-c2",
+    "pose": "困惑",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "把画画",
+      "写成代码"
+    ],
+    "subtitle": "anidoodle 代码手绘 · 1703 Star",
+    "hook": "读完8万行引擎和确定性契约，讲它凭什么分毫不差",
+    "giant": "32"
+  },
+  {
+    "slug": "anidoodle-c3",
+    "pose": "委屈",
+    "accent": "#07C160",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "把画画",
+      "写成代码"
+    ],
+    "subtitle": "anidoodle 代码手绘 · 1703 Star",
+    "hook": "读完8万行引擎和确定性契约，讲它凭什么分毫不差",
+    "giant": "32"
+  }
+]
