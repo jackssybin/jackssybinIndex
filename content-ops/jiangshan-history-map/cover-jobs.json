@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "jiangshan-c1",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "拖动时间轴",
+      "看懂江山分合"
+    ],
+    "subtitle": "江山时序 交互舆图 · 7096 Star",
+    "hook": "翻完3.4万行零依赖代码，看它怎么做历史GIS",
+    "giant": "18"
+  },
+  {
+    "slug": "jiangshan-c2",
+    "pose": "喜爱",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "拖动时间轴",
+      "看懂江山分合"
+    ],
+    "subtitle": "江山时序 交互舆图 · 7096 Star",
+    "hook": "翻完3.4万行零依赖代码，看它怎么做历史GIS",
+    "giant": "18"
+  },
+  {
+    "slug": "jiangshan-c3",
+    "pose": "困惑",
+    "accent": "#F97316",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "拖动时间轴",
+      "看懂江山分合"
+    ],
+    "subtitle": "江山时序 交互舆图 · 7096 Star",
+    "hook": "翻完3.4万行零依赖代码，看它怎么做历史GIS",
+    "giant": "18"
+  }
+]
