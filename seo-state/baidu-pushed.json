@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-19T01:04:52.888Z",
+  "lastRunAt": "2026-11-19T03:32:12.674Z",
   "daily": {
     "date": "2026-11-19",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -2051,6 +2051,11 @@
       "pushes": 1,
       "lastmod": "2026-11-19T09:01:02+08:00",
       "pushedAt": "2026-11-19T01:04:52.888Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/19/maitian-publish-hub/": {
+      "pushes": 1,
+      "lastmod": "2026-11-19T11:28:16+08:00",
+      "pushedAt": "2026-11-19T03:32:12.674Z"
     }
   },
   "history": [
@@ -2426,6 +2431,11 @@
     },
     {
       "date": "2026-11-17",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-19",
       "pushed": 1,
       "source": "changed"
     },
