@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "maitian-c1",
+    "pose": "得意",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "一条视频",
+      "发七个平台"
+    ],
+    "subtitle": "麦田多平台发布中控 · 1355 Star",
+    "hook": "翻完源码看它怎么不碰密码还能防封号",
+    "giant": "7"
+  },
+  {
+    "slug": "maitian-c2",
+    "pose": "委屈",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "一条视频",
+      "发七个平台"
+    ],
+    "subtitle": "麦田多平台发布中控 · 1355 Star",
+    "hook": "翻完源码看它怎么不碰密码还能防封号",
+    "giant": "7"
+  },
+  {
+    "slug": "maitian-c3",
+    "pose": "喜爱",
+    "accent": "#3B82F6",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "一条视频",
+      "发七个平台"
+    ],
+    "subtitle": "麦田多平台发布中控 · 1355 Star",
+    "hook": "翻完源码看它怎么不碰密码还能防封号",
+    "giant": "7"
+  }
+]
