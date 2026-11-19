@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "concat-c1",
+    "pose": "开心",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "本地剪辑",
+      "AI 替你剪"
+    ],
+    "subtitle": "Concat 开源剪辑器 · 1.87万 Star",
+    "hook": "扒完18.9万行Rust，看它怎么用MCP做剪辑",
+    "giant": "22"
+  },
+  {
+    "slug": "concat-c2",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "本地剪辑",
+      "AI 替你剪"
+    ],
+    "subtitle": "Concat 开源剪辑器 · 1.87万 Star",
+    "hook": "扒完18.9万行Rust，看它怎么用MCP做剪辑",
+    "giant": "22"
+  },
+  {
+    "slug": "concat-c3",
+    "pose": "得意",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "本地剪辑",
+      "AI 替你剪"
+    ],
+    "subtitle": "Concat 开源剪辑器 · 1.87万 Star",
+    "hook": "扒完18.9万行Rust，看它怎么用MCP做剪辑",
+    "giant": "22"
+  }
+]
