@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-19T03:32:12.674Z",
+  "lastRunAt": "2026-11-19T07:27:21.720Z",
   "daily": {
     "date": "2026-11-19",
-    "pushed": 2
+    "pushed": 3
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -2056,6 +2056,11 @@
       "pushes": 1,
       "lastmod": "2026-11-19T11:28:16+08:00",
       "pushedAt": "2026-11-19T03:32:12.674Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/19/stickman-video-skill/": {
+      "pushes": 1,
+      "lastmod": "2026-11-19T15:23:29+08:00",
+      "pushedAt": "2026-11-19T07:27:21.720Z"
     }
   },
   "history": [
@@ -2431,6 +2436,11 @@
     },
     {
       "date": "2026-11-17",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-19",
       "pushed": 1,
       "source": "changed"
     },
