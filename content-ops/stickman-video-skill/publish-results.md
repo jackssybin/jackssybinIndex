@@ -39,3 +39,9 @@
 ## 配图 QA
 - 火柴人手绘涂鸦风（米白纸底+手绘黑线条+亮蓝/橙/红三原色，封面含手绘火柴人）
 - grep 检查无 yy 漏等号；5 图全部 vision_analyze 复检；数字 73 references/57 scripts/485 断言均经 find 核实
+
+## 线上复核（CI success 后实测）
+- 文章页 200，title 正确：https://jackssybin.cn/articles/2026/11/19/stickman-video-skill/
+- 首页 HTML 已收录本文（grep 4 处）；data/home.json 是 Hugo 构建数据源不对外发布（线上 /data/home.json 404 属正常），构建时编译进首页
+- 线上 search-index.json 完整下载后为合法 JSON、647 条目、含 stickman 4 次（早期 grep=0 是 curl 下载截断假象，--compressed 完整拉取后确认正常）
+- 本地复跑标准流程 sync-site + hugo：产物 search-index 与首页均含 stickman，与 CI 同命令一致
