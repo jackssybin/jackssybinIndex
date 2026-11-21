@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-21T05:40:17.708Z",
+  "lastRunAt": "2026-11-21T17:34:22.020Z",
   "daily": {
-    "date": "2026-11-21",
-    "pushed": 1
+    "date": "2026-11-22",
+    "pushed": 7
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -408,9 +408,9 @@
       "pushedAt": "2026-09-28T06:09:31.422Z"
     },
     "https://jackssybin.cn/articles/2026/09/28/anything2explainer/": {
-      "pushes": 1,
-      "lastmod": "2026-09-28T21:33:07+08:00",
-      "pushedAt": "2026-09-29T06:27:35.946Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/articles/2026/09/28/easel-social-media-agent/": {
       "pushes": 1,
@@ -1088,9 +1088,9 @@
       "pushedAt": "2026-10-15T05:27:35.471Z"
     },
     "https://jackssybin.cn/articles/2026/10/16/superpowers-agent-skills-methodology/": {
-      "pushes": 1,
-      "lastmod": "2026-10-16T12:04:28+08:00",
-      "pushedAt": "2026-10-16T04:08:57.086Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/articles/2026/06/08/odysseus-user-manual.html": {
       "pushes": 1,
@@ -1823,9 +1823,9 @@
       "pushedAt": "2026-11-03T05:32:56.137Z"
     },
     "https://jackssybin.cn/articles/2026/11/03/charles-video-maker/": {
-      "pushes": 1,
-      "lastmod": "2026-11-04T10:34:40+08:00",
-      "pushedAt": "2026-11-04T02:39:03.051Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/mysql/03/13.html": {
       "pushes": 1,
@@ -1863,9 +1863,9 @@
       "pushedAt": "2026-11-04T07:08:13.438Z"
     },
     "https://jackssybin.cn/articles/2026/11/05/agent-desktop-computer-use/": {
-      "pushes": 1,
-      "lastmod": "2026-11-05T13:49:40+08:00",
-      "pushedAt": "2026-11-05T05:54:00.687Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/mysql/05/20.html": {
       "pushes": 1,
@@ -2003,9 +2003,9 @@
       "pushedAt": "2026-11-09T12:22:34.821Z"
     },
     "https://jackssybin.cn/articles/2026/11/10/aperant-multi-agent-coding/": {
-      "pushes": 1,
-      "lastmod": "2026-11-10T13:58:06+08:00",
-      "pushedAt": "2026-11-10T06:02:08.566Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/articles/2026/11/10/yingce-ai-film-canvas/": {
       "pushes": 1,
@@ -2033,9 +2033,9 @@
       "pushedAt": "2026-11-13T08:00:14.413Z"
     },
     "https://jackssybin.cn/articles/2026/11/13/papermorph/": {
-      "pushes": 1,
-      "lastmod": "2026-11-14T00:20:37+08:00",
-      "pushedAt": "2026-11-13T16:27:48.800Z"
+      "pushes": 2,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/articles/2026/11/15/anidoodle-code-art/": {
       "pushes": 1,
@@ -2066,6 +2066,11 @@
       "pushes": 1,
       "lastmod": "2026-11-21T13:36:13+08:00",
       "pushedAt": "2026-11-21T05:40:17.708Z"
+    },
+    "https://jackssybin.cn/services/": {
+      "pushes": 1,
+      "lastmod": "2026-11-22T01:25:07+08:00",
+      "pushedAt": "2026-11-21T17:34:22.020Z"
     }
   },
   "history": [
@@ -2462,6 +2467,11 @@
     {
       "date": "2026-11-21",
       "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-22",
+      "pushed": 7,
       "source": "changed"
     }
   ]
