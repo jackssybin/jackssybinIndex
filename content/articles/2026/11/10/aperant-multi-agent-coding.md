@@ -2,6 +2,8 @@
 title: "1.46 万 Star 的 Aperant：给 Claude Code 套上 12 路并行的桌面军团，我把源码翻了个底朝天"
 slug: "aperant-multi-agent-coding"
 date: 2026-11-10
+topic: "开源实测"
+topicSlug: "open-source-review"
 draft: false
 categories: ["开源项目", "AI编程"]
 tags: ["开源", "Aperant", "Claude Code", "AI编程", "多智能体", "Electron", "git worktree", "AGPL", "自动化"]

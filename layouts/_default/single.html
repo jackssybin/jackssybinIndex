@@ -20,7 +20,11 @@
       {{ end }}
       {{ end }}
 
+      {{ if or (eq .Section "articles") .Params.markdownContent }}
+      <div class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+      {{ else }}
       {{ .Content }}
+      {{ end }}
 
       {{ if eq .Section "articles" }}
       {{ with .Params.tags }}
@@ -58,7 +62,7 @@
         <main class="fn-clear">
           <img src="/images/sidebar-avatar.jpg" alt="jackssybin">
           <p>jackssybin</p>
-          <p class="ft-gray">记录精彩的程序人生</p>
+          <p class="ft-gray">真跑通，才推荐</p>
         </main>
       </section>
       <section class="module">

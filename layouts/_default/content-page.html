@@ -3,7 +3,11 @@
 <div class="wrapper">
   <div class="main-wrap">
     <main class="other">
+      {{ if .Params.markdownContent }}
+      <div class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+      {{ else }}
       {{ .Content }}
+      {{ end }}
       {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
     </main>
   </div>

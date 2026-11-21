@@ -2,6 +2,8 @@
 title: "别用 Sora 硬刚科普了：给个主题，这个开源 skill 用代码\"画\"出整条讲解视频"
 slug: "anything2explainer"
 date: 2026-09-28
+topic: "开源实测"
+topicSlug: "open-source-review"
 draft: false
 categories: ["AI工具", "开源项目", "AI视频"]
 tags: ["AI", "开源", "AI视频", "Claude Code", "Remotion", "科普", "Agent Skill"]

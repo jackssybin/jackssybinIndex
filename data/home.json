@@ -214,8 +214,8 @@
       "date": "2026-11-13",
       "description": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
       "excerpt": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "Papermorph",
@@ -258,8 +258,8 @@
       "date": "2026-11-10",
       "description": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
       "excerpt": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -428,8 +428,8 @@
       "date": "2026-11-05",
       "description": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
       "excerpt": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -452,8 +452,8 @@
       "date": "2026-11-03",
       "description": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
       "excerpt": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -593,8 +593,8 @@
       "date": "2026-10-16",
       "description": "obra/superpowers 是一年涨到 30 万 Star 的编码 Agent 方法论插件：15 个可组合 skill 加一个 SessionStart 钩子，强制 AI 先头脑风暴、再写规格与计划、用子 Agent 执行、TDD、评审。本文克隆 v7.0.0 源码、实跑启动钩子，拆解它的注入机制、七步工作流、跨 16 种 Agent 外壳的适配，以及那个反直觉的 94% PR 拒绝率。",
       "excerpt": "obra/superpowers 是一年涨到 30 万 Star 的编码 Agent 方法论插件：15 个可组合 skill 加一个 SessionStart 钩子，强制 AI 先头脑风暴、再写规格与计划、用子 Agent 执行、TDD、评审。本文克隆 v7.0.0 源码、实跑启动钩子，拆解它的注入机制、七步工作流、跨 16 种 Agent 外壳的适配，以及那个反直觉的 94% PR 拒绝率。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -653,75 +653,6 @@
       "content": "看到竞品 App 里一个做得好的功能，想弄清原理再自己实现一个，传统路径是什么？解包、拖进 Hopper 或 Ghidra、搜字符串、追交叉引用，再在反编译窗口和笔记之间来回切换，几天就过去了。如果这个过程能直接交给 AI Agent——但不是让模型「猜」，而是让它调用真正的反汇编引擎、每一句结论都附上函数地址和源码行号呢？ 这就是 morluto/rea（Reverse Engineer Anything）在做的事。2026 年 4 月建仓，到 10 月已经有 8.3 万 Star、1.8 万 Fork ，npm 包 rea agents 迭代到 6.4.0，几乎每天发版。我把仓库克隆下来通读了架构，并在本机用一个真实构造的 Electron 小工程跑通了它的静态分析。这篇文章讲三件事：它到底怎么工作、我实测拿到了什么、以及谁该现在就装、谁应该再等等。 一个 MCP 服务，把「逆向工具箱」接给所有 Agent REA 的形态很克制：它本身 不是 反汇编器，也不是一个带聊天框的新产品。它是一个本地 MCP（Model Context Protocol）服务加一个同名 CLI，对上以标准 MCP 协议服务 AI Agent，对下用各自的桥接脚本驱动你机器上已经装好的分析工具。 设置只需要一条命令，它会注册 MCP 服务、装入配套的调查工作流 skill，并先备份原有配置： 我在这台 Linux 机器上跑了 setup client hermes dry run json（我自己就跑在 Hermes 上），dry run 输出清楚列出了两个计划动作：往 /.hermes/config.yaml 加一条 npx rea agents mcp 的 stdio 注册，以及安装 reverse engineer anything skill，备份路径是 config.yaml.rea.backup，批准前不落盘。支持列表里有 17 种客户端：Claude Code、Claude Desktop、Codex、Cursor、Gemini CLI、Windsurf、Devin、OpenCode、GitHub Copilot CLI、VS Code、Grok Build、Qwen Code、Hermes 等，任何支持本地 MCP 的客户端也能手动注册。 下一层是引擎桥接，全部在仓库的 bridge/ 目录里可以直接读到源码： Hopper ：bridge/hopper bridge.py，通过 Python 桥驱动；setup 甚至可以在你批准后代装 Hopper。 Ghidra ：bridge/ghidra/ReaGhidraBridge.java 等一组 Java 扩展，跑在 Ghidra 进程里。 IDA / JEB ：不直接控制，而是对接对方提供的 MCP 服务（如 REA IDA MCP CONFIG、REA JEB MCP URL），REA 做编排层。 JADX / Apktool / adb / mitmproxy / Chrome ：Android、资源、抓包、浏览器观测各自独立桥接。 我数了一下 src/server/register .ts，当前版本一共注册了 91 个 MCP 工具 。CLI 与 MCP 共用同一套 workflow 和证据契约，这意味着你在终端里 rea analyze 得到的结果结构，和 Agent 调工具拿到的完全一致。 本机实测：3 个文件的假 Electron 应用 空谈架构没有意义。我构造了一个最小但真实的 Electron 通信场景：主进程 main.js 用 ipcMain.handle(\"sign\", ...) 注册了一个 SHA 256 通道，渲染进程 renderer.js 通过 ipcRenderer.invoke(\"sign\", t) 调用它。静态 JS 分析不需要 Hopper/Ghidra，装好 Node 22+ 即可，这也是 REA 门槛最低的一条路径。 命令退出码 0，经历了 create → validate → seal → hash 四个证据阶段，产出一份 144,695 字节 的 JSON。里面不是一段自然语言「分析报告」，而是一张带哈希的证据图： 几个我逐个核对过原始 JSON 的关键数字： relevant files: 3、parsed javascript files: 2、visited ast nodes: 71，识别边界和实际文件完全一致； IPC 汇总里 operations: 1、main handlers: 1、literal channels: 1，并且把通道名恢复成了字面量 \"sign\"； 语义图 60 个节点、27 条关系，渲染进程里的 signText 函数节点带着精确到行列的 source range（renderer.js 第 2 行第 15 列起），每个节点还挂着文件 sha256； unknowns: 24——main.js 第 2 行的 require(\"electron\") 被如实标记成 dynamic call / Unresolved call target require，而不是硬猜。 最后这一点是整个项目最打动我..."
     },
     {
-      "title": "18000 Star 的「手机号定位神器」？我读完 316 行源码，劝你别用来定位任何人",
-      "url": "/articles/2026/10/10/ghosttrack-osint-menu-teardown/",
-      "type": "blog",
-      "date": "2026-10-10",
-      "description": "GitHub 上 18k Star 的 GhostTrack 自称能追踪位置和手机号。本文逐行读完它唯一的 316 行 Python 源码并在本机实测，拆解 IP Tracker、Phone Tracker、Username Tracker 三个菜单背后真正的数据源，指出它做不到什么、代码有哪些真实缺陷，以及普通人如何用它背后的知识识破「付费定位」骗局。",
-      "excerpt": "GitHub 上 18k Star 的 GhostTrack 自称能追踪位置和手机号。本文逐行读完它唯一的 316 行 Python 源码并在本机实测，拆解 IP Tracker、Phone Tracker、Username Tracker 三个菜单背后真正的数据源，指出它做不到什么、代码有哪些真实缺陷，以及普通人如何用它背后的知识识破「付费定位」骗局。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "OSINT",
-        "信息安全",
-        "Python",
-        "祛魅",
-        "隐私保护",
-        "防诈骗"
-      ],
-      "priority": 0,
-      "content": "每隔一段时间，中文互联网上就会流传一类视频：黑客风格的绿色终端，输入一个手机号，屏幕刷出一串「归属地、运营商、经纬度」，然后弹幕惊呼「这也能查到？」。这类视频背后高频出现的工具之一，就是 GitHub 上拿到约 1.8 万 Star 的 GhostTrack，自我介绍是「track location or mobile number」。 我把它克隆下来通读了全部源码。结论先放这里： 整个项目只有一个 316 行的 Python 文件，三个菜单背后是一个免费 IP 查询 API、一个离线号段库和一轮粗糙的网页状态码探测。它不能定位任何人。 但这恰恰是值得写它的原因——搞懂这 316 行，你就能同时看懂三件事：IP 归属地查询的真实精度、手机号「定位」话术的骗局结构，以及 OSINT（公开信息搜集）的正确姿势。 三个菜单，三个公开数据源 GhostTrack 的菜单有四项：IP Tracker、Show Your IP、Phone Number Tracker、Username Tracker。逐一拆开： IP Tracker 做的事 ，是向免费接口 http://ipwho.is/ 发一个 GET 请求，把返回的国家、城市、经纬度、ISP、ASN、时区打印出来。这就是任意 IP 信息查询网站（ipwhois、ip api 等几十家）都提供的公开数据。注意请求走的是 明文 HTTP 。 Phone Tracker 更简单 ：它用的是 Google 开源号段库 libphonenumber 的 Python 移植 phonenumbers，解析号码的国家码、号段归属地、运营商和格式有效性。这一步 完全离线 ，号码不离开你的电脑——因为它需要的信息早就写死在号段分配表里了。 Username Tracker 则是在 23 个社交网站的 URL 模板里填入用户名，挨个发 GET，状态码 200 就判定「该用户名存在」。 本机实测：它到底输出什么 我没有用它的交互菜单，而是直接调用了三段核心逻辑（测试目标只用公共 IP 和示例号段）： 查 8.8.8.8（Google 公共 DNS）：返回美国圣何塞、ISP 为 Google LLC、坐标 37.34, 121.89。这是 DNS 服务器机房的登记位置。 解析 +86 开头示例号码：返回「北京市 / China Mobile / 有效」；印尼号段返回「印度尼西亚 / Telkomsel」。全程无网络请求。 用户名探测：github.com/github 返回 200，一个乱编的用户名返回 404——逻辑就这一行状态码判断。 源码里三个值得说的工程问题 读源码时我还发现了三个实打实的问题，它们比「能不能追踪」更能反映项目质量： 1. 经纬度被 int() 截断。 第 59 60 行写着 lat = int(ip data['latitude'])、lon = int(ip data['longitude'])，把 121.8949553 直接抹成 121。经纬度上 0.9 度的误差在地面上可达近百公里——一个号称定位的工具，亲手把唯一还算有用的精度抹掉了。 2. IP 查询走明文 HTTP （http://ipwho.is），同一批数据其实有 HTTPS 端点可用。在不可信网络下，查询内容可被中间人看到。 3. 用户名探测列表陈旧且会误报。 列表里的 Periscope、StumbleUpon 早已关闭；Snapchat 重复出现两次；更普遍的问题是，现代网站大量是单页应用，无论用户名存不存在，首页和个人页都可能对爬虫返回 200，于是「查得到」并不代表账号真的存在。代码也没有任何请求间隔，23 个请求瞬间打出，很容易触发风控或被临时封禁。 另外，项目 没有 LICENSE 文件 （GitHub API 也确认 license 为 None）。严格说，在作者补上开源协议前，你连「自由使用、修改、再分发」的法律授权都没有，尽管源码是公开的。仓库最后一次代码推送停在 2024 年 1 月。 名字叫 Tracker，但先分清它做不到什么 这是全文最重要的一张图。三点必须讲清楚： 手机号查不到实时位置。 号段归属城市是运营商分配号段时的登记信息，和机主此刻站在哪条街没有任何关系。真正的基站定位只掌握在运营商和依法定程序调取的执法机关手里。任何声称「输入手机号就能实时定位」的第三方网站、App、付费服务，要么用的就是 GhostTrack 这种号段查询冒充定位，要么是诈骗——多数时候两者皆是。 IP 坐标不是家庭住址。 它指向的是运营商局端或机房，移动网络下可能跨城市偏差，家庭宽带通常也只能到城市/区县一级。 用户名探测不是监控。 它只是访问公开主页，拿不到任何私密信息，也无法持续跟踪。 那么它（以及它背后的技术）合法正当的用途是什么？排查一条骚扰/攻击来源 IP 的归属地、在表单里校验手机号格式与国别、以及注册品牌名或笔名前 自查 这个用户名在各平台是否已被占用——这些都是标准的网络运维和 OSINT 自我保护动作。区别在于：查自己、查公开数据是防御；试图在他人不知情时定位他人，既做不到，也越界。 给两类读者的建议 如果你只是刷到了「定位神器」视频 ：不用装。它展示的信息，任何 IP 查询网..."
-    },
-    {
-      "title": "下载、转写、AI 总结别再来回切：我把 VidBee 和四类工具摊开对比了一遍",
-      "url": "/articles/2026/10/10/vidbee-vs-download-transcription-tools/",
-      "type": "blog",
-      "date": "2026-10-10",
-      "description": "下载、转写、AI 摘要三场接力是音视频工作的常态。本文以 10.8k Star 的开源项目 VidBee 为锚点，与本地转写工具 Buzz/MacWhisper、yt-dlp 图形下载器 Stacher、飞书妙记/Notta/通义听悟等云服务逐项对比，给出能力定位象限图、源码级差异、选型边界和谁该用/谁该等的判断。",
-      "excerpt": "下载、转写、AI 摘要三场接力是音视频工作的常态。本文以 10.8k Star 的开源项目 VidBee 为锚点，与本地转写工具 Buzz/MacWhisper、yt-dlp 图形下载器 Stacher、飞书妙记/Notta/通义听悟等云服务逐项对比，给出能力定位象限图、源码级差异、选型边界和谁该用/谁该等的判断。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "视频下载",
-        "语音转写",
-        "Whisper",
-        "AI总结",
-        "工具横评",
-        "VidBee",
-        "播客"
-      ],
-      "priority": 0,
-      "content": "拿到一段两小时的访谈视频，想存档、想要带说话人标记的逐字稿、还想让 AI 提炼要点，今天大多数人的工作流是三场接力：先用某个下载工具或解析网站把视频弄下来，再把文件上传到飞书妙记、Notta 或通义听悟转写，等半小时，最后复制稿子去 ChatGPT 做总结。三个工具、三次上传，中间夹着时长限制、月度额度，以及「这段商业内容传云端合适吗」的犹豫。 我两天前刚拆解过 GitHub 上 10.8k Star 的开源项目 VidBee（本系列上一篇 讲它的架构）。这篇换个视角：不回答「VidBee 是什么」，而回答一个更实际的问题—— 我已经有下载器 / 已经在用 Buzz / 已经买了云转写会员，还需要它吗？ 我把它和四类常见工具摊在同一张表上对比，并标出每一种选择的边界。 先给结论：工具分四类，VidBee 占的是右上象限 按「下载/订阅能力」和「转写/提取能力」两个维度，市面上的工具可以分成四堆： 下载器 （yt dlp 及其图形壳，如 Stacher、Motrix 类）：下载强、不管转写； 本地转写工具 （Buzz、MacWhisper 等）：转写强、不管下载； 云端转写服务 （飞书妙记、Notta、通义听悟等）：转写和摘要质量高，但文件要上传、按时长或会员计费； VidBee ：唯一同时占住「强下载 + 强转写」右上角的 本地方案 ，并在两者之间用一个资料库串起来。 需要强调：象限图是能力覆盖的 定性判断 ，不是精确跑分。云端服务的转写准确率、说话人分离效果通常是第一梯队，这一点不应因为推荐开源而被抹掉。 逐项对比：差异不在功能有无，而在工作流断点 逐行看，真正拉开差距的是三个位置。 第一，下载与转写之间有没有断点。 用 Stacher 下载完、再手动导入 Buzz 转写，功能上完全走得通，但每处理一个文件都要在两个应用间倒一次手：找文件、拖进去、等结果、再另存。VidBee 把 yt dlp 下载内核（packages/downloader core）和转写内核（packages/transcription）放进同一个 monorepo，可以设置 下载完成后自动开始转写 ，队列、文件路径、状态都在同一张 SQLite 表里。对一次处理几十个视频的人，省掉的是几十次手动搬运。 第二，转写模型的宽度和说话人分离的工程深度。 Buzz（GitHub 约 21.9k Star，MIT，至今活跃）是优秀的本地转写工具，核心围绕 Whisper 生态。VidBee 的模型目录（packages/transcription/src/model catalog.ts）覆盖 Whisper、SenseVoice、Parakeet、Qwen3 ASR 四个家族 ，中文用户可以直接走 SenseVoice / Qwen3 ASR 路线。更关键的是它的说话人分离是独立流水线：speaker embed（声纹嵌入）→ speaker count（人数估计）→ speaker cluster（聚类），且支持 指定人数后重新标注但不重新识别全文 。diarization 出错后不必全文重跑，这个细节处理多人访谈时很救命。 第三，AI 步骤的 provider 自由，以及一个必须说清的隐私边界。 云服务的 AI 摘要是开箱即用的；VidBee 则允许接 OpenAI、Anthropic、Google、DeepSeek、OpenRouter、xAI 等十几家，也支持自定义 Base URL。隐私上要分清两件事： 语音识别默认在本机跑，媒体文件不上传 ；但当你运行 AI 提示词时，提示词和文稿内容会发送给所选 provider——选 Ollama 或 LM Studio 本地端点，才能让 AI 这一步也留在本机。 下载与 RSS：它本质上是一个「带转写的下载器」 很多人忽略 VidBee 的下载部分本身已经做到专业下载器的水准：批量链接、播放列表、频道，实时速度/文件大小/格式可见，任务可暂停、恢复、重试；容器支持 Auto（MP4/MKV）、MP4、MKV、WebM、Original，可嵌入缩略图封面、章节、字幕和元数据。 RSS 订阅是它区别于所有转写工具的一招：为每个播客/频道单独设定关键词过滤、自动打标签、自定义目录和文件名模板，新节目出现后自动入队或等你手动确认。常听播客的人等于拿到了一个「追更即转写」的管线。 怎么选：四种人群的明确答案 你已经在用命令行 yt dlp 且只要下载 ：继续用 yt dlp。VidBee 的图形队列对你是多余重量。 你偶尔转写本地录音，频次低 ：Buzz / MacWhisper 足够，模型生态成熟，不必为下载功能买单。 你要处理大量在线视频/播客，且在意隐私或云费用 ：VidBee 的「下载即转写即总结」一体化最划算，尤其适合播客作者、访谈剪辑、做内容归档的研究者。 你追求最高转写准确率、对每月会员费不敏感、内容不敏感 ：直接用飞书妙记/Notta，云端 diarization 和编辑体验目前仍是最省心的。也可以两者组合：日常批量走 VidBee，重要硬骨头丢云端。 上手路径与未验证项 最小路径：从 vidbee.org/download 下载桌面端，粘贴一个链接下载，在设置里让它按语言推荐并下载一个 AS..."
-    },
-    {
-      "title": "飞书妙记收费、Notta 限时长：这个开源 App 把下载、转写、AI 总结全搬回你电脑",
-      "url": "/articles/2026/10/08/vidbee-local-transcription-library/",
-      "type": "blog",
-      "date": "2026-10-08",
-      "description": "VidBee 是 GitHub 上 10.8k Star 的开源桌面应用，支持 1000+ 站点下载、本地 Whisper/SenseVoice/Parakeet/Qwen3-ASR 转写、说话人分离与多 provider AI 摘要，并可 Docker 自托管。本文基于源码与官方界面截图拆解其统一流水线架构，给出桌面与 NAS 两条上手路径、与云转写服务的对比，以及谁该用/谁该等的判断。",
-      "excerpt": "VidBee 是 GitHub 上 10.8k Star 的开源桌面应用，支持 1000+ 站点下载、本地 Whisper/SenseVoice/Parakeet/Qwen3-ASR 转写、说话人分离与多 provider AI 摘要，并可 Docker 自托管。本文基于源码与官方界面截图拆解其统一流水线架构，给出桌面与 NAS 两条上手路径、与云转写服务的对比，以及谁该用/谁该等的判断。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "视频下载",
-        "语音转写",
-        "Whisper",
-        "AI总结",
-        "Docker",
-        "NAS",
-        "播客",
-        "Electron"
-      ],
-      "priority": 0,
-      "content": "一个两小时的播客访谈，想存档、想拿到带说话人标记的逐字稿、还想让 AI 提炼出要点——今天多数人的做法是三场接力：先在某个下载网站把视频弄下来，再上传到飞书妙记或 Notta 等转写，等半小时拿到稿子，最后复制粘贴进 ChatGPT 做总结。三个工具、三次上传，中间还要忍受时长限制、月度额度，以及「这段内容涉及商业信息，传到云端合适吗」的犹豫。 最近我把 GitHub 上 10.8k Star 的开源项目 VidBee 克隆下来通读了源码。它由独立开发者 @nexmoe 维护，MIT 协议，2025 年 10 月才建仓，一年内涨到近 1.1 万 Star，目前最新版是 2026 年 8 月 30 日发布的 v2.1.0。它干的事情一句话概括： 把下载、本地语音识别、说话人分离、AI 摘要和 RSS 追更，缝合成一个带资料库的桌面 App，媒体文件全程不必离开你的电脑 。这篇文章基于源码结构和官方界面截图，讲清楚它的机制、两条上手路径和适用边界。 核心机制：一条本地流水线，一个 SQLite 库 VidBee 的仓库是一个 pnpm monorepo，根目录的 pnpm workspace.yaml 把应用和共享包分得很清楚： apps/desktop：Electron 桌面端（Windows / macOS / Linux）； apps/api + apps/web：Fastify API 服务和 TanStack Start 网页客户端，可以用 Docker 部署到 NAS； packages/：downloader core（下载内核）、transcription（转写内核）、subscriptions core（RSS 订阅）、task queue（任务队列）、db（数据库）等共享包。 这个结构本身就说明了它的设计取向： 下载和转写不是写死在界面里的功能，而是独立的内核包，桌面端和 Web 端各做一层壳。 README 里也明确写道，Web API 与桌面端使用同一套 SQLite 文件布局——一个 vidbee.db 同时存下载队列、历史记录、转写文本和 RSS 订阅。 数据流是这样的：链接（或 RSS 发现的新条目）进入任务队列，downloader core 调用 yt dlp 和 FFmpeg 完成下载；随后 transcription 包在本地拉起 ASR 模型出逐字稿；独立的说话人模块（源码里的 speaker embed.ts、speaker cluster.ts、speaker count.ts）做声纹嵌入和聚类，把稿子切成「说话人 1 / 2 / 3」；最后你可以把整段稿子发给任意一家 AI provider 做摘要或翻译。 源码级洞察：转写跑在 Worker 里，说话人分离是独立流水线 读 packages/transcription/src/ 目录，有两个值得注意的工程取舍。 第一，ASR 推理跑在独立的 Worker 里（worker/entry.ts + worker/protocol.ts），主进程只通过协议消息和它通信。这意味着下载两小时音视频后跑转写，界面不会被模型推理卡死，任务可以排队、可以限制同时运行的转写任务数。模型选择上，它支持 Whisper、SenseVoice、Parakeet 和 Qwen3 ASR 四个家族，并能根据你的电脑和语言推荐模型——这个覆盖面比绝大多数只封装 Whisper.cpp 的工具宽，中文用户可以直接选 SenseVoice 或 Qwen3 ASR 路线。 第二，说话人分离不是 ASR 的附属功能，而是一条独立的三段式流水线：先 speaker embed 提取声纹向量，再 speaker count 估计人数，最后 speaker cluster 聚类；speaker refine.ts 还支持 固定说话人人数后重新标注、但不改动已识别的文字 。这正好解决了 diarization（声纹分割）最常见的痛点：自动估计人数错了，你只能设一个确定人数重跑，而不用重新识别一遍全文。 转写稿是可搜索的：按发言人或正文关键词搜，点时间戳直接从那一秒继续播放。导出支持纯文本、Markdown，甚至可以另存一个带可选字幕或烧录字幕的新视频。 AI 环节：provider 自选，prompt 也是资产 隐私模型上，VidBee 的边界划得很诚实： 语音识别在本地跑，但执行 AI 提示词时，提示词和转写内容会发给你选的 provider 。想彻底离线，可以接 Ollama 或 LM Studio 的本地端点。 内置支持的 provider 有 11 家：OpenAI、Anthropic、Google、DeepSeek、Groq、Azure、Hugging Face、OpenRouter、xAI、Ollama、LM Studio，也可以填自定义 Base URL 和模型 ID。内置提示词覆盖摘要、语法清理、FAQ、数据提取、思维导图、改写和翻译，而且提示词本身可以新建、编辑、拿示例稿测试、恢复默认。API Key 只存在本机。 上手路径一：桌面端，零配置 到官网下载页取对应平台安装包（仓库的 release 提供 Windows、macOS Intel/Apple ..."
-    },
-    {
       "title": "20.4k Star 的视频号下载器，我把源码翻了一遍：它其实是个「傻瓜版 Charles」",
       "url": "/articles/2026/10/04/res-downloader-proxy-sniffer/",
       "type": "blog",
@@ -745,59 +676,14 @@
       "content": "刷视频号时看到一条想存档的采访，小红书里有个教程想离线反复看，小程序里买的课想在电脑上留一份——打开 App 找了一圈，没有任何「保存」按钮。这类需求每天都有，但平台们默契地不给入口。 通用下载器解决不了这个问题：IDM、Motrix 这类工具的前提是你手里有一个真实的媒体 URL，而视频号、小程序、小红书的视频地址藏在加密的 HTTPS 流量里，还带着动态鉴权参数，普通用户根本看不见、也复制不出来。 最近我把 GitHub 上 20.4k Star 的开源项目 res downloader（中文名「爱享素材下载器」）拉下来通读了一遍源码。它支持视频号、小程序、抖音、快手、小红书、酷狗、QQ 音乐、m3u8 和直播流，Apache 2.0 协议，用 Go + Wails 写成，跨 Windows / macOS / Linux，截至今天（10 月 4 日）还在发布 4.0.0 beta.6。读完最大的感受是： 它根本不是什么「破解工具」，而是一个把专业抓包软件做成「点一下就行」的 MITM 代理。 这篇文章讲清楚它的机制、用法、风险和适用边界。 核心机制：本地代理 + 自签证书 + 实时筛选 理解 res downloader，只要理解一句话： 它在你自己的电脑上开了一个代理服务器，让你的流量先经过它，再由它筛选出视频、音频、图片。 项目的底层依赖是 Go 生态里成熟的中间人代理库 goproxy（go.mod 里写得很清楚：github.com/elazarl/goproxy v1.7.2）。整体数据流是这样的： 1. 点击「启动代理」后，程序在本机 127.0.0.1:8899 端口启动代理（端口写在 core/config.go 的默认配置里），并自动把系统代理指向它； 2. 安装时要求信任的那个「证书文件」，是程序动态生成的自签 CA 根证书。有了它，代理才能对 HTTPS 流量做中间人解密——core/proxy.go 的 setCa() 里把生成的证书赋给 goproxy.GoproxyCa，这一步和 Fiddler、Charles 首次启动时让你装证书是完全相同的原理； 3. 你在手机或电脑上播放视频时，媒体请求经过代理，程序的响应钩子按 Content Type 和域名实时判断这是不是一个视频/音频/图片资源（core/plugins/plugin.default.go 的 OnResponse 只处理 200、206、304 三种响应，再用 TypeSuffix 映射 MINE 类型）； 4. 命中的资源通过 WebSocket 推给前端列表，你看到的就是一个干净的「可下载资源清单」，而不是 Charles 里几千条混杂请求。 换句话说，它做的事情和 Fiddler / Charles / 浏览器 DevTools 的 Network 面板 在原理上一模一样 ，作者在 README 里也没有掩饰这一点。区别只在于：专业工具把所有原始请求丢给你，让你自己在瀑布流里找 .mp4；res downloader 替你完成了筛选、分类、命名和下载。 非显然的工程细节：规则引擎和平台插件 如果只是「按 Content Type 抓视频」，这个项目不值 2 万 Star。源码里有两个值得说的设计。 一是域名规则引擎。 core/rule.go 实现了一套文本规则集，支持三种写法： 匹配所有域名、 .example.com 通配子域、以 ! 开头表示否定规则。规则逐行解析、内存匹配，加了读写锁。这意味着抓哪些站、屏蔽哪些站的噪音，不需要改代码，改规则文本即可——这是典型的「机制与策略分离」。 二是插件化的平台特判。 通用插件（DefaultPlugin）注册在 \"default\" 域名上，按 MINE 类型通吃；而 core/plugins/plugin.qq.com.go 是一个专门的 QQ 系插件，注册在 qq.com 域名，里面有大量针对性处理，我在源码里核对到的包括： 对 finder.video.qq.com（视频号 CDN）的视频流单独识别，并校验请求来自 mp.weixin.qq.com； 对 channels.weixin.qq.com、res.wx.qq.com 的特殊响应改写 JS 内容（replaceWxJsContent），用正则替换视频号异步取评论等函数——小程序场景下甚至通过注入 fetch 请求配合完成资源上报； 视频号部分视频是加密传输的，项目单独实现了 core/aes.go 的 AES 加解密，下载后在界面上点「视频解密（视频号）」才能得到可播放文件。 这套「通用插件兜底 + 特殊平台插件」的注册表结构（proxy.go 里的 pluginRegistry map[string]shared.Plugin）解释了为什么它能持续加平台：每支持一个需要特殊处理的站点，写一个实现 Domains()/OnRequest()/OnResponse() 的插件注册进去就行，主代理流程一行不用动。 使用步骤：关键在「证书」和「同一网络」 官方流程很短，但有几个新手最容易翻车的点，我按实际操作顺序整理： 1. 下载安装 ：从 GitHub Releases 下载对应平台安装包，也有蓝奏云镜像。安..."
     },
     {
-      "title": "外包报价上万的产品宣传片，我把仓库链接丢给 Claude Code：38 秒成片、逐帧可改",
-      "url": "/articles/2026/10/02/video-shotcraft-ai-skill/",
-      "type": "blog",
-      "date": "2026-10-02",
-      "description": "video-shotcraft 是一个给 Claude Code/Codex 使用的 AI agent skill：157 张镜头配方卡、214 个样式、221 个 Remotion TSX 实现、已验收的 Ink Press 成片模板。本文基于源码拆解其「确定性代码渲染」范式、镜头卡知识工程与动效工作台，并给出谁该用、谁该等的判断。",
-      "excerpt": "video-shotcraft 是一个给 Claude Code/Codex 使用的 AI agent skill：157 张镜头配方卡、214 个样式、221 个 Remotion TSX 实现、已验收的 Ink Press 成片模板。本文基于源码拆解其「确定性代码渲染」范式、镜头卡知识工程与动效工作台，并给出谁该用、谁该等的判断。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "AI",
-        "开源",
-        "Claude Code",
-        "Codex",
-        "Remotion",
-        "AI视频",
-        "产品宣传片",
-        "Agent Skill"
-      ],
-      "priority": 0,
-      "content": "产品做到要发版的那天，很多独立开发者都会卡在同一件事上：需要一支像样的宣传片。 传统路径就那么几条。找动效工作室外包，报价动辄几万，沟通分镜、改文案、等排期，两个礼拜能拿到片子就算快；自己上手剪映或 PPT 模板，做出来的东西自带一股「模板味」——转场在哪、字怎么飞，全是别人的节奏；这两年文生视频火了，你也试过让 Sora 类模型「生成一个 SaaS 产品的宣传片」，拿到的画面确实漂亮，但界面是假的、按钮是它瞎编的，没有一帧是你的产品。 问题的根子在于： 一支产品宣传片的核心诉求，是精确地展示你的真实界面，并且让所有运动卡在节奏上。 生成式模型给你的是幻觉画面，模板工具给你的是一张预制皮肤——前者不可控，后者不精确。 最近在 GitHub 上看到一个思路完全不同的项目：video shotcraft。它不是一个视频生成模型，而是一个给 Claude Code / Codex 用的 agent skill ——把仓库链接丢给你的 agent，它会像一名动效师一样，用 React 视频框架 Remotion 写出确定性的代码，渲染出一支电影感产品宣传片。项目 7 月 19 日建仓，两个多月涨到 10.2k Star、905 Fork ，Apache 2.0 协议。我把仓库拉下来通读了一遍，这篇文章讲清楚它到底怎么运转、含金量在哪，以及谁先别着急上车。 它不是「生成视频」，而是把动效工作室的方法论装进 skill 先纠正一个直觉：video shotcraft 不产出任何「AI 生成画面」。它的输出是一个 Remotion 工程——Remotion 是一个用 React 组件描述视频的框架，画面由代码渲染，每一帧都由一个归一化的进度参数 t 驱动。这意味着： 同一个工程渲十遍，得到的十个 MP4 逐帧一致。 这跟扩散模型是两条根本不同的技术路线。扩散式文生视频是采样，每次结果都不同，你只能抽卡、无法指定「第 3.2 秒镜头推近到这个按钮」；代码式渲染是工程，镜头时长、缓动曲线、目标构图全部是写死的参数，可以逐帧审查、逐帧修改。video shotcraft 的全部价值，就是把一名成熟动效师的工作流，拆成了 agent 可以执行的结构化资产： 仓库里的资产清单（我逐项核对过）： 157 张镜头配方卡 （references/shots/），按开场与品牌、文字与字卡、界面登场、运镜与空间、数据与指标、交互演示、转场、节奏与蒙太奇、光效与强调、收尾等 11 个目录组织； 214 个动效样式、214 条动态样片 ，可以在在线 Gallery直接播放、搜索、筛选； 221 个 TSX 参考实现 （demos/），每张卡都对应调校过的真实代码，copy 进 Remotion 项目就能跑； 一支已验收的完整成片模板 Ink Press（墨压） ：36.2 秒、1920×1080、30fps、10 个镜头的纸墨琥珀风宣传片； 149 个音效分 16 类、5 首 BGM （assets/audio/），以及页面素材采集脚本、2.5D 页面相机组件； 交付后的 动效工作台 和 剪映工程导出 能力。 README 里有句话很能概括它的自我定位：「最直接的方式：把仓库链接丢给你的 agent。」 镜头配方卡：把动效师的隐性知识变成参数和「已知坑」 这个项目里我认为最有含金量的，不是现成模板，而是那 157 张镜头配方卡——它本质上是一次 知识工程 ：把优秀动效师看参考片时脑子里那些说不清的东西，固化成结构化的工程文档。 我抽读了 camera/crash zoom punch（急推撞停）这张卡，结构很能说明问题： 卡片开头不是参数，而是 语义 ：慢推近（spotlight hero card）是「请看」，急推是「看这个！」——一拍之内视线没有选择余地。落位质感还分两款：过冲回弹是弹性（「看这个」），撞停震屏是重量（「就是它」）。 然后才是参数，但每个参数都带着「调节手感」而不是干巴巴的数字： 急推动作 6 帧 ease in，zoom 从 1 推到 2.6；超过 10 帧就会被读作普通推近，冲击感消失； 撞停款到位后机位高频抖动，幅度 14 像素、按 e^(−t/1.8) 指数衰减，6 帧收干；幅度必须过肉眼可感阈值，但超过 20 像素就会读作故障； 运动模糊只包急推段，撞停抖动段必须保持清晰。 最有价值的是「已知坑」一栏：终点必须是高清纹理槽位，否则急推后全程特写糊字；回弹和震屏两款禁止混用，否则读作穿帮；一支片子急推最多用 2 次。这些都是拿真实项目换过的教训，新手如果凭直觉自己写，几乎必然踩中。卡片最后指向 demos/camera/crash zoom punch/ 下的 TSX——SKILL.md 里反复强调， 配方卡给的是语义，调校过的 demo 源码才是参数真相 ，禁止 agent 凭卡名和理解新写。 这套卡片的来源也值得一说：仓库明确声明它们研究自 ClickUp、Perplexity、Notion、Figma、Framer、Raycast 等产品的公开宣传片，但所有实现都从零重写，只抽象「时序结构、缓动思路、编排逻辑」这类手法，不含任何原片素材，并专门写了法律边界说明。2026 年 8 月新增的 48 张卡，是从 209 个候选动..."
-    },
-    {
-      "title": "Agent 自己开浏览器跑命令，最怕的不是变笨而是失控：开源 OpenMuse 用四个进程和两条安全边界交了答卷",
-      "url": "/articles/2026/09/29/openmuse-personal-agent-computer/",
-      "type": "blog",
-      "date": "2026-09-29",
-      "description": "OpenMuse 是 CopilotKit 开源的个人 Agent：自带持久浏览器、终端、文件空间，任务计划/审批/回执全部落库，浏览器会话可随时 Take control 接管。本文基于源码拆解其四进程架构与三条安全铁律，并给出零模型本地跑通路径。",
-      "excerpt": "OpenMuse 是 CopilotKit 开源的个人 Agent：自带持久浏览器、终端、文件空间，任务计划/审批/回执全部落库，浏览器会话可随时 Take control 接管。本文基于源码拆解其四进程架构与三条安全铁律，并给出零模型本地跑通路径。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "AI",
-        "开源",
-        "AI Agent",
-        "CopilotKit",
-        "AG-UI",
-        "自托管",
-        "Computer Use"
-      ],
-      "priority": 0,
-      "content": "这一年用 Agent，最拧巴的一件事是：它明明越来越会说话，但你让它\"去把事办了\"，它递回来的还是一段文字。 你让它查校游通知邮件，它告诉你\"邮件里说周五截止\"，然后呢？表单还得你自己下载、自己填、自己回复。你让它调研一个网站，它输出的内容里哪个数字真来自页面、哪个是模型顺嘴补的，你也没处核对。而各家推出的 computer use，很多时候是一个录屏黑盒——你看不见它此刻正在点哪个按钮，发现它点错了，也没办法把手伸进屏幕里接手。 最近看到 CopilotKit 团队开源的 OpenMuse ，思路不太一样：它直接给 Agent 配了一台\"电脑\"——持久化的 Chromium、一个可选的 Linux 工作空间、一套不会丢的任务状态，而且你随时可以把浏览器从它手里拿过来自己操作。项目 9 月 15 日才建仓，两周左右涨到 3000 多 Star，MIT 协议。我把源码拉下来过了一遍，这篇文章讲清楚它怎么运转、安全上做对了什么，以及谁先别着急上车。 它不是\"又一个聊天套壳\"，而是四个可独立部署的进程 OpenMuse 是一个 pnpm monorepo，TypeScript 写的。README 里的架构图我按源码重新梳理了一遍： 客户端（apps/mobile） ：一套 Expo / React Native 代码同时出 iOS、Android 和 Web。对话用的是 CopilotKit headless chat，AG UI 协议把工具调用、状态、结果以事件流推到界面，邮件、浏览器、PDF、计划、财务都以内联卡片呈现，而不是一坨纯文本。 API（apps/server） ：Hono 框架 + CopilotKit runtime，负责身份边界、任务引擎、审批、文件和 Google OAuth；存储默认用嵌入式 PGlite，也可以切 PostgreSQL。 浏览器 worker（apps/worker） ：一个独立的 Playwright / Chromium 服务，用随机 WORKER TOKEN 和 API 之间鉴权。 Linux 电脑（apps/computer） ：一个 Docker 容器，提供 bash、python3、node、git，配一个持久化的 /workspace 卷。 另外有两块不算独立进程但值得知道：CopilotKit Intelligence 提供 Rich Threads 会话持久化（主对话、侧聊、改名、归档、回放），它是 CopilotKit 的云服务、不在 MIT 许可内，必须配一个 server only 的 project key；packages/integrations 里是 Gmail / Calendar 的 OAuth 适配器，发信和改日历全部要逐项审批。仓库里还预留了 OpenBot 适配器，默认禁用，只做了协议契约测试。 最让我有好感的是： 本地样例模式一个模型都不用接 。默认 .env 是 WORKSPACE MODE=sample + AGENT BACKEND=sample，内置虚构邮箱和测试数据，你可以先把整套交互和任务引擎摸明白，再决定要不要挂真模型、真 Google 账号。 \"看得见、接得住\"：浏览器会话持久，Take control 是同一个会话 官方的手机端演示是让它去 Hacker News 找有意思的内容、再总结 copilotkit.ai： 注意卡片里的细节：浏览器读的是哪个域名、当前页面长什么样，都直接嵌在对话里；每张浏览器卡片下面都有一个 Take control 。桌面端演示更完整——先查收件箱里的校游邮件，打开邮件读细节，再去蒙特雷湾水族馆的网站查展品： 这里的关键不是\"能截图\"，而是 会话是持久的 。普通 Agent 框架里的浏览器多是一次性工具：任务结束，context、cookie、登录态全销毁，下次重来。OpenMuse 的 Chromium profile 按线程持久化，README 和验证文档里明确测过：完全杀掉 App 再重开，同一个线程拿到的还是同一个 session ID，Take control 打开的控制台里页面还停在原处。发现它走偏了，你点接管，在同一个浏览器里手动改完，再把活交还给它——人和 Agent 共享的是一台真正的浏览器，不是两段互不相干的录屏。 跑代码的事，关进非 root、断网、30 秒的容器里 Agent 能开终端是一件危险系数很高的事，OpenMuse 在这块的设计是整个项目里最值得细看的部分。 我去翻了 apps/computer/Dockerfile 和 apps/server/src/computer.ts，它的约束是一条一条写死在代码里的： 1. 非 root、无挂载 ：容器镜像固定 USER 1000:1000，启动时不挂载任何宿主机目录，只有一个命名卷 /workspace 用来持久化文件。 2. 终端没有网络 ：容器里跑命令是断网的，需要访问公网只能绕道浏览器 worker。这意味着哪怕模型被提示词注入骗着去 curl 一个恶意外部地址，也根本发不出去。 3. 只传 argv，不给 shell ：computer.ts 里宿主侧唯一会 spawn 的进程是 docker，命令以参数数..."
-    },
-    {
       "title": "别用 Sora 硬刚科普了：给个主题，这个开源 skill 用代码\"画\"出整条讲解视频",
       "url": "/articles/2026/09/28/anything2explainer/",
       "type": "blog",
       "date": "2026-09-28",
       "description": "anything2explainer 是一个 Claude Code/Codex skill：给一个主题，产出黑底 MG 风格的科普讲解视频，带 TTS 配音、字幕和章节进度条。画面全部由 Remotion 代码绘制，事实可追溯、可逐帧修改、可复现，无需视频生成模型和 GPU。",
       "excerpt": "anything2explainer 是一个 Claude Code/Codex skill：给一个主题，产出黑底 MG 风格的科普讲解视频，带 TTS 配音、字幕和章节进度条。画面全部由 Remotion 代码绘制，事实可追溯、可逐帧修改、可复现，无需视频生成模型和 GPU。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "AI",
@@ -832,90 +718,6 @@
       ],
       "priority": 0,
       "content": "一个人做社媒，最耗人的从来不是\"写一条文案\"。 打开热搜找选题、评估哪个话题和自己账号匹配、想标题、写正文、做图、剪视频、按每个平台的规则改格式、登录一个个账号发布、第二天再回去看数据……这条链路里，真正的创作只占一小部分，剩下的全是切换、复制粘贴和重复交代背景。 通用 AI 助手帮不上太多：你问它\"这条文案怎么改\"，它能给出一段文字，但它不认识你的账号、不记得你的风格，更不可能登录平台帮你把内容发出去。最近浙江大学 ZJU REAL 实验室（联合北京大学 OpenDCAI 实验室）开源的 Easel ，想解决的就是这个问题——项目 8 月底上线，一个月左右在 GitHub 收获近 2000 Star。 Easel 是什么 Easel 自我定位是\"你的私人、持续进化的社媒运营助手\"。从工程上看，它是一个把四个东西接在一起的 内容工作台 ： 1. OpenClaw Agent ——负责理解任务、调度技能、执行多步工作流的 Agent 运行时； 2. 账号画像（profiles/） ——每个账号一份独立档案，包含定位、风格、受众、平台、偏好红线、长期记忆六个维度； 3. 114 个内容技能 ——发现、策划、图文、音视频、发布、归因，每个技能都是一份 SKILL.md 加可运行脚本，而不是功能清单上的摆设； 4. React Web 工作台 ——会话、素材、账号、画像、内容库、发布中心统一管理，默认跑在 localhost:7860。 关键区别在于：通用 ChatBot 是\"顾问\"，只告诉你应该怎么做；Easel 是\"搭档\"，直接把内容做出来、写入 outputs/ 目录、登录平台发出去，再把发布后的数据带回来。 五层工作流：一个 Agent 贯穿全链路 Easel 把社媒运营拆成五个连续阶段，由同一个 Agent 带着同一份画像从头走到尾。 发现 ：聚合微博、抖音、知乎、B 站、百度、头条等平台热榜，叠加垂类趋势研究、竞品分析、内容缺口分析和 RSS，筛选真正适合当前账号的机会，而不是把热搜原样塞给你。 策划 ：把机会变成选题矩阵、标题 Hook、分镜脚本和内容日历，支持系列规划、直播策划和商单方案。 创作 ：社媒文案、小红书笔记、长文、小说、知识卡、海报、信息图、数据图表，以及配音、AI 音乐、AI 视频、AI 短剧、字幕剪辑等音视频内容。 发布 ：先过质量门禁（敏感与版权风险检查、平台 SEO、发布 Checklist），再按平台适配标题、画幅和媒体要求，分发到已登录账号。 归因 ：回收播放、互动、评论数据，做复盘和 ROI 分析，把\"什么结构有效\"沉淀回账号画像，供下一次创作使用。 闭环里最值得注意的是最后一步——归因结论会写回 profiles/ /memory.md。这意味着 Agent 的输出会随账号运营时间变得越来越贴合，而不是每次从零开始。 真实界面长什么样 账号画像 ：一个画像对应 profiles/ 下的一个目录，六个维度都可以在 Web 页面直接编辑，同一画像能跨多个平台和会话使用。 热点雷达 ：多平台热榜聚合，Agent 基于当前画像筛选选题，而不是无差别投喂。 内容日历 ：统一管理选题、草稿、待发、已发状态，结合节日节点排期。 发布中心 ：一份母版内容生成多平台版本，集中完成格式适配、附件管理、发布前检查和真实发布。 十分钟跑起来 环境要求：Linux、macOS 或 Windows 10/11，Python 3.10+、git；安装向导会检查 Node.js 22.19+、FFmpeg、Playwright/Chromium，缺什么给出引导。 Windows 原生环境（不需要 WSL）在 PowerShell 里执行： setup.sh 是引导式、可重复运行的：创建项目内 .venv、安装或复用 OpenClaw 并使用 独立的 easel profile （不会动你已有的 /.openclaw/）、装齐 Python/Node 依赖、构建 React 前端、安装 Chromium，最后引导配置 LLM。完成后： 最小配置只需要一个可用的 LLM，在根目录 .env 里提供即可，Anthropic、OpenAI 或任意 OpenAI compatible / Anthropic compatible 服务都支持： 如果只配置聊天模型、没有独立 Embedding 服务，Easel 会显式退化为关键词记忆检索，不会反复请求不可用的 embedding 端点——这个细节在同类项目里经常踩坑。 一个工程层面的观察 翻完源码和 CHANGELOG，Easel 真正有意思的设计不是\"114 个技能\"这个数字，而是两点： 第一，账号画像是一等公民。 大部分 AI 内容工具把\"人设\"塞进一句系统提示词，用完即弃；Easel 把画像做成磁盘上的结构化目录，且归因系统有权限回写它。这才让\"持续进化\"从口号变成数据结构。 第二，技能是真执行，不是 MOCK。 从 pyproject.toml 的依赖可以直接看到执行栈：Playwright（浏览器自动化登录发布）、biliup（B 站投稿）、faster whisper（本地语音转写）、edge tts（配音）、librosa/OpenCV（音视频处理）、rembg..."
-    },
-    {
-      "title": "612条人生建议全部附上论文出处：这本开源书把\"说人话\"做成了硬指标",
-      "url": "/articles/2026/09/27/how-to-live-better-evidence-based-life/",
-      "type": "blog",
-      "date": "2026-09-27",
-      "description": "《高性价比人生指南》把612条人生建议按性价比排序，每条写清花掉什么、换回什么、证据多硬，只引期刊论文和官方文件。阅读页仓库把全书做成断网可读的单文件HTML，手机即开。我在本地完整构建并核对了一手数据。",
-      "excerpt": "《高性价比人生指南》把612条人生建议按性价比排序，每条写清花掉什么、换回什么、证据多硬，只引期刊论文和官方文件。阅读页仓库把全书做成断网可读的单文件HTML，手机即开。我在本地完整构建并核对了一手数据。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "人生指南",
-        "循证",
-        "单文件网页",
-        "GitHub"
-      ],
-      "priority": 0,
-      "content": "健康、花钱、婚恋、工作、法律——普通人一生要做几千个决策，但大多数决策的依据只有三样：长辈经验、自媒体文章、自己的直觉。长辈经验可能过时三十年，自媒体养生文最爱选择性引用，直觉则擅长在事后假装自己早就知道。 最近挖到一个把这件事做得异常老实的开源项目。先说原书，再说我更想推荐的阅读页。 一本书，只引期刊论文和官方文件 《高性价比人生指南》原书由 eternity4719/HowToLiveBetter 维护，Unlicense 协议、公有领域。它按「性价比」组织全部章节，每条建议都强制写清三件事： 花掉什么、换回什么、证据有多硬。 证据分 A/B/C 三级，来源不是\"专家说\"，而是论文和官方文件——Cochrane 系统综述、Lancet 荟萃分析、NHTSA 报告、中国疾控周报、国务院条例。 举个例子，第一条「系安全带」：成本是\"不花钱，每次上车多花 2 秒\"，收益是 NHTSA 估计轿车前排致命伤风险下降 45%、轻型卡车 60%，WHO 口径是死亡风险最多降 50%，证据等级 A。备注里还专门解释：45% 这个数是拿事故数据库算的估计，不是随机分组试验—— 它连自己数字的来历和局限都交代得一清二楚。 最显眼的一栏，叫\"说人话\" 我翻遍全书，发现每个条目里有一栏在网页上被做得最醒目，名字就叫「说人话」。它的唯一任务是把统计量翻译成人话： 头盔那条，原始数据写着\"OR 0.58，95% CI 0.50–0.68\"，说人话栏写： \"戴头盔并扣好，骑摩托出事时死亡概率低约四成，头部受伤低约七成。松松垮垮挂头上不算戴。\" 降压那条，RR 0.80 的背后是： \"血压每降 10 个毫米汞柱，中风降 27%、心衰降 28%。中国 10 个高血压的人里只有不到 1 个控制住了。\" 论文的门槛被这一栏拆掉了。你能看懂结论，又能顺着来源链接核对它有没有骗你——这两样过去很少同时出现。 阅读页：断网也能读的 2MB 单文件 原书是一堆 Markdown，手机上直接读并不舒服。cdyforever/how to live better 这个仓库不是 fork、也不改一个字，只做一件事：用 build.py 把全书渲染成 一个完全自包含的 index.html ——没有 CDN、没有字体外链、不 fetch 任何数据，双击即开、断网可读。 页面功能是按真实阅读场景做的：全站关键词搜索并高亮、只看 A 级证据、只看说人话、左侧目录带性价比色点且滚动联动；手机端搜索独占一行、顶栏下滑自动收成一行、一键回到顶部；明暗主题、直接打印都支持。 我本地完整构建了一遍 为确认不是 README 吹的，我克隆了阅读页和上游原书，在本地跑了完整构建，命令和真实输出如下： 这里有个值得注意的细节： 阅读页 README 写的是\"32 节、528 条建议\"，但我实际构建出来是 33 节、612 条 ——上游还在持续增长，文档没跟上。这恰恰说明它是个活项目。 更打动我的是构建脚本的一个设计：它不记录\"构建时间\"，而是取 上游 git 提交的哈希和日期 作为版本标识。同一个源状态，无论谁在哪台机器上跑，产物都能做字节级比对。这是工程师才有的洁癖——确认\"没改坏东西\"比\"刚刚更新过\"重要。 诚实，是被设计进去的 读这本书时我多次停下来，因为它总在\"拆自己的台\"： 电动自行车头盔那条，明确写\"数据来自摩托车，电动自行车是照着推的，没有直接研究\"； 一氧化碳报警器那条，写\"报警器本身没有降低死亡率的研究，收益是按中毒集中在冬季家中推出来的\"； 没核实的内容不硬写，正文里直接保留可见的 TODO（待核实：……）。 书的开头还有一句话，几乎是在劝你别太当回事： \"这是按性价比排好的备选单，不是任务清单——挑走一两条就算数，作者自己也没做到其中大部分。\" 不装权威、不贩卖焦虑、允许你只做一点点。在一个人人都想给你完整人生方案的环境里，这种克制反而少见。 性价比是算出来的，不是喊出来的 书里每条建议的\"性价比极高/高/一般\"不是主观标签，而是按公开公式算的：成本拆成钱、时间、毅力三个维度（各分 0/少/多档），再结合收益档得出。这个公式直接抄自上游的统计脚本并在代码里写明，\"仓库改了那两行，这里也要同步改，否则档位会和官方对不上\"。 换句话说，连\"哪条建议更值\"这个排序本身都是可复核的。 谁适合，谁先等等 适合 ：愿意用证据而非情绪做决策的人，尤其是程序员群体（书里有一节专门讲\"写哪些代码、接哪些单会被判刑\"）；习惯在手机或地铁上读东西、需要离线可用的人；对健康、养老、法律这类\"做错一次代价很大\"的决策，想提前补课的人。 先等等 ：期待权威给出\"必须照做\"命令式答案的人——这本书给的是概率和权衡，不保证单一结果；只想要极简几条口诀的人，612 条可能显得信息密度太高。 内容每天会随上游自动更新：GitHub Actions 在北京时间每天 06:00 拉取上游重新生成， 只有内容真的变化才提交 ，不会制造无意义的更新噪音。 一个把全部结论都挂在可核查证据上、连自己的不确定都摊开给你看的开源项目，值得放进收藏夹。手机打开那个网页，先挑一条 A 级、零成本的做了——比如下次上车把安全带卡扣按上。"
-    },
-    {
-      "title": "画架构图再也不用手拖：这个开源Skill让你说中文直接出1920px工程图",
-      "url": "/articles/2026/09/27/fireworks-tech-graph-nlp-diagram-skill/",
-      "type": "blog",
-      "date": "2026-09-27",
-      "description": "TL;DR ：fireworks tech graph 是一份 Codex 和 Claude Code 可共用的 Agent Skill，用中文描述系统就能产出通过几何门禁的 SVG、1920px PNG、语义 GIF 动效和离线交互 HTML。内置 12 种视觉风格、14 种 UML 图类型，并把 C4、云部署、事件流、可靠性排查的工程语义契约做成渲染前强...",
-      "excerpt": "TL;DR ：fireworks tech graph 是一份 Codex 和 Claude Code 可共用的 Agent Skill，用中文描述系统就能产出通过几何门禁的 SVG、1920px PNG、语义 GIF 动效和离线交互 HTML。内置 12 种视觉风格、14 种 UML 图类型，并把 C4、云部署、事件流、可靠性排查的工程语义契约做成渲染前强...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "AI",
-        "开源",
-        "架构图",
-        "UML",
-        "Claude Code",
-        "Codex"
-      ],
-      "priority": 0,
-      "content": "TL;DR ：fireworks tech graph 是一份 Codex 和 Claude Code 可共用的 Agent Skill，用中文描述系统就能产出通过几何门禁的 SVG、1920px PNG、语义 GIF 动效和离线交互 HTML。内置 12 种视觉风格、14 种 UML 图类型，并把 C4、云部署、事件流、可靠性排查的工程语义契约做成渲染前强制校验。我在本地真实跑通了 validate → render → export png 全流程，本文附一手结果。 画图这件事，卡了技术人很多年 写文档、做评审、沉淀架构，几乎人人都经历过：打开 Draw.io 或 PPT，拖节点、拉连线、对齐网格，改一个节点要连带重排半张图；好不容易画完，风格还和同事的图完全不统一。 近两年多了两条「捷径」，但都不彻底。一是 Mermaid 这类 DSL，省去了拖拽，但仍要手写语法、布局不可控，自然语言进不来；二是让通用画图 AI 直接吐 SVG，省事是省事，但成品经常出现 连线穿过节点、标签压在框线上、箭头指向反了 这类几何错误——而且无法自动校验，只能靠肉眼一张张挑。 问题的本质是：技术图不是插画，它需要 语义正确 （这是个向量库不是普通数据库）和 几何正确 （线不穿框、标签不重叠）。通用文生图两者都不管。 fireworks tech graph（GitHub: yizhiyanhua ai，MIT 协议）的切入点正在这里：它不是「让 AI 画一张好看的图」，而是把画图做成一条 带编译期检查和集成测试的工程流水线 。 核心机制：从一句话到验证通过的图 根据仓库 SKILL.md 和我的实际运行，一张图的诞生要经过这条链路： 自然语言描述先被识别为图类型（架构图/数据流/序列图……），随后转成版本化的 Diagram IR（schema v1） ——重复 ID、悬空引用、非法 waypoint、非有限坐标在这一步直接失败。IR 配上风格规范后，进入 确定性的 Route Planner ：正交走线、强制 waypoint、端口分流、图例自动避让，全是算出来的而非模型自由生成。SVG 构建完先过结构校验（XML 解析、marker 完整性、路径箭头穿框检测），再 回读 PNG 做视觉复核 ，发现问题只做定向修正，且默认最多两轮，避免无上限的自我修改。 这个设计和训练神经网络的思路异曲同工：IR 是源代码，validator 是编译器前端，route planner 是确定性布局引擎，PNG 回读就是集成测试。它明确奉行一条原则—— Evaluate, don't assert ：完成状态必须有 validator 和真实渲染证据，而不是听模型说「我画好了」。 我在本地真实跑了一遍 光看文档不够，我把仓库克隆下来实际运行。环境自检 fireworks.py doctor 的结果是：cairosvg、PNG、HTML、ffmpeg 均可用；GIF 因本机未安装 puppeteer/chromium 而不可用（诚实记录，这也是它的可选依赖）。 随后用内置的 OpenAI 风格夹具跑完整链路： 渲染出的成品是一张标准 OpenAI 风格的 API 集成流程图： 三层逻辑域（接入 / 模型与工具 / 交付治理）用浅蓝虚线框分隔，八节点、八连线，绿色主路径、青色工具路径、深灰治理路径在底部图例中明确区分。逐行检查无乱码、无文字截断、无穿框线。这就是「1920px 可直接嵌进文章」的实际质量。 能力盘点：12 风格 × 14 UML × 语义契约 12 种视觉风格 ：扁平图标、暗黑极客、工程蓝图、Notion 极简、玻璃态、Claude 官方、OpenAI 官方、AI 手绘暗黑奢华（Style 8，唯一由 AI 手工绘制），以及四个工程评审风格——C4 评审画布、Cloud Fabric 多区域部署、Event Transit 事件地铁图、Ops Pulse 可靠性脉冲。 14 种 UML 图 ：类图、组件、部署、包、复合结构、对象、用例、活动、状态机、序列、通信、时序、交互概览、ER，外加 RAG、Mem0、Multi Agent 等 AI 领域图。 值得注意的是四个工程风格带 语义契约 而非只是换皮：C4 强制只展示一个抽象层级并标注「动作+协议」；云部署图强制 Region/VPC 归属和具名跨区机制；事件图强制 Topic 轨道、Junction、Consumer Group、DLQ；可靠性图强制每个服务展示四个 Golden Signals 和关联 Trace。这些字段缺失会在渲染前 fail closed，而不是画出一张语义错误的漂亮图。 此外还有一套 语义形状词汇表 ：LLM 是双层描边圆角矩形、Agent 是六边形、向量库是带内环的圆柱体；语义箭头用颜色和虚线编码写入/读取/异步/循环；内置 40+ 产品品牌色（OpenAI、Anthropic、Pinecone、Kafka……）。 怎么用：一条命令装到两个 Agent 推荐用 skills CLI 一次装到 Codex 和 Claude Code（注意必须用嵌套路径）： 装完重启 Agent，之后直接说人话即可： 即可同时得到可编辑的 SVG 和 1920px PNG。也可导..."
-    },
-    {
-      "title": "微软开源SkillOpt：不动模型权重，把GPT-5.5准确率拉高23.5分",
-      "url": "/articles/2026/09/27/microsoft-skillopt-train-agent-skills/",
-      "type": "blog",
-      "date": "2026-09-27",
-      "description": "TL;DR ：微软开源的 SkillOpt 把 Agent 的 skill 文档（一份 Markdown）当作冻结模型的「可训练参数」，用训练神经网络的纪律——epoch、batch size、learning rate、validation gate——去优化它，部署时不增加任何模型调用。在 GPT 5.5 上，平均准确率直聊 +23.5 分、Codex ...",
-      "excerpt": "TL;DR ：微软开源的 SkillOpt 把 Agent 的 skill 文档（一份 Markdown）当作冻结模型的「可训练参数」，用训练神经网络的纪律——epoch、batch size、learning rate、validation gate——去优化它，部署时不增加任何模型调用。在 GPT 5.5 上，平均准确率直聊 +23.5 分、Codex ...",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "AI",
-        "开源",
-        "AI Agent",
-        "SkillOpt",
-        "提示词工程",
-        "自我进化"
-      ],
-      "priority": 0,
-      "content": "TL;DR ：微软开源的 SkillOpt 把 Agent 的 skill 文档（一份 Markdown）当作冻结模型的「可训练参数」，用训练神经网络的纪律——epoch、batch size、learning rate、validation gate——去优化它，部署时不增加任何模型调用。在 GPT 5.5 上，平均准确率直聊 +23.5 分、Codex 循环内 +24.8 分、Claude Code 内 +19.1 分。其夜间自进化引擎 SkillOpt Sleep 已发布到 PyPI，pip install skillopt 即可使用。 一个被长期忽视的问题：skill 本身没人「训练」 过去一年，几乎所有写 Agent 的人都在做同一件事：手写一份 system prompt 或 skill 文档，或者让一个强模型一次性生成一份，丢给 Agent 用。效果不好？再手动改两句，或者让模型「自我反思」修订一版。 问题在于，这两种方式都 无法保证新版本比旧版本好 。一次性生成没有反馈闭环；而缺乏约束的自我修订更危险——优化模型可能提炼出一条听起来非常合理、实则错误的规则，而目标模型会忠实地执行它。SkillOpt 论文里把这件事称为「none of which reliably improves over its starting point under feedback」。 微软研究院在 SkillOpt 中换了个思路： 模型权重冻结，把 skill 文档本身当作可训练状态 ，然后照搬深度学习训练中那些被验证过的纪律。 核心机制：六步训练循环 根据仓库文档 docs/guide/training loop.md，SkillOpt 的一个训练 step 包含六个阶段： 1. Rollout（前向传播） ：target 模型带着当前 skill 文档执行一批任务，产出轨迹和得分； 2. Reflect（反向传播） ：optimizer 模型分析轨迹 mini batch，产出结构化的 add / delete / replace 编辑补丁，失败批次必然参与分析； 3. Aggregate ：语义相似的补丁自动合并，避免重复修改； 4. Select（梯度裁剪） ：补丁按相关性排序，learning rate 限定每步最多应用几条，防止一步走崩；还支持 cosine / linear / constant 学习率调度； 5. Update ：把选中的补丁应用到 skill 文档，生成候选版本； 6. Gate（验证） ：候选版本在留出的 selection split 上评分， 只有严格高于当前版本才被接受 。 Epoch 边界还有两个机制： Slow Update 把上一轮和当前轮的 skill 放在同样样本上对比，分类为改善/退化/持续失败/稳定成功，生成高层指导以对抗跨轮遗忘； Meta Skill 则是跨 epoch 的策略记忆，从第 2 个 epoch 起把上轮的策略笔记带入后续反思。 深度学习类比几乎是严丝合缝的：skill 文档=参数，rollout=前向，reflect=反向，learning rate=每步编辑数上限，gate=验证集早停，slow update≈epoch 级动量。区别是部署时的产物只是一份通常 300–2000 token 的 best skill.md， 推理时零额外调用 。 证据：52 个评估格全部第一，三组实测数据 论文在 6 个 benchmark、7 个目标模型、3 种执行框架（直聊、Codex CLI、Claude Code CLI）上做了评估， 52 个（模型×基准×框架）组合全部 best 或 tied best 。GPT 5.5 无 skill 基线的平均准确率被提升 +23.5 分（直聊）、+24.8 分（Codex）、+19.1 分（Claude Code）。优化出的 skill 还能跨模型规模、跨框架、迁移到相邻基准而无需重新优化。 更值得关注的是 SkillOpt Sleep 的对照实验（docs/sleep/RESULTS.md），因为它回答的是「无人值守的夜间自进化是否安全」： 压力测试 ：弱模型 GPT 5.4 nano 在 SearchQA 上，关闭 gate 后，优化器连续五晚学到一条错误规则——「用文档标题字符串原文作答」，准确率 0.554 → 0.490 → 0.325 → 0.031 → 0.034 → 0.026， 暴跌 52.8 分 。而同样的补丁流在 gate 开启时 被全部拒绝 ，0.570 → 0.570，一分不丢。这就是 gate 默认开启的原因。 弱模型收益更大 ：同样的夜间协议下，nano 配合累积回放 0.560 → 0.679（ +11.9 ），而 GPT 5.5 在该基准上 +6.0——提升空间越大收益越大，约 2 倍差距。这恰好对应最经济的部署模式：白天用便宜的小模型推理，晚上用一次强优化模型。 经验回放决定曲线形状 ：GPT 5.5 上 recall k=10 收益 +3.1，recall k=20 收益 +4.5，全历史回放 +5.6，收益随召回量单调上升，且曲线是逐晚爬升而非跳一下就平。 训完的 skill 长..."
-    },
-    {
-      "title": "别再把公众号密码交给付费分发工具了：我通读了 Wechatsync 源码，看它如何不碰你密码就把文章发到 29 个平台",
-      "url": "/articles/2026/09/24/wechatsync-open-source-content-distribution-deep-dive/",
-      "type": "blog",
-      "date": "2026-09-24",
-      "description": "Wechatsync（文章同步助手）是一款开源免费（GPL-3.0）的 Chrome MV3 扩展，把一篇文章一键同步到知乎、掘金、头条、CSDN、小红书、抖音等 29+ 平台，并支持 WordPress/Typecho 及 Hexo/Hugo 导出。它不模拟登录、不做爬虫、不经第三方服务器，而是复用浏览器已有登录态、调用各平台 Web 编辑器的同一套官方 API。本文基于 monorepo（core/extension/cli/mcp-server）源码：以知乎适配器为例讲清建草稿、图片 OSS 签名上传、Draft.js 内容转换、回填草稿的完整流程，并分析其声明式网络请求改写、限频保护、MCP/CLI 桥接等工程设计；同时点出一个关键边界——部分热门平台适配器放在私有的 git submodule 中。最后给出谁该用、谁该等的判断。",
-      "excerpt": "Wechatsync（文章同步助手）是一款开源免费（GPL-3.0）的 Chrome MV3 扩展，把一篇文章一键同步到知乎、掘金、头条、CSDN、小红书、抖音等 29+ 平台，并支持 WordPress/Typecho 及 Hexo/Hugo 导出。它不模拟登录、不做爬虫、不经第三方服务器，而是复用浏览器已有登录态、调用各平台 Web 编辑器的同一套官方 API。本文基于 monorepo（core/extension/cli/mcp-server）源码：以知乎适配器为例讲清建草稿、图片 OSS 签名上传、Draft.js 内容转换、回填草稿的完整流程，并分析其声明式网络请求改写、限频保护、MCP/CLI 桥接等工程设计；同时点出一个关键边界——部分热门平台适配器放在私有的 git submodule 中。最后给出谁该用、谁该等的判断。",
-      "topic": "开源项目",
-      "topicSlug": "open-source",
-      "series": "",
-      "tags": [
-        "开源",
-        "内容分发",
-        "Chrome扩展",
-        "自媒体",
-        "MCP",
-        "TypeScript",
-        "效率工具"
-      ],
-      "priority": 0,
-      "content": "别再把公众号密码交给付费分发工具了：我通读了 Wechatsync 源码 项目地址： 协议： GPL 3.0 · 语言： TypeScript · 当前版本： v2.0.9 数据： 6.3k stars / 1k forks，2020 年 9 月创建，持续维护至今 取证依据： 仓库源码（packages/core、packages/extension、packages/cli、packages/mcp server） 认真做过多平台分发的人，都懂那种重复劳动的烦躁。一篇公众号文章写完，要挨个打开知乎、掘金、头条、CSDN、简书、小红书的网页编辑器，复制正文，重新上传图片，再手动修一遍排版和封面。一个平台三五分钟，铺十几个平台就是小半天，还常常因为编辑器吞格式而返工。 市面上早就有微小宝、新媒体管家、蚁小二等\"一键分发\"工具，但它们的代价很实在： 一是要付费订阅，二是必须把你的账号密码或登录 Cookie 上传到厂商的云服务器 。对靠账号吃饭的自媒体来说，把公众号、小红书的登录态交给一个第三方，始终是件心里没底的事。 最近我通读了 Wechatsync（文章同步助手） 的源码。它想走第三条路： 一个本地浏览器扩展，不碰你的密码，不经第三方服务器，用你自己的浏览器把文章直接发到 29 个平台 。这篇文章讲清它的机制、源码里的工程细节，以及一个容易被忽略的开源边界。结论先行：对真正需要多平台分发的人，这是目前安全模型最干净的方案；但它不是\"全适配器都开源\"的项目，下面会具体说。 一、核心机制：把扩展伪装成\"浏览器自己\" Wechatsync 最关键的设计，是它在架构上同时绕开了\"付费\"和\"账号上传\"这两个坑。README 里有三句话概括得很准确： 不是爬虫，不模拟登录，不经过任何第三方服务器。 它的工作方式和浏览器本身完全一致： 1. 用你自己的登录态 ——你在浏览器里正常登录知乎、掘金等账号，扩展直接复用浏览器里已有的 Cookie，不需要再输入一次密码，也不需要额外授权； 2. 调用平台官方接口 ——发布时请求的是各平台 Web 编辑器正在用的同一套 API，和你手动点\"发布\"在服务端看来没有区别； 3. 数据不出设备 ——所有请求从你的浏览器直接发往各平台，没有中间服务器转发，源码完全可审计； 4. 草稿优先 ——默认同步成草稿，发布前由你人工确认，不会一键群发。 这一点的工程意义在于：平台的风控系统很难把它判定为异常。传统第三方工具让所有用户的请求都从厂商机房的同一批 IP 发出，天然带\"集群特征\"；爬虫脚本用模拟登录硬刷接口，容易触发滑块和封号。而 Wechatsync 的请求来自你本人的浏览器、本机 IP、带着你本人的 Cookie，访问的又是官方编辑器接口——它在协议层面就是一次\"正常发布\"。 二、源码结构：monorepo 四包，职责切得很清楚 仓库是一个 pnpm/yarn workspace 管理的 monorepo，packages/ 下四个包，依赖关系是单向的： core ：核心逻辑，包括各平台适配器、HTML/Markdown 转换、图片处理，是被其余三端复用的底座； extension ：Chrome MV3 扩展，普通用户的可视化入口，负责页面注入和同步界面； cli ：命令行工具，基于 commander，提供 wechatsync sync 等命令； mcp server ：AI 桥接服务，兼容 Anthropic MCP 协议，支持 stdio 和 WebSocket。 扩展的 manifest.json 是理解它权限边界的最好入口。它申请的权限包括 cookies、declarativeNetRequest、scripting、tabs、downloads 等，但 没有任何远程服务器地址 ，background 是一个纯本地的 service worker。其中 declarativeNetRequest 很关键：知乎等平台的接口对请求头有要求（比如必须带 x requested with: fetch），扩展通过声明式规则在请求发出前改写头部，而不是把请求劫持到别处。 内容提取则分层处理：content script 注入页面，优先走微信、飞书等特定平台提取器，通用页面用 Safari Readability / Reader 方案竞争择优，最后才退回 标签；页面端用 Turndown 把 HTML 转成 Markdown，service worker 只处理 Markdown，不必在后台解析 DOM。 三、源码实证：以知乎适配器为例，看一次发布的完整流程 光讲机制不够，我挑了信息最完整的知乎适配器（packages/core/src/adapters/platforms/zhihu.ts）逐段看，一次发布分四步。 第一步，建草稿。 扩展向 https://zhuanlan.zhihu.com/api/articles/drafts 发 POST，只带标题和空内容，拿回一个 draftId。这一步刻意不提交正文，是为了先在服务端占住草稿位。 第二步，处理图片。 正文里的图片分两种来源：远程图通过知乎官方的 uploaded images 接口以 URL 转存；本地图和 data URI..."
     },
     {
       "title": "7 秒跑完真实网页任务：我通读了 Browser Use 新开源的 Jev Ultrafast 源码，看清浏览器 Agent 的「做选择题」路线",
@@ -5947,8 +5749,8 @@
       "date": "2026-11-13",
       "description": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
       "excerpt": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "Papermorph",
@@ -5991,8 +5793,8 @@
       "date": "2026-11-10",
       "description": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
       "excerpt": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -6161,8 +5963,8 @@
       "date": "2026-11-05",
       "description": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
       "excerpt": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -6185,8 +5987,8 @@
       "date": "2026-11-03",
       "description": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
       "excerpt": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
-      "topic": "",
-      "topicSlug": "",
+      "topic": "开源实测",
+      "topicSlug": "open-source-review",
       "series": "",
       "tags": [
         "开源",
@@ -6552,6 +6354,178 @@
     }
   ],
   "topics": [
+    {
+      "title": "开源工具实测与源码拆解",
+      "url": "/topics/open-source-review.html",
+      "date": "",
+      "description": "区分本机实测、源码拆解与资料整理，记录版本、环境、真实产出、成本、常见问题和商用边界。",
+      "excerpt": "区分本机实测、源码拆解与资料整理，记录版本、环境、真实产出、成本、常见问题和商用边界。",
+      "topic": "",
+      "topicSlug": "",
+      "tags": [],
+      "type": "topic",
+      "count": 6,
+      "slug": "open-source-review",
+      "core": false,
+      "priority": 100,
+      "readingOrder": 1,
+      "guide": "",
+      "content": "",
+      "keywords": [
+        "开源AI",
+        "AI视频",
+        "Agent",
+        "实测",
+        "源码拆解"
+      ],
+      "articles": [
+        {
+          "title": "Papermorph 实测：4 个官方案例与 4 个本地原创试样",
+          "url": "/articles/2026/11/13/papermorph/",
+          "type": "blog",
+          "date": "2026-11-13",
+          "description": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
+          "excerpt": "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "Papermorph",
+            "开源",
+            "AI工具",
+            "互动课程",
+            "内容生产"
+          ],
+          "priority": 0,
+          "content": "一份线性代数 PDF，想变成学生愿意打开的课，通常要拆章节、写讲解、画图、配音，再考虑练习和网页发布。故事、纪录片和历史内容也类似：素材可能已经在手里，麻烦的是把它们组织成别人能看、能听、能操作的作品。 Papermorph 想接手的是这一整段流程。它是一个给编程智能体使用的开源技能，可以把教材、故事、书籍或观点做成带动画、旁白和互动的静态网页，也能导出 MP4 与字幕。 我打开了它的四个官方案例，并核对了本机安装的技能文档和初始化脚本。最吸引我的不是“AI 又学会做一种视频”，而是这些案例都能作为完整作品存在：有章节，有统一的播放器，有声音与画面的同步，也有些地方必须让读者亲自参与。 下面不看虚构的客户故事和效率数字，只看四个已经上线、可以亲自打开的案例。 不只截图官方页面：本地真的做了四个 为了验证安装后能否实际制作，我又在本机写了四个原创中文最小试样。画面由代码绘制，旁白使用 Edge TTS，没有调用付费 API。下面的截图与 MP4 都是本地真实导出，不是官方素材。 本地试样一：三个平面，一个公共解 三个三元一次方程变成三个半透明平面，公共交点 (1, 2, 3) 随后出现；网页版还有两道检查题。 播放器未显示时，直接打开 MP4（约 33.47 秒） 本地试样二：小马过河纸偶绘本 小马、老牛与河边纸景都由代码绘制，带中文角色配音、走路、眨眼、摆尾、抬蹄与水纹。 播放器未显示时，直接打开 MP4（约 23.69 秒） 本地试样三：从放逐到拘禁 这段《疯癫与文明》主题纪录片用原创 SVG 城镇、船、高墙和概念卡，提出“谁有权划分正常与异常”的问题。 播放器未显示时，直接打开 MP4（约 45.58 秒） 本地试样四：欧洲思想史互动地图 1919—1929 年，海德格尔、维特根斯坦、本雅明和卡西尔沿城市路线移动，每个年份都有事件卡片。这个案例以点击阅读为主，不配语音，也不强行导出线性视频。 地图底图来自 Natural Earth，现代国界仅作定位。四个试样的源码、整套截图、视频与复现命令保存在 local demos/。 下面再看四个官方完整案例，它们展示了这些试样继续扩展后的作品形态。 案例一：把抽象数学做成能演示、能练习的课 真实场景：教师或课程作者需要解释三维空间，但不希望学生只看一段无法操作的录像。 Papermorph 官方的 Linear Algebra 第 12 章 叫 Three Planes, One Point ，讲的是三个三元方程如何对应三个平面，以及它们为什么共享一个解。 页面标注约 14 分钟，共 21 步。我打开第 6 步时，方程、候选解的代入判断和三维平面出现在同一套讲解里。后面的进度条还列出了 Quick check、Chapter practice 和 Playground。 这个案例说明，Papermorph 的课程不是把 PDF 文本塞进视频模板。它会把解释拆成一串可前进、可回退的步骤，并在其中安排检查与练习。官方 README 还列出了整套 Linear Algebra 的 40 章；这个数量来自项目方，本文只逐页核对了第 12 章。 对数学老师来说，价值不在“少剪一条视频”，而在于讲完以后，学生仍能拖动、答题和复查。视频导出来后，这些操作反而会消失，这一点后面还会提到。 案例二：把儿童故事做成纸偶绘本，而不只是配图朗读 真实场景：儿童内容作者已有故事，想让人物表演起来，并在阅读中加入简单互动。 官方的 《小马过河》第 1 集 标注约 4 分钟，共 9 个场景，从 Home、By the river 到 Uncle Ox、Squirrel 和 At the mill。 人物和场景采用纸偶式的分层表达。根据官方文档，这个案例还包含角色配音、音效、音乐，以及让孩子根据提示在画面里找人物的 listen and find 环节。技能说明注明，角色声音使用了 ElevenLabs，因此“绘本完全免费生成”并不是准确说法。 我在自动化浏览器里打开了河边场景，但这次环境没有成功播放声音，所以我不把“听过配音”或“玩过全部互动”写成实测结论。页面本身和官方文档能确认的是：Papermorph 给绘本作者准备的不只是图片生成，还包括纸偶、场景、口型、声音与找物互动的制作工具。 案例三：一本书做成纪录片，再拆成手机端短片 真实场景：知识类创作者围绕一本书制作长内容，同时希望把同一主题分发到竖屏平台。 Madness and Civilization 的官方系列页提供了一部约 10 分钟的纪录片，也列出了 4 集竖屏短片： The Ship 、 Locked Up 、 Liberation 、 The Last Voices ，每集标注 2 分钟。 这个案例更接近内容团队的真实工作：长片负责完整论证，短片分别抓住一个场景或判断。系列页还公开了素材与许可信息，图片和音乐包括来自 Wikimedia Commons 的 public domain、CC0 作品；声音使用 ElevenLabs，部分线稿和动画也标明了图像模型与视频模型的参与。 我喜欢这种把来源摆在明面上的做法。公共领域图片不是“随便搜一张古画”，作曲进入公共领域也不等于某份录音可以任意使用。Papermorph 提供了查找和记录素..."
+        },
+        {
+          "title": "1.46 万 Star 的 Aperant：给 Claude Code 套上 12 路并行的桌面军团，我把源码翻了个底朝天",
+          "url": "/articles/2026/11/10/aperant-multi-agent-coding/",
+          "type": "blog",
+          "date": "2026-11-10",
+          "description": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
+          "excerpt": "AndyMik90/Aperant（前身 Auto Claude）是一个 1.46 万 Star 的自主多会话 AI 编码框架，以 Electron 40 + React 19 桌面应用形态，把 Claude Code CLI 编排成最多 12 个并行 agent 终端：每个任务在独立 git worktree 中规划、编码、自验证、智能合并，主分支保持只读安全。本文基于 1146 个 TS 文件、约 31.4 万行源码实测，拆解它的自主编码闭环（spec 规划→parallel-executor 并行→qa-loop 自验证→auto-merger 语义合并）、worktree 隔离机制、基于 libSQL 图数据库与五级 embedding 降级的记忆层、OS 沙箱/文件系统限制/命令白名单/secret-scanner 四层安全模型，也如实说清它的本质是 Claude Code 的工程化外壳而非新模型、强依赖 Claude Pro/Max 订阅、2.x 已进入维护模式且 3.0 在独立仓库推倒重构（PR 暂停、最近 release 停在 2026-03），以及 AGPL-3.0 的闭源 SaaS 商业授权边界。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "开源",
+            "Aperant",
+            "Claude Code",
+            "AI编程",
+            "多智能体",
+            "Electron",
+            "git worktree",
+            "AGPL",
+            "自动化"
+          ],
+          "priority": 0,
+          "content": "AI 编程工具这一年卷得厉害，但大多数产品的形态高度趋同：一个对话框，你提需求、它改代码、你 review。真正在\"并行\"和\"自主\"上动刀子的不多。今天这个项目选择了一个很硬核的方向—— 让十几个 AI agent 同时在你的代码库里分头干活，还互不干扰、能自己测、自己合 。 它叫 Aperant，前身是 Auto Claude，目前 1.46 万 Star、1890 Fork，主语言 TypeScript，AGPL 3.0 协议。我把仓库克隆下来，通读了 1146 个 TypeScript 文件、约 31.4 万行代码。这篇不讲营销话，回答三个我最好奇的问题：它怎么做到 12 个 agent 并行还不把代码库搞乱、\"自主编码\"到底有多少真东西、以及它现在这个特殊阶段还值不值得上手。 一、先定性：它不是新模型，是 Claude Code 的工程化军团 这是最需要先讲清楚的一点，避免你产生错误预期。 我在 src/main/agent/agent process.ts 里看到，agent 的运行方式是通过 Node 的 child process.spawn 拉起 Claude Code CLI 子进程，并用 CLAUDE CONFIG DIR、CLAUDE CODE OAUTH TOKEN 等环境变量做 profile 隔离。 Aperant 自己不训练、也不内置大模型 ，它做的是 Claude Code 之上的那一层工程化外壳：任务编排、环境隔离、状态管理、质量回路和自动合并。 所以它的前置依赖写得很直白，三条缺一不可： Claude Pro/Max 订阅、本地安装 Claude Code CLI、一个已初始化 git 仓库的项目 。想清楚这个定位很重要——它放大的是你已有的 Claude Code 生产力，而不是一个能脱离 Anthropic 独立运行的替代品。 二、自主编码闭环：从一句需求到可合并代码 把 src/main/ai/orchestration/ 目录展开，能看到一条完整的流水线。 规划阶段 ，spec orchestrator 和 subtask iterator 把你的自然语言需求拆成结构化的任务规格（spec）和可独立执行的子任务，还带路线图和竞品分析能力。 并行构建阶段 ，parallel executor 负责调度多个 agent 同时开工。这里有两个我很认可的工程细节：一是 ai/client/factory.ts 里默认 maxSteps=200、简单任务 maxSteps=1，从规则上杜绝 agent 无限跑下去烧钱；二是每个 agent 的状态用 XState 状态机管理（仓库里有专门的 XSTATE MIGRATION SUMMARY），生命周期可控、可暂停恢复（pause handler、recovery manager）。 自验证阶段 是它区别于\"聊天式改代码\"的核心。qa loop.ts 构成质量回路：测试失败会自动驱动 agent 修正再跑，由 QA MAX ITERATIONS 兜底防止死循环，还能生成 QA 报告和人工测试计划。 合并阶段 ，ai/merge/ 下的 conflict detector、semantic analyzer、auto merger、file evolution、timeline tracker 协同工作——注意它强调的是 语义级 冲突分析而非纯文本 diff，配合文件演变追踪，把多个 agent 的产出安全地并回主干。 三、并行不乱的根基：git worktree 隔离 12 个 agent 同时改一个代码库，最大的风险是互相覆盖。Aperant 的答案是 git worktree。 ai/worktree/worktree manager.ts 负责为每个任务创建或复用独立的 git worktree——本质是给同一个仓库挂多个工作目录、每个绑定独立分支。我核对了实现，它用 git worktree add 建目录、git worktree list porcelain 核验状态、任务结束批量回收，而主分支全程只读保护。这样任务 A 的改动天然被关在它自己的工作区里，碰不到任务 B，更碰不到 main。 UI 层的 TerminalGrid.tsx 则把这套能力可视化：固定 3×4 网格、上限 12 个终端 ，界面上直接显示 terminals.length / 12 terminals。这个\"12\"不是宣传数字，是源码里写死的网格布局和监听器配置（preload 层注释明确写了为 12 终端调大 max listeners）。 四、记忆层：用图数据库让 agent 跨会话记住项目 单次会话聪明不难，难的是跨会话的项目记忆。Aperant 在 ai/memory/ 下做了一套相对完整的体系。 存储用的是 libSQL（SQLite 的开源分支）做图数据库，核心是 graph nodes、graph edges、graph closure 三张表，其中闭包表用 BFS/DFS 预算节点的可达关系，且把传递闭包深度上限设为 5（MAX CLOSURE DEPTH）来控制性能。observer 监听代码变更更新图谱，retrieval 在 ag..."
+        },
+        {
+          "title": "Vercel 开源的 1.5 万 Star 工具：让 AI 不用截图、不靠像素，直接「读懂」你的桌面",
+          "url": "/articles/2026/11/05/agent-desktop-computer-use/",
+          "type": "blog",
+          "date": "2026-11-05",
+          "description": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
+          "excerpt": "vercel-labs/agent-desktop 是 Vercel Labs 开源的 Computer Use CLI（Apache-2.0，Rust 约 35 万行、2628 个源文件）：与主流「截图+视觉模型+像素坐标」的 computer use 不同，它直接读取操作系统的无障碍树（macOS AX API / Windows UI Automation / Linux AT-SPI），把桌面 App 的界面结构化成带 ref 的 JSON，Agent 对 ref 点击、输入，再重新快照验证，形成确定性的 observe→act→verify 循环，内部不含任何模型。默认无头（不移动鼠标、不抢焦点），60 个命令名/56 个操作命令，支持 CLI、C 库和 stdio MCP server，npm 月下载约 3.1 万。本文克隆仓库拆解它的快照/ref 严格解析机制、三态证据模型、防窗口句柄复用的身份校验、平台适配架构和安全边界（快照可能含隐私、密钥走 stdin），也说清它的局限：依赖 App 无障碍支持质量、部分操作必须 headed、1.2 版仍在快速迭代。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "开源",
+            "Vercel",
+            "Computer Use",
+            "AI Agent",
+            "Rust",
+            "无障碍",
+            "桌面自动化",
+            "MCP",
+            "CLI"
+          ],
+          "priority": 0,
+          "content": "过去一年\"让 AI 操作电脑\"（computer use）的主流玩法你大概已经见过：给大模型一张屏幕截图，模型用眼睛找按钮、输出像素坐标，然后模拟鼠标点过去。能用，但你也一定见过它的翻车现场——分辨率一变就点空、相似按钮分不清、点没点中还得再截图猜。 Vercel Labs 开源的 agent desktop 走了一条完全不同的路： 不让 AI\"看\"屏幕，而是让它直接\"读\"操作系统的无障碍树（accessibility tree）。 界面在它眼里不是像素，而是一份结构化的 JSON——每个可操作元素都带一个 ref 句柄，点按钮变成对 ref 发指令，不需要图像识别，也没有坐标猜谜。 项目数据先摆出来： 15,585 Star、1,083 Fork，Apache 2.0 协议，核心用 Rust 写成（2628 个 .rs 文件、约 35 万行），npm 包月下载约 3.1 万次 ，2026 年 2 月建仓，11 月 5 日刚发布 1.2.0。我把仓库克隆下来通读了 README、CONCEPTS 和 CHANGELOG，这篇讲清楚它的原理、工程上最硬核的几个设计，以及它的边界。 一、核心思路：把桌面变成一个带句柄的 JSON API 一句话概括它的工作方式： 快照（snapshot）→ 对 ref 操作（act）→ 再快照验证（verify），循环往复。 安装就是一行： 实际交互长这样： 每次命令输出一个 JSON 信封（envelope）。快照的精简结构是这样的： 关键在于： agent desktop 内部没有任何模型。 它不做推理、不做决策，只负责\"读界面\"和\"执行动作\"两件确定性的事；观察—决策—验证的智能循环完全住在你自己的 Agent（Claude Code、Cursor、自研 Agent 等）里。它把自己定位成 Agent 的\"眼睛和手\"，而不是\"大脑\"。 这和截图派的差别是本质性的： 维度 截图 + 视觉模型 agent desktop（无障碍树） 感知方式 像素截图，模型识别 系统 API 的结构化语义树 定位 猜坐标，受分辨率/缩放影响 ref 句柄，语义定位 成本/延迟 每步一次视觉模型调用 本地 JSON，无 token 费用 可靠性 相似元素易混淆 严格身份校验，歧义直接报错 无头能力 通常要真实屏幕 默认无头，不移动鼠标不抢焦点 二、最硬核的设计：ref 不是坐标，而是一份\"捕获证明\" 如果只是\"读无障碍树然后点元素\"，这工具不值 1.5 万 Star。它真正的工程含量在 CONCEPTS.md 里—— 怎么保证你点下去的那个 ref，在 UI 变化之后仍然指向当初那个元素，而不是另一个长得一样的控件。 1. ref 属于且仅属于它的快照 每个 ref 都带快照限定符，形如 @s8f3k2p9:e8。裸写 @e8 会被直接拒绝（INVALID ARGS）。当界面发生变化，旧 ref 会返回 STALE REF（过期）或 AMBIGUOUS TARGET（有歧义），要求你重新快照—— 它宁可失败，也不猜。 2. 严格解析（Strict Ref Resolution）：fail closed 重新解析一个 ref 时，它拿捕获时存下的完整身份证据（role + native id + 稳定的 name/description）在当前窗口里重新计数匹配：恰好一个匹配才执行；零个匹配判过期，两个及以上判歧义。 控件的当前值和坐标从不参与身份判断 ——因为值会变、窗口会移动。 macOS 上更强：ref 直接存了元素的无障碍地址（retained object），元素活着且进程/role/标识仍匹配时直接还原，应用重启或元素销毁则判过期，两个\"双胞胎\"控件各有各的 ref。 3. 防操作系统的\"句柄复用\" 这是我觉得最老到的细节。操作系统的窗口句柄（Windows 的 HWND、macOS 窗口号、Linux 的 X11 client id）在窗口销毁后 可能被分配给另一个新窗口 。所以句柄 alone 不能当身份。它的做法是句柄 + 进程创建时间令牌（process generation token）双重佐证，并且在每次写操作 执行前立即复核一次 ——防止\"检查时是对的、点击时窗口已被换了住户\"。截图派工具几乎不会考虑这一层。 4. 证据三态：Known / Absent / Unknown 绝不合并 适配器读到的每个属性只有三种状态：已知、确认不存在、读失败不可信。Absent（问了，系统说没有）和 Unknown（没读到）被严格区分——一个没回应的目标不能伪装成\"它没有这个属性\"。任何角色或状态只在系统给出 正面证据 时才授予，读失败就宁可不写。这避免了\"每个无关节点都被装饰上一堆假状态\"的常见自动化 bug。 5. Web 容器的\"透明折叠\" Electron/Chromium 这类 Web 套壳应用会制造大量匿名容器节点（UIA 的 Group/Custom/Pane、AX group、AT SPI panel），能把树深撑爆一个数量级。它的处理是：无名、无值、无开发者标识、除了滚动没有任何动作的\"透明包装\"跳过逻辑深度；但这个跳过在 Windows 上要先验证 Chromium 来源（窗口..."
+        },
+        {
+          "title": "零粉丝新号 13 天 37 万播放：这个开源 Agent Skill，让代码一帧一帧画出整条短视频",
+          "url": "/articles/2026/11/03/charles-video-maker/",
+          "type": "blog",
+          "date": "2026-11-03",
+          "description": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
+          "excerpt": "anneheartrecord/charles-video-maker 是一个 MIT 协议的 Agent Skill：文字稿进去，带配音、逐字字幕、封面和发布文案的竖屏成片出来，画面由模型写一个 render(t) 网页、用 Playwright 逐帧截图再经 FFmpeg 合成，不是抽卡式一句话生视频。它合并了 xilo-opus-video 的代码渲染流水线与 Anatomy 等距机器插画，内置事实核查闸门、-14 LUFS 响度、Whisper 逐字时间戳对齐、静止帧检查，还能实录/原片/免版税空镜打底、接 53 种 Lemo-Opuscar 画风。最有话题性的是它的抖音知识号模式：从一条正在爆的原片出发做风格复刻，作者用它零粉丝新号 13 天做到 37 万播放、0 投流，代表作 78 秒 23.1 万播放。本文克隆仓库（约 2.9 万行脚本）拆解它的制作流水线、四种画面路线、D-1→D5 抖音起号工作流和质量闸门，也说清它不做什么（不剪辑已有视频、不用视频模型、Claude 不亲手写文案）以及真实数据背后的边界。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "开源",
+            "AI视频",
+            "Agent Skill",
+            "短视频",
+            "抖音",
+            "代码动画",
+            "FFmpeg",
+            "Playwright",
+            "Whisper",
+            "自动化"
+          ],
+          "priority": 0,
+          "content": "\"一句话让 AI 生成视频\"如今已经不稀奇，但真做过内容的人都知道那是什么体验：像抽卡。出来什么样、为什么是这样、下一条还能不能复现，全都不可控。 今天这个开源项目走的是一条完全相反的路。它叫 charles video maker，是一个装进 Claude Code / Antigravity 这类 AI 编程工具里的 Agent Skill ：你给文字稿，它交付一条带配音、逐字字幕、封面和发布文案的成片——而画面，是 让模型写一个会按时间 t 自己绘制的网页，再一帧一帧截图合成出来的 。 最有话题性的是作者甩出来的一组真实数据： 零粉丝新号，2026 年 10 月 20 日开号，13 天做到 37 万+ 播放，0 投流 ，代表作一条 78 秒的视频拿了 23.1 万播放、7053 次分享。 我把仓库克隆下来通读了 SKILL、14 份参考文档和全部脚本（约 2.9 万行）。这篇讲清楚它到底怎么工作、为什么\"代码画视频\"反而更可控，以及那 37 万播放里有多少是工具的功劳、有多少不是。 一、它是什么：一个给 Agent 的「视频制作 SOP」，不是剪辑软件 先厘清形态。它不是 Premiere、剪映那种你手动操作的软件，也不是 Sora/Veo 那种输入提示词直接吐视频的生成模型。它是一份 教 AI 编程助手如何做视频的技能包 ： 装好后，你在 Agent 里说一句： 剩下的由 Agent 按技能包里固化的流程执行。核心机制一句话： Opus/Claude 这类编程模型自己不会输出视频，但会写网页。于是让它写一个暴露了 render(t) 函数的动画网页——t 是时间（秒），画面随 t 变化；脚本用 Playwright 把每一帧截下来，FFmpeg 合成为 MP4，声音用 TTS 合成。 这带来一个关键区别：因为每一帧都来自确定性的代码，\"下一条还能不能做出同样水准\"是可控的；而且任何一个画面元素、时间点、数据都可以精确到帧地修改和复核——这正是\"抽卡式生成视频\"做不到的。 二、四种画面路线：不只是代码动画 它并不是只会画代码动画，SKILL 开头先做\"分流\"，根据你要讲的东西选路线： 1. 代码动画（code rendered） ：模型写按时间绘制的网页（Canvas / SVG / WebGL / Three.js / Remotion / Manim 都行），逐帧截图合成。适合知识讲解、数据可视化、产品介绍。 2. 素材打底（footage layer） ：用实录画面、原视频片段、Pexels/Pixabay 免版税空镜或生成图垫在底层，代码画面退成一个 透明信息层 叠上去。适合产品演示、游戏介绍、评论视频——解决\"画面全是插图不够真实\"的问题。 3. 机器讲概念（Anatomy） ：把一个技术概念造成一台会动的等距（isometric）机器——百分表、抽屉柜、绘图仪，甚至带 WebGL 尾焰的猛禽发动机。旁白念到哪一步，机器就做哪一个动作，读者因为\"认出了机器\"而理解原理。 4. 抖音知识号模式（Douyin mode） ：这是最特殊的一条，从一条 正在爆的原片 出发，选题、复刻风格、重写文案、配乐、渲染、定时发布、拉数据一路做完。 另外还能可选接入 Lemo Opuscar 的 53 种画风 （油画厚涂、水彩、浮世绘、水墨、像素 RPG……）和真乐器配乐，但风格库按需下载（约 350MB，采样库另约 1.3GB），不强制塞进仓库。 三、一条视频的生产流水线：细节里全是工程 最能体现这个项目成色的，是它把\"做一条能看的视频\"拆成的这条严谨流水线： 逐个说几个我觉得专业的点： 1. 配音对齐——整段合成，再用 Whisper 对回原文。 TTS 不是一句一句拼，而是整段合成（更自然）、可加速（默认 Gemini TTS 1.25 倍速），然后用 Whisper 做逐字时间戳，把识别结果 对齐回稿子原文 。这样场景切换、画面动作、音效、字幕全都绑定在\"念到哪个词\"上，而且识别错的字不会污染字幕——字幕显示的是你的原稿。Apple Silicon 用 mlx whisper，其他机器用 faster whisper。 2. 事实核查闸门（factcheck）。 只要稿子里出现价格、额度、数据、产品功能、截止日期，或\"最新/现在\"这种会过期的说法，就必须先调研、建一张核对表（factcheck.py extract）。正式渲染前还有一道闸：factcheck.py gate 同时校验旁白文案和画面代码里出现的数字， 退出码非 0 就不许出片 。这是专门防 AI 视频最容易犯的\"一本正经编数字\"。 3. 音频按广播标准做。 混完统一标准化到 14 LUFS （YouTube/抖音等平台的响度规范），还要过真峰值（true peak）检查，避免不同平台音量忽大忽小。 4. 静止检查（still check）。 自动找出\"画面停住超过 2 秒\"的段落，以及\"字幕已经换了、画面却没跟上\"的地方——这俩是 AI 生成视频最常见的划水痕迹。 5. 三方案先确认，再动手。 普通模式不会闷头直接做，而是先给三个方案（每个都写清封面和开头黄金几秒）+ 关键帧/几秒预览，你确认后写成 brief.md，再从封面和开头逐镜头制作、逐镜头..."
+        },
+        {
+          "title": "30 万 Star 的 Superpowers：我通读源码，看它怎么把 Claude Code 驯成靠谱工程师",
+          "url": "/articles/2026/10/16/superpowers-agent-skills-methodology/",
+          "type": "blog",
+          "date": "2026-10-16",
+          "description": "obra/superpowers 是一年涨到 30 万 Star 的编码 Agent 方法论插件：15 个可组合 skill 加一个 SessionStart 钩子，强制 AI 先头脑风暴、再写规格与计划、用子 Agent 执行、TDD、评审。本文克隆 v7.0.0 源码、实跑启动钩子，拆解它的注入机制、七步工作流、跨 16 种 Agent 外壳的适配，以及那个反直觉的 94% PR 拒绝率。",
+          "excerpt": "obra/superpowers 是一年涨到 30 万 Star 的编码 Agent 方法论插件：15 个可组合 skill 加一个 SessionStart 钩子，强制 AI 先头脑风暴、再写规格与计划、用子 Agent 执行、TDD、评审。本文克隆 v7.0.0 源码、实跑启动钩子，拆解它的注入机制、七步工作流、跨 16 种 Agent 外壳的适配，以及那个反直觉的 94% PR 拒绝率。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "开源",
+            "Claude Code",
+            "Agent Skill",
+            "TDD",
+            "工作流",
+            "Hermes",
+            "AI编程"
+          ],
+          "priority": 0,
+          "content": "你给 Claude Code 或 Cursor 下一句「帮我做个待办应用」，它最常见的反应是什么？几秒沉默，然后开始疯狂写文件，半小时后甩给你一个能跑、但不是你想要的东西。你想要的它没问，你没说的它替你拍了板，测试？它说「建议补充」。这不是模型不够聪明——它太想立刻「动手帮忙」了，而软件工程里最贵的错误，恰恰都发生在动手之前。 obra/superpowers 想治的就是这个病。它不是一个带聊天框的新产品，也不是某个框架的 SDK，而是一套写给编码 AI 的「纪律」：15 个可组合的 skill（技能文件），加一个在每次会话开始时自动注入的引导，让你的 Agent 不允许 跳过「先问清楚、写规格、写计划、测试先行、同行评审」这套流程。作者是 Jesse Vincent（网名 obra，Prime Radiant 团队），2025 年 10 月建仓，到我写文时刚好一年，已经 30 万 Star、2.68 万 Fork ，版本迭代到 v7.0.0，并且被 Anthropic 收进了 Claude 官方插件市场。 我把仓库完整克隆下来，通读了 README.md、AGENTS.md、全部 15 个 skill 和各平台的钩子源码，还在这台机器上实跑了它的启动脚本。这篇文章讲清楚四件事：它到底靠什么机制「管住」一个大模型、那七步工作流每步在干什么、跨 16 种 Agent 外壳（包括我自己跑的 Hermes）是怎么适配的，以及——谁该现在装、谁应该再等等。 一个核心心智模型：纪律是一段被强制加载的文字 理解 Superpowers 最快的方式，是先破除一个误解：它几乎没有代码。整个插件零第三方依赖，核心资产是一堆 Markdown 文件，每个 skill 就是一个目录里的 SKILL.md，最长的也不到 5000 英文单词。真正让这套 Markdown「生效」的，是两个朴素但被打磨到极致的机制。 第一，会话开局强制注入。 插件通过各 Agent 外壳的 SessionStart 钩子，在你每次打开会话（startup）、清空上下文（clear）、压缩上下文（compact）时，把 using superpowers 这个总纲 skill 的全文塞进模型的第一句话里。我在本地直接执行了它的钩子脚本 hooks/session start，它的输出是一段 JSON，核心字段是注入给模型的上下文，开头是这样的： 我特意用空环境变量模拟了「启动时 PATH 是坏的」这种边界情况去读它的脚本，发现一个很说明设计态度的细节：脚本连 dirname、cat 都不调用——因为 Claude Code 曾经在 PATH 尚未修复时就批量执行启动钩子（issue 43127），一旦钩子报错，纪律就静默读不进来了。于是它用 bash 参数展开自己切路径、用 $(<file) 内置语法读文件、用纯字符串替换做 JSON 转义。 一个「保证规则永远在场」的脚本，自身必须在最恶劣的环境里也不失败 ——这是整套项目工程气质的缩影。 第二，用强祈使语气对抗模型的「合理化」。 注入的总纲里没有一句「你可以考虑」，全是这种文字（摘自 skills/using superpowers/SKILL.md）： 更妙的是它专门列了一张「红旗对照表」，把模型给自己找借口时的内心独白预先写死、再逐条怼回去： 「这只是个简单问题」「我先看下代码再说」「这 skill 太重了」——每一条模型最容易冒出来的自我说服，右边都跟着一句「问题也是任务，先查 skill」「skill 会告诉你该怎么看，先查」。这背后是一个很清醒的认知： 大模型不守规矩，很少是因为不知道规矩，而是因为它太擅长现场编一个听起来很合理的理由去破例。 Superpowers 做的，是把这些理由提前枚举、逐一封死。 七步工作流：把一个热情但没判断力的 junior 关进轨道 装完之后你什么都不用记，skill 会根据你要做的事自动触发。README 里把标准流程拆成七步，我对照源码逐个看了它的触发条件和产物： 1. brainstorming（头脑风暴）——在写任何代码之前。 这是 v7.0.0 完全重写过的一个 skill，也是整个系统的闸门。它的第一条规则就反直觉：Agent 不许上来提方案，先问自己「我到底知道用户想要什么、以及为什么吗？」，然后向你抛出一个关于具体场景的开放问题（「你是在哪个瞬间希望有这个东西的？」）。它还会主动给你台阶——「如果你想跳过提问直接开干，说一声就行」。小改动在对话里达成一致即可，真正的项目则要产出一份 设计文档 ，并派一个全新的子 Agent 假装自己是要接手实现的人，读完设计后列出「我还有哪些地方看不懂、必须问」，把会改变成品的问题一次性抛回给你。 2. using git worktrees（隔离工作区）。 设计批准后，它不在你当前分支上直接改，而是开一个 git worktree、跑一遍项目初始化、确认现有测试是干净的绿，再动工。目的是让「开工前基线就是坏的」这种坑无所遁形。 3. writing plans（写计划）。 把工作切成一个个「一次动作、一个可检查结果」的任务。v6.4.2 对这个 skill 做过一次很值得说的瘦身：早期版本会把每个任务的完整代码都写进计划..."
+        },
+        {
+          "title": "别用 Sora 硬刚科普了：给个主题，这个开源 skill 用代码\"画\"出整条讲解视频",
+          "url": "/articles/2026/09/28/anything2explainer/",
+          "type": "blog",
+          "date": "2026-09-28",
+          "description": "anything2explainer 是一个 Claude Code/Codex skill：给一个主题，产出黑底 MG 风格的科普讲解视频，带 TTS 配音、字幕和章节进度条。画面全部由 Remotion 代码绘制，事实可追溯、可逐帧修改、可复现，无需视频生成模型和 GPU。",
+          "excerpt": "anything2explainer 是一个 Claude Code/Codex skill：给一个主题，产出黑底 MG 风格的科普讲解视频，带 TTS 配音、字幕和章节进度条。画面全部由 Remotion 代码绘制，事实可追溯、可逐帧修改、可复现，无需视频生成模型和 GPU。",
+          "topic": "开源实测",
+          "topicSlug": "open-source-review",
+          "series": "",
+          "tags": [
+            "AI",
+            "开源",
+            "AI视频",
+            "Claude Code",
+            "Remotion",
+            "科普",
+            "Agent Skill"
+          ],
+          "priority": 0,
+          "content": "想做一条技术讲解视频，你大概会在三条路上反复纠结。 找 Sora、Veo、可灵这类视频生成模型：给一段提示词确实能出画面，但画面里出现的数字、机构、年份它可能随手就编，你也没法精确指定第三秒该显示什么；想改一帧？基本只能重抽。找数字人工具：一个虚拟主播站在那里念稿，机制讲不清楚，看两分钟就犯困。或者自己用 Manim、Remotion 一行行写——效果好，但一条五分钟的片子可能要磨上一两个礼拜。 最近在 GitHub 上看到一个思路很不一样的开源项目 anything2explainer 。它是一个 Claude Code / Codex 的 skill：你给一个主题，它直接产出一条黑底 MG 风格的科普讲解视频，带配音、字幕和章节进度条，中文英文都行。最关键的是， 画面全部由代码绘制，不用素材库、不用视频生成模型，也不使用任何现有视频的帧 。项目 9 月 8 日上线，二十天左右拿到 2000 多 Star。 它到底是什么 先纠正一个预期：anything2explainer 不是一个你装好就能双击运行的 CLI。仓库里装的是一整套 让 AI 编程 Agent 把片子做出来的方法 ： 一个可编译的 Remotion 模板工程（React + TypeScript）； 一套图元与光效库（白线条图形、紫色重点、点阵波/星点幕底）； 配音、分镜、渲染、量化质检的脚本工具； 风格规范、动效词表和多 Agent 分工协议； 一条完整样片作为质量标尺。 换句话说，它把\"一个会做 MG 视频的资深团队\"的工作流，编码成了 Agent 可以照着执行的文档和模板。你要做的只是在 Claude Code 或 Codex 里说一句：\"讲一下向量数据库，做成一条讲解视频。\" 九阶段流水线：多 Agent 并行，四个点等你确认 整个流程分九个阶段，最耗时的\"写镜头\"环节由多个构建 Agent 并行完成——一个镜头对应一个文件。 1. 建项目 ：从模板复制出 Remotion 工程； 2. 调研 ：一个 Agent 做带出处的调研，每个数字、年份、术语都配 URL； 3. 解说词与时间轴 ：写文案、生成 TTS 配音，按词边界生成帧级时间轴； 4. 分镜 ：每镜头一行，写清帧区间、节拍、画面、动效、主角和光； 5. 覆盖层与图元 ：片头、章节卡、HUD、流程轨加主题图标； 6. 打样 ：先渲 30 秒样片给你看风格； 7. 并行构建 ：多个 Agent 各写 5–7 个镜头的纯函数组件； 8. 渲染 ：整片渲染并跑量化帧指标； 9. QC 与修复 ：每章一个 QC Agent 逐帧检查，修完复验再交付。 它不会闷头从头做到尾，而是在四处停下来等你拍板： 时长与语言、解说词定稿、配音、前 30 秒样片 。这个设计背后是一条很朴素的成本规律——解说词定稿是最便宜的干预点，因为定稿之后帧号会被每个镜头硬编码，改一个字就得全片重新对位；而 30 秒样片阶段改风格，代价只是一个构建组，整片渲完再改就是全部组。 真实成片长什么样 项目的质量标尺是一条《RAG 与知识库》样片：中文版 4 分 54 秒、44 个镜头、1490 字。下面这张帧拼图能直观看到它的画面语言——黑底、白线条、紫色重点、超粗黑体大字，动画随解说逐步添加元素，用\"大模型开卷考试\"这类比喻把检索增强生成讲清楚。 章节切换时会有专门的章节卡，底部常驻一条全片章节进度条，观众随时知道自己看到哪儿了。 讲到具体机制时（比如 Agent 循环、GraphRAG），画面会用图形把流程画出来，而不是干念定义。 全套过程文件——从调研、解说词、分镜表、逐镜头源码到 QC 报告——都在仓库的 examples/rag/ 里，可以直接对照着学。 一个有意思的设计：用\"正反例\"约束审美 Agent 自动生成画面，最大的风险是\"每个元素单看都对，凑在一起又乱又丑\"。anything2explainer 的应对方式很工程化：在 examples/contrast/ 里放了 6 组正反例帧对照——主体该多大、大字该怎么出现、数字该放哪、背景该不该留空、结尾该怎么收，每组都给一个 good 和一个 bad。 这等于把\"什么叫好看\"从一句模糊的\"高级感\"，变成了 Agent 可以比对的具体判据。QC 阶段也是按书面标准逐帧打分，而不是凭感觉说\"我觉得还行\"。 十分钟装起来 依赖方面：Node 18 以上（模板 npm install 会装 Remotion 4.0.507 / React 19），ffmpeg 必需；Python 侧装 edge tts、numpy、pillow、scipy。中文默认配音走 edge tts 的云希男声，免费且带词级边界；英文默认用 8200 万参数的 kokoro 本地模型，CPU 就能跑。 几个值得说的工程细节： 不需要 GPU ，Remotion 用无头 Chromium 在 CPU 上渲染； 渲染完全可复现 ，所有动画都是帧号的纯函数、随机数带种子、排版靠计算而不测 DOM，重渲一遍帧完全一致。项目甚至在树莓派 5 上跑通了，针对 ARM 上 kokoro 难装的问题补了 kokoro onnx 和 piper 两个兜底引擎。 工程层面的一个判断 这个项目最值得琢磨的，是它主动 放..."
+        }
+      ],
+      "articleTitles": [
+        "Papermorph 实测：4 个官方案例与 4 个本地原创试样",
+        "1.46 万 Star 的 Aperant：给 Claude Code 套上 12 路并行的桌面军团，我把源码翻了个底朝天",
+        "Vercel 开源的 1.5 万 Star 工具：让 AI 不用截图、不靠像素，直接「读懂」你的桌面",
+        "零粉丝新号 13 天 37 万播放：这个开源 Agent Skill，让代码一帧一帧画出整条短视频",
+        "30 万 Star 的 Superpowers：我通读源码，看它怎么把 Claude Code 驯成靠谱工程师",
+        "别用 Sora 硬刚科普了：给个主题，这个开源 skill 用代码\"画\"出整条讲解视频"
+      ]
+    },
     {
       "title": "Java 与 JVM",
       "url": "/topics/java-jvm.html",
@@ -9243,135 +9217,6 @@
         "蚂蚁中间件SOFA",
         "免费接口api分享（终于找到了）",
         "什么是区块链？ 区块链的入门介绍,场景应用"
-      ]
-    },
-    {
-      "title": "工具、效率与博客建设",
-      "url": "/topics/tools-blog.html",
-      "date": "",
-      "description": "开发工具、网络分析、Rust 学习、效率工具、内容维护和零散工程笔记。",
-      "excerpt": "开发工具、网络分析、Rust 学习、效率工具、内容维护和零散工程笔记。",
-      "topic": "",
-      "topicSlug": "",
-      "tags": [],
-      "type": "topic",
-      "count": 5,
-      "slug": "tools-blog",
-      "core": false,
-      "priority": 80,
-      "readingOrder": 9999,
-      "guide": "",
-      "content": "",
-      "keywords": [
-        "solo",
-        "博客",
-        "迁移",
-        "rust",
-        "wireshark",
-        "drools",
-        "工具",
-        "github",
-        "api",
-        "区块链"
-      ],
-      "articles": [
-        {
-          "title": "Drools语法",
-          "url": "/articles/2020/10/29/1603968711195.html",
-          "type": "blog",
-          "date": "2020-10-29",
-          "description": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
-          "excerpt": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
-          "topic": "",
-          "topicSlug": "",
-          "series": "",
-          "tags": [
-            "Drools",
-            "规则引擎"
-          ],
-          "priority": 0,
-          "content": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus activation group agenda group ruleflow group entry point duration package import dialect salience enabled attributes rule extend when then template query declare function global eval not in or and exists forall accumulate collect from action reverse result end over init 注释 单行注释 多行注释 Pakage package package表示一个命名空间.package是必须定义的，必须放在规则文件第一行. import import语句的工作方式类似于Java中的import语句。您需要为要在规则中使用的任何对象指定完全限定路径和类型名称。 global global用于定义全局变量。 Rules: Set the global value: Function function function是一种将语义代码放置在规则源文件中的方法，而不是普通的Java类 Query query query是一种搜索工作内存中与指定条件匹配的事实的简单方法. Rule rule定义规则。rule \"ruleName\"。 一个规则可以包含三个部分：属性部分,条件部分：即LHS,结果部分：即RHS. 属性部分 Attributes 定义当前规则执行的一些属性等，比如是否可被重复执行、过期时间、生效时间等。 activation group agenda group auto focus date effective date expires dialect duration duration value enabled lock on active no loop ruleflow group salience no loop 默认值：false 类型：Boolean 在一个规则当中如果条件满足就对Working Memory当中的某个Fact对象进行了修改，比如使用update 将其更新到当前的Working Memory当中，这时引擎会再次检查所有的规则是否满足条件，如果满足会再次执行. ruleflow group 默认值：N/A 类型：String Ruleflow是一个Drools功能，可让您控制规则的触发。由相同的规则流组标识汇编的规则仅在其组处于活动状态时触发。将规则划分为一个个的组，然后在规则流当中通过使用ruleflow group属性的值，从而使用对应的规则。 lock on active 默认值：false 类型：Boolean 当在规则上使用ruleflow group 属性或agenda group 属性的时候，将lock on action 属性的值设置为true，可能避免因某些Fact 对象被修改而使已经执行过的规则再次被激活执行。可以看出该属性与no loop 属性有相似之处，no loop 属性是为了避免Fact 修改或调用了insert、retract、update 之类而导致规则再次激活执行，这里的lock on action 属性也是起这个作用，lock on active 是no loop 的增强版属性，它主要作用在使用ruleflow group 属性或agenda group 属性的时候 salience 默认值：0 类型：integer 设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数. 规则的salience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机的. agenda group 默认值：MAIN 类型：String 规则的调用与执行是通过StatelessSession 或StatefulSession 来实现的，一般的顺序是创建一个StatelessSession 或StatefulSession，将各种经过编译的规则的package 添加到session当中，接下来将规则当中可能用到的Global对象和Fact对象插入到Session 当中，最后调用fireAllRules 方法来触发、执行规则。在没有调用最后一步fireAllRules方法之前，所有的规则及插入的Fact对象都存放在一个名叫Agenda表的对象当中，这个Agenda表中每一个规则及与其匹配相关业务数据叫做Activation，在调用fireAllRules方法后，这些Activation 会依次执行，这些位于Agenda 表中的Activation 的执行顺序在没有设置相关用来控制顺序的属性时（比如salience 属性），它的执行顺..."
-        },
-        {
-          "title": "wireshark安装和基本语法",
-          "url": "/articles/2020/01/04/1578123919824.html",
-          "type": "blog",
-          "date": "2020-01-04",
-          "description": "1.过滤IP，如来源IP或者目标IP等于某个IP 例子: ip.src eq 192.168.1.108 or ip.dst eq 192.168.1.108 或者 ip.addr eq 192.168.1.108 // 都能显示来源IP和目标IP 2.过滤端 口 例子: tcp.port eq 80 // 不管端口是...",
-          "excerpt": "1.过滤IP，如来源IP或者目标IP等于某个IP 例子: ip.src eq 192.168.1.108 or ip.dst eq 192.168.1.108 或者 ip.addr eq 192.168.1.108 // 都能显示来源IP和目标IP 2.过滤端 口 例子: tcp.port eq 80 // 不管端口是...",
-          "topic": "",
-          "topicSlug": "",
-          "series": "",
-          "tags": [
-            "wireshark",
-            "网络嗅探"
-          ],
-          "priority": 0,
-          "content": "1.过滤IP，如来源IP或者目标IP等于某个IP 例子: ip.src eq 192.168.1.108 or ip.dst eq 192.168.1.108 或者 ip.addr eq 192.168.1.108 // 都能显示来源IP和目标IP 2.过滤端 口 例子: tcp.port eq 80 // 不管端口是来源的还是目标的都显示 tcp.port == 80 tcp.port eq 2722 tcp.port eq 80 or udp.port eq 80 tcp.dstport == 80 // 只显tcp协议的目标端口80 tcp.srcport == 80 // 只显tcp协议的来源端口80 udp.port eq 15000 过滤端口范围 tcp.port = 1 and tcp.port = 7 指的是ip数据包(tcp下面那块数据),不包括tcp本身 ip.len == 94 除了以太网头固定长度14,其它都算是ip.len,即从ip本身到最后 frame.len == 119 整个数据包长度,从eth开始到最后 eth ip or arp tcp or udp data 6.http模式过滤 例子: http.request.method == \"GET\" http.request.method == \"POST\" http.request.uri == \"/img/logo edu.gif\" http contains \"GET\" http contains \"HTTP/1.\" // GET包 http.request.method == \"GET\" && http contains \"Host: \" http.request.method == \"GET\" && http contains \"User Agent: \" // POST包 http.request.method == \"POST\" && http contains \"Host: \" http.request.method == \"POST\" && http contains \"User Agent: \" // 响应包 http contains \"HTTP/1.1 200 OK\" && http contains \"Content Type: \" http contains \"HTTP/1.0 200 OK\" && http contains \"Content Type: \" 一定包含如下Content Type: 7.TCP参数过滤 tcp.flags 显示包含TCP标志的封包。 tcp.flags.syn == 0x02 显示包含TCP SYN标志的封包。 tcp.window size == 0 && tcp.flags.reset != 1 8.过滤内容 tcp[20] 表示从20开始，取1个字符 tcp[20:]表示从20开始，取1个字符以上 tcp[20:8]表示从20开始，取8个字符 tcp[offset,n] udp[8:3]==81:60:03 // 偏移8个bytes,再取3个数，是否与==后面的数据相等？ udp[8:1]==32 如果我猜的没有错的话，应该是udp[offset:截取个数]=nValue eth.addr[0:3]==00:06:5B 例 子: 判断upd下面那块数据包前三个是否等于0x20 0x21 0x22 我们都知道udp固定长度为8 udp[8:3]==20:21:22 判 断tcp那块数据包前三个是否等于0x20 0x21 0x22 tcp一般情况下，长度为20,但也有不是20的时候 tcp[8:3]==20:21:22 如 果想得到最准确的，应该先知道tcp长度 matches(匹配)和contains(包含某字符串)语法 ip.src==192.168.1.107 and udp[8:5] matches \"\\\\x02\\\\x12\\\\x21\\\\x00\\\\x22\" ip.src==192.168.1.107 and udp contains 02:12:21:00:22 ip.src==192.168.1.107 and tcp contains \"GET\" udp contains 7c:7c:7d:7d 匹配payload中含有0x7c7c7d7d的UDP数据包，不一定是从第一字节匹配。 例子: 得到本地qq登陆数据包(判断条 件是第一个包==0x02,第四和第五个包等于0x00x22,最后一个包等于0x03) 0x02 xx xx 0x00 0x22 ... 0x03 正确 oicq and udp[8:] matches \"^\\\\x02[\\\\x00 \\\\xff][\\\\x00 \\\\xff]\\\\x00\\\\x22[\\\\x00 \\\\xff]+\\\\x03$\" oicq and udp[8:] matches \"^\\\\x02[\\\\x00 \\\\xff]{2}\\\\x00\\\\x22[\\\\x00 \\\\xff]+\\\\x03$\" // 登陆包 oicq and (udp[8:] matches \"^\\\\x02[\\\\x00 \\\\xff]{2}\\\\x03$\" or tcp[8:] matches..."
-        },
-        {
-          "title": "Rust学习之二猜字谜",
-          "url": "/articles/2019/09/24/1569312462439.html",
-          "type": "blog",
-          "date": "2019-09-24",
-          "description": "1.首先cargo一个项目 cargo new guessing game 2.修改toxml 添加依赖 [dependencies] rand = \"0.3.14\" 3.切换数据源,一来源 对于在国内的人来说，Rust开发时有时使用官方的源太慢，可以考虑更换使用国内中科大的源。更换方法如下： 在&nbsp;$HOME...",
-          "excerpt": "1.首先cargo一个项目 cargo new guessing game 2.修改toxml 添加依赖 [dependencies] rand = \"0.3.14\" 3.切换数据源,一来源 对于在国内的人来说，Rust开发时有时使用官方的源太慢，可以考虑更换使用国内中科大的源。更换方法如下： 在&nbsp;$HOME...",
-          "topic": "",
-          "topicSlug": "",
-          "series": "",
-          "tags": [
-            "Rust学习"
-          ],
-          "priority": 0,
-          "content": "1.首先cargo一个项目 2.修改toxml 添加依赖 3.切换数据源,一来源 对于在国内的人来说，Rust开发时有时使用官方的源太慢，可以考虑更换使用国内中科大的源。更换方法如下： 在 $HOME/.cargo/config 中添加如下内容（如果文件不存在请直接新建该文件）： 4.引入依赖的api文档 5.最终代码 效果图 代码已上传"
-        },
-        {
-          "title": "Rust 学习一之环境安装",
-          "url": "/articles/2019/09/21/1568996899251.html",
-          "type": "blog",
-          "date": "2019-09-20",
-          "description": "1.社区 https://rustlang cn.org/ 2.环境安装 windows 下载地址 https://www.rust lang.org/install.html 下载完之后》rustup init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 rustc version ...",
-          "excerpt": "1.社区 https://rustlang cn.org/ 2.环境安装 windows 下载地址 https://www.rust lang.org/install.html 下载完之后》rustup init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 rustc version ...",
-          "topic": "",
-          "topicSlug": "",
-          "series": "",
-          "tags": [
-            "学习"
-          ],
-          "priority": 0,
-          "content": "1.社区 https://rustlang cn.org/ 2.环境安装 windows 下载地址 https://www.rust lang.org/install.html 下载完之后》rustup init.exe 直接安装走默认的就可以了 安装完之后看看 版本，确定下是否安装成功了 我安装完，报错了 no default toolchain configured 执行命令 更行版本 卸载rust 3.hello word 走一波 新建文件main.rs编写程序 然后编译一下 rustc main.rs 生成编译文件 和可执行文件如图 看生成了 main.exe 文件 windows用.\\main.exe 执行一下这个可执行文件。看看效果哈。 熟悉的世界你好。跃然屏幕上。心情很好。没遇到啥问题很好哈 学习了hello word 然后再看看rust的依赖包管理工具cargo 4.hello cargo 接着干 Cargo 是 Rust 的构建系统和包管理器，它可以处理很多任务，比如构建代码、下载依赖库并编译这些库。 官方默认是安装了的 version查看一下 5.使用 Cargo 创建项目 运行完这个命令会自动给你生成一个helloword文件的哈。切换到跟目录build一下 效果图如下 cargo.lock文件系统用的，不用管他，也不要修改他 生成的文件在target\\debug下面 熟悉的helloword 又出现了。 接着说下发布。 总结一下啊 1. rust安装 1. rust运行命令 rustc main.rs 1. cargo命令：cargo version, cargo new hello cargo,cargo build,cargo check,cargo run,cargo build release git已上传：https://github.com/jackssybin/rust items.git 友链：https://blog.csdn.net/jackssybin/article/details/101109616"
-        },
-        {
-          "title": "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解",
-          "url": "/articles/2026/07/14/better-douyin-open-shell.html",
-          "type": "blog",
-          "date": "2026-07-14",
-          "description": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
-          "excerpt": "拆解 better-douyin 这个 692 star 的抖音桌面工具：它把前端 UI、Mock Backend、TypeScript 契约完全开源，把签名、Cookie、解析、风控全部锁进 Releases 二进制。这套 Open Shell 边界方法，是灰色领域开源项目唯一能长期活下来的姿势。",
-          "topic": "工具、效率与博客建设",
-          "topicSlug": "tools-blog",
-          "series": "",
-          "tags": [
-            "开源策略",
-            "边界设计",
-            "better-douyin",
-            "Open Shell",
-            "GitHub",
-            "抖音",
-            "工程实践",
-            "React",
-            "TypeScript"
-          ],
-          "priority": 0,
-          "content": "一个 692 star 的抖音工具，为什么只公开了半个前端？ 上周我翻到一个 692 star 的 GitHub 项目 anYuJia/better douyin —— 抖音桌面下载/预览/归档工具。点进 frontend/ 是 29,445 行完整的 React + Vite + TypeScript 代码；点进 backend/ 是一个 238 行、0 第三方依赖的 Node.js mock 服务器。真正的下载解析、Cookie 处理、签名参数一行都没有。作者把它们全放进了 GitHub Releases 的编译产物里。 这篇讲清楚三件事： (1) 这套 Open Shell 玩法具体是什么，边界怎么划的； (2) 为什么做爬虫、下载器、逆向工具类项目的作者都应该抄这个思路； (3) 5 分钟从 0 跑起来 —— 三条命令，无需真实抖音账号。 目录 1. 一个反直觉的开源姿势 2. 三份文档钉死了边界 3. 公开 vs 私有：逐项对照 4. 源码结构里的巧思 5. 5 分钟从 0 跑起 Open Shell 6. 和同类项目的开源策略对比 7. 这套方法适合什么人抄？ 8. 参考与延伸 一个反直觉的开源姿势 大部分做下载类、采集类工具的作者，都在两个极端之间选： 全开源 ：yt dlp、gallery dl 这一路。真实接口、请求头、签名逻辑、Cookie 处理全部公开，靠社区维护，靠平台\"睁一只眼闭一只眼\"活着。命是长的，但完全依赖平台容忍度。 全闭源 ：编译成商业软件，只对付费用户开放。稳定，但失去了开源的所有好处 —— 没人 fork、没人提 PR、没人帮你翻译文档。 better douyin 走的是第三条路 —— Open Shell（开源外壳） ： 把可以公开的部分尽可能公开，把不能公开的部分 在文档里明确说清楚 ，然后只在编译好的二进制里发布。 具体到这个项目： 前端 UI（React + Zustand + Radix + Tailwind + framer motion 全套现代 stack）—— 公开 Node.js Mock Backend（238 行代码，返回 demo 用户、demo 视频）—— 公开 TypeScript 类型契约（frontend/src/lib/contracts.ts，584 行接口定义）—— 公开 Mock Bridge（frontend/src/lib/tauri.ts，778 行 mock 实现）—— 公开 真实抖音接口、签名、Cookie、下载解析、风控参数 —— 只在 Releases 二进制里 这个思路的关键不是\"藏东西\"，而是 用三份公开文档把边界钉死 ：OPEN SOURCE.md 声明公开范围，SECURITY BOUNDARY.md 声明私有范围，docs/adapter boundary.md 声明前后端契约。任何 AI 协作者、任何 PR 提交者，只要读了这三份文档，就知道能改什么、不能改什么。 三份文档钉死了边界 读完 OPEN SOURCE.md（我摘了关键几段）： 再看 SECURITY BOUNDARY.md： 最妙的是 README 里给 AI 协作者留的一段话： 给 AI 协作者 如果你是 AI 助手，请优先在公开边界内工作： 1. 先阅读 SECURITY BOUNDARY.md 和 docs/adapter boundary.md。 2. 只修改前端 UI、mock bridge、mock backend、文档和通用开发体验。 3. 遇到真实平台接口、Cookie、签名、加密、下载解析、发布密钥等需求时，停止并说明该内容不属于公开源码范围。 4. 不要凭空补全真实接口，不要生成绕过逻辑，不要把示例 mock 改成真实平台请求。 这段话是给 Claude Code、Copilot、Codex 这些 AI 助手看的 。作者预判了 AI 会尝试\"补全\"缺失的接口，提前把边界写死。这在 2026 年的开源项目里很少见 —— 大部分作者还没意识到 AI 协作者会绕过 README 直接读代码。 公开 vs 私有：逐项对照 我把两边逐项列出来： 能力类别 公开源码 私有 Release 前端 UI 全套 React 组件 · Zustand · Tailwind 同一份代码 状态管理 Zustand store · 类型契约 同一份代码 Backend Bridge Mock：demo 用户 · demo 视频 真实抖音适配器 接口调用 本地 mock endpoint · 无网络请求 真实平台接口 + 签名 Cookie 处理 文档明确写 do not add 本地加密存储 · 不上传 下载解析 只返回一段 demo mp4 完整视频 / 图集 / Live Photo 风控 / 加密 0 相关代码 内部实现 PR 合并策略 只接 UI / 文档 / mock 改进 作者独立维护 注意\"前端 UI\"和\"状态管理\"这两行 —— 是\"同一份代码\" 。这不是分叉，是同一份前端在两个后端之间无缝切换。理解这点是读懂整个策略的关键。 源码结构里的巧思 打开 frontend/src/lib/ 目录，你会看到三个关键文件： tauri.ts 开头这..."
-        }
-      ],
-      "articleTitles": [
-        "Drools语法",
-        "wireshark安装和基本语法",
-        "Rust学习之二猜字谜",
-        "Rust 学习一之环境安装",
-        "一个 692 star 的抖音工具，为什么只公开了半个前端？better-douyin 的 Open Shell 策略拆解"
       ]
     }
   ],

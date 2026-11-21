@@ -1,0 +1,5 @@
+{{- $url := . -}}
+{{- if and hugo.IsServer (hasPrefix $url "https://tools.jackssybin.cn") -}}
+  {{- $url = replace $url "https://tools.jackssybin.cn" "http://127.0.0.1:8080" -}}
+{{- end -}}
+{{- return $url -}}

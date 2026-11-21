@@ -2,6 +2,8 @@
 title: "30 万 Star 的 Superpowers：我通读源码，看它怎么把 Claude Code 驯成靠谱工程师"
 slug: "superpowers-agent-skills-methodology"
 date: 2026-10-16
+topic: "开源实测"
+topicSlug: "open-source-review"
 draft: false
 categories: ["开源项目", "AI工具"]
 tags: ["开源", "Claude Code", "Agent Skill", "TDD", "工作流", "Hermes", "AI编程"]

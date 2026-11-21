@@ -2,6 +2,8 @@
 title: "零粉丝新号 13 天 37 万播放：这个开源 Agent Skill，让代码一帧一帧画出整条短视频"
 slug: "charles-video-maker"
 date: 2026-11-03
+topic: "开源实测"
+topicSlug: "open-source-review"
 draft: false
 categories: ["开源项目", "AI视频"]
 tags: ["开源", "AI视频", "Agent Skill", "短视频", "抖音", "代码动画", "FFmpeg", "Playwright", "Whisper", "自动化"]

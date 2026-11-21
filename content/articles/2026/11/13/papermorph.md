@@ -1,6 +1,8 @@
 ---
 title: "Papermorph 实测：4 个官方案例与 4 个本地原创试样"
 date: 2026-11-13
+topic: "开源实测"
+topicSlug: "open-source-review"
 slug: papermorph
 draft: false
 categories: ["开源项目", "AI工具"]

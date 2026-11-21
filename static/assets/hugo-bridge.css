@@ -267,6 +267,12 @@
   background: #4c5563;
 }
 
+.solo-static .home-portal-hero a.home-service-link {
+  background: transparent;
+  border: 1px solid #ff4d3a;
+  color: #ff4d3a;
+}
+
 .solo-static .home-portal-grid,
 .solo-static .weekly-grid,
 .solo-static .tutorial-route-grid,
@@ -283,6 +289,10 @@
 .solo-static .home-portal-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 14px;
+}
+
+.solo-static .home-portal-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .solo-static .nav-grid {
@@ -921,6 +931,9 @@ html[data-solo-theme="light"] body {
 }
 
 @media (max-width: 760px) {
+  .solo-static .home-portal-grid--two {
+    grid-template-columns: 1fr;
+  }
   .solo-static .wrapper {
     min-width: 0;
     width: 94%;

@@ -2,6 +2,8 @@
 title: "Vercel 开源的 1.5 万 Star 工具：让 AI 不用截图、不靠像素，直接「读懂」你的桌面"
 slug: "agent-desktop-computer-use"
 date: 2026-11-05
+topic: "开源实测"
+topicSlug: "open-source-review"
 draft: false
 categories: ["开源项目", "AI Agent"]
 tags: ["开源", "Vercel", "Computer Use", "AI Agent", "Rust", "无障碍", "桌面自动化", "MCP", "CLI"]

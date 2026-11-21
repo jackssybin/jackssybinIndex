@@ -1,6 +1,6 @@
 baseURL = "https://jackssybin.cn/"
-title = "jackssybin 的个人博客"
-description = "记录精彩的程序人生，分享技术教程与成长经验"
+title = "日拱一卒｜开源 AI 工具实测与落地工作流"
+description = "真跑通，才推荐。开源 AI 工具实测、AI 视频工作流、Agent、Java + AI 与私有化部署"
 author = "jackssybin"
 locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
@@ -35,8 +35,8 @@ priority = 0.5
 filename = "sitemap.xml"
 
 [params]
-description = "记录精彩的程序人生，分享Java、SpringBoot、Netty等技术教程"
-keywords = "编程,Java,SpringBoot,后端开发,技术博客"
+description = "真跑通，才推荐。实测开源 AI 工具的安装、效果、成本、报错和商用边界"
+keywords = "开源AI,AI视频,Agent,Java AI,私有化部署,独立开发,技术博客"
 author = "jackssybin"
 
 [params.geo]

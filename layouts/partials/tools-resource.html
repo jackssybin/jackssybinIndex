@@ -2,5 +2,5 @@
   <span class="tools-resource-card__label">配套资料</span>
   <h3>{{ .title }}</h3>
   <p>{{ .description }}</p>
-  <a class="tools-resource-card__link" href="{{ .url }}">{{ .cta }}<span aria-hidden="true"> →</span></a>
+  <a class="tools-resource-card__link" href="{{ partial "tools-url.html" .url }}">{{ .cta }}<span aria-hidden="true"> →</span></a>
 </aside>

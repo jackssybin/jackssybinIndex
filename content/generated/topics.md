@@ -1,6 +1,6 @@
 ---
 title: 专题系列
-description: 按 AI、Java、Spring Boot、MySQL、Linux、Python 爬虫、中间件和博客建设重新组织的专题阅读入口。
+description: 按开源工具实测、AI 视频工作流、Agent、Java + AI、私有化部署和经典后端教程组织的专题阅读入口。
 url: /topics.html
 layout: topics
 contentType: page
