@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "ai-pose-gallery-c1",
+    "pose": "惊讶",
+    "accent": "#F97316",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "中文AI",
+      "姿势图库"
+    ],
+    "subtitle": "三合一参考工作台 · 6011 张本地高清图",
+    "hook": "克隆下来逐层拆了它的五位一体架构",
+    "giant": "7869"
+  },
+  {
+    "slug": "ai-pose-gallery-c2",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "中文AI",
+      "姿势图库"
+    ],
+    "subtitle": "三合一参考工作台 · 6011 张本地高清图",
+    "hook": "克隆下来逐层拆了它的五位一体架构",
+    "giant": "7869"
+  },
+  {
+    "slug": "ai-pose-gallery-c3",
+    "pose": "开心",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "中文AI",
+      "姿势图库"
+    ],
+    "subtitle": "三合一参考工作台 · 6011 张本地高清图",
+    "hook": "克隆下来逐层拆了它的五位一体架构",
+    "giant": "7869"
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "repo": {
+    "full_name": "anhao/ai-pose-gallery-zh",
+    "url": "https://github.com/anhao/ai-pose-gallery-zh",
+    "stars": 7869,
+    "forks": 2040,
+    "open_issues": 17,
+    "created_at": "2026-10-27",
+    "pushed_at": "2026-11-18",
+    "age_days_at_article": 27,
+    "license": "NOASSERTION（代码 MIT，图片数据不被 MIT 覆盖，各有原作者版权）",
+    "language": "TypeScript",
+    "homepage": "https://ai-pose-gallery.anhao.app/",
+    "topics": ["ai-art","chinese","cloudflare-pages","gallery","i18n","pose","reference-images","static-site"],
+    "version": "2.0.0",
+    "clone_size": "1.2GB（不含.git）/ 2.3GB（含.git）"
+  },
+  "thesis": "它表面是一个『AI 绘画姿势/服装/人像参考图库』，真正的工程价值是把原本散落在三个日文站点、需要人工搬运和翻译的参考素材，重构成了一个『数据本地化 + 全中文索引 + 五协议生图 + ComfyUI 节点 + Agent 技能』五位一体的角色合成工作台——一个个人创作者用静态站点 + 边缘函数 + 本地插件，搭出了通常只有 SaaS 团队才做的完整闭环。",
+  "reader_promise": "读完你能：1) 拿到一份实测核验过的真实数据规模（不盲信 README）；2) 看懂它如何用一个仓库同时服务 Web/ComfyUI/Agent 三种使用姿势；3) 知道怎么本地跑、怎么装成 ComfyUI 节点、谁该用谁要小心合规风险。",
+  "narrative_spine": {
+    "1_pain": "AI 绘画想精准控制角色姿势/服装/长相，最大痛点不是没有模型，而是『参考图』：原素材在三个独立日文站点、满屏日文标签看不懂、找到图还要手动下载、再手动喂给多个生图工具，链条断裂且效率低。",
+    "2_why_normal_not_enough": "普通素材站只解决『看图』，不解决『检索语言、组合配方、一键生图、接入工作流』。书签收藏夹式的素材库无法和 Gemini/GPT Image/Qwen/豆包/ComfyUI 这些生产工具打通，更进不了 Agent 的可调用上下文。",
+    "3_mechanism": "五层架构：① 三库四站全量本地镜像（纯静态、可离线、Cloudflare 免费托管）；② 日译中 i18n 流水线（translations.csv 474 条对照 + apply_translation.py 生成纯中文 JSON）；③ React19+Vite8 合成台，人像+服装+姿势三槽位+N 附加图，12 画风、自动组中英 Prompt、IndexedDB 持久化；④ 5 大 AI 协议直连 + Cloudflare /api/proxy 同源代理解决跨域；⑤ ComfyUI 原生 4 节点插件 + 9 个 SKILL.md Agent 技能。",
+    "4_evidence": [
+      "实测三大主库 JSON 记录数：pose-zh=1439、costume-zh=1407、portrait-zh=1499，与 README 吻合",
+      "实测额外数据源：gia-anime 动漫服装 1320、shisei 中国历代服装 57、charadb 二次元 440 条",
+      "实测图片文件：img/ 与 thumbs/ 各 6011 张（白模png1439 + depth1439 + costume1407 + costumes历代227视角 + portrait1499），注意 README 顶部宣称 12022 张是把缩略图和原图重复计数，本地实际去重后约 6011 张原图+6011 缩略图",
+      "代码规模实测：src 67 个 ts/tsx 共 11841 行、comfyui_plugin 5 文件 1610 行、scripts 8 文件 1342 行",
+      "ComfyUI 4 节点经源码确认：PoseGalleryNode/CostumeGalleryNode/PortraitGalleryNode/CharacterRecipeNode，NODE_CLASS_MAPPINGS 真实存在",
+      "9 个 skills 目录经 ls 确认（pose×5、costume×3、portrait×1），每个含 SKILL.md",
+      "translations.csv 实测 475 行（含表头 474 条对照），含 双人缠绵275/上半身400/性感系399/标准系365 体系映射",
+      "合规设计：默认 SFW 安全模式隐藏 NSFW、纯前端不收集数据、图片版权归原作者 ギア/たき AI，MIT 不覆盖 img/data"
+    ],
+    "5_smallest_run_path": "Web：直接用在线演示 ai-pose-gallery.anhao.app，或 pnpm install && pnpm dev 本地跑；ComfyUI：git clone 到 custom_nodes 目录重启即用 4 节点；Agent：把 skills/*-reference* 软链到 ~/.claude/skills。",
+    "6_verdict": {
+      "who_should": "需要稳定可控中文参考素材的 AI 绘画创作者/插画师；做角色一致性工作流、想把参考图接入 ComfyUI ControlNet Depth 的进阶用户；想学习『静态站+边缘函数+本地插件+Agent技能』一体化架构的前端/独立开发者。",
+      "who_should_wait": "只想要在线轻量工具、不想处理 1.2GB 克隆体积的人；无法接受素材含 NSFW（虽默认 SFW 屏蔽）的未成年人或受限环境；有商业用途的人——图片版权不被 MIT 覆盖、明确禁止打包倒卖，商用需自行找原作者授权。",
+      "verify": "license 字段 GitHub 识别为 NOASSERTION，因为代码 MIT 但 data/img 保留原作者版权；含 18+ 素体与性感穿搭，靠 SFW 开关而非物理删除；7869 star 但 fork 高达 2040（fork/star≈26%，远高于普通项目），反映它本质是个需要克隆使用的数据/工具仓库而非纯展示项目。"
+    }
+  },
+  "non_obvious_insight": "最值得学的不是图库本身，而是它的『一鱼五吃』架构：同一套 data/*.json + img/ 静态资产，被五个互不依赖的消费端复用——React 网页、Cloudflare 代理、ComfyUI Python 节点、9 个 Agent SKILL.md、以及可独立下载的数据集。维护者用 i18n 脚本把『日文→中文』做成可重跑的构建步骤而非一次性人工翻译，这才是 1.2GB 项目能一个人持续维护的关键。另外 README 的图片计数把缩略图和原图相加（12022），实测去重后是 6011 张原图，读者引用数据时要用核验后的口径。",
+  "title_candidates": [
+    {"family": "quantified", "title": "7869 Star、1.2GB、6011 张本地高清图：我把这个中文 AI 姿势图库克隆下来，逐层拆了它的五位一体架构", "score": 93},
+    {"family": "contrarian", "title": "别再满世界找 AI 绘画参考图了：一个仓库同时喂饱网页、ComfyUI 和你的 AI Agent", "score": 90},
+    {"family": "audience", "title": "AI 绘画控角色姿势/服装/长相总翻车？这个全中文三合一参考工作台值得收藏", "score": 84}
+  ],
+  "selected_title": "7869 Star、1.2GB、6011 张本地高清图：我把这个中文 AI 姿势图库克隆下来，逐层拆了它的五位一体架构",
+  "slug": "ai-pose-gallery-zh",
+  "wechat_title": "AI 绘画找参考图有多痛？这个 7869 Star 的中文三合一工作台一次解决了",
+  "zhihu_title": "如何评价 ai-pose-gallery-zh 这个把姿势、服装、人像三库合一的中文 AI 绘画参考项目？"
+}
