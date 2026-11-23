@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-23T03:38:41.172Z",
+  "lastRunAt": "2026-11-23T04:38:47.431Z",
   "daily": {
     "date": "2026-11-23",
-    "pushed": 1
+    "pushed": 2
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -2076,6 +2076,11 @@
       "pushes": 1,
       "lastmod": "2026-11-23T11:33:06+08:00",
       "pushedAt": "2026-11-23T03:38:41.172Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/23/ai-pose-gallery-zh/": {
+      "pushes": 1,
+      "lastmod": "2026-11-23T12:32:58+08:00",
+      "pushedAt": "2026-11-23T04:38:47.431Z"
     }
   },
   "history": [
@@ -2481,6 +2486,11 @@
     },
     {
       "date": "2026-11-22",
+      "pushed": 1,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-23",
       "pushed": 1,
       "source": "changed"
     },
