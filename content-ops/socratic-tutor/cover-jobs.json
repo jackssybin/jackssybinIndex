@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "socratic-tutor-c1",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "只会追问",
+      "的AI私教"
+    ],
+    "subtitle": "Jane Street 开源 · 零代码 SKILL.md",
+    "hook": "20 天 GitHub 破万星的苏格拉底教学法",
+    "giant": "1万+"
+  },
+  {
+    "slug": "socratic-tutor-c2",
+    "pose": "开心",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "只会追问",
+      "的AI私教"
+    ],
+    "subtitle": "Jane Street 开源 · 零代码 SKILL.md",
+    "hook": "20 天 GitHub 破万星的苏格拉底教学法",
+    "giant": "1万+"
+  },
+  {
+    "slug": "socratic-tutor-c3",
+    "pose": "大笑",
+    "accent": "#3B82F6",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "只会追问",
+      "的AI私教"
+    ],
+    "subtitle": "Jane Street 开源 · 零代码 SKILL.md",
+    "hook": "20 天 GitHub 破万星的苏格拉底教学法",
+    "giant": "1万+"
+  }
+]

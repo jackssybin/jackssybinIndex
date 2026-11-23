@@ -1,0 +1,46 @@
+{
+  "repo": {
+    "full_name": "janestreet/agent_skills",
+    "url": "https://github.com/janestreet/agent_skills",
+    "stars": 10681,
+    "forks": 739,
+    "created_at": "2026-11-03",
+    "pushed_at": "2026-11-17",
+    "age_days_at_article": 20,
+    "license": "MIT",
+    "language": "none (pure Markdown SKILL.md, zero code, zero dependency)",
+    "owner": "Jane Street（知名量化交易公司，OCaml 主要推动者）",
+    "skills_count": 1,
+    "only_skill": "socratic-tutor"
+  },
+  "thesis": "一个只有 5KB、零行代码的 SKILL.md，凭什么 20 天破万星？因为它卖的不是功能，而是一套把『LLM 直接给答案』反过来变成『LLM 只追问、逼你自己推理』的严格教学协议——真正稀缺的不是又一个答题机器，而是一个不讨好你、不灌水、严格到会给你降级的私教。",
+  "reader_promise": "读完你能：1) 看懂苏格拉底式技能的完整机制（诊断→技能地图→一次一问→间隔复习→终考）；2) 5 分钟把它装进任意支持 SKILL.md 的 agent；3) 判断它适合谁、什么时候别用。",
+  "narrative_spine": {
+    "1_pain": "用 LLM 学习的通病：问什么秒给答案，看懂了≈学会了的错觉，一周后全忘；模型还总讨好你、夸你『Great try』，模糊答案也算对。",
+    "2_why_normal_not_enough": "普通自定义指令只规定语气和角色，没有可执行的教学状态机：不做入学诊断、不追踪每个子技能掌握度、不做间隔复习、不设严格通关标准，所以无法保证真正掌握。",
+    "3_mechanism": "socratic-tutor 是一个完整教学闭环：Guard 意图守卫 → 3-5 题诊断定位 → 4-10 个子技能 × 0-5 级 ASCII 技能地图 → 一次只问一个问题（问完立刻闭嘴等回答）→ 答错不给答案只追问更窄的问题（2-3 次后才讲解并立即换角度重测）→ 间隔复习不打招呼重测、不过就降级 → 终考混合评估。",
+    "4_evidence": [
+      "一手源码核验：整个仓库非 .git 仅 4 个文件、核心 SKILL.md 5243 字符、零 .py/.js/.ts 可执行代码，纯提示词协议，MIT 协议",
+      "严格评分规则原文：升级需 2+ 次独立验证且至少一次无提示回忆；部分正确不算对；5 级需处理边界/对抗题并能教别人",
+      "5 个随时可用命令：show progress / harder / easier / just tell me / save state / resume from（含可粘贴的会话状态块，跨会话续学）",
+      "Guard 机制：检测到一次性问题（explain X / what is X）不启动教学循环，避免误触发小测验",
+      "ASCII 技能地图用 U+2588/U+2591 块字符渲染进度条，带 overall 百分比和 current focus 标记"
+    ],
+    "5_smallest_run_path": "支持 SKILL.md 的 agent：把 socratic-tutor 目录复制进 skills 文件夹，说『teach me X』；普通聊天机器人：把 SKILL.md 正文粘进系统提示词，再说想学的主题。",
+    "6_verdict": {
+      "who_should": "想真正吃透一门硬知识（数学/语言/编程/金融概念）、备考、愿意被追问而不是被投喂的自学者；想给团队/产品加教学模块的开发者（可直接借鉴这套状态机）。",
+      "who_should_wait": "只想快速查个答案/要现成代码的人（它故意慢、故意不直接给）；需要多模态、动手实验环境的场景（纯文本协议，工具调用是可选项）；无法坚持多轮对话的碎片学习者。",
+      "verify": "Jane Street 明确不接受改文案的 PR（内部仓库导出，只分享自己验证有用的），所以这是一份『观点鲜明的教学法』而非社区大杂烩；GitHub open_issues=0，仍在早期，后续会加更多 skill。"
+    }
+  },
+  "non_obvious_insight": "它的核心工程思想和量化交易同源——『可量化、可审计、反人性』：把模糊的『学会了』变成 0-5 级可追踪状态、要求无提示回忆才算数、答对还要被魔鬼代言人质疑。提示词工程的高级形态不是写得多华丽，而是设计一个有状态、有守卫、有严格验收标准的协议。这也是它能被任意 agent 零依赖复用的原因：机制全在 Markdown 里。",
+  "title_candidates": [
+    {"family": "quantified", "title": "5KB 提示词、零行代码，20 天 GitHub 破万星：Jane Street 把私教做成了一个 SKILL.md", "score": 92},
+    {"family": "contrarian", "title": "当所有 AI 都在抢着给你答案，Jane Street 开源了一个只会追问、还会给你打差评的老师", "score": 90},
+    {"family": "audience", "title": "别再让 AI 直接喂答案了：这套苏格拉底教学法，让 LLM 把你逼到真正学会", "score": 85}
+  ],
+  "selected_title": "5KB 提示词、零行代码，20 天 GitHub 破万星：Jane Street 把私教做成了一个 SKILL.md",
+  "slug": "socratic-tutor",
+  "wechat_title": "当所有 AI 都抢着给你答案，Jane Street 却开源了一个只会追问的严格私教",
+  "zhihu_title": "如何评价 Jane Street 开源的 socratic-tutor：一个零代码、20 天破万星的 AI 教学技能？"
+}
