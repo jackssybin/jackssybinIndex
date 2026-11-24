@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "sensenova-u1-c1",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "原生统一",
+      "多模态模型"
+    ],
+    "subtitle": "商汤 SenseNova-U1.6 · 单卡24GB可跑",
+    "hook": "克隆下来拆清 NEO-unify 架构与真实参数",
+    "giant": "175亿"
+  },
+  {
+    "slug": "sensenova-u1-c2",
+    "pose": "困惑",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "原生统一",
+      "多模态模型"
+    ],
+    "subtitle": "商汤 SenseNova-U1.6 · 单卡24GB可跑",
+    "hook": "克隆下来拆清 NEO-unify 架构与真实参数",
+    "giant": "175亿"
+  },
+  {
+    "slug": "sensenova-u1-c3",
+    "pose": "大笑",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "原生统一",
+      "多模态模型"
+    ],
+    "subtitle": "商汤 SenseNova-U1.6 · 单卡24GB可跑",
+    "hook": "克隆下来拆清 NEO-unify 架构与真实参数",
+    "giant": "175亿"
+  }
+]

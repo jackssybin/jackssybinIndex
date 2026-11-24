@@ -1,0 +1,49 @@
+{
+  "repo": {
+    "full_name": "OpenSenseNova/SenseNova-U1",
+    "url": "https://github.com/OpenSenseNova/SenseNova-U1",
+    "stars": 6989,
+    "forks": 539,
+    "open_issues": 21,
+    "created_at": "2026-04-17",
+    "pushed_at": "2026-11-24",
+    "license": "Apache-2.0（代码；模型权重以各自模型卡许可为准）",
+    "language": "Python",
+    "owner": "商汤科技 OpenSenseNova",
+    "latest": "U1.6（2026-11-24 发布），含 4步/8步蒸馏模型，ComfyUI 上线",
+    "repo_size_kb": 747808
+  },
+  "thesis": "多模态过去主流是『拼接派』——一个 LLM 当大脑，外挂独立视觉编码器理解、再外挂 VAE/扩散模型生成，三个模块靠胶水连接。SenseNova-U 系列用 NEO-unify 原生统一范式把它变成『一个模型』：U1.5 起干脆去掉独立视觉编码器和 VAE，同一套权重既能看懂图、又能画图改图、还能在一段话里图文交错输出。它真正的看点不是又一个文生图模型，而是证明了『理解与生成能否共用一个原生模型』这个路线工程上跑得通，而且 8B 量级 + 量化/GGUF 后能落到单卡 24GB 显存。",
+  "reader_promise": "读完你能：1) 分清原生统一模型和传统多模块拼接的本质差别；2) 看懂 8B-MoT 名字背后其实是 17.55B 总参数（理解8B+生成8B+共享1.2B）的 Mixture-of-Transformers；3) 拿到可复现的单卡部署命令、显存/磁盘预算和量化选型；4) 知道 U1/U1.5/U1.6 三代差异与谁该现在上手。",
+  "narrative_spine": {
+    "1_pain": "传统多模态系统是模块拼接：理解走视觉编码器+LLM，生成走 VAE+扩散/流匹配，训练目标、数据格式、部署管线各自独立，结果是系统臃肿、图文难以真正交错、理解和生成无法互相促进。",
+    "2_why_normal_not_enough": "拼接方案在『生成后能否自我检查修正』『一段回答里自然图文混排』『端到端联合优化』上有结构天花板，且多模块意味着多套依赖、多份显存占用、更难单卡部署。",
+    "3_mechanism": "NEO-unify 原生统一：MoT（Mixture-of-Transformers）里理解专家与生成专家共存、共享文本输入输出层；U1.5 去掉独立视觉编码器与 VAE，走无 VAE 的视觉路径 + 具空间连续性的图像重建；用 flow-matching 做生成、支持原生 4K；U1.6 加入原生自修正（生成-检查-修改在同一次生成内完成）。",
+    "4_evidence": [
+      "参数实测依据 docs/parameter_breakdown.md：8B-MoT 实际 Total params 17.552B、bf16 约 35.1GB；generation_transformer 8.186B(46.64%)、understanding 8.121B(46.27%)、shared 1.245B(7.09%，embed_tokens+lm_head 各 622.33M)；按通路理解 9.366B/生成 9.431B（共享被两边各计一次）",
+      "代码规模实测：src 39 个 py 共 11065 行、training 154 个 py 共 51837 行、tests 13 个 2829 行、examples 6 个 2450 行；是含完整训练/推理/评测的工程仓而非推理壳",
+      "examples 五类任务齐全：t2i 文生图、editing 图像编辑、interleave 图文交错(含 self_correction.py)、vqa 视觉问答、serving 服务化，外加 comfyui 集成",
+      "src 结构佐证架构：models/neo_unify 下 modeling_qwen3.py / modeling_qwen3_moe.py / modeling_neo_vit.py / modeling_fm_modules.py(flow-matching) 共存，utils 含 gguf_loader/lora/layer_offload/quant_runtime/profiler",
+      "权重矩阵(U1.6)：原版 BF16 分片、LoRAs(4步/8步)、Native(BF16/FP8 W8A8/INT8 ConvRot W8A8)、GGUF(Q4_0/Q6_K/Q8_0)，覆盖云端到本地",
+      "部署预算(README_CN 原文)：balanced 配置按 24GB 显存 + 64GB 系统内存规划，另留约 35GB 磁盘；uv+Python3.11，torch2.8/cu128，依赖很干净(requirements 仅 12 个直接依赖)",
+      "U1.6 量化收益指标：综合美感较 U1.5 提升10%；UltraTextBench 高文字密度信息图任务自修正较单次生成平均相对提升7%",
+      "工程化：22 篇中文文档(共45篇 md)中英双语、AGENTS.md 给 AI agent 的仓库入口、3 个 git 子模块(evalscope/EASI/LightLLM)、LightLLM+LightX2V Docker 服务化部署、pre-commit+coderabbit+13 个测试"
+    ],
+    "5_smallest_run_path": "git clone --depth 1 → uv sync --locked --python 3.11 → hf download 下 U1.6-8B-MoT 权重 → python examples/t2i/inference.py 一把梭（bucket 4m、1:1、50步、balanced、sdpa）；显存不够就换 GGUF Q4 或 FP8/INT8 Native 权重。",
+    "6_verdict": {
+      "who_should": "研究统一多模态架构的算法工程师（有完整 training 51k 行可学）；需要在单卡 24GB 跑理解+生成一体化、做图文交错/信息图/图像编辑的开发者；追求数据闭环（生成后自修正）的产品团队；ComfyUI 用户可直接用官方节点。",
+      "who_should_wait": "只有 8-16GB 显存且不愿折腾量化的（即使 Q4 也偏紧，建议等社区更小蒸馏版）；只想调 API 不本地部署的（直接用在线 Demo unify.light-ai.top 即可，不必克隆）；纯文生图追求极致出图量、不需要理解/交错能力的，专用 SD/Flux 生态可能更顺手。",
+      "verify": "Apache-2.0 只覆盖代码，模型权重许可要看各 HF 模型卡；仓库 size 约 748MB（不含权重与子模块），权重另下约 35GB；README 的 arXiv 编号 2605/2609 为 2026 年新论文；U1.6 自修正 7%/美感 10% 是官方主观/基准数据，第三方独立复现仍需观察。"
+    }
+  },
+  "non_obvious_insight": "两个反直觉点。第一，叫『8B-MoT』但总参数其实 17.55B——8B 指每条通路（理解/生成各约8B），MoT 是 Mixture-of-Transformers 让两套专家在同一模型里按任务切换、再共享 embedding/lm_head，营销名和工程实际差了一倍多，看参数必须读 parameter_breakdown 而不是望文生义。第二，它把『自修正』做成模型原生能力而非外部 agent 循环：U1.6 生成信息图后能在同一次生成里对照 prompt 自查文字错误并出修改稿，这其实是统一模型才有的红利——因为同一个模型既『看得懂』自己画的图（理解）又能重画（生成），拼接派要做这件事得在多个模块间来回搬运。",
+  "title_candidates": [
+    {"family": "quantified", "title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构", "score": 93},
+    {"family": "contrarian", "title": "别再堆 LLM+VAE+扩散模型了：商汤开源的 SenseNova-U 把看图和画图塞进了同一个模型", "score": 90},
+    {"family": "audience", "title": "单卡 24GB 能跑的统一多模态模型：SenseNova-U1.6 本地部署与架构实测指南", "score": 86}
+  ],
+  "selected_title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构",
+  "slug": "sensenova-u1",
+  "wechat_title": "一个模型既看懂图又会画图还能自己改错：商汤 SenseNova-U1.6 实测拆解",
+  "zhihu_title": "如何评价商汤开源的 SenseNova-U 系列原生统一多模态模型（NEO-unify 架构）？"
+}
