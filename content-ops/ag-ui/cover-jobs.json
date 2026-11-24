@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "ag-ui-c1",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "black",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Agent接前端",
+      "的统一协议"
+    ],
+    "subtitle": "31事件 · 23框架 · 三语言SDK",
+    "hook": "翻遍 2.1 万 Star 协议仓库的工程设计",
+    "giant": "2.1万"
+  },
+  {
+    "slug": "ag-ui-c2",
+    "pose": "大笑",
+    "accent": "#F97316",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Agent接前端",
+      "的统一协议"
+    ],
+    "subtitle": "31事件 · 23框架 · 三语言SDK",
+    "hook": "翻遍 2.1 万 Star 协议仓库的工程设计",
+    "giant": "2.1万"
+  },
+  {
+    "slug": "ag-ui-c3",
+    "pose": "委屈",
+    "accent": "#07C160",
+    "theme": "amber",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "Agent接前端",
+      "的统一协议"
+    ],
+    "subtitle": "31事件 · 23框架 · 三语言SDK",
+    "hook": "翻遍 2.1 万 Star 协议仓库的工程设计",
+    "giant": "2.1万"
+  }
+]

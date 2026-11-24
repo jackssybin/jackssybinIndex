@@ -1,0 +1,50 @@
+{
+  "repo": {
+    "full_name": "ag-ui-protocol/ag-ui",
+    "url": "https://github.com/ag-ui-protocol/ag-ui",
+    "stars": 21510,
+    "forks": 2168,
+    "open_issues": 617,
+    "created_at": "2025-05-07",
+    "pushed_at": "2026-11-24",
+    "license": "MIT",
+    "language": "TypeScript",
+    "homepage": "https://ag-ui.com",
+    "creator": "CopilotKit 发起，社区共建",
+    "version": "@ag-ui/core 1.0.5，协议版本 1.0（frozen spec）",
+    "topics": ["ag-ui-protocol","agent-frontend","agent-ui","agentic-workflow","ai-agents"]
+  },
+  "thesis": "Agent 不适合传统的请求/响应模型：它会流式吐 token、在回答中途调用工具、更新共享状态、暂停等人类接管、还会派生子 agent，而每个框架（LangChain、CrewAI、ADK、Pydantic AI……）各搞一套接线方式。AG-UI 用一条双向事件流把这件事标准化：agent 发类型化事件，任何客户端都能渲染，无论后端是哪个框架。同一个 agent 可以同时驱动 Web、移动端、终端、Slack。它和 MCP（给 agent 接工具/数据）、A2A（agent 之间协作）是互补的三层：MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户。",
+  "reader_promise": "读完你能：1) 分清 AG-UI/MCP/A2A 三个协议各管哪一段，不再混为一谈；2) 看懂 1.0 规范的 31 个事件、8 大家族怎么把 agent 的全部行为编码进一条流；3) 理解它为什么用『一份 JSON Schema 代码生成三语言 SDK + 一致性测试』来保证协议不碎片化；4) 知道 23 个框架集成和单仓库结构意味着什么，以及怎么 30 行代码跑通第一个 agent。",
+  "narrative_spine": {
+    "1_pain": "把一个能思考、会调工具、需要人类审批、还会派生 subagent 的 agent 接到前端，传统做法是每个团队自己造 SSE/WebSocket 协议、自己定义消息格式，换一个 agent 框架就要重写一遍前端胶水，流式、中断恢复、状态同步各有各的坑。",
+    "2_why_normal_not_enough": "普通 HTTP 请求/响应假设一问一答、立即返回，无法表达多轮流式、工具调用中途事件、共享状态增量、人类介入暂停恢复；MCP 解决的是 agent 怎么用工具，A2A 解决 agent 之间怎么对话，但都没规定 agent 的输出怎么实时、结构化地送到用户界面这一段。",
+    "3_mechanism": "客户端发一个 RunAgentInput（对话、前端可用工具、共享状态、上下文），agent 回一条类型化事件流；1.0 规范定义 31 个事件、8 大家族（运行生命周期/文本消息/工具调用/状态/推理/活动/子agent/透传），传输无关（HTTP+SSE 或 HTTP+Protobuf 二进制）；状态用 snapshot+JSON Patch delta 同步，人在环通过 interrupt outcome + 下一次 run resume 实现。",
+    "4_evidence": [
+      "实测 spec/1.0/schema.json 94KB，单一 JSON Schema 即协议事实来源；TS SDK 源码里实测枚举到正好 31 个事件类型，与 README 的 31 events/eight families 一致",
+      "代码生成机制实证：spec/generator/ 下有 typescript.ts/python.ts/dotnet.ts/protobuf.ts 等生成器；Python SDK 的模型在 ag_ui/_generated/models.py、版本在 _generated/version.py（PROTOCOL_VERSION='1.0'），证明 TS/Python/.NET 三语言 SDK 由同一份 schema 生成而非各自手写",
+      "一致性测试体系：spec/1.0/conformance/streams 实测 68 个流测试用例（命名即规则，如 first-event-not-run-started-fatal、unknown-event-dropped、state-delta-unknown-op-dropped），fixtures 实测 303 个 JSON，用 fatal/tolerated/warns 三级判定保证不同实现行为一致",
+      "集成广度实测：integrations/ 目录 23 个（langchain/langgraph/crew-ai/microsoft-agent-framework/antigravity/aws-strands/pydantic-ai/mastra/agno/ag2/llama-index/openai-agents/claude-agent-sdk/watsonx/langroid/vercel-ai-sdk 等 + a2a/agent-spec/adk-middleware + starter），middlewares/ 6 个（含 mcp/a2a/mcp-apps/a2ui 协议桥接）",
+      "SDK 代码规模实测：TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行；另有 8 个社区 SDK（go/rust/java/kotlin/dart/swift/ruby/c++）",
+      "官方 SDK 三语言安装方式明确：TS npm @ag-ui/client、Python pip ag-ui-protocol、.NET dotnet add package AGUI.Client；TS 分包 core/client/encoder/proto/cli/a2ui-toolkit 六个",
+      "1.0 双向向后兼容：0.x agent 能配 1.0 client，反之亦然（README 与 docs/migrating-to-1-0）；有 DEPRECATIONS.md 管理演进",
+      "工程治理：nx monorepo + pnpm workspace、lefthook、eslint/oxlint、coderabbit、CODEOWNERS、CONTRIBUTING(18KB)、SECURITY、AGENTS.md/CLAUDE.md/.mcp.json/.claude-plugin marketplace，说明是面向生态治理的严肃协议项目而非 demo"
+    ],
+    "5_smallest_run_path": "两条路：① npx create-ag-ui-app@latest 脚手架生成接好框架的前端（CopilotKit+Next.js 或终端），设 OPENAI_API_KEY 后 npm run dev；② 直接讲协议：pip install ag-ui-protocol fastapi uvicorn 起一个 30 行的 SSE agent server，再用 @ag-ui/client 的 HttpAgent 连上去，看到 Hello from AG-UI! 逐字流出。换后端框架时客户端代码不变。",
+    "6_verdict": {
+      "who_should": "要把 LLM/agent 接入真实产品 UI 的工程师（流式、工具调用、人在环、共享状态、生成式 UI 都是刚需）；需要在多个 agent 框架间保持同一套前端的团队；做框架/平台想接入事实标准生态的开发者；研究 agent 协议设计与 schema-driven SDK 工程的人。",
+      "who_should_wait": "只做一次性脚本、纯后端无界面 agent 的人（用不上 UI 协议）；已经深度绑定某厂商专有 agent 协议且无跨框架需求的团队；想要成熟稳定到不再变化的人——注意 open issues 617、draft spec 仍在演进，1.0 虽 frozen 但生态集成质量参差，生产前应在 Dojo 实测具体框架的集成。",
+      "verify": "它是协议+SDK+集成的 monorepo，不是可直接运行的产品，价值在标准化而非开箱功能；2.1 万 star 但 issue 617 偏高，反映生态快速扩张期的集成兼容问题；CopilotKit 是发起方且是主要 client 实现，存在发起方商业利益与协议中立性的张力，需客观指出；线上 demo 在 dojo.ag-ui.com。"
+    }
+  },
+  "non_obvious_insight": "最值得学的不是事件列表，而是它防止『协议碎片化』的工程机制。很多开源协议的死法是：规范写一份文档，各语言社区各自手写实现，然后悄悄分叉。AG-UI 的做法是把 JSON Schema 做成唯一事实来源，TS/Python/.NET 三个 SDK 的数据模型全部由 spec/generator 代码生成（Python 里直接是 _generated 目录），再用 68 个带 fatal/tolerated 语义的 conformance 流测试 + 303 个 fixtures 去卡任何实现的行为——连『收到未知事件该丢弃还是报错』『状态补丁应用失败该警告还是中断』都有明确判定。这套 schema-first + 一致性测试的组合，才是它能同时让 Google、微软、亚马逊、Oracle 接入而不四分五裂的底层原因。另一个反直觉点：AG-UI 不与 MCP 竞争，而是同一 agent 栈里不同层——把它当 MCP 替代品来评价就会完全看错。",
+  "title_candidates": [
+    {"family": "quantified", "title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天", "score": 94},
+    {"family": "contrarian", "title": "MCP 管工具、A2A 管 agent，那谁来管 agent 怎么面对用户？AG-UI 补上了最后一块", "score": 91},
+    {"family": "audience", "title": "换个 Agent 框架就要重写前端？这个开源协议想让一套 UI 通吃所有后端", "score": 87}
+  ],
+  "selected_title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天",
+  "slug": "ag-ui-protocol",
+  "wechat_title": "Agent 接前端到底有多乱？这个 2.1 万 Star 的协议用一条事件流统一了",
+  "zhihu_title": "如何评价 AG-UI（Agent-User Interaction Protocol）这个把 agent 连接到前端应用的开放协议？"
+}

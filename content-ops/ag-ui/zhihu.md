@@ -1,0 +1,47 @@
+评价 AG-UI 之前，我先把这个 2.1 万 Star 的 monorepo 克隆到本地逐目录核验了一遍，因为它最容易被误读成"又一个 agent 框架"或"MCP 竞品"，而这两种理解都不准确。它的定位是 Agent-User Interaction Protocol：用一条双向类型化事件流，标准化 agent 与用户界面应用之间的连接。
+
+## 一、先厘清定位：它是 agent 栈最上面那一层
+
+现在 agent 领域有三个互补的开放协议，常被混为一谈。MCP 解决 agent 向下接入工具与数据，A2A 解决 agent 之间横向协作，AG-UI 解决的是 agent 向上如何面对用户。
+
+![Agent 栈的三层协议](media/01-protocol-layers.png)
+
+一个真实产品往往三层并用：agent 通过 MCP 调工具、通过 A2A 与其他 agent 分工、通过 AG-UI 把运行过程实时渲染到 Web、移动端、终端或 Slack。AG-UI 可以为讲 MCP 或 A2A 的 agent 充当前端，三者不是替代关系。它与 A2UI、MCP Apps 这类生成式 UI 规范也有分工：后者描述想展示什么 UI，AG-UI 是承载这些载荷的运行时协议。
+
+## 二、核心机制：一次 Run 就是一条 31 事件的类型化流
+
+Agent 不适合传统请求/响应模型，因为它会流式输出、中途调工具、更新状态、暂停等人接管、派生子 agent。AG-UI 的做法是：客户端发送一个 RunAgentInput（消息、前端工具、共享状态、上下文），agent 回吐一条事件流。
+
+![一次 Run 的 31 个事件、8 大家族](media/02-event-stream.png)
+
+我在 TypeScript SDK 源码中实测枚举到正好 31 个事件、分 8 大家族：运行生命周期、文本消息、工具调用、状态同步、推理、活动、子 agent、透传。其中只有运行生命周期是必选项，最小 agent 发少量事件即可接入。状态采用快照加 JSON Patch 增量同步，人在环通过 interrupt 结局加下一次 run 的 resume 实现；传输无关，规范同时定义 HTTP+SSE 与 HTTP+Protobuf 二进制绑定。
+
+几个细节体现了协议化的价值。工具调用被拆成五个事件、参数可分块流式传输，前端能实时展示参数拼装；推理家族含加密事件，思维链可加密往返；子 agent 事件强制带归属 run id，解决嵌套任务的输出归因。运行结局显式区分 success、interrupt、cancelled、error，让中断恢复、取消等复杂情况变成按事件类型渲染的确定性逻辑，而不是猜测后端状态。
+
+## 三、最关键的工程设计：schema-first 如何防止协议分叉
+
+开源协议最常见的失败模式，是各语言社区照着文档手写实现、随后行为悄悄分叉。AG-UI 的应对机制是这个仓库最值得研究的部分。
+
+![schema-first：一份 Schema 生成三语言 SDK 加一致性测试](media/03-schema-first.png)
+
+第一，单一事实来源：spec/1.0/schema.json（实测约 94KB）冻结了 1.0 规范。第二，官方 SDK 全部由这份 Schema 代码生成而非手写，spec/generator 下有 TypeScript、Python、.NET、Protobuf 生成器；Python SDK 的数据模型就位于 _generated 目录，PROTOCOL_VERSION 为 1.0。实测三个官方 SDK 规模为 TypeScript 242 文件约 7.56 万行、.NET 362 文件约 5.73 万行、Python 38 文件约 1.12 万行，另有 8 个社区 SDK（Go、Rust、Java、Kotlin、Dart、Swift、Ruby、C++）。
+
+第三，用一致性测试约束行为。实测 spec/1.0 下有 68 个流测试用例和 303 个 fixtures，以 fatal、tolerated、warns 三级判定，明确规定首个事件不是 RUN_STARTED 属致命错误、未知事件应丢弃、状态补丁的未知操作应丢弃并告警、无法识别的协议版本应告警后继续等边界行为。这套"单一 Schema、代码生成、一致性测试"的组合，是它能让 Google、微软、亚马逊、Oracle 同时接入而不碎片化的根本原因。
+
+## 四、生态与需要客观看待的风险
+
+实测 integrations 目录有 23 个条目，覆盖 LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、IBM watsonx 等，middlewares 有 6 个并含 MCP/A2A/A2UI 桥接，Amazon Bedrock AgentCore 已原生支持，每个集成在 Dojo 有在线 demo。
+
+![生态版图与适用判断](media/04-ecosystem-verdict.png)
+
+但有三点应当客观指出。其一，它是协议加 SDK 加集成的 monorepo，不是开箱即用的产品，落地仍需自行接入框架与前端。其二，仓库当前有 617 个 open issue，对 2.1 万 Star 的项目偏高，反映生态高速扩张期的集成兼容问题，draft 规范仍在演进；虽然 1.0 已冻结且双向向后兼容（0.x agent 可配 1.0 client，反之亦然），生产前仍应在 Dojo 实测具体框架的集成质量。其三，协议由 CopilotKit 发起，而 CopilotKit 又是其主要客户端实现，存在发起方商业利益与协议中立性之间的张力，技术选型时应纳入考量。
+
+## 五、适用判断与上手
+
+适合的场景包括：把 agent 接入真实产品 UI 且需要流式、工具调用、人在环、共享状态、生成式 UI 的工程团队；多框架并存、希望复用同一套前端的组织；以及研究 schema-first 协议工程化的开发者。不太适合的是无界面的一次性后端脚本，或已深度绑定厂商专有协议且无跨框架需求的团队——这类情况下框架自带流式接口往往更轻。
+
+上手有两条路径。最快是 npx create-ag-ui-app@latest 脚手架，生成接好框架的前端，配置 OpenAI key 后即可运行。更贴近本质的是直接实现协议：Python 3.9+ 用 ag-ui-protocol 加 FastAPI 写约 30 行 SSE 服务，依次产出 RunStarted、文本消息、RunFinished 事件，TypeScript 端用 @ag-ui/client 的 HttpAgent 连接并监听事件；之后替换任意受支持的后端框架，客户端代码不变，这正是协议抽象的核心承诺。
+
+总体看，AG-UI 的价值不在于新增了一种 agent 能力，而在于把"agent 如何面对用户"这件原本各自造轮子的事标准化，并用工程化手段保证标准不被实现稀释。是否采用取决于你是否真的面临跨框架、多端渲染的规模化问题；而无论是否采用，它的 schema-first 与一致性测试设计都值得协议设计者参考。
+
+项目地址：https://github.com/ag-ui-protocol/ag-ui

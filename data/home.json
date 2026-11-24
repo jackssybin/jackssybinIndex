@@ -1,6 +1,31 @@
 {
   "allArticles": [
     {
+      "title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天",
+      "url": "/articles/2026/11/24/ag-ui-protocol/",
+      "type": "blog",
+      "date": "2026-11-24",
+      "description": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "excerpt": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "开源",
+        "AG-UI",
+        "Agent",
+        "协议",
+        "MCP",
+        "A2A",
+        "事件流",
+        "SDK",
+        "CopilotKit",
+        "MIT"
+      ],
+      "priority": 0,
+      "content": "过去一年 Agent 框架爆发式增长，但有一个问题始终没被很好地解决：怎么把一个会思考、会调工具、会中途停下来等人确认、还会派生子 agent 的智能体，稳定地接到用户界面上？每个框架都有自己的流式格式和消息约定，前端团队每换一个后端框架，就得重写一遍胶水代码。 AG UI 想做的就是这件事的标准化。它的全称是 Agent User Interaction Protocol，由 CopilotKit 发起、社区共建，目前在 GitHub 上有 2.1 万 Star。我把整个 monorepo 克隆下来逐层翻了一遍，这篇文章不讲概念口号，只讲我实测到的结构和数字，以及它最值得学的工程设计。 一、先定位：AG UI、MCP、A2A 到底是什么关系 很多人第一次看到 AG UI 会下意识把它当成 MCP 的竞争对手，这是第一个需要澄清的误解。它们其实是同一个 agent 技术栈里、不同层级的三个协议。 MCP（Model Context Protocol）管的是 agent 向下怎么接工具和数据 ——文件、数据库、外部 API，让 agent 有统一的方式调用能力。 A2A（Agent to Agent）管的是横向的 agent 之间怎么协作 ，不同框架构建的 agent 如何互相发现、委托任务。 AG UI 管的则是向上这一段：agent 怎么把自己的行为实时、结构化地送到用户面前。 一个真实的 agent 产品往往三层同时用：通过 MCP 拿工具、通过 A2A 与其他 agent 分工、通过 AG UI 把过程渲染给用户。README 里有一句话说得很准确——AG UI 可以给讲 MCP 或 A2A 的 agent 做前端。另外它和 A2UI、MCP Apps 这类\"生成式 UI 规范\"也不冲突：后者描述 agent 想展示什么 UI，而 AG UI 是承载这些载荷以及其他一切信息的运行时协议。 二、一次 Run 的本质：一个输入，一条 31 个事件的类型化流 为什么传统的 HTTP 请求/响应模型不适合 agent？因为 agent 不是一问一答、立即返回的：它会逐 token 流式输出、在回答中途调用工具、更新共享状态、暂停下来等人类审批、还可能派生 subagent。AG UI 用一条双向事件流把这些行为全部标准化。 流程是这样的：客户端发起一次 run，发送一个 RunAgentInput，里面包含对话消息（messages）、前端能提供的工具（tools）、共享状态（state）和上下文（context）。agent 随后回吐一条类型化事件流。我在 TypeScript SDK 源码里实测枚举到 正好 31 个事件类型，分属 8 大家族 ，和文档口径完全一致： 运行生命周期 （5 个）：RUN STARTED/FINISHED/ERROR、STEP STARTED/FINISHED，这是唯一必选的家族； 文本消息 （4 个）：TEXT MESSAGE START/CONTENT/END/CHUNK，负责逐字流式； 工具调用 （5 个）：TOOL CALL START/ARGS/END/RESULT/CHUNK； 状态同步 （3 个）：STATE SNAPSHOT、STATE DELTA（JSON Patch 增量）、MESSAGES SNAPSHOT； 推理过程 （5 个）：含加密推理值 REASONING ENCRYPTED VALUE； 活动进度 （2 个）、 子 agent （3 个）、 透传 （RAW/CUSTOM 2 个）。 这里有几个设计很讲究。状态同步不是每次全量推送，而是先给快照、再用 JSON Patch 传增量，省带宽且天然支持协同。人在环（human in the loop）通过 run 以 interrupt 结局、用户审批/编辑/拒绝后下一次 run resume 来实现，而不是另起一套机制。更关键的是它 传输无关 ：规范定义了 HTTP+SSE 和 HTTP+Protobuf 二进制两种绑定，中间件还能适配任意事件源。而且只有运行生命周期是必选的，意味着一个最小 agent 发几个事件就能接入，再按需逐步实现完整能力。 再展开几个容易被忽略的事件设计。工具调用被拆成 START、ARGS、END、RESULT、CHUNK 五个事件，参数可以分块流式传输，这让前端能像展示文字 token 一样实时展示\"agent 正在拼什么工具参数\"，而不是等整个调用结束才看到。推理家族里专门有 REASONING ENCRYPTED VALUE，意味着思维链可以加密往返——在既要展示推理过程、又不想让敏感推理内容被明文记录的生产场景里，这是个很实际的考量。子 agent 家族则要求每个事件都归属到产生它的那个 subagent run，嵌套委托时前端能清楚区分哪段输出来自哪个子任务。它还支持多模态：图像、音频、视频、文档都能出现在用户输入和工具结果里，配合活动进度、token 用量、自定义事件，覆盖了一个真实 agent 运行时几乎所有可观测的状态。这些能力在 Dojo 里每个都对应一个可点击的 live demo，不是停留在规范纸面。 三、最反直觉的亮点：它怎么防止协议碎片化 这是我读完整个仓库后..."
+    },
+    {
       "title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构",
       "url": "/articles/2026/11/24/sensenova-u1/",
       "type": "blog",
@@ -5807,6 +5832,31 @@
   ],
   "articles": [
     {
+      "title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天",
+      "url": "/articles/2026/11/24/ag-ui-protocol/",
+      "type": "blog",
+      "date": "2026-11-24",
+      "description": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "excerpt": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "开源",
+        "AG-UI",
+        "Agent",
+        "协议",
+        "MCP",
+        "A2A",
+        "事件流",
+        "SDK",
+        "CopilotKit",
+        "MIT"
+      ],
+      "priority": 0,
+      "content": "过去一年 Agent 框架爆发式增长，但有一个问题始终没被很好地解决：怎么把一个会思考、会调工具、会中途停下来等人确认、还会派生子 agent 的智能体，稳定地接到用户界面上？每个框架都有自己的流式格式和消息约定，前端团队每换一个后端框架，就得重写一遍胶水代码。 AG UI 想做的就是这件事的标准化。它的全称是 Agent User Interaction Protocol，由 CopilotKit 发起、社区共建，目前在 GitHub 上有 2.1 万 Star。我把整个 monorepo 克隆下来逐层翻了一遍，这篇文章不讲概念口号，只讲我实测到的结构和数字，以及它最值得学的工程设计。 一、先定位：AG UI、MCP、A2A 到底是什么关系 很多人第一次看到 AG UI 会下意识把它当成 MCP 的竞争对手，这是第一个需要澄清的误解。它们其实是同一个 agent 技术栈里、不同层级的三个协议。 MCP（Model Context Protocol）管的是 agent 向下怎么接工具和数据 ——文件、数据库、外部 API，让 agent 有统一的方式调用能力。 A2A（Agent to Agent）管的是横向的 agent 之间怎么协作 ，不同框架构建的 agent 如何互相发现、委托任务。 AG UI 管的则是向上这一段：agent 怎么把自己的行为实时、结构化地送到用户面前。 一个真实的 agent 产品往往三层同时用：通过 MCP 拿工具、通过 A2A 与其他 agent 分工、通过 AG UI 把过程渲染给用户。README 里有一句话说得很准确——AG UI 可以给讲 MCP 或 A2A 的 agent 做前端。另外它和 A2UI、MCP Apps 这类\"生成式 UI 规范\"也不冲突：后者描述 agent 想展示什么 UI，而 AG UI 是承载这些载荷以及其他一切信息的运行时协议。 二、一次 Run 的本质：一个输入，一条 31 个事件的类型化流 为什么传统的 HTTP 请求/响应模型不适合 agent？因为 agent 不是一问一答、立即返回的：它会逐 token 流式输出、在回答中途调用工具、更新共享状态、暂停下来等人类审批、还可能派生 subagent。AG UI 用一条双向事件流把这些行为全部标准化。 流程是这样的：客户端发起一次 run，发送一个 RunAgentInput，里面包含对话消息（messages）、前端能提供的工具（tools）、共享状态（state）和上下文（context）。agent 随后回吐一条类型化事件流。我在 TypeScript SDK 源码里实测枚举到 正好 31 个事件类型，分属 8 大家族 ，和文档口径完全一致： 运行生命周期 （5 个）：RUN STARTED/FINISHED/ERROR、STEP STARTED/FINISHED，这是唯一必选的家族； 文本消息 （4 个）：TEXT MESSAGE START/CONTENT/END/CHUNK，负责逐字流式； 工具调用 （5 个）：TOOL CALL START/ARGS/END/RESULT/CHUNK； 状态同步 （3 个）：STATE SNAPSHOT、STATE DELTA（JSON Patch 增量）、MESSAGES SNAPSHOT； 推理过程 （5 个）：含加密推理值 REASONING ENCRYPTED VALUE； 活动进度 （2 个）、 子 agent （3 个）、 透传 （RAW/CUSTOM 2 个）。 这里有几个设计很讲究。状态同步不是每次全量推送，而是先给快照、再用 JSON Patch 传增量，省带宽且天然支持协同。人在环（human in the loop）通过 run 以 interrupt 结局、用户审批/编辑/拒绝后下一次 run resume 来实现，而不是另起一套机制。更关键的是它 传输无关 ：规范定义了 HTTP+SSE 和 HTTP+Protobuf 二进制两种绑定，中间件还能适配任意事件源。而且只有运行生命周期是必选的，意味着一个最小 agent 发几个事件就能接入，再按需逐步实现完整能力。 再展开几个容易被忽略的事件设计。工具调用被拆成 START、ARGS、END、RESULT、CHUNK 五个事件，参数可以分块流式传输，这让前端能像展示文字 token 一样实时展示\"agent 正在拼什么工具参数\"，而不是等整个调用结束才看到。推理家族里专门有 REASONING ENCRYPTED VALUE，意味着思维链可以加密往返——在既要展示推理过程、又不想让敏感推理内容被明文记录的生产场景里，这是个很实际的考量。子 agent 家族则要求每个事件都归属到产生它的那个 subagent run，嵌套委托时前端能清楚区分哪段输出来自哪个子任务。它还支持多模态：图像、音频、视频、文档都能出现在用户输入和工具结果里，配合活动进度、token 用量、自定义事件，覆盖了一个真实 agent 运行时几乎所有可观测的状态。这些能力在 Dojo 里每个都对应一个可点击的 live demo，不是停留在规范纸面。 三、最反直觉的亮点：它怎么防止协议碎片化 这是我读完整个仓库后..."
+    },
+    {
       "title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构",
       "url": "/articles/2026/11/24/sensenova-u1/",
       "type": "blog",
@@ -6251,33 +6301,34 @@
       ],
       "priority": 0,
       "content": "AI 写作工具这两年不缺新玩家，但绝大多数停在\"对话框+文档\"：你把人物小传复制进聊天窗口，AI 给一段建议，你再手动粘回文档。项目一大、设定一多，上下文就断了，AI 永远像个没读过你全稿的临时工。 今天这个项目想解决的正是这个断点。它叫 Reveric（幻界），定位是 Agent Native 的桌面创作工作台 ——从长篇小说、剧本改编一路做到短剧成片，而且智能体不是陪聊，是真的能在你的作品里动手。 先看一组反差很强的数据：仓库 2026 年 10 月 22 日才建仓，到现在半个月，724 Star、178 Fork ；但代码量已经是 2064 个 Dart 文件、约 75 万行 ，最新版本 v0.8.1，支持 Windows/macOS/Android 三端。我把仓库克隆下来通读了产品文档、agent 架构和插件系统，这篇讲清楚它到底做成了什么。 一、核心主张：作品就是智能体的工作区 Reveric 最根本的设计选择，是把\"作品\"本身变成智能体可读写的工作区，而不是把 AI 当成一个外挂聊天框。四个关键词： 按需读取整部作品 ：智能体自己检索需要的章节、人物设定和伏笔，不用你把上下文复制进对话框。底层是本地 SQLite（用 drift 做持久化），作品数据全在你自己的设备上； 智能体能操作所有模块 ：小说、剧本、无限画布、3D 导演台、剪辑台，它都能直接上手改，而不只是输出文本建议； 素材自动生成 ：角色定妆照、分镜参考图、视频片段、音频，由智能体调用模型直接生成到画布上； 本地优先 + BYOK（Bring Your Own Key） ：数据存本地，模型你自己选、Key 你自己填，直连 OpenAI、Anthropic、Gemini、DeepSeek、字节 Seedance、MiniMax H3，或任何 OpenAI 兼容的自建网关（Ollama、OneAPI、NewAPI 等）。 这个组合的意义在于：它不锁定模型供应商，也不把你的作品内容托管到它的服务器。对长篇创作者来说，\"我的稿子在谁手里\"是个真实的信任问题，Local First 是一个明确的立场。 二、五大工作台：把影视工业流水线搬进一个 App 它不是单一编辑器，而是一条覆盖\"文字→影像\"的完整生产线，每个环节都是独立工作台、彼此数据打通： 1. 小说创作。 树状大纲、自动保存、历史版本快照、一键专业排版，加上多维设定库——人物、势力、技能、伏笔、地点、地图、图鉴全部关联。最有意思的是 实体关系图谱 ：记录角色关系的演变和重要节点，关系还有严谨的状态语义（当前关系、关系转变、关系恢复、已结束关系），写完一章可以让智能体提取事实、核验前后连续性，专门防\"设定吃书\"。 2. 剧本改编。 以小说为原著创建改编剧本，编辑器遵循影视行业标准，场次、动作、角色、括号、对话、转场、字幕这些元素标准化排版。支持左读原著、右写剧本的对照模式，智能体可以跨作品读取原著来提炼场景和台词。 3. 无限画布。 这是文字转视听的中枢。角色定妆照、场次节拍、分镜段落、生成的图片音频视频都以节点形式铺开，镜头的上下游引用关系和生图提示词一目了然。智能体能按剧本自动拆分镜、写提示词、批量生成素材。 4. 3D 导演台。 内置 3D 空间预演引擎（用了 flutter scene 和自定义 shader）：在三维场景里摆角色、道具，设置特写/全景/正反打机位，规划推拉摇移运镜，按时间轴预演整场戏，再导出构图参考图喂给视频生成模型。这一步解决的是 AI 视频最头疼的\"镜头语言失控\"。 5. 多轨剪辑台。 6 轨专业时间线——视频主轨、画面叠加、角色对白、环境音效、背景音乐、多语言字幕，支持剪刃分割、波纹删除、多段吸附，最后直接导出成片，不需要再跳到外部剪辑软件。智能体可以自动把画布素材排上时间线、分割修剪、加字幕、分离音频、渲染预览。 三、Agent 架构：它不是套壳聊天，有完整的编排系统 很多\"AI 写作 App\"本质是包了个对话框。Reveric 在 lib/shared/agent/ 下有一套完整的 agent 工程实现，这是它和玩具类产品的分水岭： Orchestrator + Subagent ：聊天入口背后是一个不可见的主编排器（Chat Orchestrator），负责协调直接回复、工具调用，并把专门任务委派给子智能体（Chat Subagent）。子智能体可由用户管理或内置，是能力扩展层； 工具调度与审批 ：agent tool dispatcher.dart 分发工具调用，tool approval.dart 对敏感操作做人工审批——AI 不是想改就改； 循环检测 ：loop detector.dart 专门识别 agent 陷入重复调用死循环的情况并打断； Hook 机制 ：日志、追踪、待办续写（todo continuation）、结果验证（verification）都以 hook 形式挂载； token 估算与上下文管理 ：token estimator.dart、agent context manager.dart 控制长作品下的上下文预算，round assembler.dart 组装多轮结果。 还有一个细节能看出工程成熟度：仓库根目录的 AGENTS.md ..."
-    },
+    }
+  ],
+  "latestArticles": [
     {
-      "title": "4800 Star 的开源 AI 影视工厂：剧本到成片全自动，我拆了它的 10 万行 TypeScript",
-      "url": "/articles/2026/11/05/moyin-creator-ai-film/",
+      "title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天",
+      "url": "/articles/2026/11/24/ag-ui-protocol/",
       "type": "blog",
-      "date": "2026-11-05",
-      "description": "MemeCalculate/moyin-creator（魔因漫创）是一款 AGPL-3.0 双许可的桌面端 AI 影视生产工具：把短剧/动漫番剧的制作拆成剧本→角色→场景→导演→S级五个环环相扣的板块，剧本自动解析为场景分镜对白，6 层身份锚点+角色圣经保证跨镜头人物一致，最终在 Seedance 2.0 上用多镜头合并叙事、@Image/@Video/@Audio 多模态引用和自动三层提示词融合批量生成视频，支持多供应商 Key 轮询、失败重试和并行队列。本文基于仓库源码（Electron 30 + React 18 + TS，约 10.7 万行）拆解它的 GroupRefManager 引用管理、参数约束校验（≤9图≤3视频≤3音频）、prompt-compiler 与 character-bible 引擎、数据迁移设计，也说清 AGPL 网络传染性与商业许可边界、它本质是 API 编排层而非自研模型、以及项目仍处早期（v0.2.x、last push 8 月、演示数据播种）的事实。",
-      "excerpt": "MemeCalculate/moyin-creator（魔因漫创）是一款 AGPL-3.0 双许可的桌面端 AI 影视生产工具：把短剧/动漫番剧的制作拆成剧本→角色→场景→导演→S级五个环环相扣的板块，剧本自动解析为场景分镜对白，6 层身份锚点+角色圣经保证跨镜头人物一致，最终在 Seedance 2.0 上用多镜头合并叙事、@Image/@Video/@Audio 多模态引用和自动三层提示词融合批量生成视频，支持多供应商 Key 轮询、失败重试和并行队列。本文基于仓库源码（Electron 30 + React 18 + TS，约 10.7 万行）拆解它的 GroupRefManager 引用管理、参数约束校验（≤9图≤3视频≤3音频）、prompt-compiler 与 character-bible 引擎、数据迁移设计，也说清 AGPL 网络传染性与商业许可边界、它本质是 API 编排层而非自研模型、以及项目仍处早期（v0.2.x、last push 8 月、演示数据播种）的事实。",
+      "date": "2026-11-24",
+      "description": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "excerpt": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
       "topic": "",
       "topicSlug": "",
       "series": "",
       "tags": [
         "开源",
-        "AI影视",
-        "Seedance",
-        "Electron",
-        "React",
-        "工作流",
-        "多模态",
-        "AGPL",
-        "短剧"
+        "AG-UI",
+        "Agent",
+        "协议",
+        "MCP",
+        "A2A",
+        "事件流",
+        "SDK",
+        "CopilotKit",
+        "MIT"
       ],
       "priority": 0,
-      "content": "AI 视频工具现在分两类：一类是给你一个对话框、输入提示词吐一条 5 秒片段的\"玩具\"；另一类是冲着 批量生产 去的生产线——你给剧本，它负责把剧本变成分镜、定住角色长相、配好场景、调度十几个模型任务，最后拼成能看的成片。 今天拆的 moyin creator（魔因漫创）属于后者。 4,826 Star、966 Fork，AGPL 3.0 双许可，TypeScript 写的 Electron 桌面应用，代码约 10.7 万行 ，主打一句话：剧本到成片全流程批量化，深度集成字节的 Seedance 2.0 视频模型。 我把仓库克隆下来通读了核心引擎和更新日志，这篇讲清楚它怎么把\"拍剧\"这件事流水线化、工程上有哪些真东西，以及几个不能忽略的边界。 一、它在解决什么：AI 视频生产的三个老大难 用单条提示词做视频的人都知道三个痛点： 角色不一致 （同一个人下一个镜头换了张脸）、 流程断裂 （剧本、分镜、生图、生视频散在五六个工具里手工搬运）、 无法批量 （一条片子几十上百个镜头，手工点到死）。 魔因漫创的产品结构就是对着这三个问题设计的，五大板块环环相扣，上一步的产出自动流入下一步： 📝 剧本 ：粘贴剧本文本，解析引擎自动拆成场景、分镜、对白，识别角色、场景、情绪、镜头语言，支持多集/多幕结构； 🎭 角色 ：建立角色圣经（Character Bible），用 6 层身份锚点保证同一个角色跨分镜外观一致，并绑定参考图； 🌄 场景 ：场景描述自动转视觉提示词，生成多视角联合图； 🎬 导演 ：专业分镜系统，景别、机位、运动方式这些电影摄影参数化，2D/3D/写实/定格等视觉风格一键切换； ⭐ S 级板块 ：最终的视频生成车间，对接 Seedance 2.0 / SkyReels V4，把分镜批量变成视频。 它不是自己训练视频模型，而是站在各家生成 API 之上做 编排和品控 ——这个定位决定了它的价值和局限，后面细说。 二、最硬核的部分：S 级板块怎么喂饱 Seedance 2.0 Seedance 2.0 这类多模态视频模型的能力很强，但 API 约束也很具体：一次请求最多 9 张图、3 段视频、3 段音频，prompt 不超过 5000 字符。手工给每个分镜凑这些素材、卡这些限制，是纯体力活。魔因漫创把这层自动化了，核心是一个叫 GroupRefManager 的引用管理器。 每个分镜卡片（split scene card）会自动收集三类素材：角色库里的角色参考图、场景参考图、首帧图（来自素材库或 AI 生成），统一交给 GroupRefManager；运镜参考视频和 BGM 音频则手动上传。collectAllRefs() 在发请求前完成组装和约束校验： @Image1 9 ：首帧图走 N×N 网格拼接策略（多角色/场景参考拼成格子图），其余槽位放角色和场景参考，硬上限 9 张； @Video1 3 / @Audio1 3 ：运镜与配乐参考，各 3 个上限； 提示词三层自动融合 ：动作描述 + 镜头语言 + 对白唇形同步，编译成一条完整 prompt，并在 5000 字符红线内截断校验； 多镜头合并叙事 ：把多个分镜分组合并生成一条连贯叙事视频，而不是每条片段各自为政。 参数超限不是报错让你自己猜，而是在客户端先做约束自动校验。这套\"引用收集 → 网格拼接 → prompt 编译 → 约束校验 → API 请求\"的链路，是整个项目工程密度最高的地方，也解释了它为什么敢叫\"生产级\"。 三、角色一致性：6 层身份锚点 + 角色圣经 AI 短剧最大的穿帮就是\"变脸\"。它的解法分两层： 数据层是角色圣经（character bible 服务） ：每个角色有一份结构化档案，外貌特征、服装、性格、关系等信息被固化，后续所有分镜引用同一份档案而不是每次重新描述。 生成层是 6 层身份锚点 ：通过角色参考图绑定 + 多模态引用（@Image 槽位强制带上角色图）+ 首帧网格拼接，让模型在每个镜头都能\"看到\"角色长什么样。v0.1.3 的更新日志专门提到，分镜卡片现在会自动把角色参考图、场景参考、首帧统一打包进 GroupRefManager，目的就是提升跨镜头一致性。 客观说，这不是什么独门黑科技——本质是\"强参考图约束 + 结构化角色档案\"的组合拳，效果仍取决于底层模型的参考跟随能力。但它把这套方法论产品化成了默认行为，不用用户每次自己记得贴图，这是工具的价值。 四、批量生产：队列、重试与多 Key 轮询 要做番剧级别的体量，单条生成毫无意义。它的批量化靠三个机制： 1. 一键全流程 ：剧本解析 → 角色/场景生成 → 分镜切割 → 批量生图 → 批量生视频，一条任务链跑通； 2. 并行任务队列 + 自动重试 ：失败任务进入错误恢复机制重跑，不需要人盯着； 3. 多供应商调度 + Key 轮询负载均衡 ：可以配置多个 AI 服务商的多个 API Key，轮询分发请求。官方文档甚至直白建议\"Key 越多并发线程越高、批量越快\"——因为视频生成 API 普遍有并发和速率限制，堆 Key 是绕过单 Key 配额的现实做法。 供应商策略在 v0.1.3 做过一次大精简：砍掉 dik3、nanohajimi、apimart、zhipu 等废..."
-    }
-  ],
-  "latestArticles": [
+      "content": "过去一年 Agent 框架爆发式增长，但有一个问题始终没被很好地解决：怎么把一个会思考、会调工具、会中途停下来等人确认、还会派生子 agent 的智能体，稳定地接到用户界面上？每个框架都有自己的流式格式和消息约定，前端团队每换一个后端框架，就得重写一遍胶水代码。 AG UI 想做的就是这件事的标准化。它的全称是 Agent User Interaction Protocol，由 CopilotKit 发起、社区共建，目前在 GitHub 上有 2.1 万 Star。我把整个 monorepo 克隆下来逐层翻了一遍，这篇文章不讲概念口号，只讲我实测到的结构和数字，以及它最值得学的工程设计。 一、先定位：AG UI、MCP、A2A 到底是什么关系 很多人第一次看到 AG UI 会下意识把它当成 MCP 的竞争对手，这是第一个需要澄清的误解。它们其实是同一个 agent 技术栈里、不同层级的三个协议。 MCP（Model Context Protocol）管的是 agent 向下怎么接工具和数据 ——文件、数据库、外部 API，让 agent 有统一的方式调用能力。 A2A（Agent to Agent）管的是横向的 agent 之间怎么协作 ，不同框架构建的 agent 如何互相发现、委托任务。 AG UI 管的则是向上这一段：agent 怎么把自己的行为实时、结构化地送到用户面前。 一个真实的 agent 产品往往三层同时用：通过 MCP 拿工具、通过 A2A 与其他 agent 分工、通过 AG UI 把过程渲染给用户。README 里有一句话说得很准确——AG UI 可以给讲 MCP 或 A2A 的 agent 做前端。另外它和 A2UI、MCP Apps 这类\"生成式 UI 规范\"也不冲突：后者描述 agent 想展示什么 UI，而 AG UI 是承载这些载荷以及其他一切信息的运行时协议。 二、一次 Run 的本质：一个输入，一条 31 个事件的类型化流 为什么传统的 HTTP 请求/响应模型不适合 agent？因为 agent 不是一问一答、立即返回的：它会逐 token 流式输出、在回答中途调用工具、更新共享状态、暂停下来等人类审批、还可能派生 subagent。AG UI 用一条双向事件流把这些行为全部标准化。 流程是这样的：客户端发起一次 run，发送一个 RunAgentInput，里面包含对话消息（messages）、前端能提供的工具（tools）、共享状态（state）和上下文（context）。agent 随后回吐一条类型化事件流。我在 TypeScript SDK 源码里实测枚举到 正好 31 个事件类型，分属 8 大家族 ，和文档口径完全一致： 运行生命周期 （5 个）：RUN STARTED/FINISHED/ERROR、STEP STARTED/FINISHED，这是唯一必选的家族； 文本消息 （4 个）：TEXT MESSAGE START/CONTENT/END/CHUNK，负责逐字流式； 工具调用 （5 个）：TOOL CALL START/ARGS/END/RESULT/CHUNK； 状态同步 （3 个）：STATE SNAPSHOT、STATE DELTA（JSON Patch 增量）、MESSAGES SNAPSHOT； 推理过程 （5 个）：含加密推理值 REASONING ENCRYPTED VALUE； 活动进度 （2 个）、 子 agent （3 个）、 透传 （RAW/CUSTOM 2 个）。 这里有几个设计很讲究。状态同步不是每次全量推送，而是先给快照、再用 JSON Patch 传增量，省带宽且天然支持协同。人在环（human in the loop）通过 run 以 interrupt 结局、用户审批/编辑/拒绝后下一次 run resume 来实现，而不是另起一套机制。更关键的是它 传输无关 ：规范定义了 HTTP+SSE 和 HTTP+Protobuf 二进制两种绑定，中间件还能适配任意事件源。而且只有运行生命周期是必选的，意味着一个最小 agent 发几个事件就能接入，再按需逐步实现完整能力。 再展开几个容易被忽略的事件设计。工具调用被拆成 START、ARGS、END、RESULT、CHUNK 五个事件，参数可以分块流式传输，这让前端能像展示文字 token 一样实时展示\"agent 正在拼什么工具参数\"，而不是等整个调用结束才看到。推理家族里专门有 REASONING ENCRYPTED VALUE，意味着思维链可以加密往返——在既要展示推理过程、又不想让敏感推理内容被明文记录的生产场景里，这是个很实际的考量。子 agent 家族则要求每个事件都归属到产生它的那个 subagent run，嵌套委托时前端能清楚区分哪段输出来自哪个子任务。它还支持多模态：图像、音频、视频、文档都能出现在用户输入和工具结果里，配合活动进度、token 用量、自定义事件，覆盖了一个真实 agent 运行时几乎所有可观测的状态。这些能力在 Dojo 里每个都对应一个可点击的 live demo，不是停留在规范纸面。 三、最反直觉的亮点：它怎么防止协议碎片化 这是我读完整个仓库后..."
+    },
     {
       "title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构",
       "url": "/articles/2026/11/24/sensenova-u1/",
@@ -6373,29 +6424,6 @@
       ],
       "priority": 0,
       "content": "想做个小工具、搭个 Demo、或者给 Side Project 找点真实数据，第一步往往不是写代码，而是满世界找\"哪个 API 能白嫖、要不要 Key、浏览器能不能直接调\"。GitHub 上有个仓库专门解决这件事——public apis，一个收集免费公共 API 的清单，Star 数已经冲到 50 万 ，是全站 Star 量最高的项目之一。 但高 Star 不等于你真的会用它。这次我没有停留在\"收藏等于学会\"，而是把仓库完整克隆到本机、写脚本把那份 379KB 的 README 逐条解析了一遍，还跑通了它自带的测试。这篇文章讲三件事：这个仓库到底怎么组织的、哪些接口真能零成本调、以及——也是你这次最关心的—— 拿这两千多个 API 聚合起来，到底能做出什么应用、有哪些值得做的方向 。 一、先看家底：一份 README 撑起 50 万 Star 很多人以为这种\"awesome 清单\"就是随手堆链接，public apis 恰恰相反，它的工程化程度不亚于一个正经软件项目。 我本地克隆后实测的核心数据：标准 API 条目 2465 个 ，分布在 51 个分类 里，另外还有一个今年新增的 MCP Servers 专栏，收录 60 个 MCP 服务器 ；累计约 2406 位贡献者、7019 次提交 ，MIT 协议，主语言 Python，2016 年 3 月建仓，到今天仍然保持每日更新，没有归档。 它最反直觉的一点是： 整个仓库的\"数据库\"就是一份 README.md 。没有 SQLite、没有 JSON 数据文件，所有 API 信息都以 Markdown 表格的形式维护，每一行严格遵循六列契约： 其中 Auth 只接受 No、apiKey、OAuth 等固定枚举，CORS 只接受 Yes、No、Unknown 三个值。这种\"用 Markdown 当结构化数据\"的做法之所以没失控，靠的是一套强制质量门禁： scripts/validate/format.py：校验分类内字母序、字段数量、CORS 枚举值是否合法； scripts/validate/links.py：在 PR 阶段自动检查链接是否失效； scripts/tests/ 下 31 个单元测试 ，我在本地用 CI 同款方式（PYTHONPATH=. python3 m unittest）跑了一遍，结果是 Ran 31 tests … OK，全部通过 ； 3 个 GitHub Actions 分别管 push、PR 校验和链接巡检； CONTRIBUTING.md 明确写着：拒收营销性质的 PR，收录的 API 必须能被社区免费、公开调用。 换句话说，50 万 Star 的背后不是一份链接列表，而是一套\"人工策展 + 自动化校验\"的长期治理机制。理解了这一点，你才会明白为什么它能维护十年还可信。 二、能不能白嫖、能不能纯前端调：看这三张分布 对想做聚合应用的人来说，接口总数其实是最没用的指标，真正决定架构的是两个字段： 要不要认证（Auth）、浏览器能不能跨域直连（CORS） 。我把 2465 个接口全部统计了一遍。 认证维度 ：1200 个接口完全免认证（约占 49%），1104 个需要申请 apiKey（约 45%），150 个走标准 OAuth（约 6%），剩下 11 个是 Mashape Key、User Agent 之类的小众方式。也就是说，接近一半的接口连注册都不用，直接发请求就能拿数据。 跨域维度 ：1080 个接口明确支持 CORS（44%），1055 个标注为 Unknown（43%），330 个明确不支持（13%）。这个比例要特别注意——标 Unknown 的不是不能用，而是清单没验证过，需要你自己发一次请求确认；明确标 No 的，浏览器直连一定会被拦，必须走后端代理。 两个维度取交集，得到一个对独立开发者极其友好的数字： 有 656 个接口同时满足\"免认证 + 支持 CORS\" 。这意味着什么？意味着你不需要服务器、不需要申请任何 Key、不需要处理密钥泄露，纯靠一个静态网页里的 fetch() 就能直连出数据——做原型、做 Demo、做黑客马拉松作品，成本几乎为零。 为了让这个数字不只是统计，我从池子里按分类抽了几个真实接口验证它的可用性思路：天气类有 Open Meteo（面向非商业用途的全球天气预报，免 Key）、NASA POWER（太阳能与气象数据）；测试数据类有 DummyJSON（自带商品、用户、帖子的假 REST API）、FakerAPI；娱乐类有 Cat Facts、Dog Facts 这类随机事实接口；金融类甚至有 Billionaire Tracker 这种实时富豪榜。它们共同的特征是：注册零成本、文档清晰、返回标准 JSON，非常适合当聚合应用的\"第一块拼图\"。 另外提一句 HTTPS：2465 个里有 2377 个支持 HTTPS，只有 88 个还是裸 HTTP，安全基线整体不错。顺带说明一个解析时的发现：仓库里有 24 个条目的 HTTPS 字段标注了 stdio（其中部分同时支持 HTTP），这是给 MCP/本地进程类接口用的新形态，说明它的数据结构也在跟着 Agent 生态演进，而不是一成不变的老表格。 三、重点：2..."
-    },
-    {
-      "title": "1.87 万 Star 的 Concat：一个用 Rust 写的本地优先剪辑软件，还内置 MCP 让 AI 替你剪片",
-      "url": "/articles/2026/11/19/concat-video-editor/",
-      "type": "blog",
-      "date": "2026-11-19",
-      "description": "jub0t/Concat 是一个 2026 年 8 月底才建仓、三个月冲到 1.87 万 Star 的开源视频编辑器，AGPL-3.0 协议，用 Rust 写成，覆盖 macOS/Windows/Linux/Android/iOS 五平台、26 种语言，主打无水印、无账号、无订阅、素材从不上传的本地优先体验。本文基于仓库源码实测：它由 18 个 crate 组成单一 Cargo workspace、276 个 Rust 源文件约 18.9 万行，Slint+Skia 做界面、FFmpeg 7 做媒体引擎，187 个测试文件把关；22 个 AI 模型（RVM 抠像、ISNet/SAM 分割、Real-ESRGAN 超分、Chatterbox/Kokoro 语音合成与声音克隆、Whisper 转写、Spleeter 人声分离）不打进安装包而是按需下载、sha256 校验、镜像到自有 release，下载后完全离线。重点拆解它最有差异化的设计：内置 MCP 服务器（concat --mcp）让 Claude 等 Agent 通过 40 余个工具像人一样操作时间线，支持 window/headless 双模式、工程锁防双写、家目录沙箱，并提供 JSON-RPC 与源码编译可得的 gRPC/CLI；同时如实说清它仍是 v0.2.x beta、Windows 未签名会触发 SmartScreen、本地模型吃算力、以及 AGPL-3.0 强 copyleft 对闭源商用和 SaaS 二次开发的授权要求。",
-      "excerpt": "jub0t/Concat 是一个 2026 年 8 月底才建仓、三个月冲到 1.87 万 Star 的开源视频编辑器，AGPL-3.0 协议，用 Rust 写成，覆盖 macOS/Windows/Linux/Android/iOS 五平台、26 种语言，主打无水印、无账号、无订阅、素材从不上传的本地优先体验。本文基于仓库源码实测：它由 18 个 crate 组成单一 Cargo workspace、276 个 Rust 源文件约 18.9 万行，Slint+Skia 做界面、FFmpeg 7 做媒体引擎，187 个测试文件把关；22 个 AI 模型（RVM 抠像、ISNet/SAM 分割、Real-ESRGAN 超分、Chatterbox/Kokoro 语音合成与声音克隆、Whisper 转写、Spleeter 人声分离）不打进安装包而是按需下载、sha256 校验、镜像到自有 release，下载后完全离线。重点拆解它最有差异化的设计：内置 MCP 服务器（concat --mcp）让 Claude 等 Agent 通过 40 余个工具像人一样操作时间线，支持 window/headless 双模式、工程锁防双写、家目录沙箱，并提供 JSON-RPC 与源码编译可得的 gRPC/CLI；同时如实说清它仍是 v0.2.x beta、Windows 未签名会触发 SmartScreen、本地模型吃算力、以及 AGPL-3.0 强 copyleft 对闭源商用和 SaaS 二次开发的授权要求。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "视频剪辑",
-        "Rust",
-        "MCP",
-        "本地优先",
-        "AI",
-        "FFmpeg",
-        "AGPL"
-      ],
-      "priority": 0,
-      "content": "视频剪辑软件长期是付费订阅的天下：Premiere、Final Cut、剪映专业版各有壁垒，而近几年打着\"AI 剪辑\"旗号的在线工具又普遍要求注册、上传素材、成品带水印。最近有个叫 Concat 的开源项目反着来——完全免费、本地运行、素材从不上传，还把一个 MCP 服务器内置进了编辑器，让 AI Agent 能直接操作时间线。 它 2026 年 8 月底才建仓，三个月就涨到 1.87 万 Star。我把仓库克隆下来逐 crate 读了一遍，这篇回答三个问题：一个本地优先的剪辑器如何用 Rust 搭起来、它的本地 AI 和 MCP 自动化到底怎么实现、以及 beta 阶段和 AGPL 协议下你该注意什么。 一、先看家底：18.9 万行 Rust，一个 workspace 管 18 个 crate Concat 不是套壳 FFmpeg 的小工具，而是一个工程化程度很高的完整编辑器。我统计了 src/ 下的代码：276 个 Rust 源文件、约 18.9 万行，组织成 18 个 crate 的单一 Cargo workspace，版本 0.2.12，要求 Rust 1.93。 从 crate 命名能清楚看出分层：concat 是 4.4 万行的主程序，用 Slint 做声明式 UI、Skia 做 GPU 渲染；concat core 放核心数据模型，concat media（1.67 万行）负责基于 FFmpeg 7 的解码，concat render 是可选的 GPU 合成器，concat effects 实现约百种特效滤镜转场；能力层有 concat vision（视觉）、concat speech（语音）、concat text（字幕标题）、concat project（2 万行的工程管理）；自动化层则是 concat mcp、concat api、concat server、concat cli 和负责 4K 导出的 concat export。 这种分层最实际的好处是引擎与界面解耦：GPU 合成器被做成可选 feature，纯引擎任务不必承担这块编译重量，而且整个编辑器能在没有窗口的 headless 模式下跑渲染。仓库里有 187 个带测试的文件，CI 还会跑 cargo fmt check 和 cargo clippy D warnings，发布的每个文件都由 GitHub Actions 从打 tag 的提交构建、测试通过后才上传，不接受任何个人机器上的构建产物。 二、22 个本地 AI 模型：能力在本机，素材不上云 现在的剪辑器都在加 AI，Concat 的不同在于所有模型都跑在你自己的机器上。我读了 models/manifest.toml，一共管理 22 个模型，分成几类： 智能抠像 ：RobustVideoMatting 做人物分割、ISNet 做通用物体、SAM（slimsam）支持笔刷手绘蒙版，外加 Real ESRGAN 做超分辨率放大； 语音与配音 ：Chatterbox 本地 TTS、几秒录音即可声音克隆，桌面端还有 Kokoro 语音库； 字幕与音频 ：Whisper 本地自动转写生成字幕、Spleeter 做人声/伴奏分离，以及一键降噪、人声增强、响度均衡。 这里有个很专业的供应链设计值得单独说。模型体积比编辑器本身大很多倍，所以安装包 不捆绑任何权重 ，而是在你第一次使用某个功能时按需下载。清单里每个模型都带 sha256 摘要，下载完必须校验通过，没有摘要的模型直接拒绝运行；Hugging Face 上游被锁定到具体 commit 而非 main，同时所有模型还镜像到项目自己的 models v1 release，第三方图床挂了也不受影响。网络请求只在你主动检查版本或下载模型时发生，真正的剪辑和推理完全离线——这就是它敢承诺\"footage never leaves your disk\"的底气。 三、内置 MCP：让 AI Agent 像剪辑师一样操作时间线 这是 Concat 最有差异化、也最契合当下 Agent 浪潮的部分。它在 App 里内置了一个 MCP（Model Context Protocol）服务器，Claude Code、Claude Desktop 或任何 MCP 客户端，只要把启动命令指向 concat mcp，就能调用和图形界面完全相同的编辑能力，无需额外安装。 我把 docs/MCP.md 读完了，它的设计有几个讲究。 一是双运行模式 ：窗口模式（window）下，Agent 走你正在运行的编辑器，但不能打开并覆盖你屏幕上的工程，导出还会和你的操作排队，更安全；无头模式（headless）下，MCP 服务器自己拉起引擎，什么窗口都不用开。每个进程用 concat.lock 锁住自己打开的工程，窗口和 Agent 同时编辑同一个工程会被直接拒绝，从根上杜绝双写冲突。 二是文件沙箱 ：Agent 写出的工程、导出、帧文件默认只能放在你的家目录，要让 headless 模式访问其他目录得显式配置 CONCAT MCP ROOTS 白名单。 在能力上，它暴露了 40 多个工具：工程的创建/打开/保存、timeline read 读时间线、素材探测导入、分割/修剪/..."
     }
   ],
   "tutorials": [
@@ -9624,6 +9652,31 @@
   ],
   "recentUpdates": [
     {
+      "title": "31 个事件、23 个框架、一份 Schema 生成三语言 SDK：我把 2.1 万 Star 的 AG-UI 协议仓库翻了个底朝天",
+      "url": "/articles/2026/11/24/ag-ui-protocol/",
+      "type": "文章",
+      "date": "2026-11-24",
+      "description": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "excerpt": "AG-UI（Agent-User Interaction Protocol）是 CopilotKit 发起、GitHub 2.1 万 Star 的开放协议，用一条双向类型化事件流标准化 AI agent 与用户界面应用的连接方式。本文基于本地真实克隆与逐目录核验而非读 README 复述：实测 spec/1.0/schema.json 为 94KB 单一 JSON Schema，TypeScript SDK 中枚举到正好 31 个事件、分 8 大家族；integrations 目录实测 23 个框架/协议集成（LangChain、LangGraph、CrewAI、Google ADK/Antigravity、Microsoft Agent Framework、AWS Strands、Pydantic AI、Mastra、Agno、AG2、LlamaIndex、OpenAI Agents、Claude Agent SDK、watsonx 等），middlewares 6 个含 MCP/A2A/A2UI 桥接；代码规模 TypeScript 242 文件 75624 行、.NET 362 文件 57343 行、Python 38 文件 11225 行，另有 8 个社区 SDK。文章重点讲清四件事：第一，AG-UI 与 MCP、A2A 不是竞争而是同一 agent 栈的三层，MCP 向下接工具、A2A 横向连 agent、AG-UI 向上接用户；第二，一次 Run 的机制——客户端发 RunAgentInput，agent 回 31 个事件的类型化流，传输无关（HTTP+SSE 或 HTTP+Protobuf），状态用 snapshot 加 JSON Patch delta 同步、人在环靠 interrupt 加 resume；第三，也是最反直觉的工程亮点——它用 schema-first 加代码生成（spec/generator 生成 TS/Python/.NET，Python 模型在 _generated 目录）加 68 个 conformance 流测试和 303 个 fixtures 的三级判定，从机制上防止协议实现碎片化；第四，适用边界与对发起方中立性、617 个 open issue 的客观提醒，以及 npx create-ag-ui-app 与 30 行 SSE server 两条最小上手路径。",
+      "topic": "",
+      "topicSlug": "",
+      "series": "",
+      "tags": [
+        "开源",
+        "AG-UI",
+        "Agent",
+        "协议",
+        "MCP",
+        "A2A",
+        "事件流",
+        "SDK",
+        "CopilotKit",
+        "MIT"
+      ],
+      "priority": 0,
+      "content": "过去一年 Agent 框架爆发式增长，但有一个问题始终没被很好地解决：怎么把一个会思考、会调工具、会中途停下来等人确认、还会派生子 agent 的智能体，稳定地接到用户界面上？每个框架都有自己的流式格式和消息约定，前端团队每换一个后端框架，就得重写一遍胶水代码。 AG UI 想做的就是这件事的标准化。它的全称是 Agent User Interaction Protocol，由 CopilotKit 发起、社区共建，目前在 GitHub 上有 2.1 万 Star。我把整个 monorepo 克隆下来逐层翻了一遍，这篇文章不讲概念口号，只讲我实测到的结构和数字，以及它最值得学的工程设计。 一、先定位：AG UI、MCP、A2A 到底是什么关系 很多人第一次看到 AG UI 会下意识把它当成 MCP 的竞争对手，这是第一个需要澄清的误解。它们其实是同一个 agent 技术栈里、不同层级的三个协议。 MCP（Model Context Protocol）管的是 agent 向下怎么接工具和数据 ——文件、数据库、外部 API，让 agent 有统一的方式调用能力。 A2A（Agent to Agent）管的是横向的 agent 之间怎么协作 ，不同框架构建的 agent 如何互相发现、委托任务。 AG UI 管的则是向上这一段：agent 怎么把自己的行为实时、结构化地送到用户面前。 一个真实的 agent 产品往往三层同时用：通过 MCP 拿工具、通过 A2A 与其他 agent 分工、通过 AG UI 把过程渲染给用户。README 里有一句话说得很准确——AG UI 可以给讲 MCP 或 A2A 的 agent 做前端。另外它和 A2UI、MCP Apps 这类\"生成式 UI 规范\"也不冲突：后者描述 agent 想展示什么 UI，而 AG UI 是承载这些载荷以及其他一切信息的运行时协议。 二、一次 Run 的本质：一个输入，一条 31 个事件的类型化流 为什么传统的 HTTP 请求/响应模型不适合 agent？因为 agent 不是一问一答、立即返回的：它会逐 token 流式输出、在回答中途调用工具、更新共享状态、暂停下来等人类审批、还可能派生 subagent。AG UI 用一条双向事件流把这些行为全部标准化。 流程是这样的：客户端发起一次 run，发送一个 RunAgentInput，里面包含对话消息（messages）、前端能提供的工具（tools）、共享状态（state）和上下文（context）。agent 随后回吐一条类型化事件流。我在 TypeScript SDK 源码里实测枚举到 正好 31 个事件类型，分属 8 大家族 ，和文档口径完全一致： 运行生命周期 （5 个）：RUN STARTED/FINISHED/ERROR、STEP STARTED/FINISHED，这是唯一必选的家族； 文本消息 （4 个）：TEXT MESSAGE START/CONTENT/END/CHUNK，负责逐字流式； 工具调用 （5 个）：TOOL CALL START/ARGS/END/RESULT/CHUNK； 状态同步 （3 个）：STATE SNAPSHOT、STATE DELTA（JSON Patch 增量）、MESSAGES SNAPSHOT； 推理过程 （5 个）：含加密推理值 REASONING ENCRYPTED VALUE； 活动进度 （2 个）、 子 agent （3 个）、 透传 （RAW/CUSTOM 2 个）。 这里有几个设计很讲究。状态同步不是每次全量推送，而是先给快照、再用 JSON Patch 传增量，省带宽且天然支持协同。人在环（human in the loop）通过 run 以 interrupt 结局、用户审批/编辑/拒绝后下一次 run resume 来实现，而不是另起一套机制。更关键的是它 传输无关 ：规范定义了 HTTP+SSE 和 HTTP+Protobuf 二进制两种绑定，中间件还能适配任意事件源。而且只有运行生命周期是必选的，意味着一个最小 agent 发几个事件就能接入，再按需逐步实现完整能力。 再展开几个容易被忽略的事件设计。工具调用被拆成 START、ARGS、END、RESULT、CHUNK 五个事件，参数可以分块流式传输，这让前端能像展示文字 token 一样实时展示\"agent 正在拼什么工具参数\"，而不是等整个调用结束才看到。推理家族里专门有 REASONING ENCRYPTED VALUE，意味着思维链可以加密往返——在既要展示推理过程、又不想让敏感推理内容被明文记录的生产场景里，这是个很实际的考量。子 agent 家族则要求每个事件都归属到产生它的那个 subagent run，嵌套委托时前端能清楚区分哪段输出来自哪个子任务。它还支持多模态：图像、音频、视频、文档都能出现在用户输入和工具结果里，配合活动进度、token 用量、自定义事件，覆盖了一个真实 agent 运行时几乎所有可观测的状态。这些能力在 Dojo 里每个都对应一个可点击的 live demo，不是停留在规范纸面。 三、最反直觉的亮点：它怎么防止协议碎片化 这是我读完整个仓库后..."
+    },
+    {
       "title": "叫 8B 实际 175 亿参数：我把商汤 SenseNova-U1 克隆下来，拆清了原生统一多模态这套架构",
       "url": "/articles/2026/11/24/sensenova-u1/",
       "type": "文章",
@@ -9718,29 +9771,6 @@
       ],
       "priority": 0,
       "content": "想做个小工具、搭个 Demo、或者给 Side Project 找点真实数据，第一步往往不是写代码，而是满世界找\"哪个 API 能白嫖、要不要 Key、浏览器能不能直接调\"。GitHub 上有个仓库专门解决这件事——public apis，一个收集免费公共 API 的清单，Star 数已经冲到 50 万 ，是全站 Star 量最高的项目之一。 但高 Star 不等于你真的会用它。这次我没有停留在\"收藏等于学会\"，而是把仓库完整克隆到本机、写脚本把那份 379KB 的 README 逐条解析了一遍，还跑通了它自带的测试。这篇文章讲三件事：这个仓库到底怎么组织的、哪些接口真能零成本调、以及——也是你这次最关心的—— 拿这两千多个 API 聚合起来，到底能做出什么应用、有哪些值得做的方向 。 一、先看家底：一份 README 撑起 50 万 Star 很多人以为这种\"awesome 清单\"就是随手堆链接，public apis 恰恰相反，它的工程化程度不亚于一个正经软件项目。 我本地克隆后实测的核心数据：标准 API 条目 2465 个 ，分布在 51 个分类 里，另外还有一个今年新增的 MCP Servers 专栏，收录 60 个 MCP 服务器 ；累计约 2406 位贡献者、7019 次提交 ，MIT 协议，主语言 Python，2016 年 3 月建仓，到今天仍然保持每日更新，没有归档。 它最反直觉的一点是： 整个仓库的\"数据库\"就是一份 README.md 。没有 SQLite、没有 JSON 数据文件，所有 API 信息都以 Markdown 表格的形式维护，每一行严格遵循六列契约： 其中 Auth 只接受 No、apiKey、OAuth 等固定枚举，CORS 只接受 Yes、No、Unknown 三个值。这种\"用 Markdown 当结构化数据\"的做法之所以没失控，靠的是一套强制质量门禁： scripts/validate/format.py：校验分类内字母序、字段数量、CORS 枚举值是否合法； scripts/validate/links.py：在 PR 阶段自动检查链接是否失效； scripts/tests/ 下 31 个单元测试 ，我在本地用 CI 同款方式（PYTHONPATH=. python3 m unittest）跑了一遍，结果是 Ran 31 tests … OK，全部通过 ； 3 个 GitHub Actions 分别管 push、PR 校验和链接巡检； CONTRIBUTING.md 明确写着：拒收营销性质的 PR，收录的 API 必须能被社区免费、公开调用。 换句话说，50 万 Star 的背后不是一份链接列表，而是一套\"人工策展 + 自动化校验\"的长期治理机制。理解了这一点，你才会明白为什么它能维护十年还可信。 二、能不能白嫖、能不能纯前端调：看这三张分布 对想做聚合应用的人来说，接口总数其实是最没用的指标，真正决定架构的是两个字段： 要不要认证（Auth）、浏览器能不能跨域直连（CORS） 。我把 2465 个接口全部统计了一遍。 认证维度 ：1200 个接口完全免认证（约占 49%），1104 个需要申请 apiKey（约 45%），150 个走标准 OAuth（约 6%），剩下 11 个是 Mashape Key、User Agent 之类的小众方式。也就是说，接近一半的接口连注册都不用，直接发请求就能拿数据。 跨域维度 ：1080 个接口明确支持 CORS（44%），1055 个标注为 Unknown（43%），330 个明确不支持（13%）。这个比例要特别注意——标 Unknown 的不是不能用，而是清单没验证过，需要你自己发一次请求确认；明确标 No 的，浏览器直连一定会被拦，必须走后端代理。 两个维度取交集，得到一个对独立开发者极其友好的数字： 有 656 个接口同时满足\"免认证 + 支持 CORS\" 。这意味着什么？意味着你不需要服务器、不需要申请任何 Key、不需要处理密钥泄露，纯靠一个静态网页里的 fetch() 就能直连出数据——做原型、做 Demo、做黑客马拉松作品，成本几乎为零。 为了让这个数字不只是统计，我从池子里按分类抽了几个真实接口验证它的可用性思路：天气类有 Open Meteo（面向非商业用途的全球天气预报，免 Key）、NASA POWER（太阳能与气象数据）；测试数据类有 DummyJSON（自带商品、用户、帖子的假 REST API）、FakerAPI；娱乐类有 Cat Facts、Dog Facts 这类随机事实接口；金融类甚至有 Billionaire Tracker 这种实时富豪榜。它们共同的特征是：注册零成本、文档清晰、返回标准 JSON，非常适合当聚合应用的\"第一块拼图\"。 另外提一句 HTTPS：2465 个里有 2377 个支持 HTTPS，只有 88 个还是裸 HTTP，安全基线整体不错。顺带说明一个解析时的发现：仓库里有 24 个条目的 HTTPS 字段标注了 stdio（其中部分同时支持 HTTP），这是给 MCP/本地进程类接口用的新形态，说明它的数据结构也在跟着 Agent 生态演进，而不是一成不变的老表格。 三、重点：2..."
-    },
-    {
-      "title": "1.87 万 Star 的 Concat：一个用 Rust 写的本地优先剪辑软件，还内置 MCP 让 AI 替你剪片",
-      "url": "/articles/2026/11/19/concat-video-editor/",
-      "type": "文章",
-      "date": "2026-11-19",
-      "description": "jub0t/Concat 是一个 2026 年 8 月底才建仓、三个月冲到 1.87 万 Star 的开源视频编辑器，AGPL-3.0 协议，用 Rust 写成，覆盖 macOS/Windows/Linux/Android/iOS 五平台、26 种语言，主打无水印、无账号、无订阅、素材从不上传的本地优先体验。本文基于仓库源码实测：它由 18 个 crate 组成单一 Cargo workspace、276 个 Rust 源文件约 18.9 万行，Slint+Skia 做界面、FFmpeg 7 做媒体引擎，187 个测试文件把关；22 个 AI 模型（RVM 抠像、ISNet/SAM 分割、Real-ESRGAN 超分、Chatterbox/Kokoro 语音合成与声音克隆、Whisper 转写、Spleeter 人声分离）不打进安装包而是按需下载、sha256 校验、镜像到自有 release，下载后完全离线。重点拆解它最有差异化的设计：内置 MCP 服务器（concat --mcp）让 Claude 等 Agent 通过 40 余个工具像人一样操作时间线，支持 window/headless 双模式、工程锁防双写、家目录沙箱，并提供 JSON-RPC 与源码编译可得的 gRPC/CLI；同时如实说清它仍是 v0.2.x beta、Windows 未签名会触发 SmartScreen、本地模型吃算力、以及 AGPL-3.0 强 copyleft 对闭源商用和 SaaS 二次开发的授权要求。",
-      "excerpt": "jub0t/Concat 是一个 2026 年 8 月底才建仓、三个月冲到 1.87 万 Star 的开源视频编辑器，AGPL-3.0 协议，用 Rust 写成，覆盖 macOS/Windows/Linux/Android/iOS 五平台、26 种语言，主打无水印、无账号、无订阅、素材从不上传的本地优先体验。本文基于仓库源码实测：它由 18 个 crate 组成单一 Cargo workspace、276 个 Rust 源文件约 18.9 万行，Slint+Skia 做界面、FFmpeg 7 做媒体引擎，187 个测试文件把关；22 个 AI 模型（RVM 抠像、ISNet/SAM 分割、Real-ESRGAN 超分、Chatterbox/Kokoro 语音合成与声音克隆、Whisper 转写、Spleeter 人声分离）不打进安装包而是按需下载、sha256 校验、镜像到自有 release，下载后完全离线。重点拆解它最有差异化的设计：内置 MCP 服务器（concat --mcp）让 Claude 等 Agent 通过 40 余个工具像人一样操作时间线，支持 window/headless 双模式、工程锁防双写、家目录沙箱，并提供 JSON-RPC 与源码编译可得的 gRPC/CLI；同时如实说清它仍是 v0.2.x beta、Windows 未签名会触发 SmartScreen、本地模型吃算力、以及 AGPL-3.0 强 copyleft 对闭源商用和 SaaS 二次开发的授权要求。",
-      "topic": "",
-      "topicSlug": "",
-      "series": "",
-      "tags": [
-        "开源",
-        "视频剪辑",
-        "Rust",
-        "MCP",
-        "本地优先",
-        "AI",
-        "FFmpeg",
-        "AGPL"
-      ],
-      "priority": 0,
-      "content": "视频剪辑软件长期是付费订阅的天下：Premiere、Final Cut、剪映专业版各有壁垒，而近几年打着\"AI 剪辑\"旗号的在线工具又普遍要求注册、上传素材、成品带水印。最近有个叫 Concat 的开源项目反着来——完全免费、本地运行、素材从不上传，还把一个 MCP 服务器内置进了编辑器，让 AI Agent 能直接操作时间线。 它 2026 年 8 月底才建仓，三个月就涨到 1.87 万 Star。我把仓库克隆下来逐 crate 读了一遍，这篇回答三个问题：一个本地优先的剪辑器如何用 Rust 搭起来、它的本地 AI 和 MCP 自动化到底怎么实现、以及 beta 阶段和 AGPL 协议下你该注意什么。 一、先看家底：18.9 万行 Rust，一个 workspace 管 18 个 crate Concat 不是套壳 FFmpeg 的小工具，而是一个工程化程度很高的完整编辑器。我统计了 src/ 下的代码：276 个 Rust 源文件、约 18.9 万行，组织成 18 个 crate 的单一 Cargo workspace，版本 0.2.12，要求 Rust 1.93。 从 crate 命名能清楚看出分层：concat 是 4.4 万行的主程序，用 Slint 做声明式 UI、Skia 做 GPU 渲染；concat core 放核心数据模型，concat media（1.67 万行）负责基于 FFmpeg 7 的解码，concat render 是可选的 GPU 合成器，concat effects 实现约百种特效滤镜转场；能力层有 concat vision（视觉）、concat speech（语音）、concat text（字幕标题）、concat project（2 万行的工程管理）；自动化层则是 concat mcp、concat api、concat server、concat cli 和负责 4K 导出的 concat export。 这种分层最实际的好处是引擎与界面解耦：GPU 合成器被做成可选 feature，纯引擎任务不必承担这块编译重量，而且整个编辑器能在没有窗口的 headless 模式下跑渲染。仓库里有 187 个带测试的文件，CI 还会跑 cargo fmt check 和 cargo clippy D warnings，发布的每个文件都由 GitHub Actions 从打 tag 的提交构建、测试通过后才上传，不接受任何个人机器上的构建产物。 二、22 个本地 AI 模型：能力在本机，素材不上云 现在的剪辑器都在加 AI，Concat 的不同在于所有模型都跑在你自己的机器上。我读了 models/manifest.toml，一共管理 22 个模型，分成几类： 智能抠像 ：RobustVideoMatting 做人物分割、ISNet 做通用物体、SAM（slimsam）支持笔刷手绘蒙版，外加 Real ESRGAN 做超分辨率放大； 语音与配音 ：Chatterbox 本地 TTS、几秒录音即可声音克隆，桌面端还有 Kokoro 语音库； 字幕与音频 ：Whisper 本地自动转写生成字幕、Spleeter 做人声/伴奏分离，以及一键降噪、人声增强、响度均衡。 这里有个很专业的供应链设计值得单独说。模型体积比编辑器本身大很多倍，所以安装包 不捆绑任何权重 ，而是在你第一次使用某个功能时按需下载。清单里每个模型都带 sha256 摘要，下载完必须校验通过，没有摘要的模型直接拒绝运行；Hugging Face 上游被锁定到具体 commit 而非 main，同时所有模型还镜像到项目自己的 models v1 release，第三方图床挂了也不受影响。网络请求只在你主动检查版本或下载模型时发生，真正的剪辑和推理完全离线——这就是它敢承诺\"footage never leaves your disk\"的底气。 三、内置 MCP：让 AI Agent 像剪辑师一样操作时间线 这是 Concat 最有差异化、也最契合当下 Agent 浪潮的部分。它在 App 里内置了一个 MCP（Model Context Protocol）服务器，Claude Code、Claude Desktop 或任何 MCP 客户端，只要把启动命令指向 concat mcp，就能调用和图形界面完全相同的编辑能力，无需额外安装。 我把 docs/MCP.md 读完了，它的设计有几个讲究。 一是双运行模式 ：窗口模式（window）下，Agent 走你正在运行的编辑器，但不能打开并覆盖你屏幕上的工程，导出还会和你的操作排队，更安全；无头模式（headless）下，MCP 服务器自己拉起引擎，什么窗口都不用开。每个进程用 concat.lock 锁住自己打开的工程，窗口和 Agent 同时编辑同一个工程会被直接拒绝，从根上杜绝双写冲突。 二是文件沙箱 ：Agent 写出的工程、导出、帧文件默认只能放在你的家目录，要让 headless 模式访问其他目录得显式配置 CONCAT MCP ROOTS 白名单。 在能力上，它暴露了 40 多个工具：工程的创建/打开/保存、timeline read 读时间线、素材探测导入、分割/修剪/..."
     },
     {
       "title": "第01章：MySQL概述与安装",
