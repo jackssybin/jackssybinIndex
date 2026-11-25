@@ -13,11 +13,7 @@
           </span>
         </div>
       </header>
-      {{ with .Description }}
-        <section class="article-guide">
-          <div><strong>导读</strong><span>{{ . }}</span></div>
-        </section>
-      {{ end }}
+      {{ partial "article-guide.html" . }}
       {{ end }}
 
       {{ if or (eq .Section "articles") .Params.markdownContent }}
@@ -27,6 +23,7 @@
       {{ end }}
 
       {{ if eq .Section "articles" }}
+      {{ partial "article-faq.html" . }}
       {{ with .Params.tags }}
         <footer class="tags">
           {{ range . }}<a class="tag" href="/search.html?keyword={{ . | urlquery }}">{{ . }}</a>{{ end }}

@@ -6,7 +6,7 @@
 百度判定站点质量下降的信号 —— 所以必须逐条核对，不能抽样。
 
 用法：
-    python scripts/seo-check/check-slug-redirects.py                        # 默认打线上（全部 89 条）
+    python scripts/seo-check/check-slug-redirects.py                        # 默认打线上（全部映射）
     python scripts/seo-check/check-slug-redirects.py http://127.0.0.1:8890  # 打本机真实 nginx
     python scripts/seo-check/check-slug-redirects.py --ua=Mozilla/5.0       # 换 UA
     python scripts/seo-check/check-slug-redirects.py --sample=12            # 只抽查 12 条（CI 用）
@@ -122,7 +122,7 @@ def main():
 
     if not os.path.isfile(MAPPING):
         print("找不到映射清单: %s" % MAPPING)
-        print("先跑 node scripts/migrate-chinese-slugs.mjs --apply --nginx")
+        print("先确认 seo-state/slug-migration.json 与 Nginx map 已同步。")
         return 1
 
     with open(MAPPING, encoding="utf-8") as fh:

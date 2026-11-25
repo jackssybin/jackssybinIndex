@@ -9,9 +9,12 @@ contentType: page
 <div class="title"><h2><i class="icon-user"></i>&nbsp;关于本站 / 内容方向 / 文章路线</h2></div>
     <section class="about-page">
     <p>这里是“日拱一卒”，由 jackssybin 维护。</p>
+    <p><a href="https://tools.jackssybin.cn/about.html">日拱资料馆</a>是本站旗下资料站，负责沉淀开源工具清单、原创工作流模板、专题导读和离线 Markdown/PDF；本站继续发布完整实测文章、源码拆解与技术教程。两站由同一作者维护。</p>
     <p>主要记录开源 AI 工具的真实运行、源码核查与落地工作流，也保留 Java 后端、Spring Boot、MySQL、Linux 和 Python 等早期技术教程。</p>
     <p>“本机实测”只用于有真实环境和产出记录的内容；没有完整运行的项目标为“源码拆解”或“资料整理”。缺失的成本、硬件、耗时和效果数据不作补造。</p>
     <p>服务方向包括固定范围诊断、部署、工作流搭建，以及经评估后的 Java + AI 集成与二次开发。</p>
+    <h3>作者与公开档案</h3>
+    <p>本站由 jackssybin 维护。可通过 <a href="https://github.com/jackssybin">GitHub</a>、<a href="https://juejin.cn/user/3509296845553853/posts">掘金</a> 和 <a href="https://www.zhihu.com/people/jackssybin">知乎</a> 核对公开项目与历史内容。</p>
     <h3>技术栈</h3>
     <ul class="list">
       <li>内容管理：Markdown、Hugo frontmatter、专题与教程数据文件</li>

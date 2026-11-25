@@ -16,6 +16,7 @@
       <header class="hugo-tutorial-meta">
         <p>{{ .Params.seriesTitle }}{{ with .Params.weight }} / 第 {{ . }} 节{{ end }}</p>
       </header>
+      {{ partial "tutorial-howto.html" . }}
       <div class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
       {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
       <footer class="post__footer fn-clear hugo-tutorial-pager">

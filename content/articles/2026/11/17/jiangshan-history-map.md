@@ -2,11 +2,25 @@
 title: "7096 Star 的「江山时序」：一个纯原生 JS 项目，怎么把两千四百年中国史做成可拖动的交互舆图"
 slug: "jiangshan-history-map"
 date: 2026-11-17
+lastmod: 2026-11-25
 draft: false
 categories: ["开源项目", "数字人文"]
 tags: ["开源", "数字人文", "历史地图", "GIS", "JavaScript", "数据可视化", "GeoJSON", "GPL"]
 cover: "/images/jiangshan-history-map/cover-zhihu.png"
 description: "DeanChensj/jiangshan-map（江山时序）是一个 7096 Star、GPL-3.0 的中国历史交互地图，覆盖公元前 403 年三家分晋至今的 18 个历史时期，用时间轴串联 200 余个疆域快照、古城名关、诗词古战场与帝王年号。本文基于仓库源码实测：它没有使用 leaflet、mapbox、d3 等任何地图或可视化框架，整个项目无 package.json、无 node_modules，由 17 个原生 JavaScript 模块约 3.45 万行代码自研 SVG/Canvas 投影与渲染；数据层是 18 个朝代目录下的 206 个 GeoJSON 与 205 个时序快照，坐标采用每字符 5 位的自定义编码、经纬度增量压缩与 shape 几何缓存来控制体积。重点拆解它的四种交互（时间轴看疆域分合的朱砂虚线残影、点地溯源的政区沿革表、点人溯事的七位人物行迹与三场事件、舆图寻址测验）、快照数据模型（caption/note/polities/regions 字段与数字 ID 索引）、Deep Links 任意门与 iframe 嵌入，以及作为个人数字人文项目的边界——疆域边界是示意而非精确国界、史料考订仍需回溯《中国历史地图集》等原始文献、GPL-3.0 的强 copyleft 特性。"
+keyPoints:
+  - "17 个原生 JavaScript 模块约 3.45 万行，不依赖常见地图或可视化框架。"
+  - "18 个历史时期、206 个 GeoJSON 与 205 个时序快照共同驱动地图、行迹和测验。"
+  - "支持 Deep Links 与 iframe 嵌入；GPL-3.0 和示意性疆域边界是二次使用的重要约束。"
+keyFacts:
+  - label: "代码规模"
+    value: "17 个 JavaScript 模块，约 3.45 万行"
+  - label: "数据规模"
+    value: "18 个时期、206 个 GeoJSON、205 个时序快照"
+  - label: "运行与嵌入"
+    value: "静态应用，可离线运行，并提供 iframe 嵌入模式"
+  - label: "许可与边界"
+    value: "GPL-3.0；疆域边界为示意，不替代权威历史地图集"
 ---
 
 读史书时有个恒久的困惑：苏东坡被贬的黄州、韩愈勒马的蓝关、岳飞北伐的朱仙镇，放在今天的地图上到底在哪儿？长安在两千年里换过多少个名字？最近有个开源项目把这些问题装进了一张可以拖动时间轴的古舆图里——它叫 [江山时序](https://github.com/DeanChensj/jiangshan-map)，7096 Star、831 Fork，GPL-3.0 协议，时间跨度从公元前 403 年三家分晋一直到今天。

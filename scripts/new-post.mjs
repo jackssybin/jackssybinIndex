@@ -38,6 +38,9 @@ title: ${JSON.stringify(title)}
 url: ${JSON.stringify(permalink)}
 date: ${JSON.stringify(`${year}-${month}-${day}`)}
 description: ""
+keyPoints: []
+keyFacts: []
+faq: []
 tags: ["待分类"]
 topic: ""
 topicSlug: ""

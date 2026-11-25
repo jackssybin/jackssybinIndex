@@ -1,6 +1,7 @@
 ---
 title: "Papermorph 实测：4 个官方案例与 4 个本地原创试样"
 date: 2026-11-13
+lastmod: 2026-11-25
 topic: "开源实测"
 topicSlug: "open-source-review"
 slug: papermorph
@@ -9,6 +10,19 @@ categories: ["开源项目", "AI工具"]
 tags: ["Papermorph", "开源", "AI工具", "互动课程", "内容生产"]
 cover: "/images/papermorph/cover-zhihu.png"
 description: "Papermorph 安装与三端实测：核对线性代数、纸偶绘本、纪录片和历史地图四个官方案例，并在本地制作四个中文原创试样，实际导出截图、带配音 MP4 与字幕。"
+keyPoints:
+  - "核对四个官方案例，并在本机完成四个中文原创试样。"
+  - "实际导出截图、带配音 MP4 与字幕，播放器外也提供直接访问链接。"
+  - "区分官方展示与本地实测，不虚构客户案例、成本或效率数字。"
+keyFacts:
+  - label: "官方案例"
+    value: "4 个：线性代数、纸偶绘本、纪录片和历史地图"
+  - label: "本地原创试样"
+    value: "4 个，均为中文最小试样"
+  - label: "本地导出"
+    value: "截图、带配音 MP4 与字幕"
+  - label: "本地配音"
+    value: "使用 Edge TTS，未调用付费 API"
 ---
 
 一份线性代数 PDF，想变成学生愿意打开的课，通常要拆章节、写讲解、画图、配音，再考虑练习和网页发布。故事、纪录片和历史内容也类似：素材可能已经在手里，麻烦的是把它们组织成别人能看、能听、能操作的作品。

@@ -10,6 +10,9 @@ enableEmoji = true
 enableGitInfo = true
 disableKinds = ["taxonomy", "term"]
 
+[frontmatter]
+lastmod = ["lastmod"]
+
 [pagination]
 pagerSize = 10
 
@@ -30,14 +33,18 @@ baseName = "sitemap"
 mediaType = "application/xml"
 
 [sitemap]
-changefreq = "weekly"
-priority = 0.5
 filename = "sitemap.xml"
 
 [params]
 description = "真跑通，才推荐。实测开源 AI 工具的安装、效果、成本、报错和商用边界"
 keywords = "开源AI,AI视频,Agent,Java AI,私有化部署,独立开发,技术博客"
 author = "jackssybin"
+authorHomepage = "https://jackssybin.cn/about.html"
+sameAs = [
+  "https://github.com/jackssybin",
+  "https://juejin.cn/user/3509296845553853/posts",
+  "https://www.zhihu.com/people/jackssybin",
+]
 
 [params.geo]
 region = "CN"

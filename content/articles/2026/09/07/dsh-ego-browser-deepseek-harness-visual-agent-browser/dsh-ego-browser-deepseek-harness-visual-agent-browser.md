@@ -2,6 +2,7 @@
 title: "dsh-ego-browser：让 DeepSeek Harness Agent 浏览器操作看得见也控得住"
 date: 2026-09-07T15:30:00+08:00
 slug: dsh-ego-browser-deepseek-harness-visual-agent-browser
+url: /articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser.html
 draft: false
 description: "dsh-ego-browser 是 DeepSeek Harness 的一个开源插件，给 AI Agent 提供了可见可控的浏览器操作能力，让你能实时看到 Agent 操作网页，还能随时接手干预。"
 tags: ["AI", "DeepSeek Harness", "Agent", "浏览器自动化"]

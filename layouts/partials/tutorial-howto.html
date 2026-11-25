@@ -1,0 +1,13 @@
+{{- with .Params.howTo }}
+{{- if and .name .description (gt (len .steps) 1) }}
+<section class="vditor-reset post__content tutorial-howto" aria-labelledby="howto-overview">
+  <h2 id="howto-overview">{{ .name }}</h2>
+  <p>{{ .description }}</p>
+  <ol>
+    {{ range .steps }}
+    <li><a href="#{{ .anchor }}">{{ .name }}</a>{{ with .text }}<p>{{ . }}</p>{{ end }}</li>
+    {{ end }}
+  </ol>
+</section>
+{{- end }}
+{{- end }}

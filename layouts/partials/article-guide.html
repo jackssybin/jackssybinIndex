@@ -1,0 +1,26 @@
+{{ if or .Params.keyPoints .Params.keyFacts }}
+<section class="article-guide">
+  {{ with .Params.keyPoints }}
+  <div class="article-guide-points">
+    <strong>本文要点</strong>
+    <ul class="article-key-points">
+      {{ range . }}<li>{{ . }}</li>{{ end }}
+    </ul>
+  </div>
+  {{ end }}
+  {{ with .Params.keyFacts }}
+  <div class="article-guide-facts">
+    <strong>关键事实</strong>
+    <dl class="article-key-facts">
+      {{ range . }}<div><dt>{{ .label }}</dt><dd>{{ .value }}</dd></div>{{ end }}
+    </dl>
+  </div>
+  {{ end }}
+</section>
+{{ else }}
+  {{ with .Description }}
+  <section class="article-guide">
+    <div><strong>导读</strong><span>{{ . }}</span></div>
+  </section>
+  {{ end }}
+{{ end }}

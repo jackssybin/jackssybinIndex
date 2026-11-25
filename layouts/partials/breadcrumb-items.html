@@ -1,0 +1,29 @@
+{{- $items := slice (dict "name" "首页" "url" .Site.BaseURL "current" false) -}}
+{{- $parentName := "" -}}
+{{- $parentURL := "" -}}
+{{- if eq .Params.layout "topic-detail" -}}
+  {{- $parentName = "专题" -}}
+  {{- $parentURL = "/topics.html" | absURL -}}
+{{- else if or (eq .Params.contentType "tutorial") (eq .Params.layout "tutorial") -}}
+  {{- $parentName = "教程中心" -}}
+  {{- $parentURL = "/tutorials.html" | absURL -}}
+{{- else if or (eq .Params.contentType "article") (hasPrefix .RelPermalink "/articles/") -}}
+  {{- $topicSlug := .Params.topicSlug -}}
+  {{- with $topicSlug -}}
+    {{- range $.Site.Data.topics -}}
+      {{- if eq .slug $topicSlug -}}
+        {{- $parentName = .title -}}
+        {{- $parentURL = .url | absURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $parentName -}}
+    {{- $parentName = "文章" -}}
+    {{- $parentURL = "/archives.html" | absURL -}}
+  {{- end -}}
+{{- end -}}
+{{- if $parentName -}}
+  {{- $items = $items | append (dict "name" $parentName "url" $parentURL "current" false) -}}
+{{- end -}}
+{{- $items = $items | append (dict "name" .Title "url" .Permalink "current" true) -}}
+{{- return $items -}}

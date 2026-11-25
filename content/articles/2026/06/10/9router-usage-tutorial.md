@@ -2,13 +2,28 @@
 title: "9Router 使用教程：从文本到音频、图片、视频的完整实践"
 url: "/articles/2026/06/10/9router-usage-tutorial.html"
 date: "2026-06-10T00:00:00+08:00"
-lastmod: "2026-06-10T00:00:00+08:00"
+lastmod: "2026-11-25"
 description: "从本地启动、文本对话、编程工具接入到图片、语音、视频和路由策略，完整掌握 9Router 的多模型网关用法。"
 tags: ["AI", "9Router", "AI 网关", "多模型路由", "教程"]
 topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"
 layout: article
 contentType: article
+keyPoints:
+  - "从本地启动和文本对话，延伸到编程工具、图片、语音和视频。"
+  - "auto、best、fast、cheap 可按能力类型路由，Combo 用于生产场景的自动降级。"
+  - "媒体能力需要单独配置 Media Providers，客户端 API Key 与上游 API Key 分别管理。"
+faq:
+  - q: "auto 和 auto:image 有什么区别？"
+    a: "auto 默认用于文本或 LLM；auto:image 用于图片。同类写法还包括 auto:tts、auto:stt 和 auto:video，best、fast、cheap 也可以按能力类型指定。"
+  - q: "我应该优先用指定模型还是 auto？"
+    a: "新手测试可以用 auto；生产环境追求稳定时使用 Combo 名，例如 coding 或 writing；需要精准控制成本时指定 provider/model。"
+  - q: "为什么我的媒体接口没有可用模型？"
+    a: "需要在 Media Providers 里添加对应类型的提供商。文本 Providers 和 Media Providers 的能力分类不同，一个提供商支持 LLM，并不代表它同时支持 TTS 或 Video。"
+  - q: "9Router 的 API Key 是上游 API Key 吗？"
+    a: "不是。客户端填写 9Router 的 API Key；上游 API Key 保存在 9Router 的 Providers 或 Media Providers 连接里。"
+  - q: "局域网或公网使用安全吗？"
+    a: "建议开启 Require API Key，不要把控制台直接暴露到公网。必须公网访问时使用 Tunnel 或 Cloud Endpoint 并设置强 Key，同时避免把 .env、数据库文件和上游 Key 提交到 Git。"
 ---
 # 9Router 使用教程：从文本到音频、图片、视频的完整实践
 
@@ -28,7 +43,7 @@ contentType: article
 10. [场景七：视频生成](#场景七视频生成)
 11. [场景八：网页搜索、网页抓取与 Embedding](#场景八网页搜索网页抓取与-embedding)
 12. [场景九：用量统计、限额和排障](#场景九用量统计限额和排障)
-13. [常见问题](#常见问题)
+13. [常见问题](#faq)
 
 ---
 
@@ -699,42 +714,6 @@ curl http://localhost:20128/v1/video/generations \
 ```
 
 这个流程可以扩展成：脚本生成 → TTS 配音 → 图片生成封面 → 视频生成 → 字幕转写 → 发布素材。
-
----
-
-## 常见问题
-
-### 1. `auto` 和 `auto:image` 有什么区别？
-
-- `auto` 默认用于文本/LLM。
-- `auto:image` 用于图片。
-- `auto:tts` 用于文本转语音。
-- `auto:stt` 用于语音转文字。
-- `auto:video` 用于视频。
-- `best`、`fast`、`cheap` 也支持类似写法，例如 `cheap:tts`、`best:image`。
-
-### 2. 我应该优先用指定模型还是 auto？
-
-- 新手测试：用 `auto`。
-- 生产稳定：用 Combo 名，例如 `coding`、`writing`。
-- 精准控制成本：指定 `provider/model`。
-
-### 3. 为什么我的媒体接口没有可用模型？
-
-你需要在 **Media Providers** 里添加对应类型的提供商。文本 Providers 和 Media Providers 的能力分类不同：一个提供商可能支持 LLM，但不一定支持 TTS 或 Video。
-
-### 4. 9Router 的 API Key 是上游 API Key 吗？
-
-不是。客户端里填 9Router 的 API Key；上游 API Key 保存在 9Router 的 Providers / Media Providers 连接里。
-
-### 5. 局域网或公网使用安全吗？
-
-建议：
-
-- 开启 Require API Key。
-- 不要把控制台暴露到公网。
-- 必须公网访问时，使用 Tunnel / Cloud Endpoint，并设置强 Key。
-- 避免把 `.env`、数据库文件和上游 Key 提交到 Git。
 
 ---
 

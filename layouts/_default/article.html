@@ -13,12 +13,9 @@
             </span>
           </div>
         </header>
-        {{ with .Description }}
-          <section class="article-guide">
-            <div><strong>导读</strong><span>{{ . }}</span></div>
-          </section>
-        {{ end }}
+        {{ partial "article-guide.html" . }}
         <div id="more" class="vditor-reset post__content hugo-markdown-content">{{ .Content }}</div>
+        {{ partial "article-faq.html" . }}
         {{ with .Params.toolsResource }}{{ partial "tools-resource.html" . }}{{ end }}
         {{ with .Params.tags }}
           <footer class="tags">

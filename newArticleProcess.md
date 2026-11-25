@@ -22,6 +22,12 @@ title: "文章标题"
 url: "/articles/2026/06/07/my-new-post.html"
 date: "2026-06-07"
 description: "一句话说明本文解决什么问题。"
+keyPoints:
+  - "用 2–4 条完整句子列出本文真正覆盖的重点。"
+keyFacts:
+  - label: "可选事实名称"
+    value: "只填正文可核验的版本、数字、环境或限制"
+faq: []
 tags: ["AI", "Java"]
 topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"
@@ -38,6 +44,8 @@ pnpm build
 ```
 
 新文章会展示在首页、归档、标签、专题、搜索结果和 RSS。
+
+`keyPoints` 会替代正文前的单段导读；`keyFacts` 用于展示可核验事实。只有文章确有问答内容时才填写 `faq`（每项使用 `q` 和 `a`），模板会同时生成可见 FAQ 与对应 JSON-LD；不要为获得结构化数据而编造问题。
 
 ## 2. 专题归类
 

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-18T14:33:54.328Z",
-  "note": "中文 slug -> 拼音 ASCII slug 迁移映射。nginx 301 与线上验收脚本都以本文件为准。",
-  "count": 89,
+  "generatedAt": "2026-11-25T07:47:34.302Z",
+  "note": "中文 slug 与少量嵌套 slug -> 规范 ASCII URL 迁移映射。nginx 301 与验收脚本都以本文件为准。",
+  "count": 92,
   "entries": [
     {
       "source": "content/articles/2026/06/07/ai-明星公司排队上市普通人最该警惕什么.md",
@@ -714,6 +714,30 @@
       "oldPathEncoded": "/articles/2026/08/25/claude-code-%E8%A2%AB%E9%80%80%E8%AE%A2%E7%94%A8%E6%88%B7%E8%BD%AC%E7%94%A8-codex%E8%AE%A2%E9%98%85%E5%88%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B5%A2%E4%B8%8D%E4%BA%86%E6%8C%89%E6%AC%A1%E4%BB%98%E8%B4%B9/",
       "slugBefore": "claude-code-被退订用户转用-codex订阅制为什么赢不了按次付费",
       "slugAfter": "claude-code-bei-tui-ding-yong-hu-zhuan-yong-codex-ding-yue-zhi-wei-shen-me-ying-bu-liao-an-ci-fu-fei"
+    },
+    {
+      "source": "content/articles/2026/09/09/book-to-skill-agent-skill/book-to-skill-agent-skill.md",
+      "oldPath": "/articles/2026/09/09/book-to-skill-agent-skill/book-to-skill-agent-skill/",
+      "newPath": "/articles/2026/09/09/book-to-skill-agent-skill.html",
+      "oldPathEncoded": "/articles/2026/09/09/book-to-skill-agent-skill/book-to-skill-agent-skill/",
+      "slugBefore": "book-to-skill-agent-skill/book-to-skill-agent-skill",
+      "slugAfter": "book-to-skill-agent-skill"
+    },
+    {
+      "source": "content/articles/2026/09/07/navop-native-all-in-one-workspace/navop-native-all-in-one-workspace.md",
+      "oldPath": "/articles/2026/09/07/navop-native-all-in-one-workspace/navop-native-all-in-one-workspace/",
+      "newPath": "/articles/2026/09/07/navop-native-all-in-one-workspace.html",
+      "oldPathEncoded": "/articles/2026/09/07/navop-native-all-in-one-workspace/navop-native-all-in-one-workspace/",
+      "slugBefore": "navop-native-all-in-one-workspace/navop-native-all-in-one-workspace",
+      "slugAfter": "navop-native-all-in-one-workspace"
+    },
+    {
+      "source": "content/articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser/dsh-ego-browser-deepseek-harness-visual-agent-browser.md",
+      "oldPath": "/articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser/dsh-ego-browser-deepseek-harness-visual-agent-browser/",
+      "newPath": "/articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser.html",
+      "oldPathEncoded": "/articles/2026/09/07/dsh-ego-browser-deepseek-harness-visual-agent-browser/dsh-ego-browser-deepseek-harness-visual-agent-browser/",
+      "slugBefore": "dsh-ego-browser-deepseek-harness-visual-agent-browser/dsh-ego-browser-deepseek-harness-visual-agent-browser",
+      "slugAfter": "dsh-ego-browser-deepseek-harness-visual-agent-browser"
     }
   ]
 }

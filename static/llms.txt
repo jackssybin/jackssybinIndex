@@ -1,0 +1,42 @@
+# 日拱一卒
+
+> 日拱一卒由 jackssybin 维护，发布开源 AI 工具实测、源码拆解、技术教程和落地工作流。“本机实测”需要真实环境与产出记录；未完整运行的项目只标为“源码拆解”或“资料整理”，不补造缺失的成本、硬件、耗时与效果数据。
+
+## 开源实测
+
+- [开源工具实测与源码拆解](https://jackssybin.cn/topics/open-source-review.html): 按实测与拆解类型查找工具版本、环境、真实产出、成本、限制和许可说明。
+- [Papermorph 本机实测](https://jackssybin.cn/articles/2026/11/13/papermorph/): 查看互动课程、纸偶绘本、纪录片和地图试样及导出限制。
+- [charles-video-maker 源码拆解](https://jackssybin.cn/articles/2026/11/03/charles-video-maker/): 了解竖屏知识短视频工作流、质量闸门和多组件环境门槛。
+- [anything2explainer 源码与文档拆解](https://jackssybin.cn/articles/2026/09/28/anything2explainer/): 判断横屏技术科普视频机制、人工干预点和非商业许可边界。
+- [9Router 使用教程](https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html): 配置多模型路由并查看真实常见问题与处理答案。
+- [江山时序历史地图](https://jackssybin.cn/articles/2026/11/17/jiangshan-history-map/): 查看历史地图项目的本机试样、交互结果和实现边界。
+- [Public APIs 聚合项目](https://jackssybin.cn/articles/2026/11/21/public-apis-aggregator/): 了解公开 API 目录的源码机制、数据维护方式和使用限制。
+
+## 教程中心
+
+- [系统教程中心](https://jackssybin.cn/tutorials.html): 进入 MySQL、Spring Boot 4、Netty 和 Linux 系列教程。
+- [Linux 开发者基础命令教程](https://jackssybin.cn/linux.html): 按目录学习文件、权限、网络、Git、Shell 与部署操作。
+- [Linux Git 快速开始](https://jackssybin.cn/linux/quick-start.html): 按四个可见步骤完成 Git 安装、首次提交、分支开发和远程推送。
+- [MySQL 系统教程](https://jackssybin.cn/mysql.html): 按学习路线查阅基础、备份恢复、安全、高可用和性能优化。
+- [Spring Boot 4 系统教程](https://jackssybin.cn/springboot4.html): 查阅核心特性、数据访问、监控、迁移和性能优化章节。
+- [Netty 系统教程](https://jackssybin.cn/netty.html): 查阅网络编程、编解码、协议、实战项目与性能调优内容。
+
+## 技术专题
+
+- [AI、Agent 与本地模型](https://jackssybin.cn/topics/ai-agent.html): 按推荐阅读顺序查找 Agent、本地模型与 AI 工程文章。
+- [Spring Boot 与后端框架](https://jackssybin.cn/topics/spring-backend.html): 查找 Spring 后端机制、实战与问题排查文章。
+- [Java 与 JVM](https://jackssybin.cn/topics/java-jvm.html): 查找 Java 基础、并发、虚拟机和性能分析文章。
+- [MySQL 与数据架构](https://jackssybin.cn/topics/mysql-data.html): 查找数据库设计、SQL、事务、索引与高可用文章。
+- [Linux 运维与部署](https://jackssybin.cn/topics/linux-ops.html): 查找 Linux 运维、服务部署和故障处理文章。
+
+## 资料馆
+
+- [关于日拱资料馆](https://tools.jackssybin.cn/about.html): 了解主站与资料馆的同作者关系、资料边界和交付原则。
+- [AI 视频工具实测选型表](https://tools.jackssybin.cn/topics/ai-video-tool-selection/): 对比三个工具的任务、环境、产出、成本、常见问题与商用边界。
+- [技术网站 SEO 与 GEO 实施清单](https://tools.jackssybin.cn/topics/technical-seo-geo-checklist/): 按清单核查规范 URL、真实日期、内容抽取、结构化数据与度量闭环。
+- [资料馆下载指南](https://tools.jackssybin.cn/topics/tools-download-guide/): 按公众号关键字或配对码流程获取 Markdown、PDF 与网盘资料。
+
+## 服务与作者
+
+- [服务与合作](https://jackssybin.cn/services/): 查看固定范围诊断、部署、工作流搭建、Java + AI 集成和二次开发边界。
+- [关于本站与作者](https://jackssybin.cn/about.html): 核对作者公开档案、内容原则、技术路线和双站关系。

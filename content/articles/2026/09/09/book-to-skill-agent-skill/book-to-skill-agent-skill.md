@@ -3,6 +3,7 @@ title: "把整本书丢给 AI 太烧钱？开源工具 book-to-skill 把单次�
 date: 2026-09-09T10:30:00+08:00
 lastmod: 2026-09-09T10:30:00+08:00
 slug: book-to-skill-agent-skill
+url: /articles/2026/09/09/book-to-skill-agent-skill.html
 draft: false
 description: "book-to-skill 把 PDF/EPUB/DOCX 技术书与文档转换成结构化 Agent Skill：4K token 常驻核心 + 1K 按需章节，比把整本书塞进上下文省 24–51 倍 token，单书生成成本约 1 美元。本文含我实跑提取器的第一手输出、源码级工程洞察与适用边界。"
 tags: ["AI", "Agent", "Claude Code", "开源", "Skill", "知识管理"]

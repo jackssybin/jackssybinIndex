@@ -2,7 +2,7 @@
 title: "聊两句就画一张架构图：拆开 tt-a1i/archify 这个 agent skill"
 url: "/articles/2026/07/03/archify-agent-skill-diagram-generator.html"
 date: "2026-07-03T14:00:00+08:00"
-lastmod: "2026-07-03T14:00:00+08:00"
+lastmod: "2026-11-25T16:00:00+08:00"
 description: "Archify 是给 Claude / Codex CLI / opencode 用的一个 agent skill：用自然语言描述系统，生成单文件 HTML 里的一张 SVG 图，支持深浅色切换、4× 原生光栅化和双主题 SVG 导出。这篇拆到源码级：JSON IR、五种渲染器、生成后 checker，以及它和 Mermaid / draw.io / Excalidraw 的边界。"
 tags: ["Agent Skill", "架构图", "Diagrams as Code", "Claude", "开源项目"]
 topic: "AI 工具"
@@ -186,7 +186,7 @@ archify 最容易踩的坑不是"画得不好看"，是**选错了图种**。以
 用户提交请求 → Agent 规划 → 需要审批时进入 Approval Gate → 调工具 → 记录 trace → 返回结果
 ```
 
-![Workflow 示例](https://raw.githubusercontent.com/tt-a1i/archify/main/docs/assets/archify-workflow.png)
+![Workflow 示例](/images/archify-agent-skill-diagram-generator/workflow.png)
 
 **Sequence — 画调用顺序。**
 
@@ -195,7 +195,7 @@ archify 最容易踩的坑不是"画得不好看"，是**选错了图种**。以
 用户打开页面，前端请求 API，API 校验 JWT，读取 Redis，缓存未命中则查 Postgres，返回结果并写入 trace。
 ```
 
-![Sequence 示例](https://raw.githubusercontent.com/tt-a1i/archify/main/docs/assets/archify-sequence.png)
+![Sequence 示例](/images/archify-agent-skill-diagram-generator/sequence.png)
 
 **Data Flow — 画数据资产怎么走。**
 
@@ -205,7 +205,7 @@ Web 和 Mobile 上报埋点，Edge API 收集事件，Consent Gate 过滤 PII，
 Warehouse 存分析表，Feature Store 做每日特征，Dashboard 和 ML Model 消费下游数据。
 ```
 
-![Data Flow 示例](https://raw.githubusercontent.com/tt-a1i/archify/main/docs/assets/archify-dataflow.png)
+![Data Flow 示例](/images/archify-agent-skill-diagram-generator/dataflow.png)
 
 **Lifecycle — 画状态怎么变。**
 
@@ -216,7 +216,7 @@ Agent Run 从 Queued 进入 Planning，再进入 Executing 和 Reviewing。
 工具失败可以 Failed 后重试，用户取消进入 Cancelled，超时进入 Expired，成功则进入 Completed。
 ```
 
-![Lifecycle 示例](https://raw.githubusercontent.com/tt-a1i/archify/main/docs/assets/archify-lifecycle.png)
+![Lifecycle 示例](/images/archify-agent-skill-diagram-generator/lifecycle.png)
 
 ## 谁应该现在装，谁再等一等
 

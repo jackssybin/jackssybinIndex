@@ -183,6 +183,77 @@
   min-width: 44px;
 }
 
+.solo-static .article-guide ul {
+  margin: 6px 0 0;
+  padding-left: 22px;
+}
+
+.solo-static .article-guide li + li {
+  margin-top: 4px;
+}
+
+.solo-static .article-key-facts {
+  display: grid;
+  gap: 6px 16px;
+  grid-template-columns: minmax(100px, 160px) 1fr;
+  margin: 8px 0 0;
+}
+
+.solo-static .article-key-facts > div {
+  display: contents;
+}
+
+.solo-static .article-key-facts dt {
+  color: #333;
+  font-weight: 600;
+}
+
+.solo-static .article-key-facts dd {
+  margin: 0;
+}
+
+.solo-static .article-faq {
+  margin: 24px 0;
+}
+
+.solo-static .article-faq-item {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  margin-top: 10px;
+  padding: 12px 14px;
+}
+
+.solo-static .article-faq-item summary {
+  color: #333;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.solo-static .article-faq-item p {
+  line-height: 1.75;
+  margin: 10px 0 0;
+}
+
+html[data-solo-theme="dark"] .solo-static .article-faq-item {
+  background: #171d26;
+  border-color: #2a323f;
+}
+
+html[data-solo-theme="dark"] .solo-static .article-faq-item summary,
+html[data-solo-theme="dark"] .solo-static .article-key-facts dt {
+  color: #f3f4f6;
+}
+
+@media (max-width: 640px) {
+  .solo-static .article-key-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .solo-static .article-key-facts > div {
+    display: block;
+  }
+}
+
 .solo-static .home-portal,
 .solo-static .weekly-page {
   margin-bottom: 20px;

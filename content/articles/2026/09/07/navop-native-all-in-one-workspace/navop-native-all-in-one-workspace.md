@@ -2,6 +2,7 @@
 title: "Navop：开源免费的一体化原生开发工作台，替代付费数据库和远程工具"
 date: 2026-09-07T10:30:00+08:00
 slug: navop-native-all-in-one-workspace
+url: /articles/2026/09/07/navop-native-all-in-one-workspace.html
 draft: false
 description: "Navop 是一个基于 Rust+GPUI 构建的开源原生桌面应用，把数据库管理、SSH/SFTP、终端、远程桌面、AI 工具整合到一个工作台，替代多个付费工具，提升开发效率。"
 tags: ["开源工具", "开发效率", "数据库", "远程运维"]

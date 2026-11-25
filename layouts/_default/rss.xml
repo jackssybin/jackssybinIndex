@@ -4,7 +4,11 @@
     <title>{{ .Site.Title }}</title>
     <link>{{ .Site.BaseURL }}</link>
     <description>{{ .Site.Params.description }}</description>
-    {{ range first 20 (where .Site.RegularPages "Params.contentType" "article") }}
+    {{- $legacyArticles := where .Site.RegularPages "Params.contentType" "article" }}
+    {{- $currentArticles := where .Site.RegularPages "Type" "articles" }}
+    {{- $articles := sort (union $legacyArticles $currentArticles) "Date" "desc" }}
+    {{- $articles = where $articles "Title" "ne" "" }}
+    {{ range first 20 $articles }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>

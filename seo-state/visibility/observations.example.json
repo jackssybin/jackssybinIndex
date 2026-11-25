@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "month": "2026-11",
+  "exampleOnly": true,
+  "search": [
+    {
+      "source": "google-search-console",
+      "url": "https://jackssybin.cn/articles/YYYY/MM/DD/example.html",
+      "indexStatus": "observed-indexed",
+      "impressions": 100,
+      "clicks": 10,
+      "queries": [
+        {
+          "query": "示例查询词，不是真实数据",
+          "impressions": 60,
+          "clicks": 6
+        }
+      ]
+    }
+  ],
+  "aiCitations": [
+    {
+      "product": "ChatGPT",
+      "checkedAt": "2026-11-25",
+      "question": "固定抽测问题示例，不是真实引用结果",
+      "cited": true,
+      "citedUrls": [
+        "https://jackssybin.cn/articles/YYYY/MM/DD/example.html"
+      ]
+    }
+  ]
+}

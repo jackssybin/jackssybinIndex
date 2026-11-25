@@ -21,6 +21,7 @@ nginx 路由仿真：不部署也能核对 deploy/nginx-jackssybin.conf 的抓�
     * 正常内容页仍然 200
 """
 import os
+import json
 import re
 import sys
 from collections import Counter
@@ -103,8 +104,40 @@ RE_HTML = re.compile(r"\.html$")
 RE_DIR = re.compile(r"^(.+)/$")
 
 
+def load_legacy_rules():
+    conf = os.path.join(ROOT, "deploy", "nginx-jackssybin.conf")
+    src = open(conf, encoding="utf-8").read()
+    match = re.search(
+        r"map\s+\$request_uri\s+\$legacy_redirect_uri\s*\{(.*?)\n\}", src, re.S)
+    if not match:
+        return []
+    rules = []
+    for line in match.group(1).splitlines():
+        line = line.strip()
+        if not line.startswith("~*"):
+            continue
+        pattern, target = line[2:].split(None, 1)
+        rules.append((re.compile(pattern, re.I), target.rstrip(";")))
+    return rules
+
+
+LEGACY_RULES = load_legacy_rules()
+
+
+def legacy_redirect(request_uri):
+    for pattern, target in LEGACY_RULES:
+        if pattern.search(request_uri):
+            return target
+    return None
+
+
 def route(uri, query=""):
-    path = unquote(uri)
+    raw_path = uri.split("?", 1)[0]
+    request_uri = raw_path + ("?" + query if query else "")
+    redirect = legacy_redirect(request_uri)
+    if redirect:
+        return 301, "legacy map -> %s" % redirect
+    path = unquote(raw_path)
     args = {}
     for kv in query.split("&"):
         if kv:
@@ -301,6 +334,34 @@ for p in ["/?p=2", "/?p=6"]:
     good = c == 410
     ok &= good
     print("  [%s] %-40s 实测=%s 期望=410" % ("OK " if good else "FAIL", p, c))
+
+print()
+print("老 URL -> 规范 URL 映射回归（直接匹配 Nginx map）")
+with open(os.path.join(ROOT, "seo-state", "slug-migration.json"), encoding="utf-8") as fh:
+    legacy_entries = json.load(fh)["entries"]
+legacy_failures = []
+legacy_cases = 0
+for entry in legacy_entries:
+    old = entry["oldPathEncoded"]
+    new = entry["newPath"]
+    old_variants = [old]
+    if old.endswith("/"):
+        old_variants.append(old.rstrip("/"))
+    for old_variant in old_variants:
+        legacy_cases += 1
+        code, why = route(old_variant)
+        if code != 301 or why != "legacy map -> %s" % new:
+            legacy_failures.append((old_variant, code, why, new))
+    legacy_cases += 1
+    code, why = route(new)
+    if code != 200:
+        legacy_failures.append((new, code, why, 200))
+print("  映射条目: %d，请求用例: %d" % (len(legacy_entries), legacy_cases))
+print("  [%s] 所有旧 URL 均 301 到真实的新 URL    失败=%d" % (
+    "OK " if not legacy_failures else "FAIL", len(legacy_failures)))
+for failure in legacy_failures[:10]:
+    print("      ", failure)
+ok &= not legacy_failures
 
 print()
 print("状态码分布:", dict(Counter(results.values())))

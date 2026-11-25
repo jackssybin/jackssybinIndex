@@ -1,0 +1,18 @@
+{
+  "/images/archify-agent-skill-diagram-generator/workflow.png": {
+    "width": 2880,
+    "height": 3120
+  },
+  "/images/archify-agent-skill-diagram-generator/sequence.png": {
+    "width": 1400,
+    "height": 1320
+  },
+  "/images/archify-agent-skill-diagram-generator/dataflow.png": {
+    "width": 1400,
+    "height": 1320
+  },
+  "/images/archify-agent-skill-diagram-generator/lifecycle.png": {
+    "width": 3920,
+    "height": 2640
+  }
+}

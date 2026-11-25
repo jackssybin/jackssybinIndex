@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
+  {{ $pageTitle := .Site.Title }}
+  {{ if and (not .IsHome) .Title }}{{ $pageTitle = printf "%s｜日拱一卒" .Title }}{{ end }}
+  <title>{{ $pageTitle }}</title>
   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
   {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
 
@@ -62,7 +64,7 @@
   <meta name="ICBM" content="China">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
+  <meta property="og:title" content="{{ $pageTitle }}">
   {{ with .Description }}
   <meta property="og:description" content="{{ . }}">
   {{ else }}
@@ -75,7 +77,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
+  <meta name="twitter:title" content="{{ $pageTitle }}">
   {{ with .Description }}
   <meta name="twitter:description" content="{{ . }}">
   {{ else }}
@@ -86,28 +88,26 @@
   <link rel="alternate" href="/rss.xml" title="RSS" type="application/rss+xml">
   <link rel="stylesheet" href="/assets/solo-base.css">
   <link rel="stylesheet" href="/assets/site.css">
-  <link rel="stylesheet" href="/assets/hugo-bridge.css?v=20261122a">
-  {{ template "_internal/schema.html" . }}
+  <link rel="stylesheet" href="/assets/hugo-bridge.css?v=20261125a">
   {{ partial "json-ld.html" . }}
 </head>
 <body>
   <div class="solo-static">
     {{ if .IsPage }}
-    <nav class="breadcrumbs" vocab="https://schema.org/" typeof="BreadcrumbList">
+    {{ $breadcrumbItems := partial "breadcrumb-items.html" . }}
+    <nav class="breadcrumbs" aria-label="面包屑" vocab="https://schema.org/" typeof="BreadcrumbList">
+      {{- range $index, $item := $breadcrumbItems }}
+      {{- if $index }}<span class="sep">›</span>{{ end }}
       <span property="itemListElement" typeof="ListItem">
-        <a property="item" typeof="WebPage" href="/"><span property="name">首页</span></a>
-        <meta property="position" content="1">
+        {{- if $item.current }}
+        <span property="name">{{ $item.name }}</span>
+        <link property="item" typeof="WebPage" href="{{ $item.url }}">
+        {{- else }}
+        <a property="item" typeof="WebPage" href="{{ $item.url }}"><span property="name">{{ $item.name }}</span></a>
+        {{- end }}
+        <meta property="position" content="{{ add $index 1 }}">
       </span>
-      <span class="sep">›</span>
-      <span property="itemListElement" typeof="ListItem">
-        <a property="item" typeof="WebPage" href="{{ .CurrentSection.RelPermalink }}"><span property="name">{{ .CurrentSection.Title }}</span></a>
-        <meta property="position" content="2">
-      </span>
-      <span class="sep">›</span>
-      <span property="itemListElement" typeof="ListItem">
-        <span property="name">{{ .Title }}</span>
-        <meta property="position" content="3">
-      </span>
+      {{- end }}
     </nav>
     {{ end }}
 
