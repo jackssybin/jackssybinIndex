@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-23T04:38:47.431Z",
+  "lastRunAt": "2026-11-25T09:26:20.172Z",
   "daily": {
-    "date": "2026-11-23",
-    "pushed": 2
+    "date": "2026-11-25",
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -658,9 +658,9 @@
       "pushedAt": "2026-10-05T06:28:21.261Z"
     },
     "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html": {
-      "pushes": 1,
-      "lastmod": "2026-08-14T13:26:30+08:00",
-      "pushedAt": "2026-10-05T06:28:21.261Z"
+      "pushes": 2,
+      "lastmod": "2026-11-25T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/06/12/claw-code-agent-harness-deep-dive.html": {
       "pushes": 1,
@@ -733,9 +733,9 @@
       "pushedAt": "2026-10-07T06:45:02.194Z"
     },
     "https://jackssybin.cn/articles/2026/07/03/archify-agent-skill-diagram-generator.html": {
-      "pushes": 1,
-      "lastmod": "2026-08-14T13:26:30+08:00",
-      "pushedAt": "2026-10-07T06:45:02.194Z"
+      "pushes": 2,
+      "lastmod": "2026-11-25T16:00:00+08:00",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/07/03/terax-ai-lightweight-terminal-agentic-workspace.html": {
       "pushes": 1,
@@ -1358,9 +1358,9 @@
       "pushedAt": "2026-10-22T05:38:54.489Z"
     },
     "https://jackssybin.cn/articles/2019/10/17/1571293329133.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-22T05:38:54.489Z"
+      "pushes": 2,
+      "lastmod": "2026-11-25T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2019/10/21/1571652176584.html": {
       "pushes": 1,
@@ -2033,9 +2033,9 @@
       "pushedAt": "2026-11-13T08:00:14.413Z"
     },
     "https://jackssybin.cn/articles/2026/11/13/papermorph/": {
-      "pushes": 2,
-      "lastmod": "2026-11-22T01:25:07+08:00",
-      "pushedAt": "2026-11-21T17:34:22.020Z"
+      "pushes": 3,
+      "lastmod": "2026-11-25T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/11/15/anidoodle-code-art/": {
       "pushes": 1,
@@ -2043,9 +2043,9 @@
       "pushedAt": "2026-11-15T15:07:33.264Z"
     },
     "https://jackssybin.cn/articles/2026/11/17/jiangshan-history-map/": {
-      "pushes": 1,
-      "lastmod": "2026-11-17T13:02:59+08:00",
-      "pushedAt": "2026-11-17T05:08:11.863Z"
+      "pushes": 2,
+      "lastmod": "2026-11-25T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/11/19/concat-video-editor/": {
       "pushes": 1,
@@ -2081,6 +2081,21 @@
       "pushes": 1,
       "lastmod": "2026-11-23T12:32:58+08:00",
       "pushedAt": "2026-11-23T04:38:47.431Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/25/ds-bot/": {
+      "pushes": 1,
+      "lastmod": "2026-11-25T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/24/ag-ui-protocol/": {
+      "pushes": 1,
+      "lastmod": "2026-11-24T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
+    },
+    "https://jackssybin.cn/articles/2026/11/24/sensenova-u1/": {
+      "pushes": 1,
+      "lastmod": "2026-11-24T00:00:00Z",
+      "pushedAt": "2026-11-25T09:26:20.172Z"
     }
   },
   "history": [
@@ -2498,6 +2513,11 @@
       "date": "2026-11-23",
       "pushed": 1,
       "source": "changed"
+    },
+    {
+      "date": "2026-11-25",
+      "pushed": 8,
+      "source": "daily"
     }
   ]
 }
