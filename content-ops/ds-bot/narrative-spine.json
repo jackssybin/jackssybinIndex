@@ -1,0 +1,49 @@
+{
+  "repo": {
+    "full_name": "Fei-Craft/DS-Bot（原 Fei2411/DS-Bot，已迁移组织，API 301 重定向）",
+    "url": "https://github.com/Fei-Craft/DS-Bot",
+    "stars": 8885,
+    "forks": 903,
+    "open_issues": 391,
+    "created_at": "2026-10-07",
+    "pushed_at": "2026-11-25",
+    "license": "Apache-2.0",
+    "language": "JavaScript",
+    "version": "ds-bot 包 0.3.10（v0.3 预览），CHANGELOG 24 个版本",
+    "topics": ["bot","deepseek-harness","dsh-plugin","multi-agent"],
+    "note": "创建仅 7 周的年轻项目；独立社区项目，非 DeepSeek 官方"
+  },
+  "thesis": "现有 AI 助手大多是『一次性会话』：关掉窗口上下文和身份就散了。DS-Bot 把 DeepSeek Harness（dsh）改造成一支『长生命周期的 bot 团队』——每个 bot 是持久身份，有独立记忆、工作文件夹、权限档位和模型；一个高权限 Main Bot（Chief）当管理员，可以创建/调度其他 bot，bot 之间能 @ 派活、在群聊里多 agent 协作、设 Goal 拆阶段验收。它不是又一个聊天客户端，而是把『团队组织学』搬进了本地 agent 运行时：角色、权限、隐私隔离、任务交接都做成了一等公民。同时它用 dsh 插件/Electron 桌面端/Docker/移动 App 四种形态覆盖同一套内核，并把 10 种编程 CLI 变成可编排的 bot 成员。",
+  "reader_promise": "读完你能：1) 理解『长生命周期 bot 团队』和普通多 agent 框架的差别（持久身份+记忆+权限+群聊经济模型）；2) 看清它在 dsh 生态里的位置（插件、永不 patch 上游的硬规则）；3) 拿到四种部署形态的选择依据和真实硬件/网络限制；4) 看懂它的安全模型怎么防 prompt injection 和密钥泄露，以及哪些是它明确承认不防的。",
+  "narrative_spine": {
+    "1_pain": "用 dsh/Claude Code 这类 agent 干真实工作时，痛点不是单次能力不够，而是：每次重开要重新交代背景、多个任务互相污染上下文、想让『写代码的』和『写文案的』长期分工却没有持久身份、长任务跑起来就占着前台不能插话、要把 agent 接到微信/飞书又得自己造桥。",
+    "2_why_normal_not_enough": "通用多 agent 框架给的是『编排原语』（create agent、handoff），但默认都是短命、无记忆隔离、无权限分级、无用户可理解的组织界面；而 dsh 本身是单人 agent harness，没有团队、群聊、bot 间消息这些概念。DS-Bot 在 dsh 插件层补上了这一层，且硬规则是绝不 patch 上游、只用文档化插件 API。",
+    "3_mechanism": "每个 bot = 持久身份（dsh session：私聊一个、每个群一个、上下文满了开新会话且旧的可读）+ 独立记忆（Markdown，可对话管理）+ 独立工作文件夹 + 权限预设；Main Bot 用 rt.isMain/rt.isAdminOf 在 tools.js 强制分权；群聊用『管理员默认回复+@ 直连』控制 token 费用，Goal 模式先对齐验收标准再拆阶段；隐私 bot 做团队内隔离；浏览器/电脑操控/IM/MCP/连接器/Office 都是挂在 bot 上的能力模块。",
+    "4_evidence": [
+      "代码规模实测：ds-bot 核心 615 个 JS/MJS 脚本约 27.35 万行（src/host 128 文件 48738 行 + src/client 139 文件 48358 行为主），测试 282-296 个 test 文件；app(Electron) 138 文件 2.7 万行、mobile(Expo RN) 96 文件 1.25 万行、link 中转 21 文件 3417 行——是全栈工程不是 demo",
+      "迭代速度：2026-10-07 创建到 11-25 的 7 周内，CHANGELOG 24 个版本（0.2.6→0.3.10），GitHub 8885 star/903 fork，CI 有 test/release/pr-triage 三个 workflow",
+      "依赖克制：ds-bot package.json 仅 11 个运行时依赖（@modelcontextprotocol/client、playwright-core、ws、undici、nodemailer/mailparser/imapflow 邮件三件套、pngjs/jpeg-js、semver、deep-view），重活复用 dsh",
+      "安全模型有独立 SECURITY_MODEL.md（73 行）：明确 6 条信任边界、maintainer 确认的首要威胁是 prompt injection；secrets.json mode 600+可选 scrypt/AES-256-GCM 信封加密、密钥对模型/日志/出站请求做 redaction、连接器拒绝非 HTTPS、HTML widget 用 sandbox iframe、Electron contextIsolation 独立 partition",
+      "诚实的风险披露：明确写出静态加密不保护运行中的进程、Docker 版默认 danger-full-access+approval never（容器即沙箱边界）、隐私 bot 只防团队内其他 bot 不防系统级权限、微信/QQ 受平台限制只能限时回复",
+      "本地 Agent 接入 10 种 CLI 实测在 README 与代码中均有：Claude Code、Codex、Cursor、GitHub Copilot、Devin、OpenCode、Gemini、Antigravity、Kimi、Kilo，直接复用各 CLI 自己的登录/套餐/模型",
+      "IM 平台实测 8 个有独立实现文件（platforms 目录）：weixin/feishu/dingtalk/wecom/qq/telegram/discord/slack，电脑无需公网 IP",
+      "四形态交付：dsh 插件（npm 包 ds-bot）、Electron 桌面端（Win/macOS/Linux，自带 pin 版 dsh）、Docker（NAS/服务器，13080 端口）、Expo 移动端+link 中继+浏览器远程访问（E2EE 配对，IndexedDB 存不可导出密钥）"
+    ],
+    "5_smallest_run_path": "最省事：Releases 下对应系统安装包，打开后设置里配模型即可（桌面端自带 dsh）；已有 dsh 用户：dsh Desktop 插件市场装 ds-bot（大陆选镜像源）或 npx @deepseek-ai/dsh@0.2.2-rc.1 plugin --profile web add ds-bot；服务器：docker compose up -d --build，配 DEEPSEEK_API_KEY，访问 13080 端口。",
+    "6_verdict": {
+      "who_should": "已经在用 dsh/Claude Code 等 CLI、想把一次性会话升级成有持久分工的 bot 团队的人；需要多 agent 群聊协作+阶段验收+成本管控的小团队；要把本地 agent 接到微信/飞书等 8 个 IM 且不想做公网映射的用户；重视数据本地化（全部数据在 ~/.ds-bot）和可读安全模型的人。",
+      "who_should_wait": "追求稳定生产环境的团队——v0.3 仍是预览、391 个 open issue、7 周项目，接口可能变；非技术用户会被未签名安装拦截、Cookie 加密限制、Wayland 兼容等问题绊倒；只用单一聊天机器人、没有多角色协作需求的人，这套组织架构是过度设计；要注意它消耗的是你自己的模型 API 额度，群聊多 bot 会明显放大费用。",
+      "verify": "仓库已从 Fei2411 迁到 Fei-Craft 组织（旧链接 301）；非 DeepSeek 官方，README 有明确商标声明；模型不限 DeepSeek，Anthropic-Messages 兼容端点均可；赞助位 ModelGo 是商业推广需与技术内容区分；所有数字均为本地克隆实测，star/fork 取迁移后 GitHub API。"
+    }
+  },
+  "non_obvious_insight": "两个反直觉点。第一，它最聪明的工程决策不是功能多，而是『绝不 patch dsh』写进 AGENTS.md 硬规则——所有能力走文档化插件 API，这让它能在 dsh 高速迭代（0.2.x→0.2.2-rc.1）时不被上游甩下，27 万行代码其实是『薄层加厚』：重活（agent loop、模型路由、终端、沙箱）全复用上游，自己只做团队/记忆/群聊/IM/桌面壳。第二，群聊的成本设计反常识：多 agent 群聊最容易烧钱（每条消息 N 个 bot 都推理），它用『管理员默认回复+显式 @ 才直连+bot 间派活』把推理次数压到接近单人对话，同时保留多角色协作——这是把组织管理学的『管理幅度』原则写进了 token 经济学。另一个细节：Main Bot 分权在 tools.js 用 rt.isMain 强制、隐私 bot 隔离在 privacy.js，权限不是 UI 提示而是代码级强制，这在同类玩具型项目里很少见。",
+  "title_candidates": [
+    {"family": "quantified", "title": "7 周 8885 Star、27 万行代码：我把 DS-Bot 克隆下来，看它怎么把 DeepSeek Harness 变成一支有编制的 bot 团队", "score": 94},
+    {"family": "contrarian", "title": "别再开一次性 AI 会话了：这个开源项目让每个 AI 都有工号、记忆、权限和工位", "score": 90},
+    {"family": "audience", "title": "10 种编程 CLI 收编成下属、8 个 IM 直接聊：DS-Bot 本地多 agent 团队实测部署指南", "score": 86}
+  ],
+  "selected_title": "7 周 8885 Star、27 万行代码：我把 DS-Bot 克隆下来，看它怎么把 DeepSeek Harness 变成一支有编制的 bot 团队",
+  "slug": "ds-bot",
+  "wechat_title": "给每个 AI 发工号：这个 8885 Star 的开源项目把 bot 变成了一支长期团队",
+  "zhihu_title": "如何评价基于 DeepSeek Harness 的开源多 agent 项目 DS-Bot（长生命周期 bot 团队、群聊协作与本地桌面端）？"
+}

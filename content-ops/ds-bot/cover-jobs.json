@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "ds-bot-c1",
+    "pose": "喜爱",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI发工号",
+      "的bot团队"
+    ],
+    "subtitle": "DeepSeek Harness · 长生命周期多智能体",
+    "hook": "克隆 27 万行代码拆它的组织架构与安全模型",
+    "giant": "8885"
+  },
+  {
+    "slug": "ds-bot-c2",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI发工号",
+      "的bot团队"
+    ],
+    "subtitle": "DeepSeek Harness · 长生命周期多智能体",
+    "hook": "克隆 27 万行代码拆它的组织架构与安全模型",
+    "giant": "8885"
+  },
+  {
+    "slug": "ds-bot-c3",
+    "pose": "开心",
+    "accent": "#F97316",
+    "theme": "paper",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "给AI发工号",
+      "的bot团队"
+    ],
+    "subtitle": "DeepSeek Harness · 长生命周期多智能体",
+    "hook": "克隆 27 万行代码拆它的组织架构与安全模型",
+    "giant": "8885"
+  }
+]
