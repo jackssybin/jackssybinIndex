@@ -1,9 +1,9 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-25T09:26:20.172Z",
+  "lastRunAt": "2026-11-26T09:03:57.617Z",
   "daily": {
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "pushed": 8
   },
   "urls": {
@@ -2023,9 +2023,9 @@
       "pushedAt": "2026-11-13T00:22:35.064Z"
     },
     "https://jackssybin.cn/articles/2026/11/13/jdbc-paging-item-reader/": {
-      "pushes": 1,
-      "lastmod": "2026-11-13T09:40:22+08:00",
-      "pushedAt": "2026-11-13T01:44:09.711Z"
+      "pushes": 2,
+      "lastmod": "2026-11-13T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/13/winutil-windows-tweaks/": {
       "pushes": 1,
@@ -2038,9 +2038,9 @@
       "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/11/15/anidoodle-code-art/": {
-      "pushes": 1,
-      "lastmod": "2026-11-15T23:03:21+08:00",
-      "pushedAt": "2026-11-15T15:07:33.264Z"
+      "pushes": 2,
+      "lastmod": "2026-11-15T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/17/jiangshan-history-map/": {
       "pushes": 2,
@@ -2048,24 +2048,24 @@
       "pushedAt": "2026-11-25T09:26:20.172Z"
     },
     "https://jackssybin.cn/articles/2026/11/19/concat-video-editor/": {
-      "pushes": 1,
-      "lastmod": "2026-11-19T09:01:02+08:00",
-      "pushedAt": "2026-11-19T01:04:52.888Z"
+      "pushes": 2,
+      "lastmod": "2026-11-19T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/19/maitian-publish-hub/": {
-      "pushes": 1,
-      "lastmod": "2026-11-19T11:28:16+08:00",
-      "pushedAt": "2026-11-19T03:32:12.674Z"
+      "pushes": 2,
+      "lastmod": "2026-11-19T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/19/stickman-video-skill/": {
-      "pushes": 1,
-      "lastmod": "2026-11-19T15:23:29+08:00",
-      "pushedAt": "2026-11-19T07:27:21.720Z"
+      "pushes": 2,
+      "lastmod": "2026-11-19T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/21/public-apis-aggregator/": {
-      "pushes": 1,
-      "lastmod": "2026-11-21T13:36:13+08:00",
-      "pushedAt": "2026-11-21T05:40:17.708Z"
+      "pushes": 2,
+      "lastmod": "2026-11-21T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/services/": {
       "pushes": 1,
@@ -2073,14 +2073,14 @@
       "pushedAt": "2026-11-21T17:34:22.020Z"
     },
     "https://jackssybin.cn/articles/2026/11/23/socratic-tutor/": {
-      "pushes": 1,
-      "lastmod": "2026-11-23T11:33:06+08:00",
-      "pushedAt": "2026-11-23T03:38:41.172Z"
+      "pushes": 2,
+      "lastmod": "2026-11-23T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/23/ai-pose-gallery-zh/": {
-      "pushes": 1,
-      "lastmod": "2026-11-23T12:32:58+08:00",
-      "pushedAt": "2026-11-23T04:38:47.431Z"
+      "pushes": 2,
+      "lastmod": "2026-11-23T00:00:00Z",
+      "pushedAt": "2026-11-26T09:03:57.617Z"
     },
     "https://jackssybin.cn/articles/2026/11/25/ds-bot/": {
       "pushes": 1,
@@ -2516,6 +2516,11 @@
     },
     {
       "date": "2026-11-25",
+      "pushed": 8,
+      "source": "daily"
+    },
+    {
+      "date": "2026-11-26",
       "pushed": 8,
       "source": "daily"
     }
