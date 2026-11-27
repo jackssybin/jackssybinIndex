@@ -67,5 +67,22 @@
       "clicks": null
     }
   ],
-  "aiCitations": []
+  "aiCitations": [
+    {
+      "product": "豆包",
+      "checkedAt": "2026-11-27",
+      "question": "9Router 的 auto 和 auto:image 有什么区别？请联网检索，并给出实际参考的来源链接。",
+      "cited": true,
+      "citedUrls": [
+        "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html"
+      ]
+    },
+    {
+      "product": "豆包",
+      "checkedAt": "2026-11-27",
+      "question": "Git 从工作区到远端仓库的基本工作流程是什么？请联网检索，并给出实际参考的来源链接。",
+      "cited": false,
+      "citedUrls": []
+    }
+  ]
 }

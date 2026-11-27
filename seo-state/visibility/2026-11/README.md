@@ -39,10 +39,11 @@
 - `2026-11.main.observations.json` 固定主站 9Router 文章、关于页、Linux 快速开始 3 个 URL。
 - `2026-11.tools.observations.json` 固定资料馆关于页、AI 视频选型表 2 个 URL。
 - 每个 URL 分别保留百度、GSC、Bing 记录；没有 URL 级官方导出时，`indexStatus` 为 `unknown`，展示和点击为 `null`，不使用站点级数据或日志抓取量代替。
-- `aiCitations` 当前为空。T11 尚未执行固定问题抽测，空数组不表示没有 AI 引用。
+- `aiCitations` 已记录 2026-11-27 豆包首期 4 题：主站观察包含 9Router 与 Git 两题，资料馆观察包含 AI 视频选型与 SEO/GEO 清单两题。只有 9Router 问题引用本站 9Router 教程，其余三题未引用双站。
+- 回答 URL、回答区域原文和实际展示来源见 `docs/evidence/t11-20261127/`；其他产品未形成有效样本，单次结果不外推。
 
 ## 后续复核线索
 
-- 主站 bingbot 请求 `/images/book-to-skill-agent-skill/01-showcase.png` 出现 404；下一批优先核对文章内容、素材是否应本地化及是否需要恢复或重定向。
+- 主站 bingbot 请求的 `/images/book-to-skill-agent-skill/01-showcase.png` 404 已定位；同文另外 2 张正文图和 1 张封面也缺失。4 张已在本地补齐并通过构建，仍需授权推送部署后复查线上状态。
 - 旧标签、旧文章路径和探测路径也有 404，应按真实页面价值与迁移清单分类处理，不批量把全部 404 改成 200。
 - 后续月份保持相同 URL 集和指标口径，先补齐全月日志与官方平台权限，再评估 T7/T8 的内容和图片收益。

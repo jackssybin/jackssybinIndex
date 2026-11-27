@@ -46,5 +46,20 @@
       "clicks": null
     }
   ],
-  "aiCitations": []
+  "aiCitations": [
+    {
+      "product": "豆包",
+      "checkedAt": "2026-11-27",
+      "question": "选择开源 AI 视频工具时，应该比较哪些环境、成本和商用许可维度？请联网检索，并给出实际参考的来源链接。",
+      "cited": false,
+      "citedUrls": []
+    },
+    {
+      "product": "豆包",
+      "checkedAt": "2026-11-27",
+      "question": "SEO 和 GEO 上线前，canonical、Sitemap 和结构化数据应该怎么检查？请联网检索，并给出实际参考的来源链接。",
+      "cited": false,
+      "citedUrls": []
+    }
+  ]
 }

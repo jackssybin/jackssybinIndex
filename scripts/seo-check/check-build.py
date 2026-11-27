@@ -513,6 +513,29 @@ else:
     check("Archify 4 张迁移图片声明真实尺寸", archify_dimension_errors, [])
     check("Archify 本地图片文件全部存在", archify_missing_images, [])
 
+book_rel = "articles/2026/09/09/book-to-skill-agent-skill.html"
+book_page = html_pages.get(book_rel)
+expected_book_images = (
+    "/images/book-to-skill-agent-skill/01-showcase.png",
+    "/images/book-to-skill-agent-skill/02-extractor-output.png",
+    "/images/book-to-skill-agent-skill/03-architecture.png",
+    "/images/book-to-skill-agent-skill/wechat-cover.jpg",
+)
+book_missing_images = [src for src in expected_book_images
+                       if not os.path.isfile(os.path.join(ROOT, src.lstrip("/")))]
+check("book-to-skill 正文与封面 4 张图片全部存在", book_missing_images, [])
+if book_page is None:
+    check("book-to-skill 图片回归样本存在", False, True)
+else:
+    book_images = {image.get("src"): image for image in book_page.images}
+    book_body_errors = []
+    for src in expected_book_images[:3]:
+        image = book_images.get(src)
+        if (image is None or image.get("loading") != "lazy"
+                or image.get("decoding") != "async"):
+            book_body_errors.append(src)
+    check("book-to-skill 3 张正文图片引用与加载属性正确", book_body_errors, [])
+
 print()
 print("=" * 96)
 print("④-B RSS 新文覆盖与订阅源质量")

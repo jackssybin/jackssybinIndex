@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "month": "2026-11",
-  "generatedAt": "2026-11-27T03:24:09.203341+00:00",
+  "generatedAt": "2026-11-27T05:20:48.369337+00:00",
   "logFilesRead": 3,
   "logCoverage": [
     {
@@ -1664,7 +1664,24 @@
         "queries": []
       }
     ],
-    "aiCitations": []
+    "aiCitations": [
+      {
+        "product": "豆包",
+        "checkedAt": "2026-11-27",
+        "question": "9Router 的 auto 和 auto:image 有什么区别？请联网检索，并给出实际参考的来源链接。",
+        "cited": true,
+        "citedUrls": [
+          "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html"
+        ]
+      },
+      {
+        "product": "豆包",
+        "checkedAt": "2026-11-27",
+        "question": "Git 从工作区到远端仓库的基本工作流程是什么？请联网检索，并给出实际参考的来源链接。",
+        "cited": false,
+        "citedUrls": []
+      }
+    ]
   },
   "limitations": [
     "仅统计 Nginx combined 访问日志中可识别的 User-Agent；UA 可伪造，不能仅凭 UA 确认官方爬虫身份。",

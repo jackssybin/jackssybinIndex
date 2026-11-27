@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "month": "2026-11",
-  "generatedAt": "2026-11-27T03:24:09.357022+00:00",
+  "generatedAt": "2026-11-27T05:20:52.201156+00:00",
   "logFilesRead": 3,
   "logCoverage": [
     {
@@ -720,7 +720,22 @@
         "queries": []
       }
     ],
-    "aiCitations": []
+    "aiCitations": [
+      {
+        "product": "豆包",
+        "checkedAt": "2026-11-27",
+        "question": "选择开源 AI 视频工具时，应该比较哪些环境、成本和商用许可维度？请联网检索，并给出实际参考的来源链接。",
+        "cited": false,
+        "citedUrls": []
+      },
+      {
+        "product": "豆包",
+        "checkedAt": "2026-11-27",
+        "question": "SEO 和 GEO 上线前，canonical、Sitemap 和结构化数据应该怎么检查？请联网检索，并给出实际参考的来源链接。",
+        "cited": false,
+        "citedUrls": []
+      }
+    ]
   },
   "limitations": [
     "仅统计 Nginx combined 访问日志中可识别的 User-Agent；UA 可伪造，不能仅凭 UA 确认官方爬虫身份。",
