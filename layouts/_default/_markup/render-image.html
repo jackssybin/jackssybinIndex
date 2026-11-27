@@ -7,4 +7,4 @@
     {{- $dimensions = . -}}
   {{- end }}
 {{- end }}
-<img src="{{ $src | safeURL }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }}{{ with $dimensions }} width="{{ .width }}" height="{{ .height }}"{{ end }} loading="lazy" decoding="async">
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }}{{ with $dimensions }} width="{{ .width }}" height="{{ .height }}"{{ end }}{{ if hasPrefix $src "https://static.oschina.net/" }} referrerpolicy="no-referrer"{{ end }} loading="lazy" decoding="async">

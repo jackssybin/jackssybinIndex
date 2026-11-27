@@ -573,6 +573,7 @@ retired_image_hosts = {
 }
 retired_image_errors = []
 insecure_oschina_images = []
+oschina_referrer_errors = []
 for rel, page in html_pages.items():
     for image in page.images:
         src = image.get("src") or ""
@@ -580,8 +581,11 @@ for rel, page in html_pages.items():
             retired_image_errors.append(rel + ": " + src)
         if src.startswith("http://static.oschina.net/"):
             insecure_oschina_images.append(rel + ": " + src)
+        if src.startswith("https://static.oschina.net/") and image.get("referrerpolicy") != "no-referrer":
+            oschina_referrer_errors.append(rel + ": " + src)
 check("P2/P3 已确认失效的旧图片域名全部移除", retired_image_errors, [])
 check("Spring Integration 图片不再使用 HTTP OSChina 地址", insecure_oschina_images, [])
+check("OSChina 外链图片禁用 Referer 以避开防盗链", oschina_referrer_errors, [])
 
 drools_page = html_pages.get("articles/2020/10/29/1603968711195.html")
 drools_html = read("articles/2020/10/29/1603968711195.html") or ""
@@ -600,6 +604,11 @@ check("Gateway 官方流程图引用、alt、尺寸与加载属性正确",
       and gateway_image.get("decoding") == "async"
       and (gateway_image.get("width"), gateway_image.get("height")) == ("443", "595")
       and os.path.isfile(os.path.join(ROOT, gateway_src.lstrip("/"))), True)
+
+mono_flux_html = read("articles/2020/06/18/1592473791199.html") or ""
+check("Mono/Flux 失效截图改为可读核心类型表格",
+      "upload-images.jianshu.io" not in mono_flux_html
+      and all(marker in mono_flux_html for marker in ("0 或 1 个元素", "0 到 N 个元素", "驱动反应式流的调度器")), True)
 
 print()
 print("=" * 96)
@@ -840,13 +849,15 @@ expected_legacy_descriptions = {
     "articles/2021/03/16/1615897840354.html": "概述 Spring Integration 的企业集成模型，解释 Message、MessageChannel、消息端点、路由器、服务激活器和通道适配器等核心组件。",
     "articles/2020/06/14/1592112174081.html": "介绍 API 网关的统一入口、认证鉴权、限流和数据转换作用，并记录 Spring Cloud Gateway 的路由谓词、端点配置与常见开源网关对比。",
     "articles/2020/06/18/1592473791199.html": "梳理 Reactive Streams、Reactor 与 Spring WebFlux 的关系，说明 Mono、Flux、Publisher、Subscriber、背压及 MVC 返回值的变化。",
+    "articles/2020/06/16/1592317763420.html": "记录 Python requests 获取与使用 Cookie 的示例，包括手动 Cookie 文件、字典与 CookieJar 转换、Session 会话维护，以及通过 cookies 或 headers 发起请求。",
+    "articles/2020/08/28/1598616084150.html": "介绍负载均衡的作用、常见方案和应用场景，概述 HAProxy 的调度集群与功能，并记录 CentOS、Ubuntu 安装方法及 global、defaults、frontend、backend、listen 配置。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("14 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("16 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []
