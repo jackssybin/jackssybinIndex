@@ -1,7 +1,13 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-27T11:00:18Z",
-  "status": "local-fixes-validated-not-yet-deployed",
+  "status": "deployed-and-verified",
+  "deployment": {
+    "commit": "4f8ae3db006f5b468323e42412c6f3cdda242b81",
+    "actionsRun": 45993865884,
+    "actionsConclusion": "success",
+    "verifiedAt": "2026-11-27T11:58:12Z"
+  },
   "sourceInventory": "2026-11.json",
   "scope": "Editorial resolution for the OmniVoice Launchpad screenshot whose live main-branch image differs from the article-date version.",
   "editorialDecision": "Use the article-date commit so the screenshot remains stable and matches the interface presented when the tutorial was written. This is a deliberate historical-version choice, not an equivalent-content URL repair.",
@@ -17,7 +23,17 @@
     "fixedDimensions": "1600x1000",
     "fixedBytes": 436163,
     "fixedUrlStatus": 200,
-    "action": "Pinned the Launchpad remote image to the article-date commit and updated lastmod to 2026-11-27 because the displayed image content changed. No localization."
+    "action": "Pinned the Launchpad remote image to the article-date commit and updated lastmod to 2026-11-27 because the displayed image content changed. No localization.",
+    "productionVerification": {
+      "articleStatus": 200,
+      "articleDateModified": "2026-11-27T00:00:00Z",
+      "imageStatus": 200,
+      "responseSha256": "10208911c15a48d2fc0d4a74de911607555869bea6083541e57fb920f593cb31",
+      "responseBytes": 436163,
+      "browserComplete": true,
+      "browserNaturalWidth": 1600,
+      "browserNaturalHeight": 1000
+    }
   },
   "authorizationBoundary": "The repository AGPL-3.0-only license does not explicitly cover documentation screenshots. The image remains remote and no file was copied into static assets.",
   "localValidation": {
