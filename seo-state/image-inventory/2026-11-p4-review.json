@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27T09:40:24Z",
+  "status": "local-fixes-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "Two OmniVoice Studio raw GitHub images whose authorization was unconfirmed in the original inventory.",
+  "authorizationReview": {
+    "repositoryRedirect": "debpalash/OmniVoice-Studio now redirects to debpalash/VoiceStudio.",
+    "fixedCommit": "34c8a33628ab65200757a89825cf1eca385683cd",
+    "commitTimestamp": "2026-07-11T06:23:47Z",
+    "license": "AGPL-3.0-only",
+    "decision": "The license scope names the application and supporting scripts but does not explicitly cover documentation screenshots. No image was copied into static assets or otherwise localized."
+  },
+  "studio": {
+    "article": "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html",
+    "oldUrl": "https://raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-studio.png",
+    "newUrl": "https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-studio.png",
+    "gitBlobSha1": "87185dec5c5f02b0a658ffb12d1e08ccf0336674",
+    "currentAndFixedSha256": "b2a7f0ca418ec6c930c415adf21893f1b242b64e25a8028874ab4302dd283cc6",
+    "dimensions": "1600x1000",
+    "bytes": 187403,
+    "action": "Pinned the byte-identical remote image to the article-date commit. No localization and no lastmod change."
+  },
+  "launchpad": {
+    "article": "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html",
+    "currentUrl": "https://raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-launchpad.png",
+    "currentSha256": "282e986b99b0e7ee4affdece43a5994d5b0151c644b73e99f00d773729857ff7",
+    "currentDimensions": "1440x900",
+    "articleDateCommitSha256": "10208911c15a48d2fc0d4a74de911607555869bea6083541e57fb920f593cb31",
+    "articleDateCommitDimensions": "1600x1000",
+    "action": "Kept the current URL unchanged because the live image differs from the article-date version. Choosing between them is an editorial content decision, not an equivalent URL repair."
+  },
+  "boundary": "This is a point-in-time availability, provenance and byte-identity review. No new localization authorization is inferred."
+}

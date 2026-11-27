@@ -74,7 +74,7 @@ MCP server 提供的工具很小一组，恰好对准 Agent 场景：
 
 打开 Studio 页，切到 Voice Clone 面板，上传或直接录制一段 3–10 秒的清晰人声。别念数字或字母表——念一句你平时会说的话，效果更自然。系统会给你一个 `profile_id`，先记下来。
 
-![Voice Cloning — Studio](https://raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-studio.png)
+![Voice Cloning — Studio](https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-studio.png)
 
 **建议**：录音时手机 / 电脑内置麦已经够用，但避开风扇声和键盘声——3 秒的 zero-shot 克隆对底噪比较敏感。
 

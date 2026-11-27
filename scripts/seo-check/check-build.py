@@ -610,6 +610,12 @@ check("Mono/Flux 失效截图改为可读核心类型表格",
       "upload-images.jianshu.io" not in mono_flux_html
       and all(marker in mono_flux_html for marker in ("0 或 1 个元素", "0 到 N 个元素", "驱动反应式流的调度器")), True)
 
+omnivoice_html = read("articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html") or ""
+omnivoice_studio_url = "https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-studio.png"
+check("OmniVoice Studio 同哈希图片使用固定提交地址",
+      omnivoice_studio_url in omnivoice_html
+      and "raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-studio.png" not in omnivoice_html, True)
+
 print()
 print("=" * 96)
 print("④-B RSS 新文覆盖与订阅源质量")
@@ -851,13 +857,15 @@ expected_legacy_descriptions = {
     "articles/2020/06/18/1592473791199.html": "梳理 Reactive Streams、Reactor 与 Spring WebFlux 的关系，说明 Mono、Flux、Publisher、Subscriber、背压及 MVC 返回值的变化。",
     "articles/2020/06/16/1592317763420.html": "记录 Python requests 获取与使用 Cookie 的示例，包括手动 Cookie 文件、字典与 CookieJar 转换、Session 会话维护，以及通过 cookies 或 headers 发起请求。",
     "articles/2020/08/28/1598616084150.html": "介绍负载均衡的作用、常见方案和应用场景，概述 HAProxy 的调度集群与功能，并记录 CentOS、Ubuntu 安装方法及 global、defaults、frontend、backend、listen 配置。",
+    "articles/2020/01/04/1578123919824.html": "汇总 Wireshark 显示过滤器基础语法，包括按 IP、端口、协议、MAC、包长度、HTTP、TCP 标志和载荷内容过滤，以及比较运算符、切片、matches 与 contains 示例。",
+    "articles/2020/12/25/1608861326670.html": "记录 Spring Boot 集成 MyBatis-Plus 动态数据源的示例，包括 dynamic-datasource、Druid 与 MySQL 依赖、禁用 Druid 自动配置、primary/strict 与 master/db2 配置，以及通过 @DS 在类或方法上切换数据源。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("16 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("18 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []
