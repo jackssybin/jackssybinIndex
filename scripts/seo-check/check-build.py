@@ -565,6 +565,42 @@ for rel, expected_images in expected_p1_images.items():
 check("P1 4 张修复图片文件全部存在", p1_missing_images, [])
 check("P1 4 张修复图片引用、alt、尺寸与加载属性正确", p1_image_errors, [])
 
+retired_image_hosts = {
+    "img.hacpai.com",
+    "of0qa2hzs.bkt.clouddn.com",
+    "springcloud-oss.oss-cn-shanghai.aliyuncs.com",
+    "www.pianshen.com",
+}
+retired_image_errors = []
+insecure_oschina_images = []
+for rel, page in html_pages.items():
+    for image in page.images:
+        src = image.get("src") or ""
+        if urlsplit(src).hostname in retired_image_hosts:
+            retired_image_errors.append(rel + ": " + src)
+        if src.startswith("http://static.oschina.net/"):
+            insecure_oschina_images.append(rel + ": " + src)
+check("P2/P3 已确认失效的旧图片域名全部移除", retired_image_errors, [])
+check("Spring Integration 图片不再使用 HTTP OSChina 地址", insecure_oschina_images, [])
+
+drools_page = html_pages.get("articles/2020/10/29/1603968711195.html")
+drools_html = read("articles/2020/10/29/1603968711195.html") or ""
+check("Drools 失效截图改为可读规则结构与属性表格",
+      drools_page is not None
+      and all(marker in drools_html for marker in ("条件（LHS）", "结果（RHS）", "执行控制", "规则分组")), True)
+
+gateway_page = html_pages.get("articles/2020/06/14/1592112174081.html")
+gateway_src = "/images/spring-cloud-gateway-overview/spring_cloud_gateway_diagram.png"
+gateway_images = {image.get("src"): image for image in gateway_page.images} if gateway_page is not None else {}
+gateway_image = gateway_images.get(gateway_src)
+check("Gateway 官方流程图引用、alt、尺寸与加载属性正确",
+      gateway_image is not None
+      and gateway_image.get("alt") == "Spring Cloud Gateway 请求路由与过滤流程"
+      and gateway_image.get("loading") == "lazy"
+      and gateway_image.get("decoding") == "async"
+      and (gateway_image.get("width"), gateway_image.get("height")) == ("443", "595")
+      and os.path.isfile(os.path.join(ROOT, gateway_src.lstrip("/"))), True)
+
 print()
 print("=" * 96)
 print("④-B RSS 新文覆盖与订阅源质量")
@@ -799,13 +835,18 @@ expected_legacy_descriptions = {
     "articles/2020/04/11/1586608404790.html": "比较 Redis、ZooKeeper 和数据库锁的选择，介绍 Redis 的 SETNX、Redisson 与 Redlock 方案，以及 ZooKeeper 临时节点、Watcher 和羊群效应等实现要点。",
     "articles/2019/10/16/1571220427190.html": "通过示例说明 Java Integer 缓存与相等比较、变量传值、数组转 List、目录创建、float 精度和 Integer.MAX_VALUE 取值边界等基础问题。",
     "articles/2020/02/19/1582046551397.html": "梳理 Java 并发锁的分类与使用，包括公平锁、可重入锁、读写锁、乐观锁与悲观锁，以及 AQS、CAS、synchronized、ReentrantLock 和 ReentrantReadWriteLock 示例。",
+    "articles/2020/02/27/1582768389143.html": "记录 Spring Boot 集成 Knife4j 替换 Swagger UI 的过程，包括依赖选择、@EnableSwagger2 配置、doc.html 资源映射与接口文档访问。",
+    "articles/2020/10/29/1603968711195.html": "整理 Drools 规则语言基础，包括硬关键词与软关键词、rule 的属性和 LHS/RHS 结构，以及常用规则属性与条件示例。",
+    "articles/2021/03/16/1615897840354.html": "概述 Spring Integration 的企业集成模型，解释 Message、MessageChannel、消息端点、路由器、服务激活器和通道适配器等核心组件。",
+    "articles/2020/06/14/1592112174081.html": "介绍 API 网关的统一入口、认证鉴权、限流和数据转换作用，并记录 Spring Cloud Gateway 的路由谓词、端点配置与常见开源网关对比。",
+    "articles/2020/06/18/1592473791199.html": "梳理 Reactive Streams、Reactor 与 Spring WebFlux 的关系，说明 Mono、Flux、Publisher、Subscriber、背压及 MVC 返回值的变化。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("9 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("14 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []

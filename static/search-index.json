@@ -5306,8 +5306,8 @@
     "url": "/articles/2020/02/27/1582768389143.html",
     "type": "blog",
     "date": "2020-02-27",
-    "description": "1.官方文档 knife4j接入文档 2.概述 引入基础包，如果老项目以前有swagger做doc文档。那就省事了。可以直接引入新ui包 &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox ...",
-    "excerpt": "1.官方文档 knife4j接入文档 2.概述 引入基础包，如果老项目以前有swagger做doc文档。那就省事了。可以直接引入新ui包 &lt;dependency&gt; &lt;groupId&gt;io.springfox&lt;/groupId&gt; &lt;artifactId&gt;springfox ...",
+    "description": "记录 Spring Boot 集成 Knife4j 替换 Swagger UI 的过程，包括依赖选择、@EnableSwagger2 配置、doc.html 资源映射与接口文档访问。",
+    "excerpt": "记录 Spring Boot 集成 Knife4j 替换 Swagger UI 的过程，包括依赖选择、@EnableSwagger2 配置、doc.html 资源映射与接口文档访问。",
     "topic": "",
     "topicSlug": "",
     "series": "",
@@ -5529,8 +5529,8 @@
     "url": "/articles/2020/06/14/1592112174081.html",
     "type": "blog",
     "date": "2020-06-14",
-    "description": "1.什么是网关 API网关是一个系统的唯一入口。 是众多分布式服务唯一的一个出口。 它做到了物理隔离,内网服务只有通过网关才能暴露到外网被别人访问。 简而言之:网关就是你家的大门 2.提供了哪些功能 身份认证(oauth2/jwt) 权限安全(黑白名单/爬虫控制) 流量控制(请求大小/速率) 数据转换(公共请求requ...",
-    "excerpt": "1.什么是网关 API网关是一个系统的唯一入口。 是众多分布式服务唯一的一个出口。 它做到了物理隔离,内网服务只有通过网关才能暴露到外网被别人访问。 简而言之:网关就是你家的大门 2.提供了哪些功能 身份认证(oauth2/jwt) 权限安全(黑白名单/爬虫控制) 流量控制(请求大小/速率) 数据转换(公共请求requ...",
+    "description": "介绍 API 网关的统一入口、认证鉴权、限流和数据转换作用，并记录 Spring Cloud Gateway 的路由谓词、端点配置与常见开源网关对比。",
+    "excerpt": "介绍 API 网关的统一入口、认证鉴权、限流和数据转换作用，并记录 Spring Cloud Gateway 的路由谓词、端点配置与常见开源网关对比。",
     "topic": "",
     "topicSlug": "",
     "series": "",
@@ -5566,8 +5566,8 @@
     "url": "/articles/2020/06/18/1592473791199.html",
     "type": "blog",
     "date": "2020-06-18",
-    "description": "关于java的响应式编程框架 SpringReactor 关于Reactor的介绍 Reactor是Spring中的一个子项目是一个基于java的响应式编程框架，此框架是 Pivotal 公司（开发 Spring 等技术的公司）开发的，实现了 Reactive Programming（反应式编程即响应式编程） 思想，符...",
-    "excerpt": "关于java的响应式编程框架 SpringReactor 关于Reactor的介绍 Reactor是Spring中的一个子项目是一个基于java的响应式编程框架，此框架是 Pivotal 公司（开发 Spring 等技术的公司）开发的，实现了 Reactive Programming（反应式编程即响应式编程） 思想，符...",
+    "description": "梳理 Reactive Streams、Reactor 与 Spring WebFlux 的关系，说明 Mono、Flux、Publisher、Subscriber、背压及 MVC 返回值的变化。",
+    "excerpt": "梳理 Reactive Streams、Reactor 与 Spring WebFlux 的关系，说明 Mono、Flux、Publisher、Subscriber、背压及 MVC 返回值的变化。",
     "topic": "",
     "topicSlug": "",
     "series": "",
@@ -5578,7 +5578,7 @@
       "WebFlux"
     ],
     "priority": 0,
-    "content": "关于java的响应式编程框架 SpringReactor 关于Reactor的介绍 Reactor是Spring中的一个子项目是一个基于java的响应式编程框架，此框架是 Pivotal 公司（开发 Spring 等技术的公司）开发的，实现了 Reactive Programming（反应式编程即响应式编程） 思想，符合 Reactive Streams 规范（Reactive Streams 是由 Netflix、TypeSafe、Pivotal 等公司发起的）的一项技术。其名字有反应堆之意，反映了其背后的强大的性能。 Spring 5 对应的Reactor框架的版本为3.1.0。（由于Spring5实现了很多关于函数式编程的东西，所以jdk版本至少得1.8） 关于反应式编程的思想： 反应式编程框架主要采用了观察者模式，而SpringReactor的核心则是对观察者模式的一种衍伸。关于观察者模式的架构中被观察者(Observable)和观察者(Subscriber)处在不同的线程环境中时，由于者各自的工作量不一样，导致它们产生事件和处理事件的速度不一样，这时就出现了两种情况： 1. 被观察者产生事件慢一些，观察者处理事件很快。那么观察者就会等着被观察者发送事件，（好比观察者在等米下锅，程序等待，这没有问题）。 2. 被观察者产生事件的速度很快，而观察者处理很慢。那就出问题了，如果不作处理的话，事件会堆积起来，最终挤爆你的内存，导致程序崩溃。（好比被观察者生产的大米没人吃，堆积最后就会烂掉）。 为了方便下面理解Mono和Flux，也可以理解为Publisher（发布者也可以理解为被观察者）主动推送数据给Subscriber（订阅者也可以叫观察者），如果Publisher发布消息太快，超过了Subscriber的处理速度，如何处理。这时就出现了Backpressure（背压 指在异步场景中，被观察者发送事件速度远快于观察者的处理速度的情况下，一种告诉上游的被观察者降低发送速度的策略） Reactor的主要类： 在Reactor中，经常使用的类并不多，主要有以下两个： Mono 实现了 org.reactivestreams.Publisher 接口，代表0到1个元素的发布者（Publisher）。 Flux 同样实现了 org.reactivestreams.Publisher 接口，代表0到N个元素的发布者（Subscriber）。 可能会使用到的类： Scheduler 表示背后驱动反应式流的调度器，通常由各种线程池实现。 Spring5引入了一个基于Netty而不是Servlet高性能Web框架，但是使用方式和传统的基于Servlet的SrpingMvc并没有什么大的不同。 Web Flux中MVC接口的示例： 最大的变化就是返回值从 Foobar 所表示的一个对象变为 Mono （或 Flux ）。 关于Reactive Streams、Srping Reactor 和 Spring Flux（Web Flux）之间的关系 Reactive Streams 是规范，Reactor 实现了 Reactive Streams。Web Flux 以 Reactor 为基础，实现 Web 领域的反应式编程框架 关于Mono和Flux Mono和Flux都是Publisher（发布者）。 其实，对于大部分业务开发人员来说，当编写反应式代码时，我们通常只会接触到 Publisher 这个接口，对应到 Reactor 便是 Mono 和 Flux。对于 Subscriber 和 Subcription 这两个接口，Reactor 必然也有相应的实现。但是，这些都是 Web Flux 和 Spring Data Reactive 这样的框架用到的。如果不开发中间件，通常开发人员是不会接触到的。 比如，在 Web Flux，你的方法只需返回 Mono 或 Flux 即可。你的代码基本也只和 Mono 或 Flux 打交道。而 Web Flux 则会实现 Subscriber ，onNext 时将业务开发人员编写的 Mono 或 Flux 转换为 HTTP Response 返回给客户端。 案例 Mono 实现了 Publisher 接口，但是通过查看源码，发现它是一个抽象类。Mono 里面有很多 API，关于这些 API 的解释如下： empty()：创建一个不包含任何元素，只发布结束消息的序列。 just()：可以指定序列中包含的全部元素。创建出来的 Mono序列在发布这些元素之后会自动结束。 justOrEmpty()：从一个 Optional 对象或可能为 null 的对象中创建 Mono。只有 Optional 对象中包含值或对象不为 null 时，Mono 序列才产生对应的元素。 error(Throwable error)：创建一个只包含错误消息的序列。 never()：创建一个不包含任何消息通知的序列。 fromCallable()、fromCompletionStage()、fromFuture()、fromRunnable()和 fromSupplier()：分别从 Callable、CompletionStag..."
+    "content": "关于java的响应式编程框架 SpringReactor 关于Reactor的介绍 Reactor是Spring中的一个子项目是一个基于java的响应式编程框架，此框架是 Pivotal 公司（开发 Spring 等技术的公司）开发的，实现了 Reactive Programming（反应式编程即响应式编程） 思想，符合 Reactive Streams 规范（Reactive Streams 是由 Netflix、TypeSafe、Pivotal 等公司发起的）的一项技术。其名字有反应堆之意，反映了其背后的强大的性能。 Spring 5 对应的Reactor框架的版本为3.1.0。（由于Spring5实现了很多关于函数式编程的东西，所以jdk版本至少得1.8） 关于反应式编程的思想： 反应式编程框架主要采用了观察者模式，而SpringReactor的核心则是对观察者模式的一种衍伸。关于观察者模式的架构中被观察者(Observable)和观察者(Subscriber)处在不同的线程环境中时，由于者各自的工作量不一样，导致它们产生事件和处理事件的速度不一样，这时就出现了两种情况： 1. 被观察者产生事件慢一些，观察者处理事件很快。那么观察者就会等着被观察者发送事件，（好比观察者在等米下锅，程序等待，这没有问题）。 2. 被观察者产生事件的速度很快，而观察者处理很慢。那就出问题了，如果不作处理的话，事件会堆积起来，最终挤爆你的内存，导致程序崩溃。（好比被观察者生产的大米没人吃，堆积最后就会烂掉）。 为了方便下面理解Mono和Flux，也可以理解为Publisher（发布者也可以理解为被观察者）主动推送数据给Subscriber（订阅者也可以叫观察者），如果Publisher发布消息太快，超过了Subscriber的处理速度，如何处理。这时就出现了Backpressure（背压 指在异步场景中，被观察者发送事件速度远快于观察者的处理速度的情况下，一种告诉上游的被观察者降低发送速度的策略） Reactor的主要类： 在Reactor中，经常使用的类并不多，主要有以下两个： Mono 实现了 org.reactivestreams.Publisher 接口，代表0到1个元素的发布者（Publisher）。 Flux 同样实现了 org.reactivestreams.Publisher 接口，代表0到N个元素的发布者（Subscriber）。 可能会使用到的类： Scheduler 表示背后驱动反应式流的调度器，通常由各种线程池实现。 Spring5引入了一个基于Netty而不是Servlet高性能Web框架，但是使用方式和传统的基于Servlet的SrpingMvc并没有什么大的不同。 Web Flux中MVC接口的示例： 场景 返回值 传统 Spring MVC 返回对象 Foobar WebFlux 返回单个结果 Mono WebFlux 返回多个结果 Flux 最大的变化就是返回值从 Foobar 所表示的一个对象变为 Mono （或 Flux ）。 关于Reactive Streams、Srping Reactor 和 Spring Flux（Web Flux）之间的关系 Reactive Streams 是规范，Reactor 实现了 Reactive Streams。Web Flux 以 Reactor 为基础，实现 Web 领域的反应式编程框架 关于Mono和Flux Mono和Flux都是Publisher（发布者）。 其实，对于大部分业务开发人员来说，当编写反应式代码时，我们通常只会接触到 Publisher 这个接口，对应到 Reactor 便是 Mono 和 Flux。对于 Subscriber 和 Subcription 这两个接口，Reactor 必然也有相应的实现。但是，这些都是 Web Flux 和 Spring Data Reactive 这样的框架用到的。如果不开发中间件，通常开发人员是不会接触到的。 比如，在 Web Flux，你的方法只需返回 Mono 或 Flux 即可。你的代码基本也只和 Mono 或 Flux 打交道。而 Web Flux 则会实现 Subscriber ，onNext 时将业务开发人员编写的 Mono 或 Flux 转换为 HTTP Response 返回给客户端。 案例 Mono 实现了 Publisher 接口，但是通过查看源码，发现它是一个抽象类。Mono 里面有很多 API，关于这些 API 的解释如下： empty()：创建一个不包含任何元素，只发布结束消息的序列。 just()：可以指定序列中包含的全部元素。创建出来的 Mono序列在发布这些元素之后会自动结束。 justOrEmpty()：从一个 Optional 对象或可能为 null 的对象中创建 Mono。只有 Optional 对象中包含值或对象不为 null 时，Mono 序列才产生对应的元素。 error(Throwable error)：创建一个只包含错误消息的序列。 never()：创建一个不包含任何消息通知的序列。 fromCallable()、fromCompletionStage(..."
   },
   {
     "title": "HAProxy常见的安装方式",
@@ -5640,8 +5640,8 @@
     "url": "/articles/2020/10/29/1603968711195.html",
     "type": "blog",
     "date": "2020-10-29",
-    "description": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
-    "excerpt": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus acti...",
+    "description": "整理 Drools 规则语言基础，包括硬关键词与软关键词、rule 的属性和 LHS/RHS 结构，以及常用规则属性与条件示例。",
+    "excerpt": "整理 Drools 规则语言基础，包括硬关键词与软关键词、rule 的属性和 LHS/RHS 结构，以及常用规则属性与条件示例。",
     "topic": "",
     "topicSlug": "",
     "series": "",
@@ -5650,7 +5650,7 @@
       "规则引擎"
     ],
     "priority": 0,
-    "content": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus activation group agenda group ruleflow group entry point duration package import dialect salience enabled attributes rule extend when then template query declare function global eval not in or and exists forall accumulate collect from action reverse result end over init 注释 单行注释 多行注释 Pakage package package表示一个命名空间.package是必须定义的，必须放在规则文件第一行. import import语句的工作方式类似于Java中的import语句。您需要为要在规则中使用的任何对象指定完全限定路径和类型名称。 global global用于定义全局变量。 Rules: Set the global value: Function function function是一种将语义代码放置在规则源文件中的方法，而不是普通的Java类 Query query query是一种搜索工作内存中与指定条件匹配的事实的简单方法. Rule rule定义规则。rule \"ruleName\"。 一个规则可以包含三个部分：属性部分,条件部分：即LHS,结果部分：即RHS. 属性部分 Attributes 定义当前规则执行的一些属性等，比如是否可被重复执行、过期时间、生效时间等。 activation group agenda group auto focus date effective date expires dialect duration duration value enabled lock on active no loop ruleflow group salience no loop 默认值：false 类型：Boolean 在一个规则当中如果条件满足就对Working Memory当中的某个Fact对象进行了修改，比如使用update 将其更新到当前的Working Memory当中，这时引擎会再次检查所有的规则是否满足条件，如果满足会再次执行. ruleflow group 默认值：N/A 类型：String Ruleflow是一个Drools功能，可让您控制规则的触发。由相同的规则流组标识汇编的规则仅在其组处于活动状态时触发。将规则划分为一个个的组，然后在规则流当中通过使用ruleflow group属性的值，从而使用对应的规则。 lock on active 默认值：false 类型：Boolean 当在规则上使用ruleflow group 属性或agenda group 属性的时候，将lock on action 属性的值设置为true，可能避免因某些Fact 对象被修改而使已经执行过的规则再次被激活执行。可以看出该属性与no loop 属性有相似之处，no loop 属性是为了避免Fact 修改或调用了insert、retract、update 之类而导致规则再次激活执行，这里的lock on action 属性也是起这个作用，lock on active 是no loop 的增强版属性，它主要作用在使用ruleflow group 属性或agenda group 属性的时候 salience 默认值：0 类型：integer 设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数. 规则的salience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机的. agenda group 默认值：MAIN 类型：String 规则的调用与执行是通过StatelessSession 或StatefulSession 来实现的，一般的顺序是创建一个StatelessSession 或StatefulSession，将各种经过编译的规则的package 添加到session当中，接下来将规则当中可能用到的Global对象和Fact对象插入到Session 当中，最后调用fireAllRules 方法来触发、执行规则。在没有调用最后一步fireAllRules方法之前，所有的规则及插入的Fact对象都存放在一个名叫Agenda表的对象当中，这个Agenda表中每一个规则及与其匹配相关业务数据叫做Activation，在调用fireAllRules方法后，这些Activation 会依次执行，这些位于Agenda 表中的Activation 的执行顺序在没有设置相关用来控制顺序的属性时（比如salience 属性），它的执行顺..."
+    "content": "Drools语法 Language 关键词 Hard keywords(Cannot use any): true,false,null Soft keywords(avoid use) lock on active date effective date expires no loop auto focus activation group agenda group ruleflow group entry point duration package import dialect salience enabled attributes rule extend when then template query declare function global eval not in or and exists forall accumulate collect from action reverse result end over init 注释 单行注释 多行注释 Pakage package package表示一个命名空间.package是必须定义的，必须放在规则文件第一行. import import语句的工作方式类似于Java中的import语句。您需要为要在规则中使用的任何对象指定完全限定路径和类型名称。 global global用于定义全局变量。 Rules: Set the global value: Function function function是一种将语义代码放置在规则源文件中的方法，而不是普通的Java类 Query query query是一种搜索工作内存中与指定条件匹配的事实的简单方法. Rule rule定义规则。rule \"ruleName\"。 一个规则可以包含三个部分：属性部分,条件部分：即LHS,结果部分：即RHS. 组成 作用 对应语法 属性 控制规则的优先级、分组、启用状态和执行行为 salience 10 条件（LHS） 在 when 后声明需要匹配的事实与约束 Person(age = 18) 结果（RHS） 在 then 后声明条件满足时执行的动作，最后以 end 结束 System.out.println(...) 属性部分 Attributes 定义当前规则执行的一些属性等，比如是否可被重复执行、过期时间、生效时间等。 activation group agenda group auto focus date effective date expires dialect duration duration value enabled lock on active no loop ruleflow group salience 类别 常用属性 执行控制 no loop、lock on active、auto focus、salience 规则分组 activation group、agenda group、ruleflow group 时间控制 date effective、date expires、duration、duration value 语言与启用状态 dialect、enabled no loop 默认值：false 类型：Boolean 在一个规则当中如果条件满足就对Working Memory当中的某个Fact对象进行了修改，比如使用update 将其更新到当前的Working Memory当中，这时引擎会再次检查所有的规则是否满足条件，如果满足会再次执行. ruleflow group 默认值：N/A 类型：String Ruleflow是一个Drools功能，可让您控制规则的触发。由相同的规则流组标识汇编的规则仅在其组处于活动状态时触发。将规则划分为一个个的组，然后在规则流当中通过使用ruleflow group属性的值，从而使用对应的规则。 lock on active 默认值：false 类型：Boolean 当在规则上使用ruleflow group 属性或agenda group 属性的时候，将lock on action 属性的值设置为true，可能避免因某些Fact 对象被修改而使已经执行过的规则再次被激活执行。可以看出该属性与no loop 属性有相似之处，no loop 属性是为了避免Fact 修改或调用了insert、retract、update 之类而导致规则再次激活执行，这里的lock on action 属性也是起这个作用，lock on active 是no loop 的增强版属性，它主要作用在使用ruleflow group 属性或agenda group 属性的时候 salience 默认值：0 类型：integer 设置规则执行的优先级，salience 属性的值是一个数字，数字越大执行优先级越高，同时它的值可以是一个负数. 规则的salience 默认值为0，所以如果我们不手动设置规则的salience 属性，那么它的执行顺序是随机的. agenda group 默认值：MAIN 类型：String 规则的调用与执行是通过StatelessSession 或StatefulSession 来实现的，一般的顺序是创建..."
   },
   {
     "title": "缓存和数据库一致性问题",
@@ -5801,8 +5801,8 @@
     "url": "/articles/2021/03/16/1615897840354.html",
     "type": "blog",
     "date": "2021-03-16",
-    "description": "1. Spring Integration 中文手册 Spring Integration 对 Spring 编程模型进行了扩展，使得后者能够支持著名的“企业集成模式”。通过SI（Spring Integration）可以在基于Spring的应用中引入轻量级的“消息驱动模式”，并且支持“通过声明式的适配器”与外部系统进...",
-    "excerpt": "1. Spring Integration 中文手册 Spring Integration 对 Spring 编程模型进行了扩展，使得后者能够支持著名的“企业集成模式”。通过SI（Spring Integration）可以在基于Spring的应用中引入轻量级的“消息驱动模式”，并且支持“通过声明式的适配器”与外部系统进...",
+    "description": "概述 Spring Integration 的企业集成模型，解释 Message、MessageChannel、消息端点、路由器、服务激活器和通道适配器等核心组件。",
+    "excerpt": "概述 Spring Integration 的企业集成模型，解释 Message、MessageChannel、消息端点、路由器、服务激活器和通道适配器等核心组件。",
     "topic": "",
     "topicSlug": "",
     "series": "",

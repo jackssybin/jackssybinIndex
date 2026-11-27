@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27T08:14:38.355563+00:00",
+  "status": "local-fixes-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "P2 two non-image responses and six HTTP 403 responses; P3 all 72 original curl check errors.",
+  "p2": {
+    "drools": {
+      "article": "/articles/2020/10/29/1603968711195.html",
+      "count": 2,
+      "evidence": "HTTP URLs returned a DeskClaw HTML application rather than images; HTTPS failed TLS and browser navigation failed.",
+      "action": "Replaced both screenshots with semantic HTML tables derived from the surrounding rule-structure and attribute text. No third-party image downloaded."
+    },
+    "springIntegration": {
+      "article": "/articles/2021/03/16/1615897840354.html",
+      "count": 6,
+      "evidence": "All six HTTPS equivalents loaded in the isolated background browser tab.",
+      "action": "Changed only http to https; retained remote assets and original alt text.",
+      "assets": [
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0322/223850_R9Qy_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0322/223850_R9Qy_2321188.jpg",
+          "naturalWidth": 238,
+          "naturalHeight": 191
+        },
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0322/223916_9OKQ_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0322/223916_9OKQ_2321188.jpg",
+          "naturalWidth": 725,
+          "naturalHeight": 116
+        },
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0323/172825_iYGd_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0323/172825_iYGd_2321188.jpg",
+          "naturalWidth": 437,
+          "naturalHeight": 144
+        },
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0323/173009_YRjT_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0323/173009_YRjT_2321188.jpg",
+          "naturalWidth": 610,
+          "naturalHeight": 193
+        },
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0323/173045_17jf_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0323/173045_17jf_2321188.jpg",
+          "naturalWidth": 625,
+          "naturalHeight": 108
+        },
+        {
+          "oldUrl": "http://static.oschina.net/uploads/space/2015/0323/173125_WtFa_2321188.jpg",
+          "httpsUrl": "https://static.oschina.net/uploads/space/2015/0323/173125_WtFa_2321188.jpg",
+          "naturalWidth": 629,
+          "naturalHeight": 108
+        }
+      ]
+    }
+  },
+  "p3": {
+    "hacpai": {
+      "originalUniqueImages": 68,
+      "originalOccurrences": 71,
+      "articles": 34,
+      "browserEvidence": "Representative old URL returned Cloudflare 522 with host error; this was not merely a local curl TLS failure.",
+      "action": "Replaced img.hacpai.com with b3logfile.com while retaining path and query. No binary downloaded and no lastmod change for equivalent-host-only edits. All 68 unique replacement URLs passed one HEAD as HTTP 200 image content.",
+      "checks": [
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20171107.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20171107.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20171225.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20171225.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180107.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180107.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180204.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180204.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180209.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180209.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180403.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180403.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180411.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180411.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180613.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180613.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180630.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180630.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180815.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180815.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20180830.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20180830.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20181109.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20181109.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20181210.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20181210.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20181225.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20181225.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190106.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190106.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190221.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190221.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190408.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190408.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190612.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190612.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190706.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190706.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190719.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190719.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20190814.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20190814.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20191009.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20191009.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20200301.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20200301.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/bing/20200514.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/bing/20200514.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/08/start.spring.io-b1d0e5aa.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/08/start.spring.io-b1d0e5aa.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/1-5c4b1e2c.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/1-5c4b1e2c.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/1-be122b0d.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/1-be122b0d.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/1-fe9c0ecb.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/1-fe9c0ecb.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/10-aee7d2fa.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/10-aee7d2fa.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/105909836825e1f1384fb0a3-685251c3.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/105909836825e1f1384fb0a3-685251c3.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/11-a6b40729.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/11-a6b40729.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/12-d5bc1249.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/12-d5bc1249.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/2-33b49367.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/2-33b49367.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/2-a51c2fe7.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/2-a51c2fe7.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/3-cee4064f.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/3-cee4064f.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/3-d317985f.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/3-d317985f.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/4-37e74d45.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/4-37e74d45.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/4-986667d6.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/4-986667d6.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/5-960cbd5a.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/5-960cbd5a.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/6-6984aa8a.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/6-6984aa8a.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/7-33a425b3.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/7-33a425b3.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/8-56e105ce.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/8-56e105ce.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/9-d839252c.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/9-d839252c.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-13b8cd12.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-13b8cd12.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-6e46b52e.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-6e46b52e.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-752bf172.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-752bf172.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-9cc98613.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-9cc98613.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-dcafecf4.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-dcafecf4.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/09/image-ec4dcdba.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/09/image-ec4dcdba.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/2-05554711.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/2-05554711.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/20160918154444663-da41dddf.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/20160918154444663-da41dddf.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/3-f0e19304.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/3-f0e19304.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/5-da83a961.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/5-da83a961.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/599b9b3ca5bb7-ee5d7502.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/599b9b3ca5bb7-ee5d7502.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/6-f393f4c2.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/6-f393f4c2.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/7-d62c7f1e.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/7-d62c7f1e.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/TIM%E6%88%AA%E5%9B%BE20191029134216-0ae9670a.png?imageView2/2/interlace/1/format/webp",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/TIM%E6%88%AA%E5%9B%BE20191029134216-0ae9670a.png?imageView2/2/interlace/1/format/webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/bg2017122704-2a4731d7.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/bg2017122704-2a4731d7.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/bg2017122709-8ba4f8bd.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/bg2017122709-8ba4f8bd.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/bg2017122710-198cda66.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/bg2017122710-198cda66.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/image-ddd20588.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/image-ddd20588.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/10/微信图片20191030115333-e9b62fe3.jpg",
+          "replacementUrl": "https://b3logfile.com/file/2019/10/微信图片20191030115333-e9b62fe3.jpg",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/jpeg"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2019/12/image-adfd2b0a.png",
+          "replacementUrl": "https://b3logfile.com/file/2019/12/image-adfd2b0a.png",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/png"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2020/04/2-4967fa3f.webp",
+          "replacementUrl": "https://b3logfile.com/file/2020/04/2-4967fa3f.webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2020/04/3-948881fd.webp",
+          "replacementUrl": "https://b3logfile.com/file/2020/04/3-948881fd.webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2020/04/33444943e2761783cd8ab95-5716895e.webp",
+          "replacementUrl": "https://b3logfile.com/file/2020/04/33444943e2761783cd8ab95-5716895e.webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2020/04/4-ab9f194f.webp",
+          "replacementUrl": "https://b3logfile.com/file/2020/04/4-ab9f194f.webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        },
+        {
+          "oldUrl": "https://img.hacpai.com/file/2020/04/5-7780bae1.webp",
+          "replacementUrl": "https://b3logfile.com/file/2020/04/5-7780bae1.webp",
+          "curlExitCode": 0,
+          "httpStatus": 200,
+          "contentType": "image/webp"
+        }
+      ]
+    },
+    "zhimg": {
+      "url": "https://pic1.zhimg.com/80/v2-e213899effebd5770c76e68325990a14_720w.jpg",
+      "browserEvidence": "Loaded successfully at 720×473.",
+      "action": "Kept remote and unchanged; original curl 35 was environment-specific."
+    },
+    "springCloudGateway": {
+      "article": "/articles/2020/06/14/1592112174081.html",
+      "evidence": "HTTPS browser navigation ended in ERR_CONNECTION_CLOSED; HTTP returned unrelated DeskClaw HTML.",
+      "action": "Replaced with the official Spring Cloud Gateway diagram from spring-cloud/spring-cloud-gateway commit 1f5563426d71e10ac5c8cc617db17658ab89c6fe under Apache-2.0. Source, license, dimensions and SHA-256 are stored beside the image."
+    },
+    "pianshen": {
+      "article": "/articles/2020/06/18/1592473791199.html",
+      "count": 2,
+      "evidence": "Both URLs ended in browser ERR_CONNECTION_CLOSED.",
+      "action": "Restored the first image to its original Jianshu URL already present in alt text; that URL returned HTTP 200 image/webp. Replaced the second unknown screenshot with a visible MVC/WebFlux return-value table derived from the adjacent text."
+    }
+  },
+  "t7": {
+    "articles": [
+      "/articles/2020/02/27/1582768389143.html",
+      "/articles/2020/10/29/1603968711195.html",
+      "/articles/2021/03/16/1615897840354.html",
+      "/articles/2020/06/14/1592112174081.html",
+      "/articles/2020/06/18/1592473791199.html"
+    ],
+    "action": "Rewrote five truncated descriptions; fixed-description regression set expanded from 9 to 14. Only four lastmod values changed because Knife4j was already 2026-11-27."
+  },
+  "boundary": "The original 2026-11 inventory remains the pre-fix snapshot. This review records source changes and availability evidence; production must be rechecked after a separately authorized deployment."
+}
