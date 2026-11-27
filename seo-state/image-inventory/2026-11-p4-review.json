@@ -1,7 +1,13 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-27T09:40:24Z",
-  "status": "local-fixes-validated-not-yet-deployed",
+  "status": "deployed-and-verified",
+  "deployment": {
+    "commit": "c375c44e77b83e671fc1aefd1df3415a8fb07107",
+    "actionsRun": 45983389156,
+    "actionsConclusion": "success",
+    "verifiedAt": "2026-11-27T10:42:48Z"
+  },
   "sourceInventory": "2026-11.json",
   "scope": "Two OmniVoice Studio raw GitHub images whose authorization was unconfirmed in the original inventory.",
   "authorizationReview": {
@@ -19,7 +25,16 @@
     "currentAndFixedSha256": "b2a7f0ca418ec6c930c415adf21893f1b242b64e25a8028874ab4302dd283cc6",
     "dimensions": "1600x1000",
     "bytes": 187403,
-    "action": "Pinned the byte-identical remote image to the article-date commit. No localization and no lastmod change."
+    "action": "Pinned the byte-identical remote image to the article-date commit. No localization and no lastmod change.",
+    "productionVerification": {
+      "articleStatus": 200,
+      "imageStatus": 200,
+      "responseSha256": "b2a7f0ca418ec6c930c415adf21893f1b242b64e25a8028874ab4302dd283cc6",
+      "responseBytes": 187403,
+      "browserComplete": true,
+      "browserNaturalWidth": 1600,
+      "browserNaturalHeight": 1000
+    }
   },
   "launchpad": {
     "article": "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html",
