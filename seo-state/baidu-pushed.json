@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-26T09:03:57.617Z",
+  "lastRunAt": "2026-11-27T06:49:42.154Z",
   "daily": {
-    "date": "2026-11-26",
-    "pushed": 8
+    "date": "2026-11-27",
+    "pushed": 4
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1223,9 +1223,9 @@
       "pushedAt": "2026-10-19T05:31:54.078Z"
     },
     "https://jackssybin.cn/articles/2019/08/04/1564886769156.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-19T05:31:54.078Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T06:49:42.154Z"
     },
     "https://jackssybin.cn/articles/2019/08/04/1564893581000.html": {
       "pushes": 1,
@@ -1308,9 +1308,9 @@
       "pushedAt": "2026-10-21T05:35:47.671Z"
     },
     "https://jackssybin.cn/articles/2019/09/17/1568731586414.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-21T05:35:47.671Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T06:49:42.154Z"
     },
     "https://jackssybin.cn/articles/2019/09/17/1568733889287.html": {
       "pushes": 1,
@@ -1448,9 +1448,9 @@
       "pushedAt": "2026-10-24T05:16:20.817Z"
     },
     "https://jackssybin.cn/articles/2019/11/20/1574261012104.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-25T05:32:57.395Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T06:49:42.154Z"
     },
     "https://jackssybin.cn/articles/2019/11/22/1574389113537.html": {
       "pushes": 1,
@@ -1603,9 +1603,9 @@
       "pushedAt": "2026-10-28T06:30:07.920Z"
     },
     "https://jackssybin.cn/articles/2020/05/28/1590656168798.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-28T06:30:07.920Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T06:49:42.154Z"
     },
     "https://jackssybin.cn/articles/2026/10/29/paperclip-ai-agent-company/": {
       "pushes": 2,
@@ -2523,6 +2523,11 @@
       "date": "2026-11-26",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-27",
+      "pushed": 4,
+      "source": "changed"
     }
   ]
 }
