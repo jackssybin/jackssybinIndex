@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-27T06:49:42.154Z",
+  "lastRunAt": "2026-11-27T07:40:17.293Z",
   "daily": {
     "date": "2026-11-27",
-    "pushed": 4
+    "pushed": 8
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -478,9 +478,9 @@
       "pushedAt": "2026-09-30T06:12:33.005Z"
     },
     "https://jackssybin.cn/articles/2026/09/01/august-2026-github-project-roundup.html": {
-      "pushes": 1,
-      "lastmod": "2026-09-18T22:38:30+08:00",
-      "pushedAt": "2026-09-30T06:12:33.005Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T07:40:17.293Z"
     },
     "https://jackssybin.cn/articles/2026/09/18/agnes-image-tool-gradio-studio-source-deep-dive/": {
       "pushes": 1,
@@ -1353,9 +1353,9 @@
       "pushedAt": "2026-10-22T05:38:54.489Z"
     },
     "https://jackssybin.cn/articles/2019/10/16/1571220427190.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-22T05:38:54.489Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T07:40:17.293Z"
     },
     "https://jackssybin.cn/articles/2019/10/17/1571293329133.html": {
       "pushes": 2,
@@ -1533,9 +1533,9 @@
       "pushedAt": "2026-10-27T05:51:59.709Z"
     },
     "https://jackssybin.cn/articles/2020/02/19/1582046551397.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-27T05:51:59.709Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T07:40:17.293Z"
     },
     "https://jackssybin.cn/articles/2020/02/20/1582211908887.html": {
       "pushes": 1,
@@ -1543,9 +1543,9 @@
       "pushedAt": "2026-10-27T05:51:59.709Z"
     },
     "https://jackssybin.cn/articles/2020/02/27/1582768389143.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-27T05:51:59.709Z"
+      "pushes": 2,
+      "lastmod": "2026-11-27T00:00:00Z",
+      "pushedAt": "2026-11-27T07:40:17.293Z"
     },
     "https://jackssybin.cn/articles/2020/03/05/1583419653736.html": {
       "pushes": 1,
@@ -2523,6 +2523,11 @@
       "date": "2026-11-26",
       "pushed": 8,
       "source": "daily"
+    },
+    {
+      "date": "2026-11-27",
+      "pushed": 4,
+      "source": "changed"
     },
     {
       "date": "2026-11-27",
