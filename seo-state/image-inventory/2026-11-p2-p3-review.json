@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-27T08:14:38.355563+00:00",
-  "status": "local-fixes-validated-not-yet-deployed",
+  "productionReviewedAt": "2026-11-27T09:08:17Z",
+  "status": "deployed-and-verified",
   "sourceInventory": "2026-11.json",
   "scope": "P2 two non-image responses and six HTTP 403 responses; P3 all 72 original curl check errors.",
   "p2": {
@@ -14,8 +15,8 @@
     "springIntegration": {
       "article": "/articles/2021/03/16/1615897840354.html",
       "count": 6,
-      "evidence": "All six HTTPS equivalents loaded in the isolated background browser tab.",
-      "action": "Changed only http to https; retained remote assets and original alt text.",
+      "evidence": "All six HTTPS equivalents loaded in an isolated background browser tab. Initial production verification exposed OSChina hotlink protection when the article Referer was sent; the final production page loaded all six with referrerpolicy=no-referrer.",
+      "action": "Changed http to https, retained remote assets and original alt text, and added a target-specific no-referrer attribute in the Markdown image render hook.",
       "assets": [
         {
           "oldUrl": "http://static.oschina.net/uploads/space/2015/0322/223850_R9Qy_2321188.jpg",
@@ -555,8 +556,8 @@
     "pianshen": {
       "article": "/articles/2020/06/18/1592473791199.html",
       "count": 2,
-      "evidence": "Both URLs ended in browser ERR_CONNECTION_CLOSED.",
-      "action": "Restored the first image to its original Jianshu URL already present in alt text; that URL returned HTTP 200 image/webp. Replaced the second unknown screenshot with a visible MVC/WebFlux return-value table derived from the adjacent text."
+      "evidence": "Both original URLs ended in browser ERR_CONNECTION_CLOSED. A restored Jianshu URL returned HTTP 200 and loaded when opened directly, but production embedded-image checks failed with default and no-referrer policies.",
+      "action": "Replaced both unreliable screenshots with visible semantic tables derived from adjacent text: Reactor core types and MVC/WebFlux return values. No third-party image was downloaded or retained."
     }
   },
   "t7": {
@@ -565,9 +566,52 @@
       "/articles/2020/10/29/1603968711195.html",
       "/articles/2021/03/16/1615897840354.html",
       "/articles/2020/06/14/1592112174081.html",
-      "/articles/2020/06/18/1592473791199.html"
+      "/articles/2020/06/18/1592473791199.html",
+      "/articles/2020/06/16/1592317763420.html",
+      "/articles/2020/08/28/1598616084150.html"
     ],
-    "action": "Rewrote five truncated descriptions; fixed-description regression set expanded from 9 to 14. Only four lastmod values changed because Knife4j was already 2026-11-27."
+    "action": "Rewrote seven truncated descriptions across the third and fourth batches; fixed-description regression set expanded from 9 to 16. Six articles changed lastmod to 2026-11-27 because Knife4j was already current."
   },
-  "boundary": "The original 2026-11 inventory remains the pre-fix snapshot. This review records source changes and availability evidence; production must be rechecked after a separately authorized deployment."
+  "production": {
+    "initialDeployment": {
+      "commit": "dc84d22af45aae5a3c02bebaaa3de7fe0ae70ea3",
+      "runId": 45969051980,
+      "conclusion": "success",
+      "finding": "Five descriptions, Gateway and Hacpai samples passed; embedded OSChina and Jianshu images required follow-up fixes."
+    },
+    "finalDeployment": {
+      "commit": "6c1c98531c9fdcd5e34c19536a261c044ee19b6a",
+      "runId": 45970627915,
+      "conclusion": "success"
+    },
+    "descriptionChecks": {
+      "articles": 7,
+      "meta": 7,
+      "articleJsonLd": 7,
+      "searchIndex": 7,
+      "sitemapLastmod": "2026-11-27T00:00:00Z"
+    },
+    "osChina": {
+      "loaded": 6,
+      "referrerPolicy": "no-referrer",
+      "dimensions": ["238x191", "725x116", "437x144", "610x193", "625x108", "629x108"]
+    },
+    "gateway": {
+      "loaded": true,
+      "dimensions": "443x595",
+      "sha256": "326cbb41946c60f00cb495d938b6642a1546c54dffa16a47b2aecbcae786d1be"
+    },
+    "hacpaiSample": {
+      "article": "/articles/2019/09/24/1569312462439.html",
+      "url": "https://b3logfile.com/file/2019/09/image-752bf172.png",
+      "loaded": true,
+      "dimensions": "394x571"
+    },
+    "monoFlux": {
+      "jianshuImages": 0,
+      "reactorTable": true,
+      "mvcWebFluxTable": true
+    }
+  },
+  "boundary": "The original 2026-11 inventory remains the pre-fix snapshot. This review records source changes and point-in-time local and production evidence; external assets may change later and require subsequent review."
 }
