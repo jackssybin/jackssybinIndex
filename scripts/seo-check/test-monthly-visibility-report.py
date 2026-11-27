@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import gzip
 import importlib.util
 import json
 import tempfile
@@ -49,10 +50,29 @@ class MonthlyVisibilityReportTest(unittest.TestCase):
         self.assertEqual(report["bots"]["GPTBot"]["requests"], 2)
         self.assertEqual(report["bots"]["GPTBot"]["statuses"], {"200": 1, "404": 1})
         self.assertEqual(report["bots"]["Baiduspider"]["topPaths"][0]["path"], "/articles/a/")
+        self.assertEqual(report["logCoverage"][0]["file"], "access.log")
+        self.assertEqual(report["logCoverage"][0]["linesRead"], 10)
+        self.assertEqual(report["logCoverage"][0]["parseErrors"], 1)
+        self.assertEqual(report["logCoverage"][0]["requestsInMonth"], 8)
+        self.assertEqual(report["logCoverage"][0]["outsideMonth"], 1)
+        self.assertEqual(report["logCoverage"][0]["firstTimestamp"], "2026-10-25T10:00:00+08:00")
+        self.assertEqual(report["logCoverage"][0]["lastTimestamp"], "2026-11-25T10:07:00+08:00")
         serialized = json.dumps(report, ensure_ascii=False)
         self.assertNotIn("192.0.2", serialized)
         self.assertNotIn("secret", serialized)
         self.assertNotIn("private.invalid", serialized)
+
+    def test_reads_gzip_logs_and_records_file_coverage(self):
+        source = self.write_log().read_bytes()
+        path = self.root / "access.log.gz"
+        with gzip.open(path, "wb") as handle:
+            handle.write(source)
+        report = REPORT.collect_report("2026-11", [path], 10)
+        self.assertEqual(report["totals"]["linesRead"], 10)
+        self.assertEqual(report["totals"]["recognizedRequests"], 7)
+        self.assertEqual(report["logCoverage"][0]["file"], "access.log.gz")
+        self.assertEqual(report["logCoverage"][0]["compressed"], True)
+        self.assertEqual(report["logCoverage"][0]["requestsInMonth"], 8)
 
     def test_loads_only_valid_manual_observations(self):
         path = self.root / "observations.json"

@@ -48,7 +48,7 @@ python -m unittest scripts/seo-check/test-monthly-visibility-report.py
 
 ## 月度可见度
 
-`monthly-visibility-report.py` 只读解析 Nginx combined 访问日志，按 URL、状态码和 Bot 类型输出月度聚合；可通过 `--observations` 合并人工搜索平台与真实 AI 引用记录。完整命令和字段说明见 `seo-state/visibility/README.md`。报表不输出 IP、Cookie、Referer、查询参数或原始日志行，爬虫请求也不等于收录、点击或 AI 引用。
+`monthly-visibility-report.py` 只读解析 Nginx combined 访问日志（含 `.gz`），按 URL、状态码和 Bot 类型输出月度聚合，并以 `logCoverage` 记录逐文件覆盖范围；可通过 `--observations` 合并人工搜索平台与真实 AI 引用记录。完整命令和字段说明见 `seo-state/visibility/README.md`，首期双站基线见 `seo-state/visibility/2026-11/README.md`。报表不输出 IP、Cookie、Referer、查询参数或原始日志行，爬虫请求也不等于收录、点击或 AI 引用。
 
 ## 发布新文章
 
@@ -101,6 +101,7 @@ GitHub Actions 使用 `.github/workflows/deploy-to-server.yml` 构建并部署�
 - 不直接修改 `public`，它是构建产物。
 - 不提交 `node_modules`、`public`、`resources`。
 - 新文章优先补充 `description`、`tags`、`topic`、`topicSlug`，并用 `keyPoints` 写 2–4 条真实要点；`keyFacts` 和 `faq` 只在有可核验内容时填写。
+- 页面有真实代表图时，在 frontmatter 填写 `images` 并确保图片在正文可见；模板会输出绝对 URL 的 Article、OG 和 Twitter 图片字段，不为消除工具提示编造图片。
 - 非首页 title、OG 和 Twitter 标题统一追加 `｜日拱一卒`；`static/llms.txt` 只维护 10–30 个高价值无参数规范入口，新增重要页面时人工复核。
 - 外链图片只在授权与来源明确后逐步本地化；真实尺寸登记到 `data/image-dimensions.json`，来源和校验和记录到对应图片目录，不批量下载权利不明素材。
 - 修改内容后运行 `pnpm build` 验证。

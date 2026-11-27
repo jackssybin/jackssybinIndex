@@ -3,6 +3,7 @@
 """生成主站月度搜索爬虫、AI 抓取与人工可见度观察报表。"""
 
 import argparse
+import gzip
 import json
 import re
 import sys
@@ -62,6 +63,12 @@ def parse_log_line(line):
     if not path.startswith("/"):
         return None
     return parsed_time, path, status, user_agent
+
+
+def open_log(path):
+    if Path(path).suffix == ".gz":
+        return gzip.open(path, "rt", encoding="utf-8", errors="replace")
+    return open(path, encoding="utf-8", errors="replace")
 
 
 def classify_bot(user_agent):
@@ -197,20 +204,30 @@ def collect_report(month, log_paths, top, observations=None):
     if isinstance(top, bool) or not isinstance(top, int) or not 1 <= top <= 1000:
         raise ValueError("top 必须是 1～1000 的整数")
     totals = Counter()
+    coverage = []
     bots = {name: empty_bot_bucket(group) for name, group in BOT_GROUPS.items()}
     for log_path in log_paths:
-        with open(log_path, encoding="utf-8", errors="replace") as handle:
+        file_totals = Counter()
+        first_seen = None
+        last_seen = None
+        with open_log(log_path) as handle:
             for line in handle:
                 totals["linesRead"] += 1
+                file_totals["linesRead"] += 1
                 parsed = parse_log_line(line)
                 if parsed is None:
                     totals["parseErrors"] += 1
+                    file_totals["parseErrors"] += 1
                     continue
                 parsed_time, path, status, user_agent = parsed
+                first_seen = parsed_time if first_seen is None else min(first_seen, parsed_time)
+                last_seen = parsed_time if last_seen is None else max(last_seen, parsed_time)
                 if parsed_time.strftime("%Y-%m") != month:
                     totals["outsideMonth"] += 1
+                    file_totals["outsideMonth"] += 1
                     continue
                 totals["requestsInMonth"] += 1
+                file_totals["requestsInMonth"] += 1
                 bot_name = classify_bot(user_agent)
                 if bot_name is None:
                     totals["unclassifiedRequests"] += 1
@@ -220,6 +237,17 @@ def collect_report(month, log_paths, top, observations=None):
                 bucket["requests"] += 1
                 bucket["statuses"][status] += 1
                 bucket["paths"][path][status] += 1
+        coverage.append({
+            "file": Path(log_path).name,
+            "sizeBytes": Path(log_path).stat().st_size,
+            "compressed": Path(log_path).suffix == ".gz",
+            "linesRead": file_totals["linesRead"],
+            "parseErrors": file_totals["parseErrors"],
+            "outsideMonth": file_totals["outsideMonth"],
+            "requestsInMonth": file_totals["requestsInMonth"],
+            "firstTimestamp": first_seen.isoformat() if first_seen else None,
+            "lastTimestamp": last_seen.isoformat() if last_seen else None,
+        })
     bot_reports = {}
     for name, bucket in bots.items():
         sorted_paths = sorted(
@@ -244,6 +272,7 @@ def collect_report(month, log_paths, top, observations=None):
         "month": month,
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "logFilesRead": len(log_paths),
+        "logCoverage": coverage,
         "totals": {
             "linesRead": totals["linesRead"],
             "parseErrors": totals["parseErrors"],

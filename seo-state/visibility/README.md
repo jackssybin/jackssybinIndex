@@ -23,9 +23,11 @@ python scripts/seo-check/monthly-visibility-report.py \
   --output seo-state/visibility/2026-11.report.json
 ```
 
-在 Windows 本地运行时可把命令写成一行，并传入已合法取得、脱敏保存的日志副本。只读打开日志，不需要生产 Shell、数据库或部署权限。日志采用 Nginx `combined` 格式；压缩日志需先解压，无法解析的行只计数，不输出原文。
+在 Windows 本地运行时可把命令写成一行，并传入已合法取得、脱敏保存的日志副本。只读打开日志，不需要数据库或部署权限。日志采用 Nginx `combined` 格式；`.gz` 轮换日志可直接读取，其他压缩格式需先解压。无法解析的行只计数，不输出原文。
 
 `--top` 默认每个 Bot 输出 50 条路径，可在 1～1000 之间调整。省略 `--observations` 时只生成抓取报表；省略 `--output` 时 JSON 写标准输出。
+
+`logCoverage` 逐文件记录文件名、大小、是否压缩、读取行数、解析失败数、月份内请求数及首末时间戳，用于说明真实日志覆盖范围。空日志和跨月行会如实保留，不得把部分月份报表描述成完整自然月。
 
 ## 观察字段
 

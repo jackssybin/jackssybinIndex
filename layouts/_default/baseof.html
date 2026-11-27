@@ -74,6 +74,11 @@
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ .Site.Title }}">
   <meta property="og:locale" content="zh_CN">
+  {{ with .Params.images }}
+  {{ $primaryImage := index . 0 | absURL }}
+  <meta property="og:image" content="{{ $primaryImage }}">
+  <meta name="twitter:image" content="{{ $primaryImage }}">
+  {{ end }}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">

@@ -4,10 +4,13 @@ description: 日拱一卒的开源 AI 实测、内容原则、技术教程与服
 url: /about.html
 layout: content-page
 contentType: page
+images:
+  - "/images/sidebar-avatar.jpg"
 ---
 
 <div class="title"><h2><i class="icon-user"></i>&nbsp;关于本站 / 内容方向 / 文章路线</h2></div>
     <section class="about-page">
+    <p><img src="/images/sidebar-avatar.jpg" alt="jackssybin 头像" width="400" height="400" loading="lazy" decoding="async"></p>
     <p>这里是“日拱一卒”，由 jackssybin 维护。</p>
     <p><a href="https://tools.jackssybin.cn/about.html">日拱资料馆</a>是本站旗下资料站，负责沉淀开源工具清单、原创工作流模板、专题导读和离线 Markdown/PDF；本站继续发布完整实测文章、源码拆解与技术教程。两站由同一作者维护。</p>
     <p>主要记录开源 AI 工具的真实运行、源码核查与落地工作流，也保留 Java 后端、Spring Boot、MySQL、Linux 和 Python 等早期技术教程。</p>

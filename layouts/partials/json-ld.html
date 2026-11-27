@@ -36,11 +36,12 @@
     "@type": "WebPage",
     "@id": {{ .Permalink | jsonify | safeJS }}
   }
+  ,"url": {{ .Permalink | jsonify | safeJS }}
   {{- with .Params.images }}
   ,"image": [
     {{- range $index, $img := . }}
     {{- if $index }},{{ end }}
-    {{ $img | jsonify | safeJS }}
+    {{ $img | absURL | jsonify | safeJS }}
     {{- end }}
   ]
   {{- end }}

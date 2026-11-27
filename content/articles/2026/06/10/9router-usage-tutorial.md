@@ -9,6 +9,8 @@ topic: "AI、Agent 与本地模型"
 topicSlug: "ai-agent"
 layout: article
 contentType: article
+images:
+  - "/images/9router-tutorial/01-dashboard-guide.svg"
 keyPoints:
   - "从本地启动和文本对话，延伸到编程工具、图片、语音和视频。"
   - "auto、best、fast、cheap 可按能力类型路由，Combo 用于生产场景的自动降级。"

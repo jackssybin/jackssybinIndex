@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "month": "2026-11",
+  "exampleOnly": false,
+  "search": [
+    {
+      "source": "baidu-search-resource-platform",
+      "url": "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "google-search-console",
+      "url": "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "bing-webmaster-tools",
+      "url": "https://jackssybin.cn/articles/2026/06/10/9router-usage-tutorial.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "baidu-search-resource-platform",
+      "url": "https://jackssybin.cn/about.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "google-search-console",
+      "url": "https://jackssybin.cn/about.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "bing-webmaster-tools",
+      "url": "https://jackssybin.cn/about.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "baidu-search-resource-platform",
+      "url": "https://jackssybin.cn/linux/quick-start.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "google-search-console",
+      "url": "https://jackssybin.cn/linux/quick-start.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    },
+    {
+      "source": "bing-webmaster-tools",
+      "url": "https://jackssybin.cn/linux/quick-start.html",
+      "indexStatus": "unknown",
+      "impressions": null,
+      "clicks": null
+    }
+  ],
+  "aiCitations": []
+}

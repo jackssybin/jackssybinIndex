@@ -655,6 +655,11 @@ for rel, page in html_pages.items():
         if (publisher.get("@id") != "https://jackssybin.cn/#organization"
                 or publisher.get("url") != "https://jackssybin.cn/"):
             publisher_errors.append(rel)
+        if article.get("url") != page.canonical:
+            article_field_errors.append((rel, "url", article.get("url")))
+        for image in article.get("image", []):
+            if not isinstance(image, str) or not image.startswith("https://jackssybin.cn/"):
+                article_field_errors.append((rel, "image", image))
         if rel.startswith("articles/"):
             word_count = article.get("wordCount")
             if (isinstance(word_count, bool) or not isinstance(word_count, (int, float))
@@ -725,6 +730,12 @@ else:
     check("9Router FAQ 目录链接指向可见区域",
           bool(re.search(r'href=(?:"#faq"|#faq)', router_source))
           and bool(re.search(r'id=(?:"faq"|faq)', router_source)), True)
+    router_articles = schemas(router_page, "Article")
+    check("9Router Article 使用真实可见图片",
+          len(router_articles) == 1
+          and router_articles[0].get("image") == ["https://jackssybin.cn/images/9router-tutorial/01-dashboard-guide.svg"]
+          and any(image.get("src") == "/images/9router-tutorial/01-dashboard-guide.svg"
+                  for image in router_page.images), True)
 
 hash_page = html_pages.get("articles/2019/10/17/1571293329133.html")
 expected_hash_description = "总结 Java Hash 碰撞的原因，以及开放地址法、多次 Hash、拉链法和公共溢出区等处理方式。"
@@ -750,6 +761,18 @@ check("关于页 title/OG/Twitter 使用统一后缀",
 check("主站关于页链接资料馆干净 URL",
       'href="https://tools.jackssybin.cn/about.html"' in about_source
       or "href=https://tools.jackssybin.cn/about.html" in about_source, True)
+about_articles = schemas(about_page, "Article") if about_page is not None else []
+check("关于页 Article 使用真实可见头像",
+      len(about_articles) == 1
+      and about_articles[0].get("image") == ["https://jackssybin.cn/images/sidebar-avatar.jpg"]
+      and any(image.get("src") == "/images/sidebar-avatar.jpg" for image in about_page.images), True)
+linux_page = html_pages.get("linux/quick-start.html")
+linux_articles = schemas(linux_page, "Article") if linux_page is not None else []
+check("Linux 快速开始 Article 使用真实可见流程图",
+      len(linux_articles) == 1
+      and linux_articles[0].get("image") == ["https://jackssybin.cn/images/linux-quick-start/git-workflow.svg"]
+      and any(image.get("src") == "/images/linux-quick-start/git-workflow.svg"
+              for image in linux_page.images), True)
 home_page = html_pages.get("index.html")
 check("首页 title 保留站点主标题，不重复追加品牌",
       home_page.title if home_page is not None else None,
