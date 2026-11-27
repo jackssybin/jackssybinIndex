@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "maitian-c1",
+    "pose": "喜爱",
+    "accent": "#F97316",
+    "theme": "ink",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "它故意不帮",
+      "你点发布"
+    ],
+    "subtitle": "麦田 mdldm-maitian · 多平台发布工作台",
+    "hook": "13天2303星，我克隆跑了149个测试",
+    "giant": "13天"
+  },
+  {
+    "slug": "maitian-c2",
+    "pose": "得意",
+    "accent": "#F97316",
+    "theme": "cream",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "它故意不帮",
+      "你点发布"
+    ],
+    "subtitle": "麦田 mdldm-maitian · 多平台发布工作台",
+    "hook": "13天2303星，我克隆跑了149个测试",
+    "giant": "13天"
+  },
+  {
+    "slug": "maitian-c3",
+    "pose": "疲惫",
+    "accent": "#F97316",
+    "theme": "cream-grad",
+    "kicker": "GitHub 开源 · 源码实测",
+    "title": [
+      "它故意不帮",
+      "你点发布"
+    ],
+    "subtitle": "麦田 mdldm-maitian · 多平台发布工作台",
+    "hook": "13天2303星，我克隆跑了149个测试",
+    "giant": "13天"
+  }
+]

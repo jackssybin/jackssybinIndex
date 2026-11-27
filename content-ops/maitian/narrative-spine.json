@@ -1,0 +1,53 @@
+{
+  "repo": "CzzzzzzJ/mdldm-maitian",
+  "verified_facts": {
+    "stars": 2303,
+    "forks": 598,
+    "open_issues": 14,
+    "created_at": "2026-11-14",
+    "age_days": 13,
+    "license": "MIT",
+    "language": "JavaScript (ESM, .mjs)",
+    "node_required": ">=22.5 (uses built-in node:sqlite)",
+    "version": "0.4.0",
+    "releases": 1,
+    "contributors": 7,
+    "code_lines_src": "35 files / 3529 lines in src/",
+    "tests": "26 test files, 149 tests, ALL PASS (9.2s, node --test tests/*.test.mjs)",
+    "total_js_mjs": "70 files / 6064 lines",
+    "platforms_7": ["B站", "抖音", "小红书", "视频号", "YouTube", "X", "Instagram", "(+Threads 已在代码, 知识站小鹅通)"],
+    "auto_submit": ["zsz知识站", "X", "YouTube", "Instagram", "Threads"],
+    "manual_human_press": ["B站", "抖音", "小红书", "视频号"],
+    "batches": [["bilibili","douyin"],["xhs","channels"],["zsz","x"],["youtube"],["instagram","threads"]],
+    "architecture": "三层: 发布skill(Claude Code/Codex) + 麦田发布助手(Chrome扩展,应用商店) + 麦田hub(Node守护进程+SQLite+web大屏+飞书)",
+    "storage": "node:sqlite (data/hub.db), 无外部数据库",
+    "security": "不存平台密码; 用专用Chrome登录态(CDP 9333); config/data/chrome-profile 全在.gitignore; 国内4家只填写不发布,人点最后一下; 防重复上传; 小红书只模拟滚动点击不调接口; 视频faststart/moov校验",
+    "install": "一行curl脚本(mac)/PowerShell(win社区贡献); Agent自动安装; 手动三档L1只看数据30min/L2分发+1h/L3转化",
+    "notifications": "飞书卡片; 守护进程20min提醒人点发布; 1/3/7天复盘; 周一报; 每日采数据,新期头3天每6h",
+    "extra": "iPhone Scriptable小组件; cloudflared隧道+飞书验证码/Access; 小鹅通销售看板; UTM转化漏斗"
+  },
+  "narrative_spine": {
+    "hook": "13天2303星的个人作品，解决一个所有多平台博主都懂的痛：一期视频要手动发7个平台",
+    "core_insight": "它不是又一个'自动群发工具'，核心反直觉点是'故意不帮你点发布'——国内四家只填不发，最后一下人点。这是对平台风控的清醒，也是个人开发者能长期用下去的边界设计",
+    "differentiation": "三层Agent架构(skill写文案+Chrome扩展填表单+hub调度数据)，且不存密码、用你自己浏览器登录态；对比传统RPA/群控工具的黑盒和封号风险",
+    "unique_angle_vs_prev": "前三个项目偏开发者基础设施，这个是'内容创作者的生产力工具'，且主角是独立开发者照着自己每天发视频的流程dogfooding出来的，带强烈实战气质(各平台的坑一节)"
+  },
+  "palette": {
+    "name": "麦田绿 + 麦浪金，温暖田园但保持工程克制",
+    "bg": "#1c221c 深石墨绿",
+    "primary": "#7BAE5A 麦苗绿",
+    "accent": "#F2B21B 麦浪金(对齐项目徽章色)",
+    "secondary": "#7B5CFF 紫(官网徽章，少量点缀)",
+    "text": "#ECEFE6",
+    "muted": "#9AA68F",
+    "card": "#262E25"
+  },
+  "six_images": [
+    "01 痛点对照: 手动7平台重复劳动 vs 麦田一次分发",
+    "02 三层架构图: 发布skill / Chrome扩展 / hub守护进程",
+    "03 七平台自动vs人工边界表(4家手动+5家自动)",
+    "04 数据闭环: 播种(发布)-长势(流量粉丝)-收成(转化)+1/3/7复盘",
+    "05 安全与风控设计清单",
+    "06 三档上手L1/L2/L3 时间与能力矩阵"
+  ]
+}
