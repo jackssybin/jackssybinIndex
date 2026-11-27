@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27T13:44:34Z",
+  "status": "local-fixes-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "Recheck original abnormal assets still referenced by current content and scan current raw GitHub image URLs for mutable main/master references.",
+  "scan": {
+    "originalAbnormalUrlsStillReferenced": 1,
+    "mutableRawGithubImageUrls": 0,
+    "decision": "Only the previously reviewed Zhihu image remains from the original abnormal set. No mutable raw GitHub main/master image reference requires a drift fix."
+  },
+  "zhihu": {
+    "article": "/articles/2020/04/11/1586608404790.html",
+    "imageUrl": "https://pic1.zhimg.com/80/v2-e213899effebd5770c76e68325990a14_720w.jpg",
+    "directCheck": "Local requests still ends with an SSL EOF; this alone is not treated as proof that the image is gone.",
+    "defaultReferrerPolicy": {
+      "browserComplete": true,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    "noReferrerPolicy": {
+      "browserOutcome": "load",
+      "browserComplete": true,
+      "naturalWidth": 720,
+      "naturalHeight": 473
+    },
+    "action": "Keep the remote URL and alt unchanged. Add referrerpolicy=no-referrer through the shared image render hook, alongside the existing OSChina-specific rule.",
+    "articleContentChanged": false,
+    "lastmodChanged": false,
+    "authorizationStatus": "unconfirmed",
+    "localized": false
+  },
+  "localValidation": {
+    "buildPages": 668,
+    "checkBuildPassed": true,
+    "zhihuNoReferrerAsserted": true,
+    "nginxSimulationPassed": true,
+    "legacyMappings": 275,
+    "onlineSlugRedirectChecks": 275
+  }
+}

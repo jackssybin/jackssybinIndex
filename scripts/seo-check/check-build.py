@@ -574,6 +574,7 @@ retired_image_hosts = {
 retired_image_errors = []
 insecure_oschina_images = []
 oschina_referrer_errors = []
+zhihu_referrer_errors = []
 for rel, page in html_pages.items():
     for image in page.images:
         src = image.get("src") or ""
@@ -583,9 +584,12 @@ for rel, page in html_pages.items():
             insecure_oschina_images.append(rel + ": " + src)
         if src.startswith("https://static.oschina.net/") and image.get("referrerpolicy") != "no-referrer":
             oschina_referrer_errors.append(rel + ": " + src)
+        if src.startswith("https://pic1.zhimg.com/") and image.get("referrerpolicy") != "no-referrer":
+            zhihu_referrer_errors.append(rel + ": " + src)
 check("P2/P3 已确认失效的旧图片域名全部移除", retired_image_errors, [])
 check("Spring Integration 图片不再使用 HTTP OSChina 地址", insecure_oschina_images, [])
 check("OSChina 外链图片禁用 Referer 以避开防盗链", oschina_referrer_errors, [])
+check("知乎外链图片禁用 Referer 以避开防盗链", zhihu_referrer_errors, [])
 
 drools_page = html_pages.get("articles/2020/10/29/1603968711195.html")
 drools_html = read("articles/2020/10/29/1603968711195.html") or ""
@@ -865,13 +869,15 @@ expected_legacy_descriptions = {
     "articles/2020/12/25/1608861326670.html": "记录 Spring Boot 集成 MyBatis-Plus 动态数据源的示例，包括 dynamic-datasource、Druid 与 MySQL 依赖、禁用 Druid 自动配置、primary/strict 与 master/db2 配置，以及通过 @DS 在类或方法上切换数据源。",
     "articles/2019/07/31/1564568923421.html": "通过 Guava Lists.transform 示例说明列表元素转换与延迟求值视图，展示原列表修改对后续访问结果的影响，并与 Java Stream map/collect 生成独立列表的方式进行对比。",
     "articles/2019/10/28/1572254233777.html": "整理 Python Selenium WebDriver 与 WebElement 常用 API，包括页面信息、导航、窗口与 iframe/alert 切换、Cookie、截图和等待，以及元素定位、状态读取、输入点击和 JavaScript 调用示例。",
+    "articles/2019/08/15/1565804778217.html": "记录 Spring Boot 2.1.6 与 MyBatis-Plus 3.1.1 项目初始化示例，包括代码生成器、Freemarker、MySQL、Druid、Swagger 等 Maven 依赖，以及多环境 profiles、资源过滤和 assembly 打包配置。",
+    "articles/2019/11/30/1575088937927.html": "记录 CentOS 7 编译安装 Python 3.7.0 的历史步骤，包括 Development tools 与 libffi 等依赖、下载解压、configure/make 安装到 /usr/local/python3、创建 python3/pip3 软链接及版本验证。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("20 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("22 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []
