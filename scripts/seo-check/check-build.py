@@ -760,10 +760,19 @@ else:
           and any(image.get("src") == "/images/9router-tutorial/01-dashboard-guide.svg"
                   for image in router_page.images), True)
 
-hash_page = html_pages.get("articles/2019/10/17/1571293329133.html")
-expected_hash_description = "总结 Java Hash 碰撞的原因，以及开放地址法、多次 Hash、拉链法和公共溢出区等处理方式。"
-check("旧文截断导读改为完整摘要",
-      hash_page.description if hash_page is not None else None, expected_hash_description)
+expected_legacy_descriptions = {
+    "articles/2019/10/17/1571293329133.html": "总结 Java Hash 碰撞的原因，以及开放地址法、多次 Hash、拉链法和公共溢出区等处理方式。",
+    "articles/2019/09/17/1568731586414.html": "梳理 JVM 运行时数据区域、HotSpot 对象创建与访问、对象存活判断，以及引用计数、可达性分析和标记清除、复制、标记整理等垃圾回收算法。",
+    "articles/2019/11/20/1574261012104.html": "汇总 Linux 下按内存或 CPU 占用排序并筛选前 10 个进程的 ps 命令，以及使用 top 查看单个进程、调整显示宽度和批量结束同类进程的方法。",
+    "articles/2019/08/04/1564886769156.html": "记录 Windows 10 64 位下 Python 2 与 Python 3 的共存配置：分别安装、设置 Path、重命名可执行文件，并重装 pip 后验证 python2、python3 与 pip 命令。",
+    "articles/2020/05/28/1590656168798.html": "区分 Redis 缓存穿透、击穿和雪崩的场景，并整理布隆过滤器、空值缓存、互斥锁、过期时间扰动与临期 key 更新等应对思路。",
+}
+legacy_description_errors = []
+for rel, expected_description in expected_legacy_descriptions.items():
+    page = html_pages.get(rel)
+    if page is None or page.description != expected_description:
+        legacy_description_errors.append(rel)
+check("5 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []
