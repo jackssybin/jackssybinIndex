@@ -615,6 +615,10 @@ omnivoice_studio_url = "https://raw.githubusercontent.com/debpalash/VoiceStudio/
 check("OmniVoice Studio 同哈希图片使用固定提交地址",
       omnivoice_studio_url in omnivoice_html
       and "raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-studio.png" not in omnivoice_html, True)
+omnivoice_launchpad_url = "https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-launchpad.png"
+check("OmniVoice Launchpad 使用文章日期版本",
+      omnivoice_launchpad_url in omnivoice_html
+      and "raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-launchpad.png" not in omnivoice_html, True)
 
 print()
 print("=" * 96)
@@ -859,13 +863,15 @@ expected_legacy_descriptions = {
     "articles/2020/08/28/1598616084150.html": "介绍负载均衡的作用、常见方案和应用场景，概述 HAProxy 的调度集群与功能，并记录 CentOS、Ubuntu 安装方法及 global、defaults、frontend、backend、listen 配置。",
     "articles/2020/01/04/1578123919824.html": "汇总 Wireshark 显示过滤器基础语法，包括按 IP、端口、协议、MAC、包长度、HTTP、TCP 标志和载荷内容过滤，以及比较运算符、切片、matches 与 contains 示例。",
     "articles/2020/12/25/1608861326670.html": "记录 Spring Boot 集成 MyBatis-Plus 动态数据源的示例，包括 dynamic-datasource、Druid 与 MySQL 依赖、禁用 Druid 自动配置、primary/strict 与 master/db2 配置，以及通过 @DS 在类或方法上切换数据源。",
+    "articles/2019/07/31/1564568923421.html": "通过 Guava Lists.transform 示例说明列表元素转换与延迟求值视图，展示原列表修改对后续访问结果的影响，并与 Java Stream map/collect 生成独立列表的方式进行对比。",
+    "articles/2019/10/28/1572254233777.html": "整理 Python Selenium WebDriver 与 WebElement 常用 API，包括页面信息、导航、窗口与 iframe/alert 切换、Cookie、截图和等待，以及元素定位、状态读取、输入点击和 JavaScript 调用示例。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("18 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("20 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []

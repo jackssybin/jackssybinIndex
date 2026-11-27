@@ -2,7 +2,7 @@
 url: "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html"
 title: "如何让 Claude Code / Cursor 用克隆的声音说话？OmniVoice Studio 的 MCP 方案实测"
 date: 2026-07-11T14:30:00+08:00
-lastmod: 2026-07-11T14:30:00+08:00
+lastmod: 2026-11-27
 description: "3 秒克隆你的声音，然后通过一段 MCP 配置让 Claude Code / Cursor 用它开口说话。全本地、零 API key、成本 0 元。这篇讲清楚接线全流程和踩坑。"
 keywords:
   - OmniVoice Studio
@@ -53,7 +53,7 @@ draft: false
 
 但它里面最容易被忽略的一件事，是**后端启动之后自动挂了一个 MCP 服务器**在 `http://localhost:3900/mcp`。你只要打开 App，这个端点就活着。
 
-![OmniVoice Studio Launchpad](https://raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-launchpad.png)
+![OmniVoice Studio Launchpad](https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-launchpad.png)
 
 MCP server 提供的工具很小一组，恰好对准 Agent 场景：
 

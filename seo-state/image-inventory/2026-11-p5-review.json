@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-27T11:00:18Z",
+  "status": "local-fixes-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "Editorial resolution for the OmniVoice Launchpad screenshot whose live main-branch image differs from the article-date version.",
+  "editorialDecision": "Use the article-date commit so the screenshot remains stable and matches the interface presented when the tutorial was written. This is a deliberate historical-version choice, not an equivalent-content URL repair.",
+  "launchpad": {
+    "article": "/articles/2026/07/11/omnivoice-studio-give-your-ai-agent-a-voice.html",
+    "oldUrl": "https://raw.githubusercontent.com/debpalash/OmniVoice-Studio/main/docs/screenshot-launchpad.png",
+    "currentSha256": "282e986b99b0e7ee4affdece43a5994d5b0151c644b73e99f00d773729857ff7",
+    "currentDimensions": "1440x900",
+    "currentBytes": 189642,
+    "newUrl": "https://raw.githubusercontent.com/debpalash/VoiceStudio/34c8a33628ab65200757a89825cf1eca385683cd/docs/screenshot-launchpad.png",
+    "fixedCommit": "34c8a33628ab65200757a89825cf1eca385683cd",
+    "fixedSha256": "10208911c15a48d2fc0d4a74de911607555869bea6083541e57fb920f593cb31",
+    "fixedDimensions": "1600x1000",
+    "fixedBytes": 436163,
+    "fixedUrlStatus": 200,
+    "action": "Pinned the Launchpad remote image to the article-date commit and updated lastmod to 2026-11-27 because the displayed image content changed. No localization."
+  },
+  "authorizationBoundary": "The repository AGPL-3.0-only license does not explicitly cover documentation screenshots. The image remains remote and no file was copied into static assets.",
+  "localValidation": {
+    "buildPages": 668,
+    "checkBuildPassed": true,
+    "nginxSimulationPassed": true,
+    "legacyMappings": 275,
+    "onlineSlugRedirectChecks": 275,
+    "fixedImageUrlAsserted": true
+  }
+}
