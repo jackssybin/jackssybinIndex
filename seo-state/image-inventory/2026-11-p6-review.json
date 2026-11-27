@@ -1,7 +1,13 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-27T13:44:34Z",
-  "status": "local-fixes-validated-not-yet-deployed",
+  "status": "deployed-and-verified",
+  "deployment": {
+    "commit": "cdfd1ab32390ddd17b1fec6bf12b702f16c9aba2",
+    "actionsRun": 46011783922,
+    "actionsConclusion": "success",
+    "verifiedAt": "2026-11-27T14:06:04Z"
+  },
   "sourceInventory": "2026-11.json",
   "scope": "Recheck original abnormal assets still referenced by current content and scan current raw GitHub image URLs for mutable main/master references.",
   "scan": {
@@ -28,7 +34,16 @@
     "articleContentChanged": false,
     "lastmodChanged": false,
     "authorizationStatus": "unconfirmed",
-    "localized": false
+    "localized": false,
+    "productionVerification": {
+      "articleStatus": 200,
+      "renderedReferrerPolicy": "no-referrer",
+      "renderedLoading": "lazy",
+      "browserComplete": true,
+      "browserNaturalWidth": 720,
+      "browserNaturalHeight": 473,
+      "currentSrcMatchesOriginal": true
+    }
   },
   "localValidation": {
     "buildPages": 668,
