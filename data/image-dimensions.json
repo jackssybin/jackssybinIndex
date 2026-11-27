@@ -14,5 +14,21 @@
   "/images/archify-agent-skill-diagram-generator/lifecycle.png": {
     "width": 3920,
     "height": 2640
+  },
+  "/images/deepseek-harness-intro/providers-models-page.png": {
+    "width": 1600,
+    "height": 866
+  },
+  "/images/buzz-ai-workspace/channel-agents.png": {
+    "width": 2000,
+    "height": 1299
+  },
+  "/images/geolook-geo-optimization-platform/overview.png": {
+    "width": 1600,
+    "height": 1000
+  },
+  "/images/knife4j-swagger-ui/s1.png": {
+    "width": 1919,
+    "height": 1057
   }
 }

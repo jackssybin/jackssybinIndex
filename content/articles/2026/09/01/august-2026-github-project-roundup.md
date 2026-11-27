@@ -1,7 +1,7 @@
 ---
 url: /articles/2026/09/01/august-2026-github-project-roundup.html
 date: 2026-09-01T00:00:00+08:00
-lastmod: 2026-09-01
+lastmod: 2026-11-27
 description: 八月开源项目推荐汇总：9个优质开源项目按领域分类推荐，涵盖AI开发框架、AI内容生成工具、垂直领域开源项目，每个项目都有概要、图片和三端链接。
 topic: 开源推荐
 topicSlug: open-source
@@ -25,7 +25,7 @@ cover: "/images/august-2026-github-project-roundup/cover-wechat.jpg"
 
 **GitHub**: [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)
 
-![DeepSeek Harness 框架概览](https://jackssybin.cn/images/deepseek-harness-intro/deepseek-harness-overview.png)
+![DeepSeek Harness 模型提供商配置界面](/images/deepseek-harness-intro/providers-models-page.png)
 
 最近 AI Agent 框架一个接一个出来，我试用了大半年，总觉得差点意思：
 - Claude Code 好用，但闭源，你想改个核心逻辑根本动不了
@@ -56,7 +56,7 @@ cover: "/images/august-2026-github-project-roundup/cover-wechat.jpg"
 
 **GitHub**: [block/buzz](https://github.com/block/buzz/releases/latest)
 
-![Buzz 协作工作区](https://jackssybin.cn/images/buzz-ai-workspace/app-screenshot.png)
+![Buzz 频道中的 AI 代理协作界面](/images/buzz-ai-workspace/channel-agents.png)
 
 上周我把测试环境的 AI 协作工作流从「Slack + Claude Code + GitHub 分散联动」换成了 Buzz，整个团队开发和代理协作都收敛到一个事件日志里，不用再在七八个标签页之间跳来跳去找上下文了。
 
@@ -132,7 +132,7 @@ oh-story 就是专门解决这些问题的 Claude Code 技能包，开源免费�
 
 **GitHub**: [aigclink/geolook](https://github.com/aigclink/geolook/blob/main/README.md)
 
-![GeoLook 首页截图](https://jackssybin.cn/images/geolook-open-source-geo-platform/geolook-home.png)
+![GeoLook 项目概览界面](/images/geolook-geo-optimization-platform/overview.png)
 
 GeoLook 是一款**开源的全流程 GEO 实施平台**，支持自托管部署。面向具体 SEO/GEO 项目：从现状分析 → 诊断 → 方案 → 实施计划工单 → 执行落地 → 效果验收，全流程一站式搞定。
 

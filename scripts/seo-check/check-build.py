@@ -536,6 +536,35 @@ else:
             book_body_errors.append(src)
     check("book-to-skill 3 张正文图片引用与加载属性正确", book_body_errors, [])
 
+expected_p1_images = {
+    "articles/2026/09/01/august-2026-github-project-roundup.html": {
+        "/images/deepseek-harness-intro/providers-models-page.png": ("1600", "866", "DeepSeek Harness 模型提供商配置界面"),
+        "/images/buzz-ai-workspace/channel-agents.png": ("2000", "1299", "Buzz 频道中的 AI 代理协作界面"),
+        "/images/geolook-geo-optimization-platform/overview.png": ("1600", "1000", "GeoLook 项目概览界面"),
+    },
+    "articles/2020/02/27/1582768389143.html": {
+        "/images/knife4j-swagger-ui/s1.png": ("1919", "1057", "Knife4j 接口文档界面"),
+    },
+}
+p1_missing_images = []
+p1_image_errors = []
+for rel, expected_images in expected_p1_images.items():
+    page = html_pages.get(rel)
+    if page is None:
+        p1_image_errors.append(rel)
+        continue
+    images = {image.get("src"): image for image in page.images}
+    for src, (width, height, alt) in expected_images.items():
+        if not os.path.isfile(os.path.join(ROOT, src.lstrip("/"))):
+            p1_missing_images.append(src)
+        image = images.get(src)
+        if (image is None or image.get("alt") != alt
+                or image.get("loading") != "lazy" or image.get("decoding") != "async"
+                or (image.get("width"), image.get("height")) != (width, height)):
+            p1_image_errors.append(src)
+check("P1 4 张修复图片文件全部存在", p1_missing_images, [])
+check("P1 4 张修复图片引用、alt、尺寸与加载属性正确", p1_image_errors, [])
+
 print()
 print("=" * 96)
 print("④-B RSS 新文覆盖与订阅源质量")
@@ -766,13 +795,17 @@ expected_legacy_descriptions = {
     "articles/2019/11/20/1574261012104.html": "汇总 Linux 下按内存或 CPU 占用排序并筛选前 10 个进程的 ps 命令，以及使用 top 查看单个进程、调整显示宽度和批量结束同类进程的方法。",
     "articles/2019/08/04/1564886769156.html": "记录 Windows 10 64 位下 Python 2 与 Python 3 的共存配置：分别安装、设置 Path、重命名可执行文件，并重装 pip 后验证 python2、python3 与 pip 命令。",
     "articles/2020/05/28/1590656168798.html": "区分 Redis 缓存穿透、击穿和雪崩的场景，并整理布隆过滤器、空值缓存、互斥锁、过期时间扰动与临期 key 更新等应对思路。",
+    "articles/2020/04/03/1585929213226.html": "梳理 CMS 和 G1 垃圾回收器的工作流程与特点，并解释初始标记、并发标记、重新标记、安全点、安全区域、Region、Remembered Set 和卡表等关键概念。",
+    "articles/2020/04/11/1586608404790.html": "比较 Redis、ZooKeeper 和数据库锁的选择，介绍 Redis 的 SETNX、Redisson 与 Redlock 方案，以及 ZooKeeper 临时节点、Watcher 和羊群效应等实现要点。",
+    "articles/2019/10/16/1571220427190.html": "通过示例说明 Java Integer 缓存与相等比较、变量传值、数组转 List、目录创建、float 精度和 Integer.MAX_VALUE 取值边界等基础问题。",
+    "articles/2020/02/19/1582046551397.html": "梳理 Java 并发锁的分类与使用，包括公平锁、可重入锁、读写锁、乐观锁与悲观锁，以及 AQS、CAS、synchronized、ReentrantLock 和 ReentrantReadWriteLock 示例。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("5 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("9 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []
