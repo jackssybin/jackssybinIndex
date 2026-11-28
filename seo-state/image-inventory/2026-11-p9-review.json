@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-28",
-  "status": "local-fix-validated-not-yet-deployed",
+  "status": "deployed-and-production-verified",
   "sourceInventory": "2026-11.json",
   "scope": "Review six content images in the I/O multiplexing article: four HTTP CnBlog images and two HTTPS CSDN images. All six were available-image in the original HEAD inventory but render as 0x0 in production.",
   "article": {
@@ -101,5 +101,15 @@
     "legacyMappings": 275,
     "onlineSlugRedirectChecks": 275
   },
-  "monthlyReviewBoundary": "T9/T10/T11 were not repeated and remain scheduled for the next fixed monthly review."
+  "productionVerification": {
+    "commit": "a3f35b9fb43d6ceac3b4d2c7fd9ccaddf1cdef76",
+    "actionsRun": {"id": 46121535223, "conclusion": "success", "buildAndDeploy": "success", "pushUrlsToBaidu": "success"},
+    "articlesVerifiedAt": "2026-11-28T07:36:13.392992Z",
+    "browserObservedAt": "2026-11-28T07:39:16.248Z",
+    "firstForegroundScrollPass": true,
+    "manualDomInjection": false,
+    "imageNaturalSizes": [[1302, 695], [1256, 704], [1350, 804], [1868, 812], [400, 119], [600, 450]]
+  },
+  "monthlyReviewBoundary": "T9/T10/T11 were not repeated and remain scheduled for the next fixed monthly review.",
+  "t13Boundary": "T13 remains pending and non-blocking; no article or status was changed."
 }
