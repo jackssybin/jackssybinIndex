@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-28",
+  "status": "local-fix-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "Review six content images in the I/O multiplexing article: four HTTP CnBlog images and two HTTPS CSDN images. All six were available-image in the original HEAD inventory but render as 0x0 in production.",
+  "article": {
+    "path": "/articles/2019/11/05/1572944811633.html",
+    "sourceFile": "content/generated/articles/2019/11/05/1572944811633.md",
+    "originalInventoryAvailability": "available-image",
+    "defaultReferrerBrokenImageCount": 6,
+    "httpSourceImageCount": 4,
+    "issueType": "mixed-http-source-and-hotlink-protection-not-missing-content"
+  },
+  "decision": "Upgrade the four CnBlog source URLs from HTTP to HTTPS after verifying identical response hashes, and add referrerpolicy=no-referrer for images.cnitblog.com and img-blog.csdn.net in the shared image render hook. Keep the two CSDN URLs and all six alt values unchanged. Do not download or localize the assets.",
+  "authorizationStatus": "unconfirmed",
+  "localized": false,
+  "articleContentChangedByT8": true,
+  "articleContentChangeScope": "Only four image URL schemes changed from HTTP to HTTPS; no other body text or alt text changed.",
+  "lastmodBoundary": "The I/O article lastmod is 2026-11-28 because this batch changes its description and four image URLs. The API index article lastmod changed separately for T7 batch 10.",
+  "renderHook": "layouts/_default/_markup/render-image.html",
+  "controlImage": {
+    "imageUrl": "https://b3logfile.com/bing/20171225.jpg?imageView2/1/w/960/h/540/interlace/1/q/100",
+    "directCheck": {
+      "httpStatus": 200,
+      "contentType": "image/jpeg",
+      "bytes": 102592,
+      "width": 960,
+      "height": 540,
+      "sha256": "ae2094bbb9b56dce73e4fdb408764e4663fc2a2991e4fa2bbf3240519ad702bc"
+    },
+    "productionDefaultReferrer": {
+      "complete": true,
+      "naturalWidth": 960,
+      "naturalHeight": 540
+    }
+  },
+  "assets": [
+    {
+      "originalImageUrl": "http://images.cnitblog.com/blog/405877/201411/142330286789443.png",
+      "finalImageUrl": "https://images.cnitblog.com/blog/405877/201411/142330286789443.png",
+      "alt": "",
+      "httpAndHttpsSha256Match": true,
+      "directCheck": {"httpStatus": 200, "contentType": "image/png", "bytes": 25732, "width": 1302, "height": 695, "sha256": "2179f481378bf98af68d538d1116d585d4e95d467689b69fec31f70d5ec1661c"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 1, "outcome": "load", "naturalWidth": 1302, "naturalHeight": 695}
+    },
+    {
+      "originalImageUrl": "http://images.cnitblog.com/blog/405877/201411/142332004602984.png",
+      "finalImageUrl": "https://images.cnitblog.com/blog/405877/201411/142332004602984.png",
+      "alt": "",
+      "httpAndHttpsSha256Match": true,
+      "directCheck": {"httpStatus": 200, "contentType": "image/png", "bytes": 30951, "width": 1256, "height": 704, "sha256": "7e80de2980472a31e78526e1940c223546c8a84b5787582575fcb78599f7fdab"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 1, "outcome": "load", "naturalWidth": 1256, "naturalHeight": 704}
+    },
+    {
+      "originalImageUrl": "http://images.cnitblog.com/blog/405877/201411/142332187256396.png",
+      "finalImageUrl": "https://images.cnitblog.com/blog/405877/201411/142332187256396.png",
+      "alt": "",
+      "httpAndHttpsSha256Match": true,
+      "directCheck": {"httpStatus": 200, "contentType": "image/png", "bytes": 35681, "width": 1350, "height": 804, "sha256": "866f17165f41739a280a694fd77a1e31b481738045abc40e388a190ed3c12d6c"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 2, "outcome": "load", "naturalWidth": 1350, "naturalHeight": 804}
+    },
+    {
+      "originalImageUrl": "http://images.cnitblog.com/blog/405877/201411/142333511475767.png",
+      "finalImageUrl": "https://images.cnitblog.com/blog/405877/201411/142333511475767.png",
+      "alt": "",
+      "httpAndHttpsSha256Match": true,
+      "directCheck": {"httpStatus": 200, "contentType": "image/png", "bytes": 42575, "width": 1868, "height": 812, "sha256": "5a14a1d73d8137bcb8282cc8a27876b5c448e28ab0d9fb97bdebb426c9fe4316"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 2, "outcome": "load", "naturalWidth": 1868, "naturalHeight": 812}
+    },
+    {
+      "originalImageUrl": "https://img-blog.csdn.net/20150808203829641?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center",
+      "finalImageUrl": "https://img-blog.csdn.net/20150808203829641?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center",
+      "alt": "",
+      "directCheck": {"httpStatus": 200, "contentType": "image/gif", "bytes": 7153, "width": 400, "height": 119, "sha256": "d6070f4b39a29d6355486dabf85592bfb88318939a273025f3af99ca91bff02d"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 2, "outcome": "load", "naturalWidth": 400, "naturalHeight": 119}
+    },
+    {
+      "originalImageUrl": "https://img-blog.csdn.net/20150808203809771?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center",
+      "finalImageUrl": "https://img-blog.csdn.net/20150808203809771?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center",
+      "alt": "",
+      "directCheck": {"httpStatus": 200, "contentType": "image/png", "bytes": 4265, "width": 600, "height": 450, "sha256": "85700da23b8f689dc177e42ebff2ea2ff071bcc9eb78704ad355c3263247d568"},
+      "productionDefaultReferrer": {"complete": true, "naturalWidth": 0, "naturalHeight": 0},
+      "noReferrerProbe": {"attempts": 2, "outcome": "load", "naturalWidth": 600, "naturalHeight": 450}
+    }
+  ],
+  "localValidation": {
+    "buildPages": 668,
+    "checkBuildPassed": true,
+    "cnitblogHttpsAsserted": true,
+    "cnitblogNoReferrerAsserted": true,
+    "csdnNoReferrerAsserted": true,
+    "fixedDescriptionRegression": 28,
+    "remainingTruncatedDescriptions": 72,
+    "nginxSimulationPassed": true,
+    "legacyMappings": 275,
+    "onlineSlugRedirectChecks": 275
+  },
+  "monthlyReviewBoundary": "T9/T10/T11 were not repeated and remain scheduled for the next fixed monthly review."
+}

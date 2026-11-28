@@ -7,4 +7,4 @@
     {{- $dimensions = . -}}
   {{- end }}
 {{- end }}
-<img src="{{ $src | safeURL }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }}{{ with $dimensions }} width="{{ .width }}" height="{{ .height }}"{{ end }}{{ if or (hasPrefix $src "https://static.oschina.net/") (hasPrefix $src "https://pic1.zhimg.com/") (hasPrefix $src "https://upload-images.jianshu.io/") }} referrerpolicy="no-referrer"{{ end }} loading="lazy" decoding="async">
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}"{{ end }}{{ with $dimensions }} width="{{ .width }}" height="{{ .height }}"{{ end }}{{ if or (hasPrefix $src "https://static.oschina.net/") (hasPrefix $src "https://pic1.zhimg.com/") (hasPrefix $src "https://upload-images.jianshu.io/") (hasPrefix $src "https://images.cnitblog.com/") (hasPrefix $src "https://img-blog.csdn.net/") }} referrerpolicy="no-referrer"{{ end }} loading="lazy" decoding="async">

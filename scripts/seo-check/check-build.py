@@ -576,6 +576,9 @@ insecure_oschina_images = []
 oschina_referrer_errors = []
 zhihu_referrer_errors = []
 jianshu_referrer_errors = []
+cnitblog_referrer_errors = []
+csdn_referrer_errors = []
+insecure_cnitblog_images = []
 for rel, page in html_pages.items():
     for image in page.images:
         src = image.get("src") or ""
@@ -589,11 +592,20 @@ for rel, page in html_pages.items():
             zhihu_referrer_errors.append(rel + ": " + src)
         if src.startswith("https://upload-images.jianshu.io/") and image.get("referrerpolicy") != "no-referrer":
             jianshu_referrer_errors.append(rel + ": " + src)
+        if src.startswith("http://images.cnitblog.com/"):
+            insecure_cnitblog_images.append(rel + ": " + src)
+        if src.startswith("https://images.cnitblog.com/") and image.get("referrerpolicy") != "no-referrer":
+            cnitblog_referrer_errors.append(rel + ": " + src)
+        if src.startswith("https://img-blog.csdn.net/") and image.get("referrerpolicy") != "no-referrer":
+            csdn_referrer_errors.append(rel + ": " + src)
 check("P2/P3 已确认失效的旧图片域名全部移除", retired_image_errors, [])
 check("Spring Integration 图片不再使用 HTTP OSChina 地址", insecure_oschina_images, [])
 check("OSChina 外链图片禁用 Referer 以避开防盗链", oschina_referrer_errors, [])
 check("知乎外链图片禁用 Referer 以避开防盗链", zhihu_referrer_errors, [])
 check("简书外链图片禁用 Referer 以避开防盗链", jianshu_referrer_errors, [])
+check("CnBlog 图片不再使用 HTTP 地址", insecure_cnitblog_images, [])
+check("CnBlog 外链图片禁用 Referer 以避开防盗链", cnitblog_referrer_errors, [])
+check("CSDN 外链图片禁用 Referer 以避开防盗链", csdn_referrer_errors, [])
 
 drools_page = html_pages.get("articles/2020/10/29/1603968711195.html")
 drools_html = read("articles/2020/10/29/1603968711195.html") or ""
@@ -879,13 +891,15 @@ expected_legacy_descriptions = {
     "articles/2019/12/12/1576162628044.html": "记录 CentOS 7 开启 SSH 的历史操作，包括 root 权限、rpm 检查与 openssh-server 安装、sshd_config 配置、systemctl start/enable，以及通过 ps 和 netstat 检查进程与 22 端口。",
     "articles/2019/11/11/1573460631525.html": "记录 2019 年阿里云 Ubuntu 16.04 安装 Java 8 与 Redis 的历史步骤，包括 JDK 解压、JAVA_HOME/PATH 环境变量和版本验证，以及 redis-server 安装、进程与 6379 端口检查、redis-cli、requirepass、bind 配置和远程连接验证。",
     "articles/2019/11/04/1572851425831.html": "记录 2019 年阿里云 Ubuntu 将 Python 3.5.2 升级至 3.6 的历史操作，包括 apt 卸载与依赖清理、/usr/bin 残留检查、software-properties-common 和 jonathonf PPA、Python 3.6 与 pip 安装，以及 python/pip 版本验证。",
+    "articles/2020/02/18/1582037776392.html": "汇总 2020 年记录的免费 API 接口索引，涵盖聚合数据的手机归属地、天气、新闻、股票、汇率和机器人等接口，以及 API Store、豆瓣、淘宝、腾讯、讯飞、高德等第三方平台入口；可用性与配额需以各平台当前说明为准。",
+    "articles/2019/11/05/1572944811633.html": "梳理服务器端高性能 I/O 模型与多路复用机制，包括同步阻塞、同步非阻塞、I/O 多路复用和异步 I/O，并对比 select、poll、epoll 的连接数限制、线程安全、就绪通知与平台支持。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("26 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("28 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []

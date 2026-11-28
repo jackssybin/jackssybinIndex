@@ -12,6 +12,7 @@
 - `2026-11-p6-review.json`：原异常清单中仍被引用的知乎图复核及 raw GitHub 漂移扫描。默认 Referer 下浏览器为 0×0，`no-referrer` 实测可加载 720×473，因此共享渲染钩子仅为该域名补充相同策略并随 `cdfd1ab` 部署。生产原图在 `no-referrer` 下懒加载为 720×473；原 URL、alt、正文和 lastmod 均不变，未下载或本地化。
 - `2026-11-p7-review.json`：原清单中 Scrapy 四个 `check-error` 项对应的当前 `b3logfile.com` 图片生产复核。四图直接 GET 均为 200 PNG，记录字节数、尺寸和 SHA-256；生产页面逐张滚动触发既有懒加载后，自然尺寸分别为 545×236、1093×834、794×267、1146×257。P7 不替换、不下载、不本地化，也不做 T8 专属正文或 lastmod 修改；Scrapy 摘要与 lastmod 的更新属于第八批 T7。第八批已随 `e6a2a7b` 上线，Actions 运行 `46104101053` 成功；两篇生产字段通过复验，部署后四图再次逐张真实懒加载通过。授权仍未确认。
 - `2026-11-p8-review.json`：两张简书图的新浏览器失效复核。原清单 HEAD 均为 `available-image`，当前直接 GET 也均为 200 WebP，但生产正文默认 Referer 下自然尺寸均为 0×0，说明可下载不等于可嵌入。`no-referrer` 下首图加载为 1500×613，次图第一次失败、第二次相同请求加载为 1500×702，因此共享渲染钩子仅为 `upload-images.jianshu.io` 补充相同策略并新增全站构建断言。原 URL、alt、正文和 lastmod 不变，未下载或本地化；修复已随 `db2e325` 上线，Actions 运行 `46118966096` 成功，部署后两图第一次真实懒加载即分别达到 1500×613、1500×702，两篇 T7 生产字段同步通过。
+- `2026-11-p9-review.json`：I/O 多路复用文章六张正文图的新失效复核。四张 CnBlog HTTP 图与两张 CSDN HTTPS 图在原清单和直接 GET 中均为可用图片，但生产默认 Referer 下均为 0×0；同页 b3logfile 封面正常，可作为对照。四张 CnBlog 的 HTTP/HTTPS 响应 SHA-256 完全一致，因此仅升级协议，六图最终地址在 `no-referrer` 下均可恢复。共享钩子新增两个域名的定向策略和构建回归；CSDN URL、六图 alt 和其他正文不变，未下载或本地化。I/O 文章的 lastmod 与同批摘要和四处 URL 协议修改一起更新；本地修复已验证，尚待部署后的真实图片复验。
 - 扫描 `content/articles/` 与 `content/generated/articles/` 中的 Markdown 图片、HTML `img` 绝对地址，以及 frontmatter `cover` / `image` 的 HTTP(S) 绝对地址。相对路径的站内图片由既有构建审计负责，不在此清单重复统计。
 - HTTP 状态是生成清单时的单次快照，不是持续监控结论；远程服务后续可能恢复、失效或改变响应。
 
