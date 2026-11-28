@@ -575,6 +575,7 @@ retired_image_errors = []
 insecure_oschina_images = []
 oschina_referrer_errors = []
 zhihu_referrer_errors = []
+jianshu_referrer_errors = []
 for rel, page in html_pages.items():
     for image in page.images:
         src = image.get("src") or ""
@@ -586,10 +587,13 @@ for rel, page in html_pages.items():
             oschina_referrer_errors.append(rel + ": " + src)
         if src.startswith("https://pic1.zhimg.com/") and image.get("referrerpolicy") != "no-referrer":
             zhihu_referrer_errors.append(rel + ": " + src)
+        if src.startswith("https://upload-images.jianshu.io/") and image.get("referrerpolicy") != "no-referrer":
+            jianshu_referrer_errors.append(rel + ": " + src)
 check("P2/P3 已确认失效的旧图片域名全部移除", retired_image_errors, [])
 check("Spring Integration 图片不再使用 HTTP OSChina 地址", insecure_oschina_images, [])
 check("OSChina 外链图片禁用 Referer 以避开防盗链", oschina_referrer_errors, [])
 check("知乎外链图片禁用 Referer 以避开防盗链", zhihu_referrer_errors, [])
+check("简书外链图片禁用 Referer 以避开防盗链", jianshu_referrer_errors, [])
 
 drools_page = html_pages.get("articles/2020/10/29/1603968711195.html")
 drools_html = read("articles/2020/10/29/1603968711195.html") or ""
@@ -873,13 +877,15 @@ expected_legacy_descriptions = {
     "articles/2019/11/30/1575088937927.html": "记录 CentOS 7 编译安装 Python 3.7.0 的历史步骤，包括 Development tools 与 libffi 等依赖、下载解压、configure/make 安装到 /usr/local/python3、创建 python3/pip3 软链接及版本验证。",
     "articles/2019/09/20/1568913777036.html": "记录 2019 年 Scrapy 热点信息抓取项目的历史实现，包括项目与 Item 初始化、CSS 选择器提取标题和链接、命令行入口、Pipeline 写入 MySQL，以及豆瓣、微博、贴吧、虎扑、GitHub 和百度热点的多站点扩展。",
     "articles/2019/12/12/1576162628044.html": "记录 CentOS 7 开启 SSH 的历史操作，包括 root 权限、rpm 检查与 openssh-server 安装、sshd_config 配置、systemctl start/enable，以及通过 ps 和 netstat 检查进程与 22 端口。",
+    "articles/2019/11/11/1573460631525.html": "记录 2019 年阿里云 Ubuntu 16.04 安装 Java 8 与 Redis 的历史步骤，包括 JDK 解压、JAVA_HOME/PATH 环境变量和版本验证，以及 redis-server 安装、进程与 6379 端口检查、redis-cli、requirepass、bind 配置和远程连接验证。",
+    "articles/2019/11/04/1572851425831.html": "记录 2019 年阿里云 Ubuntu 将 Python 3.5.2 升级至 3.6 的历史操作，包括 apt 卸载与依赖清理、/usr/bin 残留检查、software-properties-common 和 jonathonf PPA、Python 3.6 与 pip 安装，以及 python/pip 版本验证。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("24 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("26 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []

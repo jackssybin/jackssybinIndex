@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-28",
+  "status": "local-fix-validated-not-yet-deployed",
+  "sourceInventory": "2026-11.json",
+  "scope": "Recheck two Jianshu images that were available-image in the original HEAD inventory but currently render as 0x0 in the production article.",
+  "article": {
+    "path": "/articles/2019/09/17/1568727178145.html",
+    "sourceFile": "content/generated/articles/2019/09/17/1568727178145.md",
+    "originalInventoryAvailability": "available-image",
+    "currentImageCount": 2,
+    "issueType": "hotlink-protection-not-missing-content"
+  },
+  "decision": "Keep both remote URLs and their existing alt text unchanged. Add referrerpolicy=no-referrer for upload-images.jianshu.io in the shared image render hook. Do not download, replace, localize, or change the article lastmod.",
+  "authorizationStatus": "unconfirmed",
+  "localized": false,
+  "articleContentChanged": false,
+  "lastmodChanged": false,
+  "renderHook": "layouts/_default/_markup/render-image.html",
+  "assets": [
+    {
+      "imageUrl": "https://upload-images.jianshu.io/upload_images/10590983-32eeb2fb360604ed.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp",
+      "alt": "null",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 78628,
+        "width": 1500,
+        "height": 613,
+        "sha256": "59a9f9c2d495f32a3f9ada73bbb34e9958a49ea949b015a89cd07bb3d1f3585d"
+      },
+      "productionDefaultReferrer": {
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      "noReferrerProbe": {
+        "attempts": 1,
+        "outcome": "load",
+        "naturalWidth": 1500,
+        "naturalHeight": 613
+      }
+    },
+    {
+      "imageUrl": "https://upload-images.jianshu.io/upload_images/10590983-fd9eb29db149a878.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp",
+      "alt": "null",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/webp",
+        "bytes": 117396,
+        "width": 1500,
+        "height": 702,
+        "sha256": "3f10d9878e78d48fc0cc74f5f6e64732248fbf17d143bacc4f90fb50725e4c69"
+      },
+      "productionDefaultReferrer": {
+        "complete": true,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      "noReferrerProbe": {
+        "attempts": 2,
+        "failedAttempts": 1,
+        "outcome": "load",
+        "naturalWidth": 1500,
+        "naturalHeight": 702,
+        "note": "The first isolated no-referrer attempt failed and the second identical attempt loaded; post-deploy verification must check the real rendered images rather than assume a deterministic one-attempt response."
+      }
+    }
+  ],
+  "scan": {
+    "mutableRawGithubMainMasterImagesInRemainingT7": 0,
+    "selectionBoundary": "This is a small browser-driven review, not a claim that every remote image in the remaining articles has been rechecked."
+  },
+  "localValidation": {
+    "buildPages": 668,
+    "checkBuildPassed": true,
+    "jianshuNoReferrerAsserted": true,
+    "fixedDescriptionRegression": 26,
+    "remainingTruncatedDescriptions": 74,
+    "nginxSimulationPassed": true,
+    "legacyMappings": 275,
+    "onlineSlugRedirectChecks": 275
+  },
+  "monthlyReviewBoundary": "T9/T10/T11 were not repeated and remain scheduled for the next fixed monthly review."
+}
