@@ -1,8 +1,23 @@
 ---
 title: "13 天 2303 Star：麦田让我看到了多平台博主工具的另一种清醒"
 date: 2026-11-27T16:30:00+08:00
+lastmod: 2026-11-28
 slug: mdldm-maitian
 description: "本地克隆实测 mdldm-maitian（麦田）：一个 13 天拿下 2303 Star 的 Agent 驱动自媒体发布工作台。它最反直觉的设计是故意不帮你点发布——国内四家只填不发，最后一下人点。"
+keyPoints:
+  - "三层架构：发布 Skill 生成 publish.json，Chrome 扩展负责填表，Node Hub 管调度、防重与采数据。"
+  - "最反直觉的设计：国内四平台只填不发，最后一下由人点，用克制换取长期可用的安全边界。"
+  - "本机实跑 149 个测试全部通过、耗时 9.2 秒；全仓库 JS/MJS 仅 6064 行，体量克制。"
+  - "不止是发布，还用播种/长势/收成的隐喻做数据复盘闭环，并接自有站点做 UTM 转化归因。"
+keyFacts:
+  - label: "项目规模"
+    value: "13 天、2303 Star、598 Fork、7 位贡献者"
+  - label: "三层架构"
+    value: "发布 Skill + Chrome 扩展 + Node.js Hub（内置 node:sqlite）"
+  - label: "发布边界"
+    value: "国内四平台人工点发布；海外五平台回读后自动提交"
+  - label: "实测结果"
+    value: "149 个测试全部通过，耗时 9.2 秒，零失败"
 keywords: ["麦田", "mdldm-maitian", "多平台分发", "自媒体工具", "Agent", "Chrome 扩展", "飞书"]
 categories: ["开源实测"]
 tags: ["开源", "自媒体", "Agent", "效率工具", "多平台分发"]
