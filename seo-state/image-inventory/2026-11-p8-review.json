@@ -1,7 +1,13 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-11-28",
-  "status": "local-fix-validated-not-yet-deployed",
+  "status": "deployed-and-verified",
+  "deployment": {
+    "commit": "db2e325675322373136da6a8336f42ae5113ecbf",
+    "actionsRun": 46118966096,
+    "actionsConclusion": "success",
+    "verifiedAt": "2026-11-28T07:02:55Z"
+  },
   "sourceInventory": "2026-11.json",
   "scope": "Recheck two Jianshu images that were available-image in the original HEAD inventory but currently render as 0x0 in the production article.",
   "article": {
@@ -72,6 +78,29 @@
   "scan": {
     "mutableRawGithubMainMasterImagesInRemainingT7": 0,
     "selectionBoundary": "This is a small browser-driven review, not a claim that every remote image in the remaining articles has been rechecked."
+  },
+  "postDeployVerification": {
+    "articleStatus": 200,
+    "renderedReferrerPolicy": "no-referrer",
+    "renderedLoading": "lazy",
+    "sourceFileUrlsUnchanged": true,
+    "altsUnchanged": true,
+    "firstAttemptAfterDeploySucceededForBoth": true,
+    "currentSrcMatchesRenderedSrcForAll": true,
+    "images": [
+      {
+        "naturalWidth": 1500,
+        "naturalHeight": 613,
+        "complete": true
+      },
+      {
+        "naturalWidth": 1500,
+        "naturalHeight": 702,
+        "complete": true
+      }
+    ],
+    "bothT7ArticleFieldsMatchSource": true,
+    "bothT7SitemapLastmods": "2026-11-28T00:00:00Z"
   },
   "localValidation": {
     "buildPages": 668,
