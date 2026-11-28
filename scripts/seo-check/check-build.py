@@ -871,13 +871,15 @@ expected_legacy_descriptions = {
     "articles/2019/10/28/1572254233777.html": "整理 Python Selenium WebDriver 与 WebElement 常用 API，包括页面信息、导航、窗口与 iframe/alert 切换、Cookie、截图和等待，以及元素定位、状态读取、输入点击和 JavaScript 调用示例。",
     "articles/2019/08/15/1565804778217.html": "记录 Spring Boot 2.1.6 与 MyBatis-Plus 3.1.1 项目初始化示例，包括代码生成器、Freemarker、MySQL、Druid、Swagger 等 Maven 依赖，以及多环境 profiles、资源过滤和 assembly 打包配置。",
     "articles/2019/11/30/1575088937927.html": "记录 CentOS 7 编译安装 Python 3.7.0 的历史步骤，包括 Development tools 与 libffi 等依赖、下载解压、configure/make 安装到 /usr/local/python3、创建 python3/pip3 软链接及版本验证。",
+    "articles/2019/09/20/1568913777036.html": "记录 2019 年 Scrapy 热点信息抓取项目的历史实现，包括项目与 Item 初始化、CSS 选择器提取标题和链接、命令行入口、Pipeline 写入 MySQL，以及豆瓣、微博、贴吧、虎扑、GitHub 和百度热点的多站点扩展。",
+    "articles/2019/12/12/1576162628044.html": "记录 CentOS 7 开启 SSH 的历史操作，包括 root 权限、rpm 检查与 openssh-server 安装、sshd_config 配置、systemctl start/enable，以及通过 ps 和 netstat 检查进程与 22 端口。",
 }
 legacy_description_errors = []
 for rel, expected_description in expected_legacy_descriptions.items():
     page = html_pages.get(rel)
     if page is None or page.description != expected_description:
         legacy_description_errors.append(rel)
-check("22 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
+check("24 篇旧文截断导读改为完整摘要", legacy_description_errors, [])
 
 about_page = html_pages.get("about.html")
 people = schemas(about_page, "Person") if about_page is not None else []

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-28",
+  "status": "production-review-passed-no-change-required",
+  "sourceInventory": "2026-11.json",
+  "scope": "Recheck the four current b3logfile.com images corresponding to Scrapy assets recorded as img.hacpai.com check-error entries in the original inventory.",
+  "article": {
+    "path": "/articles/2019/09/20/1568913777036.html",
+    "sourceFile": "content/generated/articles/2019/09/20/1568913777036.md",
+    "originalInventoryAvailability": "check-error",
+    "originalInventorySourceDomain": "img.hacpai.com",
+    "currentSourceDomain": "b3logfile.com",
+    "productionBrowserImageCount": 4
+  },
+  "decision": "All four current image URLs returned complete PNG responses and rendered at their expected natural dimensions after production lazy loading. Keep the current remote URLs and alt text unchanged; no replacement, download, localization, or T8-specific lastmod edit is required.",
+  "authorizationStatus": "unconfirmed",
+  "localized": false,
+  "articleContentChangedByT8": false,
+  "lastmodChangedByT8": false,
+  "lastmodBoundary": "The Scrapy article description and lastmod changed separately in T7 batch 8; the P7 image review itself made no article edit.",
+  "assets": [
+    {
+      "originalInventoryUrl": "https://img.hacpai.com/file/2019/09/1-be122b0d.png",
+      "currentImageUrl": "https://b3logfile.com/file/2019/09/1-be122b0d.png",
+      "alt": "1.png",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "bytes": 10032,
+        "width": 545,
+        "height": 236,
+        "sha256": "13fd1f318ada1f415026d39c965bae2d4c1b3b570e5ee946e74d5a7e79fba990"
+      },
+      "productionBrowser": {
+        "loading": "lazy",
+        "complete": true,
+        "naturalWidth": 545,
+        "naturalHeight": 236,
+        "currentSrcMatchesOriginal": true
+      }
+    },
+    {
+      "originalInventoryUrl": "https://img.hacpai.com/file/2019/09/2-33b49367.png",
+      "currentImageUrl": "https://b3logfile.com/file/2019/09/2-33b49367.png",
+      "alt": "2.png",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "bytes": 223246,
+        "width": 1093,
+        "height": 834,
+        "sha256": "9e622488d6e064d7813e769e415f71c350edf1b1400019a5e74885d9c2bd46d5"
+      },
+      "productionBrowser": {
+        "loading": "lazy",
+        "complete": true,
+        "naturalWidth": 1093,
+        "naturalHeight": 834,
+        "currentSrcMatchesOriginal": true
+      }
+    },
+    {
+      "originalInventoryUrl": "https://img.hacpai.com/file/2019/09/3-cee4064f.png",
+      "currentImageUrl": "https://b3logfile.com/file/2019/09/3-cee4064f.png",
+      "alt": "3.png",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "bytes": 32772,
+        "width": 794,
+        "height": 267,
+        "sha256": "2bc6d323fc04d884ac8dcd7a2a4508f2cdc421c1b31cacb7311af380565da381"
+      },
+      "productionBrowser": {
+        "loading": "lazy",
+        "complete": true,
+        "naturalWidth": 794,
+        "naturalHeight": 267,
+        "currentSrcMatchesOriginal": true
+      }
+    },
+    {
+      "originalInventoryUrl": "https://img.hacpai.com/file/2019/09/4-986667d6.png",
+      "currentImageUrl": "https://b3logfile.com/file/2019/09/4-986667d6.png",
+      "alt": "4.png",
+      "directCheck": {
+        "method": "GET",
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "bytes": 43848,
+        "width": 1146,
+        "height": 257,
+        "sha256": "a12626c05da0dda92c34f5e830349a3bcce66751c1eb9b8a42ac5e16df7d4e80"
+      },
+      "productionBrowser": {
+        "loading": "lazy",
+        "complete": true,
+        "naturalWidth": 1146,
+        "naturalHeight": 257,
+        "currentSrcMatchesOriginal": true
+      }
+    }
+  ],
+  "localValidation": {
+    "buildPages": 668,
+    "checkBuildPassed": true,
+    "fixedDescriptionRegression": 24,
+    "remainingTruncatedDescriptions": 76,
+    "nginxSimulationPassed": true,
+    "legacyMappings": 275,
+    "onlineSlugRedirectChecks": 275
+  },
+  "monthlyReviewBoundary": "T9/T10/T11 were not repeated in this batch and remain scheduled for the next fixed monthly review."
+}
