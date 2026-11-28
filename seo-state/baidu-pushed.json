@@ -1,10 +1,10 @@
 {
   "version": 1,
   "site": "jackssybin.cn",
-  "lastRunAt": "2026-11-28T03:46:02.271Z",
+  "lastRunAt": "2026-11-28T07:01:40.118Z",
   "daily": {
     "date": "2026-11-28",
-    "pushed": 2
+    "pushed": 4
   },
   "urls": {
     "https://jackssybin.cn/articles/2026/06/07/ai-ming-xing-gong-si-pai-dui-shang-shi-pu-tong-ren-zui-gai-jing-ti-shen-me.html": {
@@ -1388,9 +1388,9 @@
       "pushedAt": "2026-10-23T05:37:33.152Z"
     },
     "https://jackssybin.cn/articles/2019/11/04/1572851425831.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-23T05:37:33.152Z"
+      "pushes": 2,
+      "lastmod": "2026-11-28T00:00:00Z",
+      "pushedAt": "2026-11-28T07:01:40.118Z"
     },
     "https://jackssybin.cn/articles/2019/11/04/1572870368019.html": {
       "pushes": 1,
@@ -1413,9 +1413,9 @@
       "pushedAt": "2026-10-24T05:16:20.817Z"
     },
     "https://jackssybin.cn/articles/2019/11/11/1573460631525.html": {
-      "pushes": 1,
-      "lastmod": "2026-06-07T09:42:45+08:00",
-      "pushedAt": "2026-10-24T05:16:20.817Z"
+      "pushes": 2,
+      "lastmod": "2026-11-28T00:00:00Z",
+      "pushedAt": "2026-11-28T07:01:40.118Z"
     },
     "https://jackssybin.cn/articles/2019/11/13/1573657642163.html": {
       "pushes": 1,
@@ -2532,6 +2532,11 @@
     {
       "date": "2026-11-27",
       "pushed": 4,
+      "source": "changed"
+    },
+    {
+      "date": "2026-11-28",
+      "pushed": 2,
       "source": "changed"
     },
     {
